@@ -1,0 +1,29 @@
+{
+  "index.qmd": {
+    "index.html": "dd9d830d"
+  },
+  "intro.qmd": {
+    "intro.html": "50e421fd"
+  },
+  "summary.qmd": {
+    "summary.html": "6057fda6"
+  },
+  "references.qmd": {
+    "references.html": "c4b8b54f"
+  },
+  "class1_overview.qmd": {
+    "class1_overview.html": "35980a4f"
+  },
+  "class1/class1_overview.qmd": {
+    "class1_overview.html": "ebef2f99"
+  },
+  "appendices/setup_vscode.qmd": {
+    "setup_vscode.html": "87e68c7e"
+  },
+  "class1/pandas1.qmd": {
+    "pandas1.html": "cbe24ff6"
+  },
+  "class1/pandas2.qmd": {
+    "pandas2.html": "2b49a305"
+  }
+}

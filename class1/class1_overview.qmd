@@ -1,0 +1,12 @@
+# Class 1 {.unnumbered}
+
+
+
+## Today's objectives
+
+### Theory
+
+1. Why scientific coding?
+2. Fundamentals of scientific computing
+3. Why Python?
+4. How to use Python?

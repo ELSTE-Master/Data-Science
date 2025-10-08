@@ -1,0 +1,57 @@
+# Setup VS Code {.unnumbered}
+
+This tutorial guides you through the installation and configuration of Visual Studio Code (VS Code) for Python development in the 0013 computer room at the University of Geneva.
+
+## Open VS Code
+
+1. Create a folder on your `H:/` drive named `data_science`
+2. Open `VS Code`
+3. Click `File / Open Folder` and choose the `data_science` folder (@fig-open)
+4. When asked, click to confirm your trust in the system
+
+These steps will ensure that Python works and finds the files in this exact folder. 
+
+![Open VS Code and set the working folder](img/1.png){#fig-open width=80%}
+
+## Create a new Jupyter Notebook
+
+1. Type <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>i</kbd> (or <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>i</kbd> on MacOS) to open the command palette
+2. Type `jupyter` and select `Create: New Jupyter Notebook` (@fig-newnotebook)
+
+![Create a new Jupyter Notebook](img/3.png){#fig-newnotebook width=80%}
+
+::: {.callout-tip}
+## Command palette
+
+The command palette is a key functionality of VS Code, learning to use it will speed up your workflow.
+:::
+
+
+## Install the Python extensions
+
+This step installs the Python extensions for VS Code.
+
+1. When asked, click the `Install` button and wait for it to finish (@fig-3)
+
+<!-- ![Create a new Jupyter Notebook](img/4.png){width=80% fig-align="left"} -->
+![Create a new Jupyter Notebook](img/4.png){#fig-3 width=80%}
+
+## Install Jupyter
+
+Jupyter Notebooks are one of the ways to run Python. This step installs all the required Jupyter stuff for VS Code.
+
+1. On the top right corner of the notebook, locate and click on the `Select kernel` button @fig-4
+2. Install the `Jupyter notebook support` extension  (@fig-5)
+
+![Browse for kernels](img/6.png){#fig-4 width=80%}
+
+![Install the Jupyter notebook support extension](img/7.png){#fig-5 width=80%}
+
+## Select the right Python 
+
+Several versions of Python can be installed on a computer. In the computer room, these versions are controlled by an *environment manager* called `anaconda`. This step ensures that the Jupyter notebook will use the right Python version, i.e., the one installed using `anaconda`.
+
+1. On the top right corner of the notebook, where the `Select kernel` button previously appeared, make sure you see `base (Python 3.x.x)` (@fig-env)
+2. If you don't, click on the button and search for the right one (i.e., there should be `anaconda` in the path)
+
+![Select the right Python environment](img/8.png){#fig-env width=80%}
