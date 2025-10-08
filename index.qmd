@@ -1,5 +1,8 @@
-# Preface {.unnumbered}
-
-This is a Quarto book.
-
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
+---
+title: "ELSTE Data Science Master Course"
+subtitle: "A rapid introduction to data science using Python"
+author: "Sébastien Biass & Stéphane Guerrier"
+format:
+  html:
+    theme: cosmo
+---

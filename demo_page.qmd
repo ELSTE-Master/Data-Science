@@ -10,70 +10,60 @@ engine: knitr
 
 {{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
 
-
 ## Exercise interactive code with hints and solution
 
 :::: {.panel-tabset}
 
 ## Exercise
 
-```{webr}
+```{pyodide}
 #| setup: true
 #| exercise: ex_4
-library(idarps)
+import numpy as np
 ```
 
-```{webr}s
+```{pyodide}
 #| exercise: ex_4
-data("pharmacy")
-# Construct attendance by day
-monday = na.omit(pharmacy$attendance[pharmacy$weekday == "Monday"])
-tuesday = na.omit(pharmacy$attendance[pharmacy$weekday == "Tuesday"])
-wednesday = na.omit(pharmacy$attendance[pharmacy$weekday == "Wednesday"])
-thursday = na.omit(pharmacy$attendance[pharmacy$weekday == "Thursday"])
-friday = na.omit(pharmacy$attendance[pharmacy$weekday == "Friday"])
-saturday = na.omit(pharmacy$attendance[pharmacy$weekday == "Saturday"])
-sunday = na.omit(pharmacy$attendance[pharmacy$weekday == "Sunday"])
-idarps::___________(monday, tuesday, wednesday,
-                    thursday, friday, saturday, sunday)
+A = np._____([[1, 2, 3],
+              [4, 5, 6],
+              [7, 8, 9]])
 ```
 
 ## Hints
 
 ::: { .hint exercise="ex_4"}
-Consider using the `boxplot_w_points()` function from package `idarps`.
+Consider using the `array()` function from `numpy`.
 
-```r
-?idarps::boxplot_w_points
+```python
+np.array([[1,2], [3,4]])
 ```
 :::
 
 ## Solution
 
 ::: { .solution exercise="ex_4" }
-Use the function `boxplot_w_points()` from package `idarps`:
+Use  the `array()` function from `numpy`:
 
-```r
-data("pharmacy")
 
-# Construct attendance by day
-monday = na.omit(pharmacy$attendance[pharmacy$weekday == "Monday"])
-tuesday = na.omit(pharmacy$attendance[pharmacy$weekday == "Tuesday"])
-wednesday = na.omit(pharmacy$attendance[pharmacy$weekday == "Wednesday"])
-thursday = na.omit(pharmacy$attendance[pharmacy$weekday == "Thursday"])
-friday = na.omit(pharmacy$attendance[pharmacy$weekday == "Friday"])
-saturday = na.omit(pharmacy$attendance[pharmacy$weekday == "Saturday"])
-sunday = na.omit(pharmacy$attendance[pharmacy$weekday == "Sunday"])
-idarps::boxplot_w_points(monday, tuesday, wednesday, #<1>
-                         thursday, friday, saturday, sunday)           
-                     
-          
+```python
+A = np.array([[1, 2, 3], #<1>
+              [4, 5, 6],
+              [7, 8, 9]])   
 ```
-1. Use function `boxplot_w_points()` from the `idarps` package to create a boxplot with points overlaid.
-
+1. Use `np.array()`
 :::
 
 ::::
+
+
+# Interactive code no hint no solution
+
+```{pyodide}
+A = np._____([[1, 2, 3],
+              [4, 5, 6],
+              [7, 8, 9]])
+```
+
 
 ## Python code chunk
 ```{python}
@@ -86,8 +76,6 @@ idarps::boxplot_w_points(monday, tuesday, wednesday, #<1>
 
 
 
-
-
 ## Iframe 
 
 <iframe src="https://raw.githack.com/stephaneguerrier/data_analytics/master/Lecture1.html#1" width="710" height="530">
@@ -96,36 +84,9 @@ idarps::boxplot_w_points(monday, tuesday, wednesday, #<1>
 ## Local pdf slides
 
 
-<embed src="cours_3.pdf" type="application/pdf" width="100%" height="600px" />
+<embed src="assets/cours_3.pdf" type="application/pdf" width="100%" height="600px" />
 
 
-## Python interactive
-
-```{pyodide}
-for x in range(5):
-  print(x ** 2)
-import matplotlib.pyplot as plt
-plt.plot([1, 2, 3, 4], [1, 4, 9, 16])
-plt.ylabel('Magic Numbers')
-plt.show()
-```
-
-
-## R interactive
-```{webr}
-library(idarps)
-data("pharmacy")
-
-# Construct attendance by day
-monday = na.omit(pharmacy$attendance[pharmacy$weekday == "Monday"])
-tuesday = na.omit(pharmacy$attendance[pharmacy$weekday == "Tuesday"])
-wednesday = na.omit(pharmacy$attendance[pharmacy$weekday == "Wednesday"])
-thursday = na.omit(pharmacy$attendance[pharmacy$weekday == "Thursday"])
-friday = na.omit(pharmacy$attendance[pharmacy$weekday == "Friday"])
-saturday = na.omit(pharmacy$attendance[pharmacy$weekday == "Saturday"])
-sunday = na.omit(pharmacy$attendance[pharmacy$weekday == "Sunday"])
-idarps::boxplot_w_points(monday, tuesday, wednesday, thursday, friday, saturday, sunday)
-```
 
 
 
@@ -170,4 +131,6 @@ make_alert_button(message =  "This is a test \\(X\\)", type = "hint2")
 small_v_space_html(4)
 make_alert_button(message = "Test \\( f_X(x) = \\frac{1}{\\sqrt{2 \\pi \\sigma^2}} \\exp\\Big(-\\frac{(x-\\mu)^2}{2\\sigma^2}\\Big) \\)", type = "explanation")
 ```
+
+
 

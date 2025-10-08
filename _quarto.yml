@@ -1,32 +1,30 @@
 project:
-  type: book
-
-book:
+  type: website
+  
+website:
   title: "ELSTE Data Science Master Course"
-  subtitle: "A rapid introduction to data science using Python"
-  author: "Sébastien Biass & Stéphane Guerrier"
-  # contributor: "Various contributors"
-  date: "Fall semester 2025"
-  license: "CC BY 4.0"
-  downloads: "pdf"
+  description: "A rapid introduction to data science using Python"
+  navbar:
+    right:
+      - icon: github
+        href: https://github.com/e5k/Data-Science/blob/main/_quarto.yml
   sidebar:
     background: "#F5F5F5"
     search: true
-    tools:
-      - icon: github
-        href: https://github.com/
-  chapters:
-    - index.qmd
-    - part: Class 1
-      chapters:
-        - class1/class1_overview.qmd
-        - class1/pandas1.qmd
-        - class1/pandas2.qmd
-        - demo_page.qmd
-    - part: Appendices
-      chapters:
-        - appendices/setup_vscode.qmd
-    - references.qmd
+    contents:
+      - index.qmd
+      - section: "Class 1"
+        contents:
+          - class1/class1_overview.qmd
+          - class1/pandas1.qmd
+          - class1/pandas2.qmd
+          - demo_page.qmd
+      - section: "Appendices"
+        contents:
+          - appendices/setup_vscode.qmd
+      - references.qmd
+  page-footer:
+    center: "© Fall semester 2025 - CC BY 4.0 - Sébastien Biass & Stéphane Guerrier"
   # navbar:
   #   right:
   #     - icon: github

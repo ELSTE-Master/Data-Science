@@ -1,6 +1,6 @@
 <script>
 window.onload = function() {
-  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  var radiogroups = document.getElementsByClassName("webex2-radiogroup");
 
   for (var i = 0; i < radiogroups.length; i++) {
     let group = radiogroups[i];
@@ -21,21 +21,21 @@ window.onload = function() {
         // Keep the same logic as before
         var checked = group.querySelector("input:checked");
         var labels = group.children;
-        var feedbackBox = group.querySelector(".webex-feedback-box");
+        var feedbackBox = group.querySelector(".webex2-feedback-box");
 
         // clear option styles
         for (var j = 0; j < labels.length; j++) {
-          labels[j].classList.remove("webex-correct", "webex-incorrect");
+          labels[j].classList.remove("webex2-correct", "webex2-incorrect");
         }
 
         // clear feedback styles
         feedbackBox.classList.remove("correct-feedback", "incorrect-feedback");
 
         if (checked && checked.value === "answer") {
-          checked.parentElement.classList.add("webex-correct");
+          checked.parentElement.classList.add("webex2-correct");
           feedbackBox.classList.add("correct-feedback");
         } else if (checked) {
-          checked.parentElement.classList.add("webex-incorrect");
+          checked.parentElement.classList.add("webex2-incorrect");
           feedbackBox.classList.add("incorrect-feedback");
         }
 

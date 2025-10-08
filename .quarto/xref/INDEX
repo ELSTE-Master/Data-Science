@@ -28,5 +28,14 @@
   },
   "demo_page.qmd": {
     "demo_page.html": "9e2481f3"
+  },
+  "slides/intro-slides.qmd": {
+    "intro-slides.html": "67fd19cc"
+  },
+  "ressources.qmd": {
+    "ressources.html": "f960cb92"
+  },
+  "demo_page_2.qmd": {
+    "demo_page_2.html": "29abb3a5"
   }
 }
