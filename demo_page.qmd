@@ -1,0 +1,173 @@
+---
+title: "Demo page"
+format: 
+  live-html:
+    theme: cosmo
+    css: assets/webex_2.css
+    include-after-body: assets/webex_2.js
+engine: knitr
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+
+## Exercise interactive code with hints and solution
+
+:::: {.panel-tabset}
+
+## Exercise
+
+```{webr}
+#| setup: true
+#| exercise: ex_4
+library(idarps)
+```
+
+```{webr}s
+#| exercise: ex_4
+data("pharmacy")
+# Construct attendance by day
+monday = na.omit(pharmacy$attendance[pharmacy$weekday == "Monday"])
+tuesday = na.omit(pharmacy$attendance[pharmacy$weekday == "Tuesday"])
+wednesday = na.omit(pharmacy$attendance[pharmacy$weekday == "Wednesday"])
+thursday = na.omit(pharmacy$attendance[pharmacy$weekday == "Thursday"])
+friday = na.omit(pharmacy$attendance[pharmacy$weekday == "Friday"])
+saturday = na.omit(pharmacy$attendance[pharmacy$weekday == "Saturday"])
+sunday = na.omit(pharmacy$attendance[pharmacy$weekday == "Sunday"])
+idarps::___________(monday, tuesday, wednesday,
+                    thursday, friday, saturday, sunday)
+```
+
+## Hints
+
+::: { .hint exercise="ex_4"}
+Consider using the `boxplot_w_points()` function from package `idarps`.
+
+```r
+?idarps::boxplot_w_points
+```
+:::
+
+## Solution
+
+::: { .solution exercise="ex_4" }
+Use the function `boxplot_w_points()` from package `idarps`:
+
+```r
+data("pharmacy")
+
+# Construct attendance by day
+monday = na.omit(pharmacy$attendance[pharmacy$weekday == "Monday"])
+tuesday = na.omit(pharmacy$attendance[pharmacy$weekday == "Tuesday"])
+wednesday = na.omit(pharmacy$attendance[pharmacy$weekday == "Wednesday"])
+thursday = na.omit(pharmacy$attendance[pharmacy$weekday == "Thursday"])
+friday = na.omit(pharmacy$attendance[pharmacy$weekday == "Friday"])
+saturday = na.omit(pharmacy$attendance[pharmacy$weekday == "Saturday"])
+sunday = na.omit(pharmacy$attendance[pharmacy$weekday == "Sunday"])
+idarps::boxplot_w_points(monday, tuesday, wednesday, #<1>
+                         thursday, friday, saturday, sunday)           
+                     
+          
+```
+1. Use function `boxplot_w_points()` from the `idarps` package to create a boxplot with points overlaid.
+
+:::
+
+::::
+
+## Python code chunk
+```{python}
+1+1
+```
+## R code chunk
+```{r}
+1+1
+```
+
+
+
+
+
+## Iframe 
+
+<iframe src="https://raw.githack.com/stephaneguerrier/data_analytics/master/Lecture1.html#1" width="710" height="530">
+</iframe>
+
+## Local pdf slides
+
+
+<embed src="cours_3.pdf" type="application/pdf" width="100%" height="600px" />
+
+
+## Python interactive
+
+```{pyodide}
+for x in range(5):
+  print(x ** 2)
+import matplotlib.pyplot as plt
+plt.plot([1, 2, 3, 4], [1, 4, 9, 16])
+plt.ylabel('Magic Numbers')
+plt.show()
+```
+
+
+## R interactive
+```{webr}
+library(idarps)
+data("pharmacy")
+
+# Construct attendance by day
+monday = na.omit(pharmacy$attendance[pharmacy$weekday == "Monday"])
+tuesday = na.omit(pharmacy$attendance[pharmacy$weekday == "Tuesday"])
+wednesday = na.omit(pharmacy$attendance[pharmacy$weekday == "Wednesday"])
+thursday = na.omit(pharmacy$attendance[pharmacy$weekday == "Thursday"])
+friday = na.omit(pharmacy$attendance[pharmacy$weekday == "Friday"])
+saturday = na.omit(pharmacy$attendance[pharmacy$weekday == "Saturday"])
+sunday = na.omit(pharmacy$attendance[pharmacy$weekday == "Sunday"])
+idarps::boxplot_w_points(monday, tuesday, wednesday, thursday, friday, saturday, sunday)
+```
+
+
+
+
+
+## MCQ 
+```{r, echo = FALSE, results='asis'}
+knitr::opts_chunk$set(echo = FALSE)
+source("assets/q_a_env.R")
+```
+
+<!-- MathJax for Rendering Math -->
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+
+## Question 1
+
+Here is a question.
+
+```{r, results='asis'}
+# Define questions choice and individual feedback for each question
+opts <- list(
+  list(value = "\\(\\frac{1}{10}\\)",
+       feedback = "Too small ! 😱"),
+  list(value = "\\(\\frac{3}{10}\\)",
+       feedback = "Close! "),
+  answer = list(
+    value = "\\(\\frac{2}{5}\\)",
+    feedback = "correct ! 🐉 \\(\\frac{52}{100}\\)"
+  ),
+  list(
+    value = "\\(\\frac{52}{100}\\)",
+    feedback = "Not correct with \\(\\frac{52}{100}\\)! 🤓"
+  )
+)
+# render QA environment
+render_q_a_env(opts)
+small_v_space_html(4)
+make_alert_button(message =  "This is a test \\(X\\)", type = "hint2")
+small_v_space_html(4)
+make_alert_button(message = "Test \\( f_X(x) = \\frac{1}{\\sqrt{2 \\pi \\sigma^2}} \\exp\\Big(-\\frac{(x-\\mu)^2}{2\\sigma^2}\\Big) \\)", type = "explanation")
+```
+

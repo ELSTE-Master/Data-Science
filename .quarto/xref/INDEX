@@ -25,5 +25,8 @@
   },
   "class1/pandas2.qmd": {
     "pandas2.html": "2b49a305"
+  },
+  "demo_page.qmd": {
+    "demo_page.html": "9e2481f3"
   }
 }

@@ -22,6 +22,7 @@ book:
         - class1/class1_overview.qmd
         - class1/pandas1.qmd
         - class1/pandas2.qmd
+        - demo_page.qmd
     - part: Appendices
       chapters:
         - appendices/setup_vscode.qmd
@@ -42,6 +43,6 @@ format:
     backgroundcolor: "#F5F5F5"
   # pdf:
   #   documentclass: scrreprt
-  revealjs: default # slides output
+  # revealjs: default # slides output
 
 
