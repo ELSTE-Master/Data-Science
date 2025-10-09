@@ -478,5 +478,47 @@
       "Class 1",
       "Demo page"
     ]
+  },
+  {
+    "objectID": "slides/class1.html#getting-up",
+    "href": "slides/class1.html#getting-up",
+    "title": "ELSTE Data science",
+    "section": "Getting up",
+    "text": "Getting up\n\nTurn off alarm\nGet out of bed"
+  },
+  {
+    "objectID": "slides/class1.html#going-to-sleep",
+    "href": "slides/class1.html#going-to-sleep",
+    "title": "ELSTE Data science",
+    "section": "Going to sleep",
+    "text": "Going to sleep\n\nGet in bed\nCount sheep"
+  },
+  {
+    "objectID": "slides/class1.html#schedule",
+    "href": "slides/class1.html#schedule",
+    "title": "ELSTE Data science",
+    "section": "Schedule",
+    "text": "Schedule\n\n6 \\(\\times\\) 3-h long sessions\n\nOctober 15, 22, 29\nNovember 5, 12, 19"
+  },
+  {
+    "objectID": "slides/class1.html#schedule-1",
+    "href": "slides/class1.html#schedule-1",
+    "title": "ELSTE Data science",
+    "section": "Schedule",
+    "text": "Schedule\n\nTurn off alarm\nGet out of bed"
+  },
+  {
+    "objectID": "slides/class1.html#assistants",
+    "href": "slides/class1.html#assistants",
+    "title": "ELSTE Data science",
+    "section": "Assistants",
+    "text": "Assistants\n\nGet in bed\nCount sheep"
+  },
+  {
+    "objectID": "slides/class1.html#why-this-class",
+    "href": "slides/class1.html#why-this-class",
+    "title": "ELSTE Data science",
+    "section": "Why this class?",
+    "text": "Why this class?\n\n\nAs scientists, we are exposed to:\n\nIncreasing computational power/facilities\nIncreasing amount of data\n\n\nHow do we make sense of it all?\n\nScientific coding → gateway to data and processing power\nData science → extracting meaningful infomation and insights from data"
   }
 ]

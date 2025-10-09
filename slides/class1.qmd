@@ -1,0 +1,70 @@
+---
+title: "ELSTE Data science"
+subtitle: "Some concept of Python coding and statistical inference"
+date: "October 15, 2025"
+author:
+  - name: Sébastien Biass
+    id: sb
+    orcid: 0000-0002-1919-9473
+    email: sebastien.biasse@unige.ch
+    affiliation: 
+      - name: Earth Sciences
+  - name: Stéphane Guerrier
+    id: sg
+    orcid: 0000-0003-0002-8794
+    email: Stephane.Guerrier@unige.ch
+    affiliation: 
+      - name: Earth Sciences
+      - name: Pharmaceutical Sciences
+license: "CC BY"
+format: 
+  clean-revealjs:
+    footer: "ELSTE Data Science course / Fall 2025"
+
+---
+
+## Why this class?
+
+:::: {.columns}
+
+::: {.column width="50%"}
+**As scientists, we are exposed to**:
+
+- Increasing computational power/facilities
+- Increasing amount of data
+
+::: {.fragment}
+**How do we make sense of it all?**
+
+- [Scientific coding]{.hlght} → gateway to scientific data analysis
+- [Data science]{.hlght} → extracting meaningful infomation and insights from data
+:::
+
+:::
+
+::: {.column width="50%"}
+
+![](img/diw.jpeg)
+
+:::
+
+::::
+
+
+
+
+## Schedule
+
+- 6 $\times$ 3-h long sessions
+  - **October** 15, 22, 29
+  - **November** 5, 12, 19
+
+## Schedule
+
+- Turn off alarm
+- Get out of bed
+
+## Assistants
+
+- Get in bed
+- Count sheep
