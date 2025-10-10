@@ -20,13 +20,28 @@ license: "CC BY"
 format: 
   clean-revealjs:
     footer: "ELSTE Data Science course / Fall 2025"
+    fontawesome: true
+    mermaid:
+        theme: dark
 
 ---
 
 ## Why this class?
 
-:::: {.columns}
+### Data deluge: The big EO data landscape
 
+![](img/LandsatArchive.gif){width=80% fig-align="center"}
+
+- **Landsat:**
+  - Download: 53 images/day (2001) - 220’000 images/day (2017)
+  - 5 million images of the Earth surface → [> 5 PB]{.bg}
+- **ESA Sentinel 1 & 2** → [4.6TB /daily!]{.bg}
+
+
+
+## Why this class?
+
+:::: {.columns}
 ::: {.column width="50%"}
 **As scientists, we are exposed to**:
 
@@ -36,35 +51,326 @@ format:
 ::: {.fragment}
 **How do we make sense of it all?**
 
-- [Scientific coding]{.hlght} → gateway to scientific data analysis
-- [Data science]{.hlght} → extracting meaningful infomation and insights from data
+- [Scientific coding]{.bg} → gateway to scientific data analysis
+- [Data science]{.bg} → extracting meaningful infomation and insights from data
 :::
-
 :::
-
 ::: {.column width="50%"}
-
 ![](img/diw.jpeg)
+:::
+::::
+
+## What is [data science]{.bg}
+
+### Wikipedia
+
+> Data science is an [interdisciplinary academic field]{.bg} that uses statistics, scientific computing, scientific methods, processing, scientific visualization, algorithms and systems to extract or extrapolate knowledge from [...] data.
+
+::: {.fragment}
+
+### National Institutes of Standards and Technology
+
+> The field that combines domain expertise, programming skills, and knowledge of mathematics and statistics to [extract meaningful insights from data]{.bg}.
+:::
+
+## Class schedule
+
+- **Fall part at UNIGE**: 6 $\times$ 3-h long sessions
+- **Assistants**: Simon Thivet, Filippo Salmaso, Lionel Voirol 
+- **Format**: Theory, live coding and exercises
+
+### October 15 and 22
+
+- **Seb** → Intro to data science libraries for [Python]{.bg} → `Pandas`, `seaborn`
+
+### October 29 and November 5
+
+- **Stéphane** → Intro to statistical method for [data inference]{.bg}
+
+### November 12 and 19
+
+- Flexible as a function of how we progress
+- Exam format to be defined
+
+## Class objectives
+
+- Scientific coding and stats often appear daunting
+- True, there can be a steep learning curve
+
+
+<span style="font-size: 0.5em;"></span>
+
+::: {.fragment}
+### Objectives
+
+- **Not** to make you and expert developer / statistician **but**
+  - To help you gain the [confidence]{.bg} that you are [totally capable of doing it]{.bg}
+  - To make you realise that [what you will get]{.bg} in terms of research capabilities is [worth the effort]{.bg}!
 
 :::
 
+## Get involved!!!
+
+**We want this class to be useful for [your research]{.bg}**!
+
+<span style="font-size: 0.5em;"></span>
+
+Try to contextualise the course material to **your research**:
+
+- Do you already have your own [datasets]{.bg} you could bring to class?
+- Can you use the course to [formulate new research questions]{.bg}?
+- Do you know any open-access datasets relevant to your fields?
+  - If not, can you find some for the next weeks?
+
+
+# Why coding? {background-color="#2F4647"}
+
+
+
+## Motivations
+
+- **Example**: A common - but unnecessarily complicated - workflow of [many specialised softwares]{.bg}
+
+```{mermaid}
+%%{init: {"theme":"dark"}}%%
+flowchart LR
+    B[Data Collection]
+    B --> C[Data Cleaning]
+    C --> D[Analysis]
+    D --> E[Visualisation]
+```
+
+
+::: {.fragment}
+- **Objective**: Integrate full research workflow in an environment [supporting all tasks]{.bg}
+
+```{mermaid}
+flowchart LR
+    B[Start]
+    B --> C["<img src='https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/community/logos/python-logo-only.png' width='20'>"]
+    C --> D[End]
+```
+:::
+
+
+
+
+
+
+## Motivations
+
+### Motivation 1: Automation
+
+:::: {.columns}
+::: {.column width="60%"}
+
+**Cotopaxi volcano**
+
+- Reconstructing eruption source parameters (ESP) from tephra deposits
+    - *How do different measurement methods influence ESP estimates*?
+
+::: {.fragment}
+- 40 outcrops
+- ~10 samples per outcrop
+- ~7 measurement methods per sample
+:::
+
+
+:::
+::: {.column width="40%"}
+![](img/_Cotopaxi%20-%202%20of%20200.jpeg){width=100%}
+:::
+::::
+
+
+## Motivations
+
+### Motivation 2: Data analysis
+
+:::: {.columns}
+::: {.column width="48%"}
+
+**Example 1**: Exploit catalogues of big Earth Observation data
+
+- **Revisit big EO catalogues to infer new knowledge**
+    - *What controls the impact and recovery of vegetation following eruptions*?
+:::
+::: {.column width="4%"}
+:::
+::: {.column width="48%"}
+![](img/Pinatubo.gif){width=100%}
+
+:::
+::::
+
+## Motivations
+### Motivation 2: Data analysis
+
+:::: {.columns}
+::: {.column width="48%"}
+
+**Example 2**: Streamline global geochemical analyses
+
+- **Access global databases**
+  - e.g., *Georock* database 
+- **Automatic dedicated analyses/plots**
+  - e.g., *TAS* diagrams and classification using `pyrolite`
+
+:::
+::: {.column width="4%"}
+:::
+::: {.column width="48%"}
+
+![](img/pyrolite.webp){width=100%}
+
+:::
 ::::
 
 
 
+## Motivations
+### Motivation 3: Visualisation
 
-## Schedule
+**Example 1**: In volcanically-active regions, soil burial after explosive eruptions [capture more carbon that they emit]{.bg}.
 
-- 6 $\times$ 3-h long sessions
-  - **October** 15, 22, 29
-  - **November** 5, 12, 19
+![](img/C_v2.png)
 
-## Schedule
+## Motivations
+### Motivation 3: Visualisation
 
-- Turn off alarm
-- Get out of bed
+**Example 2**: In Small Island States, [≥90% of population and GDP]{.bg} is exposed to volcanic hazards.
 
-## Assistants
+![](img/FigS07.png){width=90% fig-align="center"}
 
-- Get in bed
-- Count sheep
+
+
+# Why Python?  {background-color="#2F4647"}
+
+## Python's advantages [^1]
+
+:::: {.columns}
+::: {.column width="50%"}
+
+1. **Free**
+2. **Open source**
+   - Not dependent on any company
+   - Large online community
+3. **Old** → stable (started in 1991)
+4. **Very** popular in science
+5. Relatively easy to learn
+
+:::
+::: {.column width="50%"}
+![](img/stack.png){width=120%}
+:::
+::::
+
+[^1]: Inspired by the [School of Oceanography at University of Washington](https://www.youtube.com/watch?v=O3DnvPuw8Ro&list=PLjazLUieaXOWl-4ZUn4VWabP5-Tb74ZbR&index=3)
+
+## What is Python
+
+**High-level computing language**
+
+- Compiled → doesn't directly speak to the computer, but is *interpreted* by another language
+  - Usually slower, but much, much [easier to use]{.bg}!
+
+
+**Modular**
+
+- Python is composed of a *core* of functions complemented by wide ecosystem of specialized packages for [specific tasks]{.bg}
+  - A [function]{.bg} is a bit of code to perform a **specific task**
+  - A [module]{.bg} is a collection of **functions**
+  - A [package]{.bg} is composed by multiple **modules**
+
+
+## An example of packages, modules and functions
+
+In the code below, we first load the necessary packages and libraries:
+
+- `matplotlib` is the main **visualisation** [package]{.bg} used in Python
+- `pyplot` is a [module]{.bg} of `matplotlib` that provides easy-to-use functions for **plotting** data
+- `figure` is a [function]{.bg} of `pyplot` and is the main function to prepare a plot
+
+```{python}
+# | eval: False
+# | echo: True
+
+# Import the packages and modules
+from matplotlib import pyplot as plt 
+# Set up a figure for plotting
+plt.figure(...) 
+
+```
+<!-- 1. Load the `pyplot` [module]{.bg} from the `matplotlib` [package]{.bg} 
+2. The `pyplot` module provides the `figure` [function]{.bg} -->
+
+## How to use Python 
+
+
+:::: {.columns}
+::: {.column width="48%"}
+
+**Option 1**: Your own computer
+
+- Requires some setup
+- No internet connection required
+- Slow if computer is slow
+- All data stored on your own computer
+
+::: {.callout-important}
+## Environment manager!
+
+Make sure to install an **environment manager** → e.g. [Miniconda](https://www.anaconda.com/docs/getting-started/miniconda/main)
+:::
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+::: {.fragment}
+**Option 2**: On the cloud → [Google Collab](https://colab.google)
+
+- No setup required
+- No internet connection required
+- Decent speed, free as long as Google says it is free
+- All data stored on your own computer
+
+:::
+:::
+::::
+
+## How to run Python 
+
+
+
+:::: {.columns}
+::: {.column width="48%"}
+
+**3 main ways to run Python...**
+
+1. Run Python `.py` scripts from the command line → *deprecated*
+2. Run blocks of code from within a Python `.py` script using `ipykernel` → **similar behaviour to R/Matlab**
+3. Use **Jupyter Notebooks** in `.ipynb` files
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+::: {.fragment}
+**...in two different environments**
+
+1. Dedicated software:
+   - [VSCode](https://code.visualstudio.com/docs/python/jupyter-support-py)
+   - [PyCharm](https://www.jetbrains.com/pycharm/) 
+   - [Spyder](https://www.spyder-ide.org)
+2. Web browser
+   - [JupyterLab](https://jupyter.org)
+:::
+:::
+::::

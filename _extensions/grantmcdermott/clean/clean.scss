@@ -98,7 +98,7 @@ $selection-bg: $bg_light !default;
 
   .author,
   .quarto-title-author-name {
-    color: $body-color;
+    color: $bg_dark;
   }
 
   .quarto-title-authors {
@@ -136,13 +136,6 @@ $selection-bg: $bg_light !default;
   margin-top: 1.25em;
 }
 
-
-.hlght {
-  background-color: rgba($accent, 0.5);
-  padding: 0.1em 0.2em;
-  border-radius: 3px;
-}
-
 .alert {
   color: $accent;
 }
@@ -152,7 +145,8 @@ $selection-bg: $bg_light !default;
 }
 
 .bg {
-  background-color: var(--col, #fff);
+  // background-color: var(--col, #fff);
+  background-color: rgba($accent, 0.5);
   padding: 0.1em;
   border-radius: 5px;
   display: inline-block;
@@ -163,6 +157,13 @@ $selection-bg: $bg_light !default;
   color: $bg_light;
 }
 
+// Seb 
+
+.small-gap {
+  display: block;
+  margin-top: 0.25em;  /* adjust smaller/larger as needed */
+  margin-bottom: 0.25em;
+}
 
 // lists
 
@@ -375,3 +376,26 @@ $selection-bg: $bg_light !default;
 .reveal .columns6040 div.column:not(:first-child) {
   width: 40%;
 }      
+
+
+// Seb
+
+.reveal code {
+    color: $bg_light;
+    font-size: .875em;
+    background-color: rgba($bg_light, 0.25);
+    padding: 0.05em;
+    border-radius: 2px;
+    display: inline-block;
+    white-space: pre-wrap;
+    font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+}
+
+// Change the size of code annotations
+span[data-code-cell] {
+  font-size: .775em;
+}
+
+.reveal .slides section .code-annotation-container-grid {
+  margin-top: 1.5em !important;
+}

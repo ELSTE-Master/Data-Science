@@ -16,7 +16,7 @@
         "jupyter: python3\n",
         "---"
       ],
-      "id": "342df057"
+      "id": "d93ea875"
     },
     {
       "cell_type": "code",
@@ -29,7 +29,7 @@
         "    \"figure.facecolor\":  (0.0, 0.0, 0.0, 0.0),  # red   with alpha = 30%\n",
         "})"
       ],
-      "id": "f2f97391",
+      "id": "a0450d6e",
       "execution_count": null,
       "outputs": []
     },
@@ -150,7 +150,7 @@
         "\n",
         "As always, we start by importing the `pandas` library as `pd`.\n"
       ],
-      "id": "2d6c9ba5"
+      "id": "b6948c79"
     },
     {
       "cell_type": "code",
@@ -183,7 +183,7 @@
         "- `parse_dates=['Date']`: Specify that the `Date` column should be treated as a date object.\n",
         "::: -->\n"
       ],
-      "id": "d8ab8996"
+      "id": "64a70e86"
     },
     {
       "cell_type": "code",
@@ -195,7 +195,7 @@
         "df = pd.read_csv('data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data\n",
         "df.head() # Show the first 5 rows"
       ],
-      "id": "769f52a9",
+      "id": "ab9894ce",
       "execution_count": null,
       "outputs": []
     },
@@ -212,7 +212,7 @@
         "- `.set_index()`: Uses a column as the DataFrame's index\n",
         "- `.reset_index()`: Removes the column's index back to a sequential numbering as in @lst-load-data.\n"
       ],
-      "id": "88b2b096"
+      "id": "d54da516"
     },
     {
       "cell_type": "code",
@@ -226,7 +226,7 @@
         "df = df.set_index('Name') # Here we go.\n",
         "df.head()"
       ],
-      "id": "464ab686",
+      "id": "e7c4c099",
       "execution_count": null,
       "outputs": []
     },
@@ -271,7 +271,7 @@
         "\n",
         "When we know the exact label of the row or the column, we can use the `.loc` function to query the DataFrame (@fig-pandas-loc). Let's start by querying specific **rows**. @lst-set-index has defined the `Name` column as the *index* (i.e., row label), which means that we can simply pass the name of the volcano.\n"
       ],
-      "id": "692b8552"
+      "id": "1c6902b9"
     },
     {
       "cell_type": "code",
@@ -280,7 +280,7 @@
         "# Get the row for \"Calbuco\" volcano\n",
         "df.loc['Calbuco']"
       ],
-      "id": "b434073c",
+      "id": "84520a3c",
       "execution_count": null,
       "outputs": []
     },
@@ -290,7 +290,7 @@
       "source": [
         "Note that the result is a *Series* (i.e., a 1-dimensional DataFrame where the columns become the index), not a DataFrame. If we want to **keep it as a DataFrame**, we can use double brackets. Double brackets can also be used to query **multiple rows**.\n"
       ],
-      "id": "b7b36d6a"
+      "id": "a39e4772"
     },
     {
       "cell_type": "code",
@@ -299,7 +299,7 @@
         "df.loc[['Calbuco']] # Query one row and return it as a DataFrame\n",
         "df.loc[['Calbuco', 'Taal']] # Query multiple rows"
       ],
-      "id": "28afd081",
+      "id": "041d9450",
       "execution_count": null,
       "outputs": []
     },
@@ -312,7 +312,7 @@
         "\n",
         "What is the VEI recorded for Etna volcano?\n"
       ],
-      "id": "e2213eff"
+      "id": "fddcd6d1"
     },
     {
       "cell_type": "code",
@@ -327,7 +327,7 @@
         "    '5' : 0\n",
         "})"
       ],
-      "id": "bb815293",
+      "id": "a2e2cfe4",
       "execution_count": null,
       "outputs": []
     },
@@ -337,7 +337,7 @@
       "source": [
         "What is the eruption date for Taal volcano?\n"
       ],
-      "id": "4e7db1a1"
+      "id": "7a128a0d"
     },
     {
       "cell_type": "code",
@@ -352,7 +352,7 @@
         "    '2023-02-13' : 0\n",
         "})"
       ],
-      "id": "bcb965c2",
+      "id": "6eecbbcf",
       "execution_count": null,
       "outputs": []
     },
@@ -373,7 +373,7 @@
         "\n",
         "Let's now query specific **columns**. For example, querying the `VEI` column can be achieved in different ways. The simplest is to use the column name directly. We can also query **multiple columns** using double brackets\n"
       ],
-      "id": "e683e5e5"
+      "id": "0b680c4c"
     },
     {
       "cell_type": "code",
@@ -382,7 +382,7 @@
         "df[['VEI']] # Get the VEI column\n",
         "df[['Country', 'VEI']] # Query multiple columns"
       ],
-      "id": "187f2ee0",
+      "id": "8f09a3c0",
       "execution_count": null,
       "outputs": []
     },
@@ -392,7 +392,7 @@
       "source": [
         "Note that until now, we have only retrieved either rows or columns (@fig-pandas-loc). We can also retrieve specific values by specifying **both the row and the column**.\n"
       ],
-      "id": "61d13e9e"
+      "id": "746dfd85"
     },
     {
       "cell_type": "code",
@@ -400,7 +400,7 @@
       "source": [
         "df.loc[['Calbuco', 'Taal']][['Country', 'VEI']]"
       ],
-      "id": "4f34f5c8",
+      "id": "16d0d08a",
       "execution_count": null,
       "outputs": []
     },
@@ -417,7 +417,7 @@
         "\n",
         "The next example queries the first row - using again double brackets to return a **DataFrame**.\n"
       ],
-      "id": "b221b927"
+      "id": "50513ba3"
     },
     {
       "cell_type": "code",
@@ -425,7 +425,7 @@
       "source": [
         "df.iloc[[0]]"
       ],
-      "id": "599a117c",
+      "id": "4776e4bb",
       "execution_count": null,
       "outputs": []
     },
@@ -437,7 +437,7 @@
         "\n",
         "We can get **a range of rows** using what is called *slicing*. This is done using the colon (`:`) operator. The next example queries rows 3 to 6 of the DataFrame. Note that the end index is exclusive, meaning that the element at the end index is not included in the result.\n"
       ],
-      "id": "0b53d2b4"
+      "id": "18971e6a"
     },
     {
       "cell_type": "code",
@@ -445,7 +445,7 @@
       "source": [
         "df.iloc[2:6]"
       ],
-      "id": "6a5ac1a0",
+      "id": "ca70af2d",
       "execution_count": null,
       "outputs": []
     },
@@ -455,7 +455,7 @@
       "source": [
         "To get rows 3 to 6 and columns 2-3:\n"
       ],
-      "id": "a238301a"
+      "id": "c10165a3"
     },
     {
       "cell_type": "code",
@@ -463,7 +463,7 @@
       "source": [
         "df.iloc[0:5, 1:3]"
       ],
-      "id": "1480a0c5",
+      "id": "1b6ddbf8",
       "execution_count": null,
       "outputs": []
     },
@@ -475,7 +475,7 @@
         "\n",
         "To get the last 5 rows of the DataFrame:\n"
       ],
-      "id": "b90861b2"
+      "id": "7db47072"
     },
     {
       "cell_type": "code",
@@ -483,7 +483,7 @@
       "source": [
         "df.iloc[-5:]"
       ],
-      "id": "b233eade",
+      "id": "e15d886e",
       "execution_count": null,
       "outputs": []
     },
@@ -496,7 +496,7 @@
         "By experience, position-based queries is more used on *rows* than *columns*. For instance, we might want to access the first 10 rows because we don't know their associated labels, yet it is less likely that we ignore their *attributes*.\n",
         "It is possible mix label-based and position-based indexing. For example, to get the first 5 rows and the `Country` and `VEI` columns:\n"
       ],
-      "id": "75987206"
+      "id": "4d1f5bcf"
     },
     {
       "cell_type": "code",
@@ -504,7 +504,7 @@
       "source": [
         "df.iloc[0:5][['Country', 'VEI']]"
       ],
-      "id": "20d26e77",
+      "id": "6d84f98d",
       "execution_count": null,
       "outputs": []
     },
@@ -518,7 +518,7 @@
         "\n",
         "Now that we have reviewed how to access data, let's now see how to **filter** data using **boolean indexing**. For this, we need to review what are **comparison operators** (@tbl-comparison-operators). Let's assume the following variables:\n"
       ],
-      "id": "cba3c4d9"
+      "id": "7534da38"
     },
     {
       "cell_type": "code",
@@ -530,7 +530,7 @@
         "a = 1\n",
         "b = 2"
       ],
-      "id": "bd57844c",
+      "id": "d5602365",
       "execution_count": null,
       "outputs": []
     },
@@ -553,7 +553,7 @@
         "\n",
         "We can apply comparison operators to DataFrame. Let's say we want to test what rows have a VEI of 4:\n"
       ],
-      "id": "65e67e29"
+      "id": "7fb27d63"
     },
     {
       "cell_type": "code",
@@ -563,7 +563,7 @@
         "#| lst-cap: Create a boolean mask\n",
         "df['VEI'] == 4"
       ],
-      "id": "3f7bf67d",
+      "id": "fb60125a",
       "execution_count": null,
       "outputs": []
     },
@@ -573,7 +573,7 @@
       "source": [
         "We can see that Galunggung, Taal, La Soufrière, Calbuco and Eyjafjallajökull return `True` to this condition. This is great, but what if we want to return the actual rows? We can use @lst-bool as a **mask** to then query the rows using `.loc`.\n"
       ],
-      "id": "8b74b90e"
+      "id": "5ab80e4f"
     },
     {
       "cell_type": "code",
@@ -588,7 +588,7 @@
         "# Or, as a one line alternative:\n",
         "df.loc[df['VEI'] == 4]"
       ],
-      "id": "671bd580",
+      "id": "78854262",
       "execution_count": null,
       "outputs": []
     },
@@ -601,7 +601,7 @@
         "\n",
         "What volcanoes have a VEI of 5?\n"
       ],
-      "id": "3d11ee29"
+      "id": "6463bc79"
     },
     {
       "cell_type": "code",
@@ -615,7 +615,7 @@
         "    'St. Helens and El Chichón' : 1\n",
         "})"
       ],
-      "id": "78fee7fc",
+      "id": "b13e60cc",
       "execution_count": null,
       "outputs": []
     },
@@ -625,7 +625,7 @@
       "source": [
         "How many volcanoes are in the southern hemisphere? (hint: use the `df.shape` function to count them).\n"
       ],
-      "id": "4cc1ec2d"
+      "id": "31faecd9"
     },
     {
       "cell_type": "code",
@@ -640,7 +640,7 @@
         "    '12': 0\n",
         "})"
       ],
-      "id": "74f8930d",
+      "id": "05696e6f",
       "execution_count": null,
       "outputs": []
     },
@@ -655,7 +655,7 @@
         "\n",
         "We can also use comparison operators on columns containing **strings** (see @cau-dtypes for caveats). @lst-str-comp illustrates a basic string comparison using the `=` operator. @tbl-comparison-str shows additional operators for strings.\n"
       ],
-      "id": "d8a928da"
+      "id": "005dd6d0"
     },
     {
       "cell_type": "code",
@@ -667,7 +667,7 @@
         "\n",
         "df.loc[df['Country'] == 'Indonesia']"
       ],
-      "id": "325cc75a",
+      "id": "d4f7d8d9",
       "execution_count": null,
       "outputs": []
     },
@@ -707,7 +707,7 @@
         "\n",
         "Let's gather all volcanoes that have a VEI of 3 and are in Indonesia:\n"
       ],
-      "id": "1b009cab"
+      "id": "8cf37ee1"
     },
     {
       "cell_type": "code",
@@ -719,7 +719,7 @@
         "mask = (df['VEI'] == 3) & (df['Country'] == 'Indonesia') # Create a mask - don't forget parentheses!\n",
         "df.loc[mask] # Query the data"
       ],
-      "id": "04fed1bc",
+      "id": "9d59f4f4",
       "execution_count": null,
       "outputs": []
     },
@@ -732,7 +732,7 @@
         "\n",
         "How many volcanoes are either in Chile **or** in the USA?\n"
       ],
-      "id": "bbd9cad9"
+      "id": "d18c7514"
     },
     {
       "cell_type": "code",
@@ -746,7 +746,7 @@
         "    '8': 0\n",
         "})"
       ],
-      "id": "7b378bfc",
+      "id": "fdb96489",
       "execution_count": null,
       "outputs": []
     },
@@ -756,7 +756,7 @@
       "source": [
         "How many volcanoes are in the southern hemisphere **and** have a VEI≥4?\n"
       ],
-      "id": "eb267bbe"
+      "id": "1164953d"
     },
     {
       "cell_type": "code",
@@ -770,7 +770,7 @@
         "    '12': 0\n",
         "})"
       ],
-      "id": "1f3d7db2",
+      "id": "ce3ee8a0",
       "execution_count": null,
       "outputs": []
     },
@@ -792,7 +792,7 @@
         "2. `axis`: Specifies whether sorting rows (`axis = 0` - in which case `by` is a column name) or sorting columns (`axis = 1`, in which case `by` is an index value). The documentation specifies `axis = 0`, which means that rows will be sorted if `axis` is not specified.\n",
         "3. `ascending`: Using a *bool* (remember, this is a True/False behaviour), specifies if values are sorted in *ascending* (`ascending = True`, default behaviour is not specified) or *descending* (`ascending = False`) order.\n"
       ],
-      "id": "8dd77a85"
+      "id": "cd225e63"
     },
     {
       "cell_type": "code",
@@ -807,7 +807,7 @@
         "df.sort_values('Country') # .sort_values also work on strings to sort alphabetically\n",
         "df.sort_values(['Latitude', 'Longitude']) # Sorting using multiple columns"
       ],
-      "id": "780d8410",
+      "id": "9504efef",
       "execution_count": null,
       "outputs": []
     },
@@ -820,7 +820,7 @@
         "\n",
         "After sorting the data in **descending order** by VEI and time, what are the three first volcanoes?\n"
       ],
-      "id": "e385cf95"
+      "id": "2f819ebb"
     },
     {
       "cell_type": "code",
@@ -834,7 +834,7 @@
         "    'St Helens, El Chichon, Pinatubo': 0\n",
         "})"
       ],
-      "id": "49bc6cdc",
+      "id": "8c3a2ee8",
       "execution_count": null,
       "outputs": []
     },
@@ -855,7 +855,7 @@
         "\n",
         "@lst-op1 Illustrates how to half the VEI column save the results to a new column.\n"
       ],
-      "id": "f755a876"
+      "id": "ee66bdba"
     },
     {
       "cell_type": "code",
@@ -866,7 +866,7 @@
         "\n",
         "df['VEI_halved'] = df['VEI'] / 2"
       ],
-      "id": "423b1ac7",
+      "id": "25c058c3",
       "execution_count": null,
       "outputs": []
     },
@@ -949,7 +949,7 @@
         "\n",
         ": Common string operations on pandas columns. {#tbl-op-str .striped   }"
       ],
-      "id": "04b7acc9"
+      "id": "aa08a02d"
     }
   ],
   "metadata": {

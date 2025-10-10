@@ -498,7 +498,7 @@
     "href": "slides/class1.html#schedule",
     "title": "ELSTE Data science",
     "section": "Schedule",
-    "text": "Schedule\n\n6 \\(\\times\\) 3-h long sessions\n\nOctober 15, 22, 29\nNovember 5, 12, 19"
+    "text": "Schedule\n\nTurn off alarm\nGet out of bed"
   },
   {
     "objectID": "slides/class1.html#schedule-1",
@@ -519,6 +519,167 @@
     "href": "slides/class1.html#why-this-class",
     "title": "ELSTE Data science",
     "section": "Why this class?",
-    "text": "Why this class?\n\n\nAs scientists, we are exposed to:\n\nIncreasing computational power/facilities\nIncreasing amount of data\n\n\nHow do we make sense of it all?\n\nScientific coding → gateway to data and processing power\nData science → extracting meaningful infomation and insights from data"
+    "text": "Why this class?\nData deluge: The big EO data landscape\n\n\nLandsat:\n\nDownload: 53 images/day (2001) - 220’000 images/day (2017)\n5 million images of the Earth surface → &gt; 5 PB\n\nESA Sentinel 1 & 2 → 4.6TB /daily!"
+  },
+  {
+    "objectID": "slides/class1.html#why-this-class-1",
+    "href": "slides/class1.html#why-this-class-1",
+    "title": "ELSTE Data science",
+    "section": "Why this class?",
+    "text": "Why this class?\n\n\nAs scientists, we are exposed to:\n\nIncreasing computational power/facilities\nIncreasing amount of data\n\n\nHow do we make sense of it all?\n\nScientific coding → gateway to scientific data analysis\nData science → extracting meaningful infomation and insights from data"
+  },
+  {
+    "objectID": "slides/class1.html#what-is-data-science",
+    "href": "slides/class1.html#what-is-data-science",
+    "title": "ELSTE Data science",
+    "section": "What is data science",
+    "text": "What is data science\nWikipedia\n\nData science is an interdisciplinary academic field that uses statistics, scientific computing, scientific methods, processing, scientific visualization, algorithms and systems to extract or extrapolate knowledge from […] data.\n\n\nNational Institutes of Standards and Technology\n\nThe field that combines domain expertise, programming skills, and knowledge of mathematics and statistics to extract meaningful insights from data."
+  },
+  {
+    "objectID": "slides/class1.html#class-schedule",
+    "href": "slides/class1.html#class-schedule",
+    "title": "ELSTE Data science",
+    "section": "Class schedule",
+    "text": "Class schedule\n\nFall part at UNIGE: 6 \\(\\times\\) 3-h long sessions\nAssistants: Simon Thivet, Filippo Salmaso, Lionel Voirol\nFormat: Theory, live coding and exercises\n\nOctober 15 and 22\n\nSeb → Intro to data science libraries for Python → Pandas, seaborn\n\nOctober 29 and November 5\n\nStéphane → Intro to statistical method for data inference\n\nNovember 12 and 19\n\nFlexible as a function of how we progress\nExam format to be defined"
+  },
+  {
+    "objectID": "slides/class1.html#motivations",
+    "href": "slides/class1.html#motivations",
+    "title": "ELSTE Data science",
+    "section": "Motivations",
+    "text": "Motivations\n\nExample: A common - but unnecessarily complicated - workflow of many specialised softwares\n\n\n\n\n\n\n%%{init: {\"theme\":\"dark\"}}%%\nflowchart LR\n    B[Data Collection]\n    B --&gt; C[Data Cleaning]\n    C --&gt; D[Analysis]\n    D --&gt; E[Visualisation]\n\n\n\n\n\n\n\n\nObjective: Integrate full research workflow in an environment supporting all tasks\n\n\n\n\n\n\nflowchart LR\n    B[Start]\n    B --&gt; C[\"&lt;img src='https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/community/logos/python-logo-only.png' width='20'&gt;\"]\n    C --&gt; D[End]"
+  },
+  {
+    "objectID": "slides/class1.html#motivations-1",
+    "href": "slides/class1.html#motivations-1",
+    "title": "ELSTE Data science",
+    "section": "Motivations",
+    "text": "Motivations\nMotivation 1: Automation\n\n\nCotopaxi volcano\n\nReconstructing eruption source parameters (ESP) from tephra deposits\n\nHow do different measurement methods influence ESP estimates?\n\n\n\n\n40 outcrops\n~10 samples per outcrop\n~7 measurement methods per sample"
+  },
+  {
+    "objectID": "slides/class1.html#motivations-2",
+    "href": "slides/class1.html#motivations-2",
+    "title": "ELSTE Data science",
+    "section": "Motivations",
+    "text": "Motivations\nMotivation 2: Data analysis\n\n\nExample 1: Exploit catalogues of big Earth Observation data\n\nRevisit big EO catalogues to infer new knowledge\n\nWhat controls the impact and recovery of vegetation following eruptions?"
+  },
+  {
+    "objectID": "slides/class1.html#motivations-3",
+    "href": "slides/class1.html#motivations-3",
+    "title": "ELSTE Data science",
+    "section": "Motivations",
+    "text": "Motivations\nMotivation 2: Data analysis\n\n\nExample 2: Streamline global geochemical analyses\n\nAccess global databases\n\ne.g., Georock database\n\nAutomatic dedicated analyses/plots\n\ne.g., TAS diagrams and classification using pyrolite"
+  },
+  {
+    "objectID": "slides/class1.html#motivation",
+    "href": "slides/class1.html#motivation",
+    "title": "ELSTE Data science",
+    "section": "Motivation",
+    "text": "Motivation\nMotivation 2: Data analysis\n\n\nExample 2\n\nStreamline global geochemical analyses\nAccess global databases\n\ne.g., Georock database through\n\nAutomatic dedicated analyses / plots\n\ne.g., TAS diagrams and classification using pyrolite\n\n\n\n\n\n::::"
+  },
+  {
+    "objectID": "slides/class1.html#motivations-4",
+    "href": "slides/class1.html#motivations-4",
+    "title": "ELSTE Data science",
+    "section": "Motivations",
+    "text": "Motivations\nMotivation 3: Visualisation\nExample 1: In volcanically-active regions, soil burial after explosive eruptions capture more carbon that they emit."
+  },
+  {
+    "objectID": "slides/class1.html#motivations-5",
+    "href": "slides/class1.html#motivations-5",
+    "title": "ELSTE Data science",
+    "section": "Motivations",
+    "text": "Motivations\nMotivation 3: Visualisation\nExample 2: In Small Island States, ≥90% of population and GDP is exposed to volcanic hazards."
+  },
+  {
+    "objectID": "slides/class1.html#motivations-6",
+    "href": "slides/class1.html#motivations-6",
+    "title": "ELSTE Data science",
+    "section": "Motivations",
+    "text": "Motivations\nMotivation 3: Visualisation\nExample 2: In Small Island States, ≥90% of population and GDP is exposed to volcanic hazards."
+  },
+  {
+    "objectID": "slides/class1.html#a-comparison-of-scientific-programming-language",
+    "href": "slides/class1.html#a-comparison-of-scientific-programming-language",
+    "title": "ELSTE Data science",
+    "section": "A comparison of scientific programming language",
+    "text": "A comparison of scientific programming language"
+  },
+  {
+    "objectID": "slides/class1.html#pythons-many-advantages1",
+    "href": "slides/class1.html#pythons-many-advantages1",
+    "title": "ELSTE Data science",
+    "section": "Python’s many advantages1",
+    "text": "Python’s many advantages1\n\n\n\nFree\nOpen source\n\nNot dependent on any company\nLarge online communuty\n\nOld → stable (started in 1991)\nVery popular in science\nRelatively easy to learn\n\n\n\n\n\n\nInspired from this"
+  },
+  {
+    "objectID": "slides/class1.html#why-python-1",
+    "href": "slides/class1.html#why-python-1",
+    "title": "ELSTE Data science",
+    "section": "Why Python? 1",
+    "text": "Why Python? 1\n\n\n\nFree\nOpen source\n\nNot dependent on any company\nLarge online community\n\nOld → stable (started in 1991)\nVery popular in science\nRelatively easy to learn\n\n\n\n\nInspired by the School of Oceanography at University of Washington"
+  },
+  {
+    "objectID": "slides/class1.html#class-objectives",
+    "href": "slides/class1.html#class-objectives",
+    "title": "ELSTE Data science",
+    "section": "Class objectives",
+    "text": "Class objectives\n\nScientific coding and stats often appear daunting\nTrue, there can be a steep learning curve\n\n\n\nObjectives\n\nNot to make you and expert developer / statistician but\n\nTo help you gain the confidence that you are totally capable of doing it\nTo make you realise that what you will get in terms of research capabilities is worth the effort!"
+  },
+  {
+    "objectID": "slides/class1.html#get-involved",
+    "href": "slides/class1.html#get-involved",
+    "title": "ELSTE Data science",
+    "section": "Get involved!!!",
+    "text": "Get involved!!!\nWe want this class to be useful for your research!\n\nTry to contextualise the course material to your research:\n\nDo you already have your own datasets you could bring to class?\nCan you use the course to formulate new research questions?\nDo you know any open-access datasets relevant to your fields?\n\nIf not, can you find some for the next weeks?"
+  },
+  {
+    "objectID": "slides/class1.html#what-is-python",
+    "href": "slides/class1.html#what-is-python",
+    "title": "ELSTE Data science",
+    "section": "What is Python",
+    "text": "What is Python\nHigh-level computing language\n\nCompiled → doesn’t directly speak to the computer, but is interpreted by another language\n\nUsually slower, but much, much easier to use!\n\n\nModular\n\nPython is composed of a core of functions complemented by wide ecosystem of specialized packages for specific tasks\n\nA function is a bit of code to perform a specific task\nA module is a collection of functions\nA package is composed by multiple modules"
+  },
+  {
+    "objectID": "slides/class1.html#how-to-use-python",
+    "href": "slides/class1.html#how-to-use-python",
+    "title": "ELSTE Data science",
+    "section": "How to use Python",
+    "text": "How to use Python\n\n\nOption 1: Your own computer\n\nRequires some setup\nNo internet connection required\nSlow if computer is slow\nAll data stored on your own computer\n\n\n\n\n\n\n\nEnvironment manager!\n\n\nMake sure to install an environment manager → e.g. Miniconda\n\n\n\n\n\n\n\nOption 2: On the cloud → Google Collab\n\nNo setup required\nNo internet connection required\nDecent speed, free as long as Google says it is free\nAll data stored on your own computer"
+  },
+  {
+    "objectID": "slides/class1.html#what-is-python-1",
+    "href": "slides/class1.html#what-is-python-1",
+    "title": "ELSTE Data science",
+    "section": "What is Python",
+    "text": "What is Python\n\n# Import the packages and modules\n1from matplotlib import pyplot as plt\n# Set up a figure for plotting\n2plt.figure(...)\n\n\n1\n\nLoad the pyplot module from the matplotlib package\n\n2\n\nThe pyplot module provides the figure function"
+  },
+  {
+    "objectID": "slides/class1.html#an-example-of-packages-modules-and-functions",
+    "href": "slides/class1.html#an-example-of-packages-modules-and-functions",
+    "title": "ELSTE Data science",
+    "section": "An example of packages, modules and functions",
+    "text": "An example of packages, modules and functions\nIn the code below, we first load the necessary packages and libraries:\n\nmatplotlib is the main visualisation package used in Python\npyplot is a module of matplotlib that provides easy-to-use functions for plotting data\nfigure is a function of pyplot and is the main function to prepare a plot\n\n\n# Import the packages and modules\nfrom matplotlib import pyplot as plt \n# Set up a figure for plotting\nplt.figure(...)"
+  },
+  {
+    "objectID": "slides/class1.html#pythons-advantages-1",
+    "href": "slides/class1.html#pythons-advantages-1",
+    "title": "ELSTE Data science",
+    "section": "Python’s advantages 1",
+    "text": "Python’s advantages 1\n\n\n\nFree\nOpen source\n\nNot dependent on any company\nLarge online community\n\nOld → stable (started in 1991)\nVery popular in science\nRelatively easy to learn\n\n\n\n\nInspired by the School of Oceanography at University of Washington"
+  },
+  {
+    "objectID": "slides/class1.html#environment-manager",
+    "href": "slides/class1.html#environment-manager",
+    "title": "ELSTE Data science",
+    "section": "Environment manager!",
+    "text": "Environment manager!\nMake sure to install an environment manager → e.g. Miniconda"
+  },
+  {
+    "objectID": "slides/class1.html#how-to-run-python",
+    "href": "slides/class1.html#how-to-run-python",
+    "title": "ELSTE Data science",
+    "section": "How to run Python",
+    "text": "How to run Python\n\n\n3 main ways to run Python…\n\nRun Python .py scripts from the command line → deprecated\nRun blocks of code from within a Python .py script using ipykernel → similar behaviour to R/Matlab\nUse Jupyter Notebooks in .ipynb files\n\n\n\n\n\n…in two different environments\n\nDedicated software:\n\nVSCode\nPyCharm\nSpyder\n\nWeb browser\n\nJupyterLab"
   }
 ]

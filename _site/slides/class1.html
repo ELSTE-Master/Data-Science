@@ -30,8 +30,73 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-0b1e5a92323c2cdaa3a18d88247bbc88.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-965085ff4d32111f126b552dce29b7a7.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -123,6 +188,10 @@
       margin-right: 0; 
     }
   </style>
+  <meta name="mermaid-theme" content="dark">
+  <script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
 <script src="_extensions/clean/mathjax-config.js"></script>
@@ -165,6 +234,19 @@ Stéphane Guerrier <a href="https://orcid.org/0000-0003-0002-8794" class="quarto
 </section>
 <section id="why-this-class" class="slide level2">
 <h2>Why this class?</h2>
+<h3 id="data-deluge-the-big-eo-data-landscape">Data deluge: The big EO data landscape</h3>
+
+<img data-src="img/LandsatArchive.gif" class="quarto-figure quarto-figure-center r-stretch" style="width:80.0%"><ul>
+<li><strong>Landsat:</strong>
+<ul>
+<li>Download: 53 images/day (2001) - 220’000 images/day (2017)</li>
+<li>5 million images of the Earth surface → <span class="bg">&gt; 5 PB</span></li>
+</ul></li>
+<li><strong>ESA Sentinel 1 &amp; 2</strong> → <span class="bg">4.6TB /daily!</span></li>
+</ul>
+</section>
+<section id="why-this-class-1" class="slide level2">
+<h2>Why this class?</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>As scientists, we are exposed to</strong>:</p>
@@ -175,40 +257,334 @@ Stéphane Guerrier <a href="https://orcid.org/0000-0003-0002-8794" class="quarto
 <div class="fragment">
 <p><strong>How do we make sense of it all?</strong></p>
 <ul>
-<li><span class="hlght">Scientific coding</span> → gateway to data and processing power</li>
-<li><span class="hlght">Data science</span> → extracting meaningful infomation and insights from data</li>
+<li><span class="bg">Scientific coding</span> → gateway to scientific data analysis</li>
+<li><span class="bg">Data science</span> → extracting meaningful infomation and insights from data</li>
 </ul>
 </div>
 </div><div class="column" style="width:50%;">
 <p><img data-src="img/diw.jpeg"></p>
 </div></div>
 </section>
-<section id="schedule" class="slide level2">
-<h2>Schedule</h2>
+<section id="what-is-data-science" class="slide level2">
+<h2>What is <span class="bg">data science</span></h2>
+<h3 id="wikipedia">Wikipedia</h3>
+<blockquote>
+<p>Data science is an <span class="bg">interdisciplinary academic field</span> that uses statistics, scientific computing, scientific methods, processing, scientific visualization, algorithms and systems to extract or extrapolate knowledge from […] data.</p>
+</blockquote>
+<div class="fragment">
+<h3 id="national-institutes-of-standards-and-technology">National Institutes of Standards and Technology</h3>
+<blockquote>
+<p>The field that combines domain expertise, programming skills, and knowledge of mathematics and statistics to <span class="bg">extract meaningful insights from data</span>.</p>
+</blockquote>
+</div>
+</section>
+<section id="class-schedule" class="slide level2">
+<h2>Class schedule</h2>
 <ul>
-<li>6 <span class="math inline">\(\times\)</span> 3-h long sessions
+<li><strong>Fall part at UNIGE</strong>: 6 <span class="math inline">\(\times\)</span> 3-h long sessions</li>
+<li><strong>Assistants</strong>: Simon Thivet, Filippo Salmaso, Lionel Voirol</li>
+<li><strong>Format</strong>: Theory, live coding and exercises</li>
+</ul>
+<h3 id="october-15-and-22">October 15 and 22</h3>
 <ul>
-<li><strong>October</strong> 15, 22, 29</li>
-<li><strong>November</strong> 5, 12, 19</li>
+<li><strong>Seb</strong> → Intro to data science libraries for <span class="bg">Python</span> → <code>Pandas</code>, <code>seaborn</code></li>
+</ul>
+<h3 id="october-29-and-november-5">October 29 and November 5</h3>
+<ul>
+<li><strong>Stéphane</strong> → Intro to statistical method for <span class="bg">data inference</span></li>
+</ul>
+<h3 id="november-12-and-19">November 12 and 19</h3>
+<ul>
+<li>Flexible as a function of how we progress</li>
+<li>Exam format to be defined</li>
+</ul>
+</section>
+<section id="class-objectives" class="slide level2">
+<h2>Class objectives</h2>
+<ul>
+<li>Scientific coding and stats often appear daunting</li>
+<li>True, there can be a steep learning curve</li>
+</ul>
+<p><span style="font-size: 0.5em;"></span></p>
+<div class="fragment">
+<h3 id="objectives">Objectives</h3>
+<ul>
+<li><strong>Not</strong> to make you and expert developer / statistician <strong>but</strong>
+<ul>
+<li>To help you gain the <span class="bg">confidence</span> that you are <span class="bg">totally capable of doing it</span></li>
+<li>To make you realise that <span class="bg">what you will get</span> in terms of research capabilities is <span class="bg">worth the effort</span>!</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="get-involved" class="slide level2">
+<h2>Get involved!!!</h2>
+<p><strong>We want this class to be useful for <span class="bg">your research</span></strong>!</p>
+<p><span style="font-size: 0.5em;"></span></p>
+<p>Try to contextualise the course material to <strong>your research</strong>:</p>
+<ul>
+<li>Do you already have your own <span class="bg">datasets</span> you could bring to class?</li>
+<li>Can you use the course to <span class="bg">formulate new research questions</span>?</li>
+<li>Do you know any open-access datasets relevant to your fields?
+<ul>
+<li>If not, can you find some for the next weeks?</li>
 </ul></li>
 </ul>
 </section>
-<section id="schedule-1" class="slide level2">
-<h2>Schedule</h2>
-<ul>
-<li>Turn off alarm</li>
-<li>Get out of bed</li>
-</ul>
-</section>
-<section id="assistants" class="slide level2">
-<h2>Assistants</h2>
-<ul>
-<li>Get in bed</li>
-<li>Count sheep</li>
-</ul>
-
+<section>
+<section id="why-coding" class="title-slide slide level1 center" data-background-color="#2F4647">
+<h1>Why coding?</h1>
 
 </section>
+<section id="motivations" class="slide level2">
+<h2>Motivations</h2>
+<ul>
+<li><strong>Example</strong>: A common - but unnecessarily complicated - workflow of <span class="bg">many specialised softwares</span></li>
+</ul>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {"theme":"dark"}}%%
+flowchart LR
+    B[Data Collection]
+    B --&gt; C[Data Cleaning]
+    C --&gt; D[Analysis]
+    D --&gt; E[Visualisation]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="fragment">
+<ul>
+<li><strong>Objective</strong>: Integrate full research workflow in an environment <span class="bg">supporting all tasks</span></li>
+</ul>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    B[Start]
+    B --&gt; C["&lt;img src='https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/community/logos/python-logo-only.png' width='20'&gt;"]
+    C --&gt; D[End]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="motivations-1" class="slide level2">
+<h2>Motivations</h2>
+<h3 id="motivation-1-automation">Motivation 1: Automation</h3>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><strong>Cotopaxi volcano</strong></p>
+<ul>
+<li>Reconstructing eruption source parameters (ESP) from tephra deposits
+<ul>
+<li><em>How do different measurement methods influence ESP estimates</em>?</li>
+</ul></li>
+</ul>
+<div class="fragment">
+<ul>
+<li>40 outcrops</li>
+<li>~10 samples per outcrop</li>
+<li>~7 measurement methods per sample</li>
+</ul>
+</div>
+</div><div class="column" style="width:40%;">
+<p><img data-src="img/_Cotopaxi - 2 of 200.jpeg" style="width:100.0%"></p>
+</div></div>
+</section>
+<section id="motivations-2" class="slide level2">
+<h2>Motivations</h2>
+<h3 id="motivation-2-data-analysis">Motivation 2: Data analysis</h3>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p><strong>Example 1</strong>: Exploit catalogues of big Earth Observation data</p>
+<ul>
+<li><strong>Revisit big EO catalogues to infer new knowledge</strong>
+<ul>
+<li><em>What controls the impact and recovery of vegetation following eruptions</em>?</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<p><img data-src="img/Pinatubo.gif" style="width:100.0%"></p>
+</div></div>
+</section>
+<section id="motivations-3" class="slide level2">
+<h2>Motivations</h2>
+<h3 id="motivation-2-data-analysis-1">Motivation 2: Data analysis</h3>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p><strong>Example 2</strong>: Streamline global geochemical analyses</p>
+<ul>
+<li><strong>Access global databases</strong>
+<ul>
+<li>e.g., <em>Georock</em> database</li>
+</ul></li>
+<li><strong>Automatic dedicated analyses/plots</strong>
+<ul>
+<li>e.g., <em>TAS</em> diagrams and classification using <code>pyrolite</code></li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<p><img data-src="img/pyrolite.webp" style="width:100.0%"></p>
+</div></div>
+</section>
+<section id="motivations-4" class="slide level2">
+<h2>Motivations</h2>
+<h3 id="motivation-3-visualisation">Motivation 3: Visualisation</h3>
+<p><strong>Example 1</strong>: In volcanically-active regions, soil burial after explosive eruptions <span class="bg">capture more carbon that they emit</span>.</p>
+
+<img data-src="img/C_v2.png" class="r-stretch"></section>
+<section id="motivations-5" class="slide level2">
+<h2>Motivations</h2>
+<h3 id="motivation-3-visualisation-1">Motivation 3: Visualisation</h3>
+<p><strong>Example 2</strong>: In Small Island States, <span class="bg">≥90% of population and GDP</span> is exposed to volcanic hazards.</p>
+
+<img data-src="img/FigS07.png" class="quarto-figure quarto-figure-center r-stretch" style="width:90.0%"></section></section>
+<section>
+<section id="why-python" class="title-slide slide level1 center" data-background-color="#2F4647">
+<h1>Why Python?</h1>
+
+</section>
+<section id="pythons-advantages-1" class="slide level2">
+<h2>Python’s advantages <sup>1</sup></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ol type="1">
+<li><strong>Free</strong></li>
+<li><strong>Open source</strong>
+<ul>
+<li>Not dependent on any company</li>
+<li>Large online community</li>
+</ul></li>
+<li><strong>Old</strong> → stable (started in 1991)</li>
+<li><strong>Very</strong> popular in science</li>
+<li>Relatively easy to learn</li>
+</ol>
+</div><div class="column" style="width:50%;">
+<p><img data-src="img/stack.png" style="width:120.0%"></p>
+</div></div>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>Inspired by the <a href="https://www.youtube.com/watch?v=O3DnvPuw8Ro&amp;list=PLjazLUieaXOWl-4ZUn4VWabP5-Tb74ZbR&amp;index=3">School of Oceanography at University of Washington</a></p></li></ol></aside></section>
+<section id="what-is-python" class="slide level2">
+<h2>What is Python</h2>
+<p><strong>High-level computing language</strong></p>
+<ul>
+<li>Compiled → doesn’t directly speak to the computer, but is <em>interpreted</em> by another language
+<ul>
+<li>Usually slower, but much, much <span class="bg">easier to use</span>!</li>
+</ul></li>
+</ul>
+<p><strong>Modular</strong></p>
+<ul>
+<li>Python is composed of a <em>core</em> of functions complemented by wide ecosystem of specialized packages for <span class="bg">specific tasks</span>
+<ul>
+<li>A <span class="bg">function</span> is a bit of code to perform a <strong>specific task</strong></li>
+<li>A <span class="bg">module</span> is a collection of <strong>functions</strong></li>
+<li>A <span class="bg">package</span> is composed by multiple <strong>modules</strong></li>
+</ul></li>
+</ul>
+</section>
+<section id="an-example-of-packages-modules-and-functions" class="slide level2">
+<h2>An example of packages, modules and functions</h2>
+<p>In the code below, we first load the necessary packages and libraries:</p>
+<ul>
+<li><code>matplotlib</code> is the main <strong>visualisation</strong> <span class="bg">package</span> used in Python</li>
+<li><code>pyplot</code> is a <span class="bg">module</span> of <code>matplotlib</code> that provides easy-to-use functions for <strong>plotting</strong> data</li>
+<li><code>figure</code> is a <span class="bg">function</span> of <code>pyplot</code> and is the main function to prepare a plot</li>
+</ul>
+<div id="99d75943" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># Import the packages and modules</span></span>
+<span id="cb1-2"><a></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt </span>
+<span id="cb1-3"><a></a><span class="co"># Set up a figure for plotting</span></span>
+<span id="cb1-4"><a></a>plt.figure(...) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<!-- 1. Load the `pyplot` [module]{.bg} from the `matplotlib` [package]{.bg} 
+2. The `pyplot` module provides the `figure` [function]{.bg} -->
+</section>
+<section id="how-to-use-python" class="slide level2">
+<h2>How to use Python</h2>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p><strong>Option 1</strong>: Your own computer</p>
+<ul>
+<li>Requires some setup</li>
+<li>No internet connection required</li>
+<li>Slow if computer is slow</li>
+<li>All data stored on your own computer</li>
+</ul>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Environment manager!</strong></p>
+</div>
+<div class="callout-content">
+<p>Make sure to install an <strong>environment manager</strong> → e.g.&nbsp;<a href="https://www.anaconda.com/docs/getting-started/miniconda/main">Miniconda</a></p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<div class="fragment">
+<p><strong>Option 2</strong>: On the cloud → <a href="https://colab.google">Google Collab</a></p>
+<ul>
+<li>No setup required</li>
+<li>No internet connection required</li>
+<li>Decent speed, free as long as Google says it is free</li>
+<li>All data stored on your own computer</li>
+</ul>
+</div>
+</div></div>
+</section>
+<section id="how-to-run-python" class="slide level2">
+<h2>How to run Python</h2>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p><strong>3 main ways to run Python…</strong></p>
+<ol type="1">
+<li>Run Python <code>.py</code> scripts from the command line → <em>deprecated</em></li>
+<li>Run blocks of code from within a Python <code>.py</code> script using <code>ipykernel</code> → <strong>similar behaviour to R/Matlab</strong></li>
+<li>Use <strong>Jupyter Notebooks</strong> in <code>.ipynb</code> files</li>
+</ol>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<div class="fragment">
+<p><strong>…in two different environments</strong></p>
+<ol type="1">
+<li>Dedicated software:
+<ul>
+<li><a href="https://code.visualstudio.com/docs/python/jupyter-support-py">VSCode</a></li>
+<li><a href="https://www.jetbrains.com/pycharm/">PyCharm</a></li>
+<li><a href="https://www.spyder-ide.org">Spyder</a></li>
+</ul></li>
+<li>Web browser
+<ul>
+<li><a href="https://jupyter.org">JupyterLab</a></li>
+</ul></li>
+</ol>
+</div>
+</div></div>
+
+
+</section></section>
+
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

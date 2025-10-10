@@ -16,7 +16,7 @@
         "jupyter: python3\n",
         "---"
       ],
-      "id": "395a571a"
+      "id": "bcbf91b2"
     },
     {
       "cell_type": "code",
@@ -29,7 +29,7 @@
         "    \"figure.facecolor\":  (0.0, 0.0, 0.0, 0.0),  # red   with alpha = 30%\n",
         "})"
       ],
-      "id": "10d0d736",
+      "id": "17efb990",
       "execution_count": null,
       "outputs": []
     },
@@ -45,7 +45,7 @@
         "\n",
         "We start by importing libraries and the dataset.\n"
       ],
-      "id": "c372bc8d"
+      "id": "e074c104"
     },
     {
       "cell_type": "code",
@@ -63,7 +63,7 @@
         "# Import the dataset specifying which Excel sheet name to load the data from\n",
         "df = pd.read_excel('../Data/Smith_glass_post_NYT_data.xlsx', sheet_name='Supp_traces')"
       ],
-      "id": "40886981",
+      "id": "ac6b16db",
       "execution_count": null,
       "outputs": []
     },
@@ -98,7 +98,7 @@
         "\n",
         "The easiest way to define a figure is using the `subplots()` function (@lst-plt-set). Note that the code returns two variables - `fig` and `ax` - which are the figure and the axes, respectively.\n"
       ],
-      "id": "f01ab5d7"
+      "id": "4ab31d23"
     },
     {
       "cell_type": "code",
@@ -111,7 +111,7 @@
         "import matplotlib.pyplot as plt\n",
         "fig, ax = plt.subplots()"
       ],
-      "id": "9978c652",
+      "id": "6819843f",
       "execution_count": null,
       "outputs": []
     },
@@ -155,7 +155,7 @@
         "\n",
         ": Some of the most frequently used plotting functions. {#tbl-mpl-basics .striped   }\n"
       ],
-      "id": "b9b36526"
+      "id": "a2e29a0f"
     },
     {
       "cell_type": "code",
@@ -183,7 +183,7 @@
         "# - Add a legend\n",
         "# - Add a grid"
       ],
-      "id": "709972ea",
+      "id": "f8d4f60f",
       "execution_count": null,
       "outputs": []
     },
@@ -202,7 +202,7 @@
         "3. `x`: The name of the column containing the values used along x\n",
         "4. `y`: The name of the column containing the values used along y\n"
       ],
-      "id": "de79cae4"
+      "id": "c1e85c4a"
     },
     {
       "cell_type": "code",
@@ -217,7 +217,7 @@
         "# df is the geochemical dataset imported previously\n",
         "sns.scatterplot(ax=ax, data=df, x='Rb', y='Sr')"
       ],
-      "id": "d2bd9fa5",
+      "id": "0f9c3964",
       "execution_count": null,
       "outputs": []
     },
@@ -264,7 +264,7 @@
         "\n",
         "## Histogram\n"
       ],
-      "id": "7f3df76e"
+      "id": "59d1a2cc"
     },
     {
       "cell_type": "code",
@@ -278,7 +278,7 @@
         "ax.set_xlabel('Zr (ppm)');\n",
         "ax.set_title('Zr distribution');"
       ],
-      "id": "3f648cd7",
+      "id": "a540c464",
       "execution_count": null,
       "outputs": []
     },
@@ -295,7 +295,7 @@
         "\n",
         ":::\n"
       ],
-      "id": "371a1259"
+      "id": "b59e53f2"
     },
     {
       "cell_type": "code",
@@ -309,7 +309,7 @@
         "ax.set_ylabel('Concentration (ppm)');\n",
         "ax.set_title('Zr and Sr distribution');"
       ],
-      "id": "c14b6da7",
+      "id": "a20bbfd9",
       "execution_count": null,
       "outputs": []
     },
@@ -319,7 +319,7 @@
       "source": [
         "## Violin plot\n"
       ],
-      "id": "9a185313"
+      "id": "358e26a8"
     },
     {
       "cell_type": "code",
@@ -333,7 +333,7 @@
         "ax.set_xlabel('Concentration (ppm)');\n",
         "ax.set_title('Zr and Sr distribution');"
       ],
-      "id": "6bd07630",
+      "id": "557aa106",
       "execution_count": null,
       "outputs": []
     },
@@ -368,7 +368,7 @@
         "\n",
         "The mean of a dataset can easily be computed with *Pandas* using the [`.mean()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mean.html) function (@lst-univ-mean). Note that we round the results to two significant digits using `.round(2)`.\n"
       ],
-      "id": "800aca7e"
+      "id": "fcdcae4a"
     },
     {
       "cell_type": "code",
@@ -379,7 +379,7 @@
         "\n",
         "df['Zr'].mean().round(2)"
       ],
-      "id": "f6c50e41",
+      "id": "56fe7ee7",
       "execution_count": null,
       "outputs": []
     },
@@ -392,7 +392,7 @@
         "\n",
         "What is the mean value for Strontium?\n"
       ],
-      "id": "f98f777c"
+      "id": "8abcf54d"
     },
     {
       "cell_type": "code",
@@ -406,7 +406,7 @@
         "    '123.94' : 0,\n",
         "})"
       ],
-      "id": "7701086b",
+      "id": "cb4fe848",
       "execution_count": null,
       "outputs": []
     },
@@ -428,7 +428,7 @@
         "- `axis = 0` is usually the default, and computes the mean [across all rows for each column]{.mark}(@lst-univ-mean-multi-row)\n",
         "- `axis = 1` usually makes sense when rows are labelled, and computes the mean [across all columns for each row]{.mark}(@lst-univ-mean-multi-col)\n"
       ],
-      "id": "59ff66c8"
+      "id": "e1b8852f"
     },
     {
       "cell_type": "code",
@@ -441,7 +441,7 @@
         "# Compute the mean across all rows\n",
         "df_sub.mean(axis=0).round(2).head()"
       ],
-      "id": "7eb2ebff",
+      "id": "45cbae22",
       "execution_count": null,
       "outputs": []
     },
@@ -457,7 +457,7 @@
         "# Compute the mean across all columns\n",
         "df_sub.mean(axis=1).round(2).head()"
       ],
-      "id": "97609f01",
+      "id": "4f01f098",
       "execution_count": null,
       "outputs": []
     },
@@ -479,7 +479,7 @@
         "2. On the x-axis, find the point dividing the dataset into two equal numbers of observations;\n",
         "3. Read the value on the y-axis that intersects the ECDF.\n"
       ],
-      "id": "b652c89c"
+      "id": "2a492726"
     },
     {
       "cell_type": "code",
@@ -494,7 +494,7 @@
         "ax.plot([.5,0], [df['Zr'].median(), df['Zr'].median()], color='orange', linestyle='--')\n",
         "ax.set_ylim([0,900])"
       ],
-      "id": "06132c43",
+      "id": "b1202e12",
       "execution_count": null,
       "outputs": []
     },
@@ -504,7 +504,7 @@
       "source": [
         "Fortunately, we can also use the native *Pandas* [`.median`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.median.html) function (@lst-univ-median). \n"
       ],
-      "id": "1d3b2b8c"
+      "id": "908efe03"
     },
     {
       "cell_type": "code",
@@ -515,7 +515,7 @@
         "\n",
         "df['Zr'].median().round(2)"
       ],
-      "id": "0a92bf5c",
+      "id": "a7fe78f9",
       "execution_count": null,
       "outputs": []
     },
@@ -528,7 +528,7 @@
         "\n",
         "What is the mean value for Cesium?\n"
       ],
-      "id": "4511fe37"
+      "id": "f81478e2"
     },
     {
       "cell_type": "code",
@@ -542,7 +542,7 @@
         "    '13.94' : 0,\n",
         "})"
       ],
-      "id": "c8385f69",
+      "id": "3f17da96",
       "execution_count": null,
       "outputs": []
     },
@@ -566,7 +566,7 @@
         "- If the distribution of a sample is [not symmetrical]{.mark}, **the mean should not be used**.\n",
         "- The [mean is highly sensitive to outliers]{.mark}, whereas the median is not.\n"
       ],
-      "id": "949157b1"
+      "id": "63facd24"
     },
     {
       "cell_type": "code",
@@ -581,7 +581,7 @@
         "ax.axvline(df['Zr'].median(), color='darkviolet', lw=3, label='Median')\n",
         "ax.legend()"
       ],
-      "id": "b9ac3386",
+      "id": "63f54de0",
       "execution_count": null,
       "outputs": []
     },
@@ -599,7 +599,7 @@
         "\\text{Range} = \\max(x) - \\min(x)\n",
         "$$ {#eq-range}\n"
       ],
-      "id": "c2814a6a"
+      "id": "f5faf0fc"
     },
     {
       "cell_type": "code",
@@ -611,7 +611,7 @@
         "df['Zr'].min()\n",
         "df['Zr'].max()"
       ],
-      "id": "cf05b45e",
+      "id": "07f37d0f",
       "execution_count": null,
       "outputs": []
     },
@@ -624,7 +624,7 @@
         "\n",
         "What is the mean value for Cesium?\n"
       ],
-      "id": "8c0f030c"
+      "id": "324c8064"
     },
     {
       "cell_type": "code",
@@ -638,7 +638,7 @@
         "    '10455.91' : 0,\n",
         "})"
       ],
-      "id": "a12bad07",
+      "id": "3cb3413e",
       "execution_count": null,
       "outputs": []
     },
@@ -681,7 +681,7 @@
         "\n",
         "#### Simple linear regression x {.unnumbered}"
       ],
-      "id": "78321b15"
+      "id": "d747dc92"
     }
   ],
   "metadata": {
