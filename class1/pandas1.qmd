@@ -73,7 +73,7 @@ Throughout this class we will focus on the use of **DataFrames**, not Series. Ke
 
 
 
-![Basic anaotmy of a Pandas DataFrame.](img/pandas-1.png){#fig-anatomy}
+![Basic anatomy of a Pandas DataFrame.](img/pandas-1.png){#fig-anatomy}
 
 The first row - i.e. the row containing the column *labels* - is not considered as an entry. This is because the **top row** of a dataframe is usually used as the *label* for the **columns**. Similarly, we might want to set the **first column** as a *label* for the **rows** (@fig-index). In a nutshell:
 

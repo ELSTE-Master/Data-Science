@@ -1,0 +1,115 @@
+---
+title: "Operations"
+format:
+  html:
+    code-fold: false
+    code-line-numbers: true
+    css: [../assets/webex.css]
+    include-after-body: [../assets/webex.js]
+    embed-resources: true 
+jupyter: python3
+---
+
+```{python}
+#| echo: false
+from pywebexercises.exercises import mcq, longmcq, torf
+import matplotlib.pyplot as plt
+plt.rcParams.update({
+    "figure.facecolor":  (0.0, 0.0, 0.0, 0.0),  # red   with alpha = 30%
+})
+import pandas as pd
+df = pd.read_csv('data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data
+df = df.set_index('Name')
+```
+
+
+
+Let's now see how we can manipulate and operate on data contained within our DataFrame. @tbl-op-arith and @tbl-op-str respectively illustrate arithmetic and string-based operators that can be applied on parts of the DataFrame.
+
+
+## Numeric operations {.unnumbered}
+
+@lst-op1 Illustrates how to half the VEI column save the results to a new column.
+
+```{python}
+#| lst-label: lst-op1
+#| lst-cap: Divide VEI by two and save the results to a new column.
+
+df['VEI_halved'] = df['VEI'] / 2
+
+```
+
+::: {.callout-note}
+## Exercise
+
+Longitudes are expressed as degrees E (i.e., from 0–180 ) and degrees W (i.e., from -180–0). Use operators to convert longitudes to degrees E (i.e., from 0–360) and store the results to a column called `Longitude_E`. To do so:
+
+1. Define a mask where Longitudes are negative using [logical operators]
+2. Where the mask is `True` (i.e. where the longitude is negative), add the longitude (or subtract its absolute value) to 360
+
+
+::: {.callout-tip collapse="true"}
+## Define a mask
+Start by defining a mask
+
+::: {.callout-tip collapse="true"}
+## How?
+
+```python
+mask = df['Longitude'] <= 0
+```
+:::
+
+:::
+
+::: {.callout-tip collapse="true"}
+## Select the values
+Select the values using `.loc` and do the maths.
+
+::: {.callout-tip collapse="true"}
+## How?
+
+```python
+360 + df.loc[mask, 'Longitude']
+```
+:::
+
+:::
+
+::: {.callout-tip collapse="true"}
+## Store back the values
+
+```python
+df.loc[mask, 'Longitude_E'] = 360 + df.loc[mask, 'Longitude']
+```
+:::
+
+
+:::
+
+| Operation      | Symbol | Example                | Description                                 |
+|----------------|--------|------------------------|---------------------------------------------|
+| Addition       | `+`    | `df['VEI'] + 1`        | Adds a value to each element                |
+| Subtraction    | `-`    | `df['VEI'] - 1`        | Subtracts a value from each element         |
+| Multiplication | `*`    | `df['VEI'] * 2`        | Multiplies each element by a value          |
+| Division       | `/`    | `df['VEI'] / 2`        | Divides each element by a value             |
+| Exponentiation | `**`   | `df['VEI'] ** 2`       | Raises each element to a power              |
+| Modulo         | `%`    | `df['VEI'] % 2`        | Remainder after division for each element   |
+
+: Common arithmetic operations on numerical pandas columns. {#tbl-op-arith .striped   }
+
+
+
+## String operations {.unnumbered}
+
+
+
+| Operation         | Example                                 | Description                                         |
+|-------------------|-----------------------------------------|-----------------------------------------------------|
+| Concatenation     | `df['Country'] + ' volcano'`            | Adds a string to each element                       |
+| String length     | `df['Country'].str.len()`                  | Returns the length of each string                   |
+| Uppercase         | `df['Country'].str.upper()`             | Converts each string to uppercase                   |
+| Lowercase         | `df['Country'].str.lower()`             | Converts each string to lowercase                   |
+| Replace           | `df['Country'].str.replace('USA', 'US')`| Replaces substrings in each string                  |
+
+: Common string operations on pandas columns. {#tbl-op-str .striped   }

@@ -1,0 +1,186 @@
+---
+title: "Filtering data"
+format:
+  html:
+    code-fold: false
+    code-line-numbers: true
+    css: [../assets/webex.css]
+    include-after-body: [../assets/webex.js]
+    embed-resources: true 
+jupyter: python3
+---
+
+```{python}
+#| echo: false
+from pywebexercises.exercises import mcq, longmcq, torf
+import matplotlib.pyplot as plt
+plt.rcParams.update({
+    "figure.facecolor":  (0.0, 0.0, 0.0, 0.0),  # red   with alpha = 30%
+})
+import pandas as pd
+df = pd.read_csv('data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data
+df = df.set_index('Name')
+```
+
+Now that we have reviewed how to access data, let's now see how to **filter** data using **boolean indexing**. For this, we need to review what are **comparison operators** (@tbl-comparison-operators).
+
+## Comparison operators {.unnumbered}
+
+
+Let's assume the following variables (@lst-basic-bool):
+
+```{python}
+#| lst-label: lst-basic-bool
+#| lst-cap: Variables used for illustrating logical operations
+#| 
+a = 1
+b = 2
+```
+
+Applying the comparison operators in @tbl-comparison-operators will produce a variable of type `bool` - which can take only two values: `True` or `False`.
+
+| Operator | Meaning                | Example      | Result      |
+|----------|------------------------|--------------|-------------|
+| `==`     | Equal to               | `a == b`     | `False`     |
+| `!=`     | Not equal to           | `a != b`     | `True`      |
+| `>`      | Greater than           | `a > b`      | `False`     |
+| `<`      | Less than              | `a < b`      | `True`      |
+| `>=`     | Greater than or equal  | `a >= b`     | `False`     |
+| `<=`     | Less than or equal     | `a <= b`     | `True`      |
+
+: Comparison operators in Python. {#tbl-comparison-operators .striped   }
+
+We can apply comparison operators to DataFrame. Let's say we want to test what rows have a VEI of 4:
+
+```{python}
+#| lst-label: lst-bool
+#| lst-cap: Create a boolean mask
+df['VEI'] == 4
+```
+
+We can see that Galunggung, Taal, La Soufrière, Calbuco and Eyjafjallajökull return `True` to this condition. This is great, but what if we want to return the actual rows? We can use @lst-bool as a **mask** to then query the rows using `.loc`.
+
+```{python}
+#| lst-label: lst-bool-query
+#| lst-cap: Query data using a boolean mask
+
+mask = df['VEI'] == 4 # Create a mask
+df.loc[mask] # Query the data
+
+# Or, as a one line alternative:
+df.loc[df['VEI'] == 4]
+```
+
+::: {.callout-note}
+## Question
+
+What volcanoes have a VEI of 5?
+
+```{python}
+#| echo: false
+mcq({
+    'La Soufrière and Calbuco' : 0,
+    'Merapi and Agung' : 0,
+    'Nyiragongo and Taal' : 0,
+    'St. Helens and El Chichón' : 1
+})
+```
+
+How many volcanoes are in the southern hemisphere? (hint: use the `df.shape` function to count them).
+
+```{python}
+#| echo: false
+mcq({
+    '1': 0,
+    '2': 0,
+    '4': 0,
+    '6': 1,
+    '12': 0
+})
+```
+
+:::
+
+
+### String comparisons {.unnumbered}
+
+We can also use comparison operators on columns containing **strings** (see @cau-dtypes for caveats). @lst-str-comp illustrates a basic string comparison using the `=` operator. @tbl-comparison-str shows additional operators for strings.
+
+```{python}
+#| lst-label: lst-str-comp
+#| lst-cap: Basic comparison operation on strings
+
+
+df.loc[df['Country'] == 'Indonesia']
+```
+
+| Operation         | Example                                 | Description                                         |
+|-------------------|-----------------------------------------|-----------------------------------------------------|
+| Contains          | `df['Name'].str.contains('Soufrière')`  | Checks if each string contains a substring          |
+| Startswith        | `df['Name'].str.startswith('E')`        | Checks if each string starts with a substring       |
+| Endswith          | `df['Name'].str.endswith('o')`          | Checks if each string ends with a substring         |
+
+
+: Common string comparison operations. {#tbl-comparison-str .striped   }
+
+
+::: {#cau-dtypes .callout-caution collapse="true"}
+## Compare what is comparable!
+
+When using the comparison operators in @tbl-comparison-operators, we need to make sure that we are comparing data that have the **same type**. In @lst-bool, we are comparing the column `VEI` with an integer number. You can check the data type of a DataFrame using `df.dtypes`. 
+
+Not all comparison operators work with all data type. For instance, you can test if a column contains a specific string using the `==` or `!=` operators, but the other won't work as they are *illogical*.
+:::
+
+## Logical operators {.unnumbered}
+
+But what if we want to create more complex filters based on different rules? We can use **logical operators** to combine several comparison operators. Going back to the example in @lst-basic-bool, @tbl-logical-operators illustrates the use of logical operators.
+
+| Operator | Meaning                 | Example                        | Result      |
+|----------|-------------------------|--------------------------------|-------------|
+| `&`      | Logical AND             | `(a > 1) & (b < 3)`            | `False`     |
+| `|`      | Logical OR              | `(a == 1) | (b == 1)`           | `True`      |
+| `~`      | Logical NOT             | `~(a == 1)`                    | `False`     |
+
+: Logical operators in pandas for combining boolean conditions. Use parentheses around each condition. {#tbl-logical-operators .striped }
+
+Let's gather all volcanoes that have a VEI of 3 and are in Indonesia:
+
+```{python}
+#| lst-label: lst-logical-query
+#| lst-cap: Complex filtering using logical operators
+
+mask = (df['VEI'] == 3) & (df['Country'] == 'Indonesia') # Create a mask - don't forget parentheses!
+df.loc[mask] # Query the data
+
+```
+
+::: {.callout-note}
+## Question
+
+How many volcanoes are either in Chile **or** in the USA?
+
+```{python}
+#| echo: false
+mcq({
+    '1': 0,
+    '3': 0,
+    '5': 1,
+    '8': 0
+})
+```
+
+How many volcanoes are in the southern hemisphere **and** have a VEI≥4?
+
+```{python}
+#| echo: false
+mcq({
+    '1': 0,
+    '2': 1,
+    '8': 0,
+    '12': 0
+})
+```
+
+:::
+

@@ -19,10 +19,16 @@ author:
 license: "CC BY"
 format: 
   clean-revealjs:
+    chalkboard: true
+    callout-appearance: simple
+    transition: slide
+    transition-speed: fast
     footer: "ELSTE Data Science course / Fall 2025"
     fontawesome: true
     mermaid:
-        theme: dark
+      theme: 'default'
+      themeVariables:
+
 
 ---
 
@@ -346,31 +352,97 @@ Make sure to install an **environment manager** → e.g. [Miniconda](https://www
 ## How to run Python 
 
 
-
-:::: {.columns}
-::: {.column width="48%"}
-
 **3 main ways to run Python...**
 
 1. Run Python `.py` scripts from the command line → *deprecated*
 2. Run blocks of code from within a Python `.py` script using `ipykernel` → **similar behaviour to R/Matlab**
 3. Use **Jupyter Notebooks** in `.ipynb` files
-:::
 
-::: {.column width="4%"}
-:::
-
-::: {.column width="48%"}
 
 ::: {.fragment}
 **...in two different environments**
 
-1. Dedicated software:
-   - [VSCode](https://code.visualstudio.com/docs/python/jupyter-support-py)
-   - [PyCharm](https://www.jetbrains.com/pycharm/) 
-   - [Spyder](https://www.spyder-ide.org)
-2. Web browser
-   - [JupyterLab](https://jupyter.org)
+1. Dedicated software: [VSCode](https://code.visualstudio.com/docs/python/jupyter-support-py), [PyCharm](https://www.jetbrains.com/pycharm/), [Spyder](https://www.spyder-ide.org)
+2. Web browser: [JupyterLab](https://jupyter.org)
 :::
+
+
+## Get started
+
+- Follow the guide
+- Start a new Jupyter Notebook
+
+# Let's get coding  {background-color="#2F4647"}
+
+## Background
+
+::: {.callout-warning}
+## 
+We assume that you all followed Guy Simpson's Python crash course
 :::
-::::
+
+
+<span style="font-size: 0.5em;"></span>
+
+`pandas`: A **package** for [data manipulation and analysis]{.bg} handling **structured data**
+
+- **Reading/writing data** from common formats (CSV, Excel, JSON, etc.)
+- Handling **missing data**
+- **Filtering**, **sorting**, **reshaping** and **grouping** data
+- **Aggregating** data (sum, mean, count, etc.)
+- **Time series support** (date ranges, frequency conversions)
+- **Statistical operations**
+
+## Today's objectives
+
+Understand what is a `pandas` [DataFrame]{.bg} and its [basic anatomy]{.bg}
+
+- How to [load data]{.bg} in a DataFrame
+- How to [access]{.bg} data → *query by label/position*
+- How to [filter]{.bg} data → *comparison and logical operators*
+- How to [rearrange]{.bg} data → *sorting values*
+- How to [operate]{.bg} on data → *arithmetic and string operations*
+
+## Anatomy of a DataFrame
+
+![](../class1/img/pandas-1.png)
+
+::: {.fragment}
+- Similar to *Excel* → contains *tabular data* composed of [rows]{.bg} and [columns]{.bg}
+:::
+
+::: {.fragment}
+- In *Excel*:
+  - **Rows** are accessed using *numbers*
+  - **Columns** are accessed using *letters*
+:::
+
+
+## Anatomy of a DataFrame
+
+![](../class1/img/pandas-2.png)
+
+::: {.fragment}
+- Unlike *Excel*, **rows** and **columns** can be [labelled]{.bg}
+  - [Index]{.bg} refers to the label of the **rows**. In the *index*, **values are usually unique** - meaning that each entry has a different label.
+  - [Column]{.bg} refers to the label of - logically - the **columns**
+:::
+
+## Accessing data in a DataFrame
+
+![](../class1/img/pandas_loc.png)
+
+**Option 1**: [label-based]{.bg} indexing
+
+- Use the [labels]{.bg} of **index** and **columns** to retrieve data
+- Function to use: `df.loc`
+
+
+## Accessing data in a DataFrame
+
+![](../class1/img/pandas_iloc.png)
+
+**Option 2**: [position-based]{.bg} indexing
+
+- Use the [positions]{.bg} of **index** and **columns** to retrieve data
+- Function to use: `df.iloc`

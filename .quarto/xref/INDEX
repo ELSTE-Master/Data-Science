@@ -40,5 +40,38 @@
   },
   "slides/class1.qmd": {
     "class1.html": "c74f303f"
+  },
+  "class1/day1-2_data_exploration.qmd": {
+    "day1-2_data_exploration.html": "e15fff19"
+  },
+  "class1/day1-4_filtering.qmd": {
+    "day1-4_filtering.html": "d6b00177"
+  },
+  "class1/day1-3_queries.qmd": {
+    "day1-3_queries.html": "e0575985"
+  },
+  "class1/day1-5_operations.qmd": {
+    "day1-5_operations.html": "bbe7c368"
+  },
+  "class1/day1-1_intro.qmd": {
+    "day1-1_intro.html": "9c441835"
+  },
+  "class1/day1-3_data_exploration.qmd": {
+    "day1-3_data_exploration.html": "5f357f16"
+  },
+  "class1/day1-6_queries.qmd": {
+    "day1-6_queries.html": "5a74b839"
+  },
+  "class1/day1-2_pandas.qmd": {
+    "day1-2_pandas.html": "c4bf56fe"
+  },
+  "class1/day1-4_queries.qmd": {
+    "day1-4_queries.html": "1df662f4"
+  },
+  "class1/day1-5_filtering.qmd": {
+    "day1-5_filtering.html": "0aff698d"
+  },
+  "class1/day1-6_operations.qmd": {
+    "day1-6_operations.html": "5b5f2be6"
   }
 }

@@ -96,10 +96,12 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-965085ff4d32111f126b552dce29b7a7.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-4a4771a0f4ecc53fc9ac15017a782af8.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
@@ -188,7 +190,7 @@
       margin-right: 0; 
     }
   </style>
-  <meta name="mermaid-theme" content="dark">
+  <meta name="mermaid-theme" content="default">
   <script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
   <script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
   <link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
@@ -505,7 +507,7 @@ flowchart LR
 <li><code>pyplot</code> is a <span class="bg">module</span> of <code>matplotlib</code> that provides easy-to-use functions for <strong>plotting</strong> data</li>
 <li><code>figure</code> is a <span class="bg">function</span> of <code>pyplot</code> and is the main function to prepare a plot</li>
 </ul>
-<div id="99d75943" class="cell" data-execution_count="1">
+<div id="4308e259" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># Import the packages and modules</span></span>
 <span id="cb1-2"><a></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt </span>
 <span id="cb1-3"><a></a><span class="co"># Set up a figure for plotting</span></span>
@@ -525,7 +527,7 @@ flowchart LR
 <li>Slow if computer is slow</li>
 <li>All data stored on your own computer</li>
 </ul>
-<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout callout-important callout-titled callout-style-simple">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
@@ -554,33 +556,114 @@ flowchart LR
 </section>
 <section id="how-to-run-python" class="slide level2">
 <h2>How to run Python</h2>
-<div class="columns">
-<div class="column" style="width:48%;">
 <p><strong>3 main ways to run Python…</strong></p>
 <ol type="1">
 <li>Run Python <code>.py</code> scripts from the command line → <em>deprecated</em></li>
 <li>Run blocks of code from within a Python <code>.py</code> script using <code>ipykernel</code> → <strong>similar behaviour to R/Matlab</strong></li>
 <li>Use <strong>Jupyter Notebooks</strong> in <code>.ipynb</code> files</li>
 </ol>
-</div><div class="column" style="width:4%;">
-
-</div><div class="column" style="width:48%;">
 <div class="fragment">
 <p><strong>…in two different environments</strong></p>
 <ol type="1">
-<li>Dedicated software:
-<ul>
-<li><a href="https://code.visualstudio.com/docs/python/jupyter-support-py">VSCode</a></li>
-<li><a href="https://www.jetbrains.com/pycharm/">PyCharm</a></li>
-<li><a href="https://www.spyder-ide.org">Spyder</a></li>
-</ul></li>
-<li>Web browser
-<ul>
-<li><a href="https://jupyter.org">JupyterLab</a></li>
-</ul></li>
+<li>Dedicated software: <a href="https://code.visualstudio.com/docs/python/jupyter-support-py">VSCode</a>, <a href="https://www.jetbrains.com/pycharm/">PyCharm</a>, <a href="https://www.spyder-ide.org">Spyder</a></li>
+<li>Web browser: <a href="https://jupyter.org">JupyterLab</a></li>
 </ol>
 </div>
-</div></div>
+</section>
+<section id="get-started" class="slide level2">
+<h2>Get started</h2>
+<ul>
+<li>Follow the guide</li>
+<li>Start a new Jupyter Notebook</li>
+</ul>
+</section></section>
+<section>
+<section id="lets-get-coding" class="title-slide slide level1 center" data-background-color="#2F4647">
+<h1>Let’s get coding</h1>
+
+</section>
+<section id="background" class="slide level2">
+<h2>Background</h2>
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>We assume that you all followed Guy Simpson’s Python crash course</p>
+</div>
+</div>
+</div>
+<p><span style="font-size: 0.5em;"></span></p>
+<p><code>pandas</code>: A <strong>package</strong> for <span class="bg">data manipulation and analysis</span> handling <strong>structured data</strong></p>
+<ul>
+<li><strong>Reading/writing data</strong> from common formats (CSV, Excel, JSON, etc.)</li>
+<li>Handling <strong>missing data</strong></li>
+<li><strong>Filtering</strong>, <strong>sorting</strong>, <strong>reshaping</strong> and <strong>grouping</strong> data</li>
+<li><strong>Aggregating</strong> data (sum, mean, count, etc.)</li>
+<li><strong>Time series support</strong> (date ranges, frequency conversions)</li>
+<li><strong>Statistical operations</strong></li>
+</ul>
+</section>
+<section id="todays-objectives" class="slide level2">
+<h2>Today’s objectives</h2>
+<p>Understand what is a <code>pandas</code> <span class="bg">DataFrame</span> and its <span class="bg">basic anatomy</span></p>
+<ul>
+<li>How to <span class="bg">load data</span> in a DataFrame</li>
+<li>How to <span class="bg">access</span> data → <em>query by label/position</em></li>
+<li>How to <span class="bg">filter</span> data → <em>comparison and logical operators</em></li>
+<li>How to <span class="bg">rearrange</span> data → <em>sorting values</em></li>
+<li>How to <span class="bg">operate</span> on data → <em>arithmetic and string operations</em></li>
+</ul>
+</section>
+<section id="anatomy-of-a-dataframe" class="slide level2">
+<h2>Anatomy of a DataFrame</h2>
+
+<img data-src="../class1/img/pandas-1.png" class="r-stretch"><div class="fragment">
+<ul>
+<li>Similar to <em>Excel</em> → contains <em>tabular data</em> composed of <span class="bg">rows</span> and <span class="bg">columns</span></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>In <em>Excel</em>:
+<ul>
+<li><strong>Rows</strong> are accessed using <em>numbers</em></li>
+<li><strong>Columns</strong> are accessed using <em>letters</em></li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="anatomy-of-a-dataframe-1" class="slide level2">
+<h2>Anatomy of a DataFrame</h2>
+
+<img data-src="../class1/img/pandas-2.png" class="r-stretch"><div class="fragment">
+<ul>
+<li>Unlike <em>Excel</em>, <strong>rows</strong> and <strong>columns</strong> can be <span class="bg">labelled</span>
+<ul>
+<li><span class="bg">Index</span> refers to the label of the <strong>rows</strong>. In the <em>index</em>, <strong>values are usually unique</strong> - meaning that each entry has a different label.</li>
+<li><span class="bg">Column</span> refers to the label of - logically - the <strong>columns</strong></li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="accessing-data-in-a-dataframe" class="slide level2">
+<h2>Accessing data in a DataFrame</h2>
+
+<img data-src="../class1/img/pandas_loc.png" class="r-stretch"><p><strong>Option 1</strong>: <span class="bg">label-based</span> indexing</p>
+<ul>
+<li>Use the <span class="bg">labels</span> of <strong>index</strong> and <strong>columns</strong> to retrieve data</li>
+<li>Function to use: <code>df.loc</code></li>
+</ul>
+</section>
+<section id="accessing-data-in-a-dataframe-1" class="slide level2">
+<h2>Accessing data in a DataFrame</h2>
+
+<img data-src="../class1/img/pandas_iloc.png" class="r-stretch"><p><strong>Option 2</strong>: <span class="bg">position-based</span> indexing</p>
+<ul>
+<li>Use the <span class="bg">positions</span> of <strong>index</strong> and <strong>columns</strong> to retrieve data</li>
+<li>Function to use: <code>df.iloc</code></li>
+</ul>
 
 
 </section></section>
@@ -599,6 +682,7 @@ flowchart LR
   <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
   <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
   <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -620,7 +704,8 @@ flowchart LR
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -746,10 +831,10 @@ flowchart LR
         previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
-        transition: 'none',
+        transition: 'slide',
 
         // Transition speed (default/fast/slow)
-        transitionSpeed: 'default',
+        transitionSpeed: 'fast',
 
         // Transition style for full page slide backgrounds
         // (none/fade/slide/convex/concave/zoom)
@@ -791,7 +876,7 @@ flowchart LR
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
           RevealMath,
           RevealNotes,
