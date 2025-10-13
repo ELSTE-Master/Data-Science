@@ -1,0 +1,697 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Data exploration\"\n",
+        "format:\n",
+        "  html:\n",
+        "    code-fold: false\n",
+        "    code-line-numbers: true\n",
+        "    css: [../assets/webex.css]\n",
+        "    include-after-body: [../assets/webex.js]\n",
+        "    embed-resources: true \n",
+        "jupyter: python3\n",
+        "---"
+      ],
+      "id": "3b1eef58"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: false\n",
+        "from pywebexercises.exercises import mcq, longmcq, torf\n",
+        "import matplotlib.pyplot as plt\n",
+        "plt.rcParams.update({\n",
+        "    \"figure.facecolor\":  (0.0, 0.0, 0.0, 0.0),  # red   with alpha = 30%\n",
+        "})"
+      ],
+      "id": "bc1c061b",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Introduction\n",
+        "\n",
+        "### Today's objectives {.unnumbered}\n",
+        "\n",
+        "## Setting up the exercise\n",
+        "\n",
+        "We start by importing libraries and the dataset.\n"
+      ],
+      "id": "5b322d63"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "#| lst-label: lst-load-geochem\n",
+        "#| lst-cap: caption\n",
+        "\n",
+        "# Load libraries\n",
+        "import pandas as pd # Import pandas\n",
+        "import matplotlib.pyplot as plt # Import the pyplot module from matplotlib\n",
+        "import seaborn as sns # Import seaborn\n",
+        "\n",
+        "# Import the dataset specifying which Excel sheet name to load the data from\n",
+        "df = pd.read_excel('../Data/Smith_glass_post_NYT_data.xlsx', sheet_name='Supp_traces')"
+      ],
+      "id": "6473c7c6",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "As in [the previous class](pandas1.qmd), we load the dataset using **Pandas**. The dataset comes from @Smith2011 and contains the chemical concentrations in volcanic tephra belonging to the recent activity (last 15 ky) of the Campi Flergrei Caldera (Italy). The dataset is contained in an Excel file that contains two sheets named `'Supp_majors'` and `'Supp_traces'`. In @lst-load-geochem, we use the `sheet_name` argument to the `read_excel()` ([doc](https://pandas.pydata.org/docs/reference/api/pandas.read_excel.html)) function to specify that we want to load the sheet containing trace elements.\n",
+        "\n",
+        "::: {.callout-tip}\n",
+        "## Good reference book\n",
+        "\n",
+        "The use of this dataset is inspired by the by the book *Introduction to Python in Earth Science Data Analysis: From Descriptive Statistics to Machine Learning* by @Petrelli2021.\n",
+        ":::\n",
+        "\n",
+        "\n",
+        "### Basics of plotting in Python {.unnumbered}\n",
+        "\n",
+        "@lst-load-geochem also loads two libraries for plotting:\n",
+        "\n",
+        "- [**Matplotlib**](https://matplotlib.org/stable/users/explain/quick_start.html) is [the library]{.mark} for plotting in Python. It allows for the finest and most comprehensive level of customisation, but it take some time to get used to. You can visit the [gallery](https://matplotlib.org/stable/gallery/index.html) to get some inspiration.\n",
+        "- [**Seaborn**](https://seaborn.pydata.org/tutorial/introduction) is [built on Matplotlib]{.mark}, but provides some higher-level functions to easily produce stats-oriented plots. It looks good by default, but finer customisation might be difficult and might result to using Matplotlib. Again, check out the [gallery](https://seaborn.pydata.org/examples/index.html).\n",
+        "\n",
+        "Here again, the idea is not to make you expert in *Matplotlib* or *Seaborn*, but rather to provide you with the minimum knowledge for you to further explore this tools in the context of your research.\n",
+        "\n",
+        "#### Components of a Figure {.unnumbered}\n",
+        "\n",
+        "Let's start to look at the basic components of a *Matplotlib* figure. There are two \"hosts\" to any plot (@fig-fig-anatomy-1):\n",
+        "\n",
+        "1. A [**Figure**]{.mark} represents the main canevas;\n",
+        "2. [**Axes**]{.mark} are contained within the figure and is where most of the plotting will occur.\n",
+        "\n",
+        "The easiest way to define a figure is using the `subplots()` function (@lst-plt-set). Note that the code returns two variables - `fig` and `ax` - which are the figure and the axes, respectively.\n"
+      ],
+      "id": "25e2cbfc"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| eval: false\n",
+        "#| lst-label: lst-plt-set\n",
+        "#| lst-cap: Define a figure and one axes.\n",
+        "#| \n",
+        "import matplotlib.pyplot as plt\n",
+        "fig, ax = plt.subplots()"
+      ],
+      "id": "41cadeff",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "![Main figure and axes of a *Matplotlib* figure](img/fig-anatomy-1.png){#fig-fig-anatomy-1}\n",
+        "\n",
+        "\n",
+        "Most additional components of a plot are controlled via the `ax` variable, which can be used to (@fig-fig-anatomy-2):\n",
+        "\n",
+        "- *Plot* (e.g., line plot or scatter plots)\n",
+        "- *Set labels* (e.g., x-label, y-label, title)\n",
+        "- Add various *components* (e.g., legend, grid)\n",
+        "\n",
+        "![Basic components of a *Matplotlib* figure](img/fig-anatomy-2.png){#fig-fig-anatomy-2}\n",
+        "\n",
+        "::: {.callout-note}\n",
+        "\n",
+        "## Plotting exercise\n",
+        "\n",
+        "@lst-plt-ex1 defines a figure and plots some data. @tbl-mpl-basics and @fig-fig-anatomy-2 illustrate some of the most frequently used functions for customising plots.\n",
+        "\n",
+        "Use these functions to customise @lst-plt-ex1. Some hints:\n",
+        "\n",
+        "- Remember that a *function* takes some *arguments* provided between *parentheses* (e.g., `ax.title(argument)`). Each function might accept different types of arguments.\n",
+        "- Titles and labels require a *string*, so remember to use `\" \"` or `' '`.\n",
+        "- For now, the legend does not require any argument, so you can leave the parentheses empty.\n",
+        "- Setting the grid requires one argument: do we want to show the grid (`True`) or not (`False`)\n",
+        "\n",
+        ":::\n",
+        "\n",
+        "| Function        | Description                        | Argument Type         | Example Argument           |\n",
+        "|-----------------|------------------------------------|-----------------------|----------------------------|\n",
+        "| [`ax.set_title`](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_title.html)    | Sets the title of the axes         | str                   | \"My Plot Title\"            |\n",
+        "| [`ax.set_xlabel`](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_xlabel.html)   | Sets the label for the x-axis      | str                   | \"X Axis Label\"             |\n",
+        "| [`ax.set_ylabel`](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_ylabel.html)   | Sets the label for the y-axis      | str                   | \"Y Axis Label\"             |\n",
+        "| [`ax.legend`](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.legend.html)       | Displays the legend                | None    | None (default)  |\n",
+        "| [`ax.grid`](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.grid.html)         | Shows grid lines                   | bool           | True             |\n",
+        "\n",
+        ": Some of the most frequently used plotting functions. {#tbl-mpl-basics .striped   }\n"
+      ],
+      "id": "40f28ddf"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| lst-label: lst-plt-ex1\n",
+        "#| lst-cap: Define a figure and one axes.\n",
+        "\n",
+        "import matplotlib.pyplot as plt # Import matplotlib\n",
+        "\n",
+        "# Define some data\n",
+        "data1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n",
+        "data2 = [7, 3, 9, 1, 5, 10, 8, 2, 6, 4]\n",
+        "\n",
+        "# Set the figure and the axes\n",
+        "fig, ax = plt.subplots()\n",
+        "\n",
+        "# Plot the data\n",
+        "ax.plot(data1, data1, color='aqua', label='Line')\n",
+        "ax.scatter(data1, data2, color='purple', label='scatter')\n",
+        "\n",
+        "# Customise the plot - up to you!\n",
+        "# - Add a title\n",
+        "# - Add x and y labels\n",
+        "# - Add a legend\n",
+        "# - Add a grid"
+      ],
+      "id": "e890116a",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Plotting with Seaborn {.unnumbered}\n",
+        "\n",
+        "Let's now review the use of **Seaborn**. You might wonder [why do we need another plotting library]{.mark}. Well, the topic of this module is [data exploration]{.mark}, and this is exactly what *Seaborn* is designed for. In additions, *Seaborn* is designed to work with *Pandas*.\n",
+        "\n",
+        "Over the next steps of the exercise we will use various types of plots offered by *Seaborn* to explore our geochemical dataset. @lst-sns-intro illustrates how to create a [scatterplot](https://seaborn.pydata.org/generated/seaborn.scatterplot.html) of the [Rubidium]{.mark} and [Strontium]{.mark} values contained in our dataset `df`. *Seaborn* usually takes [4 arguments]{.mark}:\n",
+        "\n",
+        "1. `ax`: The axes on which to plot the data\n",
+        "2. `data`: The DataFrame containing the data.\n",
+        "3. `x`: The name of the column containing the values used along x\n",
+        "4. `y`: The name of the column containing the values used along y\n"
+      ],
+      "id": "e5274231"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| lst-label: lst-sns-intro\n",
+        "#| lst-cap: Basic plotting using Seaborn.\n",
+        "\n",
+        "# Define figure + axes\n",
+        "fig, ax = plt.subplots()\n",
+        "# Plot with seaborn (remember, we imported it as sns)\n",
+        "# df is the geochemical dataset imported previously\n",
+        "sns.scatterplot(ax=ax, data=df, x='Rb', y='Sr')"
+      ],
+      "id": "3eae279a",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Should you feel adventurous and check out the [documentation](https://seaborn.pydata.org/generated/seaborn.scatterplot.html) of the `scatterplot` function, you would see that it is possible to use [additional arguments]{.mark} to further customize the plot:\n",
+        "\n",
+        "- `hue`: Name of the variable that will produce points with [different colors]{.mark}.\n",
+        "- `size`: Name of the variable that will produce points with [different sizes]{.mark}.\n",
+        "\n",
+        "::: {.callout-note}\n",
+        "\n",
+        "## Seaborn exercise\n",
+        "\n",
+        "Complete @lst-sns-intro, but use:\n",
+        "\n",
+        "- The `\"Epoch\"` column to control points color.\n",
+        "- The `\"SiO2* (EMP)\"` column to control points size.\n",
+        "\n",
+        "Remember, you can use `df.columns` to print a list of column names contained in the DataFrame.\n",
+        "\n",
+        ":::\n",
+        "\n",
+        "\n",
+        "\n",
+        "## Descriptive statistics\n",
+        "\n",
+        "\n",
+        "### Univariate statistics  {.unnumbered}\n",
+        "\n",
+        "The objective of **descriptive statistics** is to [provide ways of capturing the properties of a given data set or sample]{.mark}. Using *Pandas* and *Seaborn*, we will review some [metrics, tools, and strategies]{.mark} that can be used to summarize a dataset, providing us with a quantitative basis to talk about it and compare it to other datasets.\n",
+        "\n",
+        "By **univariate statistics**, we focus on [capturing the properties of **single** variables at the time]{.mark}. We are not yet concerned in characterising the [relationships]{.mark} between two or more variables.\n",
+        "\n",
+        "Let's focus on the Zircon concentration in Campi Flegrei's geochemical dataset. Let's start by simply [visualising]{.mark} the dataset to get an understanding of what we will talk about. Figures below illustrate three different plot types:\n",
+        "\n",
+        "1. **Histograms** ([`sns.histplots()`](https://seaborn.pydata.org/generated/seaborn.histplot.html)) show the [number of times a specific Zr concentration occurs]{.mark} in our dataset (@lst-sns-hist).\n",
+        "2. **Box plots** ([`sns.boxplot()`](https://seaborn.pydata.org/generated/seaborn.boxplot.html) - or box-and-whisker plot) show the [distribution of quantitative data]{.mark} with some measure of dispersion. Note that they are useful to compare between variables (@lst-sns-boxplot). \n",
+        "3. **Violin plots** ([`sns.violinplot()`](https://seaborn.pydata.org/generated/seaborn.violinplot.html)) are similar to box plots, but they approximate the underlying data distribution using some smoothing algorithm (i.e. *kernel density estimation*). Without going into too much detail, this provides a good first approximation of the distribution, but [it can create some unrealistic artefacts]{.mark} (e.g., see the negative Sr concentrations in @lst-sns-violinplot).\n",
+        "\n",
+        "::: {.panel-tabset}\n",
+        "\n",
+        "## Histogram\n"
+      ],
+      "id": "5d175886"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| lst-label: lst-sns-hist\n",
+        "#| lst-cap: Visualising distributions using histograms.\n",
+        "\n",
+        "fig, ax = plt.subplots()\n",
+        "sns.histplot(data=df, x='Zr')\n",
+        "ax.set_xlabel('Zr (ppm)');\n",
+        "ax.set_title('Zr distribution');"
+      ],
+      "id": "4e913fb7",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Box plot\n",
+        "\n",
+        "::: {.callout-tip}\n",
+        "## Plotting several columns\n",
+        "\n",
+        "Box plots are useful to plot and compare more than one data. @lst-sns-boxplot slightly adjusts how `boxplot()` is called to allow for that.\n",
+        "\n",
+        ":::\n"
+      ],
+      "id": "02f7b916"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| lst-label: lst-sns-boxplot\n",
+        "#| lst-cap: Visualising distributions using box-and-whisker plots.\n",
+        "\n",
+        "fig, ax = plt.subplots()\n",
+        "sns.boxplot(data=df[['Zr', 'Sr']]) # We plot Zr and Sr together using a list\n",
+        "ax.set_ylabel('Concentration (ppm)');\n",
+        "ax.set_title('Zr and Sr distribution');"
+      ],
+      "id": "ad2a73e9",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Violin plot\n"
+      ],
+      "id": "3c2e0bb3"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| lst-label: lst-sns-violinplot\n",
+        "#| lst-cap: Visualising distributions using violin plots.\n",
+        "\n",
+        "fig, ax = plt.subplots()\n",
+        "sns.violinplot(data=df[['Zr', 'Sr']])\n",
+        "ax.set_xlabel('Concentration (ppm)');\n",
+        "ax.set_title('Zr and Sr distribution');"
+      ],
+      "id": "19d76b8a",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "\n",
+        "\n",
+        "By looking at the Zr and St distributions from the figures above, we can intuitively understand the importance of describing [three different parameters]{.mark}:\n",
+        "\n",
+        "- The **location** - or where is [the central value(s)]{.mark} of the dataset;\n",
+        "- The **dispersion** - or how [spread out]{.mark} is the distribution of data compared to the central values;\n",
+        "- The **skewness** - or how [symmetrical]{.mark} is the distribution of data compared to the central values;\n",
+        "\n",
+        "\n",
+        "#### Location {.unnumbered}\n",
+        "\n",
+        "##### Mean {.unnumbered}\n",
+        "\n",
+        "The **mean** (or *arithmetic* mean - by opposition to *geometric* or *harmonic* means) is the [sum of the values divided by the number of values]{.mark} (@eq-mean):\n",
+        "\n",
+        "$$\n",
+        "\\bar{x} = \\frac{1}{n} \\sum_{i=1}^{n} x_i\n",
+        "$$ {#eq-mean}\n",
+        "\n",
+        "The mean is meaningful to describe [**symmetric** distributions without **outliers**]{.mark}, where:\n",
+        "\n",
+        "- **Symmetric** means the number of items above the mean should be roughly the same as the number below;\n",
+        "- **Outliers** are *extreme* values.\n",
+        "\n",
+        "The mean of a dataset can easily be computed with *Pandas* using the [`.mean()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mean.html) function (@lst-univ-mean). Note that we round the results to two significant digits using `.round(2)`.\n"
+      ],
+      "id": "58512803"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| lst-label: lst-univ-mean\n",
+        "#| lst-cap: Compute the mean for two significant digits.\n",
+        "\n",
+        "df['Zr'].mean().round(2)"
+      ],
+      "id": "1be4de9c",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "::: {.callout-note}\n",
+        "## Question\n",
+        "\n",
+        "What is the mean value for Strontium?\n"
+      ],
+      "id": "6b346bff"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: false\n",
+        "mcq({\n",
+        "    '365.38' : 0,\n",
+        "    '516.42' : 1,\n",
+        "    '219.38' : 0,\n",
+        "    '123.94' : 0,\n",
+        "})"
+      ],
+      "id": "74182df2",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "::: {.callout-tip}\n",
+        "## Descriptive stats functions\n",
+        "\n",
+        "@lst-univ-mean shows how to compute the mean on one column, but the `.mean()` function - as well as most fuctions for descriptive stats - can be applied to entire DataFrames. For this, we need to understand a critical argument - `axis`.\n",
+        "\n",
+        "- `axis = 0` is usually the default, and computes the mean [across all rows for each column]{.mark}(@lst-univ-mean-multi-row)\n",
+        "- `axis = 1` usually makes sense when rows are labelled, and computes the mean [across all columns for each row]{.mark}(@lst-univ-mean-multi-col)\n"
+      ],
+      "id": "ab8e31f8"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| lst-label: lst-univ-mean-multi-row\n",
+        "#| lst-cap: Compute the mean across rows.\n",
+        "# Create a subset of the df containing numerical data\n",
+        "df_sub = df[['Sc','Rb','Sr','Y','Zr','Nb','Cs']] \n",
+        "# Compute the mean across all rows\n",
+        "df_sub.mean(axis=0).round(2).head()"
+      ],
+      "id": "cf2f2b9e",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| lst-label: lst-univ-mean-multi-col\n",
+        "#| lst-cap: Compute the mean across columns.\n",
+        "\n",
+        "# Create a subset of the df containing numerical data\n",
+        "df_sub = df[['Sc','Rb','Sr','Y','Zr','Nb','Cs']] \n",
+        "# Compute the mean across all columns\n",
+        "df_sub.mean(axis=1).round(2).head()"
+      ],
+      "id": "c0a17c61",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "##### Median {.unnumbered}\n",
+        "\n",
+        "The **median** is the value [at the exact middle of the dataset]{.mark}, meaning that just as\n",
+        "many elements lie above the median as below it. There is no easy formula to compute the median, instead we need to conceptually (@lst-univ-median-ex):\n",
+        "\n",
+        "1. Order all values in ascending order and plot them against a normalised number of observations (this is called an empirical cumulative density function - or ECDF);\n",
+        "2. On the x-axis, find the point dividing the dataset into two equal numbers of observations;\n",
+        "3. Read the value on the y-axis that intersects the ECDF.\n"
+      ],
+      "id": "5598dcbc"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| lst-label: lst-univ-median-ex\n",
+        "#| lst-cap: Graphical representation of the median.\n",
+        "\n",
+        "fig, ax = plt.subplots()\n",
+        "sns.ecdfplot(data=df, y='Zr')\n",
+        "ax.plot([.5,.5], [0, df['Zr'].median()], color='orange', linestyle='--')\n",
+        "ax.plot([.5,0], [df['Zr'].median(), df['Zr'].median()], color='orange', linestyle='--')\n",
+        "ax.set_ylim([0,900])"
+      ],
+      "id": "7cadc7fc",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Fortunately, we can also use the native *Pandas* [`.median`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.median.html) function (@lst-univ-median). \n"
+      ],
+      "id": "76fa4ecb"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| lst-label: lst-univ-median\n",
+        "#| lst-cap: Compute the median for two significant digits.\n",
+        "\n",
+        "df['Zr'].median().round(2)"
+      ],
+      "id": "a54229fa",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "::: {.callout-note}\n",
+        "## Question\n",
+        "\n",
+        "What is the mean value for Cesium?\n"
+      ],
+      "id": "6d3c67b8"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: false\n",
+        "mcq({\n",
+        "    '36.38' : 0,\n",
+        "    '51.42' : 1,\n",
+        "    '23.99' : 1,\n",
+        "    '13.94' : 0,\n",
+        "})"
+      ],
+      "id": "43adb4af",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "\n",
+        "\n",
+        "<!-- ##### Mode {.unnumbered}\n",
+        "\n",
+        "[mode](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mode.html)\n",
+        " -->\n",
+        "\n",
+        "##### Summary {.unnumbered}\n",
+        "\n",
+        "@lst-univ-mean-med illustrate the values of the mean and the median relative to the distribution shown in the histogram. There are a few things to keep in mind when choosing between mean and median to estimate the location of a dataset:\n",
+        "\n",
+        "- If a sample has a [symmetrical distribution]{.mark}, then **the mean and median are equal**.\n",
+        "- If the distribution of a sample is [not symmetrical]{.mark}, **the mean should not be used**.\n",
+        "- The [mean is highly sensitive to outliers]{.mark}, whereas the median is not.\n"
+      ],
+      "id": "a80b5e14"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| lst-label: lst-univ-mean-med\n",
+        "#| lst-cap: Compute the median for two significant digits.\n",
+        "#| \n",
+        "fig, ax = plt.subplots()\n",
+        "sns.histplot(data=df, x='Zr')\n",
+        "ax.axvline(df['Zr'].mean(), color='darkorange', lw=3, label='Mean')\n",
+        "ax.axvline(df['Zr'].median(), color='darkviolet', lw=3, label='Median')\n",
+        "ax.legend()"
+      ],
+      "id": "76fc54ad",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "#### Dispersion {.unnumbered}\n",
+        "\n",
+        "##### Range {.unnumbered}\n",
+        "\n",
+        "The first information we might want to get for a dataset is the range of values it covers, or *range*. For this, we need to get the minimum (`df.min()`) and maximum (`df.max()`) values, from which, when needed, the range can be calculated with @eq-range. It is however likely that the min/max functions will be more frequently used (@lst-univ-minmax).\n",
+        "\n",
+        "$$\n",
+        "\\text{Range} = \\max(x) - \\min(x)\n",
+        "$$ {#eq-range}\n"
+      ],
+      "id": "7243d64a"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| lst-label: lst-univ-minmax\n",
+        "#| lst-cap: Compute the min and the max values of a column\n",
+        "\n",
+        "df['Zr'].min()\n",
+        "df['Zr'].max()"
+      ],
+      "id": "5fbab57d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "::: {.callout-note}\n",
+        "## Question\n",
+        "\n",
+        "What is the mean value for Cesium?\n"
+      ],
+      "id": "120bf433"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: false\n",
+        "mcq({\n",
+        "    '10.46' : 0,\n",
+        "    '104.66' : 1,\n",
+        "    '1045.59' : 1,\n",
+        "    '10455.91' : 0,\n",
+        "})"
+      ],
+      "id": "b71684df",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "\n",
+        "##### Variance and standard deviation {.unnumbered}\n",
+        "\n",
+        "The **variance** and **standard deviation** are two key measures of dispersion that describe how spread out the values in a dataset are.\n",
+        "\n",
+        "- **Standard deviation** ($\\sigma$) measures sum of squares differences between data points $x_i$ and the\n",
+        "mean $\\bar{x}$:\n",
+        "    $$\n",
+        "    \\sigma = \\sqrt{\\frac{\\sum_{i=1}^{n} (x_i - \\bar{x})^2}{n-1} }\n",
+        "    $$\n",
+        "    where $x_i$ are the data points, $\\bar{x}$ is the mean, and $n$ is the number of observations.\n",
+        "\n",
+        "- **Variance** ($\\sigma^2$) is the square of the standard deviation:\n",
+        "    $$\n",
+        "    \\sigma^2 = \\frac{\\sum_{i=1}^{n} (x_i - \\bar{x})^2}{n-1} \n",
+        "    $$\n",
+        "    \n",
+        "\n",
+        "For now we will consider that they roughly measure the same thing. The standard deviation is in the same units as the data, making it easier to interpret.\n",
+        "\n",
+        "**Relation to the Gaussian distribution:**  \n",
+        "For a Gaussian (normal) distribution, about 68% of the data falls within one standard deviation of the mean, about 95% within two standard deviations, and about 99.7% within three standard deviations. Thus, variance and standard deviation are fundamental for describing the spread and probability intervals of normally distributed data.\n",
+        "\n",
+        "You can compute these in pandas using `.var()` and `.std()`:\n",
+        "\n",
+        "\n",
+        "#### Skewness x {.unnumbered}\n",
+        "\n",
+        "### Bivariate statistics x {.unnumbered}\n",
+        "\n",
+        "#### Correlation x {.unnumbered}\n",
+        "\n",
+        "#### Simple linear regression x {.unnumbered}"
+      ],
+      "id": "bf9d2649"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/home/lionel/.local/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

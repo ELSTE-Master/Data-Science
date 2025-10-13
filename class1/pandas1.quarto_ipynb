@@ -1,0 +1,965 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Intro to Pandas\"\n",
+        "format:\n",
+        "  html:\n",
+        "    code-fold: false\n",
+        "    code-line-numbers: true\n",
+        "    css: [../assets/webex.css]\n",
+        "    include-after-body: [../assets/webex.js]\n",
+        "    embed-resources: true \n",
+        "jupyter: python3\n",
+        "---"
+      ],
+      "id": "50a69d1b"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: false\n",
+        "from pywebexercises.exercises import mcq, longmcq, torf\n",
+        "import matplotlib.pyplot as plt\n",
+        "plt.rcParams.update({\n",
+        "    \"figure.facecolor\":  (0.0, 0.0, 0.0, 0.0),  # red   with alpha = 30%\n",
+        "})"
+      ],
+      "id": "d50b8e39",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Introduction\n",
+        "\n",
+        "We will start our data science journey by learning a bit about the most useful Python library for this class: **Pandas**. As a reminder, a *library* is a set of tools we load on top of Python that provides new functionalities for a specific problem or type of analysis. Here, Pandas provides functions for **data manipulation and analysis**, handling structured data like tables or time series and facilitating numerous tasks you might encounter as a scientist. These include:\n",
+        "\n",
+        "- **Reading/writing data** from various commonly-used formats (CSV, Excel, SQL, JSON, etc.)\n",
+        "- Handling **missing data**\n",
+        "- **Filtering**, **sorting**, **reshaping** and **grouping** data\n",
+        "- **Aggregating** data (sum, mean, count, etc.)\n",
+        "- **Time series support** (date ranges, frequency conversions)\n",
+        "- **Statistical operations**\n",
+        "\n",
+        "### Today's objectives {.unnumbered}\n",
+        "\n",
+        "The objective of this class is by no way to make you an expert in Pandas and data science. Rather, the objective is to take you through the most basic manipulations in order to build the confidence to keep on exploring the use of scientific coding and to include it into your research pipeline. The objectives of this module are to review:\n",
+        "\n",
+        "- [x] What is a Pandas DataFrame and its basic anatomy\n",
+        "- [x] How to *load data* in a DataFrame\n",
+        "- [x] How to *access* data (e.g., query by label/position)\n",
+        "- [x] How to *filter* data (e.g., comparison and logical operators)\n",
+        "- [x] How to *rearrange* data (e.g., sorting values)\n",
+        "- [x] How to *operate* on data (e.g., arithmetic and string operations)\n",
+        "\n",
+        "We first start by reviewing the [data structure](#pandas-data-structure) behind Pandas, then we will move on to a [coding exercise](#coding-playground) to make you familiar with some basic functionalities.\n",
+        "\n",
+        "## Pandas data structure\n",
+        "\n",
+        "Pandas consists of two main types of **data structures**. Let's make an analogy with Excel.\n",
+        "\n",
+        "1. **Series**: A 1D labeled array. Think of a 2-columns Excel spreadsheet where the left column would contain a *label* (e.g., the time of a measurement) and the right column would contain a *value* (e.g., the actual value measured at the time specified in the label, let's say the temperature of a river).\n",
+        "2. **DataFrame**: A 2D labeled table. This is the same as an Excel spreadsheet that would contain more columns than a Series. You can think of having measurements of different variables contained in each column (e.g., the flow rate, the turbidity etc...).\n",
+        "\n",
+        "The keyword here is **labelled**. In Excel, you might get a column using *letters* and rows using *numbers*. In Pandas, you can use the column name (e.g., `water_temperature`) or the row label (e.g., `2021-06-15 14:19:14`).\n",
+        "\n",
+        "\n",
+        "::: {.callout-note}\n",
+        "## DataFrame\n",
+        "Throughout this class we will focus on the use of **DataFrames**, not Series. Keep in mind that the behaviour between both is almost identical.\n",
+        ":::\n",
+        "\n",
+        "### Anatomy of a DataFrame {.unnumbered}\n",
+        "\n",
+        "@fig-anatomy shows the basic anatomy of a DataFrame that contains four **rows** and four **columns**). We already see some data structuring emerging:\n",
+        "\n",
+        "- *Rows* tend to represent **entries**, which can be:\n",
+        "  - Different measurements at specific time steps\n",
+        "  - Different samples collected at different place/times\n",
+        "  - etc.\n",
+        "- In contrast, *column* represent **attributes** and store the properties of each entry:\n",
+        "  - The actual values of different measured parameters\n",
+        "  - The location and time of collected samples, along with associated analyses (e.g., geochemistry)\n",
+        "  - etc.\n",
+        "\n",
+        "\n",
+        "\n",
+        "![Basic anaotmy of a Pandas DataFrame.](img/pandas-1.png){#fig-anatomy}\n",
+        "\n",
+        "The first row - i.e. the row containing the column *labels* - is not considered as an entry. This is because the **top row** of a dataframe is usually used as the *label* for the **columns**. Similarly, we might want to set the **first column** as a *label* for the **rows** (@fig-index). In a nutshell:\n",
+        "\n",
+        "- **Index** refers to the label of the **rows**. In the *index*, **values are usually unique** - meaning that each entry has a different label.\n",
+        "- **Column** refers to the label of - logically - the **columns**\n",
+        "\n",
+        "![Index and columns of a DataFrame.](img/pandas-2.png){#fig-index}\n",
+        "\n",
+        "::: {#cau-indexing .callout-caution}\n",
+        "## Indexing in Python\n",
+        "Remember that in Python, indexing starts from 0 - so the first row or column has an index of 0.\n",
+        ":::\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "## Coding playground\n",
+        "\n",
+        "Let's get our hands dirty and start coding. Create a new Jupyter notebook following [this guide](../appendices/setup_vscode.qmd). You can copy fragments of the code, but make sure each code block is a different cell in you notebook. Also remember that you can add **Markdown** cells in between code cells, which are really useful to document your code.\n",
+        "\n",
+        "The data we will use here is a `csv` file containing selected eruptions of the past 50 years. The first 5 rows of the data are illustrated in @tbl-first-5.\n",
+        "\n",
+        "\n",
+        "| Name            | Country     | Date                |   VEI |   Latitude |   Longitude |\n",
+        "|:----------------|:------------|:--------------------|------:|-----------:|------------:|\n",
+        "| St. Helens      | USA         | 1980-05-18 00:00:00 |     5 |    46.1914 |   -122.196  |\n",
+        "| Pinatubo        | Philippines | 1991-04-02 00:00:00 |     6 |    15.1501 |    120.347  |\n",
+        "| El Chichón      | Mexico      | 1982-03-28 00:00:00 |     5 |    17.3559 |    -93.2233 |\n",
+        "| Galunggung      | Indonesia   | 1982-04-05 00:00:00 |     4 |    -7.2567 |    108.077  |\n",
+        "| Nevado del Ruiz | Colombia    | 1985-11-13 00:00:00 |     3 |     4.895  |    -75.322  |\n",
+        "\n",
+        ": First 5 rows of the dataset. {#tbl-first-5 .striped   }\n",
+        "\n",
+        "::: {.callout-note collapse=\"true\"}\n",
+        "## What is the VEI?\n",
+        "\n",
+        "The Volcanic Explosivity Index - or VEI - is a scale to measure the magnitude of explosive eruptions based on the volume of tephra ejected during an eruption. It is a logarithmic scale in base 10:\n",
+        "\n",
+        "| VEI | Min Volume (km³) | Max Volume (km³) | Approx. Frequency      |\n",
+        "|-----|------------------|------------------|------------------------|\n",
+        "| 0   | <0.00001         | 0.0001           | Daily                  |\n",
+        "| 1   | 0.0001           | 0.001            | Weekly                 |\n",
+        "| 2   | 0.001            | 0.01             | Yearly                 |\n",
+        "| 3   | 0.01             | 0.1              | Few per year           |\n",
+        "| 4   | 0.1              | 1                | ~10 per decade         |\n",
+        "| 5   | 1                | 10               | ~1 per decade          |\n",
+        "| 6   | 10               | 100              | ~1 per century         |\n",
+        "| 7   | 100              | 1000             | ~1 per several centuries|\n",
+        "| 8   | >1000            | -                | ~1 per 10,000 years    |\n",
+        "\n",
+        ": VEI scale with minimum and maximum erupted volume and approximate frequency. {#tbl-vei .striped   }\n",
+        "\n",
+        ":::\n",
+        "\n",
+        "### Importing the library and the data {.unnumbered}\n",
+        "\n",
+        "As always, we start by importing the `pandas` library as `pd`.\n"
+      ],
+      "id": "e72af62d"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "output-fold": true,
+        "output-summary": "Show output"
+      },
+      "source": [
+        "#| label: load-packages\n",
+        "\n",
+        "import pandas as pd"
+      ],
+      "id": "load-packages",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "We load the dataset using the `pd.read_csv` function into a variable called `df` (for DataFrame) ([doc](https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html)). Remember that *functions* can take different *arguments*, which are extra keywords you can *pass* to make the behaviour of the function more specific to your need. Here, we pass one arguments to the `read_csv()` function: `parse_dates=['Date']` Specifies that the `Date` column should be treated as a date object.\n",
+        "\n",
+        "\n",
+        "<!-- ::: {.callout-tip}\n",
+        "## Function arguments\n",
+        "\n",
+        "Remember that *functions* can take different *arguments*, which are extra keywords you can *pass* to make the behaviour of the function more specific to your need. Here, we one arguments to the `read_csv()` function:\n",
+        "\n",
+        "- `index_col=0`: Specify that the index of the file is the first column. More on that soon if this is unclear.\n",
+        "- `parse_dates=['Date']`: Specify that the `Date` column should be treated as a date object.\n",
+        "::: -->\n"
+      ],
+      "id": "f7cf60db"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| lst-label: lst-load-data\n",
+        "#| lst-cap: Loading data from a csv file\n",
+        "\n",
+        "df = pd.read_csv('data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data\n",
+        "df.head() # Show the first 5 rows"
+      ],
+      "id": "9765b2a3",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "#### Setting up the index {.unnumbered}\n",
+        "\n",
+        "The output of @lst-load-data shows the first 5 rows in our DataFrame. As displayed in @fig-index, the first column is the *index* - which is currently just integer numbers. That can be acceptable in some cases, but for the sake of the exercise we will choose one column to become the index - here `Name`. \n",
+        "\n",
+        "@lst-set-index Illustrates the use of two useful functions:\n",
+        "\n",
+        "- `.set_index()`: Uses a column as the DataFrame's index\n",
+        "- `.reset_index()`: Removes the column's index back to a sequential numbering as in @lst-load-data.\n"
+      ],
+      "id": "86777fd8"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| lst-label: lst-set-index\n",
+        "#| lst-cap: Common functions to set the index of a DataFrame\n",
+        "\n",
+        "df = df.set_index('VEI') # Set the 'VEI' column as an index\n",
+        "df = df.reset_index() # Shoots, I meant to set the 'Name' columns as an index\n",
+        "df = df.set_index('Name') # Here we go.\n",
+        "df.head()"
+      ],
+      "id": "afd495b0",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "#### Basic data exploration {.unnumbered}\n",
+        "\n",
+        "Let's now explore the structure of the dataset with the following functions:\n",
+        "\n",
+        "| Function         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |\n",
+        "|------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n",
+        "| `df.head()`      | Prints the *first* 5 rows of the DataFrame ([doc](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.head.html))                                                                                                                                                                                                                                                                                                                          |\n",
+        "| `df.tail()`      | Prints the *last* 5 rows of the DataFrame ([doc](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.tail.html))                                                                                                                                                                                                                                                                                                                           |\n",
+        "| `df.info()`      | Displays some info about the DataFrame, including the number of rows (*entries*) and columns ([doc](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.info.html)). Note the `Dtype` column: this is the type variable stored in each column including *strings* (`object`), *integer* (`int64`) and *float* (`int64`) numbers. See that the `Date` column is indeed stored as a `datetime` variable as requested above. |\n",
+        "| `df.shape`       | Returns a list containing the number of rows and columns of the DataFrame.                                                                                                                                                                                                                                                                                                                                                                           |\n",
+        "| `df.index`       | Returns a list containing the index along the *rows* of the DataFrame.                                                                                                                                                                                                                                                                                                                                                                           |\n",
+        "| `df.columns`     | Returns a list containing the index along the *columns* of the DataFrame.                                                                                                                                                                                                                                                                                                                                                                           |\n",
+        "\n",
+        "::: {.callout-tip}\n",
+        "\n",
+        "## Your turn!\n",
+        "\n",
+        "Try these functions on `df` and get familiar with the output.\n",
+        "\n",
+        ":::\n",
+        "\n",
+        "\n",
+        "### Querying data {.unnumbered}\n",
+        "\n",
+        "Let's now review how we can access data contained in the DataFrame. This process, known as *indexing*, consists in specifying a row or a column (or ranges of rows and columns) where the data is stored. In `pandas`, there are two different ways to do that:\n",
+        "\n",
+        "- By `label`: data is queried using the actual index/column name (e.g., the `VEI` column in the DataFrame above)\n",
+        "- By `location`: data is queried using the column location (e.g., the 3rd row)\n",
+        "\n",
+        "#### Label-based indexing {.unnumbered}\n",
+        "\n",
+        "![Label-based queries using `.loc`.](img/pandas_loc.png){#fig-pandas-loc}\n",
+        "\n",
+        "##### Querying rows {.unnumbered}\n",
+        "\n",
+        "When we know the exact label of the row or the column, we can use the `.loc` function to query the DataFrame (@fig-pandas-loc). Let's start by querying specific **rows**. @lst-set-index has defined the `Name` column as the *index* (i.e., row label), which means that we can simply pass the name of the volcano.\n"
+      ],
+      "id": "63899cdc"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# Get the row for \"Calbuco\" volcano\n",
+        "df.loc['Calbuco']"
+      ],
+      "id": "abb08f0c",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Note that the result is a *Series* (i.e., a 1-dimensional DataFrame where the columns become the index), not a DataFrame. If we want to **keep it as a DataFrame**, we can use double brackets. Double brackets can also be used to query **multiple rows**.\n"
+      ],
+      "id": "c2ab77bd"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "df.loc[['Calbuco']] # Query one row and return it as a DataFrame\n",
+        "df.loc[['Calbuco', 'Taal']] # Query multiple rows"
+      ],
+      "id": "db758455",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "::: {.callout-note}\n",
+        "## Question\n",
+        "\n",
+        "What is the VEI recorded for Etna volcano?\n"
+      ],
+      "id": "3e4c7603"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: false\n",
+        "mcq({\n",
+        "    '1' : 0,\n",
+        "    '2' : 0,\n",
+        "    '3' : 0,\n",
+        "    '4' : 1,\n",
+        "    '5' : 0\n",
+        "})"
+      ],
+      "id": "cb6ff38e",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "What is the eruption date for Taal volcano?\n"
+      ],
+      "id": "80731486"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: false\n",
+        "mcq({\n",
+        "    '1980-05-18\t' : 0,\n",
+        "    '1991-04-02' : 0,\n",
+        "    '2020-01-12' : 1,\n",
+        "    '1997-06-25' : 0,\n",
+        "    '2023-02-13' : 0\n",
+        "})"
+      ],
+      "id": "d751ee8e",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "\n",
+        "\n",
+        "::: {.callout-tip}\n",
+        "## Double brackets\n",
+        "In general, double brackets ``[[ ]]`` will return a DataFrame and not a Series. We will dominantly use this in the following examples.\n",
+        ":::\n",
+        "\n",
+        "\n",
+        "##### Querying columns {.unnumbered}\n",
+        "\n",
+        "Let's now query specific **columns**. For example, querying the `VEI` column can be achieved in different ways. The simplest is to use the column name directly. We can also query **multiple columns** using double brackets\n"
+      ],
+      "id": "eb46b8c9"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "df[['VEI']] # Get the VEI column\n",
+        "df[['Country', 'VEI']] # Query multiple columns"
+      ],
+      "id": "a35679d0",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Note that until now, we have only retrieved either rows or columns (@fig-pandas-loc). We can also retrieve specific values by specifying **both the row and the column**.\n"
+      ],
+      "id": "4a0f8e88"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "df.loc[['Calbuco', 'Taal']][['Country', 'VEI']]"
+      ],
+      "id": "02e1e2f3",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "#### Position-based indexing {.unnumbered}\n",
+        "\n",
+        "![Position-based queries using `.iloc`.](img/pandas_iloc.png){#fig-pandas-iloc}\n",
+        "\n",
+        "\n",
+        "Some situations require querying data by *location* instead of *label* - let's say for instance we need to retrieve rows 10-20. This is done using the `.iloc` function (instead of the `.loc` function previously used; @fig-pandas-iloc). Remember that Python uses zero-based indexing (@cau-indexing), meaning that the first element is at position 0, the second at position 1, and so on.\n",
+        "\n",
+        "The next example queries the first row - using again double brackets to return a **DataFrame**.\n"
+      ],
+      "id": "c353bcdf"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "df.iloc[[0]]"
+      ],
+      "id": "470b6f67",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "##### Get ranges of rows {.unnumbered}\n",
+        "\n",
+        "We can get **a range of rows** using what is called *slicing*. This is done using the colon (`:`) operator. The next example queries rows 3 to 6 of the DataFrame. Note that the end index is exclusive, meaning that the element at the end index is not included in the result.\n"
+      ],
+      "id": "05253860"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "df.iloc[2:6]"
+      ],
+      "id": "06e6723c",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "To get rows 3 to 6 and columns 2-3:\n"
+      ],
+      "id": "82023bb8"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "df.iloc[0:5, 1:3]"
+      ],
+      "id": "cdc5834e",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "##### Count rows from the last {.unnumbered}\n",
+        "\n",
+        "To get the last 5 rows of the DataFrame:\n"
+      ],
+      "id": "d537d29a"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "df.iloc[-5:]"
+      ],
+      "id": "61338cea",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "##### Combining position-based and label-based queries {.unnumbered}\n",
+        "\n",
+        "By experience, position-based queries is more used on *rows* than *columns*. For instance, we might want to access the first 10 rows because we don't know their associated labels, yet it is less likely that we ignore their *attributes*.\n",
+        "It is possible mix label-based and position-based indexing. For example, to get the first 5 rows and the `Country` and `VEI` columns:\n"
+      ],
+      "id": "1c1c1563"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "df.iloc[0:5][['Country', 'VEI']]"
+      ],
+      "id": "eac6b791",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Filtering data {.unnumbered}\n",
+        "\n",
+        "#### Comparison operators {.unnumbered}\n",
+        "\n",
+        "Now that we have reviewed how to access data, let's now see how to **filter** data using **boolean indexing**. For this, we need to review what are **comparison operators** (@tbl-comparison-operators). Let's assume the following variables:\n"
+      ],
+      "id": "cec99c6e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| lst-label: lst-basic-bool\n",
+        "#| lst-cap: Variables used for illustrating logical operations\n",
+        "#| \n",
+        "a = 1\n",
+        "b = 2"
+      ],
+      "id": "e7370a97",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Applying the comparison operators in @tbl-comparison-operators will produce a variable of type `bool` - which can take only two values: `True` or `False`.\n",
+        "\n",
+        "| Operator | Meaning                | Example      | Result      |\n",
+        "|----------|------------------------|--------------|-------------|\n",
+        "| `==`     | Equal to               | `a == b`     | `False`     |\n",
+        "| `!=`     | Not equal to           | `a != b`     | `True`      |\n",
+        "| `>`      | Greater than           | `a > b`      | `False`     |\n",
+        "| `<`      | Less than              | `a < b`      | `True`      |\n",
+        "| `>=`     | Greater than or equal  | `a >= b`     | `False`     |\n",
+        "| `<=`     | Less than or equal     | `a <= b`     | `True`      |\n",
+        "\n",
+        ": Comparison operators in Python. {#tbl-comparison-operators .striped   }\n",
+        "\n",
+        "We can apply comparison operators to DataFrame. Let's say we want to test what rows have a VEI of 4:\n"
+      ],
+      "id": "fc886c38"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| lst-label: lst-bool\n",
+        "#| lst-cap: Create a boolean mask\n",
+        "df['VEI'] == 4"
+      ],
+      "id": "a5aa4f28",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "We can see that Galunggung, Taal, La Soufrière, Calbuco and Eyjafjallajökull return `True` to this condition. This is great, but what if we want to return the actual rows? We can use @lst-bool as a **mask** to then query the rows using `.loc`.\n"
+      ],
+      "id": "21609c21"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| lst-label: lst-bool-query\n",
+        "#| lst-cap: Query data using a boolean mask\n",
+        "\n",
+        "mask = df['VEI'] == 4 # Create a mask\n",
+        "df.loc[mask] # Query the data\n",
+        "\n",
+        "# Or, as a one line alternative:\n",
+        "df.loc[df['VEI'] == 4]"
+      ],
+      "id": "b16f1e71",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "::: {.callout-note}\n",
+        "## Question\n",
+        "\n",
+        "What volcanoes have a VEI of 5?\n"
+      ],
+      "id": "b3474773"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: false\n",
+        "mcq({\n",
+        "    'La Soufrière and Calbuco' : 0,\n",
+        "    'Merapi and Agung' : 0,\n",
+        "    'Nyiragongo and Taal' : 0,\n",
+        "    'St. Helens and El Chichón' : 1\n",
+        "})"
+      ],
+      "id": "56fc906a",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "How many volcanoes are in the southern hemisphere? (hint: use the `df.shape` function to count them).\n"
+      ],
+      "id": "5c7f607c"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: false\n",
+        "mcq({\n",
+        "    '1': 0,\n",
+        "    '2': 0,\n",
+        "    '4': 0,\n",
+        "    '6': 1,\n",
+        "    '12': 0\n",
+        "})"
+      ],
+      "id": "9566fcdb",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "\n",
+        "\n",
+        "##### String comparisons {.unnumbered}\n",
+        "\n",
+        "We can also use comparison operators on columns containing **strings** (see @cau-dtypes for caveats). @lst-str-comp illustrates a basic string comparison using the `=` operator. @tbl-comparison-str shows additional operators for strings.\n"
+      ],
+      "id": "71c72ecc"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| lst-label: lst-str-comp\n",
+        "#| lst-cap: Basic comparison operation on strings\n",
+        "\n",
+        "\n",
+        "df.loc[df['Country'] == 'Indonesia']"
+      ],
+      "id": "eaafbdf3",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "| Operation         | Example                                 | Description                                         |\n",
+        "|-------------------|-----------------------------------------|-----------------------------------------------------|\n",
+        "| Contains          | `df['Name'].str.contains('Soufrière')`  | Checks if each string contains a substring          |\n",
+        "| Startswith        | `df['Name'].str.startswith('E')`        | Checks if each string starts with a substring       |\n",
+        "| Endswith          | `df['Name'].str.endswith('o')`          | Checks if each string ends with a substring         |\n",
+        "\n",
+        "\n",
+        ": Common string comparison operations. {#tbl-comparison-str .striped   }\n",
+        "\n",
+        "\n",
+        "::: {#cau-dtypes .callout-caution collapse=\"true\"}\n",
+        "## Compare what is comparable!\n",
+        "\n",
+        "When using the comparison operators in @tbl-comparison-operators, we need to make sure that we are comparing data that have the **same type**. In @lst-bool, we are comparing the column `VEI` with an integer number. You can check the data type of a DataFrame using `df.dtypes`. \n",
+        "\n",
+        "Not all comparison operators work with all data type. For instance, you can test if a column contains a specific string using the `==` or `!=` operators, but the other won't work as they are *illogical*.\n",
+        ":::\n",
+        "\n",
+        "#### Logical operators {.unnumbered}\n",
+        "\n",
+        "But what if we want to create more complex filters based on different rules? We can use **logical operators** to combine several comparison operators. Going back to the example in @lst-basic-bool, @tbl-logical-operators illustrates the use of logical operators.\n",
+        "\n",
+        "| Operator | Meaning                 | Example                        | Result      |\n",
+        "|----------|-------------------------|--------------------------------|-------------|\n",
+        "| `&`      | Logical AND             | `(a > 1) & (b < 3)`            | `False`     |\n",
+        "| `|`      | Logical OR              | `(a == 1) | (b == 1)`           | `True`      |\n",
+        "| `~`      | Logical NOT             | `~(a == 1)`                    | `False`     |\n",
+        "\n",
+        ": Logical operators in pandas for combining boolean conditions. Use parentheses around each condition. {#tbl-logical-operators .striped }\n",
+        "\n",
+        "Let's gather all volcanoes that have a VEI of 3 and are in Indonesia:\n"
+      ],
+      "id": "615da2a8"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| lst-label: lst-logical-query\n",
+        "#| lst-cap: Complex filtering using logical operators\n",
+        "\n",
+        "mask = (df['VEI'] == 3) & (df['Country'] == 'Indonesia') # Create a mask - don't forget parentheses!\n",
+        "df.loc[mask] # Query the data"
+      ],
+      "id": "0698a25e",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "::: {.callout-note}\n",
+        "## Question\n",
+        "\n",
+        "How many volcanoes are either in Chile **or** in the USA?\n"
+      ],
+      "id": "9f985e95"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: false\n",
+        "mcq({\n",
+        "    '1': 0,\n",
+        "    '3': 0,\n",
+        "    '5': 1,\n",
+        "    '8': 0\n",
+        "})"
+      ],
+      "id": "1a1531b1",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "How many volcanoes are in the southern hemisphere **and** have a VEI≥4?\n"
+      ],
+      "id": "5c663096"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: false\n",
+        "mcq({\n",
+        "    '1': 0,\n",
+        "    '2': 1,\n",
+        "    '8': 0,\n",
+        "    '12': 0\n",
+        "})"
+      ],
+      "id": "352ed8f1",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "\n",
+        "\n",
+        "\n",
+        "### Rearranging data {.unnumbered}\n",
+        "\n",
+        "#### Sorting data {.unnumbered}\n",
+        "\n",
+        "The main function to sort data is `.sort_values` ([doc](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html)). It is necessary to review how *three arguments* can alter the function's behaviour:\n",
+        "\n",
+        "1. `by`: First argument (required) is the label of index/row used to sort the data. It is possible to sort by multiple columns by passing a list of values.\n",
+        "2. `axis`: Specifies whether sorting rows (`axis = 0` - in which case `by` is a column name) or sorting columns (`axis = 1`, in which case `by` is an index value). The documentation specifies `axis = 0`, which means that rows will be sorted if `axis` is not specified.\n",
+        "3. `ascending`: Using a *bool* (remember, this is a True/False behaviour), specifies if values are sorted in *ascending* (`ascending = True`, default behaviour is not specified) or *descending* (`ascending = False`) order.\n"
+      ],
+      "id": "54a8b513"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| lst-label: lst-sort\n",
+        "#| lst-cap: Basic sorting operations\n",
+        "#| eval: false\n",
+        "\n",
+        "df.sort_values('VEI') # Sort volcanoes by VEI in ascending number\n",
+        "df.sort_values('Date', ascending=False) # Sort volcanoes by eruption dates from recent to old\n",
+        "df.sort_values('Country') # .sort_values also work on strings to sort alphabetically\n",
+        "df.sort_values(['Latitude', 'Longitude']) # Sorting using multiple columns"
+      ],
+      "id": "d921345c",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "::: {.callout-note}\n",
+        "## Question\n",
+        "\n",
+        "After sorting the data in **descending order** by VEI and time, what are the three first volcanoes?\n"
+      ],
+      "id": "64bae8d3"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: false\n",
+        "mcq({\n",
+        "    'Nyiragongo, Ontake, Kīlauea': 0,\n",
+        "    'Kīlauea, Ontake, Nyiragongo': 0,\n",
+        "    'Pinatubo, El Chichon, St Helens': 1,\n",
+        "    'St Helens, El Chichon, Pinatubo': 0\n",
+        "})"
+      ],
+      "id": "6926d61d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "\n",
+        "\n",
+        "\n",
+        "### Operations {.unnumbered}\n",
+        "\n",
+        "Let's now see how we can manipulate and operate on data contained within our DataFrame. @tbl-op-arith and @tbl-op-str respectively illustrate arithmetic and string-based operators that can be applied on parts of the DataFrame.\n",
+        "\n",
+        "\n",
+        "#### Numeric operations {.unnumbered}\n",
+        "\n",
+        "@lst-op1 Illustrates how to half the VEI column save the results to a new column.\n"
+      ],
+      "id": "6b97166a"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| lst-label: lst-op1\n",
+        "#| lst-cap: Divide VEI by two and save the results to a new column.\n",
+        "\n",
+        "df['VEI_halved'] = df['VEI'] / 2"
+      ],
+      "id": "95735a12",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "::: {.callout-note}\n",
+        "## Exercise\n",
+        "\n",
+        "Longitudes are expressed as degrees E (i.e., from 0–180 ) and degrees W (i.e., from -180–0). Use operators to convert longitudes to degrees E (i.e., from 0–360) and store the results to a column called `Longitude_E`. To do so:\n",
+        "\n",
+        "1. Define a mask where Longitudes are negative using [logical operators]\n",
+        "2. Where the mask is `True` (i.e. where the longitude is negative), add the longitude (or subtract its absolute value) to 360\n",
+        "\n",
+        "\n",
+        "::: {.callout-tip collapse=\"true\"}\n",
+        "## Define a mask\n",
+        "Start by defining a mask\n",
+        "\n",
+        "::: {.callout-tip collapse=\"true\"}\n",
+        "## How?\n",
+        "\n",
+        "```python\n",
+        "mask = df['Longitude'] <= 0\n",
+        "```\n",
+        ":::\n",
+        "\n",
+        ":::\n",
+        "\n",
+        "::: {.callout-tip collapse=\"true\"}\n",
+        "## Select the values\n",
+        "Select the values using `.loc` and do the maths.\n",
+        "\n",
+        "::: {.callout-tip collapse=\"true\"}\n",
+        "## How?\n",
+        "\n",
+        "```python\n",
+        "360 + df.loc[mask, 'Longitude']\n",
+        "```\n",
+        ":::\n",
+        "\n",
+        ":::\n",
+        "\n",
+        "::: {.callout-tip collapse=\"true\"}\n",
+        "## Store back the values\n",
+        "\n",
+        "```python\n",
+        "df.loc[mask, 'Longitude_E'] = 360 + df.loc[mask, 'Longitude']\n",
+        "```\n",
+        ":::\n",
+        "\n",
+        "\n",
+        ":::\n",
+        "\n",
+        "| Operation      | Symbol | Example                | Description                                 |\n",
+        "|----------------|--------|------------------------|---------------------------------------------|\n",
+        "| Addition       | `+`    | `df['VEI'] + 1`        | Adds a value to each element                |\n",
+        "| Subtraction    | `-`    | `df['VEI'] - 1`        | Subtracts a value from each element         |\n",
+        "| Multiplication | `*`    | `df['VEI'] * 2`        | Multiplies each element by a value          |\n",
+        "| Division       | `/`    | `df['VEI'] / 2`        | Divides each element by a value             |\n",
+        "| Exponentiation | `**`   | `df['VEI'] ** 2`       | Raises each element to a power              |\n",
+        "| Modulo         | `%`    | `df['VEI'] % 2`        | Remainder after division for each element   |\n",
+        "\n",
+        ": Common arithmetic operations on numerical pandas columns. {#tbl-op-arith .striped   }\n",
+        "\n",
+        "\n",
+        "\n",
+        "#### String operations {.unnumbered}\n",
+        "\n",
+        "\n",
+        "\n",
+        "| Operation         | Example                                 | Description                                         |\n",
+        "|-------------------|-----------------------------------------|-----------------------------------------------------|\n",
+        "| Concatenation     | `df['Country'] + ' volcano'`            | Adds a string to each element                       |\n",
+        "| String length     | `df['Country'].str.len()`                  | Returns the length of each string                   |\n",
+        "| Uppercase         | `df['Country'].str.upper()`             | Converts each string to uppercase                   |\n",
+        "| Lowercase         | `df['Country'].str.lower()`             | Converts each string to lowercase                   |\n",
+        "| Replace           | `df['Country'].str.replace('USA', 'US')`| Replaces substrings in each string                  |\n",
+        "\n",
+        ": Common string operations on pandas columns. {#tbl-op-str .striped   }"
+      ],
+      "id": "ef415003"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/home/lionel/.local/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
