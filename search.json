@@ -1,0 +1,880 @@
+[
+  {
+    "objectID": "class1/day1-1_intro.html",
+    "href": "class1/day1-1_intro.html",
+    "title": "Overview",
+    "section": "",
+    "text": "We will start our data science journey by learning a bit about the most useful Python library for this class: Pandas. As a reminder, a library is a set of tools we load on top of Python that provides new functionalities for a specific problem or type of analysis. Here, Pandas provides functions for data manipulation and analysis, handling structured data like tables or time series and facilitating numerous tasks you might encounter as a scientist. These include:",
+    "crumbs": [
+      "Class 1",
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "class1/day1-1_intro.html#todays-objectives",
+    "href": "class1/day1-1_intro.html#todays-objectives",
+    "title": "Overview",
+    "section": "Today’s objectives",
+    "text": "Today’s objectives\nThe objective of this class is by no way to make you an expert in Pandas and data science. Rather, the objective is to take you through the most basic manipulations in order to build the confidence to keep on exploring the use of scientific coding and to include it into your research pipeline. The objectives of this module are to review:\n\nWhat is a Pandas DataFrame and its basic anatomy\nHow to load data in a DataFrame\nHow to access data (e.g., query by label/position)\nHow to filter data (e.g., comparison and logical operators)\nHow to rearrange data (e.g., sorting values)\nHow to operate on data (e.g., arithmetic and string operations)\n\nWe first start by reviewing the data structure behind Pandas, then we will move on to a coding exercise to make you familiar with some basic functionalities.",
+    "crumbs": [
+      "Class 1",
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "class1/day1-1_intro.html#slides",
+    "href": "class1/day1-1_intro.html#slides",
+    "title": "Overview",
+    "section": "Slides",
+    "text": "Slides\n\nIntroduction\n\n\n\n Download PDF\n Open in new window\n\n\n\nIntro to Pandas\n\n\n\n Download PDF\n Open in new window",
+    "crumbs": [
+      "Class 1",
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "class1/class1_overview.html",
+    "href": "class1/class1_overview.html",
+    "title": "Class 1",
+    "section": "",
+    "text": "Why scientific coding?\nFundamentals of scientific computing\nWhy Python?\nHow to use Python?"
+  },
+  {
+    "objectID": "class1/class1_overview.html#todays-objectives",
+    "href": "class1/class1_overview.html#todays-objectives",
+    "title": "Class 1",
+    "section": "",
+    "text": "Why scientific coding?\nFundamentals of scientific computing\nWhy Python?\nHow to use Python?"
+  },
+  {
+    "objectID": "class1/day1-5_filtering.html",
+    "href": "class1/day1-5_filtering.html",
+    "title": "Filtering data",
+    "section": "",
+    "text": "Now that we have reviewed how to access data, let’s now see how to filter data using boolean indexing. For this, we need to review what are comparison operators (Table 1).",
+    "crumbs": [
+      "Class 1",
+      "Filtering data"
+    ]
+  },
+  {
+    "objectID": "class1/day1-5_filtering.html#comparison-operators",
+    "href": "class1/day1-5_filtering.html#comparison-operators",
+    "title": "Filtering data",
+    "section": "Comparison operators",
+    "text": "Comparison operators\nLet’s assume the following variables (Listing 1):\n\n\n\n\nListing 1: Variables used for illustrating logical operations\n\n\na = 1\nb = 2\n\n\n\n\nApplying the comparison operators in Table 1 will produce a variable of type bool - which can take only two values: True or False.\n\n\n\nTable 1: Comparison operators in Python.\n\n\n\n\n\nOperator\nMeaning\nExample\nResult\n\n\n\n\n==\nEqual to\na == b\nFalse\n\n\n!=\nNot equal to\na != b\nTrue\n\n\n&gt;\nGreater than\na &gt; b\nFalse\n\n\n&lt;\nLess than\na &lt; b\nTrue\n\n\n&gt;=\nGreater than or equal\na &gt;= b\nFalse\n\n\n&lt;=\nLess than or equal\na &lt;= b\nTrue\n\n\n\n\n\n\nWe can apply comparison operators to DataFrame. Let’s say we want to test what rows have a VEI of 4:\n\n\n\n\nListing 2: Create a boolean mask\n\n\ndf['VEI'] == 4\n\n\n\n\nName\nSt. Helens          False\nPinatubo            False\nEl Chichón          False\nGalunggung           True\nNevado del Ruiz     False\nMerapi              False\nOntake              False\nSoufrière Hills     False\nEtna                False\nNyiragongo          False\nKīlauea             False\nAgung               False\nTavurvur            False\nSinabung            False\nTaal                 True\nLa Soufrière         True\nCalbuco              True\nSt. Augustine       False\nEyjafjallajökull     True\nCleveland           False\nName: VEI, dtype: bool\n\n\nWe can see that Galunggung, Taal, La Soufrière, Calbuco and Eyjafjallajökull return True to this condition. This is great, but what if we want to return the actual rows? We can use Listing 2 as a mask to then query the rows using .loc.\n\n\n\n\nListing 3: Query data using a boolean mask\n\n\nmask = df['VEI'] == 4 # Create a mask\ndf.loc[mask] # Query the data\n\n# Or, as a one line alternative:\ndf.loc[df['VEI'] == 4]\n\n\n\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nGalunggung\nIndonesia\n1982-04-05\n4\n-7.2567\n108.0771\n\n\nTaal\nPhilippines\n2020-01-12\n4\n14.0020\n120.9934\n\n\nLa Soufrière\nSaint Vincent\n2021-04-09\n4\n13.2833\n-61.3875\n\n\nCalbuco\nChile\n2015-04-22\n4\n-41.2972\n-72.6097\n\n\nEyjafjallajökull\nIceland\n2010-04-14\n4\n63.6333\n-19.6111\n\n\n\n\n\n\n\n\n\n\n\n\n\nQuestion\n\n\n\nWhat volcanoes have a VEI of 5?\n\n\nLa Soufrière and CalbucoMerapi and AgungNyiragongo and TaalSt. Helens and El Chichón\n\n\nHow many volcanoes are in the southern hemisphere? (hint: use the df.shape function to count them).\n\n\n124612\n\n\n\n\n\nString comparisons\nWe can also use comparison operators on columns containing strings (see Caution 1 for caveats). Listing 4 illustrates a basic string comparison using the = operator. Table 2 shows additional operators for strings.\n\n\n\n\nListing 4: Basic comparison operation on strings\n\n\ndf.loc[df['Country'] == 'Indonesia']\n\n\n\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nGalunggung\nIndonesia\n1982-04-05\n4\n-7.2567\n108.0771\n\n\nMerapi\nIndonesia\n2023-12-03\n2\n-7.5407\n110.4457\n\n\nAgung\nIndonesia\n2017-11-21\n3\n-8.3422\n115.5083\n\n\nSinabung\nIndonesia\n2023-02-13\n3\n3.1719\n98.3925\n\n\n\n\n\n\n\n\n\n\nTable 2: Common string comparison operations.\n\n\n\n\n\n\n\n\n\n\nOperation\nExample\nDescription\n\n\n\n\nContains\ndf['Name'].str.contains('Soufrière')\nChecks if each string contains a substring\n\n\nStartswith\ndf['Name'].str.startswith('E')\nChecks if each string starts with a substring\n\n\nEndswith\ndf['Name'].str.endswith('o')\nChecks if each string ends with a substring\n\n\n\n\n\n\n\n\n\n\n\n\nCaution 1: Compare what is comparable!\n\n\n\n\n\nWhen using the comparison operators in Table 1, we need to make sure that we are comparing data that have the same type. In Listing 2, we are comparing the column VEI with an integer number. You can check the data type of a DataFrame using df.dtypes.\nNot all comparison operators work with all data type. For instance, you can test if a column contains a specific string using the == or != operators, but the other won’t work as they are illogical.",
+    "crumbs": [
+      "Class 1",
+      "Filtering data"
+    ]
+  },
+  {
+    "objectID": "class1/day1-5_filtering.html#logical-operators",
+    "href": "class1/day1-5_filtering.html#logical-operators",
+    "title": "Filtering data",
+    "section": "Logical operators",
+    "text": "Logical operators\nBut what if we want to create more complex filters based on different rules? We can use logical operators to combine several comparison operators. Going back to the example in Listing 1, Table 3 illustrates the use of logical operators.\n\n\n\nTable 3: Logical operators in pandas for combining boolean conditions. Use parentheses around each condition.\n\n\n\n\n\n\n\n\n\n\n\nOperator\nMeaning\nExample\nResult\n\n\n\n\n&\nLogical AND\n(a &gt; 1) & (b &lt; 3)\nFalse\n\n\n|\nLogical OR\n(a == 1) | (b == 1)\nTrue\n\n\n~\nLogical NOT\n~(a == 1)\nFalse\n\n\n\n\n\n\nLet’s gather all volcanoes that have a VEI of 3 and are in Indonesia:\n\n\n\n\nListing 5: Complex filtering using logical operators\n\n\nmask = (df['VEI'] == 3) & (df['Country'] == 'Indonesia') # Create a mask - don't forget parentheses!\ndf.loc[mask] # Query the data\n\n\n\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nAgung\nIndonesia\n2017-11-21\n3\n-8.3422\n115.5083\n\n\nSinabung\nIndonesia\n2023-02-13\n3\n3.1719\n98.3925\n\n\n\n\n\n\n\n\n\n\n\n\n\nQuestion\n\n\n\nHow many volcanoes are either in Chile or in the USA?\n\n\n1358\n\n\nHow many volcanoes are in the southern hemisphere and have a VEI≥4?\n\n\n12812",
+    "crumbs": [
+      "Class 1",
+      "Filtering data"
+    ]
+  },
+  {
+    "objectID": "class1/day1-summary.html",
+    "href": "class1/day1-summary.html",
+    "title": "Summary",
+    "section": "",
+    "text": "Well done, you made it through the first day! This module has provided you with a first glimpse at Pandas and has hopefully illustrated how moving your research workflow to scientific programming could help you efficiently conduct more complex analyses. Below is a summary of each part of the class with associated cheat sheets for every part of the class.",
+    "crumbs": [
+      "Class 1",
+      "Summary"
+    ]
+  },
+  {
+    "objectID": "class1/day1-summary.html#intro-to-pandas",
+    "href": "class1/day1-summary.html#intro-to-pandas",
+    "title": "Summary",
+    "section": "Intro to Pandas",
+    "text": "Intro to Pandas\nThe Intro to Pandas page introduces the two main Pandas data structures:\n\nSeries: 1D labeled array (like a single column in Excel with labels).\nDataFrame: 2D labeled table (like an Excel spreadsheet with multiple columns).\n\nKey concepts:\n\nDataFrames have rows (entries) and columns (attributes).\nLabels (index for rows, column names for columns) are important for accessing data.\nIndexing in Python starts at 0.",
+    "crumbs": [
+      "Class 1",
+      "Summary"
+    ]
+  },
+  {
+    "objectID": "class1/day1-summary.html#data-structure",
+    "href": "class1/day1-summary.html#data-structure",
+    "title": "Summary",
+    "section": "Data structure",
+    "text": "Data structure\nThe Data structure page introduces basic data exploration in Python using pandas. It covers loading a CSV dataset, setting and resetting DataFrame indices, and using key functions to inspect and sort data. The page demonstrates how to load data, explore its structure, and sort it by various columns.\n\n\n\n\n\n\nData structure cheat sheet\n\n\n\n\n\n\npd.read_csv('file.csv', ...): Load data from a CSV file\ndf.head(): Show first 5 rows\ndf.tail(): Show last 5 rows\ndf.info(): Display DataFrame info (types, non-null counts, etc.)\ndf.shape: Get (rows, columns) tuple\ndf.index: Get row index\ndf.columns: Get column names\ndf.set_index('col'): Set a column as the DataFrame index\ndf.reset_index(): Reset index to default integer index\ndf.sort_values('col', ...): Sort rows by column(s)\ndf.sort_values(['col1', 'col2']): Sort by multiple columns\ndf.sort_values('col', ascending=False): Sort in descending order",
+    "crumbs": [
+      "Class 1",
+      "Summary"
+    ]
+  },
+  {
+    "objectID": "class1/day1-summary.html#querying-data",
+    "href": "class1/day1-summary.html#querying-data",
+    "title": "Summary",
+    "section": "Querying data",
+    "text": "Querying data\nThe Querying data page reviews how to query data from a pandas DataFrame using both label-based and position-based indexing. It covers:\n\nAccessing rows and columns by their labels with .loc\nAccessing rows and columns by their integer positions with .iloc\nUsing single and double brackets to control whether the result is a Series or DataFrame\nCombining row and column selection\nSlicing to get ranges of rows or columns\nMixing label-based and position-based indexing\n\n\n\n\n\n\n\nQuerying data cheat sheet\n\n\n\n\n\n\nRow by label: df.loc['Calbuco']\n\nRow(s) by label (DataFrame): df.loc[['Calbuco', 'Taal']]\n\nColumn by label: df['VEI'] or df[['VEI']]\n\nMultiple columns: df[['Country', 'VEI']]\n\nRow and column by label: df.loc[['Calbuco', 'Taal']][['Country', 'VEI']]\n\nRow by position: df.iloc[[0]]\n\nRange of rows by position: df.iloc[2:6]\n\nRange of rows and columns: df.iloc[0:5, 1:3]\n\nLast N rows: df.iloc[-5:]\n\nFirst N rows, specific columns: df.iloc[0:5][['Country', 'VEI']]\n\nTips:\n\nUse .loc for label-based indexing, .iloc for position-based.\nDouble brackets [[...]] return a DataFrame; single bracket [...] returns a Series.\nIndexing in Python starts at 0.",
+    "crumbs": [
+      "Class 1",
+      "Summary"
+    ]
+  },
+  {
+    "objectID": "class1/day1-summary.html#filtering-data",
+    "href": "class1/day1-summary.html#filtering-data",
+    "title": "Summary",
+    "section": "Filtering data",
+    "text": "Filtering data\nThe Filtering data page provides an introduction to filtering data in pandas using boolean indexing, comparison operators, and logical operators. It covers how to create boolean masks to filter DataFrame rows based on numeric or string conditions, and how to combine multiple conditions using logical operators. The page also provides examples and questions to reinforce these concepts.\n\n\n\n\n\n\nFiltering cheat sheet\n\n\n\n\n\nComparison Operators\n\n== : Equal to\n!= : Not equal to\n&gt; : Greater than\n&lt; : Less than\n&gt;= : Greater than or equal to\n&lt;= : Less than or equal to\n\nLogical Operators\n\n& : AND (both conditions must be True)\n| : OR (at least one condition is True)\n~ : NOT (negates the condition)\nNote: Use parentheses around each condition.\n\nFiltering DataFrames\n\nCreate a boolean mask: mask = df['column'] == value\nFilter rows: df.loc[mask]\n\nString Comparisons\n\nContains substring: df['col'].str.contains('text')\nStarts with: df['col'].str.startswith('text')\nEnds with: df['col'].str.endswith('text')\n\nOther Useful Functions\n\nCheck data types: df.dtypes\nCount rows: df.shape",
+    "crumbs": [
+      "Class 1",
+      "Summary"
+    ]
+  },
+  {
+    "objectID": "class1/day1-summary.html#operations",
+    "href": "class1/day1-summary.html#operations",
+    "title": "Summary",
+    "section": "Operations",
+    "text": "Operations\nThe Operations page provides an introduction to common data management, numeric, and string operations in pandas, focusing on manipulating DataFrame columns. It covers rounding, filling missing values, arithmetic operations, logical masking, and string manipulation, with practical examples and tips for handling missing data and transforming values.\n\n\n\n\n\n\nOperations cheat sheet\n\n\n\n\n\nData Management Functions\n\ndf['col'].round(n) — Round to n decimals\ndf['col'].apply(np.floor) — Floor values\ndf['col'].apply(np.ceil) — Ceil values\ndf['col'].abs() — Absolute value\ndf['col'].clip(lower, upper) — Limit values to range\ndf['col'].fillna(val) — Fill missing values\n\nNumeric Operations\n\ndf['col'] + x — Add\ndf['col'] - x — Subtract\ndf['col'] * x — Multiply\ndf['col'] / x — Divide\ndf['col'] ** x — Exponentiate\ndf['col'] % x — Modulo\n\nNumPy Extensions\n\nnp.power(df['col'], x) — Power\nnp.sqrt(df['col']) — Square root\nnp.log(df['col']) — Natural log\nnp.log10(df['col']) — Base-10 log\nnp.exp(df['col']) — Exponential\n\nString Operations\n\ndf['col'] + 'str' — Concatenate\ndf['col'].str.len() — String length\ndf['col'].str.upper() — Uppercase\ndf['col'].str.lower() — Lowercase\ndf['col'].str.replace(a, b) — Replace substring",
+    "crumbs": [
+      "Class 1",
+      "Summary"
+    ]
+  },
+  {
+    "objectID": "class1/day1-3_data_exploration.html",
+    "href": "class1/day1-3_data_exploration.html",
+    "title": "Data structure",
+    "section": "",
+    "text": "Let’s get our hands dirty and start coding. Create a new Jupyter notebook following this guide. You can copy fragments of the code, but make sure each code block is a different cell in you notebook. Also remember that you can add Markdown cells in between code cells, which are really useful to document your code.\nThe data we will use here is a csv file containing selected eruptions of the past 50 years. The first 5 rows of the data are illustrated in Table 1.",
+    "crumbs": [
+      "Class 1",
+      "Data structure"
+    ]
+  },
+  {
+    "objectID": "class1/day1-3_data_exploration.html#importing-the-library-and-the-data",
+    "href": "class1/day1-3_data_exploration.html#importing-the-library-and-the-data",
+    "title": "Data structure",
+    "section": "Importing the library and the data",
+    "text": "Importing the library and the data\nAs always, we start by importing the pandas library as pd.\n\nimport pandas as pd\n\nWe load the dataset using the pd.read_csv function into a variable called df (for DataFrame) (doc). Remember that functions can take different arguments, which are extra keywords you can pass to make the behaviour of the function more specific to your need. Here, we pass one arguments to the read_csv() function: parse_dates=['Date'] Specifies that the Date column should be treated as a date object.\n\n\n\n\n\nListing 1: Loading data from a csv file\n\n\ndf = pd.read_csv('data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data\ndf.head() # Show the first 5 rows\n\n\n\n\n\n\n\n\n\n\n\nName\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\n\n\n0\nSt. Helens\nUSA\n1980-05-18\n5\n46.1914\n-122.1956\n\n\n1\nPinatubo\nPhilippines\n1991-04-02\n6\n15.1501\n120.3465\n\n\n2\nEl Chichón\nMexico\n1982-03-28\n5\n17.3559\n-93.2233\n\n\n3\nGalunggung\nIndonesia\n1982-04-05\n4\n-7.2567\n108.0771\n\n\n4\nNevado del Ruiz\nColombia\n1985-11-13\n3\n4.8950\n-75.3220\n\n\n\n\n\n\n\n\nSetting up the index\nThe output of Listing 1 shows the first 5 rows in our DataFrame. As displayed here, the first column is the index - which is currently just integer numbers. That can be acceptable in some cases, but for the sake of the exercise we will choose one column to become the index - here Name.\nListing 2 Illustrates the use of two useful functions:\n\n.set_index(): Uses a column as the DataFrame’s index\n.reset_index(): Removes the column’s index back to a sequential numbering as in Listing 1.\n\n\n\n\n\nListing 2: Common functions to set the index of a DataFrame\n\n\ndf = df.set_index('VEI') # Set the 'VEI' column as an index\ndf = df.reset_index() # Shoots, I meant to set the 'Name' columns as an index\ndf = df.set_index('Name') # Here we go.\ndf.head()\n\n\n\n\n\n\n\n\n\n\n\nVEI\nCountry\nDate\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nSt. Helens\n5\nUSA\n1980-05-18\n46.1914\n-122.1956\n\n\nPinatubo\n6\nPhilippines\n1991-04-02\n15.1501\n120.3465\n\n\nEl Chichón\n5\nMexico\n1982-03-28\n17.3559\n-93.2233\n\n\nGalunggung\n4\nIndonesia\n1982-04-05\n-7.2567\n108.0771\n\n\nNevado del Ruiz\n3\nColombia\n1985-11-13\n4.8950\n-75.3220",
+    "crumbs": [
+      "Class 1",
+      "Data structure"
+    ]
+  },
+  {
+    "objectID": "class1/day1-3_data_exploration.html#basic-data-exploration",
+    "href": "class1/day1-3_data_exploration.html#basic-data-exploration",
+    "title": "Data structure",
+    "section": "Basic data exploration",
+    "text": "Basic data exploration\nLet’s now explore the structure of the dataset with the following functions:\n\n\n\nFunction\nDescription\n\n\n\n\ndf.head()\nPrints the first 5 rows of the DataFrame (doc)\n\n\ndf.tail()\nPrints the last 5 rows of the DataFrame (doc)\n\n\ndf.info()\nDisplays some info about the DataFrame, including the number of rows (entries) and columns (doc). Note the Dtype column: this is the type variable stored in each column including strings (object), integer (int64) and float (int64) numbers. See that the Date column is indeed stored as a datetime variable as requested above.\n\n\ndf.shape\nReturns a list containing the number of rows and columns of the DataFrame.\n\n\ndf.index\nReturns a list containing the index along the rows of the DataFrame.\n\n\ndf.columns\nReturns a list containing the index along the columns of the DataFrame.\n\n\n\n\n\n\n\n\n\nYour turn!\n\n\n\nTry these functions on df and get familiar with the output.",
+    "crumbs": [
+      "Class 1",
+      "Data structure"
+    ]
+  },
+  {
+    "objectID": "class1/day1-3_data_exploration.html#sorting-data",
+    "href": "class1/day1-3_data_exploration.html#sorting-data",
+    "title": "Data structure",
+    "section": "Sorting data",
+    "text": "Sorting data\nThe main function to sort data is .sort_values (doc). It is necessary to review how three arguments can alter the function’s behaviour:\n\nby: First argument (required) is the label of index/row used to sort the data. It is possible to sort by multiple columns by passing a list of values.\naxis: Specifies whether sorting rows (axis = 0 - in which case by is a column name) or sorting columns (axis = 1, in which case by is an index value). The documentation specifies axis = 0, which means that rows will be sorted if axis is not specified.\nascending: Using a bool (remember, this is a True/False behaviour), specifies if values are sorted in ascending (ascending = True, default behaviour is not specified) or descending (ascending = False) order.\n\n\n\n\n\nListing 3: Basic sorting operations\n\n\ndf.sort_values('VEI') # Sort volcanoes by VEI in ascending number\ndf.sort_values('Date', ascending=False) # Sort volcanoes by eruption dates from recent to old\ndf.sort_values('Country') # .sort_values also work on strings to sort alphabetically\ndf.sort_values(['Latitude', 'Longitude']) # Sorting using multiple columns\n\n\n\n\n\n\n\n\n\n\nQuestion\n\n\n\nAfter sorting the data in descending order by VEI and time, what are the three first volcanoes?\n\n\nNyiragongo, Ontake, KīlaueaKīlauea, Ontake, NyiragongoPinatubo, El Chichon, St HelensSt Helens, El Chichon, Pinatubo",
+    "crumbs": [
+      "Class 1",
+      "Data structure"
+    ]
+  },
+  {
+    "objectID": "ressources.html",
+    "href": "ressources.html",
+    "title": "ELSTE Data Science Master Course",
+    "section": "",
+    "text": "Statistics and Geodata Analysis using Python (SOGA-Py): A comprehensive course on data science using Python from the Freie Universität Berlin.\nOcean 215: Python Methods for Oceanography: Online video course by the School of Oceanography from the University of Washington. It provides a good introduction to Python and some more low-level concepts of scientific programming."
+  },
+  {
+    "objectID": "class1_overview.html",
+    "href": "class1_overview.html",
+    "title": "Class 1",
+    "section": "",
+    "text": "Why scientific coding?\nFundamentals of scientific computing\nWhy Python?\nHow to use Python?"
+  },
+  {
+    "objectID": "class1_overview.html#todays-objectives",
+    "href": "class1_overview.html#todays-objectives",
+    "title": "Class 1",
+    "section": "",
+    "text": "Why scientific coding?\nFundamentals of scientific computing\nWhy Python?\nHow to use Python?"
+  },
+  {
+    "objectID": "summary.html",
+    "href": "summary.html",
+    "title": "Summary",
+    "section": "",
+    "text": "Summary\nIn summary, this book has no content whatsoever."
+  },
+  {
+    "objectID": "slides/class1_pandas.html#background",
+    "href": "slides/class1_pandas.html#background",
+    "title": "Intro to Python and Pandas",
+    "section": "Background",
+    "text": "Background\n\n\n\n\n\n\nWe assume that you all followed Guy Simpson’s Python crash course\n\n\n\n\npandas: A package for data manipulation and analysis handling structured data\n\nReading/writing data from common formats (CSV, Excel, JSON, etc.)\nHandling missing data\nFiltering, sorting, reshaping and grouping data\nAggregating data (sum, mean, count, etc.)\nTime series support (date ranges, frequency conversions)\nStatistical operations"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#todays-objectives",
+    "href": "slides/class1_pandas.html#todays-objectives",
+    "title": "Intro to Python and Pandas",
+    "section": "Today’s objectives",
+    "text": "Today’s objectives\nUnderstand what is a pandas DataFrame and its basic anatomy\n\nHow to load data in a DataFrame\nHow to access data → query by label/position\nHow to filter data → comparison and logical operators\nHow to rearrange data → sorting values\nHow to operate on data → arithmetic and string operations"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#anatomy-of-a-dataframe",
+    "href": "slides/class1_pandas.html#anatomy-of-a-dataframe",
+    "title": "Intro to Python and Pandas",
+    "section": "Anatomy of a DataFrame",
+    "text": "Anatomy of a DataFrame\n\n\n\nSimilar to Excel → contains tabular data composed of rows and columns\n\n\n\n\nIn Excel:\n\nRows are accessed using numbers\nColumns are accessed using letters"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#anatomy-of-a-dataframe-1",
+    "href": "slides/class1_pandas.html#anatomy-of-a-dataframe-1",
+    "title": "Intro to Python and Pandas",
+    "section": "Anatomy of a DataFrame",
+    "text": "Anatomy of a DataFrame\n\n\n\nUnlike Excel, rows and columns can be labelled\n\nIndex refers to the label of the rows. In the index, values are usually unique - meaning that each entry has a different label.\nColumn refers to the label of - logically - the columns"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#the-dataset",
+    "href": "slides/class1_pandas.html#the-dataset",
+    "title": "Intro to Python and Pandas",
+    "section": "The dataset",
+    "text": "The dataset\nSynthetic dataset of selected volcanic eruptions → first 5 rows:\n\n\n\n\n\n\n\n\n\n\n\n\nName\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\n\n\nSt. Helens\nUSA\n1980-05-18\n5\n46.1914\n-122.196\n\n\nPinatubo\nPhilippines\n1991-04-02\n6\n15.1501\n120.347\n\n\nEl Chichón\nMexico\n1982-03-28\n5\n17.3559\n-93.2233\n\n\nGalunggung\nIndonesia\n1982-04-05\n4\n-7.2567\n108.077\n\n\nNevado del Ruiz\nColombia\n1985-11-13\n3\n4.895\n-75.322"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#volcanic-explosivity-index-vei",
+    "href": "slides/class1_pandas.html#volcanic-explosivity-index-vei",
+    "title": "Intro to Python and Pandas",
+    "section": "Volcanic explosivity index (VEI)",
+    "text": "Volcanic explosivity index (VEI)"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#setting-up-the-notebook",
+    "href": "slides/class1_pandas.html#setting-up-the-notebook",
+    "title": "Intro to Python and Pandas",
+    "section": "Setting up the notebook",
+    "text": "Setting up the notebook\n\nWe start by importing the pandas library\nWe import it under the name pd - which is faster to type!\n\n\n\n# Import the required packages\nimport pandas as pd"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#setting-up-the-notebook-1",
+    "href": "slides/class1_pandas.html#setting-up-the-notebook-1",
+    "title": "Intro to Python and Pandas",
+    "section": "Setting up the notebook",
+    "text": "Setting up the notebook\n\nWe then load the specified data with the pd.read_csv() function\nThis returns a DataFrame object in a variable named df\n\n\n\n# Import the required packages\nimport pandas as pd\n\n# Read the data\ndf = pd.read_csv('data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#setting-up-the-notebook-2",
+    "href": "slides/class1_pandas.html#setting-up-the-notebook-2",
+    "title": "Intro to Python and Pandas",
+    "section": "Setting up the notebook",
+    "text": "Setting up the notebook\n\nWe print some data for inspection with df.head()\nThe functions are now directly called from the DataFrame df object\n\n\n\n# Import the required packages\nimport pandas as pd\n\n# Read the data\ndf = pd.read_csv('../class1/data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data\n\n# Show the first 3 rows\ndf.head(3) \n\n\n\n\n\n\n\n\nName\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\n\n\n0\nSt. Helens\nUSA\n1980-05-18\n5\n46.1914\n-122.1956\n\n\n1\nPinatubo\nPhilippines\n1991-04-02\n6\n15.1501\n120.3465\n\n\n2\nEl Chichón\nMexico\n1982-03-28\n5\n17.3559\n-93.2233"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#setting-the-index",
+    "href": "slides/class1_pandas.html#setting-the-index",
+    "title": "Intro to Python and Pandas",
+    "section": "Setting the index",
+    "text": "Setting the index"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#setting-the-index-1",
+    "href": "slides/class1_pandas.html#setting-the-index-1",
+    "title": "Intro to Python and Pandas",
+    "section": "Setting the index",
+    "text": "Setting the index\n\n…for now, the index (→ the first column) is and integer\nThis might be acceptable in datasets where the label is not important\n\n\n\n# Show the first 3 rows\ndf.head(3) \n\n\n\n\n\n\n\n\nName\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\n\n\n0\nSt. Helens\nUSA\n1980-05-18\n5\n46.1914\n-122.1956\n\n\n1\nPinatubo\nPhilippines\n1991-04-02\n6\n15.1501\n120.3465\n\n\n2\nEl Chichón\nMexico\n1982-03-28\n5\n17.3559\n-93.2233"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#setting-the-index-2",
+    "href": "slides/class1_pandas.html#setting-the-index-2",
+    "title": "Intro to Python and Pandas",
+    "section": "Setting the index",
+    "text": "Setting the index\n\nHere we want to access the data using the name of the volcano\nWe set the index using set_index()\n\n\n\n# Set the index to the 'Name' column\ndf = df.set_index('Name')\n\n# Show the first 3 rows\ndf.head(3) \n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nSt. Helens\nUSA\n1980-05-18\n5\n46.1914\n-122.1956\n\n\nPinatubo\nPhilippines\n1991-04-02\n6\n15.1501\n120.3465\n\n\nEl Chichón\nMexico\n1982-03-28\n5\n17.3559\n-93.2233"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#exploring-data",
+    "href": "slides/class1_pandas.html#exploring-data",
+    "title": "Intro to Python and Pandas",
+    "section": "Exploring data",
+    "text": "Exploring data\n\nHere are some basic functions to review the structure of the dataset:\n\n\n\n\n\n\n\n\n\nFunction\nDescription\n\n\n\n\ndf.head()\nPrints the first 5 rows of the DataFrame.\n\n\ndf.tail()\nPrints the last 5 rows of the DataFrame.\n\n\ndf.info()\nDisplays some info about the DataFrame, including the number of rows (entries) and columns.\n\n\ndf.shape\nReturns a list containing the number of rows and columns of the DataFrame.\n\n\ndf.index\nReturns a list containing the index along the rows of the DataFrame.\n\n\ndf.columns\nReturns a list containing the index along the columns of the DataFrame."
+  },
+  {
+    "objectID": "slides/class1_pandas.html#sorting-data",
+    "href": "slides/class1_pandas.html#sorting-data",
+    "title": "Intro to Python and Pandas",
+    "section": "Sorting data",
+    "text": "Sorting data\n\nSorting numerical, datetime or strings using .sort_values\nImportance of documentation to understand arguments\n\n\ndf.sort_values('VEI').head() # Sort volcanoes by VEI in ascending number\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nNyiragongo\nDR Congo\n2021-05-22\n1\n-1.5200\n29.2500\n\n\nMerapi\nIndonesia\n2023-12-03\n2\n-7.5407\n110.4457\n\n\nOntake\nJapan\n2014-09-27\n2\n35.5149\n137.4781\n\n\nKīlauea\nUSA\n2018-05-03\n2\n19.4194\n-155.2811\n\n\nEtna\nItaly\n2021-03-16\n2\n37.7510\n15.0044"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#sorting-data-1",
+    "href": "slides/class1_pandas.html#sorting-data-1",
+    "title": "Intro to Python and Pandas",
+    "section": "Sorting data",
+    "text": "Sorting data\n\nSorting numerical, datetime or strings using .sort_values\nImportance of documentation to understand arguments\n\n\ndf.sort_values('VEI').head() # Sort volcanoes by VEI in ascending number\ndf.sort_values('Date', ascending=False).head() # Sort volcanoes by eruption dates from recent to old\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nMerapi\nIndonesia\n2023-12-03\n2\n-7.5407\n110.4457\n\n\nCleveland\nUSA\n2023-05-23\n3\n52.8250\n-169.9444\n\n\nSinabung\nIndonesia\n2023-02-13\n3\n3.1719\n98.3925\n\n\nNyiragongo\nDR Congo\n2021-05-22\n1\n-1.5200\n29.2500\n\n\nLa Soufrière\nSaint Vincent\n2021-04-09\n4\n13.2833\n-61.3875"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#sorting-data-2",
+    "href": "slides/class1_pandas.html#sorting-data-2",
+    "title": "Intro to Python and Pandas",
+    "section": "Sorting data",
+    "text": "Sorting data\n\nSorting numerical, datetime or strings using .sort_values\nImportance of documentation to understand arguments\n\n\ndf.sort_values('VEI').head() # Sort volcanoes by VEI in ascending number\ndf.sort_values('Date', ascending=False).head() # Sort volcanoes by eruption dates from recent to old\ndf.sort_values('Country').head() # Also works on strings to sort alphabetically\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nCalbuco\nChile\n2015-04-22\n4\n-41.2972\n-72.6097\n\n\nNevado del Ruiz\nColombia\n1985-11-13\n3\n4.8950\n-75.3220\n\n\nNyiragongo\nDR Congo\n2021-05-22\n1\n-1.5200\n29.2500\n\n\nEyjafjallajökull\nIceland\n2010-04-14\n4\n63.6333\n-19.6111\n\n\nGalunggung\nIndonesia\n1982-04-05\n4\n-7.2567\n108.0771"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#sorting-data-3",
+    "href": "slides/class1_pandas.html#sorting-data-3",
+    "title": "Intro to Python and Pandas",
+    "section": "Sorting data",
+    "text": "Sorting data\n\nSorting numerical, datetime or strings using .sort_values\nImportance of documentation to understand arguments\n\n\ndf.sort_values('VEI').head() # Sort volcanoes by VEI in ascending number\ndf.sort_values('Date', ascending=False).head() # Sort volcanoes by eruption dates from recent to old\ndf.sort_values('Country').head() # Also works on strings to sort alphabetically\ndf.sort_values(['Latitude', 'Longitude']).head() # Sorting using multiple columns\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nCalbuco\nChile\n2015-04-22\n4\n-41.2972\n-72.6097\n\n\nAgung\nIndonesia\n2017-11-21\n3\n-8.3422\n115.5083\n\n\nMerapi\nIndonesia\n2023-12-03\n2\n-7.5407\n110.4457\n\n\nGalunggung\nIndonesia\n1982-04-05\n4\n-7.2567\n108.0771\n\n\nTavurvur\nPapua New Guinea\n2014-08-29\n3\n-4.3494\n152.2847"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#accessing-data-in-a-dataframe",
+    "href": "slides/class1_pandas.html#accessing-data-in-a-dataframe",
+    "title": "Intro to Python and Pandas",
+    "section": "Accessing data in a DataFrame",
+    "text": "Accessing data in a DataFrame"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#accessing-data-in-a-dataframe-1",
+    "href": "slides/class1_pandas.html#accessing-data-in-a-dataframe-1",
+    "title": "Intro to Python and Pandas",
+    "section": "Accessing data in a DataFrame",
+    "text": "Accessing data in a DataFrame\nOption 1: label-based indexing\n\nUse the labels of index and columns to retrieve data\nFunction to use: df.loc"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#accessing-data-in-a-dataframe-2",
+    "href": "slides/class1_pandas.html#accessing-data-in-a-dataframe-2",
+    "title": "Intro to Python and Pandas",
+    "section": "Accessing data in a DataFrame",
+    "text": "Accessing data in a DataFrame\nOption 2: position-based indexing\n\nUse the positions of index and columns to retrieve data\nFunction to use: df.iloc"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#label-based-indexing-rows",
+    "href": "slides/class1_pandas.html#label-based-indexing-rows",
+    "title": "Intro to Python and Pandas",
+    "section": "Label-based indexing: Rows",
+    "text": "Label-based indexing: Rows\n\nQuery a row with .loc → Use square brackets [ ]\n\nQuery the row for which the index label is Calbuco\nReturns all columns\n\n\n\n\n\n\n\ndf.loc['Calbuco']\n\nCountry                    Chile\nDate         2015-04-22 00:00:00\nVEI                            4\nLatitude                -41.2972\nLongitude               -72.6097\nName: Calbuco, dtype: object\n\n\n→ Returns a pd.Series\n\n\n\n\n\n\ndf.loc[['Calbuco']]\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nCalbuco\nChile\n2015-04-22\n4\n-41.2972\n-72.6097\n\n\n\n\n\n\n\n→ Returns a pd.DataFrame"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#label-based-indexing-rows-1",
+    "href": "slides/class1_pandas.html#label-based-indexing-rows-1",
+    "title": "Intro to Python and Pandas",
+    "section": "Label-based indexing: Rows",
+    "text": "Label-based indexing: Rows\n\nQuery multiple rows with .loc\n\nQuery the rows for which the index labels are Calbuco or Taal\nReturns all columns\n\n\n\n\n\ndf.loc[['Calbuco', 'Taal']]\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nCalbuco\nChile\n2015-04-22\n4\n-41.2972\n-72.6097\n\n\nTaal\nPhilippines\n2020-01-12\n4\n14.0020\n120.9934"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#label-based-indexing-columns",
+    "href": "slides/class1_pandas.html#label-based-indexing-columns",
+    "title": "Intro to Python and Pandas",
+    "section": "Label-based indexing: Columns",
+    "text": "Label-based indexing: Columns\n\nQuery columns\n\nQuery the columns for which the column labels are Country or VEI\nReturns all rows\n\n\n\n\n\n\nOption 1: with .loc:\n\n\ndf.loc[:, ['Country', 'VEI']].head(3)\n\n\n\n\n\n\n\n\nCountry\nVEI\n\n\nName\n\n\n\n\n\n\nSt. Helens\nUSA\n5\n\n\nPinatubo\nPhilippines\n6\n\n\nEl Chichón\nMexico\n5\n\n\n\n\n\n\n\n\n\n\n\n\n\nOption 2: without .loc:\n\n\ndf[['Country', 'VEI']].head(3)\n\n\n\n\n\n\n\n\nCountry\nVEI\n\n\nName\n\n\n\n\n\n\nSt. Helens\nUSA\n5\n\n\nPinatubo\nPhilippines\n6\n\n\nEl Chichón\nMexico\n5"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#label-based-indexing-rows-and-columns",
+    "href": "slides/class1_pandas.html#label-based-indexing-rows-and-columns",
+    "title": "Intro to Python and Pandas",
+    "section": "Label-based indexing: Rows and Columns",
+    "text": "Label-based indexing: Rows and Columns\n\nAgain, choice on whether to use .loc to query columns\n\n\n\n\n\nOption 1: Columns are specified inside .loc:\n\n\ndf.loc[['Calbuco', 'Taal'], ['Country', 'VEI']].head(3)\n\n\n\n\n\n\n\n\nCountry\nVEI\n\n\nName\n\n\n\n\n\n\nCalbuco\nChile\n4\n\n\nTaal\nPhilippines\n4\n\n\n\n\n\n\n\n\n\n\n\n\n\nOption 2: Columns are specified outside .loc:\n\n\ndf.loc[['Calbuco', 'Taal']][['Country', 'VEI']].head(3)\n\n\n\n\n\n\n\n\nCountry\nVEI\n\n\nName\n\n\n\n\n\n\nCalbuco\nChile\n4\n\n\nTaal\nPhilippines\n4"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#position-based-indexing-rows",
+    "href": "slides/class1_pandas.html#position-based-indexing-rows",
+    "title": "Intro to Python and Pandas",
+    "section": "Position-based indexing: Rows",
+    "text": "Position-based indexing: Rows\n\nQuery a row with .iloc\n\nReturns all columns\n\n\n\n\n\n\n\nOne row (first row):\n\n\ndf.iloc[[0]]\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nSt. Helens\nUSA\n1980-05-18\n5\n46.1914\n-122.1956\n\n\n\n\n\n\n\n\n\n\n\n\n\nRange of rows: (rows 3-4):\n\n\ndf.iloc[2:4]\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nEl Chichón\nMexico\n1982-03-28\n5\n17.3559\n-93.2233\n\n\nGalunggung\nIndonesia\n1982-04-05\n4\n-7.2567\n108.0771"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#position-based-indexing-rows-1",
+    "href": "slides/class1_pandas.html#position-based-indexing-rows-1",
+    "title": "Intro to Python and Pandas",
+    "section": "Position-based indexing: Rows",
+    "text": "Position-based indexing: Rows\n\nQuery rows from the end:\nExample:\n\nGet the last 5 rows of the DataFrame:\n\n\n\ndf.iloc[-5:]\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nLa Soufrière\nSaint Vincent\n2021-04-09\n4\n13.2833\n-61.3875\n\n\nCalbuco\nChile\n2015-04-22\n4\n-41.2972\n-72.6097\n\n\nSt. Augustine\nUSA\n2006-03-27\n3\n57.8819\n-155.5611\n\n\nEyjafjallajökull\nIceland\n2010-04-14\n4\n63.6333\n-19.6111\n\n\nCleveland\nUSA\n2023-05-23\n3\n52.8250\n-169.9444"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#position-based-and-label-based-queries",
+    "href": "slides/class1_pandas.html#position-based-and-label-based-queries",
+    "title": "Intro to Python and Pandas",
+    "section": "Position-based and label-based queries",
+    "text": "Position-based and label-based queries\n\nMix position-based and label-based indexing:\n\nRows → labels\nColumns → positions\n\n\n\ndf.iloc[0:5][['Country', 'VEI']]\n\n\n\n\n\n\n\n\nCountry\nVEI\n\n\nName\n\n\n\n\n\n\nSt. Helens\nUSA\n5\n\n\nPinatubo\nPhilippines\n6\n\n\nEl Chichón\nMexico\n5\n\n\nGalunggung\nIndonesia\n4\n\n\nNevado del Ruiz\nColombia\n3"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#boolean-indexing",
+    "href": "slides/class1_pandas.html#boolean-indexing",
+    "title": "Intro to Python and Pandas",
+    "section": "Boolean indexing",
+    "text": "Boolean indexing\n\nFiltering data with boolean indexing\n\nReturns either True or False depending on whether the condition is satisfied\n\n\n\n\n\n\nExample:\n\n\n\na = 1\nb = 2\n\n\n\n\n\n\n\nComparison operators:\n\n\n\n\nOperator\nMeaning\nExample\nResult\n\n\n\n\n==\nEqual to\na == b\nFalse\n\n\n!=\nNot equal to\na != b\nTrue\n\n\n&gt;\nGreater than\na &gt; b\nFalse\n\n\n&lt;\nLess than\na &lt; b\nTrue\n\n\n&gt;=\nGreater than or equal\na &gt;= b\nFalse\n\n\n&lt;=\nLess than or equal\na &lt;= b\nTrue"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#boolean-indexing-example",
+    "href": "slides/class1_pandas.html#boolean-indexing-example",
+    "title": "Intro to Python and Pandas",
+    "section": "Boolean indexing: Example",
+    "text": "Boolean indexing: Example\n\nQuery all volcanoes where VEI == 4\n\n\n\ndf['VEI'] == 4\n\nName\nSt. Helens          False\nPinatubo            False\nEl Chichón          False\nGalunggung           True\nNevado del Ruiz     False\nMerapi              False\nOntake              False\nSoufrière Hills     False\nEtna                False\nNyiragongo          False\nKīlauea             False\nAgung               False\nTavurvur            False\nSinabung            False\nTaal                 True\nLa Soufrière         True\nCalbuco              True\nSt. Augustine       False\nEyjafjallajökull     True\nCleveland           False\nName: VEI, dtype: bool"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#boolean-indexing-example-1",
+    "href": "slides/class1_pandas.html#boolean-indexing-example-1",
+    "title": "Intro to Python and Pandas",
+    "section": "Boolean indexing: Example",
+    "text": "Boolean indexing: Example\n\nQuery all volcanoes where VEI == 4\n\n\n\ndf.loc[df['VEI'] == 4]\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nGalunggung\nIndonesia\n1982-04-05\n4\n-7.2567\n108.0771\n\n\nTaal\nPhilippines\n2020-01-12\n4\n14.0020\n120.9934\n\n\nLa Soufrière\nSaint Vincent\n2021-04-09\n4\n13.2833\n-61.3875\n\n\nCalbuco\nChile\n2015-04-22\n4\n-41.2972\n-72.6097\n\n\nEyjafjallajökull\nIceland\n2010-04-14\n4\n63.6333\n-19.6111"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#boolean-indexing-strings",
+    "href": "slides/class1_pandas.html#boolean-indexing-strings",
+    "title": "Intro to Python and Pandas",
+    "section": "Boolean indexing: Strings",
+    "text": "Boolean indexing: Strings\n\nFiltering also works with strings\n\nUse string comparison operations\n\n\n\n\nExample:\n\n\ndf.loc[df['Country'] == 'Indonesia']\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nGalunggung\nIndonesia\n1982-04-05\n4\n-7.2567\n108.0771\n\n\nMerapi\nIndonesia\n2023-12-03\n2\n-7.5407\n110.4457\n\n\nAgung\nIndonesia\n2017-11-21\n3\n-8.3422\n115.5083\n\n\nSinabung\nIndonesia\n2023-02-13\n3\n3.1719\n98.3925"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#boolean-indexing-strings-1",
+    "href": "slides/class1_pandas.html#boolean-indexing-strings-1",
+    "title": "Intro to Python and Pandas",
+    "section": "Boolean indexing: Strings",
+    "text": "Boolean indexing: Strings\n\nFiltering also works with strings\n\nUse string comparison operations\n\n\n\n\nString comparison operators: \n\n\n\n\n\n\n\n\n\nOperation\nExample\nDescription\n\n\n\n\ncontains\ndf['Name'].str.contains('Soufrière')\nChecks if each string contains a substring\n\n\nstartswith\ndf['Name'].str.startswith('E')\nChecks if each string starts with a substring\n\n\nendswith\ndf['Name'].str.endswith('o')\nChecks if each string ends with a substring"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#data-management-operations",
+    "href": "slides/class1_pandas.html#data-management-operations",
+    "title": "Intro to Python and Pandas",
+    "section": "Data management operations",
+    "text": "Data management operations\n\nCommon data management functions for pandas columns:\n\n\n\n\n\n\n\n\n\nOperation\nExample\nDescription\n\n\n\n\nRound\ndf['VEI'].round(1)\nRounds values to the specified number of decimals\n\n\nFloor\ndf['VEI'].apply(np.floor)\nRounds values down to the nearest integer\n\n\nCeil\ndf['VEI'].apply(np.ceil)\nRounds values up to the nearest integer\n\n\nAbsolute value\ndf['VEI'].abs()\nReturns the absolute value of each element\n\n\nFill missing\ndf['VEI'].fillna(0)\nReplaces missing values with a specified value\n\n\n\n\n\n\nRound the 'Latitude' to two decimals → make sure you store the output!\n\n\ndf['Latitude'] = df['Latitude'].round(2)"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#arithmetic-operations",
+    "href": "slides/class1_pandas.html#arithmetic-operations",
+    "title": "Intro to Python and Pandas",
+    "section": "Arithmetic operations",
+    "text": "Arithmetic operations\n\nArithmetic operations on parts of the DataFrame (→ columns) using native Python arithmetic operators\n\n\n\n\n\n\n\n\n\n\nOperation\nSymbol\nExample\nDescription\n\n\n\n\nAddition\n+\ndf['VEI'] + 1\nAdds a value to each element\n\n\nSubtraction\n-\ndf['VEI'] - 1\nSubtracts a value from each element\n\n\nMultiplication\n*\ndf['VEI'] * 2\nMultiplies each element by a value\n\n\nDivision\n/\ndf['VEI'] / 2\nDivides each element by a value\n\n\nExponentiation\n**\ndf['VEI'] ** 2\nRaises each element to a power\n\n\nModulo\n%\ndf['VEI'] % 2\nRemainder after division for each element\n\n\n\n\n\n\nDivide VEI by 2 and store results a new column (→ VEI_haved)\n\n\ndf['VEI_halved'] = df['VEI'] / 2"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#expanded-arithmetic-operations",
+    "href": "slides/class1_pandas.html#expanded-arithmetic-operations",
+    "title": "Intro to Python and Pandas",
+    "section": "Expanded arithmetic operations",
+    "text": "Expanded arithmetic operations\n\nThe range of arithmetic operations can be expanded using numpy\n\n\n\n\n\n\n\n\n\n\nOperation\nSymbol\nExample\nDescription\n\n\n\n\nExponentiation\nnp.power\nnp.power(df['VEI'], 2)\nElement-wise exponentiation\n\n\nSquare root\nnp.sqrt\nnp.sqrt(df['VEI'])\nElement-wise square root\n\n\nLogarithm (base e)\nnp.log\nnp.log(df['VEI'])\nElement-wise natural logarithm\n\n\nLogarithm (base 10)\nnp.log10\nnp.log10(df['VEI'])\nElement-wise base-10 logarithm\n\n\nExponential\nnp.exp\nnp.exp(df['VEI'])\nElement-wise exponential (e^x)\n\n\n\n\n\n\nDivide VEI by 2 and store results a new column (→ VEI_haved)\n\n\ndf['VEI_square'] = np.power(df['VEI'], 2)"
+  },
+  {
+    "objectID": "appendices/setup_vscode.html",
+    "href": "appendices/setup_vscode.html",
+    "title": "Setup VS Code",
+    "section": "",
+    "text": "This tutorial guides you through the installation and configuration of Visual Studio Code (VS Code) for Python development in the 0013 computer room at the University of Geneva.\n\n\n\nCreate a folder on your H:/ drive named data_science\nOpen VS Code\nClick File / Open Folder and choose the data_science folder (Figure 1)\nWhen asked, click to confirm your trust in the system\n\nThese steps will ensure that Python works and finds the files in this exact folder.\n\n\n\n\n\n\nFigure 1: Open VS Code and set the working folder\n\n\n\n\n\n\n\nType Ctrl + Shift + i (or Cmd + Shift + i on MacOS) to open the command palette\nType jupyter and select Create: New Jupyter Notebook (Figure 2)\n\n\n\n\n\n\n\nFigure 2: Create a new Jupyter Notebook\n\n\n\n\n\n\n\n\n\nCommand palette\n\n\n\nThe command palette is a key functionality of VS Code, learning to use it will speed up your workflow.\n\n\n\n\n\nThis step installs the Python extensions for VS Code.\n\nWhen asked, click the Install button and wait for it to finish (Figure 3)\n\n\n\n\n\n\n\n\nFigure 3: Create a new Jupyter Notebook\n\n\n\n\n\n\nJupyter Notebooks are one of the ways to run Python. This step installs all the required Jupyter stuff for VS Code.\n\nOn the top right corner of the notebook, locate and click on the Select kernel button Figure 4\nInstall the Jupyter notebook support extension (Figure 5)\n\n\n\n\n\n\n\nFigure 4: Browse for kernels\n\n\n\n\n\n\n\n\n\nFigure 5: Install the Jupyter notebook support extension\n\n\n\n\n\n\nSeveral versions of Python can be installed on a computer. In the computer room, these versions are controlled by an environment manager called anaconda. This step ensures that the Jupyter notebook will use the right Python version, i.e., the one installed using anaconda.\n\nOn the top right corner of the notebook, where the Select kernel button previously appeared, make sure you see base (Python 3.x.x) (Figure 6)\nIf you don’t, click on the button and search for the right one (i.e., there should be anaconda in the path)\n\n\n\n\n\n\n\nFigure 6: Select the right Python environment",
+    "crumbs": [
+      "Appendices",
+      "Setup VS Code"
+    ]
+  },
+  {
+    "objectID": "appendices/setup_vscode.html#open-vs-code",
+    "href": "appendices/setup_vscode.html#open-vs-code",
+    "title": "Setup VS Code",
+    "section": "",
+    "text": "Create a folder on your H:/ drive named data_science\nOpen VS Code\nClick File / Open Folder and choose the data_science folder (Figure 1)\nWhen asked, click to confirm your trust in the system\n\nThese steps will ensure that Python works and finds the files in this exact folder.\n\n\n\n\n\n\nFigure 1: Open VS Code and set the working folder",
+    "crumbs": [
+      "Appendices",
+      "Setup VS Code"
+    ]
+  },
+  {
+    "objectID": "appendices/setup_vscode.html#create-a-new-jupyter-notebook",
+    "href": "appendices/setup_vscode.html#create-a-new-jupyter-notebook",
+    "title": "Setup VS Code",
+    "section": "",
+    "text": "Type Ctrl + Shift + i (or Cmd + Shift + i on MacOS) to open the command palette\nType jupyter and select Create: New Jupyter Notebook (Figure 2)\n\n\n\n\n\n\n\nFigure 2: Create a new Jupyter Notebook\n\n\n\n\n\n\n\n\n\nCommand palette\n\n\n\nThe command palette is a key functionality of VS Code, learning to use it will speed up your workflow.",
+    "crumbs": [
+      "Appendices",
+      "Setup VS Code"
+    ]
+  },
+  {
+    "objectID": "appendices/setup_vscode.html#install-the-python-extensions",
+    "href": "appendices/setup_vscode.html#install-the-python-extensions",
+    "title": "Setup VS Code",
+    "section": "",
+    "text": "This step installs the Python extensions for VS Code.\n\nWhen asked, click the Install button and wait for it to finish (Figure 3)\n\n\n\n\n\n\n\n\nFigure 3: Create a new Jupyter Notebook",
+    "crumbs": [
+      "Appendices",
+      "Setup VS Code"
+    ]
+  },
+  {
+    "objectID": "appendices/setup_vscode.html#install-jupyter",
+    "href": "appendices/setup_vscode.html#install-jupyter",
+    "title": "Setup VS Code",
+    "section": "",
+    "text": "Jupyter Notebooks are one of the ways to run Python. This step installs all the required Jupyter stuff for VS Code.\n\nOn the top right corner of the notebook, locate and click on the Select kernel button Figure 4\nInstall the Jupyter notebook support extension (Figure 5)\n\n\n\n\n\n\n\nFigure 4: Browse for kernels\n\n\n\n\n\n\n\n\n\nFigure 5: Install the Jupyter notebook support extension",
+    "crumbs": [
+      "Appendices",
+      "Setup VS Code"
+    ]
+  },
+  {
+    "objectID": "appendices/setup_vscode.html#select-the-right-python",
+    "href": "appendices/setup_vscode.html#select-the-right-python",
+    "title": "Setup VS Code",
+    "section": "",
+    "text": "Several versions of Python can be installed on a computer. In the computer room, these versions are controlled by an environment manager called anaconda. This step ensures that the Jupyter notebook will use the right Python version, i.e., the one installed using anaconda.\n\nOn the top right corner of the notebook, where the Select kernel button previously appeared, make sure you see base (Python 3.x.x) (Figure 6)\nIf you don’t, click on the button and search for the right one (i.e., there should be anaconda in the path)\n\n\n\n\n\n\n\nFigure 6: Select the right Python environment",
+    "crumbs": [
+      "Appendices",
+      "Setup VS Code"
+    ]
+  },
+  {
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "Introduction",
+    "section": "",
+    "text": "Introduction\nThis is a book created from markdown and executable code.\nSee (knuth84?) for additional discussion of literate programming."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "ELSTE Data Science Master Course",
+    "section": "",
+    "text": "Hello and welcome to the website for the Fall part of the ELSTE data science class at the University of Geneva. The objective of this class is to introduce you to some tools - both technical (i.e., use of Python and dedicated packages) and theoretical (i.e., understanding of the statistical methods) - that will ideally increase your ability to explore and interpret the data you will generate or collect during your Master theses.\nThe course will rely on Python, which was selected because it is both free and general purpose. We assume that you are not completely stranger to Python, yet you haven’t gained yet the confidence to start using it for your data processing and analysis workflow. The primary objective of this class is to provide you with this confidence. It would be foolish to believe that this course will be enough to make you experts at it, but we hope it will provide you the necessary tools get you started.\nYou might also be already familiar with other free (e.g., R, Julia, Octave) or commercial (Matlab) scientific programming language. In this case, the course contains sufficient theoretical material to keep your interest high, and, depending how comfortable you are with your language of predilection, you might also want to use it rather than Python at your own risk.\nIn a nutshell, by the end of the course, you will ideally:\n\nBe familiar with the basic packages and functions in Python for exploring, analysing and visualising your data;\nUnderstand the theory for some of the most frequently used statistical analyses, thus opening the gate to statistical inference.\n\n\n\nThe course is composed of three 6-h sessions on Wednesday mornings from 9h - 12h from Oct 15 to Nov 19 2025. The tentative schedule is as follows:\n\n\n\nDate\nInstructor\nTopic\n\n\n\n\nOct 15, 2025\nSB\nIntroduction to Python, data manipulation\n\n\nOct 22, 2025\nSB\nExploratory data analysis, plotting\n\n\nOct 29, 2025\nSG\nBi-variate analyses\n\n\nNov 5, 2025\nSG\nRegressions\n\n\nNov 12, 2025\nSB/SG\nTBD\n\n\nNov 19, 2025\nSB/SG\nTBD\n\n\n\n\n\n\nThe class takes place in the computer lab in the Science III building (and not in the Maraîchers building!!) located on Boulevard D’Yvoy. Check out the map below to find the room.\n\n\n\n\n\nISIS login and password\nSetup VSCode on PCs of the computer lab\n\n\n\n\nThis course is openly available in the hope it can benefit others. The course material is published under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International licence.\nUnless specified, any code snippet and software is published under a GNU GPLv3 license.",
+    "crumbs": [
+      "ELSTE Data Science Master Course"
+    ]
+  },
+  {
+    "objectID": "index.html#practical-information",
+    "href": "index.html#practical-information",
+    "title": "ELSTE Data Science Master Course",
+    "section": "",
+    "text": "Hello and welcome to the website for the Fall part of the ELSTE data science class at the University of Geneva. The objective of this class is to introduce you to some tools - both technical (i.e., use of Python and dedicated packages) and theoretical (i.e., understanding of the statistical methods) - that will ideally increase your ability to explore and interpret the data you will generate or collect during your Master theses.\nThe course will rely on Python, which was selected because it is both free and general purpose. We assume that you are not completely stranger to Python, yet you haven’t gained yet the confidence to start using it for your data processing and analysis workflow. The primary objective of this class is to provide you with this confidence. It would be foolish to believe that this course will be enough to make you experts at it, but we hope it will provide you the necessary tools get you started.\nYou might also be already familiar with other free (e.g., R, Julia, Octave) or commercial (Matlab) scientific programming language. In this case, the course contains sufficient theoretical material to keep your interest high, and, depending how comfortable you are with your language of predilection, you might also want to use it rather than Python at your own risk.\nIn a nutshell, by the end of the course, you will ideally:\n\nBe familiar with the basic packages and functions in Python for exploring, analysing and visualising your data;\nUnderstand the theory for some of the most frequently used statistical analyses, thus opening the gate to statistical inference.\n\n\n\nThe course is composed of three 6-h sessions on Wednesday mornings from 9h - 12h from Oct 15 to Nov 19 2025. The tentative schedule is as follows:\n\n\n\nDate\nInstructor\nTopic\n\n\n\n\nOct 15, 2025\nSB\nIntroduction to Python, data manipulation\n\n\nOct 22, 2025\nSB\nExploratory data analysis, plotting\n\n\nOct 29, 2025\nSG\nBi-variate analyses\n\n\nNov 5, 2025\nSG\nRegressions\n\n\nNov 12, 2025\nSB/SG\nTBD\n\n\nNov 19, 2025\nSB/SG\nTBD\n\n\n\n\n\n\nThe class takes place in the computer lab in the Science III building (and not in the Maraîchers building!!) located on Boulevard D’Yvoy. Check out the map below to find the room.\n\n\n\n\n\nISIS login and password\nSetup VSCode on PCs of the computer lab\n\n\n\n\nThis course is openly available in the hope it can benefit others. The course material is published under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International licence.\nUnless specified, any code snippet and software is published under a GNU GPLv3 license.",
+    "crumbs": [
+      "ELSTE Data Science Master Course"
+    ]
+  },
+  {
+    "objectID": "slides/class1_intro.html#why-this-class",
+    "href": "slides/class1_intro.html#why-this-class",
+    "title": "ELSTE Data science",
+    "section": "Why this class?",
+    "text": "Why this class?\nData deluge: The big EO data landscape\n\n\nLandsat:\n\nDownload: 53 images/day (2001) - 220’000 images/day (2017)\n5 million images of the Earth surface → &gt; 5 PB\n\nESA Sentinel 1 & 2 → 4.6TB /daily!"
+  },
+  {
+    "objectID": "slides/class1_intro.html#why-this-class-1",
+    "href": "slides/class1_intro.html#why-this-class-1",
+    "title": "ELSTE Data science",
+    "section": "Why this class?",
+    "text": "Why this class?\n\n\nAs scientists, we are exposed to:\n\nIncreasing computational power/facilities\nIncreasing amount of data\n\n\nHow do we make sense of it all?\n\nScientific coding → gateway to scientific data analysis\nData science → extracting meaningful infomation and insights from data"
+  },
+  {
+    "objectID": "slides/class1_intro.html#what-is-data-science",
+    "href": "slides/class1_intro.html#what-is-data-science",
+    "title": "ELSTE Data science",
+    "section": "What is data science",
+    "text": "What is data science\nWikipedia\n\nData science is an interdisciplinary academic field that uses statistics, scientific computing, scientific methods, processing, scientific visualization, algorithms and systems to extract or extrapolate knowledge from […] data.\n\n\nNational Institutes of Standards and Technology\n\nThe field that combines domain expertise, programming skills, and knowledge of mathematics and statistics to extract meaningful insights from data."
+  },
+  {
+    "objectID": "slides/class1_intro.html#class-schedule",
+    "href": "slides/class1_intro.html#class-schedule",
+    "title": "ELSTE Data science",
+    "section": "Class schedule",
+    "text": "Class schedule\n\nFall part at UNIGE: 6 \\(\\times\\) 3-h long sessions\nAssistants: Simon Thivet, Filippo Salmaso, Lionel Voirol\nFormat: Theory, live coding and exercises\n\nOctober 15 and 22\n\nSeb → Intro to data science libraries for Python → Pandas, seaborn\n\nOctober 29 and November 5\n\nStéphane → Intro to statistical method for data inference\n\nNovember 12 and 19\n\nFlexible as a function of how we progress\nExam format to be defined"
+  },
+  {
+    "objectID": "slides/class1_intro.html#class-objectives",
+    "href": "slides/class1_intro.html#class-objectives",
+    "title": "ELSTE Data science",
+    "section": "Class objectives",
+    "text": "Class objectives\n\nScientific coding and stats often appear daunting\nTrue, there can be a steep learning curve\n\n\n\nObjectives\n\nNot to make you and expert developer / statistician but\n\nTo help you gain the confidence that you are totally capable of doing it\nTo make you realise that what you will get in terms of research capabilities is worth the effort!"
+  },
+  {
+    "objectID": "slides/class1_intro.html#get-involved",
+    "href": "slides/class1_intro.html#get-involved",
+    "title": "ELSTE Data science",
+    "section": "Get involved!!!",
+    "text": "Get involved!!!\nWe want this class to be useful for your research!\n\nTry to contextualise the course material to your research:\n\nDo you already have your own datasets you could bring to class?\nCan you use the course to formulate new research questions?\nDo you know any open-access datasets relevant to your fields?\n\nIf not, can you find some for the next weeks?"
+  },
+  {
+    "objectID": "slides/class1_intro.html#motivations",
+    "href": "slides/class1_intro.html#motivations",
+    "title": "ELSTE Data science",
+    "section": "Motivations",
+    "text": "Motivations\n\nExample: A common - but unnecessarily complicated - workflow of many specialised softwares\n\n\n\n\n\n\n%%{init: {\"theme\":\"dark\"}}%%\nflowchart LR\n    B[Data Collection]\n    B --&gt; C[Data Cleaning]\n    C --&gt; D[Analysis]\n    D --&gt; E[Visualisation]\n\n\n\n\n\n\n\n\nObjective: Integrate full research workflow in an environment supporting all tasks\n\n\n\n\n\n\nflowchart LR\n    B[Start]\n    B --&gt; C[\"&lt;img src='https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/community/logos/python-logo-only.png' width='20'&gt;\"]\n    C --&gt; D[End]"
+  },
+  {
+    "objectID": "slides/class1_intro.html#motivations-1",
+    "href": "slides/class1_intro.html#motivations-1",
+    "title": "ELSTE Data science",
+    "section": "Motivations",
+    "text": "Motivations\nMotivation 1: Automation\n\n\nCotopaxi volcano\n\nReconstructing eruption source parameters (ESP) from tephra deposits\n\nHow do different measurement methods influence ESP estimates?\n\n\n\n\n40 outcrops\n~10 samples per outcrop\n~7 measurement methods per sample"
+  },
+  {
+    "objectID": "slides/class1_intro.html#motivations-2",
+    "href": "slides/class1_intro.html#motivations-2",
+    "title": "ELSTE Data science",
+    "section": "Motivations",
+    "text": "Motivations\nMotivation 2: Data analysis\n\n\nExample 1: Exploit catalogues of big Earth Observation data\n\nRevisit big EO catalogues to infer new knowledge\n\nWhat controls the impact and recovery of vegetation following eruptions?"
+  },
+  {
+    "objectID": "slides/class1_intro.html#motivations-3",
+    "href": "slides/class1_intro.html#motivations-3",
+    "title": "ELSTE Data science",
+    "section": "Motivations",
+    "text": "Motivations\nMotivation 2: Data analysis\n\n\nExample 2: Streamline global geochemical analyses\n\nAccess global databases\n\ne.g., Georock database\n\nAutomatic dedicated analyses/plots\n\ne.g., TAS diagrams and classification using pyrolite"
+  },
+  {
+    "objectID": "slides/class1_intro.html#motivations-4",
+    "href": "slides/class1_intro.html#motivations-4",
+    "title": "ELSTE Data science",
+    "section": "Motivations",
+    "text": "Motivations\nMotivation 3: Visualisation\nExample 1: In volcanically-active regions, soil burial after explosive eruptions capture more carbon that they emit."
+  },
+  {
+    "objectID": "slides/class1_intro.html#motivations-5",
+    "href": "slides/class1_intro.html#motivations-5",
+    "title": "ELSTE Data science",
+    "section": "Motivations",
+    "text": "Motivations\nMotivation 3: Visualisation\nExample 2: In Small Island States, ≥90% of population and GDP is exposed to volcanic hazards."
+  },
+  {
+    "objectID": "slides/class1_intro.html#pythons-advantages-1",
+    "href": "slides/class1_intro.html#pythons-advantages-1",
+    "title": "ELSTE Data science",
+    "section": "Python’s advantages 1",
+    "text": "Python’s advantages 1\n\n\n\nFree\nOpen source\n\nNot dependent on any company\nLarge online community\n\nOld → stable (started in 1991)\nVery popular in science\nRelatively easy to learn\n\n\n\n\nInspired by the School of Oceanography at University of Washington"
+  },
+  {
+    "objectID": "slides/class1_intro.html#what-is-python",
+    "href": "slides/class1_intro.html#what-is-python",
+    "title": "ELSTE Data science",
+    "section": "What is Python",
+    "text": "What is Python\nHigh-level computing language\n\nCompiled → doesn’t directly speak to the computer, but is interpreted by another language\n\nUsually slower, but much, much easier to use!\n\n\nModular\n\nPython is composed of a core of functions complemented by wide ecosystem of specialized packages for specific tasks\n\nA function is a bit of code to perform a specific task\nA module is a collection of functions\nA package is composed by multiple modules"
+  },
+  {
+    "objectID": "slides/class1_intro.html#an-example-of-packages-modules-and-functions",
+    "href": "slides/class1_intro.html#an-example-of-packages-modules-and-functions",
+    "title": "ELSTE Data science",
+    "section": "An example of packages, modules and functions",
+    "text": "An example of packages, modules and functions\nIn the code below, we first load the necessary packages and libraries:\n\nmatplotlib is the main visualisation package used in Python\npyplot is a module of matplotlib that provides easy-to-use functions for plotting data\nfigure is a function of pyplot and is the main function to prepare a plot\n\n\n# Import the packages and modules\nfrom matplotlib import pyplot as plt \n# Set up a figure for plotting\nplt.figure(...)"
+  },
+  {
+    "objectID": "slides/class1_intro.html#how-to-use-python",
+    "href": "slides/class1_intro.html#how-to-use-python",
+    "title": "ELSTE Data science",
+    "section": "How to use Python",
+    "text": "How to use Python\n\n\nOption 1: Your own computer\n\nRequires some setup\nNo internet connection required\nSlow if computer is slow\nAll data stored on your own computer\n\n\n\n\n\n\n\nEnvironment manager!\n\n\nMake sure to install an environment manager → e.g. Miniconda\n\n\n\n\n\n\n\nOption 2: On the cloud → Google Collab\n\nNo setup required\nNo internet connection required\nDecent speed, free as long as Google says it is free\nAll data stored on your own computer"
+  },
+  {
+    "objectID": "slides/class1_intro.html#how-to-run-python",
+    "href": "slides/class1_intro.html#how-to-run-python",
+    "title": "ELSTE Data science",
+    "section": "How to run Python",
+    "text": "How to run Python\n3 main ways to run Python…\n\nRun Python .py scripts from the command line → deprecated\nRun blocks of code from within a Python .py script using ipykernel → similar behaviour to R/Matlab\nUse Jupyter Notebooks in .ipynb files\n\n\n…in two different environments\n\nDedicated software: VSCode, PyCharm, Spyder\nWeb browser: JupyterLab"
+  },
+  {
+    "objectID": "slides/class1_intro.html#get-started",
+    "href": "slides/class1_intro.html#get-started",
+    "title": "ELSTE Data science",
+    "section": "Get started",
+    "text": "Get started\n\nFollow the guide\nStart a new Jupyter Notebook"
+  },
+  {
+    "objectID": "demo_page.html",
+    "href": "demo_page.html",
+    "title": "Demo page",
+    "section": "",
+    "text": "ExerciseHintsSolution\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nConsider using the array() function from numpy.\nnp.array([[1,2], [3,4]])\n\n\n\n\nUse the array() function from numpy:\n1A = np.array([[1, 2, 3],\n              [4, 5, 6],\n              [7, 8, 9]])   \n\n1\n\nUse np.array()"
+  },
+  {
+    "objectID": "demo_page.html#exercise-interactive-code-with-hints-and-solution",
+    "href": "demo_page.html#exercise-interactive-code-with-hints-and-solution",
+    "title": "Demo page",
+    "section": "",
+    "text": "ExerciseHintsSolution\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nConsider using the array() function from numpy.\nnp.array([[1,2], [3,4]])\n\n\n\n\nUse the array() function from numpy:\n1A = np.array([[1, 2, 3],\n              [4, 5, 6],\n              [7, 8, 9]])   \n\n1\n\nUse np.array()"
+  },
+  {
+    "objectID": "demo_page.html#python-code-chunk",
+    "href": "demo_page.html#python-code-chunk",
+    "title": "Demo page",
+    "section": "Python code chunk",
+    "text": "Python code chunk\n\n1+1\n\n2"
+  },
+  {
+    "objectID": "demo_page.html#r-code-chunk",
+    "href": "demo_page.html#r-code-chunk",
+    "title": "Demo page",
+    "section": "R code chunk",
+    "text": "R code chunk\n\n1+1\n\n[1] 2"
+  },
+  {
+    "objectID": "demo_page.html#iframe",
+    "href": "demo_page.html#iframe",
+    "title": "Demo page",
+    "section": "Iframe",
+    "text": "Iframe"
+  },
+  {
+    "objectID": "demo_page.html#local-pdf-slides",
+    "href": "demo_page.html#local-pdf-slides",
+    "title": "Demo page",
+    "section": "Local pdf slides",
+    "text": "Local pdf slides"
+  },
+  {
+    "objectID": "demo_page.html#mcq",
+    "href": "demo_page.html#mcq",
+    "title": "Demo page",
+    "section": "MCQ",
+    "text": "MCQ"
+  },
+  {
+    "objectID": "demo_page.html#question-1",
+    "href": "demo_page.html#question-1",
+    "title": "Demo page",
+    "section": "Question 1",
+    "text": "Question 1\nHere is a question.\n\n \\(\\frac{1}{10}\\) \\(\\frac{3}{10}\\) \\(\\frac{2}{5}\\) \\(\\frac{52}{100}\\)\n\n\n\n\n\n\n\n\n❓ Hint\n\n\n: \n\n\n\n\n\n💡 Explanation\n\n\n:"
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "References",
+    "crumbs": [
+      "References"
+    ]
+  },
+  {
+    "objectID": "class1/pandas2.html#setting-up-the-exercise",
+    "href": "class1/pandas2.html#setting-up-the-exercise",
+    "title": "Data exploration",
+    "section": "Setting up the exercise",
+    "text": "Setting up the exercise\nWe start by importing libraries and the dataset.\n\n\n\n\nListing 1: caption\n\n\n# Load libraries\nimport pandas as pd # Import pandas\nimport matplotlib.pyplot as plt # Import the pyplot module from matplotlib\nimport seaborn as sns # Import seaborn\n\n# Import the dataset specifying which Excel sheet name to load the data from\ndf = pd.read_excel('../Data/Smith_glass_post_NYT_data.xlsx', sheet_name='Supp_traces')\n\n\n\n\nAs in the previous class, we load the dataset using Pandas. The dataset comes from Smith, Isaia, and Pearce (2011) and contains the chemical concentrations in volcanic tephra belonging to the recent activity (last 15 ky) of the Campi Flergrei Caldera (Italy). The dataset is contained in an Excel file that contains two sheets named 'Supp_majors' and 'Supp_traces'. In Listing 1, we use the sheet_name argument to the read_excel() (doc) function to specify that we want to load the sheet containing trace elements.\n\n\n\n\n\n\nGood reference book\n\n\n\nThe use of this dataset is inspired by the by the book Introduction to Python in Earth Science Data Analysis: From Descriptive Statistics to Machine Learning by Petrelli (2021).\n\n\n\nBasics of plotting in Python\nListing 1 also loads two libraries for plotting:\n\nMatplotlib is the library for plotting in Python. It allows for the finest and most comprehensive level of customisation, but it take some time to get used to. You can visit the gallery to get some inspiration.\nSeaborn is built on Matplotlib, but provides some higher-level functions to easily produce stats-oriented plots. It looks good by default, but finer customisation might be difficult and might result to using Matplotlib. Again, check out the gallery.\n\nHere again, the idea is not to make you expert in Matplotlib or Seaborn, but rather to provide you with the minimum knowledge for you to further explore this tools in the context of your research.\n\nComponents of a Figure\nLet’s start to look at the basic components of a Matplotlib figure. There are two “hosts” to any plot (Figure 1):\n\nA Figure represents the main canevas;\nAxes are contained within the figure and is where most of the plotting will occur.\n\nThe easiest way to define a figure is using the subplots() function (Listing 2). Note that the code returns two variables - fig and ax - which are the figure and the axes, respectively.\n\n\n\n\nListing 2: Define a figure and one axes.\n\n\nimport matplotlib.pyplot as plt\nfig, ax = plt.subplots()\n\n\n\n\n\n\n\n\n\n\nFigure 1: Main figure and axes of a Matplotlib figure\n\n\n\nMost additional components of a plot are controlled via the ax variable, which can be used to (Figure 2):\n\nPlot (e.g., line plot or scatter plots)\nSet labels (e.g., x-label, y-label, title)\nAdd various components (e.g., legend, grid)\n\n\n\n\n\n\n\nFigure 2: Basic components of a Matplotlib figure\n\n\n\n\n\n\n\n\n\nPlotting exercise\n\n\n\nListing 3 defines a figure and plots some data. Table 1 and Figure 2 illustrate some of the most frequently used functions for customising plots.\nUse these functions to customise Listing 3. Some hints:\n\nRemember that a function takes some arguments provided between parentheses (e.g., ax.title(argument)). Each function might accept different types of arguments.\nTitles and labels require a string, so remember to use \" \" or ' '.\nFor now, the legend does not require any argument, so you can leave the parentheses empty.\nSetting the grid requires one argument: do we want to show the grid (True) or not (False)\n\n\n\n\n\n\nTable 1: Some of the most frequently used plotting functions.\n\n\n\n\n\nFunction\nDescription\nArgument Type\nExample Argument\n\n\n\n\nax.set_title\nSets the title of the axes\nstr\n“My Plot Title”\n\n\nax.set_xlabel\nSets the label for the x-axis\nstr\n“X Axis Label”\n\n\nax.set_ylabel\nSets the label for the y-axis\nstr\n“Y Axis Label”\n\n\nax.legend\nDisplays the legend\nNone\nNone (default)\n\n\nax.grid\nShows grid lines\nbool\nTrue\n\n\n\n\n\n\n\n\n\n\nListing 3: Define a figure and one axes.\n\n\nimport matplotlib.pyplot as plt # Import matplotlib\n\n# Define some data\ndata1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\ndata2 = [7, 3, 9, 1, 5, 10, 8, 2, 6, 4]\n\n# Set the figure and the axes\nfig, ax = plt.subplots()\n\n# Plot the data\nax.plot(data1, data1, color='aqua', label='Line')\nax.scatter(data1, data2, color='purple', label='scatter')\n\n# Customise the plot - up to you!\n# - Add a title\n# - Add x and y labels\n# - Add a legend\n# - Add a grid\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPlotting with Seaborn\nLet’s now review the use of Seaborn. You might wonder why do we need another plotting library. Well, the topic of this module is data exploration, and this is exactly what Seaborn is designed for. In additions, Seaborn is designed to work with Pandas.\nOver the next steps of the exercise we will use various types of plots offered by Seaborn to explore our geochemical dataset. Listing 4 illustrates how to create a scatterplot of the Rubidium and Strontium values contained in our dataset df. Seaborn usually takes 4 arguments:\n\nax: The axes on which to plot the data\ndata: The DataFrame containing the data.\nx: The name of the column containing the values used along x\ny: The name of the column containing the values used along y\n\n\n\n\n\nListing 4: Basic plotting using Seaborn.\n\n\n# Define figure + axes\nfig, ax = plt.subplots()\n# Plot with seaborn (remember, we imported it as sns)\n# df is the geochemical dataset imported previously\nsns.scatterplot(ax=ax, data=df, x='Rb', y='Sr')\n\n\n\n\n\n\n\n\n\n\n\nShould you feel adventurous and check out the documentation of the scatterplot function, you would see that it is possible to use additional arguments to further customize the plot:\n\nhue: Name of the variable that will produce points with different colors.\nsize: Name of the variable that will produce points with different sizes.\n\n\n\n\n\n\n\nSeaborn exercise\n\n\n\nComplete Listing 4, but use:\n\nThe \"Epoch\" column to control points color.\nThe \"SiO2* (EMP)\" column to control points size.\n\nRemember, you can use df.columns to print a list of column names contained in the DataFrame."
+  },
+  {
+    "objectID": "class1/pandas2.html#descriptive-statistics",
+    "href": "class1/pandas2.html#descriptive-statistics",
+    "title": "Data exploration",
+    "section": "Descriptive statistics",
+    "text": "Descriptive statistics\n\nUnivariate statistics\nThe objective of descriptive statistics is to provide ways of capturing the properties of a given data set or sample. Using Pandas and Seaborn, we will review some metrics, tools, and strategies that can be used to summarize a dataset, providing us with a quantitative basis to talk about it and compare it to other datasets.\nBy univariate statistics, we focus on capturing the properties of single variables at the time. We are not yet concerned in characterising the relationships between two or more variables.\nLet’s focus on the Zircon concentration in Campi Flegrei’s geochemical dataset. Let’s start by simply visualising the dataset to get an understanding of what we will talk about. Figures below illustrate three different plot types:\n\nHistograms (sns.histplots()) show the number of times a specific Zr concentration occurs in our dataset (Listing 5).\nBox plots (sns.boxplot() - or box-and-whisker plot) show the distribution of quantitative data with some measure of dispersion. Note that they are useful to compare between variables (Listing 6).\nViolin plots (sns.violinplot()) are similar to box plots, but they approximate the underlying data distribution using some smoothing algorithm (i.e. kernel density estimation). Without going into too much detail, this provides a good first approximation of the distribution, but it can create some unrealistic artefacts (e.g., see the negative Sr concentrations in Listing 7).\n\n\nHistogramBox plotViolin plot\n\n\n\n\n\n\nListing 5: Visualising distributions using histograms.\n\n\nfig, ax = plt.subplots()\nsns.histplot(data=df, x='Zr')\nax.set_xlabel('Zr (ppm)');\nax.set_title('Zr distribution');\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPlotting several columns\n\n\n\nBox plots are useful to plot and compare more than one data. Listing 6 slightly adjusts how boxplot() is called to allow for that.\n\n\n\n\n\n\nListing 6: Visualising distributions using box-and-whisker plots.\n\n\nfig, ax = plt.subplots()\nsns.boxplot(data=df[['Zr', 'Sr']]) # We plot Zr and Sr together using a list\nax.set_ylabel('Concentration (ppm)');\nax.set_title('Zr and Sr distribution');\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nListing 7: Visualising distributions using violin plots.\n\n\nfig, ax = plt.subplots()\nsns.violinplot(data=df[['Zr', 'Sr']])\nax.set_xlabel('Concentration (ppm)');\nax.set_title('Zr and Sr distribution');\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBy looking at the Zr and St distributions from the figures above, we can intuitively understand the importance of describing three different parameters:\n\nThe location - or where is the central value(s) of the dataset;\nThe dispersion - or how spread out is the distribution of data compared to the central values;\nThe skewness - or how symmetrical is the distribution of data compared to the central values;\n\n\nLocation\n\nMean\nThe mean (or arithmetic mean - by opposition to geometric or harmonic means) is the sum of the values divided by the number of values (Equation 1):\n\\[\n\\bar{x} = \\frac{1}{n} \\sum_{i=1}^{n} x_i\n\\tag{1}\\]\nThe mean is meaningful to describe symmetric distributions without outliers, where:\n\nSymmetric means the number of items above the mean should be roughly the same as the number below;\nOutliers are extreme values.\n\nThe mean of a dataset can easily be computed with Pandas using the .mean() function (Listing 8). Note that we round the results to two significant digits using .round(2).\n\n\n\n\nListing 8: Compute the mean for two significant digits.\n\n\ndf['Zr'].mean().round(2)\n\n\n\n\n365.38\n\n\n\n\n\n\n\n\nQuestion\n\n\n\nWhat is the mean value for Strontium?\n\n\n365.38516.42219.38123.94\n\n\n\n\n\n\n\n\n\n\nDescriptive stats functions\n\n\n\nListing 8 shows how to compute the mean on one column, but the .mean() function - as well as most fuctions for descriptive stats - can be applied to entire DataFrames. For this, we need to understand a critical argument - axis.\n\naxis = 0 is usually the default, and computes the mean across all rows for each column(Listing 9)\naxis = 1 usually makes sense when rows are labelled, and computes the mean across all columns for each row(Listing 10)\n\n\n\n\n\nListing 9: Compute the mean across rows.\n\n\n# Create a subset of the df containing numerical data\ndf_sub = df[['Sc','Rb','Sr','Y','Zr','Nb','Cs']] \n# Compute the mean across all rows\ndf_sub.mean(axis=0).round(2).head()\n\n\n\n\nSc      0.20\nRb    343.82\nSr    516.42\nY      31.33\nZr    365.38\ndtype: float64\n\n\n\n\n\n\nListing 10: Compute the mean across columns.\n\n\n# Create a subset of the df containing numerical data\ndf_sub = df[['Sc','Rb','Sr','Y','Zr','Nb','Cs']] \n# Compute the mean across all columns\ndf_sub.mean(axis=1).round(2).head()\n\n\n\n\n0    198.32\n1    188.41\n2    188.48\n3    200.69\n4    198.42\ndtype: float64\n\n\n\n\n\n\nMedian\nThe median is the value at the exact middle of the dataset, meaning that just as many elements lie above the median as below it. There is no easy formula to compute the median, instead we need to conceptually (Listing 11):\n\nOrder all values in ascending order and plot them against a normalised number of observations (this is called an empirical cumulative density function - or ECDF);\nOn the x-axis, find the point dividing the dataset into two equal numbers of observations;\nRead the value on the y-axis that intersects the ECDF.\n\n\n\n\n\nListing 11: Graphical representation of the median.\n\n\nfig, ax = plt.subplots()\nsns.ecdfplot(data=df, y='Zr')\nax.plot([.5,.5], [0, df['Zr'].median()], color='orange', linestyle='--')\nax.plot([.5,0], [df['Zr'].median(), df['Zr'].median()], color='orange', linestyle='--')\nax.set_ylim([0,900])\n\n\n\n\n\n\n\n\n\n\n\nFortunately, we can also use the native Pandas .median function (Listing 12).\n\n\n\n\nListing 12: Compute the median for two significant digits.\n\n\ndf['Zr'].median().round(2)\n\n\n\n\n339.41\n\n\n\n\n\n\n\n\nQuestion\n\n\n\nWhat is the mean value for Cesium?\n\n\n36.3851.4223.9913.94\n\n\n\n\n\n\n\nSummary\nListing 13 illustrate the values of the mean and the median relative to the distribution shown in the histogram. There are a few things to keep in mind when choosing between mean and median to estimate the location of a dataset:\n\nIf a sample has a symmetrical distribution, then the mean and median are equal.\nIf the distribution of a sample is not symmetrical, the mean should not be used.\nThe mean is highly sensitive to outliers, whereas the median is not.\n\n\n\n\n\nListing 13: Compute the median for two significant digits.\n\n\nfig, ax = plt.subplots()\nsns.histplot(data=df, x='Zr')\nax.axvline(df['Zr'].mean(), color='darkorange', lw=3, label='Mean')\nax.axvline(df['Zr'].median(), color='darkviolet', lw=3, label='Median')\nax.legend()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDispersion\n\nRange\nThe first information we might want to get for a dataset is the range of values it covers, or range. For this, we need to get the minimum (df.min()) and maximum (df.max()) values, from which, when needed, the range can be calculated with Equation 2. It is however likely that the min/max functions will be more frequently used (Listing 14).\n\\[\n\\text{Range} = \\max(x) - \\min(x)\n\\tag{2}\\]\n\n\n\n\nListing 14: Compute the min and the max values of a column\n\n\ndf['Zr'].min()\ndf['Zr'].max()\n\n\n\n\n920.1744058431505\n\n\n\n\n\n\n\n\nQuestion\n\n\n\nWhat is the mean value for Cesium?\n\n\n10.46104.661045.5910455.91\n\n\n\n\n\n\nVariance and standard deviation\nThe variance and standard deviation are two key measures of dispersion that describe how spread out the values in a dataset are.\n\nStandard deviation (\\(\\sigma\\)) measures sum of squares differences between data points \\(x_i\\) and the mean \\(\\bar{x}\\): \\[\n  \\sigma = \\sqrt{\\frac{\\sum_{i=1}^{n} (x_i - \\bar{x})^2}{n-1} }\n  \\] where \\(x_i\\) are the data points, \\(\\bar{x}\\) is the mean, and \\(n\\) is the number of observations.\nVariance (\\(\\sigma^2\\)) is the square of the standard deviation: \\[\n  \\sigma^2 = \\frac{\\sum_{i=1}^{n} (x_i - \\bar{x})^2}{n-1}\n  \\]\n\nFor now we will consider that they roughly measure the same thing. The standard deviation is in the same units as the data, making it easier to interpret.\nRelation to the Gaussian distribution:\nFor a Gaussian (normal) distribution, about 68% of the data falls within one standard deviation of the mean, about 95% within two standard deviations, and about 99.7% within three standard deviations. Thus, variance and standard deviation are fundamental for describing the spread and probability intervals of normally distributed data.\nYou can compute these in pandas using .var() and .std():\n\n\n\nSkewness x\n\n\n\nBivariate statistics x\n\nCorrelation x"
+  },
+  {
+    "objectID": "class1/pandas1.html",
+    "href": "class1/pandas1.html",
+    "title": "Intro to Pandas",
+    "section": "",
+    "text": "We will start our data science journey by learning a bit about the most useful Python library for this class: Pandas. As a reminder, a library is a set of tools we load on top of Python that provides new functionalities for a specific problem or type of analysis. Here, Pandas provides functions for data manipulation and analysis, handling structured data like tables or time series and facilitating numerous tasks you might encounter as a scientist. These include:\n\nReading/writing data from various commonly-used formats (CSV, Excel, SQL, JSON, etc.)\nHandling missing data\nFiltering, sorting, reshaping and grouping data\nAggregating data (sum, mean, count, etc.)\nTime series support (date ranges, frequency conversions)\nStatistical operations\n\n\n\nThe objective of this class is by no way to make you an expert in Pandas and data science. Rather, the objective is to take you through the most basic manipulations in order to build the confidence to keep on exploring the use of scientific coding and to include it into your research pipeline. The objectives of this module are to review:\n\nWhat is a Pandas DataFrame and its basic anatomy\nHow to load data in a DataFrame\nHow to access data (e.g., query by label/position)\nHow to filter data (e.g., comparison and logical operators)\nHow to rearrange data (e.g., sorting values)\nHow to operate on data (e.g., arithmetic and string operations)\n\nWe first start by reviewing the data structure behind Pandas, then we will move on to a coding exercise to make you familiar with some basic functionalities."
+  },
+  {
+    "objectID": "class1/pandas1.html#introduction",
+    "href": "class1/pandas1.html#introduction",
+    "title": "Intro to Pandas",
+    "section": "",
+    "text": "We will start our data science journey by learning a bit about the most useful Python library for this class: Pandas. As a reminder, a library is a set of tools we load on top of Python that provides new functionalities for a specific problem or type of analysis. Here, Pandas provides functions for data manipulation and analysis, handling structured data like tables or time series and facilitating numerous tasks you might encounter as a scientist. These include:\n\nReading/writing data from various commonly-used formats (CSV, Excel, SQL, JSON, etc.)\nHandling missing data\nFiltering, sorting, reshaping and grouping data\nAggregating data (sum, mean, count, etc.)\nTime series support (date ranges, frequency conversions)\nStatistical operations\n\n\n\nThe objective of this class is by no way to make you an expert in Pandas and data science. Rather, the objective is to take you through the most basic manipulations in order to build the confidence to keep on exploring the use of scientific coding and to include it into your research pipeline. The objectives of this module are to review:\n\nWhat is a Pandas DataFrame and its basic anatomy\nHow to load data in a DataFrame\nHow to access data (e.g., query by label/position)\nHow to filter data (e.g., comparison and logical operators)\nHow to rearrange data (e.g., sorting values)\nHow to operate on data (e.g., arithmetic and string operations)\n\nWe first start by reviewing the data structure behind Pandas, then we will move on to a coding exercise to make you familiar with some basic functionalities."
+  },
+  {
+    "objectID": "class1/pandas1.html#pandas-data-structure",
+    "href": "class1/pandas1.html#pandas-data-structure",
+    "title": "Intro to Pandas",
+    "section": "Pandas data structure",
+    "text": "Pandas data structure\nPandas consists of two main types of data structures. Let’s make an analogy with Excel.\n\nSeries: A 1D labeled array. Think of a 2-columns Excel spreadsheet where the left column would contain a label (e.g., the time of a measurement) and the right column would contain a value (e.g., the actual value measured at the time specified in the label, let’s say the temperature of a river).\nDataFrame: A 2D labeled table. This is the same as an Excel spreadsheet that would contain more columns than a Series. You can think of having measurements of different variables contained in each column (e.g., the flow rate, the turbidity etc…).\n\nThe keyword here is labelled. In Excel, you might get a column using letters and rows using numbers. In Pandas, you can use the column name (e.g., water_temperature) or the row label (e.g., 2021-06-15 14:19:14).\n\n\n\n\n\n\nDataFrame\n\n\n\nThroughout this class we will focus on the use of DataFrames, not Series. Keep in mind that the behaviour between both is almost identical.\n\n\n\nAnatomy of a DataFrame\nFigure 1 shows the basic anatomy of a DataFrame that contains four rows and four columns). We already see some data structuring emerging:\n\nRows tend to represent entries, which can be:\n\nDifferent measurements at specific time steps\nDifferent samples collected at different place/times\netc.\n\nIn contrast, column represent attributes and store the properties of each entry:\n\nThe actual values of different measured parameters\nThe location and time of collected samples, along with associated analyses (e.g., geochemistry)\netc.\n\n\n\n\n\n\n\n\nFigure 1: Basic anatomy of a Pandas DataFrame.\n\n\n\nThe first row - i.e. the row containing the column labels - is not considered as an entry. This is because the top row of a dataframe is usually used as the label for the columns. Similarly, we might want to set the first column as a label for the rows (Figure 2). In a nutshell:\n\nIndex refers to the label of the rows. In the index, values are usually unique - meaning that each entry has a different label.\nColumn refers to the label of - logically - the columns\n\n\n\n\n\n\n\nFigure 2: Index and columns of a DataFrame.\n\n\n\n\n\n\n\n\n\nCaution 1: Indexing in Python\n\n\n\nRemember that in Python, indexing starts from 0 - so the first row or column has an index of 0."
+  },
+  {
+    "objectID": "class1/pandas1.html#coding-playground",
+    "href": "class1/pandas1.html#coding-playground",
+    "title": "Intro to Pandas",
+    "section": "Coding playground",
+    "text": "Coding playground\nLet’s get our hands dirty and start coding. Create a new Jupyter notebook following this guide. You can copy fragments of the code, but make sure each code block is a different cell in you notebook. Also remember that you can add Markdown cells in between code cells, which are really useful to document your code.\nThe data we will use here is a csv file containing selected eruptions of the past 50 years. The first 5 rows of the data are illustrated in Table 1.\n\n\n\nTable 1: First 5 rows of the dataset.\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\n\n\nSt. Helens\nUSA\n1980-05-18 00:00:00\n5\n46.1914\n-122.196\n\n\nPinatubo\nPhilippines\n1991-04-02 00:00:00\n6\n15.1501\n120.347\n\n\nEl Chichón\nMexico\n1982-03-28 00:00:00\n5\n17.3559\n-93.2233\n\n\nGalunggung\nIndonesia\n1982-04-05 00:00:00\n4\n-7.2567\n108.077\n\n\nNevado del Ruiz\nColombia\n1985-11-13 00:00:00\n3\n4.895\n-75.322\n\n\n\n\n\n\n\n\n\n\n\n\nWhat is the VEI?\n\n\n\n\n\nThe Volcanic Explosivity Index - or VEI - is a scale to measure the magnitude of explosive eruptions based on the volume of tephra ejected during an eruption. It is a logarithmic scale in base 10:\n\n\n\nTable 2: VEI scale with minimum and maximum erupted volume and approximate frequency.\n\n\n\n\n\nVEI\nMin Volume (km³)\nMax Volume (km³)\nApprox. Frequency\n\n\n\n\n0\n&lt;0.00001\n0.0001\nDaily\n\n\n1\n0.0001\n0.001\nWeekly\n\n\n2\n0.001\n0.01\nYearly\n\n\n3\n0.01\n0.1\nFew per year\n\n\n4\n0.1\n1\n~10 per decade\n\n\n5\n1\n10\n~1 per decade\n\n\n6\n10\n100\n~1 per century\n\n\n7\n100\n1000\n~1 per several centuries\n\n\n8\n&gt;1000\n-\n~1 per 10,000 years\n\n\n\n\n\n\n\n\n\n\nImporting the library and the data\nAs always, we start by importing the pandas library as pd.\n\nimport pandas as pd\n\nWe load the dataset using the pd.read_csv function into a variable called df (for DataFrame) (doc). Remember that functions can take different arguments, which are extra keywords you can pass to make the behaviour of the function more specific to your need. Here, we pass one arguments to the read_csv() function: parse_dates=['Date'] Specifies that the Date column should be treated as a date object.\n\n\n\n\n\nListing 1: Loading data from a csv file\n\n\ndf = pd.read_csv('data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data\ndf.head() # Show the first 5 rows\n\n\n\n\n\n\n\n\n\n\n\nName\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\n\n\n0\nSt. Helens\nUSA\n1980-05-18\n5\n46.1914\n-122.1956\n\n\n1\nPinatubo\nPhilippines\n1991-04-02\n6\n15.1501\n120.3465\n\n\n2\nEl Chichón\nMexico\n1982-03-28\n5\n17.3559\n-93.2233\n\n\n3\nGalunggung\nIndonesia\n1982-04-05\n4\n-7.2567\n108.0771\n\n\n4\nNevado del Ruiz\nColombia\n1985-11-13\n3\n4.8950\n-75.3220\n\n\n\n\n\n\n\n\nSetting up the index\nThe output of Listing 1 shows the first 5 rows in our DataFrame. As displayed in Figure 2, the first column is the index - which is currently just integer numbers. That can be acceptable in some cases, but for the sake of the exercise we will choose one column to become the index - here Name.\nListing 2 Illustrates the use of two useful functions:\n\n.set_index(): Uses a column as the DataFrame’s index\n.reset_index(): Removes the column’s index back to a sequential numbering as in Listing 1.\n\n\n\n\n\nListing 2: Common functions to set the index of a DataFrame\n\n\ndf = df.set_index('VEI') # Set the 'VEI' column as an index\ndf = df.reset_index() # Shoots, I meant to set the 'Name' columns as an index\ndf = df.set_index('Name') # Here we go.\ndf.head()\n\n\n\n\n\n\n\n\n\n\n\nVEI\nCountry\nDate\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nSt. Helens\n5\nUSA\n1980-05-18\n46.1914\n-122.1956\n\n\nPinatubo\n6\nPhilippines\n1991-04-02\n15.1501\n120.3465\n\n\nEl Chichón\n5\nMexico\n1982-03-28\n17.3559\n-93.2233\n\n\nGalunggung\n4\nIndonesia\n1982-04-05\n-7.2567\n108.0771\n\n\nNevado del Ruiz\n3\nColombia\n1985-11-13\n4.8950\n-75.3220\n\n\n\n\n\n\n\n\n\nBasic data exploration\nLet’s now explore the structure of the dataset with the following functions:\n\n\n\nFunction\nDescription\n\n\n\n\ndf.head()\nPrints the first 5 rows of the DataFrame (doc)\n\n\ndf.tail()\nPrints the last 5 rows of the DataFrame (doc)\n\n\ndf.info()\nDisplays some info about the DataFrame, including the number of rows (entries) and columns (doc). Note the Dtype column: this is the type variable stored in each column including strings (object), integer (int64) and float (int64) numbers. See that the Date column is indeed stored as a datetime variable as requested above.\n\n\ndf.shape\nReturns a list containing the number of rows and columns of the DataFrame.\n\n\ndf.index\nReturns a list containing the index along the rows of the DataFrame.\n\n\ndf.columns\nReturns a list containing the index along the columns of the DataFrame.\n\n\n\n\n\n\n\n\n\nYour turn!\n\n\n\nTry these functions on df and get familiar with the output.\n\n\n\n\n\nQuerying data\nLet’s now review how we can access data contained in the DataFrame. This process, known as indexing, consists in specifying a row or a column (or ranges of rows and columns) where the data is stored. In pandas, there are two different ways to do that:\n\nBy label: data is queried using the actual index/column name (e.g., the VEI column in the DataFrame above)\nBy location: data is queried using the column location (e.g., the 3rd row)\n\n\nLabel-based indexing\n\n\n\n\n\n\nFigure 3: Label-based queries using .loc.\n\n\n\n\nQuerying rows\nWhen we know the exact label of the row or the column, we can use the .loc function to query the DataFrame (Figure 3). Let’s start by querying specific rows. Listing 2 has defined the Name column as the index (i.e., row label), which means that we can simply pass the name of the volcano.\n\n# Get the row for \"Calbuco\" volcano\ndf.loc['Calbuco']\n\nVEI                            4\nCountry                    Chile\nDate         2015-04-22 00:00:00\nLatitude                -41.2972\nLongitude               -72.6097\nName: Calbuco, dtype: object\n\n\nNote that the result is a Series (i.e., a 1-dimensional DataFrame where the columns become the index), not a DataFrame. If we want to keep it as a DataFrame, we can use double brackets. Double brackets can also be used to query multiple rows.\n\ndf.loc[['Calbuco']] # Query one row and return it as a DataFrame\ndf.loc[['Calbuco', 'Taal']] # Query multiple rows\n\n\n\n\n\n\n\n\nVEI\nCountry\nDate\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nCalbuco\n4\nChile\n2015-04-22\n-41.2972\n-72.6097\n\n\nTaal\n4\nPhilippines\n2020-01-12\n14.0020\n120.9934\n\n\n\n\n\n\n\n\n\n\n\n\n\nQuestion\n\n\n\nWhat is the VEI recorded for Etna volcano?\n\n\n12345\n\n\nWhat is the eruption date for Taal volcano?\n\n\n1980-05-18    1991-04-022020-01-121997-06-252023-02-13\n\n\n\n\n\n\n\n\n\n\nDouble brackets\n\n\n\nIn general, double brackets [[ ]] will return a DataFrame and not a Series. We will dominantly use this in the following examples.\n\n\n\n\nQuerying columns\nLet’s now query specific columns. For example, querying the VEI column can be achieved in different ways. The simplest is to use the column name directly. We can also query multiple columns using double brackets\n\ndf[['VEI']] # Get the VEI column\ndf[['Country', 'VEI']] # Query multiple columns\n\n\n\n\n\n\n\n\nCountry\nVEI\n\n\nName\n\n\n\n\n\n\nSt. Helens\nUSA\n5\n\n\nPinatubo\nPhilippines\n6\n\n\nEl Chichón\nMexico\n5\n\n\nGalunggung\nIndonesia\n4\n\n\nNevado del Ruiz\nColombia\n3\n\n\nMerapi\nIndonesia\n2\n\n\nOntake\nJapan\n2\n\n\nSoufrière Hills\nMontserrat\n3\n\n\nEtna\nItaly\n2\n\n\nNyiragongo\nDR Congo\n1\n\n\nKīlauea\nUSA\n2\n\n\nAgung\nIndonesia\n3\n\n\nTavurvur\nPapua New Guinea\n3\n\n\nSinabung\nIndonesia\n3\n\n\nTaal\nPhilippines\n4\n\n\nLa Soufrière\nSaint Vincent\n4\n\n\nCalbuco\nChile\n4\n\n\nSt. Augustine\nUSA\n3\n\n\nEyjafjallajökull\nIceland\n4\n\n\nCleveland\nUSA\n3\n\n\n\n\n\n\n\nNote that until now, we have only retrieved either rows or columns (Figure 3). We can also retrieve specific values by specifying both the row and the column.\n\ndf.loc[['Calbuco', 'Taal']][['Country', 'VEI']]\n\n\n\n\n\n\n\n\nCountry\nVEI\n\n\nName\n\n\n\n\n\n\nCalbuco\nChile\n4\n\n\nTaal\nPhilippines\n4\n\n\n\n\n\n\n\n\n\n\nPosition-based indexing\n\n\n\n\n\n\nFigure 4: Position-based queries using .iloc.\n\n\n\nSome situations require querying data by location instead of label - let’s say for instance we need to retrieve rows 10-20. This is done using the .iloc function (instead of the .loc function previously used; Figure 4). Remember that Python uses zero-based indexing (Caution 1), meaning that the first element is at position 0, the second at position 1, and so on.\nThe next example queries the first row - using again double brackets to return a DataFrame.\n\ndf.iloc[[0]]\n\n\n\n\n\n\n\n\nVEI\nCountry\nDate\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nSt. Helens\n5\nUSA\n1980-05-18\n46.1914\n-122.1956\n\n\n\n\n\n\n\n\nGet ranges of rows\nWe can get a range of rows using what is called slicing. This is done using the colon (:) operator. The next example queries rows 3 to 6 of the DataFrame. Note that the end index is exclusive, meaning that the element at the end index is not included in the result.\n\ndf.iloc[2:6]\n\n\n\n\n\n\n\n\nVEI\nCountry\nDate\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nEl Chichón\n5\nMexico\n1982-03-28\n17.3559\n-93.2233\n\n\nGalunggung\n4\nIndonesia\n1982-04-05\n-7.2567\n108.0771\n\n\nNevado del Ruiz\n3\nColombia\n1985-11-13\n4.8950\n-75.3220\n\n\nMerapi\n2\nIndonesia\n2023-12-03\n-7.5407\n110.4457\n\n\n\n\n\n\n\nTo get rows 3 to 6 and columns 2-3:\n\ndf.iloc[0:5, 1:3]\n\n\n\n\n\n\n\n\nCountry\nDate\n\n\nName\n\n\n\n\n\n\nSt. Helens\nUSA\n1980-05-18\n\n\nPinatubo\nPhilippines\n1991-04-02\n\n\nEl Chichón\nMexico\n1982-03-28\n\n\nGalunggung\nIndonesia\n1982-04-05\n\n\nNevado del Ruiz\nColombia\n1985-11-13\n\n\n\n\n\n\n\n\n\nCount rows from the last\nTo get the last 5 rows of the DataFrame:\n\ndf.iloc[-5:]\n\n\n\n\n\n\n\n\nVEI\nCountry\nDate\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nLa Soufrière\n4\nSaint Vincent\n2021-04-09\n13.2833\n-61.3875\n\n\nCalbuco\n4\nChile\n2015-04-22\n-41.2972\n-72.6097\n\n\nSt. Augustine\n3\nUSA\n2006-03-27\n57.8819\n-155.5611\n\n\nEyjafjallajökull\n4\nIceland\n2010-04-14\n63.6333\n-19.6111\n\n\nCleveland\n3\nUSA\n2023-05-23\n52.8250\n-169.9444\n\n\n\n\n\n\n\n\n\nCombining position-based and label-based queries\nBy experience, position-based queries is more used on rows than columns. For instance, we might want to access the first 10 rows because we don’t know their associated labels, yet it is less likely that we ignore their attributes. It is possible mix label-based and position-based indexing. For example, to get the first 5 rows and the Country and VEI columns:\n\ndf.iloc[0:5][['Country', 'VEI']]\n\n\n\n\n\n\n\n\nCountry\nVEI\n\n\nName\n\n\n\n\n\n\nSt. Helens\nUSA\n5\n\n\nPinatubo\nPhilippines\n6\n\n\nEl Chichón\nMexico\n5\n\n\nGalunggung\nIndonesia\n4\n\n\nNevado del Ruiz\nColombia\n3\n\n\n\n\n\n\n\n\n\n\n\nFiltering data\n\nComparison operators\nNow that we have reviewed how to access data, let’s now see how to filter data using boolean indexing. For this, we need to review what are comparison operators (Table 3). Let’s assume the following variables:\n\n\n\n\nListing 3: Variables used for illustrating logical operations\n\n\na = 1\nb = 2\n\n\n\n\nApplying the comparison operators in Table 3 will produce a variable of type bool - which can take only two values: True or False.\n\n\n\nTable 3: Comparison operators in Python.\n\n\n\n\n\nOperator\nMeaning\nExample\nResult\n\n\n\n\n==\nEqual to\na == b\nFalse\n\n\n!=\nNot equal to\na != b\nTrue\n\n\n&gt;\nGreater than\na &gt; b\nFalse\n\n\n&lt;\nLess than\na &lt; b\nTrue\n\n\n&gt;=\nGreater than or equal\na &gt;= b\nFalse\n\n\n&lt;=\nLess than or equal\na &lt;= b\nTrue\n\n\n\n\n\n\nWe can apply comparison operators to DataFrame. Let’s say we want to test what rows have a VEI of 4:\n\n\n\n\nListing 4: Create a boolean mask\n\n\ndf['VEI'] == 4\n\n\n\n\nName\nSt. Helens          False\nPinatubo            False\nEl Chichón          False\nGalunggung           True\nNevado del Ruiz     False\nMerapi              False\nOntake              False\nSoufrière Hills     False\nEtna                False\nNyiragongo          False\nKīlauea             False\nAgung               False\nTavurvur            False\nSinabung            False\nTaal                 True\nLa Soufrière         True\nCalbuco              True\nSt. Augustine       False\nEyjafjallajökull     True\nCleveland           False\nName: VEI, dtype: bool\n\n\nWe can see that Galunggung, Taal, La Soufrière, Calbuco and Eyjafjallajökull return True to this condition. This is great, but what if we want to return the actual rows? We can use Listing 4 as a mask to then query the rows using .loc.\n\n\n\n\nListing 5: Query data using a boolean mask\n\n\nmask = df['VEI'] == 4 # Create a mask\ndf.loc[mask] # Query the data\n\n# Or, as a one line alternative:\ndf.loc[df['VEI'] == 4]\n\n\n\n\n\n\n\n\n\n\n\nVEI\nCountry\nDate\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nGalunggung\n4\nIndonesia\n1982-04-05\n-7.2567\n108.0771\n\n\nTaal\n4\nPhilippines\n2020-01-12\n14.0020\n120.9934\n\n\nLa Soufrière\n4\nSaint Vincent\n2021-04-09\n13.2833\n-61.3875\n\n\nCalbuco\n4\nChile\n2015-04-22\n-41.2972\n-72.6097\n\n\nEyjafjallajökull\n4\nIceland\n2010-04-14\n63.6333\n-19.6111\n\n\n\n\n\n\n\n\n\n\n\n\n\nQuestion\n\n\n\nWhat volcanoes have a VEI of 5?\n\n\nLa Soufrière and CalbucoMerapi and AgungNyiragongo and TaalSt. Helens and El Chichón\n\n\nHow many volcanoes are in the southern hemisphere? (hint: use the df.shape function to count them).\n\n\n124612\n\n\n\n\n\nString comparisons\nWe can also use comparison operators on columns containing strings (see Caution 2 for caveats). Listing 6 illustrates a basic string comparison using the = operator. Table 4 shows additional operators for strings.\n\n\n\n\nListing 6: Basic comparison operation on strings\n\n\ndf.loc[df['Country'] == 'Indonesia']\n\n\n\n\n\n\n\n\n\n\n\nVEI\nCountry\nDate\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nGalunggung\n4\nIndonesia\n1982-04-05\n-7.2567\n108.0771\n\n\nMerapi\n2\nIndonesia\n2023-12-03\n-7.5407\n110.4457\n\n\nAgung\n3\nIndonesia\n2017-11-21\n-8.3422\n115.5083\n\n\nSinabung\n3\nIndonesia\n2023-02-13\n3.1719\n98.3925\n\n\n\n\n\n\n\n\n\n\nTable 4: Common string comparison operations.\n\n\n\n\n\n\n\n\n\n\nOperation\nExample\nDescription\n\n\n\n\ncontains\ndf['Name'].str.contains('Soufrière')\nChecks if each string contains a substring\n\n\nstartswith\ndf['Name'].str.startswith('E')\nChecks if each string starts with a substring\n\n\nendswith\ndf['Name'].str.endswith('o')\nChecks if each string ends with a substring\n\n\n\n\n\n\n\n\n\n\n\n\nCaution 2: Compare what is comparable!\n\n\n\n\n\nWhen using the comparison operators in Table 3, we need to make sure that we are comparing data that have the same type. In Listing 4, we are comparing the column VEI with an integer number. You can check the data type of a DataFrame using df.dtypes.\nNot all comparison operators work with all data type. For instance, you can test if a column contains a specific string using the == or != operators, but the other won’t work as they are illogical.\n\n\n\n\n\n\nLogical operators\nBut what if we want to create more complex filters based on different rules? We can use logical operators to combine several comparison operators. Going back to the example in Listing 3, Table 5 illustrates the use of logical operators.\n\n\n\nTable 5: Logical operators in pandas for combining boolean conditions. Use parentheses around each condition.\n\n\n\n\n\n\n\n\n\n\n\nOperator\nMeaning\nExample\nResult\n\n\n\n\n&\nLogical AND\n(a &gt; 1) & (b &lt; 3)\nFalse\n\n\n|\nLogical OR\n(a == 1) | (b == 1)\nTrue\n\n\n~\nLogical NOT\n~(a == 1)\nFalse\n\n\n\n\n\n\nLet’s gather all volcanoes that have a VEI of 3 and are in Indonesia:\n\n\n\n\nListing 7: Complex filtering using logical operators\n\n\nmask = (df['VEI'] == 3) & (df['Country'] == 'Indonesia') # Create a mask - don't forget parentheses!\ndf.loc[mask] # Query the data\n\n\n\n\n\n\n\n\n\n\n\nVEI\nCountry\nDate\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nAgung\n3\nIndonesia\n2017-11-21\n-8.3422\n115.5083\n\n\nSinabung\n3\nIndonesia\n2023-02-13\n3.1719\n98.3925\n\n\n\n\n\n\n\n\n\n\n\n\n\nQuestion\n\n\n\nHow many volcanoes are either in Chile or in the USA?\n\n\n1358\n\n\nHow many volcanoes are in the southern hemisphere and have a VEI≥4?\n\n\n12812\n\n\n\n\n\n\n\nRearranging data\n\nSorting data\nThe main function to sort data is .sort_values (doc). It is necessary to review how three arguments can alter the function’s behaviour:\n\nby: First argument (required) is the label of index/row used to sort the data. It is possible to sort by multiple columns by passing a list of values.\naxis: Specifies whether sorting rows (axis = 0 - in which case by is a column name) or sorting columns (axis = 1, in which case by is an index value). The documentation specifies axis = 0, which means that rows will be sorted if axis is not specified.\nascending: Using a bool (remember, this is a True/False behaviour), specifies if values are sorted in ascending (ascending = True, default behaviour is not specified) or descending (ascending = False) order.\n\n\n\n\n\nListing 8: Basic sorting operations\n\n\ndf.sort_values('VEI') # Sort volcanoes by VEI in ascending number\ndf.sort_values('Date', ascending=False) # Sort volcanoes by eruption dates from recent to old\ndf.sort_values('Country') # .sort_values also work on strings to sort alphabetically\ndf.sort_values(['Latitude', 'Longitude']) # Sorting using multiple columns\n\n\n\n\n\n\n\n\n\n\nQuestion\n\n\n\nAfter sorting the data in descending order by VEI and time, what are the three first volcanoes?\n\n\nNyiragongo, Ontake, KīlaueaKīlauea, Ontake, NyiragongoPinatubo, El Chichon, St HelensSt Helens, El Chichon, Pinatubo\n\n\n\n\n\n\n\nOperations\nLet’s now see how we can manipulate and operate on data contained within our DataFrame. Table 6 and Table 7 respectively illustrate arithmetic and string-based operators that can be applied on parts of the DataFrame.\n\nNumeric operations\nListing 9 Illustrates how to half the VEI column save the results to a new column.\n\n\n\n\nListing 9: Divide VEI by two and save the results to a new column.\n\n\ndf['VEI_halved'] = df['VEI'] / 2\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\nLongitudes are expressed as degrees E (i.e., from 0–180 ) and degrees W (i.e., from -180–0). Use operators to convert longitudes to degrees E (i.e., from 0–360) and store the results to a column called Longitude_E. To do so:\n\nDefine a mask where Longitudes are negative using logical operators\nWhere the mask is True (i.e. where the longitude is negative), add the longitude (or subtract its absolute value) to 360\n\n\n\n\n\n\n\nDefine a mask\n\n\n\n\n\nStart by defining a mask\n\n\n\n\n\n\nHow?\n\n\n\n\n\nmask = df['Longitude'] &lt;= 0\n\n\n\n\n\n\n\n\n\n\n\n\nSelect the values\n\n\n\n\n\nSelect the values using .loc and do the maths.\n\n\n\n\n\n\nHow?\n\n\n\n\n\n360 + df.loc[mask, 'Longitude']\n\n\n\n\n\n\n\n\n\n\n\n\nStore back the values\n\n\n\n\n\ndf.loc[mask, 'Longitude_E'] = 360 + df.loc[mask, 'Longitude']\n\n\n\n\n\n\n\n\nTable 6: Common arithmetic operations on numerical pandas columns.\n\n\n\n\n\n\n\n\n\n\n\nOperation\nSymbol\nExample\nDescription\n\n\n\n\nAddition\n+\ndf['VEI'] + 1\nAdds a value to each element\n\n\nSubtraction\n-\ndf['VEI'] - 1\nSubtracts a value from each element\n\n\nMultiplication\n*\ndf['VEI'] * 2\nMultiplies each element by a value\n\n\nDivision\n/\ndf['VEI'] / 2\nDivides each element by a value\n\n\nExponentiation\n**\ndf['VEI'] ** 2\nRaises each element to a power\n\n\nModulo\n%\ndf['VEI'] % 2\nRemainder after division for each element\n\n\n\n\n\n\n\n\nString operations\n\n\n\nTable 7: Common string operations on pandas columns.\n\n\n\n\n\n\n\n\n\n\nOperation\nExample\nDescription\n\n\n\n\nConcatenation\ndf['Country'] + ' volcano'\nAdds a string to each element\n\n\nString length\ndf['Country'].str.len()\nReturns the length of each string\n\n\nUppercase\ndf['Country'].str.upper()\nConverts each string to uppercase\n\n\nLowercase\ndf['Country'].str.lower()\nConverts each string to lowercase\n\n\nReplace\ndf['Country'].str.replace('USA', 'US')\nReplaces substrings in each string"
+  },
+  {
+    "objectID": "class1/day1-4_queries.html",
+    "href": "class1/day1-4_queries.html",
+    "title": "Querying data",
+    "section": "",
+    "text": "Let’s now review how we can access data contained in the DataFrame. This process, known as indexing, consists in specifying a row or a column (or ranges of rows and columns) where the data is stored. In pandas, there are two different ways to do that:\n\nBy label: data is queried using the actual index/column name (e.g., the VEI column in the DataFrame above)\nBy location: data is queried using the column location (e.g., the 3rd row)\n\n\n\n\n\n\n\n\n\nFigure 1: Label-based queries using .loc.\n\n\n\n\n\nWhen we know the exact label of the row or the column, we can use the .loc function to query the DataFrame (Figure 1). Let’s start by querying specific rows. We have previously defined the Name column as the index (i.e., row label), which means that we can simply pass the name of the volcano.\n\n# Get the row for \"Calbuco\" volcano\ndf.loc['Calbuco']\n\nCountry                    Chile\nDate         2015-04-22 00:00:00\nVEI                            4\nLatitude                -41.2972\nLongitude               -72.6097\nName: Calbuco, dtype: object\n\n\nNote that the result is a Series (i.e., a 1-dimensional DataFrame where the columns become the index), not a DataFrame. If we want to keep it as a DataFrame, we can use double brackets. Double brackets can also be used to query multiple rows.\n\ndf.loc[['Calbuco']] # Query one row and return it as a DataFrame\ndf.loc[['Calbuco', 'Taal']] # Query multiple rows\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nCalbuco\nChile\n2015-04-22\n4\n-41.2972\n-72.6097\n\n\nTaal\nPhilippines\n2020-01-12\n4\n14.0020\n120.9934\n\n\n\n\n\n\n\n\n\n\n\n\n\nQuestion\n\n\n\nWhat is the VEI recorded for Etna volcano?\n\n\n12345\n\n\nWhat is the eruption date for Taal volcano?\n\n\n1980-05-18    1991-04-022020-01-121997-06-252023-02-13\n\n\n\n\n\n\n\n\n\n\nDouble brackets\n\n\n\nIn general, double brackets [[ ]] will return a DataFrame and not a Series. We will dominantly use this in the following examples.\n\n\n\n\n\nLet’s now query specific columns. For example, querying the VEI column can be achieved in different ways. The simplest is to use the column name directly. We can also query multiple columns using double brackets\n\ndf[['VEI']] # Get the VEI column\ndf[['Country', 'VEI']] # Query multiple columns\n\n\n\n\n\n\n\n\nCountry\nVEI\n\n\nName\n\n\n\n\n\n\nSt. Helens\nUSA\n5\n\n\nPinatubo\nPhilippines\n6\n\n\nEl Chichón\nMexico\n5\n\n\nGalunggung\nIndonesia\n4\n\n\nNevado del Ruiz\nColombia\n3\n\n\nMerapi\nIndonesia\n2\n\n\nOntake\nJapan\n2\n\n\nSoufrière Hills\nMontserrat\n3\n\n\nEtna\nItaly\n2\n\n\nNyiragongo\nDR Congo\n1\n\n\nKīlauea\nUSA\n2\n\n\nAgung\nIndonesia\n3\n\n\nTavurvur\nPapua New Guinea\n3\n\n\nSinabung\nIndonesia\n3\n\n\nTaal\nPhilippines\n4\n\n\nLa Soufrière\nSaint Vincent\n4\n\n\nCalbuco\nChile\n4\n\n\nSt. Augustine\nUSA\n3\n\n\nEyjafjallajökull\nIceland\n4\n\n\nCleveland\nUSA\n3\n\n\n\n\n\n\n\nNote that until now, we have only retrieved either rows or columns (Figure 1). We can also retrieve specific values by specifying both the row and the column.\n\ndf.loc[['Calbuco', 'Taal']][['Country', 'VEI']]\n\n\n\n\n\n\n\n\nCountry\nVEI\n\n\nName\n\n\n\n\n\n\nCalbuco\nChile\n4\n\n\nTaal\nPhilippines\n4\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCaution 1: Indexing in Python\n\n\n\nRemember that in Python, indexing starts from 0 - so the first row or column has an index of 0.\n\n\n\n\n\n\n\n\nFigure 2: Position-based queries using .iloc.\n\n\n\nSome situations require querying data by location instead of label - let’s say for instance we need to retrieve rows 10-20. This is done using the .iloc function (instead of the .loc function previously used; Figure 2). Remember that Python uses zero-based indexing (Caution 1), meaning that the first element is at position 0, the second at position 1, and so on.\nThe next example queries the first row - using again double brackets to return a DataFrame.\n\ndf.iloc[[0]]\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nSt. Helens\nUSA\n1980-05-18\n5\n46.1914\n-122.1956\n\n\n\n\n\n\n\n\n\nWe can get a range of rows using what is called slicing. This is done using the colon (:) operator. The next example queries rows 3 to 6 of the DataFrame. Note that the end index is exclusive, meaning that the element at the end index is not included in the result.\n\ndf.iloc[2:6]\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nEl Chichón\nMexico\n1982-03-28\n5\n17.3559\n-93.2233\n\n\nGalunggung\nIndonesia\n1982-04-05\n4\n-7.2567\n108.0771\n\n\nNevado del Ruiz\nColombia\n1985-11-13\n3\n4.8950\n-75.3220\n\n\nMerapi\nIndonesia\n2023-12-03\n2\n-7.5407\n110.4457\n\n\n\n\n\n\n\nTo get rows 3 to 6 and columns 2-3:\n\ndf.iloc[0:5, 1:3]\n\n\n\n\n\n\n\n\nDate\nVEI\n\n\nName\n\n\n\n\n\n\nSt. Helens\n1980-05-18\n5\n\n\nPinatubo\n1991-04-02\n6\n\n\nEl Chichón\n1982-03-28\n5\n\n\nGalunggung\n1982-04-05\n4\n\n\nNevado del Ruiz\n1985-11-13\n3\n\n\n\n\n\n\n\n\n\n\nTo get the last 5 rows of the DataFrame:\n\ndf.iloc[-5:]\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nLa Soufrière\nSaint Vincent\n2021-04-09\n4\n13.2833\n-61.3875\n\n\nCalbuco\nChile\n2015-04-22\n4\n-41.2972\n-72.6097\n\n\nSt. Augustine\nUSA\n2006-03-27\n3\n57.8819\n-155.5611\n\n\nEyjafjallajökull\nIceland\n2010-04-14\n4\n63.6333\n-19.6111\n\n\nCleveland\nUSA\n2023-05-23\n3\n52.8250\n-169.9444\n\n\n\n\n\n\n\n\n\n\nBy experience, position-based queries is more used on rows than columns. For instance, we might want to access the first 10 rows because we don’t know their associated labels, yet it is less likely that we ignore their attributes. It is possible mix label-based and position-based indexing. For example, to get the first 5 rows and the Country and VEI columns:\n\ndf.iloc[0:5][['Country', 'VEI']]\n\n\n\n\n\n\n\n\nCountry\nVEI\n\n\nName\n\n\n\n\n\n\nSt. Helens\nUSA\n5\n\n\nPinatubo\nPhilippines\n6\n\n\nEl Chichón\nMexico\n5\n\n\nGalunggung\nIndonesia\n4\n\n\nNevado del Ruiz\nColombia\n3",
+    "crumbs": [
+      "Class 1",
+      "Querying data"
+    ]
+  },
+  {
+    "objectID": "class1/day1-4_queries.html#querying-data-from-a-dataframe",
+    "href": "class1/day1-4_queries.html#querying-data-from-a-dataframe",
+    "title": "Querying data",
+    "section": "",
+    "text": "Let’s now review how we can access data contained in the DataFrame. This process, known as indexing, consists in specifying a row or a column (or ranges of rows and columns) where the data is stored. In pandas, there are two different ways to do that:\n\nBy label: data is queried using the actual index/column name (e.g., the VEI column in the DataFrame above)\nBy location: data is queried using the column location (e.g., the 3rd row)\n\n\n\n\n\n\n\n\n\nFigure 1: Label-based queries using .loc.\n\n\n\n\n\nWhen we know the exact label of the row or the column, we can use the .loc function to query the DataFrame (Figure 1). Let’s start by querying specific rows. We have previously defined the Name column as the index (i.e., row label), which means that we can simply pass the name of the volcano.\n\n# Get the row for \"Calbuco\" volcano\ndf.loc['Calbuco']\n\nCountry                    Chile\nDate         2015-04-22 00:00:00\nVEI                            4\nLatitude                -41.2972\nLongitude               -72.6097\nName: Calbuco, dtype: object\n\n\nNote that the result is a Series (i.e., a 1-dimensional DataFrame where the columns become the index), not a DataFrame. If we want to keep it as a DataFrame, we can use double brackets. Double brackets can also be used to query multiple rows.\n\ndf.loc[['Calbuco']] # Query one row and return it as a DataFrame\ndf.loc[['Calbuco', 'Taal']] # Query multiple rows\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nCalbuco\nChile\n2015-04-22\n4\n-41.2972\n-72.6097\n\n\nTaal\nPhilippines\n2020-01-12\n4\n14.0020\n120.9934\n\n\n\n\n\n\n\n\n\n\n\n\n\nQuestion\n\n\n\nWhat is the VEI recorded for Etna volcano?\n\n\n12345\n\n\nWhat is the eruption date for Taal volcano?\n\n\n1980-05-18    1991-04-022020-01-121997-06-252023-02-13\n\n\n\n\n\n\n\n\n\n\nDouble brackets\n\n\n\nIn general, double brackets [[ ]] will return a DataFrame and not a Series. We will dominantly use this in the following examples.\n\n\n\n\n\nLet’s now query specific columns. For example, querying the VEI column can be achieved in different ways. The simplest is to use the column name directly. We can also query multiple columns using double brackets\n\ndf[['VEI']] # Get the VEI column\ndf[['Country', 'VEI']] # Query multiple columns\n\n\n\n\n\n\n\n\nCountry\nVEI\n\n\nName\n\n\n\n\n\n\nSt. Helens\nUSA\n5\n\n\nPinatubo\nPhilippines\n6\n\n\nEl Chichón\nMexico\n5\n\n\nGalunggung\nIndonesia\n4\n\n\nNevado del Ruiz\nColombia\n3\n\n\nMerapi\nIndonesia\n2\n\n\nOntake\nJapan\n2\n\n\nSoufrière Hills\nMontserrat\n3\n\n\nEtna\nItaly\n2\n\n\nNyiragongo\nDR Congo\n1\n\n\nKīlauea\nUSA\n2\n\n\nAgung\nIndonesia\n3\n\n\nTavurvur\nPapua New Guinea\n3\n\n\nSinabung\nIndonesia\n3\n\n\nTaal\nPhilippines\n4\n\n\nLa Soufrière\nSaint Vincent\n4\n\n\nCalbuco\nChile\n4\n\n\nSt. Augustine\nUSA\n3\n\n\nEyjafjallajökull\nIceland\n4\n\n\nCleveland\nUSA\n3\n\n\n\n\n\n\n\nNote that until now, we have only retrieved either rows or columns (Figure 1). We can also retrieve specific values by specifying both the row and the column.\n\ndf.loc[['Calbuco', 'Taal']][['Country', 'VEI']]\n\n\n\n\n\n\n\n\nCountry\nVEI\n\n\nName\n\n\n\n\n\n\nCalbuco\nChile\n4\n\n\nTaal\nPhilippines\n4\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCaution 1: Indexing in Python\n\n\n\nRemember that in Python, indexing starts from 0 - so the first row or column has an index of 0.\n\n\n\n\n\n\n\n\nFigure 2: Position-based queries using .iloc.\n\n\n\nSome situations require querying data by location instead of label - let’s say for instance we need to retrieve rows 10-20. This is done using the .iloc function (instead of the .loc function previously used; Figure 2). Remember that Python uses zero-based indexing (Caution 1), meaning that the first element is at position 0, the second at position 1, and so on.\nThe next example queries the first row - using again double brackets to return a DataFrame.\n\ndf.iloc[[0]]\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nSt. Helens\nUSA\n1980-05-18\n5\n46.1914\n-122.1956\n\n\n\n\n\n\n\n\n\nWe can get a range of rows using what is called slicing. This is done using the colon (:) operator. The next example queries rows 3 to 6 of the DataFrame. Note that the end index is exclusive, meaning that the element at the end index is not included in the result.\n\ndf.iloc[2:6]\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nEl Chichón\nMexico\n1982-03-28\n5\n17.3559\n-93.2233\n\n\nGalunggung\nIndonesia\n1982-04-05\n4\n-7.2567\n108.0771\n\n\nNevado del Ruiz\nColombia\n1985-11-13\n3\n4.8950\n-75.3220\n\n\nMerapi\nIndonesia\n2023-12-03\n2\n-7.5407\n110.4457\n\n\n\n\n\n\n\nTo get rows 3 to 6 and columns 2-3:\n\ndf.iloc[0:5, 1:3]\n\n\n\n\n\n\n\n\nDate\nVEI\n\n\nName\n\n\n\n\n\n\nSt. Helens\n1980-05-18\n5\n\n\nPinatubo\n1991-04-02\n6\n\n\nEl Chichón\n1982-03-28\n5\n\n\nGalunggung\n1982-04-05\n4\n\n\nNevado del Ruiz\n1985-11-13\n3\n\n\n\n\n\n\n\n\n\n\nTo get the last 5 rows of the DataFrame:\n\ndf.iloc[-5:]\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nLa Soufrière\nSaint Vincent\n2021-04-09\n4\n13.2833\n-61.3875\n\n\nCalbuco\nChile\n2015-04-22\n4\n-41.2972\n-72.6097\n\n\nSt. Augustine\nUSA\n2006-03-27\n3\n57.8819\n-155.5611\n\n\nEyjafjallajökull\nIceland\n2010-04-14\n4\n63.6333\n-19.6111\n\n\nCleveland\nUSA\n2023-05-23\n3\n52.8250\n-169.9444\n\n\n\n\n\n\n\n\n\n\nBy experience, position-based queries is more used on rows than columns. For instance, we might want to access the first 10 rows because we don’t know their associated labels, yet it is less likely that we ignore their attributes. It is possible mix label-based and position-based indexing. For example, to get the first 5 rows and the Country and VEI columns:\n\ndf.iloc[0:5][['Country', 'VEI']]\n\n\n\n\n\n\n\n\nCountry\nVEI\n\n\nName\n\n\n\n\n\n\nSt. Helens\nUSA\n5\n\n\nPinatubo\nPhilippines\n6\n\n\nEl Chichón\nMexico\n5\n\n\nGalunggung\nIndonesia\n4\n\n\nNevado del Ruiz\nColombia\n3",
+    "crumbs": [
+      "Class 1",
+      "Querying data"
+    ]
+  },
+  {
+    "objectID": "class1/day1-6_operations.html",
+    "href": "class1/day1-6_operations.html",
+    "title": "Operations",
+    "section": "",
+    "text": "Pandas contains several helpful functions to manage and format numerical data (Table 1).\n\n\n\nTable 1: Common data management functions for pandas columns.\n\n\n\n\n\n\n\n\n\n\nOperation\nExample\nDescription\n\n\n\n\nRound\ndf['VEI'].round(1)\nRounds values to the specified number of decimals\n\n\nFloor\ndf['VEI'].apply(np.floor)\nRounds values down to the nearest integer\n\n\nCeil\ndf['VEI'].apply(np.ceil)\nRounds values up to the nearest integer\n\n\nAbsolute value\ndf['VEI'].abs()\nReturns the absolute value of each element\n\n\nClip\ndf['VEI'].clip(lower=0, upper=5)\nLimits values to a specified range\n\n\nFill missing\ndf['VEI'].fillna(0)\nReplaces missing values with a specified value\n\n\n\n\n\n\n\n\n\n\n\n\nFilling missing data\n\n\n\nThe .fillna example in Table 1 shows how to replace missing data - often referred to as Nan for Not a number - with 0 value. However, Pandas’s .fillna contains a lot of different methodologies to fill missing values (e.g., interpolation). Again, take the habit of checking out the documentation of the functions your frequently use.",
+    "crumbs": [
+      "Class 1",
+      "Operations"
+    ]
+  },
+  {
+    "objectID": "class1/day1-6_operations.html#data-management-operations",
+    "href": "class1/day1-6_operations.html#data-management-operations",
+    "title": "Operations",
+    "section": "",
+    "text": "Pandas contains several helpful functions to manage and format numerical data (Table 1).\n\n\n\nTable 1: Common data management functions for pandas columns.\n\n\n\n\n\n\n\n\n\n\nOperation\nExample\nDescription\n\n\n\n\nRound\ndf['VEI'].round(1)\nRounds values to the specified number of decimals\n\n\nFloor\ndf['VEI'].apply(np.floor)\nRounds values down to the nearest integer\n\n\nCeil\ndf['VEI'].apply(np.ceil)\nRounds values up to the nearest integer\n\n\nAbsolute value\ndf['VEI'].abs()\nReturns the absolute value of each element\n\n\nClip\ndf['VEI'].clip(lower=0, upper=5)\nLimits values to a specified range\n\n\nFill missing\ndf['VEI'].fillna(0)\nReplaces missing values with a specified value\n\n\n\n\n\n\n\n\n\n\n\n\nFilling missing data\n\n\n\nThe .fillna example in Table 1 shows how to replace missing data - often referred to as Nan for Not a number - with 0 value. However, Pandas’s .fillna contains a lot of different methodologies to fill missing values (e.g., interpolation). Again, take the habit of checking out the documentation of the functions your frequently use.",
+    "crumbs": [
+      "Class 1",
+      "Operations"
+    ]
+  },
+  {
+    "objectID": "class1/day1-6_operations.html#numeric-operations",
+    "href": "class1/day1-6_operations.html#numeric-operations",
+    "title": "Operations",
+    "section": "Numeric operations",
+    "text": "Numeric operations\nLet’s now see how we can manipulate and operate on data contained within our DataFrame. Table 2 illustrates arithmetic operators that can be applied to parts of the DataFrame. Table 2 relies only on native Python arithmetic operators, which can be expanded using the numpy package (Table 3).\nListing 1 Illustrates how to half the VEI column save the results to a new column.\n\n\n\n\nListing 1: Divide VEI by two and save the results to a new column.\n\n\ndf['VEI_halved'] = df['VEI'] / 2\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\nLongitudes are expressed as degrees E (i.e., from 0–180 ) and degrees W (i.e., from -180–0). Use operators to convert longitudes to degrees E (i.e., from 0–360) and store the results to a column called Longitude_E. To do so:\n\nDefine a mask where Longitudes are negative using [logical operators]\nWhere the mask is True (i.e. where the longitude is negative), add the longitude (or subtract its absolute value) to 360\n\n\n\n\n\n\n\nDefine a mask\n\n\n\n\n\nStart by defining a mask\n\n\n\n\n\n\nHow?\n\n\n\n\n\nmask = df['Longitude'] &lt;= 0\n\n\n\n\n\n\n\n\n\n\n\n\nSelect the values\n\n\n\n\n\nSelect the values using .loc and do the maths.\n\n\n\n\n\n\nHow?\n\n\n\n\n\n360 + df.loc[mask, 'Longitude']\n\n\n\n\n\n\n\n\n\n\n\n\nStore back the values\n\n\n\n\n\ndf.loc[mask, 'Longitude_E'] = 360 + df.loc[mask, 'Longitude']\n\n\n\n\n\n\n\n\nTable 2: Common arithmetic operations on numerical pandas columns.\n\n\n\n\n\n\n\n\n\n\n\nOperation\nSymbol\nExample\nDescription\n\n\n\n\nAddition\n+\ndf['VEI'] + 1\nAdds a value to each element\n\n\nSubtraction\n-\ndf['VEI'] - 1\nSubtracts a value from each element\n\n\nMultiplication\n*\ndf['VEI'] * 2\nMultiplies each element by a value\n\n\nDivision\n/\ndf['VEI'] / 2\nDivides each element by a value\n\n\nExponentiation\n**\ndf['VEI'] ** 2\nRaises each element to a power\n\n\nModulo\n%\ndf['VEI'] % 2\nRemainder after division for each element\n\n\n\n\n\n\n\n\n\nTable 3: Common NumPy operations on pandas columns or arrays.\n\n\n\n\n\n\n\n\n\n\n\nOperation\nSymbol\nExample\nDescription\n\n\n\n\nExponentiation\nnp.power\nnp.power(df['VEI'], 2)\nElement-wise exponentiation\n\n\nSquare root\nnp.sqrt\nnp.sqrt(df['VEI'])\nElement-wise square root\n\n\nLogarithm (base e)\nnp.log\nnp.log(df['VEI'])\nElement-wise natural logarithm\n\n\nLogarithm (base 10)\nnp.log10\nnp.log10(df['VEI'])\nElement-wise base-10 logarithm\n\n\nExponential\nnp.exp\nnp.exp(df['VEI'])\nElement-wise exponential (e^x)",
+    "crumbs": [
+      "Class 1",
+      "Operations"
+    ]
+  },
+  {
+    "objectID": "class1/day1-6_operations.html#string-operations",
+    "href": "class1/day1-6_operations.html#string-operations",
+    "title": "Operations",
+    "section": "String operations",
+    "text": "String operations\nSimilarly, Table 4 illustrates Pandas’s string-based operators.\n\n\n\nTable 4: Common string operations on pandas columns.\n\n\n\n\n\n\n\n\n\n\nOperation\nExample\nDescription\n\n\n\n\nConcatenation\ndf['Country'] + ' volcano'\nAdds a string to each element\n\n\nString length\ndf['Country'].str.len()\nReturns the length of each string\n\n\nUppercase\ndf['Country'].str.upper()\nConverts each string to uppercase\n\n\nLowercase\ndf['Country'].str.lower()\nConverts each string to lowercase\n\n\nReplace\ndf['Country'].str.replace('USA', 'US')\nReplaces substrings in each string",
+    "crumbs": [
+      "Class 1",
+      "Operations"
+    ]
+  },
+  {
+    "objectID": "class1/day1-2_pandas.html",
+    "href": "class1/day1-2_pandas.html",
+    "title": "Intro to Pandas",
+    "section": "",
+    "text": "Pandas consists of two main types of data structures. Let’s make an analogy with Excel.\n\nSeries: A 1D labeled array. Think of a 2-columns Excel spreadsheet where the left column would contain a label (e.g., the time of a measurement) and the right column would contain a value (e.g., the actual value measured at the time specified in the label, let’s say the temperature of a river).\nDataFrame: A 2D labeled table. This is the same as an Excel spreadsheet that would contain more columns than a Series. You can think of having measurements of different variables contained in each column (e.g., the flow rate, the turbidity etc…).\n\nThe keyword here is labelled. In Excel, you might get a column using letters and rows using numbers. In Pandas, you can use the column name (e.g., water_temperature) or the row label (e.g., 2021-06-15 14:19:14).\n\n\n\n\n\n\nDataFrame\n\n\n\nThroughout this class we will focus on the use of DataFrames, not Series. Keep in mind that the behaviour between both is almost identical.\n\n\n\n\nFigure 1 shows the basic anatomy of a DataFrame that contains four rows and four columns). We already see some data structuring emerging:\n\nRows tend to represent entries, which can be:\n\nDifferent measurements at specific time steps\nDifferent samples collected at different place/times\netc.\n\nIn contrast, column represent attributes and store the properties of each entry:\n\nThe actual values of different measured parameters\nThe location and time of collected samples, along with associated analyses (e.g., geochemistry)\netc.\n\n\n\n\n\n\n\n\nFigure 1: Basic anatomy of a Pandas DataFrame.\n\n\n\nThe first row - i.e. the row containing the column labels - is not considered as an entry. This is because the top row of a dataframe is usually used as the label for the columns. Similarly, we might want to set the first column as a label for the rows (Figure 2). In a nutshell:\n\nIndex refers to the label of the rows. In the index, values are usually unique - meaning that each entry has a different label.\nColumn refers to the label of - logically - the columns\n\n\n\n\n\n\n\nFigure 2: Index and columns of a DataFrame.\n\n\n\n\n\n\n\n\n\nCaution 1: Indexing in Python\n\n\n\nRemember that in Python, indexing starts from 0 - so the first row or column has an index of 0.",
+    "crumbs": [
+      "Class 1",
+      "Intro to Pandas"
+    ]
+  },
+  {
+    "objectID": "class1/day1-2_pandas.html#pandas-data-structure",
+    "href": "class1/day1-2_pandas.html#pandas-data-structure",
+    "title": "Intro to Pandas",
+    "section": "",
+    "text": "Pandas consists of two main types of data structures. Let’s make an analogy with Excel.\n\nSeries: A 1D labeled array. Think of a 2-columns Excel spreadsheet where the left column would contain a label (e.g., the time of a measurement) and the right column would contain a value (e.g., the actual value measured at the time specified in the label, let’s say the temperature of a river).\nDataFrame: A 2D labeled table. This is the same as an Excel spreadsheet that would contain more columns than a Series. You can think of having measurements of different variables contained in each column (e.g., the flow rate, the turbidity etc…).\n\nThe keyword here is labelled. In Excel, you might get a column using letters and rows using numbers. In Pandas, you can use the column name (e.g., water_temperature) or the row label (e.g., 2021-06-15 14:19:14).\n\n\n\n\n\n\nDataFrame\n\n\n\nThroughout this class we will focus on the use of DataFrames, not Series. Keep in mind that the behaviour between both is almost identical.\n\n\n\n\nFigure 1 shows the basic anatomy of a DataFrame that contains four rows and four columns). We already see some data structuring emerging:\n\nRows tend to represent entries, which can be:\n\nDifferent measurements at specific time steps\nDifferent samples collected at different place/times\netc.\n\nIn contrast, column represent attributes and store the properties of each entry:\n\nThe actual values of different measured parameters\nThe location and time of collected samples, along with associated analyses (e.g., geochemistry)\netc.\n\n\n\n\n\n\n\n\nFigure 1: Basic anatomy of a Pandas DataFrame.\n\n\n\nThe first row - i.e. the row containing the column labels - is not considered as an entry. This is because the top row of a dataframe is usually used as the label for the columns. Similarly, we might want to set the first column as a label for the rows (Figure 2). In a nutshell:\n\nIndex refers to the label of the rows. In the index, values are usually unique - meaning that each entry has a different label.\nColumn refers to the label of - logically - the columns\n\n\n\n\n\n\n\nFigure 2: Index and columns of a DataFrame.\n\n\n\n\n\n\n\n\n\nCaution 1: Indexing in Python\n\n\n\nRemember that in Python, indexing starts from 0 - so the first row or column has an index of 0.",
+    "crumbs": [
+      "Class 1",
+      "Intro to Pandas"
+    ]
+  }
+]

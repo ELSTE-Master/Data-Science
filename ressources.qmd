@@ -1,3 +1,0 @@
-
-- [Statistics and Geodata Analysis using Python (SOGA-Py)](https://www.geo.fu-berlin.de/en/v/soga-py/index.html): A comprehensive course on data science using Python from the **Freie Universität Berlin**.
-- [Ocean 215: Python Methods for Oceanography](https://www.youtube.com/playlist?list=PLjazLUieaXOWl-4ZUn4VWabP5-Tb74ZbR): Online video course by the School of Oceanography from the **University of Washington**. It provides a good introduction to Python and some more low-level concepts of scientific programming.
