@@ -1,0 +1,86 @@
+{
+  "index.qmd": {
+    "index.html": "dd9d830d"
+  },
+  "intro.qmd": {
+    "intro.html": "50e421fd"
+  },
+  "summary.qmd": {
+    "summary.html": "6057fda6"
+  },
+  "references.qmd": {
+    "references.html": "c4b8b54f"
+  },
+  "class1_overview.qmd": {
+    "class1_overview.html": "35980a4f"
+  },
+  "class1/class1_overview.qmd": {
+    "class1_overview.html": "ebef2f99"
+  },
+  "appendices/setup_vscode.qmd": {
+    "setup_vscode.html": "87e68c7e"
+  },
+  "class1/pandas1.qmd": {
+    "pandas1.html": "cbe24ff6"
+  },
+  "class1/pandas2.qmd": {
+    "pandas2.html": "2b49a305"
+  },
+  "demo_page.qmd": {
+    "demo_page.html": "9e2481f3"
+  },
+  "slides/intro-slides.qmd": {
+    "intro-slides.html": "67fd19cc"
+  },
+  "ressources.qmd": {
+    "ressources.html": "f960cb92"
+  },
+  "demo_page_2.qmd": {
+    "demo_page_2.html": "29abb3a5"
+  },
+  "slides/class1.qmd": {
+    "class1.html": "c74f303f"
+  },
+  "class1/day1-2_data_exploration.qmd": {
+    "day1-2_data_exploration.html": "e15fff19"
+  },
+  "class1/day1-4_filtering.qmd": {
+    "day1-4_filtering.html": "d6b00177"
+  },
+  "class1/day1-3_queries.qmd": {
+    "day1-3_queries.html": "e0575985"
+  },
+  "class1/day1-5_operations.qmd": {
+    "day1-5_operations.html": "bbe7c368"
+  },
+  "class1/day1-1_intro.qmd": {
+    "day1-1_intro.html": "9c441835"
+  },
+  "class1/day1-3_data_exploration.qmd": {
+    "day1-3_data_exploration.html": "5f357f16"
+  },
+  "class1/day1-6_queries.qmd": {
+    "day1-6_queries.html": "5a74b839"
+  },
+  "class1/day1-2_pandas.qmd": {
+    "day1-2_pandas.html": "c4bf56fe"
+  },
+  "class1/day1-4_queries.qmd": {
+    "day1-4_queries.html": "1df662f4"
+  },
+  "class1/day1-5_filtering.qmd": {
+    "day1-5_filtering.html": "0aff698d"
+  },
+  "class1/day1-6_operations.qmd": {
+    "day1-6_operations.html": "5b5f2be6"
+  },
+  "slides/class1_pandas.qmd": {
+    "class1_pandas.html": "cb04bf0f"
+  },
+  "slides/class1_intro.qmd": {
+    "class1_intro.html": "2c0395b9"
+  },
+  "class1/day1-summary.qmd": {
+    "day1-summary.html": "72e3b3f5"
+  }
+}

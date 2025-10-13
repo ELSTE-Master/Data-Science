@@ -1,0 +1,69 @@
+---
+title: "ELSTE Data Science Master Course"
+subtitle: "An introduction to data science using Python"
+author:
+  - name: Sébastien Biass
+    id: sb
+    orcid: 0000-0002-1919-9473
+    email: sebastien.biasse@unige.ch
+    affiliation: 
+      - name: Department of Earth Sciences, University of Geneva
+  - name: Stéphane Guerrier
+    id: sg
+    orcid: 0000-0003-0002-8794
+    email: Stephane.Guerrier@unige.ch
+    affiliation: 
+      - name: Department of Earth Sciences, University of Geneva
+      - name: Section of Pharmaceutical Sciences, University of Geneva
+format:
+  html:
+    theme: cosmo
+---
+
+
+## Practical information
+
+Hello and welcome to the website for the Fall part of the [ELSTE](https://www.unil.ch/geoleman/en/home.html) data science class at the University of Geneva. The objective of this class is to introduce you to some tools - both *technical* (i.e., use of Python and dedicated packages) and *theoretical* (i.e., understanding of the statistical methods) - that will ideally increase your ability to explore and interpret the data you will generate or collect during your Master theses. 
+
+The course will rely on **Python**, which was selected because it is both *free* and *general purpose*. We assume that you are not completely stranger to Python, yet you haven't gained yet the confidence to start using it for your data processing and analysis workflow. The **primary objective** of this class is to [provide you with this confidence]{.bg}. It would be foolish to believe that this course will be enough to make you experts at it, but we hope it will provide you the necessary tools get you started.
+
+You might also be already familiar with other free (e.g., *R*, *Julia*, *Octave*) or commercial (*Matlab*) scientific programming language. In this case, the course contains sufficient theoretical material to keep your interest high, and, depending how comfortable you are with your language of predilection, you might also want to use it rather than Python at your own risk.
+
+In a nutshell, by the end of the course, you will ideally:
+
+1. Be familiar with the basic packages and functions in Python for exploring, analysing and visualising your data;
+2. Understand the theory for some of the most frequently used statistical analyses, thus opening the gate to *statistical inference*.
+
+
+
+### Course schedule
+
+The course is composed of three 6-h sessions on Wednesday mornings from 9h - 12h from Oct 15 to Nov 19 2025. The tentative schedule is as follows:
+
+| Date         | Instructor         | Topic                        |
+|--------------|--------------------|------------------------------|
+| Oct 15, 2025 | SB    | Introduction to Python, data manipulation |
+| Oct 22, 2025 | SB  | Exploratory data analysis, plotting  |
+| Oct 29, 2025 | SG    | Bi-variate analyses  |
+| Nov 5, 2025  | SG  | Regressions       |
+| Nov 12, 2025 | SB/SG    | TBD     |
+| Nov 19, 2025 | SB/SG  | TBD            |
+
+
+### Class location
+
+The class takes place in the computer lab **in the Science III building** (and [not in the Maraîchers building!!]{.mark}) located on [Boulevard D'Yvoy](https://maps.app.goo.gl/ctb66ggJ3bQYLj8t7). Check out the map below to find the room.
+
+![](img/access_map_science3.png){.lightbox}
+
+
+### Use of the computer lab
+
+- ISIS login and password
+- Setup VSCode on PCs of the computer lab
+
+### Re-use this class
+
+This course is openly available in the hope it can benefit others. The **course material** is published under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International licence](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.en). 
+
+Unless specified, any **code snippet and software** is published under a [GNU GPLv3 license](https://www.gnu.org/licenses/gpl.html).

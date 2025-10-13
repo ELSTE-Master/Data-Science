@@ -1,0 +1,14 @@
+license: "CC BY-NC-SA 4.0"
+format: 
+  clean-revealjs:
+    background: '#fafafa'
+    chalkboard: true
+    highlight-style: atom-one
+    callout-appearance: simple
+    transition: slide
+    transition-speed: fast
+    fontawesome: true
+    pdf: true
+    mermaid:
+      theme: 'default'
+      themeVariables:

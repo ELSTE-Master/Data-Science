@@ -1,0 +1,186 @@
+---
+title: "Summary"
+format:
+  html:
+    code-fold: false
+    code-line-numbers: true
+    css: [../assets/webex.css]
+    include-after-body: [../assets/webex.js]    
+    embed-resources: true 
+jupyter: python3
+---
+
+```{python}
+#| echo: false
+from pywebexercises.exercises import mcq, longmcq, torf
+import matplotlib.pyplot as plt
+plt.rcParams.update({
+    "figure.facecolor":  (0.0, 0.0, 0.0, 0.0),  # red   with alpha = 30%
+})
+import pandas as pd
+df = pd.read_csv('data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data
+df = df.set_index('Name')
+```
+
+
+Well done, you made it through the first day! This module has provided you with a first glimpse at Pandas and has hopefully illustrated how moving your research workflow to scientific programming could help you efficiently conduct more complex analyses. Below is a summary of each part of the class with **associated cheat sheets** for every part of the class.
+
+
+## Intro to Pandas 
+
+The [Intro to Pandas](day1-2_pandas.qmd) page introduces the two main Pandas data structures:
+
+- **Series**: 1D labeled array (like a single column in Excel with labels).
+- **DataFrame**: 2D labeled table (like an Excel spreadsheet with multiple columns).
+
+Key concepts:
+
+- DataFrames have **rows** (entries) and **columns** (attributes).
+- **Labels** (index for rows, column names for columns) are important for accessing data.
+- Indexing in Python starts at 0.
+
+
+
+## Data structure
+
+The [Data structure](day1-3_data_exploration.qmd) page introduces basic data exploration in Python using pandas. It covers loading a CSV dataset, setting and resetting DataFrame indices, and using key functions to inspect and sort data. The page demonstrates how to load data, explore its structure, and sort it by various columns.
+
+::: {.callout-tip  collapse="true"}
+## Data structure cheat sheet
+
+- `pd.read_csv('file.csv', ...)`: Load data from a CSV file
+- `df.head()`: Show first 5 rows
+- `df.tail()`: Show last 5 rows
+- `df.info()`: Display DataFrame info (types, non-null counts, etc.)
+- `df.shape`: Get (rows, columns) tuple
+- `df.index`: Get row index
+- `df.columns`: Get column names
+- `df.set_index('col')`: Set a column as the DataFrame index
+- `df.reset_index()`: Reset index to default integer index
+- `df.sort_values('col', ...)`: Sort rows by column(s)
+- `df.sort_values(['col1', 'col2'])`: Sort by multiple columns
+- `df.sort_values('col', ascending=False)`: Sort in descending order
+
+
+:::
+
+## Querying data
+
+The [Querying data](day1-4_queries.qmd) page reviews how to query data from a pandas DataFrame using both label-based and position-based indexing. It covers:
+
+- Accessing rows and columns by their labels with `.loc`
+- Accessing rows and columns by their integer positions with `.iloc`
+- Using single and double brackets to control whether the result is a Series or DataFrame
+- Combining row and column selection
+- Slicing to get ranges of rows or columns
+- Mixing label-based and position-based indexing
+
+::: {.callout-tip collapse="true"}
+## Querying data cheat sheet
+
+- Row by label: `df.loc['Calbuco']`  
+- Row(s) by label (DataFrame): `df.loc[['Calbuco', 'Taal']]`  
+- Column by label: `df['VEI']` or `df[['VEI']]`  
+- Multiple columns: `df[['Country', 'VEI']]`  
+- Row and column by label: `df.loc[['Calbuco', 'Taal']][['Country', 'VEI']]`  
+- Row by position: `df.iloc[[0]]`  
+- Range of rows by position: `df.iloc[2:6]`  
+- Range of rows and columns: `df.iloc[0:5, 1:3]`  
+- Last N rows: `df.iloc[-5:]`  
+- First N rows, specific columns: `df.iloc[0:5][['Country', 'VEI']]`  
+
+**Tips:**
+
+- Use `.loc` for label-based indexing, `.iloc` for position-based.
+- Double brackets `[[...]]` return a DataFrame; single bracket `[...]` returns a Series.
+- Indexing in Python starts at 0.
+
+:::
+
+
+## Filtering data
+
+The **[Filtering data](day1-5_filtering.qmd)** page provides an introduction to filtering data in pandas using boolean indexing, comparison operators, and logical operators. It covers how to create boolean masks to filter DataFrame rows based on numeric or string conditions, and how to combine multiple conditions using logical operators. The page also provides examples and questions to reinforce these concepts.
+
+::: {.callout-tip collapse="true"}
+
+## Filtering cheat sheet
+
+**Comparison Operators**
+
+- `==` : Equal to
+- `!=` : Not equal to
+- `>`  : Greater than
+- `<`  : Less than
+- `>=` : Greater than or equal to
+- `<=` : Less than or equal to
+
+**Logical Operators**
+
+- `&` : AND (both conditions must be True)
+- `|` : OR (at least one condition is True)
+- `~` : NOT (negates the condition)
+- **Note:** Use parentheses around each condition.
+
+**Filtering DataFrames**
+
+- Create a boolean mask:  `mask = df['column'] == value`
+- Filter rows:  `df.loc[mask]`
+
+**String Comparisons**
+
+- Contains substring:  `df['col'].str.contains('text')`
+- Starts with:  `df['col'].str.startswith('text')`
+- Ends with:  `df['col'].str.endswith('text')`
+
+**Other Useful Functions**
+
+- Check data types:  `df.dtypes`
+- Count rows:  `df.shape`
+
+
+:::
+
+## Operations
+
+The **[Operations](day1-6_operations.qmd)** page provides an introduction to common data management, numeric, and string operations in pandas, focusing on manipulating DataFrame columns. It covers rounding, filling missing values, arithmetic operations, logical masking, and string manipulation, with practical examples and tips for handling missing data and transforming values.
+
+::: {.callout-tip collapse="true"}
+## Operations cheat sheet
+
+**Data Management Functions**
+
+- `df['col'].round(n)` — Round to n decimals
+- `df['col'].apply(np.floor)` — Floor values
+- `df['col'].apply(np.ceil)` — Ceil values
+- `df['col'].abs()` — Absolute value
+- `df['col'].clip(lower, upper)` — Limit values to range
+- `df['col'].fillna(val)` — Fill missing values
+
+**Numeric Operations**
+
+- `df['col'] + x` — Add
+- `df['col'] - x` — Subtract
+- `df['col'] * x` — Multiply
+- `df['col'] / x` — Divide
+- `df['col'] ** x` — Exponentiate
+- `df['col'] % x` — Modulo
+
+**NumPy Extensions**
+
+- `np.power(df['col'], x)` — Power
+- `np.sqrt(df['col'])` — Square root
+- `np.log(df['col'])` — Natural log
+- `np.log10(df['col'])` — Base-10 log
+- `np.exp(df['col'])` — Exponential
+
+**String Operations**
+
+- `df['col'] + 'str'` — Concatenate
+- `df['col'].str.len()` — String length
+- `df['col'].str.upper()` — Uppercase
+- `df['col'].str.lower()` — Lowercase
+- `df['col'].str.replace(a, b)` — Replace substring
+
+
+:::
