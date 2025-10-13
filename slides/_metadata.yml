@@ -1,0 +1,14 @@
+license: "CC BY"
+format: 
+  clean-revealjs:
+    chalkboard: true
+    callout-appearance: simple
+    transition: slide
+    transition-speed: fast
+    # footer: "ELSTE Data Science course / Fall 2025"
+    fontawesome: true
+    pdf: true
+    mermaid:
+      theme: 'default'
+      themeVariables:
+

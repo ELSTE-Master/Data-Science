@@ -430,9 +430,9 @@ df.loc[df['Country'] == 'Indonesia']
 
 | Operation         | Example                                 | Description                                         |
 |-------------------|-----------------------------------------|-----------------------------------------------------|
-| Contains          | `df['Name'].str.contains('Soufrière')`  | Checks if each string contains a substring          |
-| Startswith        | `df['Name'].str.startswith('E')`        | Checks if each string starts with a substring       |
-| Endswith          | `df['Name'].str.endswith('o')`          | Checks if each string ends with a substring         |
+| contains          | `df['Name'].str.contains('Soufrière')`  | Checks if each string contains a substring          |
+| startswith        | `df['Name'].str.startswith('E')`        | Checks if each string starts with a substring       |
+| endswith          | `df['Name'].str.endswith('o')`          | Checks if each string ends with a substring         |
 
 
 : Common string comparison operations. {#tbl-comparison-str .striped   }

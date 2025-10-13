@@ -1,5 +1,5 @@
 ---
-title: "Data exploration"
+title: "Data structure"
 format:
   html:
     code-fold: false
@@ -170,5 +170,4 @@ mcq({
 })
 ```
 :::
-
 

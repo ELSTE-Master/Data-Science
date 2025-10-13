@@ -73,5 +73,14 @@
   },
   "class1/day1-6_operations.qmd": {
     "day1-6_operations.html": "5b5f2be6"
+  },
+  "slides/class1_pandas.qmd": {
+    "class1_pandas.html": "cb04bf0f"
+  },
+  "slides/class1_intro.qmd": {
+    "class1_intro.html": "2c0395b9"
+  },
+  "class1/day1-summary.qmd": {
+    "day1-summary.html": "72e3b3f5"
   }
 }

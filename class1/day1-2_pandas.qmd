@@ -63,5 +63,3 @@ The first row - i.e. the row containing the column *labels* - is not considered 
 Remember that in Python, indexing starts from 0 - so the first row or column has an index of 0.
 :::
 
-
-

@@ -144,13 +144,28 @@ $selection-bg: $bg_light !default;
   color: var(--col, $jet);
 }
 
+// .bg {
+//   // background-color: var(--col, #fff);
+//   background-color: rgba($accent, 0.5);
+//   padding: 0.05em;
+//   border-radius: 2px;
+//   display: inline-block;
+// }
+
 .bg {
-  // background-color: var(--col, #fff);
-  background-color: rgba($accent, 0.5);
-  padding: 0.1em;
-  border-radius: 5px;
-  display: inline-block;
+  margin: 0 -0.2em;
+  padding: 0em 0.2em;
+  border-radius: 0.3em 0.15em;
+  background: transparent;
+  background-image: linear-gradient(
+    to right,
+    rgba($accent, 0.5) 4%,
+    rgba($accent, 0.4) 96%
+  );
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
+
 
 .reveal b,
 .reveal strong {
@@ -400,3 +415,7 @@ span[data-code-cell] {
   margin-top: 1.5em !important;
 }
 
+/* Add vertical space after code blocks with class 'sourceCode' */
+.cell-output {
+  margin-top: 1.5em;
+}

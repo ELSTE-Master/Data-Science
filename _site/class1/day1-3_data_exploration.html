@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data exploration – ELSTE Data Science Master Course</title>
+<title>Data structure – ELSTE Data Science Master Course</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -4824,7 +4824,19 @@ color: #23373b;
 h3, h4 {
 color: #2F4647;
 }
-</style>
+
+.reveal-embed {
+width: 100%;
+aspect-ratio: 16 / 9; 
+border: none;
+display: block;
+}
+
+@media (max-width: 768px) {
+.reveal-embed {
+aspect-ratio: 4 / 3;
+}
+}</style>
 <style type="text/css">
 :root {
 --incorrect: #983E82;
@@ -4943,7 +4955,7 @@ margin: 1em 0;
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../class1/day1-1_intro.html">Class 1</a></li><li class="breadcrumb-item"><a href="../class1/day1-3_data_exploration.html">Data exploration</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../class1/day1-1_intro.html">Class 1</a></li><li class="breadcrumb-item"><a href="../class1/day1-3_data_exploration.html">Data structure</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -4989,7 +5001,7 @@ margin: 1em 0;
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../class1/day1-1_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 1 overview</span></a>
+ <span class="menu-text">Overview</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -5001,7 +5013,7 @@ margin: 1em 0;
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../class1/day1-3_data_exploration.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Data exploration</span></a>
+ <span class="menu-text">Data structure</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -5020,6 +5032,12 @@ margin: 1em 0;
   <div class="sidebar-item-container"> 
   <a href="../class1/day1-6_operations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Operations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class1/day1-summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Summary</span></a>
   </div>
 </li>
       </ul>
@@ -5069,9 +5087,9 @@ margin: 1em 0;
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../class1/day1-1_intro.html">Class 1</a></li><li class="breadcrumb-item"><a href="../class1/day1-3_data_exploration.html">Data exploration</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../class1/day1-1_intro.html">Class 1</a></li><li class="breadcrumb-item"><a href="../class1/day1-3_data_exploration.html">Data structure</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Data exploration</h1>
+<h1 class="title">Data structure</h1>
 </div>
 
 
@@ -5267,7 +5285,7 @@ Remember that *functions* can take different *arguments*, which are extra keywor
 - `index_col=0`: Specify that the index of the file is the first column. More on that soon if this is unclear.
 - `parse_dates=['Date']`: Specify that the `Date` column should be treated as a date object.
 ::: -->
-<div id="9ec37a5c" class="cell" data-execution_count="3">
+<div id="fe166c82" class="cell" data-execution_count="3">
 <div id="lst-load-data" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-load-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -5349,13 +5367,13 @@ Listing 1: Loading data from a csv file
 </div>
 <section id="setting-up-the-index" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="setting-up-the-index">Setting up the index</h3>
-<p>The output of <a href="#lst-load-data" class="quarto-xref">Listing 1</a> shows the first 5 rows in our DataFrame. As displayed in <strong>?@fig-index</strong>, the first column is the <em>index</em> - which is currently just integer numbers. That can be acceptable in some cases, but for the sake of the exercise we will choose one column to become the index - here <code>Name</code>.</p>
+<p>The output of <a href="#lst-load-data" class="quarto-xref">Listing 1</a> shows the first 5 rows in our DataFrame. As displayed <a href="../class1/day1-2_pandas.html#fig-index">here</a>, the first column is the <em>index</em> - which is currently just integer numbers. That can be acceptable in some cases, but for the sake of the exercise we will choose one column to become the index - here <code>Name</code>.</p>
 <p><a href="#lst-set-index" class="quarto-xref">Listing 2</a> Illustrates the use of two useful functions:</p>
 <ul>
 <li><code>.set_index()</code>: Uses a column as the DataFrame’s index</li>
 <li><code>.reset_index()</code>: Removes the column’s index back to a sequential numbering as in <a href="#lst-load-data" class="quarto-xref">Listing 1</a>.</li>
 </ul>
-<div id="1a4c8eca" class="cell" data-execution_count="4">
+<div id="0ebadc14" class="cell" data-execution_count="4">
 <div id="lst-set-index" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-set-index-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -5500,7 +5518,7 @@ Your turn!
 <li><code>axis</code>: Specifies whether sorting rows (<code>axis = 0</code> - in which case <code>by</code> is a column name) or sorting columns (<code>axis = 1</code>, in which case <code>by</code> is an index value). The documentation specifies <code>axis = 0</code>, which means that rows will be sorted if <code>axis</code> is not specified.</li>
 <li><code>ascending</code>: Using a <em>bool</em> (remember, this is a True/False behaviour), specifies if values are sorted in <em>ascending</em> (<code>ascending = True</code>, default behaviour is not specified) or <em>descending</em> (<code>ascending = False</code>) order.</li>
 </ol>
-<div id="3d5be50d" class="cell" data-execution_count="5">
+<div id="310b6be6" class="cell" data-execution_count="5">
 <div id="lst-sort" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-sort-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -5526,7 +5544,7 @@ Question
 </div>
 <div class="callout-body-container callout-body">
 <p>After sorting the data in <strong>descending order</strong> by VEI and time, what are the three first volcanoes?</p>
-<div id="04af5519" class="cell" data-execution_count="6">
+<div id="d6a41148" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="5">
 <select class="webex-select"><option value="blank"></option><option value="0">Nyiragongo, Ontake, Kīlauea</option><option value="0">Kīlauea, Ontake, Nyiragongo</option><option value="answer">Pinatubo, El Chichon, St Helens</option><option value="0">St Helens, El Chichon, Pinatubo</option></select>
 </div>

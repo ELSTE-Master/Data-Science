@@ -154,3 +154,4 @@ It is possible mix label-based and position-based indexing. For example, to get 
 ```{python}
 df.iloc[0:5][['Country', 'VEI']]
 ```
+

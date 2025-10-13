@@ -45,4 +45,7 @@ We first start by reviewing the [data structure](#pandas-data-structure) behind 
 
 ## Slides
 
+### Introduction 
+<iframe src="../slides/class1.html" class="reveal-embed"></iframe> 
 
+- {{< fa file-pdf >}} [Download PDF](../slides/class1.pdf)

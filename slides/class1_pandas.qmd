@@ -1,0 +1,672 @@
+---
+title: "Intro to Python and Pandas"
+subtitle: "DataFrames for Data Science"
+date: "October 15, 2025"
+author:
+  - name: Sébastien Biass
+    id: sb
+    orcid: 0000-0002-1919-9473
+    email: sebastien.biasse@unige.ch
+    affiliation: 
+      - name: Earth Sciences
+
+---
+
+## Background
+
+::: {.callout-warning}
+## 
+We assume that you all followed Guy Simpson's Python crash course
+:::
+
+
+<span style="font-size: 0.5em;"></span>
+
+`pandas`: A **package** for [data manipulation and analysis]{.bg} handling **structured data**
+
+- **Reading/writing data** from common formats (CSV, Excel, JSON, etc.)
+- Handling **missing data**
+- **Filtering**, **sorting**, **reshaping** and **grouping** data
+- **Aggregating** data (sum, mean, count, etc.)
+- **Time series support** (date ranges, frequency conversions)
+- **Statistical operations**
+
+## Today's objectives
+
+Understand what is a `pandas` [DataFrame]{.bg} and its [basic anatomy]{.bg}
+
+- How to [load data]{.bg} in a DataFrame
+- How to [access]{.bg} data → *query by label/position*
+- How to [filter]{.bg} data → *comparison and logical operators*
+- How to [rearrange]{.bg} data → *sorting values*
+- How to [operate]{.bg} on data → *arithmetic and string operations*
+
+# Introduction to pandas {background-color="#2F4647"}
+
+## Anatomy of a DataFrame
+
+![](../class1/img/pandas-1.png)
+
+::: {.fragment}
+- Similar to *Excel* → contains *tabular data* composed of [rows]{.bg} and [columns]{.bg}
+:::
+
+::: {.fragment}
+- In *Excel*:
+  - **Rows** are accessed using *numbers*
+  - **Columns** are accessed using *letters*
+:::
+
+## Anatomy of a DataFrame
+
+![](../class1/img/pandas-2.png)
+
+::: {.fragment}
+- Unlike *Excel*, **rows** and **columns** can be [labelled]{.bg}
+  - [Index]{.bg} refers to the label of the **rows**. In the *index*, **values are usually unique** - meaning that each entry has a different label.
+  - [Column]{.bg} refers to the label of - logically - the **columns**
+:::
+
+# Data structure {background-color="#2F4647"}
+
+## The dataset
+
+Synthetic dataset of **selected volcanic eruptions** → first 5 rows:
+
+<span style="font-size: 0.5em;"></span>
+
+| Name            | Country     | Date                |   VEI |   Latitude |   Longitude |
+|:----------------|:------------|:--------------------|------:|-----------:|------------:|
+| St. Helens      | USA         | 1980-05-18 |     5 |    46.1914 |   -122.196  |
+| Pinatubo        | Philippines | 1991-04-02 |     6 |    15.1501 |    120.347  |
+| El Chichón      | Mexico      | 1982-03-28 |     5 |    17.3559 |    -93.2233 |
+| Galunggung      | Indonesia   | 1982-04-05 |     4 |    -7.2567 |    108.077  |
+| Nevado del Ruiz | Colombia    | 1985-11-13 |     3 |     4.895  |    -75.322  |
+
+## Volcanic explosivity index (VEI)
+
+![](img/vei.jpeg)
+
+## Setting up the notebook {auto-animate="true"}
+
+- We start by importing the `pandas` library
+- We import it under the name [pd]{.bg} - which is faster to type!
+
+<span style="font-size: 0.5em;"></span>
+
+```{python}
+# | eval: False 
+# | echo: True 
+
+# Import the required packages
+import pandas as pd
+```
+
+## Setting up the notebook {auto-animate="true"}
+
+- We then load the specified data with the `pd.read_csv()` function
+- This returns a [DataFrame]{.bg} object in a variable named `df`
+
+<span style="font-size: 0.5em;"></span>
+
+```{python}
+# | eval: False 
+# | echo: True
+
+# Import the required packages
+import pandas as pd
+
+# Read the data
+df = pd.read_csv('data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data
+```
+
+## Setting up the notebook {auto-animate="true"}
+
+- We print some data for inspection with `df.head()`
+- The functions are now directly called from the [DataFrame]{.bg} `df` object 
+
+<span style="font-size: 0.5em;"></span>
+
+
+```{python}
+# | eval: True 
+# | echo: True
+
+# Import the required packages
+import pandas as pd
+
+# Read the data
+df = pd.read_csv('../class1/data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data
+
+# Show the first 3 rows
+df.head(3) 
+```
+
+## Setting the index
+
+![](../class1/img/pandas-2.png)
+
+## Setting the index
+
+- ...for now, the index (**→ the first column)** is and *integer*
+- This might be acceptable in datasets where the *label* is not important
+
+<span style="font-size: 0.5em;"></span>
+
+```{python}
+# | eval: True 
+# | echo: True
+
+# Show the first 3 rows
+df.head(3) 
+```
+
+## Setting the index
+
+- Here we want to access the data using the **name of the volcano**
+- We **set the index** using `set_index()`
+
+<span style="font-size: 0.5em;"></span>
+
+```{python}
+# | eval: True 
+# | echo: True
+
+# Set the index to the 'Name' column
+df = df.set_index('Name')
+
+# Show the first 3 rows
+df.head(3) 
+```
+
+
+## Exploring data
+
+- Here are some **basic functions** to review the structure of the dataset:
+
+<span style="font-size: 0.5em;"></span>
+
+
+| Function     | Description                                                                                   |
+|--------------|-----------------------------------------------------------------------------------------------|
+| `df.head()`  | Prints the *first* 5 rows of the DataFrame.                                                   |
+| `df.tail()`  | Prints the *last* 5 rows of the DataFrame.                                                    |
+| `df.info()`  | Displays some info about the DataFrame, including the number of rows (*entries*) and columns. |
+| `df.shape`   | Returns a list containing the number of rows and columns of the DataFrame.                    |
+| `df.index`   | Returns a list containing the index along the *rows* of the DataFrame.                        |
+| `df.columns` | Returns a list containing the index along the *columns* of the DataFrame.                     |
+
+
+## Sorting data {auto-animate="true"}
+
+- Sorting [numerical]{.bg}, [datetime]{.bg} or [strings]{.bg} using `.sort_values`
+- Importance of [documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html) to understand [arguments]{.bg}
+
+```{python}
+# | eval: True 
+# | echo: True
+
+df.sort_values('VEI').head() # Sort volcanoes by VEI in ascending number
+```
+
+## Sorting data {auto-animate="true"}
+
+- Sorting [numerical]{.bg}, [datetime]{.bg} or [strings]{.bg} using `.sort_values`
+- Importance of [documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html) to understand [arguments]{.bg}
+
+```{python}
+# | eval: True 
+# | echo: True
+
+df.sort_values('VEI').head() # Sort volcanoes by VEI in ascending number
+df.sort_values('Date', ascending=False).head() # Sort volcanoes by eruption dates from recent to old
+```
+
+## Sorting data {auto-animate="true"}
+
+- Sorting [numerical]{.bg}, [datetime]{.bg} or [strings]{.bg} using `.sort_values`
+- Importance of [documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html) to understand [arguments]{.bg}
+
+```{python}
+# | eval: True 
+# | echo: True
+
+df.sort_values('VEI').head() # Sort volcanoes by VEI in ascending number
+df.sort_values('Date', ascending=False).head() # Sort volcanoes by eruption dates from recent to old
+df.sort_values('Country').head() # Also works on strings to sort alphabetically
+```
+
+## Sorting data {auto-animate="true"}
+
+- Sorting [numerical]{.bg}, [datetime]{.bg} or [strings]{.bg} using `.sort_values`
+- Importance of [documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html) to understand [arguments]{.bg}
+
+```{python}
+# | eval: True 
+# | echo: True
+
+df.sort_values('VEI').head() # Sort volcanoes by VEI in ascending number
+df.sort_values('Date', ascending=False).head() # Sort volcanoes by eruption dates from recent to old
+df.sort_values('Country').head() # Also works on strings to sort alphabetically
+df.sort_values(['Latitude', 'Longitude']).head() # Sorting using multiple columns
+```
+
+
+# Querying data {background-color="#2F4647"}
+
+
+## Accessing data in a DataFrame
+
+
+![](../class1/img/pandas-2.png)
+
+
+## Accessing data in a DataFrame
+
+**Option 1**: [label-based]{.bg} indexing
+
+- Use the [labels]{.bg} of **index** and **columns** to retrieve data
+- Function to use: `df.loc`
+
+::: {.fragment}
+![](../class1/img/pandas_loc.png)
+:::
+
+
+
+## Accessing data in a DataFrame
+
+**Option 2**: [position-based]{.bg} indexing
+
+- Use the [positions]{.bg} of **index** and **columns** to retrieve data
+- Function to use: `df.iloc`
+
+::: {.fragment}
+![](../class1/img/pandas_iloc.png)
+:::
+
+## Label-based indexing: Rows
+
+- **Query a [row]{.bg}** with `.loc` → Use **square brackets** `[ ]`
+  - Query the *row* for which the *index label* is `Calbuco`
+  - Returns all *columns*
+
+<span style="font-size: 0.5em;"></span>
+
+:::: {.columns}
+::: {.column width="48%"}
+::: {.fragment}
+
+```{python}
+# | eval: True 
+# | echo: True
+
+df.loc['Calbuco']
+```
+
+→ Returns a [pd.Series]{.bg}
+:::
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+::: {.fragment}
+```{python}
+# | eval: True 
+# | echo: True
+
+df.loc[['Calbuco']]
+```
+
+→ Returns a [pd.DataFrame]{.bg}
+
+:::
+:::
+::::
+
+
+## Label-based indexing: Rows
+
+- **Query [multiple rows]{.bg}**  with `.loc`
+  - Query the *rows* for which the *index labels* are `Calbuco` or `Taal`
+  - Returns all *columns*
+
+<span style="font-size: 0.5em;"></span>
+
+::: {.fragment}
+```{python}
+# | eval: True 
+# | echo: True
+
+df.loc[['Calbuco', 'Taal']]
+```
+:::
+
+## Label-based indexing: Columns
+
+- **Query [columns]{.bg}** 
+  - Query the *columns* for which the *column labels* are `Country` or `VEI`
+  - Returns all *rows*
+
+:::: {.columns}
+::: {.column width="48%"}
+::: {.fragment}
+
+- **Option 1**: [with]{.bg} `.loc`:
+```{python}
+# | eval: True 
+# | echo: True
+df.loc[:, ['Country', 'VEI']].head(3)
+```
+:::
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+::: {.fragment}
+- **Option 2**: [without]{.bg} `.loc`:
+```{python}
+# | eval: True 
+# | echo: True
+
+df[['Country', 'VEI']].head(3)
+```
+
+:::
+:::
+::::
+
+## Label-based indexing: Rows and Columns
+
+- Again, choice on whether to use `.loc` to query columns
+
+:::: {.columns}
+::: {.column width="48%"}
+::: {.fragment}
+
+- **Option 1**: Columns are specified [inside]{.bg} `.loc`:
+```{python}
+# | eval: True 
+# | echo: True
+df.loc[['Calbuco', 'Taal'], ['Country', 'VEI']].head(3)
+```
+:::
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+::: {.fragment}
+- **Option 2**: Columns are specified [outside]{.bg} `.loc`:
+```{python}
+# | eval: True 
+# | echo: True
+
+df.loc[['Calbuco', 'Taal']][['Country', 'VEI']].head(3)
+```
+
+:::
+:::
+::::
+
+
+
+## Position-based indexing: Rows
+
+- **Query a [row]{.bg}** with `.iloc`
+  - Returns all *columns*
+
+<span style="font-size: 0.5em;"></span>
+
+:::: {.columns}
+::: {.column width="48%"}
+::: {.fragment}
+
+- **One row** (first row):
+
+```{python}
+# | eval: True 
+# | echo: True
+df.iloc[[0]]
+```
+:::
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+::: {.fragment}
+- **Range of rows**: (rows 3-4):
+```{python}
+# | eval: True 
+# | echo: True
+df.iloc[2:4]
+```
+
+:::
+:::
+::::
+
+
+## Position-based indexing: Rows
+
+- Query rows [from the end]{.bg}:
+- Example:
+  - Get the **last 5 rows** of the DataFrame:
+
+```{python}
+# | eval: True 
+# | echo: True
+df.iloc[-5:]
+```
+
+## Position-based and label-based queries
+
+- Mix [position-based]{.bg} and [label-based]{.bg} indexing:
+  - **Rows** → *labels*
+  - **Columns** → *positions*
+
+```{python}
+# | eval: True 
+# | echo: True
+df.iloc[0:5][['Country', 'VEI']]
+```
+
+
+
+
+
+# Filtering data {background-color="#2F4647"}
+
+## Boolean indexing
+
+- **Filtering** data with [boolean indexing]{.bg}
+  - Returns either `True` or `False` depending on whether the **condition** is satisfied
+
+
+:::: {.columns}
+
+::: {.column width="25%"}
+::: {.fragment}
+- Example:
+
+<span style="font-size: 0.5em;"></span>
+
+```{python}
+# | eval: True 
+# | echo: True
+a = 1
+b = 2
+```
+:::
+:::
+
+::: {.column width="10%"}
+
+:::
+
+::: {.column width="65%"}
+::: {.fragment}
+
+- **Comparison operators**:
+
+| Operator | Meaning                | Example      | Result      |
+|----------|------------------------|--------------|-------------|
+| `==`     | Equal to               | `a == b`     | `False`     |
+| `!=`     | Not equal to           | `a != b`     | `True`      |
+| `>`      | Greater than           | `a > b`      | `False`     |
+| `<`      | Less than              | `a < b`      | `True`      |
+| `>=`     | Greater than or equal  | `a >= b`     | `False`     |
+| `<=`     | Less than or equal     | `a <= b`     | `True`      |
+:::
+:::
+
+::::
+
+
+## Boolean indexing: Example  {auto-animate="true"}
+
+- Query all volcanoes where `VEI == 4`
+
+<span style="font-size: 0.5em;"></span>
+
+```{python}
+# | eval: True 
+# | echo: True
+df['VEI'] == 4
+```
+
+## Boolean indexing: Example  {auto-animate="true"}
+
+- Query all volcanoes where `VEI == 4`
+
+<span style="font-size: 0.5em;"></span>
+
+
+```{python}
+# | eval: True 
+# | echo: True
+df.loc[df['VEI'] == 4]
+```
+
+
+
+## Boolean indexing: Strings
+
+- **Filtering** also works with [strings]{.bg}
+  - Use **string comparison** operations
+
+<span style="font-size: 0.5em;"></span>
+
+- **Example**:
+
+```{python}
+# | eval: True 
+# | echo: True
+df.loc[df['Country'] == 'Indonesia']
+```
+
+
+## Boolean indexing: Strings
+
+- **Filtering** also works with [strings]{.bg}
+  - Use **string comparison** operations
+
+<span style="font-size: 0.5em;"></span>
+
+- **String comparison operators**:
+<span style="font-size: 0.5em;"></span>
+
+| Operation         | Example                                 | Description                                         |
+|-------------------|-----------------------------------------|-----------------------------------------------------|
+| contains          | `df['Name'].str.contains('Soufrière')`  | Checks if each string contains a substring          |
+| startswith        | `df['Name'].str.startswith('E')`        | Checks if each string starts with a substring       |
+| endswith          | `df['Name'].str.endswith('o')`          | Checks if each string ends with a substring         |
+
+
+
+# Operations {background-color="#2F4647"}
+
+## Data management operations
+
+- Common [data management]{.bg} functions for pandas columns:
+
+| Operation         | Example                                 | Description                                         |
+|-------------------|-----------------------------------------|-----------------------------------------------------|
+| Round             | `df['VEI'].round(1)`                    | Rounds values to the specified number of decimals   |
+| Floor             | `df['VEI'].apply(np.floor)`             | Rounds values down to the nearest integer           |
+| Ceil              | `df['VEI'].apply(np.ceil)`              | Rounds values up to the nearest integer             |
+| Absolute value    | `df['VEI'].abs()`                       | Returns the absolute value of each element          |
+| Fill missing      | `df['VEI'].fillna(0)`                   | Replaces missing values with a specified value      |
+
+<span style="font-size: 0.5em;"></span>
+
+::: {.fragment}
+- Round the `'Latitude'` to two decimals → [make sure you store the output]{.bg}!
+
+```{python}
+# | eval: False 
+# | echo: True
+df['Latitude'] = df['Latitude'].round(2)
+```
+
+:::
+
+## Arithmetic operations
+
+- [Arithmetic operations]{.bg} on parts of the DataFrame (→ *columns*) using native Python arithmetic operators
+
+| Operation      | Symbol | Example                | Description                                 |
+|----------------|--------|------------------------|---------------------------------------------|
+| Addition       | `+`    | `df['VEI'] + 1`        | Adds a value to each element                |
+| Subtraction    | `-`    | `df['VEI'] - 1`        | Subtracts a value from each element         |
+| Multiplication | `*`    | `df['VEI'] * 2`        | Multiplies each element by a value          |
+| Division       | `/`    | `df['VEI'] / 2`        | Divides each element by a value             |
+| Exponentiation | `**`   | `df['VEI'] ** 2`       | Raises each element to a power              |
+| Modulo         | `%`    | `df['VEI'] % 2`        | Remainder after division for each element   |
+
+<span style="font-size: 0.5em;"></span>
+
+::: {.fragment}
+- Divide `VEI` by 2 and store results a new column (→ `VEI_haved`)
+
+```{python}
+# | eval: False 
+# | echo: True
+df['VEI_halved'] = df['VEI'] / 2
+```
+
+:::
+
+## Expanded arithmetic operations
+
+- The range of [arithmetic operations]{.bg} can be expanded using `numpy`
+
+
+| Operation         | Symbol       | Example                        | Description                                      |
+|-------------------|--------------------------|--------------------------------|--------------------------------------------------|
+| Exponentiation    | `np.power`      | `np.power(df['VEI'], 2)`       | Element-wise exponentiation                      |
+| Square root       | `np.sqrt`                | `np.sqrt(df['VEI'])`           | Element-wise square root                         |
+| Logarithm (base e)| `np.log`                 | `np.log(df['VEI'])`            | Element-wise natural logarithm                   |
+| Logarithm (base 10)| `np.log10`              | `np.log10(df['VEI'])`          | Element-wise base-10 logarithm                   |
+| Exponential       | `np.exp`                 | `np.exp(df['VEI'])`            | Element-wise exponential (e^x)                   |
+
+<span style="font-size: 0.5em;"></span>
+
+::: {.fragment}
+- Divide `VEI` by 2 and store results a new column (→ `VEI_haved`)
+
+```{python}
+# | eval: False 
+# | echo: True
+df['VEI_square'] = np.power(df['VEI'], 2)
+```
+
+:::

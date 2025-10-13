@@ -24,10 +24,29 @@ df = df.set_index('Name')
 
 
 
-Let's now see how we can manipulate and operate on data contained within our DataFrame. @tbl-op-arith and @tbl-op-str respectively illustrate arithmetic and string-based operators that can be applied on parts of the DataFrame.
+## Data management operations  {.unnumbered}
 
+Pandas contains several helpful functions to manage and format numerical data (@tbl-op-dataman).
+
+| Operation         | Example                                 | Description                                         |
+|-------------------|-----------------------------------------|-----------------------------------------------------|
+| Round             | `df['VEI'].round(1)`                    | Rounds values to the specified number of decimals   |
+| Floor             | `df['VEI'].apply(np.floor)`             | Rounds values down to the nearest integer           |
+| Ceil              | `df['VEI'].apply(np.ceil)`              | Rounds values up to the nearest integer             |
+| Absolute value    | `df['VEI'].abs()`                       | Returns the absolute value of each element          |
+| Clip              | `df['VEI'].clip(lower=0, upper=5)`      | Limits values to a specified range                  |
+| Fill missing      | `df['VEI'].fillna(0)`                   | Replaces missing values with a specified value      |
+
+: Common data management functions for pandas columns. {#tbl-op-dataman .striped}
+
+::: {.callout-tip}
+## Filling missing data
+The `.fillna` example in @tbl-op-dataman shows how to replace [missing data]{.bg} - often referred to as *Nan* for *Not a number* - with 0 value. However, Pandas's `.fillna` contains a lot of different methodologies to fill missing values (e.g., interpolation). Again, take the habit of checking out the [documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.fillna.html) of the functions your frequently use.
+:::
 
 ## Numeric operations {.unnumbered}
+
+Let's now see how we can manipulate and operate on data contained within our DataFrame. @tbl-op-arith illustrates [arithmetic]{.bg} operators that can be applied to parts of the DataFrame. @tbl-op-arith relies only on native Python arithmetic operators, which can be expanded using the `numpy` package (@tbl-op-numpy).
 
 @lst-op1 Illustrates how to half the VEI column save the results to a new column.
 
@@ -99,10 +118,22 @@ df.loc[mask, 'Longitude_E'] = 360 + df.loc[mask, 'Longitude']
 : Common arithmetic operations on numerical pandas columns. {#tbl-op-arith .striped   }
 
 
+| Operation         | Symbol       | Example                        | Description                                      |
+|-------------------|--------------------------|--------------------------------|--------------------------------------------------|
+| Exponentiation    | `np.power`      | `np.power(df['VEI'], 2)`       | Element-wise exponentiation                      |
+| Square root       | `np.sqrt`                | `np.sqrt(df['VEI'])`           | Element-wise square root                         |
+| Logarithm (base e)| `np.log`                 | `np.log(df['VEI'])`            | Element-wise natural logarithm                   |
+| Logarithm (base 10)| `np.log10`              | `np.log10(df['VEI'])`          | Element-wise base-10 logarithm                   |
+| Exponential       | `np.exp`                 | `np.exp(df['VEI'])`            | Element-wise exponential (e^x)                   |
+
+: Common NumPy operations on pandas columns or arrays. {#tbl-op-numpy .striped}
+
+
 
 ## String operations {.unnumbered}
 
 
+Similarly, @tbl-op-str illustrates Pandas's [string-based]{.bg} operators.
 
 | Operation         | Example                                 | Description                                         |
 |-------------------|-----------------------------------------|-----------------------------------------------------|
@@ -113,3 +144,4 @@ df.loc[mask, 'Longitude_E'] = 360 + df.loc[mask, 'Longitude']
 | Replace           | `df['Country'].str.replace('USA', 'US')`| Replaces substrings in each string                  |
 
 : Common string operations on pandas columns. {#tbl-op-str .striped   }
+

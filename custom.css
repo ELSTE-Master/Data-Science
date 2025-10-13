@@ -59,3 +59,17 @@ h3, h4 {
   color: #2F4647;
 }
 
+/* Make iframe take full width of the Quarto content area */
+.reveal-embed {
+  width: 100%;
+  aspect-ratio: 16 / 9;  /* or whatever aspect ratio your slides have */
+  border: none;
+  display: block;
+}
+
+/* Optional: ensure it doesn't overflow on small screens */
+@media (max-width: 768px) {
+  .reveal-embed {
+    aspect-ratio: 4 / 3;
+  }
+}

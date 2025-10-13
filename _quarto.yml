@@ -5,6 +5,7 @@ website:
   title: "ELSTE Data Science Master Course"
   description: "An introduction to data science using Python"
   page-navigation: true
+
   search:
     location: sidebar
   # navbar:
@@ -20,7 +21,7 @@ website:
         text: "GitHub"
     background: "#F5F5F5"
     search: true
-    contents:
+    contents: 
       - index.qmd
       - section: "Class 1"
         contents:
@@ -30,6 +31,7 @@ website:
           - class1/day1-4_queries.qmd
           - class1/day1-5_filtering.qmd
           - class1/day1-6_operations.qmd
+          - class1/day1-summary.qmd
       - section: "Appendices"
         contents:
           - appendices/setup_vscode.qmd
@@ -43,6 +45,8 @@ website:
   #       href: https://github.com/
   #       aria-label: GitHub
 bibliography: references.bib
+
+
 
 format:
   html:
