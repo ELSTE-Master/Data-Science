@@ -46,6 +46,16 @@ We first start by reviewing the [data structure](#pandas-data-structure) behind 
 ## Slides
 
 ### Introduction 
-<iframe src="../slides/class1.html" class="reveal-embed"></iframe> 
+<iframe src="../slides/class1_intro.html" class="reveal-embed"></iframe> 
 
-- {{< fa file-pdf >}} [Download PDF](../slides/class1.pdf)
+- {{< fa file-pdf >}} [Download PDF](../slides/class1_intro.pdf)
+
+- <i class="fa fa-window-restore"></i> <a href="../slides/class1_intro.html" target="_blank">Open in new window</a>
+
+### Intro to Pandas
+
+<iframe src="../slides/class1_pandas.html" class="reveal-embed"></iframe> 
+
+- {{< fa file-pdf >}} [Download PDF](../slides/class1_pandas.pdf)
+
+- <i class="fa fa-window-restore"></i> <a href="../slides/class1_pandas.html" target="_blank">Open in new window</a>

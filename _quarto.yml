@@ -19,7 +19,7 @@ website:
       - icon: github
         href: ttps://github.com/e5k/Data-Science/
         text: "GitHub"
-    background: "#F5F5F5"
+    background: "#fafafa"
     search: true
     contents: 
       - index.qmd
