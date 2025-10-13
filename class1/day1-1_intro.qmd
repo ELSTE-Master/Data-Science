@@ -1,0 +1,61 @@
+---
+title: "Overview"
+format:
+  html:
+    code-fold: false
+    code-line-numbers: true
+    css: [../assets/webex.css]
+    include-after-body: [../assets/webex.js]
+    embed-resources: true 
+jupyter: python3
+---
+
+```{python}
+#| echo: false
+from pywebexercises.exercises import mcq, longmcq, torf
+import matplotlib.pyplot as plt
+plt.rcParams.update({
+    "figure.facecolor":  (0.0, 0.0, 0.0, 0.0),  # red   with alpha = 30%
+})
+```
+
+
+
+We will start our data science journey by learning a bit about the most useful Python library for this class: **Pandas**. As a reminder, a *library* is a set of tools we load on top of Python that provides new functionalities for a specific problem or type of analysis. Here, Pandas provides functions for **data manipulation and analysis**, handling structured data like tables or time series and facilitating numerous tasks you might encounter as a scientist. These include:
+
+- **Reading/writing data** from various commonly-used formats (CSV, Excel, SQL, JSON, etc.)
+- Handling **missing data**
+- **Filtering**, **sorting**, **reshaping** and **grouping** data
+- **Aggregating** data (sum, mean, count, etc.)
+- **Time series support** (date ranges, frequency conversions)
+- **Statistical operations**
+
+## Today's objectives {.unnumbered}
+
+The objective of this class is by no way to make you an expert in Pandas and data science. Rather, the objective is to take you through the most basic manipulations in order to build the confidence to keep on exploring the use of scientific coding and to include it into your research pipeline. The objectives of this module are to review:
+
+- [x] What is a Pandas DataFrame and its basic anatomy
+- [x] How to *load data* in a DataFrame
+- [x] How to *access* data (e.g., query by label/position)
+- [x] How to *filter* data (e.g., comparison and logical operators)
+- [x] How to *rearrange* data (e.g., sorting values)
+- [x] How to *operate* on data (e.g., arithmetic and string operations)
+
+We first start by reviewing the [data structure](#pandas-data-structure) behind Pandas, then we will move on to a [coding exercise](#coding-playground) to make you familiar with some basic functionalities.
+
+## Slides
+
+### Introduction 
+<iframe src="../slides/class1_intro.html" class="reveal-embed"></iframe> 
+
+- {{< fa file-pdf >}} [Download PDF](../slides/class1_intro.pdf)
+
+- <i class="fa fa-window-restore"></i> <a href="../slides/class1_intro.html" target="_blank">Open in new window</a>
+
+### Intro to Pandas
+
+<iframe src="../slides/class1_pandas.html" class="reveal-embed"></iframe> 
+
+- {{< fa file-pdf >}} [Download PDF](../slides/class1_pandas.pdf)
+
+- <i class="fa fa-window-restore"></i> <a href="../slides/class1_pandas.html" target="_blank">Open in new window</a>

@@ -3,34 +3,50 @@ project:
   
 website:
   title: "ELSTE Data Science Master Course"
-  description: "A rapid introduction to data science using Python"
-  navbar:
-    right:
-      - icon: github
-        href: https://github.com/e5k/Data-Science/blob/main/_quarto.yml
+  description: "An introduction to data science using Python"
+  page-navigation: true
+
+  search:
+    location: sidebar
+  # navbar:
+  #   right:
+  #     - icon: github
+  #       href: https://github.com/e5k/Data-Science/blob/main/_quarto.yml
   sidebar:
-    background: "#F5F5F5"
+    style: "floating"
+    title: "ELSTE Data Science Course"   # 👈 moves site title here
+    tools:     
+      - icon: github
+        href: ttps://github.com/e5k/Data-Science/
+        text: "GitHub"
+    background: "#fafafa"
     search: true
-    contents:
+    contents: 
       - index.qmd
       - section: "Class 1"
         contents:
-          - class1/class1_overview.qmd
-          - class1/pandas1.qmd
-          - class1/pandas2.qmd
-          - demo_page.qmd
+          - class1/day1-1_intro.qmd
+          - class1/day1-2_pandas.qmd
+          - class1/day1-3_data_exploration.qmd
+          - class1/day1-4_queries.qmd
+          - class1/day1-5_filtering.qmd
+          - class1/day1-6_operations.qmd
+          - class1/day1-summary.qmd
       - section: "Appendices"
         contents:
           - appendices/setup_vscode.qmd
       - references.qmd
   page-footer:
-    center: "© Fall semester 2025 - CC BY 4.0 - Sébastien Biass & Stéphane Guerrier"
+    background: "#F5F5F5"
+    center: "© 2025 - [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.en) - Sébastien Biass & Stéphane Guerrier"
   # navbar:
   #   right:
   #     - icon: github
   #       href: https://github.com/
   #       aria-label: GitHub
 bibliography: references.bib
+
+
 
 format:
   html:
@@ -39,6 +55,11 @@ format:
     code-fold: false
     css: custom.css
     backgroundcolor: "#F5F5F5"
+    toc: true          # enable TOC
+    toc-depth: 3       # how many heading levels to include
+    toc-location: right
+    toc-title: "On this page"
+    toc-expand: 1      # how much to auto-expand initially
   # pdf:
   #   documentclass: scrreprt
   # revealjs: default # slides output

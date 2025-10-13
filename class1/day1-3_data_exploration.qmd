@@ -1,0 +1,173 @@
+---
+title: "Data structure"
+format:
+  html:
+    code-fold: false
+    code-line-numbers: true
+    css: [../assets/webex.css]
+    include-after-body: [../assets/webex.js]
+    embed-resources: true 
+jupyter: python3
+---
+
+```{python}
+#| echo: false
+from pywebexercises.exercises import mcq, longmcq, torf
+import matplotlib.pyplot as plt
+plt.rcParams.update({
+    "figure.facecolor":  (0.0, 0.0, 0.0, 0.0),  # red   with alpha = 30%
+})
+```
+
+Let's get our hands dirty and start coding. Create a new Jupyter notebook following [this guide](../appendices/setup_vscode.qmd). You can copy fragments of the code, but make sure each code block is a different cell in you notebook. Also remember that you can add **Markdown** cells in between code cells, which are really useful to document your code.
+
+The data we will use here is a `csv` file containing selected eruptions of the past 50 years. The first 5 rows of the data are illustrated in @tbl-first-5.
+
+
+| Name            | Country     | Date                |   VEI |   Latitude |   Longitude |
+|:----------------|:------------|:--------------------|------:|-----------:|------------:|
+| St. Helens      | USA         | 1980-05-18 00:00:00 |     5 |    46.1914 |   -122.196  |
+| Pinatubo        | Philippines | 1991-04-02 00:00:00 |     6 |    15.1501 |    120.347  |
+| El Chichón      | Mexico      | 1982-03-28 00:00:00 |     5 |    17.3559 |    -93.2233 |
+| Galunggung      | Indonesia   | 1982-04-05 00:00:00 |     4 |    -7.2567 |    108.077  |
+| Nevado del Ruiz | Colombia    | 1985-11-13 00:00:00 |     3 |     4.895  |    -75.322  |
+
+: First 5 rows of the dataset. {#tbl-first-5 .striped   }
+
+::: {.callout-note collapse="true"}
+## What is the VEI?
+
+The Volcanic Explosivity Index - or VEI - is a scale to measure the magnitude of explosive eruptions based on the volume of tephra ejected during an eruption. It is a logarithmic scale in base 10:
+
+| VEI | Min Volume (km³) | Max Volume (km³) | Approx. Frequency      |
+|-----|------------------|------------------|------------------------|
+| 0   | <0.00001         | 0.0001           | Daily                  |
+| 1   | 0.0001           | 0.001            | Weekly                 |
+| 2   | 0.001            | 0.01             | Yearly                 |
+| 3   | 0.01             | 0.1              | Few per year           |
+| 4   | 0.1              | 1                | ~10 per decade         |
+| 5   | 1                | 10               | ~1 per decade          |
+| 6   | 10               | 100              | ~1 per century         |
+| 7   | 100              | 1000             | ~1 per several centuries|
+| 8   | >1000            | -                | ~1 per 10,000 years    |
+
+: VEI scale with minimum and maximum erupted volume and approximate frequency. {#tbl-vei .striped   }
+
+:::
+
+## Importing the library and the data {.unnumbered}
+
+As always, we start by importing the `pandas` library as `pd`.
+
+```{python}
+#| label: load-packages
+#| output-fold: true
+#| output-summary: "Show output"
+
+import pandas as pd
+```
+
+We load the dataset using the `pd.read_csv` function into a variable called `df` (for DataFrame) ([doc](https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html)). Remember that *functions* can take different *arguments*, which are extra keywords you can *pass* to make the behaviour of the function more specific to your need. Here, we pass one arguments to the `read_csv()` function: `parse_dates=['Date']` Specifies that the `Date` column should be treated as a date object.
+
+
+<!-- ::: {.callout-tip}
+## Function arguments
+
+Remember that *functions* can take different *arguments*, which are extra keywords you can *pass* to make the behaviour of the function more specific to your need. Here, we one arguments to the `read_csv()` function:
+
+- `index_col=0`: Specify that the index of the file is the first column. More on that soon if this is unclear.
+- `parse_dates=['Date']`: Specify that the `Date` column should be treated as a date object.
+::: -->
+
+
+```{python}
+#| lst-label: lst-load-data
+#| lst-cap: Loading data from a csv file
+
+df = pd.read_csv('data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data
+df.head() # Show the first 5 rows
+```
+
+
+### Setting up the index {.unnumbered}
+
+The output of @lst-load-data shows the first 5 rows in our DataFrame. As displayed [here](day1-2_pandas.qmd#fig-index), the first column is the *index* - which is currently just integer numbers. That can be acceptable in some cases, but for the sake of the exercise we will choose one column to become the index - here `Name`. 
+
+@lst-set-index Illustrates the use of two useful functions:
+
+- `.set_index()`: Uses a column as the DataFrame's index
+- `.reset_index()`: Removes the column's index back to a sequential numbering as in @lst-load-data.
+
+```{python}
+#| lst-label: lst-set-index
+#| lst-cap: Common functions to set the index of a DataFrame
+
+df = df.set_index('VEI') # Set the 'VEI' column as an index
+df = df.reset_index() # Shoots, I meant to set the 'Name' columns as an index
+df = df.set_index('Name') # Here we go.
+df.head()
+```
+
+
+## Basic data exploration {.unnumbered}
+
+Let's now explore the structure of the dataset with the following functions:
+
+| Function         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+|------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `df.head()`      | Prints the *first* 5 rows of the DataFrame ([doc](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.head.html))                                                                                                                                                                                                                                                                                                                          |
+| `df.tail()`      | Prints the *last* 5 rows of the DataFrame ([doc](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.tail.html))                                                                                                                                                                                                                                                                                                                           |
+| `df.info()`      | Displays some info about the DataFrame, including the number of rows (*entries*) and columns ([doc](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.info.html)). Note the `Dtype` column: this is the type variable stored in each column including *strings* (`object`), *integer* (`int64`) and *float* (`int64`) numbers. See that the `Date` column is indeed stored as a `datetime` variable as requested above. |
+| `df.shape`       | Returns a list containing the number of rows and columns of the DataFrame.                                                                                                                                                                                                                                                                                                                                                                           |
+| `df.index`       | Returns a list containing the index along the *rows* of the DataFrame.                                                                                                                                                                                                                                                                                                                                                                           |
+| `df.columns`     | Returns a list containing the index along the *columns* of the DataFrame.                                                                                                                                                                                                                                                                                                                                                                           |
+
+::: {.callout-tip}
+
+
+## Your turn!
+
+Try these functions on `df` and get familiar with the output.
+
+:::
+
+
+
+
+## Sorting data {.unnumbered}
+
+The main function to sort data is `.sort_values` ([doc](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html)). It is necessary to review how *three arguments* can alter the function's behaviour:
+
+1. `by`: First argument (required) is the label of index/row used to sort the data. It is possible to sort by multiple columns by passing a list of values.
+2. `axis`: Specifies whether sorting rows (`axis = 0` - in which case `by` is a column name) or sorting columns (`axis = 1`, in which case `by` is an index value). The documentation specifies `axis = 0`, which means that rows will be sorted if `axis` is not specified.
+3. `ascending`: Using a *bool* (remember, this is a True/False behaviour), specifies if values are sorted in *ascending* (`ascending = True`, default behaviour is not specified) or *descending* (`ascending = False`) order.
+
+
+```{python}
+#| lst-label: lst-sort
+#| lst-cap: Basic sorting operations
+#| eval: false
+
+df.sort_values('VEI') # Sort volcanoes by VEI in ascending number
+df.sort_values('Date', ascending=False) # Sort volcanoes by eruption dates from recent to old
+df.sort_values('Country') # .sort_values also work on strings to sort alphabetically
+df.sort_values(['Latitude', 'Longitude']) # Sorting using multiple columns
+```
+
+
+::: {.callout-note}
+## Question
+
+After sorting the data in **descending order** by VEI and time, what are the three first volcanoes?
+
+```{python}
+#| echo: false
+mcq({
+    'Nyiragongo, Ontake, Kīlauea': 0,
+    'Kīlauea, Ontake, Nyiragongo': 0,
+    'Pinatubo, El Chichon, St Helens': 1,
+    'St Helens, El Chichon, Pinatubo': 0
+})
+```
+:::
+
