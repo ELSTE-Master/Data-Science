@@ -96,7 +96,7 @@
     code span.vs { color: #da4453; } /* VerbatimString */
     code span.wa { color: #da4453; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-470bac35ac99e5572b5eb6e2eeaa68fa.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-63a0de06f658f1925789ecc194034ebc.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -502,6 +502,7 @@ flowchart LR
 <li>Usually slower, but much, much <span class="bg">easier to use</span>!</li>
 </ul></li>
 </ul>
+<div class="fragment">
 <p><strong>Modular</strong></p>
 <ul>
 <li>Python is composed of a <em>core</em> of functions complemented by wide ecosystem of specialized packages for <span class="bg">specific tasks</span>
@@ -511,6 +512,7 @@ flowchart LR
 <li>A <span class="bg">package</span> is composed by multiple <strong>modules</strong></li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="an-example-of-packages-modules-and-functions" class="slide level2">
 <h2>An example of packages, modules and functions</h2>
@@ -520,7 +522,7 @@ flowchart LR
 <li><code>pyplot</code> is a <span class="bg">module</span> of <code>matplotlib</code> that provides easy-to-use functions for <strong>plotting</strong> data</li>
 <li><code>figure</code> is a <span class="bg">function</span> of <code>pyplot</code> and is the main function to prepare a plot</li>
 </ul>
-<div id="62605ecb" class="cell" data-execution_count="1">
+<div id="4aaf0d94" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># Import the packages and modules</span></span>
 <span id="cb1-2"><a></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt </span>
 <span id="cb1-3"><a></a><span class="co"># Set up a figure for plotting</span></span>
@@ -557,12 +559,12 @@ flowchart LR
 
 </div><div class="column" style="width:48%;">
 <div class="fragment">
-<p><strong>Option 2</strong>: On the cloud → <a href="https://colab.google">Google Collab</a></p>
+<p><strong>Option 2</strong>: In the cloud → <a href="https://colab.google">Google Collab</a></p>
 <ul>
 <li>No setup required</li>
 <li>No internet connection required</li>
 <li>Decent speed, free as long as Google says it is free</li>
-<li>All data stored on your own computer</li>
+<li>All data stored in the cloud</li>
 </ul>
 </div>
 </div></div>

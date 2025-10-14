@@ -5314,7 +5314,7 @@ Remember that *functions* can take different *arguments*, which are extra keywor
 - `index_col=0`: Specify that the index of the file is the first column. More on that soon if this is unclear.
 - `parse_dates=['Date']`: Specify that the `Date` column should be treated as a date object.
 ::: -->
-<div id="4a23bed9" class="cell" data-execution_count="3">
+<div id="2bd7e5ff" class="cell" data-execution_count="3">
 <div id="lst-load-data" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-load-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -5402,7 +5402,7 @@ Listing 1: Loading data from a csv file
 <li><code>.set_index()</code>: Uses a column as the DataFrame’s index</li>
 <li><code>.reset_index()</code>: Removes the column’s index back to a sequential numbering as in <a href="#lst-load-data" class="quarto-xref">Listing 1</a>.</li>
 </ul>
-<div id="34b42e91" class="cell" data-execution_count="4">
+<div id="eccb27a8" class="cell" data-execution_count="4">
 <div id="lst-set-index" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-set-index-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -5561,7 +5561,7 @@ Figure 3: Label-based queries using <code>.loc</code>.
 <section id="querying-rows" class="level5 unnumbered">
 <h5 class="unnumbered anchored" data-anchor-id="querying-rows">Querying rows</h5>
 <p>When we know the exact label of the row or the column, we can use the <code>.loc</code> function to query the DataFrame (<a href="#fig-pandas-loc" class="quarto-xref">Figure 3</a>). Let’s start by querying specific <strong>rows</strong>. <a href="#lst-set-index" class="quarto-xref">Listing 2</a> has defined the <code>Name</code> column as the <em>index</em> (i.e., row label), which means that we can simply pass the name of the volcano.</p>
-<div id="c1f70d36" class="cell" data-execution_count="5">
+<div id="2057fdd1" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Get the row for &quot;Calbuco&quot; volcano</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>df.loc[<span class="st">&#39;Calbuco&#39;</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
@@ -5574,7 +5574,7 @@ Name: Calbuco, dtype: object</code></pre>
 </div>
 </div>
 <p>Note that the result is a <em>Series</em> (i.e., a 1-dimensional DataFrame where the columns become the index), not a DataFrame. If we want to <strong>keep it as a DataFrame</strong>, we can use double brackets. Double brackets can also be used to query <strong>multiple rows</strong>.</p>
-<div id="68a6e3dc" class="cell" data-execution_count="6">
+<div id="5d61dd0a" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>df.loc[[<span class="st">&#39;Calbuco&#39;</span>]] <span class="co"># Query one row and return it as a DataFrame</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a>df.loc[[<span class="st">&#39;Calbuco&#39;</span>, <span class="st">&#39;Taal&#39;</span>]] <span class="co"># Query multiple rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
@@ -5634,13 +5634,13 @@ Question
 </div>
 <div class="callout-body-container callout-body">
 <p>What is the VEI recorded for Etna volcano?</p>
-<div id="747c827b" class="cell" data-execution_count="7">
+<div id="139110d3" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="7">
 <select class="webex-select"><option value="blank"></option><option value="0">1</option><option value="0">2</option><option value="0">3</option><option value="answer">4</option><option value="0">5</option></select>
 </div>
 </div>
 <p>What is the eruption date for Taal volcano?</p>
-<div id="1ec0244f" class="cell" data-execution_count="8">
+<div id="44459f95" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="8">
 <select class="webex-select"><option value="blank"></option><option value="0">1980-05-18    </option><option value="0">1991-04-02</option><option value="answer">2020-01-12</option><option value="0">1997-06-25</option><option value="0">2023-02-13</option></select>
 </div>
@@ -5664,7 +5664,7 @@ Double brackets
 <section id="querying-columns" class="level5 unnumbered">
 <h5 class="unnumbered anchored" data-anchor-id="querying-columns">Querying columns</h5>
 <p>Let’s now query specific <strong>columns</strong>. For example, querying the <code>VEI</code> column can be achieved in different ways. The simplest is to use the column name directly. We can also query <strong>multiple columns</strong> using double brackets</p>
-<div id="a49068f6" class="cell" data-execution_count="9">
+<div id="6517c6fd" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>df[[<span class="st">&#39;VEI&#39;</span>]] <span class="co"># Get the VEI column</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a>df[[<span class="st">&#39;Country&#39;</span>, <span class="st">&#39;VEI&#39;</span>]] <span class="co"># Query multiple columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
@@ -5792,7 +5792,7 @@ Double brackets
 </div>
 </div>
 <p>Note that until now, we have only retrieved either rows or columns (<a href="#fig-pandas-loc" class="quarto-xref">Figure 3</a>). We can also retrieve specific values by specifying <strong>both the row and the column</strong>.</p>
-<div id="b412a195" class="cell" data-execution_count="10">
+<div id="99467bcc" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>df.loc[[<span class="st">&#39;Calbuco&#39;</span>, <span class="st">&#39;Taal&#39;</span>]][[<span class="st">&#39;Country&#39;</span>, <span class="st">&#39;VEI&#39;</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <div>
@@ -5844,7 +5844,7 @@ Figure 4: Position-based queries using <code>.iloc</code>.
 </div>
 <p>Some situations require querying data by <em>location</em> instead of <em>label</em> - let’s say for instance we need to retrieve rows 10-20. This is done using the <code>.iloc</code> function (instead of the <code>.loc</code> function previously used; <a href="#fig-pandas-iloc" class="quarto-xref">Figure 4</a>). Remember that Python uses zero-based indexing (<a href="#cau-indexing" class="quarto-xref">Caution 1</a>), meaning that the first element is at position 0, the second at position 1, and so on.</p>
 <p>The next example queries the first row - using again double brackets to return a <strong>DataFrame</strong>.</p>
-<div id="7abb63e5" class="cell" data-execution_count="11">
+<div id="c098f1e8" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>df.iloc[[<span class="dv">0</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <div>
@@ -5887,7 +5887,7 @@ Figure 4: Position-based queries using <code>.iloc</code>.
 <section id="get-ranges-of-rows" class="level5 unnumbered">
 <h5 class="unnumbered anchored" data-anchor-id="get-ranges-of-rows">Get ranges of rows</h5>
 <p>We can get <strong>a range of rows</strong> using what is called <em>slicing</em>. This is done using the colon (<code>:</code>) operator. The next example queries rows 3 to 6 of the DataFrame. Note that the end index is exclusive, meaning that the element at the end index is not included in the result.</p>
-<div id="33736815" class="cell" data-execution_count="12">
+<div id="308e9a56" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>df.iloc[<span class="dv">2</span>:<span class="dv">6</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <div>
@@ -5952,7 +5952,7 @@ Figure 4: Position-based queries using <code>.iloc</code>.
 </div>
 </div>
 <p>To get rows 3 to 6 and columns 2-3:</p>
-<div id="c496a935" class="cell" data-execution_count="13">
+<div id="34cf4748" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>df.iloc[<span class="dv">0</span>:<span class="dv">5</span>, <span class="dv">1</span>:<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <div>
@@ -6007,7 +6007,7 @@ Figure 4: Position-based queries using <code>.iloc</code>.
 <section id="count-rows-from-the-last" class="level5 unnumbered">
 <h5 class="unnumbered anchored" data-anchor-id="count-rows-from-the-last">Count rows from the last</h5>
 <p>To get the last 5 rows of the DataFrame:</p>
-<div id="ad4f6553" class="cell" data-execution_count="14">
+<div id="dc146970" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>df.iloc[<span class="op">-</span><span class="dv">5</span>:]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
 <div>
@@ -6083,7 +6083,7 @@ Figure 4: Position-based queries using <code>.iloc</code>.
 <section id="combining-position-based-and-label-based-queries" class="level5 unnumbered">
 <h5 class="unnumbered anchored" data-anchor-id="combining-position-based-and-label-based-queries">Combining position-based and label-based queries</h5>
 <p>By experience, position-based queries is more used on <em>rows</em> than <em>columns</em>. For instance, we might want to access the first 10 rows because we don’t know their associated labels, yet it is less likely that we ignore their <em>attributes</em>. It is possible mix label-based and position-based indexing. For example, to get the first 5 rows and the <code>Country</code> and <code>VEI</code> columns:</p>
-<div id="a106c9c1" class="cell" data-execution_count="15">
+<div id="6582cf96" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>df.iloc[<span class="dv">0</span>:<span class="dv">5</span>][[<span class="st">&#39;Country&#39;</span>, <span class="st">&#39;VEI&#39;</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
 <div>
@@ -6142,7 +6142,7 @@ Figure 4: Position-based queries using <code>.iloc</code>.
 <section id="comparison-operators" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="comparison-operators">Comparison operators</h4>
 <p>Now that we have reviewed how to access data, let’s now see how to <strong>filter</strong> data using <strong>boolean indexing</strong>. For this, we need to review what are <strong>comparison operators</strong> (<a href="#tbl-comparison-operators" class="quarto-xref">Table 3</a>). Let’s assume the following variables:</p>
-<div id="31ecdc80" class="cell" data-execution_count="16">
+<div id="e4928c08" class="cell" data-execution_count="16">
 <div id="lst-basic-bool" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-basic-bool-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -6214,7 +6214,7 @@ Table 3: Comparison operators in Python.
 </figure>
 </div>
 <p>We can apply comparison operators to DataFrame. Let’s say we want to test what rows have a VEI of 4:</p>
-<div id="bb914f0d" class="cell" data-execution_count="17">
+<div id="692bb422" class="cell" data-execution_count="17">
 <div id="lst-bool" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-bool-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -6251,7 +6251,7 @@ Name: VEI, dtype: bool</code></pre>
 </div>
 </div>
 <p>We can see that Galunggung, Taal, La Soufrière, Calbuco and Eyjafjallajökull return <code>True</code> to this condition. This is great, but what if we want to return the actual rows? We can use <a href="#lst-bool" class="quarto-xref">Listing 4</a> as a <strong>mask</strong> to then query the rows using <code>.loc</code>.</p>
-<div id="46deff9c" class="cell" data-execution_count="18">
+<div id="56ab0bb6" class="cell" data-execution_count="18">
 <div id="lst-bool-query" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-bool-query-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -6347,13 +6347,13 @@ Question
 </div>
 <div class="callout-body-container callout-body">
 <p>What volcanoes have a VEI of 5?</p>
-<div id="d0920d3b" class="cell" data-execution_count="19">
+<div id="ce746094" class="cell" data-execution_count="19">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="19">
 <select class="webex-select"><option value="blank"></option><option value="0">La Soufrière and Calbuco</option><option value="0">Merapi and Agung</option><option value="0">Nyiragongo and Taal</option><option value="answer">St. Helens and El Chichón</option></select>
 </div>
 </div>
 <p>How many volcanoes are in the southern hemisphere? (hint: use the <code>df.shape</code> function to count them).</p>
-<div id="04e42d2e" class="cell" data-execution_count="20">
+<div id="424b8b79" class="cell" data-execution_count="20">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="20">
 <select class="webex-select"><option value="blank"></option><option value="0">1</option><option value="0">2</option><option value="0">4</option><option value="answer">6</option><option value="0">12</option></select>
 </div>
@@ -6363,7 +6363,7 @@ Question
 <section id="string-comparisons" class="level5 unnumbered">
 <h5 class="unnumbered anchored" data-anchor-id="string-comparisons">String comparisons</h5>
 <p>We can also use comparison operators on columns containing <strong>strings</strong> (see <a href="#cau-dtypes" class="quarto-xref">Caution 2</a> for caveats). <a href="#lst-str-comp" class="quarto-xref">Listing 6</a> illustrates a basic string comparison using the <code>=</code> operator. <a href="#tbl-comparison-str" class="quarto-xref">Table 4</a> shows additional operators for strings.</p>
-<div id="d9c2c2fa" class="cell" data-execution_count="21">
+<div id="452d0ab6" class="cell" data-execution_count="21">
 <div id="lst-str-comp" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-str-comp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -6544,7 +6544,7 @@ Table 5: Logical operators in pandas for combining boolean conditions. Use pare
 </figure>
 </div>
 <p>Let’s gather all volcanoes that have a VEI of 3 and are in Indonesia:</p>
-<div id="430ab9b1" class="cell" data-execution_count="22">
+<div id="39d0e811" class="cell" data-execution_count="22">
 <div id="lst-logical-query" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-logical-query-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -6613,13 +6613,13 @@ Question
 </div>
 <div class="callout-body-container callout-body">
 <p>How many volcanoes are either in Chile <strong>or</strong> in the USA?</p>
-<div id="44f8ef5e" class="cell" data-execution_count="23">
+<div id="fdbf8490" class="cell" data-execution_count="23">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="23">
 <select class="webex-select"><option value="blank"></option><option value="0">1</option><option value="0">3</option><option value="answer">5</option><option value="0">8</option></select>
 </div>
 </div>
 <p>How many volcanoes are in the southern hemisphere <strong>and</strong> have a VEI≥4?</p>
-<div id="eb38bd66" class="cell" data-execution_count="24">
+<div id="629439ae" class="cell" data-execution_count="24">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="24">
 <select class="webex-select"><option value="blank"></option><option value="0">1</option><option value="answer">2</option><option value="0">8</option><option value="0">12</option></select>
 </div>
@@ -6638,7 +6638,7 @@ Question
 <li><code>axis</code>: Specifies whether sorting rows (<code>axis = 0</code> - in which case <code>by</code> is a column name) or sorting columns (<code>axis = 1</code>, in which case <code>by</code> is an index value). The documentation specifies <code>axis = 0</code>, which means that rows will be sorted if <code>axis</code> is not specified.</li>
 <li><code>ascending</code>: Using a <em>bool</em> (remember, this is a True/False behaviour), specifies if values are sorted in <em>ascending</em> (<code>ascending = True</code>, default behaviour is not specified) or <em>descending</em> (<code>ascending = False</code>) order.</li>
 </ol>
-<div id="f27e444b" class="cell" data-execution_count="25">
+<div id="fb2ac29e" class="cell" data-execution_count="25">
 <div id="lst-sort" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-sort-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -6664,7 +6664,7 @@ Question
 </div>
 <div class="callout-body-container callout-body">
 <p>After sorting the data in <strong>descending order</strong> by VEI and time, what are the three first volcanoes?</p>
-<div id="86249ef0" class="cell" data-execution_count="26">
+<div id="4bf0eb26" class="cell" data-execution_count="26">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="25">
 <select class="webex-select"><option value="blank"></option><option value="0">Nyiragongo, Ontake, Kīlauea</option><option value="0">Kīlauea, Ontake, Nyiragongo</option><option value="answer">Pinatubo, El Chichon, St Helens</option><option value="0">St Helens, El Chichon, Pinatubo</option></select>
 </div>
@@ -6679,7 +6679,7 @@ Question
 <section id="numeric-operations" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="numeric-operations">Numeric operations</h4>
 <p><a href="#lst-op1" class="quarto-xref">Listing 9</a> Illustrates how to half the VEI column save the results to a new column.</p>
-<div id="befed2d5" class="cell" data-execution_count="27">
+<div id="3983fd80" class="cell" data-execution_count="27">
 <div id="lst-op1" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-op1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
