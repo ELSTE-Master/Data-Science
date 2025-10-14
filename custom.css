@@ -73,3 +73,43 @@ h3, h4 {
     aspect-ratio: 4 / 3;
   }
 }
+
+/* TOC */
+.sidebar nav[role=doc-toc] ul > li > a.active,
+.sidebar nav[role=doc-toc] ul > li > ul > li > a.active {
+  /* color: #EB811B !important;        active text color */
+  color: #d86405 !important;        /* active text color */
+  border-left: 1px solid #EB811B;
+}
+.sidebar nav[role=doc-toc] ul > li > a:hover,
+.sidebar nav[role=doc-toc] ul > li > ul > li > a:hover {
+  color: #EB811B !important;       
+}
+.sidebar nav[role=doc-toc] ul > li > a,
+.sidebar nav[role=doc-toc] ul > li > ul > li > a {
+  color: #343a40 !important;       
+}
+
+/* Left sidebar */
+.sidebar-header a {
+  color: #212529 !important;
+}
+
+.sidebar-item-container a:hover{
+  color: #EB811B !important;
+}
+.sidebar-item-container a.active{
+  color: #d86405 !important;
+}
+.sidebar-item-container a {
+  color: #343a40 !important;
+}
+
+/* Links */
+a:hover{
+  color: #EB811B !important;
+}
+a {
+  color: #d86405 !important;
+} 
+

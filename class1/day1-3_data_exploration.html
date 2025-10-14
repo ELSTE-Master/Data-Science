@@ -4836,7 +4836,40 @@ display: block;
 .reveal-embed {
 aspect-ratio: 4 / 3;
 }
-}</style>
+}
+
+.sidebar nav[role=doc-toc] ul > li > a.active,
+.sidebar nav[role=doc-toc] ul > li > ul > li > a.active {
+
+color: #d86405 !important; 
+border-left: 1px solid #EB811B;
+}
+.sidebar nav[role=doc-toc] ul > li > a:hover,
+.sidebar nav[role=doc-toc] ul > li > ul > li > a:hover {
+color: #EB811B !important; }
+.sidebar nav[role=doc-toc] ul > li > a,
+.sidebar nav[role=doc-toc] ul > li > ul > li > a {
+color: #343a40 !important; }
+
+.sidebar-header a {
+color: #212529 !important;
+}
+.sidebar-item-container a:hover{
+color: #EB811B !important;
+}
+.sidebar-item-container a.active{
+color: #d86405 !important;
+}
+.sidebar-item-container a {
+color: #343a40 !important;
+}
+
+a:hover{
+color: #EB811B !important;
+}
+a {
+color: #d86405 !important;
+} </style>
 <style type="text/css">
 :root {
 --incorrect: #983E82;
@@ -5285,7 +5318,7 @@ Remember that *functions* can take different *arguments*, which are extra keywor
 - `index_col=0`: Specify that the index of the file is the first column. More on that soon if this is unclear.
 - `parse_dates=['Date']`: Specify that the `Date` column should be treated as a date object.
 ::: -->
-<div id="196f824b" class="cell" data-execution_count="3">
+<div id="ac34b414" class="cell" data-execution_count="3">
 <div id="lst-load-data" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-load-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -5373,7 +5406,7 @@ Listing 1: Loading data from a csv file
 <li><code>.set_index()</code>: Uses a column as the DataFrame’s index</li>
 <li><code>.reset_index()</code>: Removes the column’s index back to a sequential numbering as in <a href="#lst-load-data" class="quarto-xref">Listing 1</a>.</li>
 </ul>
-<div id="84e43f22" class="cell" data-execution_count="4">
+<div id="db276147" class="cell" data-execution_count="4">
 <div id="lst-set-index" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-set-index-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -5518,7 +5551,7 @@ Your turn!
 <li><code>axis</code>: Specifies whether sorting rows (<code>axis = 0</code> - in which case <code>by</code> is a column name) or sorting columns (<code>axis = 1</code>, in which case <code>by</code> is an index value). The documentation specifies <code>axis = 0</code>, which means that rows will be sorted if <code>axis</code> is not specified.</li>
 <li><code>ascending</code>: Using a <em>bool</em> (remember, this is a True/False behaviour), specifies if values are sorted in <em>ascending</em> (<code>ascending = True</code>, default behaviour is not specified) or <em>descending</em> (<code>ascending = False</code>) order.</li>
 </ol>
-<div id="2be0522d" class="cell" data-execution_count="5">
+<div id="e6a5e11c" class="cell" data-execution_count="5">
 <div id="lst-sort" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-sort-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -5544,7 +5577,7 @@ Question
 </div>
 <div class="callout-body-container callout-body">
 <p>After sorting the data in <strong>descending order</strong> by VEI and time, what are the three first volcanoes?</p>
-<div id="2f332382" class="cell" data-execution_count="6">
+<div id="28c11394" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="5">
 <select class="webex-select"><option value="blank"></option><option value="0">Nyiragongo, Ontake, Kīlauea</option><option value="0">Kīlauea, Ontake, Nyiragongo</option><option value="answer">Pinatubo, El Chichon, St Helens</option><option value="0">St Helens, El Chichon, Pinatubo</option></select>
 </div>
