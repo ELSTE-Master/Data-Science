@@ -44,8 +44,8 @@ The course is composed of three 6-h sessions on Wednesday mornings from 9h - 12h
 |--------------|--------------------|------------------------------|
 | Oct 15, 2025 | SB    | Introduction to Python, data manipulation |
 | Oct 22, 2025 | SB  | Exploratory data analysis, plotting  |
-| Oct 29, 2025 | SG    | Bi-variate analyses  |
-| Nov 5, 2025  | SG  | Regressions       |
+| Oct 29, 2025 | SG    | T-test, ANOVA, multiple comparisons  |
+| Nov 5, 2025  | SG  | Linear regression       |
 | Nov 12, 2025 | SB/SG    | TBD     |
 | Nov 19, 2025 | SB/SG  | TBD            |
 : {.striped   }
