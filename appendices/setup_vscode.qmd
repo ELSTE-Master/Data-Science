@@ -14,7 +14,7 @@ These steps will ensure that Python works and finds the files in this exact fold
 ![Open VS Code and set the working folder](img/1.png){#fig-open width=80%}
 
 ## Create a new Jupyter Notebook
-
+ 
 1. Type <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>p</kbd> (or <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>p</kbd> on MacOS) to open the command palette
 2. Type `jupyter` and select `Create: New Jupyter Notebook` (@fig-newnotebook)
 
