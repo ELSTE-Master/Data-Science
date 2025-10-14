@@ -26,7 +26,7 @@
     "href": "class1/day1-1_intro.html#slides",
     "title": "Overview",
     "section": "Slides",
-    "text": "Slides\n\nIntroduction\n\n PDF\n View in browser\n\n\n\nIntro to Pandas\n\n\n\n PDF",
+    "text": "Slides\n\nIntroduction\n\n PDF\n View in browser\n\n\n\nIntro to Pandas\n\n PDF\n View in browser",
     "crumbs": [
       "Class 1",
       "Overview"
@@ -145,10 +145,7 @@
     "href": "references.html",
     "title": "References",
     "section": "",
-    "text": "References",
-    "crumbs": [
-      "References"
-    ]
+    "text": "References"
   },
   {
     "objectID": "demo_page.html",
@@ -205,6 +202,383 @@
     "title": "Demo page",
     "section": "Question 1",
     "text": "Question 1\nHere is a question.\n\n \\(\\frac{1}{10}\\) \\(\\frac{3}{10}\\) \\(\\frac{2}{5}\\) \\(\\frac{52}{100}\\)\n\n\n\n\n\n\n\n\n❓ Hint\n\n\n: \n\n\n\n\n\n💡 Explanation\n\n\n:"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#background",
+    "href": "slides/class1_pandas.html#background",
+    "title": "Intro to Python and Pandas",
+    "section": "Background",
+    "text": "Background\n\n\n\n\n\n\nWe assume that you all followed Guy Simpson’s Python crash course\n\n\n\n\npandas: A package for data manipulation and analysis handling structured data\n\nReading/writing data from common formats (CSV, Excel, JSON, etc.)\nHandling missing data\nFiltering, sorting, reshaping and grouping data\nAggregating data (sum, mean, count, etc.)\nTime series support (date ranges, frequency conversions)\nStatistical operations"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#todays-objectives",
+    "href": "slides/class1_pandas.html#todays-objectives",
+    "title": "Intro to Python and Pandas",
+    "section": "Today’s objectives",
+    "text": "Today’s objectives\nUnderstand what is a pandas DataFrame and its basic anatomy\n\nHow to load data in a DataFrame\nHow to access data → query by label/position\nHow to filter data → comparison and logical operators\nHow to rearrange data → sorting values\nHow to operate on data → arithmetic and string operations"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#anatomy-of-a-dataframe",
+    "href": "slides/class1_pandas.html#anatomy-of-a-dataframe",
+    "title": "Intro to Python and Pandas",
+    "section": "Anatomy of a DataFrame",
+    "text": "Anatomy of a DataFrame\n\n\n\nSimilar to Excel → contains tabular data composed of rows and columns\n\n\n\n\nIn Excel:\n\nRows are accessed using numbers\nColumns are accessed using letters"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#anatomy-of-a-dataframe-1",
+    "href": "slides/class1_pandas.html#anatomy-of-a-dataframe-1",
+    "title": "Intro to Python and Pandas",
+    "section": "Anatomy of a DataFrame",
+    "text": "Anatomy of a DataFrame\n\n\n\nUnlike Excel, rows and columns can be labelled\n\nIndex refers to the label of the rows. In the index, values are usually unique - meaning that each entry has a different label.\nColumn refers to the label of - logically - the columns"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#the-dataset",
+    "href": "slides/class1_pandas.html#the-dataset",
+    "title": "Intro to Python and Pandas",
+    "section": "The dataset",
+    "text": "The dataset\nSynthetic dataset of selected volcanic eruptions → first 5 rows:\n\n\n\n\n\n\n\n\n\n\n\n\nName\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\n\n\nSt. Helens\nUSA\n1980-05-18\n5\n46.1914\n-122.196\n\n\nPinatubo\nPhilippines\n1991-04-02\n6\n15.1501\n120.347\n\n\nEl Chichón\nMexico\n1982-03-28\n5\n17.3559\n-93.2233\n\n\nGalunggung\nIndonesia\n1982-04-05\n4\n-7.2567\n108.077\n\n\nNevado del Ruiz\nColombia\n1985-11-13\n3\n4.895\n-75.322"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#volcanic-explosivity-index-vei",
+    "href": "slides/class1_pandas.html#volcanic-explosivity-index-vei",
+    "title": "Intro to Python and Pandas",
+    "section": "Volcanic explosivity index (VEI)",
+    "text": "Volcanic explosivity index (VEI)"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#setting-up-the-notebook",
+    "href": "slides/class1_pandas.html#setting-up-the-notebook",
+    "title": "Intro to Python and Pandas",
+    "section": "Setting up the notebook",
+    "text": "Setting up the notebook\n\nWe start by importing the pandas library\nWe import it under the name pd - which is faster to type!\n\n\n\n# Import the required packages\nimport pandas as pd"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#setting-up-the-notebook-1",
+    "href": "slides/class1_pandas.html#setting-up-the-notebook-1",
+    "title": "Intro to Python and Pandas",
+    "section": "Setting up the notebook",
+    "text": "Setting up the notebook\n\nWe then load the specified data with the pd.read_csv() function\nThis returns a DataFrame object in a variable named df\n\n\n\n# Import the required packages\nimport pandas as pd\n\n# Read the data\ndf = pd.read_csv('https://raw.githubusercontent.com/e5k/Data-Science/main/Data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#setting-up-the-notebook-2",
+    "href": "slides/class1_pandas.html#setting-up-the-notebook-2",
+    "title": "Intro to Python and Pandas",
+    "section": "Setting up the notebook",
+    "text": "Setting up the notebook\n\nWe print some data for inspection with df.head()\nThe functions are now directly called from the DataFrame df object\n\n\n\n# Import the required packages\nimport pandas as pd\n\n# Read the data\ndf = pd.read_csv('https://raw.githubusercontent.com/e5k/Data-Science/main/Data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data\n\n# Show the first 3 rows\ndf.head(3) \n\n\n\n\n\n\n\n\nName\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\n\n\n0\nSt. Helens\nUSA\n1980-05-18\n5\n46.1914\n-122.1956\n\n\n1\nPinatubo\nPhilippines\n1991-04-02\n6\n15.1501\n120.3465\n\n\n2\nEl Chichón\nMexico\n1982-03-28\n5\n17.3559\n-93.2233"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#setting-the-index",
+    "href": "slides/class1_pandas.html#setting-the-index",
+    "title": "Intro to Python and Pandas",
+    "section": "Setting the index",
+    "text": "Setting the index"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#setting-the-index-1",
+    "href": "slides/class1_pandas.html#setting-the-index-1",
+    "title": "Intro to Python and Pandas",
+    "section": "Setting the index",
+    "text": "Setting the index\n\n…for now, the index (→ the first column) is an integer\nThis might be acceptable in datasets where the label is not important\n\n\n\n# Show the first 3 rows\ndf.head(3) \n\n\n\n\n\n\n\n\nName\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\n\n\n0\nSt. Helens\nUSA\n1980-05-18\n5\n46.1914\n-122.1956\n\n\n1\nPinatubo\nPhilippines\n1991-04-02\n6\n15.1501\n120.3465\n\n\n2\nEl Chichón\nMexico\n1982-03-28\n5\n17.3559\n-93.2233"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#setting-the-index-2",
+    "href": "slides/class1_pandas.html#setting-the-index-2",
+    "title": "Intro to Python and Pandas",
+    "section": "Setting the index",
+    "text": "Setting the index\n\nHere we want to access the data using the name of the volcano\nWe set the index using set_index()\n\n\n\n# Set the index to the 'Name' column\ndf = df.set_index('Name')\n\n# Show the first 3 rows\ndf.head(3) \n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nSt. Helens\nUSA\n1980-05-18\n5\n46.1914\n-122.1956\n\n\nPinatubo\nPhilippines\n1991-04-02\n6\n15.1501\n120.3465\n\n\nEl Chichón\nMexico\n1982-03-28\n5\n17.3559\n-93.2233"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#exploring-data",
+    "href": "slides/class1_pandas.html#exploring-data",
+    "title": "Intro to Python and Pandas",
+    "section": "Exploring data",
+    "text": "Exploring data\n\nHere are some basic functions to review the structure of the dataset:\n\n\n\n\n\n\n\n\n\nFunction\nDescription\n\n\n\n\ndf.head()\nPrints the first 5 rows of the DataFrame.\n\n\ndf.tail()\nPrints the last 5 rows of the DataFrame.\n\n\ndf.info()\nDisplays some info about the DataFrame, including the number of rows (entries) and columns.\n\n\ndf.shape\nReturns a list containing the number of rows and columns of the DataFrame.\n\n\ndf.index\nReturns a list containing the index along the rows of the DataFrame.\n\n\ndf.columns\nReturns a list containing the index along the columns of the DataFrame.\n\n\n\n\n\n\n\n\n\n\nFunctions vs attributes\n\n\n\nFunctions have parentheses → they compute something on df\nAttributes do not have parentheses → they store some parameter related to df"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#sorting-data",
+    "href": "slides/class1_pandas.html#sorting-data",
+    "title": "Intro to Python and Pandas",
+    "section": "Sorting data",
+    "text": "Sorting data\n\nSorting numerical, datetime or strings using .sort_values\nImportance of documentation to understand arguments\n\n\ndf.sort_values('VEI').head() # Sort volcanoes by VEI in ascending number\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nNyiragongo\nDR Congo\n2021-05-22\n1\n-1.5200\n29.2500\n\n\nMerapi\nIndonesia\n2023-12-03\n2\n-7.5407\n110.4457\n\n\nOntake\nJapan\n2014-09-27\n2\n35.5149\n137.4781\n\n\nKīlauea\nUSA\n2018-05-03\n2\n19.4194\n-155.2811\n\n\nEtna\nItaly\n2021-03-16\n2\n37.7510\n15.0044"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#sorting-data-1",
+    "href": "slides/class1_pandas.html#sorting-data-1",
+    "title": "Intro to Python and Pandas",
+    "section": "Sorting data",
+    "text": "Sorting data\n\nSorting numerical, datetime or strings using .sort_values\nImportance of documentation to understand arguments\n\n\ndf.sort_values('VEI').head() # Sort volcanoes by VEI in ascending number\ndf.sort_values('Date', ascending=False).head() # Sort volcanoes by eruption dates from recent to old\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nMerapi\nIndonesia\n2023-12-03\n2\n-7.5407\n110.4457\n\n\nCleveland\nUSA\n2023-05-23\n3\n52.8250\n-169.9444\n\n\nSinabung\nIndonesia\n2023-02-13\n3\n3.1719\n98.3925\n\n\nNyiragongo\nDR Congo\n2021-05-22\n1\n-1.5200\n29.2500\n\n\nLa Soufrière\nSaint Vincent\n2021-04-09\n4\n13.2833\n-61.3875"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#sorting-data-2",
+    "href": "slides/class1_pandas.html#sorting-data-2",
+    "title": "Intro to Python and Pandas",
+    "section": "Sorting data",
+    "text": "Sorting data\n\nSorting numerical, datetime or strings using .sort_values\nImportance of documentation to understand arguments\n\n\ndf.sort_values('VEI').head() # Sort volcanoes by VEI in ascending number\ndf.sort_values('Date', ascending=False).head() # Sort volcanoes by eruption dates from recent to old\ndf.sort_values('Country').head() # Also works on strings to sort alphabetically\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nCalbuco\nChile\n2015-04-22\n4\n-41.2972\n-72.6097\n\n\nNevado del Ruiz\nColombia\n1985-11-13\n3\n4.8950\n-75.3220\n\n\nNyiragongo\nDR Congo\n2021-05-22\n1\n-1.5200\n29.2500\n\n\nEyjafjallajökull\nIceland\n2010-04-14\n4\n63.6333\n-19.6111\n\n\nGalunggung\nIndonesia\n1982-04-05\n4\n-7.2567\n108.0771"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#sorting-data-3",
+    "href": "slides/class1_pandas.html#sorting-data-3",
+    "title": "Intro to Python and Pandas",
+    "section": "Sorting data",
+    "text": "Sorting data\n\nSorting numerical, datetime or strings using .sort_values\nImportance of documentation to understand arguments\n\n\ndf.sort_values('VEI').head() # Sort volcanoes by VEI in ascending number\ndf.sort_values('Date', ascending=False).head() # Sort volcanoes by eruption dates from recent to old\ndf.sort_values('Country').head() # Also works on strings to sort alphabetically\ndf.sort_values(['Latitude', 'Longitude']).head() # Sorting using multiple columns\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nCalbuco\nChile\n2015-04-22\n4\n-41.2972\n-72.6097\n\n\nAgung\nIndonesia\n2017-11-21\n3\n-8.3422\n115.5083\n\n\nMerapi\nIndonesia\n2023-12-03\n2\n-7.5407\n110.4457\n\n\nGalunggung\nIndonesia\n1982-04-05\n4\n-7.2567\n108.0771\n\n\nTavurvur\nPapua New Guinea\n2014-08-29\n3\n-4.3494\n152.2847"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#your-turn",
+    "href": "slides/class1_pandas.html#your-turn",
+    "title": "Intro to Python and Pandas",
+    "section": "Your turn!",
+    "text": "Your turn!\n\nGo to https://e5k.github.io/Data-Science/\n\nClass 1 &gt; Data Structure"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#accessing-data-in-a-dataframe",
+    "href": "slides/class1_pandas.html#accessing-data-in-a-dataframe",
+    "title": "Intro to Python and Pandas",
+    "section": "Accessing data in a DataFrame",
+    "text": "Accessing data in a DataFrame"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#accessing-data-in-a-dataframe-1",
+    "href": "slides/class1_pandas.html#accessing-data-in-a-dataframe-1",
+    "title": "Intro to Python and Pandas",
+    "section": "Accessing data in a DataFrame",
+    "text": "Accessing data in a DataFrame\nOption 1: label-based indexing\n\nUse the labels of index and columns to retrieve data\nFunction to use: df.loc"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#accessing-data-in-a-dataframe-2",
+    "href": "slides/class1_pandas.html#accessing-data-in-a-dataframe-2",
+    "title": "Intro to Python and Pandas",
+    "section": "Accessing data in a DataFrame",
+    "text": "Accessing data in a DataFrame\nOption 2: position-based indexing\n\nUse the positions of index and columns to retrieve data\nFunction to use: df.iloc"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#label-based-indexing-rows",
+    "href": "slides/class1_pandas.html#label-based-indexing-rows",
+    "title": "Intro to Python and Pandas",
+    "section": "Label-based indexing: Rows",
+    "text": "Label-based indexing: Rows\n\nQuery a row with .loc → Use square brackets [ ]\n\nQuery the row for which the index label is Calbuco\nReturns all columns\n\n\n\n\n\n\n\ndf.loc['Calbuco']\n\nCountry                    Chile\nDate         2015-04-22 00:00:00\nVEI                            4\nLatitude                -41.2972\nLongitude               -72.6097\nName: Calbuco, dtype: object\n\n\n→ Returns a pd.Series\n\n\n\n\n\n\ndf.loc[['Calbuco']]\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nCalbuco\nChile\n2015-04-22\n4\n-41.2972\n-72.6097\n\n\n\n\n\n\n\n→ Returns a pd.DataFrame"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#label-based-indexing-rows-1",
+    "href": "slides/class1_pandas.html#label-based-indexing-rows-1",
+    "title": "Intro to Python and Pandas",
+    "section": "Label-based indexing: Rows",
+    "text": "Label-based indexing: Rows\n\nQuery multiple rows with .loc\n\nQuery the rows for which the index labels are Calbuco or Taal\nReturns all columns\n\n\n\n\n\ndf.loc[['Calbuco', 'Taal']]\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nCalbuco\nChile\n2015-04-22\n4\n-41.2972\n-72.6097\n\n\nTaal\nPhilippines\n2020-01-12\n4\n14.0020\n120.9934"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#label-based-indexing-columns",
+    "href": "slides/class1_pandas.html#label-based-indexing-columns",
+    "title": "Intro to Python and Pandas",
+    "section": "Label-based indexing: Columns",
+    "text": "Label-based indexing: Columns\n\nQuery columns\n\nQuery the columns for which the column labels are Country or VEI\nReturns all rows\n\n\n\n\n\n\nOption 1: with .loc:\n\n\ndf.loc[:, ['Country', 'VEI']].head(3)\n\n\n\n\n\n\n\n\nCountry\nVEI\n\n\nName\n\n\n\n\n\n\nSt. Helens\nUSA\n5\n\n\nPinatubo\nPhilippines\n6\n\n\nEl Chichón\nMexico\n5\n\n\n\n\n\n\n\n\n\n\n\n\n\nOption 2: without .loc:\n\n\ndf[['Country', 'VEI']].head(3)\n\n\n\n\n\n\n\n\nCountry\nVEI\n\n\nName\n\n\n\n\n\n\nSt. Helens\nUSA\n5\n\n\nPinatubo\nPhilippines\n6\n\n\nEl Chichón\nMexico\n5"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#label-based-indexing-rows-and-columns",
+    "href": "slides/class1_pandas.html#label-based-indexing-rows-and-columns",
+    "title": "Intro to Python and Pandas",
+    "section": "Label-based indexing: Rows and Columns",
+    "text": "Label-based indexing: Rows and Columns\n\nAgain, choice on whether to use .loc to query columns\n\n\n\n\n\nOption 1: Columns are specified inside .loc:\n\n\ndf.loc[['Calbuco', 'Taal'], ['Country', 'VEI']].head(3)\n\n\n\n\n\n\n\n\nCountry\nVEI\n\n\nName\n\n\n\n\n\n\nCalbuco\nChile\n4\n\n\nTaal\nPhilippines\n4\n\n\n\n\n\n\n\n\n\n\n\n\n\nOption 2: Columns are specified outside .loc:\n\n\ndf.loc[['Calbuco', 'Taal']][['Country', 'VEI']].head(3)\n\n\n\n\n\n\n\n\nCountry\nVEI\n\n\nName\n\n\n\n\n\n\nCalbuco\nChile\n4\n\n\nTaal\nPhilippines\n4"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#position-based-indexing",
+    "href": "slides/class1_pandas.html#position-based-indexing",
+    "title": "Intro to Python and Pandas",
+    "section": "Position-based indexing",
+    "text": "Position-based indexing\n\nUse positions instead of labels"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#position-based-indexing-rows",
+    "href": "slides/class1_pandas.html#position-based-indexing-rows",
+    "title": "Intro to Python and Pandas",
+    "section": "Position-based indexing: Rows",
+    "text": "Position-based indexing: Rows\n\nQuery a row with .iloc\n\nReturns all columns\n\n\n\n\n\n\n\nOne row (first row):\n\n\ndf.iloc[[0]]\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nSt. Helens\nUSA\n1980-05-18\n5\n46.1914\n-122.1956\n\n\n\n\n\n\n\n\n\n\n\n\n\nRange of rows: (rows 3-4):\n\n\ndf.iloc[2:4]\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nEl Chichón\nMexico\n1982-03-28\n5\n17.3559\n-93.2233\n\n\nGalunggung\nIndonesia\n1982-04-05\n4\n-7.2567\n108.0771"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#position-based-indexing-rows-1",
+    "href": "slides/class1_pandas.html#position-based-indexing-rows-1",
+    "title": "Intro to Python and Pandas",
+    "section": "Position-based indexing: Rows",
+    "text": "Position-based indexing: Rows\n\nQuery rows from the end:\nExample:\n\nGet the last 5 rows of the DataFrame:\n\n\n\ndf.iloc[-5:]\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nLa Soufrière\nSaint Vincent\n2021-04-09\n4\n13.2833\n-61.3875\n\n\nCalbuco\nChile\n2015-04-22\n4\n-41.2972\n-72.6097\n\n\nSt. Augustine\nUSA\n2006-03-27\n3\n57.8819\n-155.5611\n\n\nEyjafjallajökull\nIceland\n2010-04-14\n4\n63.6333\n-19.6111\n\n\nCleveland\nUSA\n2023-05-23\n3\n52.8250\n-169.9444"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#position-based-and-label-based-queries",
+    "href": "slides/class1_pandas.html#position-based-and-label-based-queries",
+    "title": "Intro to Python and Pandas",
+    "section": "Position-based and label-based queries",
+    "text": "Position-based and label-based queries\n\nMix position-based and label-based indexing:\n\nRows → labels\nColumns → positions\n\n\n\ndf.iloc[0:5][['Country', 'VEI']]\n\n\n\n\n\n\n\n\nCountry\nVEI\n\n\nName\n\n\n\n\n\n\nSt. Helens\nUSA\n5\n\n\nPinatubo\nPhilippines\n6\n\n\nEl Chichón\nMexico\n5\n\n\nGalunggung\nIndonesia\n4\n\n\nNevado del Ruiz\nColombia\n3"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#your-turn-1",
+    "href": "slides/class1_pandas.html#your-turn-1",
+    "title": "Intro to Python and Pandas",
+    "section": "Your turn!",
+    "text": "Your turn!\n\nGo to https://e5k.github.io/Data-Science/\n\nClass 1 &gt; Querying data"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#boolean-indexing",
+    "href": "slides/class1_pandas.html#boolean-indexing",
+    "title": "Intro to Python and Pandas",
+    "section": "Boolean indexing",
+    "text": "Boolean indexing\n\nFiltering data with boolean indexing\n\nReturns either True or False depending on whether the condition is satisfied\n\n\n\n\n\n\nExample:\n\n\n\na = 1\nb = 2\n\n\n\n\n\n\n\nComparison operators:\n\n\n\n\nOperator\nMeaning\nExample\nResult\n\n\n\n\n==\nEqual to\na == b\nFalse\n\n\n!=\nNot equal to\na != b\nTrue\n\n\n&gt;\nGreater than\na &gt; b\nFalse\n\n\n&lt;\nLess than\na &lt; b\nTrue\n\n\n&gt;=\nGreater than or equal\na &gt;= b\nFalse\n\n\n&lt;=\nLess than or equal\na &lt;= b\nTrue"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#boolean-indexing-example",
+    "href": "slides/class1_pandas.html#boolean-indexing-example",
+    "title": "Intro to Python and Pandas",
+    "section": "Boolean indexing: Example",
+    "text": "Boolean indexing: Example\n\nQuery all volcanoes where VEI == 4\n\n\n\n\n\n\ndf['VEI'] == 4\n\nName\nSt. Helens          False\nPinatubo            False\nEl Chichón          False\nGalunggung           True\nNevado del Ruiz     False\nMerapi              False\nOntake              False\nSoufrière Hills     False\nEtna                False\nNyiragongo          False\nKīlauea             False\nAgung               False\nTavurvur            False\nSinabung            False\nTaal                 True\nLa Soufrière         True\nCalbuco              True\nSt. Augustine       False\nEyjafjallajökull     True\nCleveland           False\nName: VEI, dtype: bool\n\n\n\n\n\n\n\n\ndf.loc[df['VEI'] == 4]\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nGalunggung\nIndonesia\n1982-04-05\n4\n-7.2567\n108.0771\n\n\nTaal\nPhilippines\n2020-01-12\n4\n14.0020\n120.9934\n\n\nLa Soufrière\nSaint Vincent\n2021-04-09\n4\n13.2833\n-61.3875\n\n\nCalbuco\nChile\n2015-04-22\n4\n-41.2972\n-72.6097\n\n\nEyjafjallajökull\nIceland\n2010-04-14\n4\n63.6333\n-19.6111"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#boolean-indexing-strings",
+    "href": "slides/class1_pandas.html#boolean-indexing-strings",
+    "title": "Intro to Python and Pandas",
+    "section": "Boolean indexing: Strings",
+    "text": "Boolean indexing: Strings\n\nFiltering also works with strings\n\nUse string comparison operations\n\n\n\n\nExample:\n\n\ndf.loc[df['Country'] == 'Indonesia']\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nGalunggung\nIndonesia\n1982-04-05\n4\n-7.2567\n108.0771\n\n\nMerapi\nIndonesia\n2023-12-03\n2\n-7.5407\n110.4457\n\n\nAgung\nIndonesia\n2017-11-21\n3\n-8.3422\n115.5083\n\n\nSinabung\nIndonesia\n2023-02-13\n3\n3.1719\n98.3925"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#boolean-indexing-strings-1",
+    "href": "slides/class1_pandas.html#boolean-indexing-strings-1",
+    "title": "Intro to Python and Pandas",
+    "section": "Boolean indexing: Strings",
+    "text": "Boolean indexing: Strings\n\nFiltering also works with strings\n\nUse string comparison operations\n\n\n\n\nString comparison operators: \n\n\n\n\n\n\n\n\n\nOperation\nExample\nDescription\n\n\n\n\ncontains\ndf['Name'].str.contains('Soufrière')\nChecks if each string contains a substring\n\n\nstartswith\ndf['Name'].str.startswith('E')\nChecks if each string starts with a substring\n\n\nendswith\ndf['Name'].str.endswith('o')\nChecks if each string ends with a substring"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#your-turn-2",
+    "href": "slides/class1_pandas.html#your-turn-2",
+    "title": "Intro to Python and Pandas",
+    "section": "Your turn!",
+    "text": "Your turn!\n\nGo to https://e5k.github.io/Data-Science/\n\nClass 1 &gt; Filtering data"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#data-management-operations",
+    "href": "slides/class1_pandas.html#data-management-operations",
+    "title": "Intro to Python and Pandas",
+    "section": "Data management operations",
+    "text": "Data management operations\n\nCommon data management functions for pandas columns:\n\n\n\n\n\n\n\n\n\nOperation\nExample\nDescription\n\n\n\n\nRound\ndf['VEI'].round(1)\nRounds values to the specified number of decimals\n\n\nFloor\ndf['VEI'].apply(np.floor)\nRounds values down to the nearest integer\n\n\nCeil\ndf['VEI'].apply(np.ceil)\nRounds values up to the nearest integer\n\n\nAbsolute value\ndf['VEI'].abs()\nReturns the absolute value of each element\n\n\nFill missing\ndf['VEI'].fillna(0)\nReplaces missing values with a specified value\n\n\n\n\n\n\nRound the 'Latitude' to two decimals → make sure you store the output!\n\n\ndf['Latitude'] = df['Latitude'].round(2)"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#arithmetic-operations",
+    "href": "slides/class1_pandas.html#arithmetic-operations",
+    "title": "Intro to Python and Pandas",
+    "section": "Arithmetic operations",
+    "text": "Arithmetic operations\n\nArithmetic operations on parts of the DataFrame (→ columns) using native Python arithmetic operators\n\n\n\n\n\n\n\n\n\n\nOperation\nSymbol\nExample\nDescription\n\n\n\n\nAddition\n+\ndf['VEI'] + 1\nAdds a value to each element\n\n\nSubtraction\n-\ndf['VEI'] - 1\nSubtracts a value from each element\n\n\nMultiplication\n*\ndf['VEI'] * 2\nMultiplies each element by a value\n\n\nDivision\n/\ndf['VEI'] / 2\nDivides each element by a value\n\n\nExponentiation\n**\ndf['VEI'] ** 2\nRaises each element to a power\n\n\nModulo\n%\ndf['VEI'] % 2\nRemainder after division for each element\n\n\n\n\n\n\nDivide VEI by 2 and store results a new column (→ VEI_halved)\n\n\ndf['VEI_halved'] = df['VEI'] / 2"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#expanded-arithmetic-operations",
+    "href": "slides/class1_pandas.html#expanded-arithmetic-operations",
+    "title": "Intro to Python and Pandas",
+    "section": "Expanded arithmetic operations",
+    "text": "Expanded arithmetic operations\n\nThe range of arithmetic operations can be expanded using numpy\n\n\n\n\n\n\n\n\n\n\nOperation\nSymbol\nExample\nDescription\n\n\n\n\nExponentiation\nnp.power\nnp.power(df['VEI'], 2)\nElement-wise exponentiation\n\n\nSquare root\nnp.sqrt\nnp.sqrt(df['VEI'])\nElement-wise square root\n\n\nLogarithm (base e)\nnp.log\nnp.log(df['VEI'])\nElement-wise natural logarithm\n\n\nLogarithm (base 10)\nnp.log10\nnp.log10(df['VEI'])\nElement-wise base-10 logarithm\n\n\nExponential\nnp.exp\nnp.exp(df['VEI'])\nElement-wise exponential (e^x)\n\n\n\n\n\n\nVEI power 2 and store results a new column (→ VEI_pow2)\n\n\ndf['VEI_pow2'] = np.power(df['VEI'], 2)"
+  },
+  {
+    "objectID": "slides/class1_pandas.html#your-turn-3",
+    "href": "slides/class1_pandas.html#your-turn-3",
+    "title": "Intro to Python and Pandas",
+    "section": "Your turn!",
+    "text": "Your turn!\n\nGo to https://e5k.github.io/Data-Science/\n\nClass 1 &gt; Operations"
+  },
+  {
+    "objectID": "appendices/setup_vscode.html",
+    "href": "appendices/setup_vscode.html",
+    "title": "Setup VS Code",
+    "section": "",
+    "text": "This tutorial guides you through the installation and configuration of Visual Studio Code (VS Code) for Python development in the 0013 computer room at the University of Geneva.\n\n\n\nCreate a folder on your H:/ drive named data_science\nOpen VS Code\nClick File / Open Folder and choose the data_science folder (Figure 1)\nWhen asked, click to confirm your trust in the system\n\nThese steps will ensure that Python works and finds the files in this exact folder.\n\n\n\n\n\n\nFigure 1: Open VS Code and set the working folder\n\n\n\n\n\n\n\nType Ctrl + Shift + i (or Cmd + Shift + i on MacOS) to open the command palette\nType jupyter and select Create: New Jupyter Notebook (Figure 2)\n\n\n\n\n\n\n\nFigure 2: Create a new Jupyter Notebook\n\n\n\n\n\n\n\n\n\nCommand palette\n\n\n\nThe command palette is a key functionality of VS Code, learning to use it will speed up your workflow.\n\n\n\n\n\nThis step installs the Python extensions for VS Code.\n\nWhen asked, click the Install button and wait for it to finish (Figure 3)\n\n\n\n\n\n\n\n\nFigure 3: Create a new Jupyter Notebook\n\n\n\n\n\n\nJupyter Notebooks are one of the ways to run Python. This step installs all the required Jupyter stuff for VS Code.\n\nOn the top right corner of the notebook, locate and click on the Select kernel button Figure 4\nInstall the Jupyter notebook support extension (Figure 5)\n\n\n\n\n\n\n\nFigure 4: Browse for kernels\n\n\n\n\n\n\n\n\n\nFigure 5: Install the Jupyter notebook support extension\n\n\n\n\n\n\nSeveral versions of Python can be installed on a computer. In the computer room, these versions are controlled by an environment manager called anaconda. This step ensures that the Jupyter notebook will use the right Python version, i.e., the one installed using anaconda.\n\nOn the top right corner of the notebook, where the Select kernel button previously appeared, make sure you see base (Python 3.x.x) (Figure 6)\nIf you don’t, click on the button and search for the right one (i.e., there should be anaconda in the path)\n\n\n\n\n\n\n\nFigure 6: Select the right Python environment\n\n\n\n\n\n\n\nType Ctrl + Shift + i (or Cmd + Shift + i on MacOS) to open the command palette\nType simple and select Simple Browser: Show\nEnter https://e5k.github.io/Data-Science/\nClick the Simple Browser tab and move it to the right of VS Code to open the course material alongside your Jupyter Notebook",
+    "crumbs": [
+      "Appendices",
+      "Setup VS Code"
+    ]
+  },
+  {
+    "objectID": "appendices/setup_vscode.html#open-vs-code",
+    "href": "appendices/setup_vscode.html#open-vs-code",
+    "title": "Setup VS Code",
+    "section": "",
+    "text": "Create a folder on your H:/ drive named data_science\nOpen VS Code\nClick File / Open Folder and choose the data_science folder (Figure 1)\nWhen asked, click to confirm your trust in the system\n\nThese steps will ensure that Python works and finds the files in this exact folder.\n\n\n\n\n\n\nFigure 1: Open VS Code and set the working folder",
+    "crumbs": [
+      "Appendices",
+      "Setup VS Code"
+    ]
+  },
+  {
+    "objectID": "appendices/setup_vscode.html#create-a-new-jupyter-notebook",
+    "href": "appendices/setup_vscode.html#create-a-new-jupyter-notebook",
+    "title": "Setup VS Code",
+    "section": "",
+    "text": "Type Ctrl + Shift + i (or Cmd + Shift + i on MacOS) to open the command palette\nType jupyter and select Create: New Jupyter Notebook (Figure 2)\n\n\n\n\n\n\n\nFigure 2: Create a new Jupyter Notebook\n\n\n\n\n\n\n\n\n\nCommand palette\n\n\n\nThe command palette is a key functionality of VS Code, learning to use it will speed up your workflow.",
+    "crumbs": [
+      "Appendices",
+      "Setup VS Code"
+    ]
+  },
+  {
+    "objectID": "appendices/setup_vscode.html#install-the-python-extensions",
+    "href": "appendices/setup_vscode.html#install-the-python-extensions",
+    "title": "Setup VS Code",
+    "section": "",
+    "text": "This step installs the Python extensions for VS Code.\n\nWhen asked, click the Install button and wait for it to finish (Figure 3)\n\n\n\n\n\n\n\n\nFigure 3: Create a new Jupyter Notebook",
+    "crumbs": [
+      "Appendices",
+      "Setup VS Code"
+    ]
+  },
+  {
+    "objectID": "appendices/setup_vscode.html#install-jupyter",
+    "href": "appendices/setup_vscode.html#install-jupyter",
+    "title": "Setup VS Code",
+    "section": "",
+    "text": "Jupyter Notebooks are one of the ways to run Python. This step installs all the required Jupyter stuff for VS Code.\n\nOn the top right corner of the notebook, locate and click on the Select kernel button Figure 4\nInstall the Jupyter notebook support extension (Figure 5)\n\n\n\n\n\n\n\nFigure 4: Browse for kernels\n\n\n\n\n\n\n\n\n\nFigure 5: Install the Jupyter notebook support extension",
+    "crumbs": [
+      "Appendices",
+      "Setup VS Code"
+    ]
+  },
+  {
+    "objectID": "appendices/setup_vscode.html#select-the-right-python",
+    "href": "appendices/setup_vscode.html#select-the-right-python",
+    "title": "Setup VS Code",
+    "section": "",
+    "text": "Several versions of Python can be installed on a computer. In the computer room, these versions are controlled by an environment manager called anaconda. This step ensures that the Jupyter notebook will use the right Python version, i.e., the one installed using anaconda.\n\nOn the top right corner of the notebook, where the Select kernel button previously appeared, make sure you see base (Python 3.x.x) (Figure 6)\nIf you don’t, click on the button and search for the right one (i.e., there should be anaconda in the path)\n\n\n\n\n\n\n\nFigure 6: Select the right Python environment",
+    "crumbs": [
+      "Appendices",
+      "Setup VS Code"
+    ]
+  },
+  {
+    "objectID": "appendices/setup_vscode.html#open-the-course-material-in-vs-code",
+    "href": "appendices/setup_vscode.html#open-the-course-material-in-vs-code",
+    "title": "Setup VS Code",
+    "section": "",
+    "text": "Type Ctrl + Shift + i (or Cmd + Shift + i on MacOS) to open the command palette\nType simple and select Simple Browser: Show\nEnter https://e5k.github.io/Data-Science/\nClick the Simple Browser tab and move it to the right of VS Code to open the course material alongside your Jupyter Notebook",
+    "crumbs": [
+      "Appendices",
+      "Setup VS Code"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "ELSTE Data Science Master Course",
+    "section": "",
+    "text": "Hello and welcome to the website for the Fall part of the ELSTE data science class at the University of Geneva. The objective of this class is to introduce you to some tools - both technical (i.e., use of Python and dedicated packages) and theoretical (i.e., understanding of the statistical methods) - that will ideally increase your ability to explore and interpret the data you will generate or collect during your Master theses.\nThe course will rely on Python, which was selected because it is both free and general purpose. We assume that you are not completely stranger to Python, yet you haven’t gained yet the confidence to start using it for your data processing and analysis workflow. The primary objective of this class is to provide you with this confidence. It would be foolish to believe that this course will be enough to make you experts at it, but we hope it will provide you the necessary tools get you started.\nYou might also be already familiar with other free (e.g., R, Julia, Octave) or commercial (Matlab) scientific programming language. In this case, the course contains sufficient theoretical material to keep your interest high, and, depending how comfortable you are with your language of predilection, you might also want to use it rather than Python at your own risk.\nIn a nutshell, by the end of the course, you will ideally:\n\nBe familiar with the basic packages and functions in Python for exploring, analysing and visualising your data;\nUnderstand the theory for some of the most frequently used statistical analyses, thus opening the gate to statistical inference.\n\n\n\nThe course is composed of three 6-h sessions on Wednesday mornings from 9h - 12h from Oct 15 to Nov 19 2025. The tentative schedule is as follows:\n\n\n\nDate\nInstructor\nTopic\n\n\n\n\nOct 15, 2025\nSB\nIntroduction to Python, data manipulation\n\n\nOct 22, 2025\nSB\nExploratory data analysis, plotting\n\n\nOct 29, 2025\nSG\nBi-variate analyses\n\n\nNov 5, 2025\nSG\nRegressions\n\n\nNov 12, 2025\nSB/SG\nTBD\n\n\nNov 19, 2025\nSB/SG\nTBD\n\n\n\n\n\n\nThe class takes place in the computer lab in the Science III building (and not in the Maraîchers building!!) located on Boulevard D’Yvoy. Check out the map below to find the room.\n\n\n\n\n\nPlease make sure you have your ISIS login and password to login\nFollow this tutorial to setup VSCode on PCs of the computer lab\n\nAlternatively, if you want to use Python on your own computer:\n\nMake sure you installed an environment manager (e.g. Miniconda) and created a dedicated environment with the following packages installed: pandas, numpy, jupyterlab\nMake sure you installed VS Code and:\n\nthe Python extensions following this tutorial\nmake sure VS Code can find your Python environment\n\n\n\n\n\n\n\n\nUsing your own computer\n\n\n\nWe won’t have time to help you install Python on your computer during the class.\n\n\n\n\n\nThe course assistants are:\n\nSimon Thivet (UNIGE / Physical Volcanology and Geological Risk)\nFilippo Salmaso (UNIGE / Data Analytics Lab)\n\n\n\n\nThis course is openly available in the hope it can benefit others. The course material is published under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International licence.\nUnless specified, any code snippet and software is published under a GNU GPLv3 license.",
+    "crumbs": [
+      "ELSTE Data Science Master Course"
+    ]
+  },
+  {
+    "objectID": "index.html#practical-information",
+    "href": "index.html#practical-information",
+    "title": "ELSTE Data Science Master Course",
+    "section": "",
+    "text": "Hello and welcome to the website for the Fall part of the ELSTE data science class at the University of Geneva. The objective of this class is to introduce you to some tools - both technical (i.e., use of Python and dedicated packages) and theoretical (i.e., understanding of the statistical methods) - that will ideally increase your ability to explore and interpret the data you will generate or collect during your Master theses.\nThe course will rely on Python, which was selected because it is both free and general purpose. We assume that you are not completely stranger to Python, yet you haven’t gained yet the confidence to start using it for your data processing and analysis workflow. The primary objective of this class is to provide you with this confidence. It would be foolish to believe that this course will be enough to make you experts at it, but we hope it will provide you the necessary tools get you started.\nYou might also be already familiar with other free (e.g., R, Julia, Octave) or commercial (Matlab) scientific programming language. In this case, the course contains sufficient theoretical material to keep your interest high, and, depending how comfortable you are with your language of predilection, you might also want to use it rather than Python at your own risk.\nIn a nutshell, by the end of the course, you will ideally:\n\nBe familiar with the basic packages and functions in Python for exploring, analysing and visualising your data;\nUnderstand the theory for some of the most frequently used statistical analyses, thus opening the gate to statistical inference.\n\n\n\nThe course is composed of three 6-h sessions on Wednesday mornings from 9h - 12h from Oct 15 to Nov 19 2025. The tentative schedule is as follows:\n\n\n\nDate\nInstructor\nTopic\n\n\n\n\nOct 15, 2025\nSB\nIntroduction to Python, data manipulation\n\n\nOct 22, 2025\nSB\nExploratory data analysis, plotting\n\n\nOct 29, 2025\nSG\nBi-variate analyses\n\n\nNov 5, 2025\nSG\nRegressions\n\n\nNov 12, 2025\nSB/SG\nTBD\n\n\nNov 19, 2025\nSB/SG\nTBD\n\n\n\n\n\n\nThe class takes place in the computer lab in the Science III building (and not in the Maraîchers building!!) located on Boulevard D’Yvoy. Check out the map below to find the room.\n\n\n\n\n\nPlease make sure you have your ISIS login and password to login\nFollow this tutorial to setup VSCode on PCs of the computer lab\n\nAlternatively, if you want to use Python on your own computer:\n\nMake sure you installed an environment manager (e.g. Miniconda) and created a dedicated environment with the following packages installed: pandas, numpy, jupyterlab\nMake sure you installed VS Code and:\n\nthe Python extensions following this tutorial\nmake sure VS Code can find your Python environment\n\n\n\n\n\n\n\n\nUsing your own computer\n\n\n\nWe won’t have time to help you install Python on your computer during the class.\n\n\n\n\n\nThe course assistants are:\n\nSimon Thivet (UNIGE / Physical Volcanology and Geological Risk)\nFilippo Salmaso (UNIGE / Data Analytics Lab)\n\n\n\n\nThis course is openly available in the hope it can benefit others. The course material is published under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International licence.\nUnless specified, any code snippet and software is published under a GNU GPLv3 license.",
+    "crumbs": [
+      "ELSTE Data Science Master Course"
+    ]
+  },
+  {
+    "objectID": "slides/class1_intro.html#get-ready",
+    "href": "slides/class1_intro.html#get-ready",
+    "title": "ELSTE Data science",
+    "section": "Get ready",
+    "text": "Get ready\n\nGo to https://e5k.github.io/Data-Science/\n\nDownload slides: Class 1 &gt; Overview\nSetup VS Code: Appendices &gt; Setup VS Code"
   },
   {
     "objectID": "slides/class1_intro.html#why-this-class",
@@ -323,370 +697,14 @@
     "href": "slides/class1_intro.html#how-to-run-python",
     "title": "ELSTE Data science",
     "section": "How to run Python",
-    "text": "How to run Python\n3 main ways to run Python…\n\nRun Python .py scripts from the command line → deprecated\nRun blocks of code from within a Python .py script using ipykernel → similar behaviour to R/Matlab\nUse Jupyter Notebooks in .ipynb files\n\n\n…in two different environments\n\nDedicated software: VSCode, PyCharm, Spyder\nWeb browser: JupyterLab"
+    "text": "How to run Python\n3 main ways to run Python…\n\nRun Python .py scripts from the command line → deprecated\nRun blocks of code from within a Python .py script using ipykernel → similar behaviour to R/Matlab = ❤️\nUse Jupyter Notebooks in .ipynb files\n\n\n…in two different environments\n\nDedicated software: VSCode, PyCharm, Spyder\nWeb browser: JupyterLab"
   },
   {
-    "objectID": "slides/class1_intro.html#get-started",
-    "href": "slides/class1_intro.html#get-started",
+    "objectID": "slides/class1_intro.html#start-coding",
+    "href": "slides/class1_intro.html#start-coding",
     "title": "ELSTE Data science",
-    "section": "Get started",
-    "text": "Get started\n\nFollow the guide\nStart a new Jupyter Notebook"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "ELSTE Data Science Master Course",
-    "section": "",
-    "text": "Hello and welcome to the website for the Fall part of the ELSTE data science class at the University of Geneva. The objective of this class is to introduce you to some tools - both technical (i.e., use of Python and dedicated packages) and theoretical (i.e., understanding of the statistical methods) - that will ideally increase your ability to explore and interpret the data you will generate or collect during your Master theses.\nThe course will rely on Python, which was selected because it is both free and general purpose. We assume that you are not completely stranger to Python, yet you haven’t gained yet the confidence to start using it for your data processing and analysis workflow. The primary objective of this class is to provide you with this confidence. It would be foolish to believe that this course will be enough to make you experts at it, but we hope it will provide you the necessary tools get you started.\nYou might also be already familiar with other free (e.g., R, Julia, Octave) or commercial (Matlab) scientific programming language. In this case, the course contains sufficient theoretical material to keep your interest high, and, depending how comfortable you are with your language of predilection, you might also want to use it rather than Python at your own risk.\nIn a nutshell, by the end of the course, you will ideally:\n\nBe familiar with the basic packages and functions in Python for exploring, analysing and visualising your data;\nUnderstand the theory for some of the most frequently used statistical analyses, thus opening the gate to statistical inference.\n\n\n\nThe course is composed of three 6-h sessions on Wednesday mornings from 9h - 12h from Oct 15 to Nov 19 2025. The tentative schedule is as follows:\n\n\n\nDate\nInstructor\nTopic\n\n\n\n\nOct 15, 2025\nSB\nIntroduction to Python, data manipulation\n\n\nOct 22, 2025\nSB\nExploratory data analysis, plotting\n\n\nOct 29, 2025\nSG\nBi-variate analyses\n\n\nNov 5, 2025\nSG\nRegressions\n\n\nNov 12, 2025\nSB/SG\nTBD\n\n\nNov 19, 2025\nSB/SG\nTBD\n\n\n\n\n\n\nThe class takes place in the computer lab in the Science III building (and not in the Maraîchers building!!) located on Boulevard D’Yvoy. Check out the map below to find the room.\n\n\n\n\n\nPlease make sure you have your ISIS login and password to login\nFollow this tutorial to setup VSCode on PCs of the computer lab\n\nAlternatively, if you want to use Python on your own computer:\n\nMake sure you installed an environment manager (e.g. Miniconda) and created a dedicated environment with the following packages installed: pandas, numpy, jupyterlab\nMake sure you installed VS Code and:\n\nthe Python extensions following this tutorial\nmake sure VS Code can find your Python environment\n\n\n\n\n\n\n\n\nUsing your own computer\n\n\n\nWe won’t have time to help you install Python on your computer during the class.\n\n\n\n\n\nThis course is openly available in the hope it can benefit others. The course material is published under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International licence.\nUnless specified, any code snippet and software is published under a GNU GPLv3 license.",
-    "crumbs": [
-      "ELSTE Data Science Master Course"
-    ]
-  },
-  {
-    "objectID": "index.html#practical-information",
-    "href": "index.html#practical-information",
-    "title": "ELSTE Data Science Master Course",
-    "section": "",
-    "text": "Hello and welcome to the website for the Fall part of the ELSTE data science class at the University of Geneva. The objective of this class is to introduce you to some tools - both technical (i.e., use of Python and dedicated packages) and theoretical (i.e., understanding of the statistical methods) - that will ideally increase your ability to explore and interpret the data you will generate or collect during your Master theses.\nThe course will rely on Python, which was selected because it is both free and general purpose. We assume that you are not completely stranger to Python, yet you haven’t gained yet the confidence to start using it for your data processing and analysis workflow. The primary objective of this class is to provide you with this confidence. It would be foolish to believe that this course will be enough to make you experts at it, but we hope it will provide you the necessary tools get you started.\nYou might also be already familiar with other free (e.g., R, Julia, Octave) or commercial (Matlab) scientific programming language. In this case, the course contains sufficient theoretical material to keep your interest high, and, depending how comfortable you are with your language of predilection, you might also want to use it rather than Python at your own risk.\nIn a nutshell, by the end of the course, you will ideally:\n\nBe familiar with the basic packages and functions in Python for exploring, analysing and visualising your data;\nUnderstand the theory for some of the most frequently used statistical analyses, thus opening the gate to statistical inference.\n\n\n\nThe course is composed of three 6-h sessions on Wednesday mornings from 9h - 12h from Oct 15 to Nov 19 2025. The tentative schedule is as follows:\n\n\n\nDate\nInstructor\nTopic\n\n\n\n\nOct 15, 2025\nSB\nIntroduction to Python, data manipulation\n\n\nOct 22, 2025\nSB\nExploratory data analysis, plotting\n\n\nOct 29, 2025\nSG\nBi-variate analyses\n\n\nNov 5, 2025\nSG\nRegressions\n\n\nNov 12, 2025\nSB/SG\nTBD\n\n\nNov 19, 2025\nSB/SG\nTBD\n\n\n\n\n\n\nThe class takes place in the computer lab in the Science III building (and not in the Maraîchers building!!) located on Boulevard D’Yvoy. Check out the map below to find the room.\n\n\n\n\n\nPlease make sure you have your ISIS login and password to login\nFollow this tutorial to setup VSCode on PCs of the computer lab\n\nAlternatively, if you want to use Python on your own computer:\n\nMake sure you installed an environment manager (e.g. Miniconda) and created a dedicated environment with the following packages installed: pandas, numpy, jupyterlab\nMake sure you installed VS Code and:\n\nthe Python extensions following this tutorial\nmake sure VS Code can find your Python environment\n\n\n\n\n\n\n\n\nUsing your own computer\n\n\n\nWe won’t have time to help you install Python on your computer during the class.\n\n\n\n\n\nThis course is openly available in the hope it can benefit others. The course material is published under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International licence.\nUnless specified, any code snippet and software is published under a GNU GPLv3 license.",
-    "crumbs": [
-      "ELSTE Data Science Master Course"
-    ]
-  },
-  {
-    "objectID": "intro.html",
-    "href": "intro.html",
-    "title": "Introduction",
-    "section": "",
-    "text": "Introduction\nThis is a book created from markdown and executable code.\nSee (knuth84?) for additional discussion of literate programming."
-  },
-  {
-    "objectID": "appendices/setup_vscode.html",
-    "href": "appendices/setup_vscode.html",
-    "title": "Setup VS Code",
-    "section": "",
-    "text": "This tutorial guides you through the installation and configuration of Visual Studio Code (VS Code) for Python development in the 0013 computer room at the University of Geneva.\n\n\n\nCreate a folder on your H:/ drive named data_science\nOpen VS Code\nClick File / Open Folder and choose the data_science folder (Figure 1)\nWhen asked, click to confirm your trust in the system\n\nThese steps will ensure that Python works and finds the files in this exact folder.\n\n\n\n\n\n\nFigure 1: Open VS Code and set the working folder\n\n\n\n\n\n\n\nType Ctrl + Shift + i (or Cmd + Shift + i on MacOS) to open the command palette\nType jupyter and select Create: New Jupyter Notebook (Figure 2)\n\n\n\n\n\n\n\nFigure 2: Create a new Jupyter Notebook\n\n\n\n\n\n\n\n\n\nCommand palette\n\n\n\nThe command palette is a key functionality of VS Code, learning to use it will speed up your workflow.\n\n\n\n\n\nThis step installs the Python extensions for VS Code.\n\nWhen asked, click the Install button and wait for it to finish (Figure 3)\n\n\n\n\n\n\n\n\nFigure 3: Create a new Jupyter Notebook\n\n\n\n\n\n\nJupyter Notebooks are one of the ways to run Python. This step installs all the required Jupyter stuff for VS Code.\n\nOn the top right corner of the notebook, locate and click on the Select kernel button Figure 4\nInstall the Jupyter notebook support extension (Figure 5)\n\n\n\n\n\n\n\nFigure 4: Browse for kernels\n\n\n\n\n\n\n\n\n\nFigure 5: Install the Jupyter notebook support extension\n\n\n\n\n\n\nSeveral versions of Python can be installed on a computer. In the computer room, these versions are controlled by an environment manager called anaconda. This step ensures that the Jupyter notebook will use the right Python version, i.e., the one installed using anaconda.\n\nOn the top right corner of the notebook, where the Select kernel button previously appeared, make sure you see base (Python 3.x.x) (Figure 6)\nIf you don’t, click on the button and search for the right one (i.e., there should be anaconda in the path)\n\n\n\n\n\n\n\nFigure 6: Select the right Python environment\n\n\n\n\n\n\n\nType Ctrl + Shift + i (or Cmd + Shift + i on MacOS) to open the command palette\nType simple and select Simple Browser: Show\nEnter https://e5k.github.io/Data-Science/\nClick the Simple Browser tab and move it to the right of VS Code to open the course material alongside your Jupyter Notebook",
-    "crumbs": [
-      "Appendices",
-      "Setup VS Code"
-    ]
-  },
-  {
-    "objectID": "appendices/setup_vscode.html#open-vs-code",
-    "href": "appendices/setup_vscode.html#open-vs-code",
-    "title": "Setup VS Code",
-    "section": "",
-    "text": "Create a folder on your H:/ drive named data_science\nOpen VS Code\nClick File / Open Folder and choose the data_science folder (Figure 1)\nWhen asked, click to confirm your trust in the system\n\nThese steps will ensure that Python works and finds the files in this exact folder.\n\n\n\n\n\n\nFigure 1: Open VS Code and set the working folder",
-    "crumbs": [
-      "Appendices",
-      "Setup VS Code"
-    ]
-  },
-  {
-    "objectID": "appendices/setup_vscode.html#create-a-new-jupyter-notebook",
-    "href": "appendices/setup_vscode.html#create-a-new-jupyter-notebook",
-    "title": "Setup VS Code",
-    "section": "",
-    "text": "Type Ctrl + Shift + i (or Cmd + Shift + i on MacOS) to open the command palette\nType jupyter and select Create: New Jupyter Notebook (Figure 2)\n\n\n\n\n\n\n\nFigure 2: Create a new Jupyter Notebook\n\n\n\n\n\n\n\n\n\nCommand palette\n\n\n\nThe command palette is a key functionality of VS Code, learning to use it will speed up your workflow.",
-    "crumbs": [
-      "Appendices",
-      "Setup VS Code"
-    ]
-  },
-  {
-    "objectID": "appendices/setup_vscode.html#install-the-python-extensions",
-    "href": "appendices/setup_vscode.html#install-the-python-extensions",
-    "title": "Setup VS Code",
-    "section": "",
-    "text": "This step installs the Python extensions for VS Code.\n\nWhen asked, click the Install button and wait for it to finish (Figure 3)\n\n\n\n\n\n\n\n\nFigure 3: Create a new Jupyter Notebook",
-    "crumbs": [
-      "Appendices",
-      "Setup VS Code"
-    ]
-  },
-  {
-    "objectID": "appendices/setup_vscode.html#install-jupyter",
-    "href": "appendices/setup_vscode.html#install-jupyter",
-    "title": "Setup VS Code",
-    "section": "",
-    "text": "Jupyter Notebooks are one of the ways to run Python. This step installs all the required Jupyter stuff for VS Code.\n\nOn the top right corner of the notebook, locate and click on the Select kernel button Figure 4\nInstall the Jupyter notebook support extension (Figure 5)\n\n\n\n\n\n\n\nFigure 4: Browse for kernels\n\n\n\n\n\n\n\n\n\nFigure 5: Install the Jupyter notebook support extension",
-    "crumbs": [
-      "Appendices",
-      "Setup VS Code"
-    ]
-  },
-  {
-    "objectID": "appendices/setup_vscode.html#select-the-right-python",
-    "href": "appendices/setup_vscode.html#select-the-right-python",
-    "title": "Setup VS Code",
-    "section": "",
-    "text": "Several versions of Python can be installed on a computer. In the computer room, these versions are controlled by an environment manager called anaconda. This step ensures that the Jupyter notebook will use the right Python version, i.e., the one installed using anaconda.\n\nOn the top right corner of the notebook, where the Select kernel button previously appeared, make sure you see base (Python 3.x.x) (Figure 6)\nIf you don’t, click on the button and search for the right one (i.e., there should be anaconda in the path)\n\n\n\n\n\n\n\nFigure 6: Select the right Python environment",
-    "crumbs": [
-      "Appendices",
-      "Setup VS Code"
-    ]
-  },
-  {
-    "objectID": "appendices/setup_vscode.html#open-the-course-material-in-vs-code",
-    "href": "appendices/setup_vscode.html#open-the-course-material-in-vs-code",
-    "title": "Setup VS Code",
-    "section": "",
-    "text": "Type Ctrl + Shift + i (or Cmd + Shift + i on MacOS) to open the command palette\nType simple and select Simple Browser: Show\nEnter https://e5k.github.io/Data-Science/\nClick the Simple Browser tab and move it to the right of VS Code to open the course material alongside your Jupyter Notebook",
-    "crumbs": [
-      "Appendices",
-      "Setup VS Code"
-    ]
-  },
-  {
-    "objectID": "slides/class1_pandas.html#background",
-    "href": "slides/class1_pandas.html#background",
-    "title": "Intro to Python and Pandas",
-    "section": "Background",
-    "text": "Background\n\n\n\n\n\n\nWe assume that you all followed Guy Simpson’s Python crash course\n\n\n\n\npandas: A package for data manipulation and analysis handling structured data\n\nReading/writing data from common formats (CSV, Excel, JSON, etc.)\nHandling missing data\nFiltering, sorting, reshaping and grouping data\nAggregating data (sum, mean, count, etc.)\nTime series support (date ranges, frequency conversions)\nStatistical operations"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#todays-objectives",
-    "href": "slides/class1_pandas.html#todays-objectives",
-    "title": "Intro to Python and Pandas",
-    "section": "Today’s objectives",
-    "text": "Today’s objectives\nUnderstand what is a pandas DataFrame and its basic anatomy\n\nHow to load data in a DataFrame\nHow to access data → query by label/position\nHow to filter data → comparison and logical operators\nHow to rearrange data → sorting values\nHow to operate on data → arithmetic and string operations"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#anatomy-of-a-dataframe",
-    "href": "slides/class1_pandas.html#anatomy-of-a-dataframe",
-    "title": "Intro to Python and Pandas",
-    "section": "Anatomy of a DataFrame",
-    "text": "Anatomy of a DataFrame\n\n\n\nSimilar to Excel → contains tabular data composed of rows and columns\n\n\n\n\nIn Excel:\n\nRows are accessed using numbers\nColumns are accessed using letters"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#anatomy-of-a-dataframe-1",
-    "href": "slides/class1_pandas.html#anatomy-of-a-dataframe-1",
-    "title": "Intro to Python and Pandas",
-    "section": "Anatomy of a DataFrame",
-    "text": "Anatomy of a DataFrame\n\n\n\nUnlike Excel, rows and columns can be labelled\n\nIndex refers to the label of the rows. In the index, values are usually unique - meaning that each entry has a different label.\nColumn refers to the label of - logically - the columns"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#the-dataset",
-    "href": "slides/class1_pandas.html#the-dataset",
-    "title": "Intro to Python and Pandas",
-    "section": "The dataset",
-    "text": "The dataset\nSynthetic dataset of selected volcanic eruptions → first 5 rows:\n\n\n\n\n\n\n\n\n\n\n\n\nName\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\n\n\nSt. Helens\nUSA\n1980-05-18\n5\n46.1914\n-122.196\n\n\nPinatubo\nPhilippines\n1991-04-02\n6\n15.1501\n120.347\n\n\nEl Chichón\nMexico\n1982-03-28\n5\n17.3559\n-93.2233\n\n\nGalunggung\nIndonesia\n1982-04-05\n4\n-7.2567\n108.077\n\n\nNevado del Ruiz\nColombia\n1985-11-13\n3\n4.895\n-75.322"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#volcanic-explosivity-index-vei",
-    "href": "slides/class1_pandas.html#volcanic-explosivity-index-vei",
-    "title": "Intro to Python and Pandas",
-    "section": "Volcanic explosivity index (VEI)",
-    "text": "Volcanic explosivity index (VEI)"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#setting-up-the-notebook",
-    "href": "slides/class1_pandas.html#setting-up-the-notebook",
-    "title": "Intro to Python and Pandas",
-    "section": "Setting up the notebook",
-    "text": "Setting up the notebook\n\nWe start by importing the pandas library\nWe import it under the name pd - which is faster to type!\n\n\n\n# Import the required packages\nimport pandas as pd"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#setting-up-the-notebook-1",
-    "href": "slides/class1_pandas.html#setting-up-the-notebook-1",
-    "title": "Intro to Python and Pandas",
-    "section": "Setting up the notebook",
-    "text": "Setting up the notebook\n\nWe then load the specified data with the pd.read_csv() function\nThis returns a DataFrame object in a variable named df\n\n\n\n# Import the required packages\nimport pandas as pd\n\n# Read the data\ndf = pd.read_csv('data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#setting-up-the-notebook-2",
-    "href": "slides/class1_pandas.html#setting-up-the-notebook-2",
-    "title": "Intro to Python and Pandas",
-    "section": "Setting up the notebook",
-    "text": "Setting up the notebook\n\nWe print some data for inspection with df.head()\nThe functions are now directly called from the DataFrame df object\n\n\n\n# Import the required packages\nimport pandas as pd\n\n# Read the data\ndf = pd.read_csv('../class1/data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data\n\n# Show the first 3 rows\ndf.head(3) \n\n\n\n\n\n\n\n\nName\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\n\n\n0\nSt. Helens\nUSA\n1980-05-18\n5\n46.1914\n-122.1956\n\n\n1\nPinatubo\nPhilippines\n1991-04-02\n6\n15.1501\n120.3465\n\n\n2\nEl Chichón\nMexico\n1982-03-28\n5\n17.3559\n-93.2233"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#setting-the-index",
-    "href": "slides/class1_pandas.html#setting-the-index",
-    "title": "Intro to Python and Pandas",
-    "section": "Setting the index",
-    "text": "Setting the index"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#setting-the-index-1",
-    "href": "slides/class1_pandas.html#setting-the-index-1",
-    "title": "Intro to Python and Pandas",
-    "section": "Setting the index",
-    "text": "Setting the index\n\n…for now, the index (→ the first column) is and integer\nThis might be acceptable in datasets where the label is not important\n\n\n\n# Show the first 3 rows\ndf.head(3) \n\n\n\n\n\n\n\n\nName\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\n\n\n0\nSt. Helens\nUSA\n1980-05-18\n5\n46.1914\n-122.1956\n\n\n1\nPinatubo\nPhilippines\n1991-04-02\n6\n15.1501\n120.3465\n\n\n2\nEl Chichón\nMexico\n1982-03-28\n5\n17.3559\n-93.2233"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#setting-the-index-2",
-    "href": "slides/class1_pandas.html#setting-the-index-2",
-    "title": "Intro to Python and Pandas",
-    "section": "Setting the index",
-    "text": "Setting the index\n\nHere we want to access the data using the name of the volcano\nWe set the index using set_index()\n\n\n\n# Set the index to the 'Name' column\ndf = df.set_index('Name')\n\n# Show the first 3 rows\ndf.head(3) \n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nSt. Helens\nUSA\n1980-05-18\n5\n46.1914\n-122.1956\n\n\nPinatubo\nPhilippines\n1991-04-02\n6\n15.1501\n120.3465\n\n\nEl Chichón\nMexico\n1982-03-28\n5\n17.3559\n-93.2233"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#exploring-data",
-    "href": "slides/class1_pandas.html#exploring-data",
-    "title": "Intro to Python and Pandas",
-    "section": "Exploring data",
-    "text": "Exploring data\n\nHere are some basic functions to review the structure of the dataset:\n\n\n\n\n\n\n\n\n\nFunction\nDescription\n\n\n\n\ndf.head()\nPrints the first 5 rows of the DataFrame.\n\n\ndf.tail()\nPrints the last 5 rows of the DataFrame.\n\n\ndf.info()\nDisplays some info about the DataFrame, including the number of rows (entries) and columns.\n\n\ndf.shape\nReturns a list containing the number of rows and columns of the DataFrame.\n\n\ndf.index\nReturns a list containing the index along the rows of the DataFrame.\n\n\ndf.columns\nReturns a list containing the index along the columns of the DataFrame."
-  },
-  {
-    "objectID": "slides/class1_pandas.html#sorting-data",
-    "href": "slides/class1_pandas.html#sorting-data",
-    "title": "Intro to Python and Pandas",
-    "section": "Sorting data",
-    "text": "Sorting data\n\nSorting numerical, datetime or strings using .sort_values\nImportance of documentation to understand arguments\n\n\ndf.sort_values('VEI').head() # Sort volcanoes by VEI in ascending number\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nNyiragongo\nDR Congo\n2021-05-22\n1\n-1.5200\n29.2500\n\n\nMerapi\nIndonesia\n2023-12-03\n2\n-7.5407\n110.4457\n\n\nOntake\nJapan\n2014-09-27\n2\n35.5149\n137.4781\n\n\nKīlauea\nUSA\n2018-05-03\n2\n19.4194\n-155.2811\n\n\nEtna\nItaly\n2021-03-16\n2\n37.7510\n15.0044"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#sorting-data-1",
-    "href": "slides/class1_pandas.html#sorting-data-1",
-    "title": "Intro to Python and Pandas",
-    "section": "Sorting data",
-    "text": "Sorting data\n\nSorting numerical, datetime or strings using .sort_values\nImportance of documentation to understand arguments\n\n\ndf.sort_values('VEI').head() # Sort volcanoes by VEI in ascending number\ndf.sort_values('Date', ascending=False).head() # Sort volcanoes by eruption dates from recent to old\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nMerapi\nIndonesia\n2023-12-03\n2\n-7.5407\n110.4457\n\n\nCleveland\nUSA\n2023-05-23\n3\n52.8250\n-169.9444\n\n\nSinabung\nIndonesia\n2023-02-13\n3\n3.1719\n98.3925\n\n\nNyiragongo\nDR Congo\n2021-05-22\n1\n-1.5200\n29.2500\n\n\nLa Soufrière\nSaint Vincent\n2021-04-09\n4\n13.2833\n-61.3875"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#sorting-data-2",
-    "href": "slides/class1_pandas.html#sorting-data-2",
-    "title": "Intro to Python and Pandas",
-    "section": "Sorting data",
-    "text": "Sorting data\n\nSorting numerical, datetime or strings using .sort_values\nImportance of documentation to understand arguments\n\n\ndf.sort_values('VEI').head() # Sort volcanoes by VEI in ascending number\ndf.sort_values('Date', ascending=False).head() # Sort volcanoes by eruption dates from recent to old\ndf.sort_values('Country').head() # Also works on strings to sort alphabetically\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nCalbuco\nChile\n2015-04-22\n4\n-41.2972\n-72.6097\n\n\nNevado del Ruiz\nColombia\n1985-11-13\n3\n4.8950\n-75.3220\n\n\nNyiragongo\nDR Congo\n2021-05-22\n1\n-1.5200\n29.2500\n\n\nEyjafjallajökull\nIceland\n2010-04-14\n4\n63.6333\n-19.6111\n\n\nGalunggung\nIndonesia\n1982-04-05\n4\n-7.2567\n108.0771"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#sorting-data-3",
-    "href": "slides/class1_pandas.html#sorting-data-3",
-    "title": "Intro to Python and Pandas",
-    "section": "Sorting data",
-    "text": "Sorting data\n\nSorting numerical, datetime or strings using .sort_values\nImportance of documentation to understand arguments\n\n\ndf.sort_values('VEI').head() # Sort volcanoes by VEI in ascending number\ndf.sort_values('Date', ascending=False).head() # Sort volcanoes by eruption dates from recent to old\ndf.sort_values('Country').head() # Also works on strings to sort alphabetically\ndf.sort_values(['Latitude', 'Longitude']).head() # Sorting using multiple columns\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nCalbuco\nChile\n2015-04-22\n4\n-41.2972\n-72.6097\n\n\nAgung\nIndonesia\n2017-11-21\n3\n-8.3422\n115.5083\n\n\nMerapi\nIndonesia\n2023-12-03\n2\n-7.5407\n110.4457\n\n\nGalunggung\nIndonesia\n1982-04-05\n4\n-7.2567\n108.0771\n\n\nTavurvur\nPapua New Guinea\n2014-08-29\n3\n-4.3494\n152.2847"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#accessing-data-in-a-dataframe",
-    "href": "slides/class1_pandas.html#accessing-data-in-a-dataframe",
-    "title": "Intro to Python and Pandas",
-    "section": "Accessing data in a DataFrame",
-    "text": "Accessing data in a DataFrame"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#accessing-data-in-a-dataframe-1",
-    "href": "slides/class1_pandas.html#accessing-data-in-a-dataframe-1",
-    "title": "Intro to Python and Pandas",
-    "section": "Accessing data in a DataFrame",
-    "text": "Accessing data in a DataFrame\nOption 1: label-based indexing\n\nUse the labels of index and columns to retrieve data\nFunction to use: df.loc"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#accessing-data-in-a-dataframe-2",
-    "href": "slides/class1_pandas.html#accessing-data-in-a-dataframe-2",
-    "title": "Intro to Python and Pandas",
-    "section": "Accessing data in a DataFrame",
-    "text": "Accessing data in a DataFrame\nOption 2: position-based indexing\n\nUse the positions of index and columns to retrieve data\nFunction to use: df.iloc"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#label-based-indexing-rows",
-    "href": "slides/class1_pandas.html#label-based-indexing-rows",
-    "title": "Intro to Python and Pandas",
-    "section": "Label-based indexing: Rows",
-    "text": "Label-based indexing: Rows\n\nQuery a row with .loc → Use square brackets [ ]\n\nQuery the row for which the index label is Calbuco\nReturns all columns\n\n\n\n\n\n\n\ndf.loc['Calbuco']\n\nCountry                    Chile\nDate         2015-04-22 00:00:00\nVEI                            4\nLatitude                -41.2972\nLongitude               -72.6097\nName: Calbuco, dtype: object\n\n\n→ Returns a pd.Series\n\n\n\n\n\n\ndf.loc[['Calbuco']]\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nCalbuco\nChile\n2015-04-22\n4\n-41.2972\n-72.6097\n\n\n\n\n\n\n\n→ Returns a pd.DataFrame"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#label-based-indexing-rows-1",
-    "href": "slides/class1_pandas.html#label-based-indexing-rows-1",
-    "title": "Intro to Python and Pandas",
-    "section": "Label-based indexing: Rows",
-    "text": "Label-based indexing: Rows\n\nQuery multiple rows with .loc\n\nQuery the rows for which the index labels are Calbuco or Taal\nReturns all columns\n\n\n\n\n\ndf.loc[['Calbuco', 'Taal']]\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nCalbuco\nChile\n2015-04-22\n4\n-41.2972\n-72.6097\n\n\nTaal\nPhilippines\n2020-01-12\n4\n14.0020\n120.9934"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#label-based-indexing-columns",
-    "href": "slides/class1_pandas.html#label-based-indexing-columns",
-    "title": "Intro to Python and Pandas",
-    "section": "Label-based indexing: Columns",
-    "text": "Label-based indexing: Columns\n\nQuery columns\n\nQuery the columns for which the column labels are Country or VEI\nReturns all rows\n\n\n\n\n\n\nOption 1: with .loc:\n\n\ndf.loc[:, ['Country', 'VEI']].head(3)\n\n\n\n\n\n\n\n\nCountry\nVEI\n\n\nName\n\n\n\n\n\n\nSt. Helens\nUSA\n5\n\n\nPinatubo\nPhilippines\n6\n\n\nEl Chichón\nMexico\n5\n\n\n\n\n\n\n\n\n\n\n\n\n\nOption 2: without .loc:\n\n\ndf[['Country', 'VEI']].head(3)\n\n\n\n\n\n\n\n\nCountry\nVEI\n\n\nName\n\n\n\n\n\n\nSt. Helens\nUSA\n5\n\n\nPinatubo\nPhilippines\n6\n\n\nEl Chichón\nMexico\n5"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#label-based-indexing-rows-and-columns",
-    "href": "slides/class1_pandas.html#label-based-indexing-rows-and-columns",
-    "title": "Intro to Python and Pandas",
-    "section": "Label-based indexing: Rows and Columns",
-    "text": "Label-based indexing: Rows and Columns\n\nAgain, choice on whether to use .loc to query columns\n\n\n\n\n\nOption 1: Columns are specified inside .loc:\n\n\ndf.loc[['Calbuco', 'Taal'], ['Country', 'VEI']].head(3)\n\n\n\n\n\n\n\n\nCountry\nVEI\n\n\nName\n\n\n\n\n\n\nCalbuco\nChile\n4\n\n\nTaal\nPhilippines\n4\n\n\n\n\n\n\n\n\n\n\n\n\n\nOption 2: Columns are specified outside .loc:\n\n\ndf.loc[['Calbuco', 'Taal']][['Country', 'VEI']].head(3)\n\n\n\n\n\n\n\n\nCountry\nVEI\n\n\nName\n\n\n\n\n\n\nCalbuco\nChile\n4\n\n\nTaal\nPhilippines\n4"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#position-based-indexing-rows",
-    "href": "slides/class1_pandas.html#position-based-indexing-rows",
-    "title": "Intro to Python and Pandas",
-    "section": "Position-based indexing: Rows",
-    "text": "Position-based indexing: Rows\n\nQuery a row with .iloc\n\nReturns all columns\n\n\n\n\n\n\n\nOne row (first row):\n\n\ndf.iloc[[0]]\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nSt. Helens\nUSA\n1980-05-18\n5\n46.1914\n-122.1956\n\n\n\n\n\n\n\n\n\n\n\n\n\nRange of rows: (rows 3-4):\n\n\ndf.iloc[2:4]\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nEl Chichón\nMexico\n1982-03-28\n5\n17.3559\n-93.2233\n\n\nGalunggung\nIndonesia\n1982-04-05\n4\n-7.2567\n108.0771"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#position-based-indexing-rows-1",
-    "href": "slides/class1_pandas.html#position-based-indexing-rows-1",
-    "title": "Intro to Python and Pandas",
-    "section": "Position-based indexing: Rows",
-    "text": "Position-based indexing: Rows\n\nQuery rows from the end:\nExample:\n\nGet the last 5 rows of the DataFrame:\n\n\n\ndf.iloc[-5:]\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nLa Soufrière\nSaint Vincent\n2021-04-09\n4\n13.2833\n-61.3875\n\n\nCalbuco\nChile\n2015-04-22\n4\n-41.2972\n-72.6097\n\n\nSt. Augustine\nUSA\n2006-03-27\n3\n57.8819\n-155.5611\n\n\nEyjafjallajökull\nIceland\n2010-04-14\n4\n63.6333\n-19.6111\n\n\nCleveland\nUSA\n2023-05-23\n3\n52.8250\n-169.9444"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#position-based-and-label-based-queries",
-    "href": "slides/class1_pandas.html#position-based-and-label-based-queries",
-    "title": "Intro to Python and Pandas",
-    "section": "Position-based and label-based queries",
-    "text": "Position-based and label-based queries\n\nMix position-based and label-based indexing:\n\nRows → labels\nColumns → positions\n\n\n\ndf.iloc[0:5][['Country', 'VEI']]\n\n\n\n\n\n\n\n\nCountry\nVEI\n\n\nName\n\n\n\n\n\n\nSt. Helens\nUSA\n5\n\n\nPinatubo\nPhilippines\n6\n\n\nEl Chichón\nMexico\n5\n\n\nGalunggung\nIndonesia\n4\n\n\nNevado del Ruiz\nColombia\n3"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#boolean-indexing",
-    "href": "slides/class1_pandas.html#boolean-indexing",
-    "title": "Intro to Python and Pandas",
-    "section": "Boolean indexing",
-    "text": "Boolean indexing\n\nFiltering data with boolean indexing\n\nReturns either True or False depending on whether the condition is satisfied\n\n\n\n\n\n\nExample:\n\n\n\na = 1\nb = 2\n\n\n\n\n\n\n\nComparison operators:\n\n\n\n\nOperator\nMeaning\nExample\nResult\n\n\n\n\n==\nEqual to\na == b\nFalse\n\n\n!=\nNot equal to\na != b\nTrue\n\n\n&gt;\nGreater than\na &gt; b\nFalse\n\n\n&lt;\nLess than\na &lt; b\nTrue\n\n\n&gt;=\nGreater than or equal\na &gt;= b\nFalse\n\n\n&lt;=\nLess than or equal\na &lt;= b\nTrue"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#boolean-indexing-example",
-    "href": "slides/class1_pandas.html#boolean-indexing-example",
-    "title": "Intro to Python and Pandas",
-    "section": "Boolean indexing: Example",
-    "text": "Boolean indexing: Example\n\nQuery all volcanoes where VEI == 4\n\n\n\ndf['VEI'] == 4\n\nName\nSt. Helens          False\nPinatubo            False\nEl Chichón          False\nGalunggung           True\nNevado del Ruiz     False\nMerapi              False\nOntake              False\nSoufrière Hills     False\nEtna                False\nNyiragongo          False\nKīlauea             False\nAgung               False\nTavurvur            False\nSinabung            False\nTaal                 True\nLa Soufrière         True\nCalbuco              True\nSt. Augustine       False\nEyjafjallajökull     True\nCleveland           False\nName: VEI, dtype: bool"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#boolean-indexing-example-1",
-    "href": "slides/class1_pandas.html#boolean-indexing-example-1",
-    "title": "Intro to Python and Pandas",
-    "section": "Boolean indexing: Example",
-    "text": "Boolean indexing: Example\n\nQuery all volcanoes where VEI == 4\n\n\n\ndf.loc[df['VEI'] == 4]\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nGalunggung\nIndonesia\n1982-04-05\n4\n-7.2567\n108.0771\n\n\nTaal\nPhilippines\n2020-01-12\n4\n14.0020\n120.9934\n\n\nLa Soufrière\nSaint Vincent\n2021-04-09\n4\n13.2833\n-61.3875\n\n\nCalbuco\nChile\n2015-04-22\n4\n-41.2972\n-72.6097\n\n\nEyjafjallajökull\nIceland\n2010-04-14\n4\n63.6333\n-19.6111"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#boolean-indexing-strings",
-    "href": "slides/class1_pandas.html#boolean-indexing-strings",
-    "title": "Intro to Python and Pandas",
-    "section": "Boolean indexing: Strings",
-    "text": "Boolean indexing: Strings\n\nFiltering also works with strings\n\nUse string comparison operations\n\n\n\n\nExample:\n\n\ndf.loc[df['Country'] == 'Indonesia']\n\n\n\n\n\n\n\n\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nGalunggung\nIndonesia\n1982-04-05\n4\n-7.2567\n108.0771\n\n\nMerapi\nIndonesia\n2023-12-03\n2\n-7.5407\n110.4457\n\n\nAgung\nIndonesia\n2017-11-21\n3\n-8.3422\n115.5083\n\n\nSinabung\nIndonesia\n2023-02-13\n3\n3.1719\n98.3925"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#boolean-indexing-strings-1",
-    "href": "slides/class1_pandas.html#boolean-indexing-strings-1",
-    "title": "Intro to Python and Pandas",
-    "section": "Boolean indexing: Strings",
-    "text": "Boolean indexing: Strings\n\nFiltering also works with strings\n\nUse string comparison operations\n\n\n\n\nString comparison operators: \n\n\n\n\n\n\n\n\n\nOperation\nExample\nDescription\n\n\n\n\ncontains\ndf['Name'].str.contains('Soufrière')\nChecks if each string contains a substring\n\n\nstartswith\ndf['Name'].str.startswith('E')\nChecks if each string starts with a substring\n\n\nendswith\ndf['Name'].str.endswith('o')\nChecks if each string ends with a substring"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#data-management-operations",
-    "href": "slides/class1_pandas.html#data-management-operations",
-    "title": "Intro to Python and Pandas",
-    "section": "Data management operations",
-    "text": "Data management operations\n\nCommon data management functions for pandas columns:\n\n\n\n\n\n\n\n\n\nOperation\nExample\nDescription\n\n\n\n\nRound\ndf['VEI'].round(1)\nRounds values to the specified number of decimals\n\n\nFloor\ndf['VEI'].apply(np.floor)\nRounds values down to the nearest integer\n\n\nCeil\ndf['VEI'].apply(np.ceil)\nRounds values up to the nearest integer\n\n\nAbsolute value\ndf['VEI'].abs()\nReturns the absolute value of each element\n\n\nFill missing\ndf['VEI'].fillna(0)\nReplaces missing values with a specified value\n\n\n\n\n\n\nRound the 'Latitude' to two decimals → make sure you store the output!\n\n\ndf['Latitude'] = df['Latitude'].round(2)"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#arithmetic-operations",
-    "href": "slides/class1_pandas.html#arithmetic-operations",
-    "title": "Intro to Python and Pandas",
-    "section": "Arithmetic operations",
-    "text": "Arithmetic operations\n\nArithmetic operations on parts of the DataFrame (→ columns) using native Python arithmetic operators\n\n\n\n\n\n\n\n\n\n\nOperation\nSymbol\nExample\nDescription\n\n\n\n\nAddition\n+\ndf['VEI'] + 1\nAdds a value to each element\n\n\nSubtraction\n-\ndf['VEI'] - 1\nSubtracts a value from each element\n\n\nMultiplication\n*\ndf['VEI'] * 2\nMultiplies each element by a value\n\n\nDivision\n/\ndf['VEI'] / 2\nDivides each element by a value\n\n\nExponentiation\n**\ndf['VEI'] ** 2\nRaises each element to a power\n\n\nModulo\n%\ndf['VEI'] % 2\nRemainder after division for each element\n\n\n\n\n\n\nDivide VEI by 2 and store results a new column (→ VEI_haved)\n\n\ndf['VEI_halved'] = df['VEI'] / 2"
-  },
-  {
-    "objectID": "slides/class1_pandas.html#expanded-arithmetic-operations",
-    "href": "slides/class1_pandas.html#expanded-arithmetic-operations",
-    "title": "Intro to Python and Pandas",
-    "section": "Expanded arithmetic operations",
-    "text": "Expanded arithmetic operations\n\nThe range of arithmetic operations can be expanded using numpy\n\n\n\n\n\n\n\n\n\n\nOperation\nSymbol\nExample\nDescription\n\n\n\n\nExponentiation\nnp.power\nnp.power(df['VEI'], 2)\nElement-wise exponentiation\n\n\nSquare root\nnp.sqrt\nnp.sqrt(df['VEI'])\nElement-wise square root\n\n\nLogarithm (base e)\nnp.log\nnp.log(df['VEI'])\nElement-wise natural logarithm\n\n\nLogarithm (base 10)\nnp.log10\nnp.log10(df['VEI'])\nElement-wise base-10 logarithm\n\n\nExponential\nnp.exp\nnp.exp(df['VEI'])\nElement-wise exponential (e^x)\n\n\n\n\n\n\nDivide VEI by 2 and store results a new column (→ VEI_haved)\n\n\ndf['VEI_square'] = np.power(df['VEI'], 2)"
-  },
-  {
-    "objectID": "summary.html",
-    "href": "summary.html",
-    "title": "Summary",
-    "section": "",
-    "text": "Summary\nIn summary, this book has no content whatsoever."
+    "section": "Start coding!",
+    "text": "Start coding!\n\nGo to https://e5k.github.io/Data-Science/\n\nSetup VS Code: Appendices &gt; Setup VS Code"
   },
   {
     "objectID": "class1_overview.html",
@@ -725,7 +743,7 @@
     "href": "class1/day1-3_data_exploration.html#importing-the-library-and-the-data",
     "title": "Data structure",
     "section": "Importing the library and the data",
-    "text": "Importing the library and the data\nAs always, we start by importing the pandas library as pd.\n\nimport pandas as pd\n\nWe load the dataset using the pd.read_csv function into a variable called df (for DataFrame) (doc). Remember that functions can take different arguments, which are extra keywords you can pass to make the behaviour of the function more specific to your need. Here, we pass one arguments to the read_csv() function: parse_dates=['Date'] Specifies that the Date column should be treated as a date object.\n\n\n\n\n\nListing 1: Loading data from a csv file\n\n\ndf = pd.read_csv('data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data\ndf.head() # Show the first 5 rows\n\n\n\n\n\n\n\n\n\n\n\nName\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\n\n\n0\nSt. Helens\nUSA\n1980-05-18\n5\n46.1914\n-122.1956\n\n\n1\nPinatubo\nPhilippines\n1991-04-02\n6\n15.1501\n120.3465\n\n\n2\nEl Chichón\nMexico\n1982-03-28\n5\n17.3559\n-93.2233\n\n\n3\nGalunggung\nIndonesia\n1982-04-05\n4\n-7.2567\n108.0771\n\n\n4\nNevado del Ruiz\nColombia\n1985-11-13\n3\n4.8950\n-75.3220\n\n\n\n\n\n\n\n\nSetting up the index\nThe output of Listing 1 shows the first 5 rows in our DataFrame. As displayed here, the first column is the index - which is currently just integer numbers. That can be acceptable in some cases, but for the sake of the exercise we will choose one column to become the index - here Name.\nListing 2 Illustrates the use of two useful functions:\n\n.set_index(): Uses a column as the DataFrame’s index\n.reset_index(): Removes the column’s index back to a sequential numbering as in Listing 1.\n\n\n\n\n\nListing 2: Common functions to set the index of a DataFrame\n\n\ndf = df.set_index('VEI') # Set the 'VEI' column as an index\ndf = df.reset_index() # Shoots, I meant to set the 'Name' columns as an index\ndf = df.set_index('Name') # Here we go.\ndf.head()\n\n\n\n\n\n\n\n\n\n\n\nVEI\nCountry\nDate\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nSt. Helens\n5\nUSA\n1980-05-18\n46.1914\n-122.1956\n\n\nPinatubo\n6\nPhilippines\n1991-04-02\n15.1501\n120.3465\n\n\nEl Chichón\n5\nMexico\n1982-03-28\n17.3559\n-93.2233\n\n\nGalunggung\n4\nIndonesia\n1982-04-05\n-7.2567\n108.0771\n\n\nNevado del Ruiz\n3\nColombia\n1985-11-13\n4.8950\n-75.3220",
+    "text": "Importing the library and the data\nAs always, we start by importing the pandas library as pd.\n\nimport pandas as pd\n\nWe load the dataset using the pd.read_csv function into a variable called df (for DataFrame) (doc). Remember that functions can take different arguments, which are extra keywords you can pass to make the behaviour of the function more specific to your need. Here, we pass one arguments to the read_csv() function: parse_dates=['Date'] Specifies that the Date column should be treated as a date object.\n\n\n\n\n\nListing 1: Loading data from a csv file\n\n\ndf = pd.read_csv('https://raw.githubusercontent.com/e5k/Data-Science/main/Data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data\ndf.head() # Show the first 5 rows\n\n\n\n\n\n\n\n\n\n\n\nName\nCountry\nDate\nVEI\nLatitude\nLongitude\n\n\n\n\n0\nSt. Helens\nUSA\n1980-05-18\n5\n46.1914\n-122.1956\n\n\n1\nPinatubo\nPhilippines\n1991-04-02\n6\n15.1501\n120.3465\n\n\n2\nEl Chichón\nMexico\n1982-03-28\n5\n17.3559\n-93.2233\n\n\n3\nGalunggung\nIndonesia\n1982-04-05\n4\n-7.2567\n108.0771\n\n\n4\nNevado del Ruiz\nColombia\n1985-11-13\n3\n4.8950\n-75.3220\n\n\n\n\n\n\n\n\nSetting up the index\nThe output of Listing 1 shows the first 5 rows in our DataFrame. As displayed here, the first column is the index - which is currently just integer numbers. That can be acceptable in some cases, but for the sake of the exercise we will choose one column to become the index - here Name.\nListing 2 Illustrates the use of two useful functions:\n\n.set_index(): Uses a column as the DataFrame’s index\n.reset_index(): Removes the column’s index back to a sequential numbering as in Listing 1.\n\n\n\n\n\nListing 2: Common functions to set the index of a DataFrame\n\n\ndf = df.set_index('VEI') # Set the 'VEI' column as an index\ndf = df.reset_index() # Shoots, I meant to set the 'Name' columns as an index\ndf = df.set_index('Name') # Here we go.\ndf.head()\n\n\n\n\n\n\n\n\n\n\n\nVEI\nCountry\nDate\nLatitude\nLongitude\n\n\nName\n\n\n\n\n\n\n\n\n\nSt. Helens\n5\nUSA\n1980-05-18\n46.1914\n-122.1956\n\n\nPinatubo\n6\nPhilippines\n1991-04-02\n15.1501\n120.3465\n\n\nEl Chichón\n5\nMexico\n1982-03-28\n17.3559\n-93.2233\n\n\nGalunggung\n4\nIndonesia\n1982-04-05\n-7.2567\n108.0771\n\n\nNevado del Ruiz\n3\nColombia\n1985-11-13\n4.8950\n-75.3220",
     "crumbs": [
       "Class 1",
       "Data structure"
