@@ -1,6 +1,7 @@
 /.quarto/
 .quarto/
 /_site/
+/scripts/
 .Rproj.user
 .Rhistory
 

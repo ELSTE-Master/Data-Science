@@ -55,3 +55,10 @@ Several versions of Python can be installed on a computer. In the computer room,
 2. If you don't, click on the button and search for the right one (i.e., there should be `anaconda` in the path)
 
 ![Select the right Python environment](img/8.png){#fig-env width=80%}
+
+## Open the course material in VS Code
+
+1. Type <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>i</kbd> (or <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>i</kbd> on MacOS) to open the command palette
+2. Type `simple` and select `Simple Browser: Show`
+3. Enter `https://e5k.github.io/Data-Science/`
+4. Click the **Simple Browser** tab and move it to the right of VS Code to open the course material alongside your Jupyter Notebook 

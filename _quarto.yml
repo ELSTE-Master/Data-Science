@@ -5,7 +5,6 @@ website:
   title: "ELSTE Data Science Master Course"
   description: "An introduction to data science using Python"
   page-navigation: true
-
   search:
     location: sidebar
   # navbar:
@@ -14,12 +13,13 @@ website:
   #       href: https://github.com/e5k/Data-Science/blob/main/_quarto.yml
   sidebar:
     style: "floating"
-    title: "ELSTE Data Science Course"   # 👈 moves site title here
+    title: "ELSTE Data Science Course" 
     tools:     
       - icon: github
-        href: ttps://github.com/e5k/Data-Science/
+        href: https://github.com/e5k/Data-Science/
         text: "GitHub"
     background: "#fafafa"
+    collapse-level: 1
     search: true
     contents: 
       - index.qmd
@@ -35,9 +35,9 @@ website:
       - section: "Appendices"
         contents:
           - appendices/setup_vscode.qmd
-      - references.qmd
+      # - references.qmd
   page-footer:
-    background: "#F5F5F5"
+    background: "#fafafa"
     center: "© 2025 - [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.en) - Sébastien Biass & Stéphane Guerrier"
   # navbar:
   #   right:
@@ -54,7 +54,7 @@ format:
       light: cosmo
     code-fold: false
     css: custom.css
-    backgroundcolor: "#F5F5F5"
+    backgroundcolor: "#fafafa"
     toc: true          # enable TOC
     toc-depth: 3       # how many heading levels to include
     toc-location: right

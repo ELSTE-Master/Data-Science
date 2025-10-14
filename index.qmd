@@ -48,7 +48,7 @@ The course is composed of three 6-h sessions on Wednesday mornings from 9h - 12h
 | Nov 5, 2025  | SG  | Regressions       |
 | Nov 12, 2025 | SB/SG    | TBD     |
 | Nov 19, 2025 | SB/SG  | TBD            |
-
+: {.striped   }
 
 ### Class location
 
@@ -59,8 +59,28 @@ The class takes place in the computer lab **in the Science III building** (and [
 
 ### Use of the computer lab
 
-- ISIS login and password
-- Setup VSCode on PCs of the computer lab
+- Please make sure you have your [ISIS login and password]{.bg} to login
+- Follow [this tutorial](appendices/setup_vscode.qmd) to [setup VSCode]{.bg} on PCs of the computer lab
+
+Alternatively, if you want to use Python on your own computer:
+
+- Make sure you installed an **environment manager** (e.g. [Miniconda](https://www.anaconda.com/docs/getting-started/miniconda/main)) and created a dedicated environment with the following packages installed: `pandas`, `numpy`, `jupyterlab`
+- Make sure you installed VS Code and:
+  - the Python extensions following [this tutorial](appendices/setup_vscode.qmd)
+  - make sure VS Code can find your Python environment
+
+::: {.callout-warning}
+## Using your own computer
+We won't have time to help you install Python on your computer **during the class**.
+:::
+
+### Assistants
+
+The course assistants are:
+
+- Simon Thivet (UNIGE / [Physical Volcanology and Geological Risk](https://www.unige.ch/sciences/terre/en/groups/physical-volcanology-and-geological-risk/staff/))
+- Filippo Salmaso (UNIGE / [Data Analytics Lab](https://farma-unites.unige.ch/en/data-analytics-lab/members))
+
 
 ### Re-use this class
 

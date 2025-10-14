@@ -84,7 +84,7 @@ Remember that *functions* can take different *arguments*, which are extra keywor
 #| lst-label: lst-load-data
 #| lst-cap: Loading data from a csv file
 
-df = pd.read_csv('data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data
+df = pd.read_csv('https://raw.githubusercontent.com/e5k/Data-Science/main/Data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data
 df.head() # Show the first 5 rows
 ```
 
@@ -121,16 +121,13 @@ Let's now explore the structure of the dataset with the following functions:
 | `df.shape`       | Returns a list containing the number of rows and columns of the DataFrame.                                                                                                                                                                                                                                                                                                                                                                           |
 | `df.index`       | Returns a list containing the index along the *rows* of the DataFrame.                                                                                                                                                                                                                                                                                                                                                                           |
 | `df.columns`     | Returns a list containing the index along the *columns* of the DataFrame.                                                                                                                                                                                                                                                                                                                                                                           |
+: {.striped   }
 
-::: {.callout-tip}
 
-
+::: {.callout-note}
 ## Your turn!
-
 Try these functions on `df` and get familiar with the output.
-
 :::
-
 
 
 

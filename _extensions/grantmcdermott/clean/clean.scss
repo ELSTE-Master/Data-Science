@@ -322,6 +322,7 @@ $selection-bg: $bg_light !default;
   padding: .23em; /* Adjust padding as needed */
   text-align: left; /* Adjust text alignment as needed */
   font-weight: lighter; /* Lighter font weight for main table text */
+  font-size: 0.85em;
 }
 
 /* Adds a bottom border to the table header row for distinction */
@@ -334,6 +335,18 @@ $selection-bg: $bg_light !default;
 /* Make column headers bold */
 .reveal table thead th {
   font-weight: bold;
+  text-align: left; /* Adjust text alignment as needed */
+  color: $bg_dark; /* Dark grey color for the header text */
+  border-top: 2px solid #D3D3D3; /* Add top border */
+  background-color: #fff;
+}
+
+.reveal table tbody tr:nth-child(even) {
+  background-color: rgba($bg_light, 0.1); /* striped rows */
+}
+
+.reveal table tbody tr:hover {
+  background-color: rgba($accent, 0.1); /* hover highlight */
 }
 
 /* Styling table captions */

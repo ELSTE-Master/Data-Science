@@ -82,6 +82,7 @@ Synthetic dataset of **selected volcanic eruptions** → first 5 rows:
 | El Chichón      | Mexico      | 1982-03-28 |     5 |    17.3559 |    -93.2233 |
 | Galunggung      | Indonesia   | 1982-04-05 |     4 |    -7.2567 |    108.077  |
 | Nevado del Ruiz | Colombia    | 1985-11-13 |     3 |     4.895  |    -75.322  |
+: {.table .table-striped .table-hover}
 
 ## Volcanic explosivity index (VEI)
 
@@ -117,7 +118,7 @@ import pandas as pd
 import pandas as pd
 
 # Read the data
-df = pd.read_csv('data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data
+df = pd.read_csv('https://raw.githubusercontent.com/e5k/Data-Science/main/Data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data
 ```
 
 ## Setting up the notebook {auto-animate="true"}
@@ -136,7 +137,7 @@ df = pd.read_csv('data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data
 import pandas as pd
 
 # Read the data
-df = pd.read_csv('../class1/data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data
+df = pd.read_csv('https://raw.githubusercontent.com/e5k/Data-Science/main/Data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data
 
 # Show the first 3 rows
 df.head(3) 
@@ -148,7 +149,7 @@ df.head(3)
 
 ## Setting the index
 
-- ...for now, the index (**→ the first column)** is and *integer*
+- ...for now, the index (**→ the first column)** is an *integer*
 - This might be acceptable in datasets where the *label* is not important
 
 <span style="font-size: 0.5em;"></span>
@@ -195,6 +196,20 @@ df.head(3)
 | `df.shape`   | Returns a list containing the number of rows and columns of the DataFrame.                    |
 | `df.index`   | Returns a list containing the index along the *rows* of the DataFrame.                        |
 | `df.columns` | Returns a list containing the index along the *columns* of the DataFrame.                     |
+
+: {.striped}
+
+<span style="font-size: 0.5em;"></span>
+
+::: {.callout-tip}
+## Functions vs attributes
+
+- **Functions** have parentheses → they **compute** something on `df`
+- **Attributes** do *not* have parentheses → they store some **parameter** related to `df`
+
+
+:::
+
 
 
 ## Sorting data {auto-animate="true"}
@@ -250,6 +265,16 @@ df.sort_values('Date', ascending=False).head() # Sort volcanoes by eruption date
 df.sort_values('Country').head() # Also works on strings to sort alphabetically
 df.sort_values(['Latitude', 'Longitude']).head() # Sorting using multiple columns
 ```
+
+
+## Your turn!
+
+- Go to [https://e5k.github.io/Data-Science/](https://e5k.github.io/Data-Science/)
+  - Class 1 > [Data Structure]{.bg}
+
+<span style="font-size: 0.5em;"></span>
+
+<iframe src="https://e5k.github.io/Data-Science/class1/day1-3_data_exploration.html" width="100%" height="400px" style="border:none;"></iframe>
 
 
 # Querying data {background-color="#2F4647"}
@@ -417,6 +442,16 @@ df.loc[['Calbuco', 'Taal']][['Country', 'VEI']].head(3)
 
 
 
+## Position-based indexing
+
+- Use **positions** instead of **labels**
+
+
+![](../class1/img/pandas_iloc.png)
+
+
+
+
 ## Position-based indexing: Rows
 
 - **Query a [row]{.bg}** with `.iloc`
@@ -480,6 +515,16 @@ df.iloc[0:5][['Country', 'VEI']]
 ```
 
 
+## Your turn!
+
+- Go to [https://e5k.github.io/Data-Science/](https://e5k.github.io/Data-Science/)
+  - Class 1 > [Querying data]{.bg}
+
+<span style="font-size: 0.5em;"></span>
+
+<iframe src="https://e5k.github.io/Data-Science/class1/day1-4_queries.html" width="100%" height="400px" style="border:none;"></iframe>
+
+
 
 
 
@@ -531,31 +576,40 @@ b = 2
 ::::
 
 
-## Boolean indexing: Example  {auto-animate="true"}
+## Boolean indexing: Example
 
 - Query all volcanoes where `VEI == 4`
 
 <span style="font-size: 0.5em;"></span>
 
+:::: {.columns}
+
+::: {.column width="25%"}
+::: {.fragment}
 ```{python}
 # | eval: True 
 # | echo: True
 df['VEI'] == 4
 ```
 
-## Boolean indexing: Example  {auto-animate="true"}
+:::
+:::
 
-- Query all volcanoes where `VEI == 4`
+::: {.column width="10%"}
 
-<span style="font-size: 0.5em;"></span>
+:::
 
-
+::: {.column width="65%"}
+::: {.fragment}
 ```{python}
 # | eval: True 
 # | echo: True
 df.loc[df['VEI'] == 4]
 ```
+:::
+:::
 
+::::
 
 
 ## Boolean indexing: Strings
@@ -589,6 +643,17 @@ df.loc[df['Country'] == 'Indonesia']
 | contains          | `df['Name'].str.contains('Soufrière')`  | Checks if each string contains a substring          |
 | startswith        | `df['Name'].str.startswith('E')`        | Checks if each string starts with a substring       |
 | endswith          | `df['Name'].str.endswith('o')`          | Checks if each string ends with a substring         |
+
+
+
+## Your turn!
+
+- Go to [https://e5k.github.io/Data-Science/](https://e5k.github.io/Data-Science/)
+  - Class 1 > [Filtering data]{.bg}
+
+<span style="font-size: 0.5em;"></span>
+
+<iframe src="https://e5k.github.io/Data-Science/class1/day1-5_filtering.html" width="100%" height="400px" style="border:none;"></iframe>
 
 
 
@@ -635,7 +700,7 @@ df['Latitude'] = df['Latitude'].round(2)
 <span style="font-size: 0.5em;"></span>
 
 ::: {.fragment}
-- Divide `VEI` by 2 and store results a new column (→ `VEI_haved`)
+- Divide `VEI` by 2 and store results a new column (→ `VEI_halved`)
 
 ```{python}
 # | eval: False 
@@ -661,12 +726,22 @@ df['VEI_halved'] = df['VEI'] / 2
 <span style="font-size: 0.5em;"></span>
 
 ::: {.fragment}
-- Divide `VEI` by 2 and store results a new column (→ `VEI_haved`)
+- `VEI` power 2 and store results a new column (→ `VEI_pow2`)
 
 ```{python}
 # | eval: False 
 # | echo: True
-df['VEI_square'] = np.power(df['VEI'], 2)
+df['VEI_pow2'] = np.power(df['VEI'], 2)
 ```
 
 :::
+
+## Your turn!
+
+- Go to [https://e5k.github.io/Data-Science/](https://e5k.github.io/Data-Science/)
+  - Class 1 > [Operations]{.bg}
+
+<span style="font-size: 0.5em;"></span>
+
+<iframe src="https://e5k.github.io/Data-Science/class1/day1-6_operations.html" width="100%" height="400px" style="border:none;"></iframe>
+
