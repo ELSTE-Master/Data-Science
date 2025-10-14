@@ -415,7 +415,8 @@ $selection-bg: $bg_light !default;
 .reveal code {
     color: $bg_light;
     font-size: .875em;
-    background-color: rgba($bg_light, 0.25);
+    background-color: #fff;
+    // background-color: rgba($bg_light, 0.25);
     padding: 0.05em;
     border-radius: 2px;
     display: inline-block;

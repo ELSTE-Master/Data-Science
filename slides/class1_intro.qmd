@@ -278,14 +278,14 @@ flowchart LR
 - Compiled → doesn't directly speak to the computer, but is *interpreted* by another language
   - Usually slower, but much, much [easier to use]{.bg}!
 
-
+::: {.fragment}
 **Modular**
 
 - Python is composed of a *core* of functions complemented by wide ecosystem of specialized packages for [specific tasks]{.bg}
   - A [function]{.bg} is a bit of code to perform a **specific task**
   - A [module]{.bg} is a collection of **functions**
   - A [package]{.bg} is composed by multiple **modules**
-
+:::
 
 ## An example of packages, modules and functions
 
@@ -336,12 +336,12 @@ Make sure to install an **environment manager** → e.g. [Miniconda](https://www
 ::: {.column width="48%"}
 
 ::: {.fragment}
-**Option 2**: On the cloud → [Google Collab](https://colab.google)
+**Option 2**: In the cloud → [Google Collab](https://colab.google)
 
 - No setup required
 - No internet connection required
 - Decent speed, free as long as Google says it is free
-- All data stored on your own computer
+- All data stored in the cloud
 
 :::
 :::

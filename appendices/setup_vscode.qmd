@@ -15,7 +15,7 @@ These steps will ensure that Python works and finds the files in this exact fold
 
 ## Create a new Jupyter Notebook
 
-1. Type <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>i</kbd> (or <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>i</kbd> on MacOS) to open the command palette
+1. Type <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>p</kbd> (or <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>p</kbd> on MacOS) to open the command palette
 2. Type `jupyter` and select `Create: New Jupyter Notebook` (@fig-newnotebook)
 
 ![Create a new Jupyter Notebook](img/3.png){#fig-newnotebook width=80%}
@@ -58,7 +58,7 @@ Several versions of Python can be installed on a computer. In the computer room,
 
 ## Open the course material in VS Code
 
-1. Type <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>i</kbd> (or <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>i</kbd> on MacOS) to open the command palette
+1. Type <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>p</kbd> (or <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>p</kbd> on MacOS) to open the command palette
 2. Type `simple` and select `Simple Browser: Show`
 3. Enter `https://e5k.github.io/Data-Science/`
 4. Click the **Simple Browser** tab and move it to the right of VS Code to open the course material alongside your Jupyter Notebook 
