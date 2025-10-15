@@ -359,8 +359,7 @@ Fortunately, we can also use the native *Pandas* [`.median`](https://pandas.pyda
 ```{python}
 #| lst-label: lst-univ-median
 #| lst-cap: Compute the median for two significant digits.
-
-df['Zr'].median().round(2)
+round(df['Zr'].median(), 2)
 ```
 
 ::: {.callout-note}
