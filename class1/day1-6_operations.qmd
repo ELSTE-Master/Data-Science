@@ -18,7 +18,7 @@ plt.rcParams.update({
     "figure.facecolor":  (0.0, 0.0, 0.0, 0.0),  # red   with alpha = 30%
 })
 import pandas as pd
-df = pd.read_csv('https://raw.githubusercontent.com/e5k/Data-Science/main/Data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data
+df = pd.read_csv('https://raw.githubusercontent.com/ELSTE-Master/Data-Science/refs/heads/main/Data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data
 df = df.set_index('Name')
 ```
 

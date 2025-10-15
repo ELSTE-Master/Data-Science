@@ -118,7 +118,7 @@ import pandas as pd
 import pandas as pd
 
 # Read the data
-df = pd.read_csv('https://raw.githubusercontent.com/e5k/Data-Science/main/Data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data
+df = pd.read_csv('https://raw.githubusercontent.com/ELSTE-Master/Data-Science/refs/heads/main/Data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data
 ```
 
 ## Setting up the notebook {auto-animate="true"}
@@ -137,7 +137,7 @@ df = pd.read_csv('https://raw.githubusercontent.com/e5k/Data-Science/main/Data/d
 import pandas as pd
 
 # Read the data
-df = pd.read_csv('https://raw.githubusercontent.com/e5k/Data-Science/main/Data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data
+df = pd.read_csv('https://raw.githubusercontent.com/ELSTE-Master/Data-Science/refs/heads/main/Data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data
 
 # Show the first 3 rows
 df.head(3) 
