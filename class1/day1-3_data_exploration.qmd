@@ -84,7 +84,7 @@ Remember that *functions* can take different *arguments*, which are extra keywor
 #| lst-label: lst-load-data
 #| lst-cap: Loading data from a csv file
 
-df = pd.read_csv('https://raw.githubusercontent.com/ELSTE-Master/Data-Science/refs/heads/main/Data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data
+df = pd.read_csv('https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data
 df.head() # Show the first 5 rows
 ```
 
