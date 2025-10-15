@@ -5312,14 +5312,14 @@ Remember that *functions* can take different *arguments*, which are extra keywor
 - `index_col=0`: Specify that the index of the file is the first column. More on that soon if this is unclear.
 - `parse_dates=['Date']`: Specify that the `Date` column should be treated as a date object.
 ::: -->
-<div id="95787ddd" class="cell" data-execution_count="3">
+<div id="ba795b45" class="cell" data-execution_count="3">
 <div id="lst-load-data" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-load-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Listing 1: Loading data from a csv file
 </figcaption>
 <div aria-describedby="lst-load-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode cell-code" id="lst-load-data"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="lst-load-data-1"><a href="#lst-load-data-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">&#39;https://raw.githubusercontent.com/e5k/Data-Science/main/Data/dummy_volcanoes.csv&#39;</span>, parse_dates<span class="op">=</span>[<span class="st">&#39;Date&#39;</span>]) <span class="co"># Load data</span></span>
+<div class="sourceCode cell-code" id="lst-load-data"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="lst-load-data-1"><a href="#lst-load-data-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">&#39;https://raw.githubusercontent.com/ELSTE-Master/Data-Science/refs/heads/main/Data/dummy_volcanoes.csv&#39;</span>, parse_dates<span class="op">=</span>[<span class="st">&#39;Date&#39;</span>]) <span class="co"># Load data</span></span>
 <span id="lst-load-data-2"><a href="#lst-load-data-2" aria-hidden="true" tabindex="-1"></a>df.head() <span class="co"># Show the first 5 rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </figure>
@@ -5400,7 +5400,7 @@ Listing 1: Loading data from a csv file
 <li><code>.set_index()</code>: Uses a column as the DataFrame’s index</li>
 <li><code>.reset_index()</code>: Removes the column’s index back to a sequential numbering as in <a href="#lst-load-data" class="quarto-xref">Listing 1</a>.</li>
 </ul>
-<div id="967c3837" class="cell" data-execution_count="4">
+<div id="2ddacbf2" class="cell" data-execution_count="4">
 <div id="lst-set-index" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-set-index-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -5545,7 +5545,7 @@ Your turn!
 <li><code>axis</code>: Specifies whether sorting rows (<code>axis = 0</code> - in which case <code>by</code> is a column name) or sorting columns (<code>axis = 1</code>, in which case <code>by</code> is an index value). The documentation specifies <code>axis = 0</code>, which means that rows will be sorted if <code>axis</code> is not specified.</li>
 <li><code>ascending</code>: Using a <em>bool</em> (remember, this is a True/False behaviour), specifies if values are sorted in <em>ascending</em> (<code>ascending = True</code>, default behaviour is not specified) or <em>descending</em> (<code>ascending = False</code>) order.</li>
 </ol>
-<div id="53c01126" class="cell" data-execution_count="5">
+<div id="2fbcdf26" class="cell" data-execution_count="5">
 <div id="lst-sort" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-sort-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -5571,7 +5571,7 @@ Question
 </div>
 <div class="callout-body-container callout-body">
 <p>After sorting the data in <strong>descending order</strong> by VEI and time, what are the three first volcanoes?</p>
-<div id="875c8dbb" class="cell" data-execution_count="6">
+<div id="b7938238" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="5">
 <select class="webex-select"><option value="blank"></option><option value="0">Nyiragongo, Ontake, Kīlauea</option><option value="0">Kīlauea, Ontake, Nyiragongo</option><option value="answer">Pinatubo, El Chichon, St Helens</option><option value="0">St Helens, El Chichon, Pinatubo</option></select>
 </div>
@@ -5886,7 +5886,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/e5k\.github\.io\/Data-Science\/");
+      var filterRegex = new RegExp("https:\/\/ELSTE-Master\.github\.io\/Data-Science\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
