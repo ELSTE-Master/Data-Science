@@ -7,16 +7,12 @@ website:
   page-navigation: true
   search:
     location: sidebar
-  # navbar:
-  #   right:
-  #     - icon: github
-  #       href: https://github.com/e5k/Data-Science/blob/main/_quarto.yml
   sidebar:
     style: "floating"
     title: "ELSTE Data Science Course" 
     tools:     
       - icon: github
-        href: https://github.com/e5k/Data-Science/
+        href: https://github.com/ELSTE-Master/Data-Science
         text: "GitHub"
     background: "#fafafa"
     collapse-level: 1
