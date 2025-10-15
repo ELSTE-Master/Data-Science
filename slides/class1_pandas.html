@@ -6,8 +6,8 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2fa0555fe88427c29efa1b60aaf9e62d.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.42">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-57476271c5f0467c372e20ff5d25630e.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.40">
 
   <meta name="author" content="Sébastien Biass">
   <meta name="dcterms.date" content="2025-10-15">
@@ -95,7 +95,7 @@
     code span.vs { color: #da4453; } /* VerbatimString */
     code span.wa { color: #da4453; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-63a0de06f658f1925789ecc194034ebc.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-bace2cf5c2ec17ca89942dab6bc2ccec.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -371,7 +371,7 @@ Sébastien Biass <a href="https://orcid.org/0000-0002-1919-9473" class="quarto-t
 <li>We import it under the name <span class="bg">pd</span> - which is faster to type!</li>
 </ul>
 <p><span style="font-size: 0.5em;"></span></p>
-<div id="35800e14" class="cell" data-execution_count="1">
+<div id="48abcbfe" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb1-1" class="hljs-ln-code"><a></a><span class="co"># Import the required packages</span></span>
 <span id="cb1-2" class="hljs-ln-code"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -383,12 +383,12 @@ Sébastien Biass <a href="https://orcid.org/0000-0002-1919-9473" class="quarto-t
 <li>This returns a <span class="bg">DataFrame</span> object in a variable named <code>df</code></li>
 </ul>
 <p><span style="font-size: 0.5em;"></span></p>
-<div id="4592950a" class="cell" data-execution_count="2">
+<div id="7372a1e9" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb2-1" class="hljs-ln-code"><a></a><span class="co"># Import the required packages</span></span>
 <span id="cb2-2" class="hljs-ln-code"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-3" class="hljs-ln-code"><a></a></span>
 <span id="cb2-4" class="hljs-ln-code"><a></a><span class="co"># Read the data</span></span>
-<span id="cb2-5" class="hljs-ln-code"><a></a>df <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/ELSTE-Master/Data-Science/refs/heads/main/Data/dummy_volcanoes.csv'</span>, parse_dates<span class="op">=</span>[<span class="st">'Date'</span>]) <span class="co"># Load data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-5" class="hljs-ln-code"><a></a>df <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/dummy_volcanoes.csv'</span>, parse_dates<span class="op">=</span>[<span class="st">'Date'</span>]) <span class="co"># Load data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="setting-up-the-notebook-2" class="slide level2" data-auto-animate="true">
@@ -398,12 +398,12 @@ Sébastien Biass <a href="https://orcid.org/0000-0002-1919-9473" class="quarto-t
 <li>The functions are now directly called from the <span class="bg">DataFrame</span> <code>df</code> object</li>
 </ul>
 <p><span style="font-size: 0.5em;"></span></p>
-<div id="572fc53d" class="cell" data-execution_count="3">
+<div id="1cbc57e8" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb3-1" class="hljs-ln-code"><a></a><span class="co"># Import the required packages</span></span>
 <span id="cb3-2" class="hljs-ln-code"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb3-3" class="hljs-ln-code"><a></a></span>
 <span id="cb3-4" class="hljs-ln-code"><a></a><span class="co"># Read the data</span></span>
-<span id="cb3-5" class="hljs-ln-code"><a></a>df <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/ELSTE-Master/Data-Science/refs/heads/main/Data/dummy_volcanoes.csv'</span>, parse_dates<span class="op">=</span>[<span class="st">'Date'</span>]) <span class="co"># Load data</span></span>
+<span id="cb3-5" class="hljs-ln-code"><a></a>df <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/dummy_volcanoes.csv'</span>, parse_dates<span class="op">=</span>[<span class="st">'Date'</span>]) <span class="co"># Load data</span></span>
 <span id="cb3-6" class="hljs-ln-code"><a></a></span>
 <span id="cb3-7" class="hljs-ln-code"><a></a><span class="co"># Show the first 3 rows</span></span>
 <span id="cb3-8" class="hljs-ln-code"><a></a>df.head(<span class="dv">3</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -481,7 +481,7 @@ Sébastien Biass <a href="https://orcid.org/0000-0002-1919-9473" class="quarto-t
 <li>This might be acceptable in datasets where the <em>label</em> is not important</li>
 </ul>
 <p><span style="font-size: 0.5em;"></span></p>
-<div id="d21957f0" class="cell" data-execution_count="4">
+<div id="ff2b17f9" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="co"># Show the first 3 rows</span></span>
 <span id="cb4-2"><a></a>df.head(<span class="dv">3</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
@@ -554,7 +554,7 @@ Sébastien Biass <a href="https://orcid.org/0000-0002-1919-9473" class="quarto-t
 <li>We <strong>set the index</strong> using <code>set_index()</code></li>
 </ul>
 <p><span style="font-size: 0.5em;"></span></p>
-<div id="6e645699" class="cell" data-execution_count="5">
+<div id="c956fecd" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="co"># Set the index to the 'Name' column</span></span>
 <span id="cb5-2"><a></a>df <span class="op">=</span> df.set_index(<span class="st">'Name'</span>)</span>
 <span id="cb5-3"><a></a></span>
@@ -695,7 +695,7 @@ Sébastien Biass <a href="https://orcid.org/0000-0002-1919-9473" class="quarto-t
 <li>Sorting <span class="bg">numerical</span>, <span class="bg">datetime</span> or <span class="bg">strings</span> using <code>.sort_values</code></li>
 <li>Importance of <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html">documentation</a> to understand <span class="bg">arguments</span></li>
 </ul>
-<div id="9d637da6" class="cell" data-execution_count="6">
+<div id="9c2f6c71" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb6-1" class="hljs-ln-code"><a></a>df.sort_values(<span class="st">'VEI'</span>).head() <span class="co"># Sort volcanoes by VEI in ascending number</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
@@ -786,7 +786,7 @@ Sébastien Biass <a href="https://orcid.org/0000-0002-1919-9473" class="quarto-t
 <li>Sorting <span class="bg">numerical</span>, <span class="bg">datetime</span> or <span class="bg">strings</span> using <code>.sort_values</code></li>
 <li>Importance of <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html">documentation</a> to understand <span class="bg">arguments</span></li>
 </ul>
-<div id="dda0e875" class="cell" data-execution_count="7">
+<div id="fa467883" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb7-1" class="hljs-ln-code"><a></a>df.sort_values(<span class="st">'VEI'</span>).head() <span class="co"># Sort volcanoes by VEI in ascending number</span></span>
 <span id="cb7-2" class="hljs-ln-code"><a></a>df.sort_values(<span class="st">'Date'</span>, ascending<span class="op">=</span><span class="va">False</span>).head() <span class="co"># Sort volcanoes by eruption dates from recent to old</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
@@ -878,7 +878,7 @@ Sébastien Biass <a href="https://orcid.org/0000-0002-1919-9473" class="quarto-t
 <li>Sorting <span class="bg">numerical</span>, <span class="bg">datetime</span> or <span class="bg">strings</span> using <code>.sort_values</code></li>
 <li>Importance of <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html">documentation</a> to understand <span class="bg">arguments</span></li>
 </ul>
-<div id="10831b1a" class="cell" data-execution_count="8">
+<div id="12e19c98" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb8-1" class="hljs-ln-code"><a></a>df.sort_values(<span class="st">'VEI'</span>).head() <span class="co"># Sort volcanoes by VEI in ascending number</span></span>
 <span id="cb8-2" class="hljs-ln-code"><a></a>df.sort_values(<span class="st">'Date'</span>, ascending<span class="op">=</span><span class="va">False</span>).head() <span class="co"># Sort volcanoes by eruption dates from recent to old</span></span>
 <span id="cb8-3" class="hljs-ln-code"><a></a>df.sort_values(<span class="st">'Country'</span>).head() <span class="co"># Also works on strings to sort alphabetically</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -971,7 +971,7 @@ Sébastien Biass <a href="https://orcid.org/0000-0002-1919-9473" class="quarto-t
 <li>Sorting <span class="bg">numerical</span>, <span class="bg">datetime</span> or <span class="bg">strings</span> using <code>.sort_values</code></li>
 <li>Importance of <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html">documentation</a> to understand <span class="bg">arguments</span></li>
 </ul>
-<div id="890b168a" class="cell" data-execution_count="9">
+<div id="de8122b9" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb9-1" class="hljs-ln-code"><a></a>df.sort_values(<span class="st">'VEI'</span>).head() <span class="co"># Sort volcanoes by VEI in ascending number</span></span>
 <span id="cb9-2" class="hljs-ln-code"><a></a>df.sort_values(<span class="st">'Date'</span>, ascending<span class="op">=</span><span class="va">False</span>).head() <span class="co"># Sort volcanoes by eruption dates from recent to old</span></span>
 <span id="cb9-3" class="hljs-ln-code"><a></a>df.sort_values(<span class="st">'Country'</span>).head() <span class="co"># Also works on strings to sort alphabetically</span></span>
@@ -1115,7 +1115,7 @@ Sébastien Biass <a href="https://orcid.org/0000-0002-1919-9473" class="quarto-t
 <div class="columns">
 <div class="column" style="width:48%;">
 <div class="fragment">
-<div id="92c61555" class="cell" data-execution_count="10">
+<div id="5073dd69" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a>df.loc[<span class="st">'Calbuco'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>Country                    Chile
@@ -1132,7 +1132,7 @@ Name: Calbuco, dtype: object</code></pre>
 
 </div><div class="column" style="width:48%;">
 <div class="fragment">
-<div id="be59f2f5" class="cell" data-execution_count="11">
+<div id="0c4c7fed" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a>df.loc[[<span class="st">'Calbuco'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <div>
@@ -1199,7 +1199,7 @@ Name: Calbuco, dtype: object</code></pre>
 </ul>
 <p><span style="font-size: 0.5em;"></span></p>
 <div class="fragment">
-<div id="f5dacc0c" class="cell" data-execution_count="12">
+<div id="9bf7c5a9" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a>df.loc[[<span class="st">'Calbuco'</span>, <span class="st">'Taal'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <div>
@@ -1276,7 +1276,7 @@ Name: Calbuco, dtype: object</code></pre>
 <ul>
 <li><strong>Option 1</strong>: <span class="bg">with</span> <code>.loc</code>:</li>
 </ul>
-<div id="15eaba66" class="cell" data-execution_count="13">
+<div id="08ca03a4" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a>df.loc[:, [<span class="st">'Country'</span>, <span class="st">'VEI'</span>]].head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <div>
@@ -1337,7 +1337,7 @@ Name: Calbuco, dtype: object</code></pre>
 <ul>
 <li><strong>Option 2</strong>: <span class="bg">without</span> <code>.loc</code>:</li>
 </ul>
-<div id="63bb0e2d" class="cell" data-execution_count="14">
+<div id="63aeaa3c" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a>df[[<span class="st">'Country'</span>, <span class="st">'VEI'</span>]].head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <div>
@@ -1404,7 +1404,7 @@ Name: Calbuco, dtype: object</code></pre>
 <ul>
 <li><strong>Option 1</strong>: Columns are specified <span class="bg">inside</span> <code>.loc</code>:</li>
 </ul>
-<div id="b885b211" class="cell" data-execution_count="15">
+<div id="4c7e32ab" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a>df.loc[[<span class="st">'Calbuco'</span>, <span class="st">'Taal'</span>], [<span class="st">'Country'</span>, <span class="st">'VEI'</span>]].head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <div>
@@ -1460,7 +1460,7 @@ Name: Calbuco, dtype: object</code></pre>
 <ul>
 <li><strong>Option 2</strong>: Columns are specified <span class="bg">outside</span> <code>.loc</code>:</li>
 </ul>
-<div id="353c3017" class="cell" data-execution_count="16">
+<div id="fb98a04c" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a>df.loc[[<span class="st">'Calbuco'</span>, <span class="st">'Taal'</span>]][[<span class="st">'Country'</span>, <span class="st">'VEI'</span>]].head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
 <div>
@@ -1533,7 +1533,7 @@ Name: Calbuco, dtype: object</code></pre>
 <ul>
 <li><strong>One row</strong> (first row):</li>
 </ul>
-<div id="82ff8ced" class="cell" data-execution_count="17">
+<div id="92f2ec03" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a>df.iloc[[<span class="dv">0</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
 <div>
@@ -1593,7 +1593,7 @@ Name: Calbuco, dtype: object</code></pre>
 <ul>
 <li><strong>Range of rows</strong>: (rows 3-4):</li>
 </ul>
-<div id="cc10bb1f" class="cell" data-execution_count="18">
+<div id="6a7c0651" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a></a>df.iloc[<span class="dv">2</span>:<span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
 <div>
@@ -1665,7 +1665,7 @@ Name: Calbuco, dtype: object</code></pre>
 <li>Get the <strong>last 5 rows</strong> of the DataFrame:</li>
 </ul></li>
 </ul>
-<div id="c45fb093" class="cell" data-execution_count="19">
+<div id="c76e8116" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a></a>df.iloc[<span class="op">-</span><span class="dv">5</span>:]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
 <div>
@@ -1759,7 +1759,7 @@ Name: Calbuco, dtype: object</code></pre>
 <li><strong>Columns</strong> → <em>positions</em></li>
 </ul></li>
 </ul>
-<div id="f33b7f6a" class="cell" data-execution_count="20">
+<div id="a962a8be" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a></a>df.iloc[<span class="dv">0</span>:<span class="dv">5</span>][[<span class="st">'Country'</span>, <span class="st">'VEI'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
 <div>
@@ -1855,7 +1855,7 @@ Name: Calbuco, dtype: object</code></pre>
 <li>Example:</li>
 </ul>
 <p><span style="font-size: 0.5em;"></span></p>
-<div id="c2cf35f9" class="cell" data-execution_count="21">
+<div id="57afe571" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a></a>a <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb22-2"><a></a>b <span class="op">=</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1927,7 +1927,7 @@ Name: Calbuco, dtype: object</code></pre>
 <div class="columns">
 <div class="column" style="width:25%;">
 <div class="fragment">
-<div id="d9cf3a25" class="cell" data-execution_count="22">
+<div id="99994792" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a>df[<span class="st">'VEI'</span>] <span class="op">==</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
 <pre><code>Name
@@ -1959,7 +1959,7 @@ Name: VEI, dtype: bool</code></pre>
 
 </div><div class="column" style="width:65%;">
 <div class="fragment">
-<div id="42559c70" class="cell" data-execution_count="23">
+<div id="f6ac25cc" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a></a>df.loc[df[<span class="st">'VEI'</span>] <span class="op">==</span> <span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
 <div>
@@ -2058,7 +2058,7 @@ Name: VEI, dtype: bool</code></pre>
 <ul>
 <li><strong>Example</strong>:</li>
 </ul>
-<div id="11a7e4b8" class="cell" data-execution_count="24">
+<div id="5090e59d" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a></a>df.loc[df[<span class="st">'Country'</span>] <span class="op">==</span> <span class="st">'Indonesia'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
 <div>
@@ -2247,7 +2247,7 @@ Name: VEI, dtype: bool</code></pre>
 <ul>
 <li>Round the <code>'Latitude'</code> to two decimals → <span class="bg">make sure you store the output</span>!</li>
 </ul>
-<div id="e3dd8d53" class="cell" data-execution_count="25">
+<div id="f2b01afa" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a></a>df[<span class="st">'Latitude'</span>] <span class="op">=</span> df[<span class="st">'Latitude'</span>].<span class="bu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
@@ -2316,7 +2316,7 @@ Name: VEI, dtype: bool</code></pre>
 <ul>
 <li>Divide <code>VEI</code> by 2 and store results a new column (→ <code>VEI_halved</code>)</li>
 </ul>
-<div id="32873af4" class="cell" data-execution_count="26">
+<div id="477527d5" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a></a>df[<span class="st">'VEI_halved'</span>] <span class="op">=</span> df[<span class="st">'VEI'</span>] <span class="op">/</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
@@ -2379,7 +2379,7 @@ Name: VEI, dtype: bool</code></pre>
 <ul>
 <li><code>VEI</code> power 2 and store results a new column (→ <code>VEI_pow2</code>)</li>
 </ul>
-<div id="9385221a" class="cell" data-execution_count="27">
+<div id="b3fec4f1" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a></a>df[<span class="st">'VEI_pow2'</span>] <span class="op">=</span> np.power(df[<span class="st">'VEI'</span>], <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
