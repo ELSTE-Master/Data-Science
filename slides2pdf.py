@@ -16,14 +16,14 @@ def run_decktape(fl):
         print(f"Error: {e}")
 
 if __name__ == "__main__":
-    fl = sys.argv[1]
-    
-    cmd = [
-        "quarto",
-        "render",
-        f"slides/{fl}.qmd"]
-    
-    subprocess.run(cmd, check=True)
-    
-    run_decktape(fl)
+
+    for fl in sys.argv[1:]:
+        cmd = [
+            "quarto",
+            "render",
+            f"slides/{fl}.qmd"]
+        
+        subprocess.run(cmd, check=True)
+        
+        run_decktape(fl)
 
