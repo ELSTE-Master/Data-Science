@@ -23,12 +23,14 @@ df = df.set_index('Name')
 ```
 
 
-Well done, you made it through the first day! This module has provided you with a first glimpse at Pandas and has hopefully illustrated how moving your research workflow to scientific programming could help you efficiently conduct more complex analyses. Below is a summary of each part of the class with **associated cheat sheets** for every part of the class.
+Well done, you made it through the first day! This module has provided you with a first glimpse at *Pandas* and has hopefully illustrated how moving your research workflow to scientific programming could help you efficiently conduct more complex analyses. *Pandas* is used in most data science applications of Python, be it for specific statistics (e.g., [statsmodels](https://www.statsmodels.org/stable/index.html)) or machine learning (e.g., [scikit-learn](https://scikit-learn.org/stable/) or [PyTorch](https://pytorch.org)). Understanding the structure of *Pandas* will also help you transitioning to other Python libraries that are based on the same philosphy, including [geopandas](https://geopandas.org/en/stable/index.html) - which provides an interface to work with **geospatial vector data** and [Xarray](https://docs.xarray.dev/en/stable/) - to wor with labelled multi-dimensional arrays (e.g., NetCDF files).
+
+Below is a summary of each part of the class with **associated cheat sheets** for every part of the class.
 
 
 ## Intro to Pandas 
 
-The [Intro to Pandas](day1-2_pandas.qmd) page introduces the two main Pandas data structures:
+The [Intro to Pandas](day1-2_pandas.qmd) page introduces the two main *Pandas* data structures:
 
 - **Series**: 1D labeled array (like a single column in Excel with labels).
 - **DataFrame**: 2D labeled table (like an Excel spreadsheet with multiple columns).
@@ -43,7 +45,7 @@ Key concepts:
 
 ## Data structure
 
-The [Data structure](day1-3_data_exploration.qmd) page introduces basic data exploration in Python using pandas. It covers loading a CSV dataset, setting and resetting DataFrame indices, and using key functions to inspect and sort data. The page demonstrates how to load data, explore its structure, and sort it by various columns.
+The [Data structure](day1-3_data_exploration.qmd) page introduces basic data exploration in Python using *Pandas*. It covers loading a CSV dataset, setting and resetting DataFrame indices, and using key functions to inspect and sort data. The page demonstrates how to load data, explore its structure, and sort it by various columns.
 
 ::: {.callout-tip  collapse="true"}
 ## Data structure cheat sheet
@@ -66,7 +68,7 @@ The [Data structure](day1-3_data_exploration.qmd) page introduces basic data exp
 
 ## Querying data
 
-The [Querying data](day1-4_queries.qmd) page reviews how to query data from a pandas DataFrame using both label-based and position-based indexing. It covers:
+The [Querying data](day1-4_queries.qmd) page reviews how to query data from a *Pandas* DataFrame using both label-based and position-based indexing. It covers:
 
 - Accessing rows and columns by their labels with `.loc`
 - Accessing rows and columns by their integer positions with `.iloc`
@@ -100,7 +102,7 @@ The [Querying data](day1-4_queries.qmd) page reviews how to query data from a pa
 
 ## Filtering data
 
-The **[Filtering data](day1-5_filtering.qmd)** page provides an introduction to filtering data in pandas using boolean indexing, comparison operators, and logical operators. It covers how to create boolean masks to filter DataFrame rows based on numeric or string conditions, and how to combine multiple conditions using logical operators. The page also provides examples and questions to reinforce these concepts.
+The **[Filtering data](day1-5_filtering.qmd)** page provides an introduction to filtering data in *Pandas* using boolean indexing, comparison operators, and logical operators. It covers how to create boolean masks to filter DataFrame rows based on numeric or string conditions, and how to combine multiple conditions using logical operators. The page also provides examples and questions to reinforce these concepts.
 
 ::: {.callout-tip collapse="true"}
 

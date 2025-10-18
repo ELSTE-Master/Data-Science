@@ -28,9 +28,13 @@ website:
           - class1/day1-5_filtering.qmd
           - class1/day1-6_operations.qmd
           - class1/day1-summary.qmd
+      - section: "Class 2"
+        contents:
+          - class2/pandas2.qmd
       - section: "Appendices"
         contents:
           - appendices/setup_vscode.qmd
+          - appendices/jupyter_markdown_summary.qmd
       # - references.qmd
   page-footer:
     background: "#fafafa"

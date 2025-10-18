@@ -1,0 +1,235 @@
+---
+title: "Markdown for Jupyter"
+format:
+  html:
+    code-fold: false
+    code-line-numbers: true
+    css: [../assets/webex.css]
+    include-after-body: [../assets/webex.js]    
+    embed-resources: true 
+jupyter: python3
+---
+
+This guide covers the most useful Markdown commands to make your Jupyter notebooks clear and structured. You can also jump to the [summary cheat sheet](#quick-reference-table).
+
+---
+
+## Headings
+
+Use `#` for titles and section headers.
+```markdown
+# Heading 1
+## Heading 2
+### Heading 3
+#### Heading 4
+```
+
+**Output:**
+
+# Heading 1
+
+## Heading 2
+
+### Heading 3
+
+#### Heading 4
+
+---
+
+## Text Formatting
+
+| Style | Markdown | Output |
+|--------|-----------|--------|
+| *Italic* | `*text*` or `_text_` | *text* |
+| **Bold** | `**text**` or `__text__` | **text** |
+| ***Bold + Italic*** | `***text***` | ***text*** |
+| `Inline code` | `` `code` `` | `code` |
+| ~~Strikethrough~~ | `~~text~~` | ~~text~~ |
+
+---
+
+## Links and Images
+
+**Link:**
+```markdown
+[Data Science Course](https://elste-master.github.io/Data-Science)
+```
+
+**Image:**
+```markdown
+![Python logo](https://www.python.org/static/community_logos/python-logo.png)
+```
+
+---
+
+## Lists
+
+**Unordered list:**
+```markdown
+- Item 1
+- Item 2
+  - Subitem 2.1
+```
+
+**Output:**
+
+- Item 1
+- Item 2
+  - Subitem 2.1
+
+**Ordered list:**
+```markdown
+1. Step one
+2. Step two
+   1. Substep
+```
+
+**Output:**
+
+1. Step one
+2. Step two
+   1. Substep
+   
+
+---
+
+## Blockquotes
+
+```markdown
+> This is a quote.
+
+```
+
+**Output:**
+
+> This is a quote.  
+
+---
+
+## Code Blocks
+
+For multi-line code with syntax highlighting:
+
+````markdown
+```python
+def greet(name):
+    print(f"Hello, {name}!")
+```
+````
+
+**Output:**
+```python
+def greet(name):
+    print(f"Hello, {name}!")
+```
+
+---
+
+## Mathematical Equations (LaTeX)
+
+Jupyter supports [LaTeX](https://pages.uoregon.edu/torrence/391/labs/LaTeX-cheat-sheet.pdf) syntax for math.
+
+**Inline math:**
+```markdown
+$ E = mc^2 $
+```
+
+**Output:**
+
+$$ E = mc^2\ $$
+
+**Display math:**
+```markdown
+$$
+\int_a^b f(x)\,dx = F(b) - F(a)
+$$
+```
+
+**Output:**
+
+$$
+\int_a^b f(x)\,dx = F(b) - F(a)
+$$
+
+---
+
+## Subscript and Superscript (LaTeX)
+
+Use **LaTeX math mode** for clean subscripts and superscripts.
+
+```markdown
+- Subscript: $H_2O$
+- Superscript: $x^2$
+- Combined: $x_i^2$
+```
+
+**Output:**
+
+- Subscript: $  H_2O $   
+- Superscript: $ x^2 $   
+- Combined: $ x_i^2 $ 
+
+---
+
+## Tables
+
+```markdown
+| Name  | Age | Country |
+|-------|-----|----------|
+| Alice | 25  | USA      |
+| Bob   | 30  | UK       |
+```
+
+**Output:**
+
+| Name  | Age | Country |
+|-------|-----|----------|
+| Alice | 25  | USA      |
+| Bob   | 30  | UK       |
+
+---
+
+## Horizontal Line
+
+```markdown
+---
+```
+
+**Output:**
+
+---
+
+## Task Lists
+
+```markdown
+- [x] Write summary
+- [ ] Add images
+- [ ] Review notebook
+```
+
+**Output:**
+
+- [x] Write summary  
+- [ ] Add images  
+- [ ] Review notebook
+
+---
+
+## Quick Reference Table
+
+| Feature | Markdown Syntax | Example |
+|----------|----------------|----------|
+| Heading | `#`, `##`, `###` | `## Title` |
+| Bold | `**text**` | **text** |
+| Italic | `*text*` | *text* |
+| Code | `` `code` `` | `print()` |
+| Code block | ```` ```python ... ``` ```` | multi-line code |
+| List | `-` or `1.` | bullet or numbered list |
+| Link | `[title](url)` | [Data Science Course](https://elste-master.github.io/Data-Science) |
+| Image | `![alt](url)` | image |
+| Math | `$...$` or `$$...$$` | formulas |
+| Subscript/Superscript | `$H_2O$, $x^2$` | \( H_2O \), \( x^2 \) |
+| Table | `| col | col |` | formatted table |
+| Quote | `>` | blockquote |
+| Line | `---` | horizontal line |
+

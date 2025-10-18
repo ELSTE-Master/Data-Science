@@ -81,6 +81,13 @@ The course assistants are:
 - Simon Thivet (UNIGE / [Physical Volcanology and Geological Risk](https://www.unige.ch/sciences/terre/en/groups/physical-volcanology-and-geological-risk/staff/))
 - Filippo Salmaso (UNIGE / [Data Analytics Lab](https://farma-unites.unige.ch/en/data-analytics-lab/members))
 
+### A note on the use of LLMs
+
+We all know that you will soon or later resort to using LLMs for your coding journey and, if you haven't done already, might very well use some for this class. It would be hypocritical of us to pretend we never do (take the cheat sheets at the end of classes 1 & 2 for instance!). The thing is, there is a big difference between using LLMs to *save time* - which implies that the code produced by a LLM can be read, understood and *critically reviewed* by the end user - and using LLMs to *seek an answer* - which implies using a magical black box.
+
+Python is one of the most versatile language used today, and scientific coding is only one of its purpose along such tasks as web development, cybersecurity, software and game development or finance. All of these topics have a plethora of dedicated packages and libraries, and there is a high probability that one specific task can be achieved by more than one library. The problem is that libraries for specific topics are designed to integrate together, whereas a blind use of libraries for other topics might lead to inconsistencies in codes.
+
+Therefore, we encourage you to play the game with this class and, for now, restrict the use of LLMs before you are confident that you can read through the codes they offer you. We are obviously more than happy to debate this in class should you have a different take!
 
 ### Re-use this class
 

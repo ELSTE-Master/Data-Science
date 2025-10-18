@@ -269,12 +269,12 @@ df.sort_values(['Latitude', 'Longitude']).head() # Sorting using multiple column
 
 ## Your turn!
 
-- Go to [https://e5k.github.io/Data-Science/](https://e5k.github.io/Data-Science/)
+- Go to [https://elste-master.github.io/Data-Science/](https://elste-master.github.io/Data-Science/)
   - Class 1 > [Data Structure]{.bg}
 
 <span style="font-size: 0.5em;"></span>
 
-<iframe src="https://e5k.github.io/Data-Science/class1/day1-3_data_exploration.html" width="100%" height="400px" style="border:none;"></iframe>
+<iframe src="../class1/day1-3_data_exploration.html" width="100%" height="400px" style="border:none;"></iframe>
 
 
 # Querying data {background-color="#2F4647"}
@@ -517,12 +517,12 @@ df.iloc[0:5][['Country', 'VEI']]
 
 ## Your turn!
 
-- Go to [https://e5k.github.io/Data-Science/](https://e5k.github.io/Data-Science/)
+- Go to [https://elste-master.github.io/Data-Science/](https://elste-master.github.io/Data-Science/)
   - Class 1 > [Querying data]{.bg}
 
 <span style="font-size: 0.5em;"></span>
 
-<iframe src="https://e5k.github.io/Data-Science/class1/day1-4_queries.html" width="100%" height="400px" style="border:none;"></iframe>
+<iframe src="../class1/day1-4_queries.html" width="100%" height="400px" style="border:none;"></iframe>
 
 
 
@@ -584,7 +584,7 @@ b = 2
 
 :::: {.columns}
 
-::: {.column width="25%"}
+::: {.column width="30%"}
 ::: {.fragment}
 ```{python}
 # | eval: True 
@@ -595,7 +595,7 @@ df['VEI'] == 4
 :::
 :::
 
-::: {.column width="10%"}
+::: {.column width="5%"}
 
 :::
 
@@ -648,12 +648,12 @@ df.loc[df['Country'] == 'Indonesia']
 
 ## Your turn!
 
-- Go to [https://e5k.github.io/Data-Science/](https://e5k.github.io/Data-Science/)
+- Go to [https://elste-master.github.io/Data-Science/](https://elste-master.github.io/Data-Science/)
   - Class 1 > [Filtering data]{.bg}
 
 <span style="font-size: 0.5em;"></span>
 
-<iframe src="https://e5k.github.io/Data-Science/class1/day1-5_filtering.html" width="100%" height="400px" style="border:none;"></iframe>
+<iframe src="../class1/day1-5_filtering.html" width="100%" height="400px" style="border:none;"></iframe>
 
 
 
@@ -738,10 +738,10 @@ df['VEI_pow2'] = np.power(df['VEI'], 2)
 
 ## Your turn!
 
-- Go to [https://e5k.github.io/Data-Science/](https://e5k.github.io/Data-Science/)
+- Go to [https://elste-master.github.io/Data-Science/](https://elste-master.github.io/Data-Science/)
   - Class 1 > [Operations]{.bg}
 
 <span style="font-size: 0.5em;"></span>
 
-<iframe src="https://e5k.github.io/Data-Science/class1/day1-6_operations.html" width="100%" height="400px" style="border:none;"></iframe>
+<iframe src="../class1/day1-6_operations.html" width="100%" height="400px" style="border:none;"></iframe>
 
