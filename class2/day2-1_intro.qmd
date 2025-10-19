@@ -1,0 +1,40 @@
+---
+title: "Overview"
+format:
+  html:
+    code-fold: false
+    code-line-numbers: true
+    css: [../assets/webex.css]
+    include-after-body: [../assets/webex.js]
+    embed-resources: true 
+jupyter: python3
+---
+
+```{python}
+#| echo: false
+from pywebexercises.exercises import mcq, longmcq, torf
+import matplotlib.pyplot as plt
+plt.rcParams.update({
+    "figure.facecolor":  (0.0, 0.0, 0.0, 0.0),  # red   with alpha = 30%
+})
+```
+
+
+Now that we've got a good idea of how to use *Pandas*, this second class puts you in the context of a **preliminary exploration** of any dataset, reviewing what we can *measure*, *compute* and *plot* to get an idea of the structure of the data before we infer anything in the following classes. We will introduce a few new *Pandas* functions and will start **plotting data** using dedicated libraries.
+
+## Today's objectives {.unnumbered}
+
+The objectives of this class are to review:
+
+- [x] How to get an idea of the structure of the dataset (e.g., *data types*)
+- [x] The basics of plotting in Python
+- [x] How to measure basics **univariate** properties of the dataset (→ *location*, *dispersion*, *skewness*)
+- [x] What plot can be used to represent distributions in a meaningful way
+- [x] How to get a first idea about the relationships between multiple variables (→ **bivariate** analysis)
+
+## Slides
+
+- {{< fa file-pdf >}} [PDF](../slides/class1_pandas.pdf)
+- <i class="fa fa-window-restore"></i> <a href="../slides/class1_pandas.html" target="_blank">View in browser</a>
+
+

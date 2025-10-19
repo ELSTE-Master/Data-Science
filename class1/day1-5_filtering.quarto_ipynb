@@ -1,0 +1,324 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Filtering data\"\n",
+        "format:\n",
+        "  html:\n",
+        "    code-fold: false\n",
+        "    code-line-numbers: true\n",
+        "    css: [../assets/webex.css]\n",
+        "    include-after-body: [../assets/webex.js]\n",
+        "    embed-resources: true \n",
+        "jupyter: python3\n",
+        "---"
+      ],
+      "id": "b9a15a57"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: false\n",
+        "from pywebexercises.exercises import mcq, longmcq, torf\n",
+        "import matplotlib.pyplot as plt\n",
+        "plt.rcParams.update({\n",
+        "    \"figure.facecolor\":  (0.0, 0.0, 0.0, 0.0),  # red   with alpha = 30%\n",
+        "})\n",
+        "import pandas as pd\n",
+        "df = pd.read_csv('https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data\n",
+        "df = df.set_index('Name')"
+      ],
+      "id": "03767241",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Now that we have reviewed how to access data, let's now see how to **filter** data using **boolean indexing**. For this, we need to review what are **comparison operators** (@tbl-comparison-operators).\n",
+        "\n",
+        "## Comparison operators {.unnumbered}\n",
+        "\n",
+        "\n",
+        "Let's assume the following variables (@lst-basic-bool):\n"
+      ],
+      "id": "1fa0b172"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| lst-label: lst-basic-bool\n",
+        "#| lst-cap: Variables used for illustrating logical operations\n",
+        "#| \n",
+        "a = 1\n",
+        "b = 2"
+      ],
+      "id": "c696a559",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Applying the comparison operators in @tbl-comparison-operators will produce a variable of type `bool` - which can take only two values: `True` or `False`.\n",
+        "\n",
+        "| Operator | Meaning                | Example      | Result      |\n",
+        "|----------|------------------------|--------------|-------------|\n",
+        "| `==`     | Equal to               | `a == b`     | `False`     |\n",
+        "| `!=`     | Not equal to           | `a != b`     | `True`      |\n",
+        "| `>`      | Greater than           | `a > b`      | `False`     |\n",
+        "| `<`      | Less than              | `a < b`      | `True`      |\n",
+        "| `>=`     | Greater than or equal  | `a >= b`     | `False`     |\n",
+        "| `<=`     | Less than or equal     | `a <= b`     | `True`      |\n",
+        "\n",
+        ": Comparison operators in Python. {#tbl-comparison-operators .striped   }\n",
+        "\n",
+        "We can apply comparison operators to DataFrame. Let's say we want to test what rows have a VEI of 4:\n"
+      ],
+      "id": "a5f47541"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| lst-label: lst-bool\n",
+        "#| lst-cap: Create a boolean mask\n",
+        "df['VEI'] == 4"
+      ],
+      "id": "858b8d87",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "We can see that Galunggung, Taal, La Soufrière, Calbuco and Eyjafjallajökull return `True` to this condition. This is great, but what if we want to return the actual rows? We can use @lst-bool as a **mask** to then query the rows using `.loc`.\n"
+      ],
+      "id": "9aa8f06f"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| lst-label: lst-bool-query\n",
+        "#| lst-cap: Query data using a boolean mask\n",
+        "\n",
+        "mask = df['VEI'] == 4 # Create a mask\n",
+        "df.loc[mask] # Query the data\n",
+        "\n",
+        "# Or, as a one line alternative:\n",
+        "df.loc[df['VEI'] == 4]"
+      ],
+      "id": "e9d84fef",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "::: {.callout-note}\n",
+        "## Question\n",
+        "\n",
+        "What volcanoes have a VEI of 5?\n"
+      ],
+      "id": "11ac4a3c"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: false\n",
+        "mcq({\n",
+        "    'La Soufrière and Calbuco' : 0,\n",
+        "    'Merapi and Agung' : 0,\n",
+        "    'Nyiragongo and Taal' : 0,\n",
+        "    'St. Helens and El Chichón' : 1\n",
+        "})"
+      ],
+      "id": "b2cf9945",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "How many volcanoes are in the southern hemisphere? (hint: use the `df.shape` function to count them).\n"
+      ],
+      "id": "6d6d4b5e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: false\n",
+        "mcq({\n",
+        "    '1': 0,\n",
+        "    '2': 0,\n",
+        "    '4': 0,\n",
+        "    '6': 1,\n",
+        "    '12': 0\n",
+        "})"
+      ],
+      "id": "bf12535d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "\n",
+        "\n",
+        "### String comparisons {.unnumbered}\n",
+        "\n",
+        "We can also use comparison operators on columns containing **strings** (see @cau-dtypes for caveats). @lst-str-comp illustrates a basic string comparison using the `=` operator. @tbl-comparison-str shows additional operators for strings.\n"
+      ],
+      "id": "5a3ff0b0"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| lst-label: lst-str-comp\n",
+        "#| lst-cap: Basic comparison operation on strings\n",
+        "\n",
+        "\n",
+        "df.loc[df['Country'] == 'Indonesia']"
+      ],
+      "id": "9f820bee",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "| Operation         | Example                                 | Description                                         |\n",
+        "|-------------------|-----------------------------------------|-----------------------------------------------------|\n",
+        "| Contains          | `df['Name'].str.contains('Soufrière')`  | Checks if each string contains a substring          |\n",
+        "| Startswith        | `df['Name'].str.startswith('E')`        | Checks if each string starts with a substring       |\n",
+        "| Endswith          | `df['Name'].str.endswith('o')`          | Checks if each string ends with a substring         |\n",
+        "\n",
+        "\n",
+        ": Common string comparison operations. {#tbl-comparison-str .striped   }\n",
+        "\n",
+        "\n",
+        "::: {#cau-dtypes .callout-caution collapse=\"true\"}\n",
+        "## Compare what is comparable!\n",
+        "\n",
+        "When using the comparison operators in @tbl-comparison-operators, we need to make sure that we are comparing data that have the **same type**. In @lst-bool, we are comparing the column `VEI` with an integer number. You can check the data type of a DataFrame using `df.dtypes`. \n",
+        "\n",
+        "Not all comparison operators work with all data type. For instance, you can test if a column contains a specific string using the `==` or `!=` operators, but the other won't work as they are *illogical*.\n",
+        ":::\n",
+        "\n",
+        "## Logical operators {.unnumbered}\n",
+        "\n",
+        "But what if we want to create more complex filters based on different rules? We can use **logical operators** to combine several comparison operators. Going back to the example in @lst-basic-bool, @tbl-logical-operators illustrates the use of logical operators.\n",
+        "\n",
+        "| Operator | Meaning                 | Example                        | Result      |\n",
+        "|----------|-------------------------|--------------------------------|-------------|\n",
+        "| `&`      | Logical AND             | `(a > 1) & (b < 3)`            | `False`     |\n",
+        "| `|`      | Logical OR              | `(a == 1) | (b == 1)`           | `True`      |\n",
+        "| `~`      | Logical NOT             | `~(a == 1)`                    | `False`     |\n",
+        "\n",
+        ": Logical operators in pandas for combining boolean conditions. Use parentheses around each condition. {#tbl-logical-operators .striped }\n",
+        "\n",
+        "Let's gather all volcanoes that have a VEI of 3 and are in Indonesia:\n"
+      ],
+      "id": "e8e55443"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| lst-label: lst-logical-query\n",
+        "#| lst-cap: Complex filtering using logical operators\n",
+        "\n",
+        "mask = (df['VEI'] == 3) & (df['Country'] == 'Indonesia') # Create a mask - don't forget parentheses!\n",
+        "df.loc[mask] # Query the data"
+      ],
+      "id": "54ec7aef",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "::: {.callout-note}\n",
+        "## Question\n",
+        "\n",
+        "How many volcanoes are either in Chile **or** in the USA?\n"
+      ],
+      "id": "23a05625"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: false\n",
+        "mcq({\n",
+        "    '1': 0,\n",
+        "    '3': 0,\n",
+        "    '5': 1,\n",
+        "    '8': 0\n",
+        "})"
+      ],
+      "id": "7e652b7d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "How many volcanoes are in the southern hemisphere **and** have a VEI≥4?\n"
+      ],
+      "id": "c204ba6e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: false\n",
+        "mcq({\n",
+        "    '1': 0,\n",
+        "    '2': 1,\n",
+        "    '8': 0,\n",
+        "    '12': 0\n",
+        "})"
+      ],
+      "id": "c310f7d7",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::"
+      ],
+      "id": "32067834"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "display_name": "Python 3",
+      "language": "python",
+      "name": "python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

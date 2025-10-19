@@ -19,7 +19,7 @@ website:
     search: true
     contents: 
       - index.qmd
-      - section: "Class 1"
+      - section: "Class 1: Pandas"
         contents:
           - class1/day1-1_intro.qmd
           - class1/day1-2_pandas.qmd
@@ -28,9 +28,12 @@ website:
           - class1/day1-5_filtering.qmd
           - class1/day1-6_operations.qmd
           - class1/day1-summary.qmd
-      - section: "Class 2"
+      - section: "Class 2: Descriptive stats"
         contents:
-          - class2/pandas2.qmd
+          - class2/day2-1_intro.qmd
+          - class2/day2-2_data_exploration.qmd
+          - class2/day2-3_univariate.qmd
+          - class2/day2-4_bivariate.qmd
       - section: "Appendices"
         contents:
           - appendices/setup_vscode.qmd
@@ -56,7 +59,7 @@ format:
     css: custom.css
     backgroundcolor: "#fafafa"
     toc: true          # enable TOC
-    toc-depth: 3       # how many heading levels to include
+    toc-depth: 4       # how many heading levels to include
     toc-location: right
     toc-title: "On this page"
     toc-expand: 1      # how much to auto-expand initially

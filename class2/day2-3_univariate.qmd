@@ -1,5 +1,5 @@
 ---
-title: "Data exploration"
+title: "Univariate analyses"
 format:
   html:
     code-fold: false
@@ -17,22 +17,6 @@ import matplotlib.pyplot as plt
 plt.rcParams.update({
     "figure.facecolor":  (0.0, 0.0, 0.0, 0.0),  # red   with alpha = 30%
 })
-```
-
-## Introduction
-
-### Today's objectives {.unnumbered}
-
-## Setting up the exercise
-
-We start by importing libraries and the dataset.
-
-As in [the previous class](pandas1.qmd), we load the dataset using **Pandas**. The dataset comes from @Smith2011 and contains the chemical concentrations in volcanic tephra belonging to the recent activity (last 15 ky) of the Campi Flergrei Caldera (Italy). The dataset is contained in an Excel file that contains two sheets named `'Supp_majors'` and `'Supp_traces'`. In @lst-load-geochem, we use the `sheet_name` argument to the `read_excel()` ([doc](https://pandas.pydata.org/docs/reference/api/pandas.read_excel.html)) function to specify that we want to load the sheet containing trace elements.
-
-```{python}
-#| echo: true
-#| lst-label: lst-load-geochem
-#| lst-cap: caption
 
 # Load libraries
 import pandas as pd # Import pandas
@@ -44,230 +28,23 @@ df_majors = pd.read_excel('https://github.com/ELSTE-Master/Data-Science/raw/refs
 df_traces = pd.read_excel('https://github.com/ELSTE-Master/Data-Science/raw/refs/heads/main/Data/Smith_glass_post_NYT_data.xlsx', sheet_name='Supp_traces')
 ```
 
-
-Take a minute to explore both datasets using the material from [last week](../class1/day1-1_intro.qmd). Remember the [cheat sheets](../class1/day1-summary.qmd) for various Pandas functions. The typical questions you want to address are:
-
-- What **columns** are contained in the DataFrame?
-- What **types** of data are each columns? (e.g., integer → `int`, decimal values →`float`, strings → `objects` )
-- What columns contain:
-  - **Numerical data** → contain [measurable quantities]{.mark} in numerical format and allow mathematical operations
-  - **Categorical data** → represent [categories or groups]{.mark} and describe *qualities* or *characteristics*, not quantities.
-
-
-::: {.callout-note}
-## Questions
-
-Based on your exploration of the trace elements dataset:
-
-- Is a [labelled]{.mark} **index** relevant? In other words, do we want to access **rows** using **[labels](../class1/day1-4_queries.qmd#label-based-indexing)** (→ `.loc`) or using **[positions](../class1/day1-4_queries.qmd#position-based-indexing)** (→ `.iloc`)?
-- Same question for columns?
-
-```{python}
-#| echo: false
-mcq({
-    'Labels for index, labels for columns' : 1,
-    'Labels for index, positions for columns' : 1,
-    'Positions for index, labels for columns' : 1,
-    'Positions for index, positions for columns' : 1,
-})
-```
-
-::: {.callout-caution collapse="true"}
-## Answer
-There is no right or wrong! But looking at the data, using **positions for index** and **labels for columns** is probably the most logical way to go.
-:::
-
-- What column**s** can be used as grouping variables?
-
-```{python}
-#| echo: false
-mcq({       
-    'Analysis no.': 0,
-    'Rb':  0, 
-    'Strat. Pos.':  0,
-    'Epoch':  1, 
-    'Sc':  0,    
-    'La':  0,    
-    'Eruption':  1,   
-    'Ce':  0,    
-})
-```
-
-:::
-
-
-
-
-
-
-::: {.callout-tip}
-## Good reference book
-
-The use of this dataset is inspired by the by the book *Introduction to Python in Earth Science Data Analysis: From Descriptive Statistics to Machine Learning* by @Petrelli2021.
-:::
-
-
-### Basics of plotting in Python {.unnumbered}
-
-@lst-load-geochem also loads two libraries for plotting:
-
-- [**Matplotlib**](https://matplotlib.org/stable/users/explain/quick_start.html) is [the library]{.mark} for plotting in Python. It allows for the finest and most comprehensive level of customisation, but it take some time to get used to. You can visit [Matplotlib's gallery](https://matplotlib.org/stable/gallery/index.html) to get some inspiration.
-- [**Seaborn**](https://seaborn.pydata.org/tutorial/introduction) is [built on Matplotlib]{.mark}, but provides some higher-level functions to easily produce stats-oriented plots. It looks good by default, but finer customisation might be difficult and might result to using Matplotlib. Again, check out [Seaborn's gallery](https://seaborn.pydata.org/examples/index.html).
-
-Here again, the idea is not to make you expert in *Matplotlib* or *Seaborn*, but rather to provide you with the minimum knowledge for you to further explore this tools in the context of your research.
-
-::: {.callout-tip}
-## Good plotting gallery
-
-Trying to find some inspiration to get creative on data representation? Check out [The Python Graph Gallery](https://python-graph-gallery.com) website. 
-
-:::
-
-#### Components of a Figure {.unnumbered}
-
-Let's start to look at the basic components of a *Matplotlib* figure. There are two "hosts" to any plot (@fig-fig-anatomy-1):
-
-1. A [**Figure**]{.mark} represents the main canevas;
-2. [**Axes**]{.mark} are contained within the figure and is where most of the plotting will occur.
-
-The easiest way to define a figure is using the `subplots()` function ([doc](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html); @lst-plt-set). Note that the code returns two variables - `fig` and `ax` - which are the figure and the axes, respectively.
-
-```{python}
-
-#| eval: false
-#| lst-label: lst-plt-set
-#| lst-cap: Define a figure and one axes.
-#| 
-import matplotlib.pyplot as plt
-fig, ax = plt.subplots()
-```
-
-![Main figure and axes of a *Matplotlib* figure](img/fig-anatomy-1.png){#fig-fig-anatomy-1}
-
-
-Most additional components of a plot are controlled via the `ax` variable, which can be used to (@fig-fig-anatomy-2):
-
-- *Plot* (e.g., line plot or scatter plots)
-- *Set labels* (e.g., x-label, y-label, title)
-- Add various *components* (e.g., legend, grid)
-
-![Basic components of a *Matplotlib* figure](img/fig-anatomy-2.png){#fig-fig-anatomy-2}
-
-::: {.callout-note}
-
-## Plotting exercise
-
-@lst-plt-ex1 defines a figure and plots some data. @tbl-mpl-basics and @fig-fig-anatomy-2 illustrate some of the most frequently used functions for customising plots.
-
-Use these functions to customise @lst-plt-ex1. Some hints:
-
-- Remember that a *function* takes some *arguments* provided between *parentheses* (e.g., `ax.title(argument)`). Each function might accept different types of arguments.
-- Titles and labels require a *string*, so remember to use `" "` or `' '`.
-- For now, the legend does not require any argument, so you can leave the parentheses empty.
-- Setting the grid requires one argument: do we want to show the grid (`True`) or not (`False`)
-
-:::
-
-| Function        | Description                        | Argument Type         | Example Argument           |
-|-----------------|------------------------------------|-----------------------|----------------------------|
-| [`ax.set_title`](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_title.html)    | Sets the title of the axes         | str                   | "My Plot Title"            |
-| [`ax.set_xlabel`](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_xlabel.html)   | Sets the label for the x-axis      | str                   | "X Axis Label"             |
-| [`ax.set_ylabel`](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_ylabel.html)   | Sets the label for the y-axis      | str                   | "Y Axis Label"             |
-| [`ax.legend`](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.legend.html)       | Displays the legend                | None    | None (default)  |
-| [`ax.grid`](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.grid.html)         | Shows grid lines                   | bool           | True             |
-
-: Some of the most frequently used plotting functions. {#tbl-mpl-basics .striped   }
-
-```{python}
-
-#| lst-label: lst-plt-ex1
-#| lst-cap: Define a figure and one axes.
-
-import matplotlib.pyplot as plt # Import matplotlib
-
-# Define some data
-data1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-data2 = [7, 3, 9, 1, 5, 10, 8, 2, 6, 4]
-
-# Set the figure and the axes
-fig, ax = plt.subplots()
-
-# Plot the data
-ax.plot(data1, data1, color='aqua', label='Line')
-ax.scatter(data1, data2, color='purple', label='scatter')
-
-# Customise the plot - up to you!
-# - Add a title
-# - Add x and y labels
-# - Add a legend
-# - Add a grid
-```
-
-
-### Plotting with Seaborn {.unnumbered}
-
-Let's now review the use of **Seaborn**. You might wonder [why do we need another plotting library]{.mark}. Well, the topic of this module is [data exploration]{.mark}, and this is exactly what *Seaborn* is designed for. In addition, *Seaborn* perfectly integrates with *Pandas* - isn't that nice?
-
-Over the next steps of the exercise we will use various types of plots offered by *Seaborn* to explore our geochemical dataset. @lst-sns-intro illustrates how to create a [scatterplot](https://seaborn.pydata.org/generated/seaborn.scatterplot.html) of the [Rubidium]{.mark} and [Strontium]{.mark} values contained in our dataset `df_traces`. *Seaborn* usually takes [4 arguments]{.mark}:
-
-1. `ax`: The axes on which to plot the data
-2. `data`: The DataFrame containing the data.
-3. `x`: The name of the column containing the values used along x
-4. `y`: The name of the column containing the values used along y
-
-```{python}
-
-#| lst-label: lst-sns-intro
-#| lst-cap: Basic plotting using Seaborn.
-
-# Define figure + axes
-fig, ax = plt.subplots()
-# Plot with seaborn (remember, we imported it as sns)
-# df_traces is the geochemical dataset imported previously
-sns.scatterplot(ax=ax, data=df_traces, x='Rb', y='Sr')
-```
-
-
-Should you feel adventurous and check out the [documentation](https://seaborn.pydata.org/generated/seaborn.scatterplot.html) of the `scatterplot` function, you would see that it is possible to use [additional arguments]{.mark} to further customize the plot:
-
-- `hue`: Name of the variable that will produce points with [different colors]{.mark}.
-- `size`: Name of the variable that will produce points with [different sizes]{.mark}.
-
-::: {.callout-note}
-
-## Seaborn exercise
-
-Complete @lst-sns-intro, but use:
-
-- The `"Epoch"` column to control points color.
-- The `"SiO2* (EMP)"` column to control points size.
-
-Remember, you can use `df.columns` to print a list of column names contained in the DataFrame.
-
-- And if you are already done, take the time to explore and plot the `df_majors` dataset and plot some variables.
-
-:::
-
-
-
-## Descriptive statistics
-
-
-### Univariate analyses  {.unnumbered}
-
 The objective of **descriptive statistics** is to [provide ways of capturing the properties of a given data set or sample]{.mark}. Using *Pandas* and *Seaborn*, we will review some [metrics, tools, and strategies]{.mark} that can be used to summarize a dataset, providing us with a quantitative basis to talk about it and compare it to other datasets.
+
+## Univariate analyses  {.unnumbered}
+
+
 
 By **univariate analyses**, we focus on [capturing the properties of **single** variables at the time]{.mark}. We are not yet concerned in characterising the [relationships]{.mark} between two or more variables. The following sections introduce basic functions to visually analyse single variables and the most important parameters to describe them.
 
-#### Initial visual analysis {.unnumbered}
+### Plotting data distributions {.unnumbered}
 
-Let's focus on the Zircon concentration in Campi Flegrei's geochemical dataset. We start by simply [visualising]{.mark} the dataset to get an understanding of what we will talk about. The fist type of plot we will consider is a [histogram]{.mark}, which shows the [number of times a specific value occurs]{.mark} in a given variable. (@lst-sns-hist). In *Seaborn*, **Histograms** can be plotted using [`sns.histplots()`](https://seaborn.pydata.org/generated/seaborn.histplot.html), and (@lst-sns-hist) show the [number of times a specific Zr concentration occurs]{.mark} in the dataset.
+Let's focus on the Zircon concentration in Campi Flegrei's geochemical dataset. We start by simply [visualising]{.mark} the dataset to get an understanding of what we will talk about. The fist type of plot we will consider is a [histogram]{.mark}, which shows the [number of times a specific value occurs]{.mark} in a given variable. (@fig-sns-hist). In *Seaborn*, **Histograms** can be plotted using [`sns.histplots()`](https://seaborn.pydata.org/generated/seaborn.histplot.html), and (@fig-sns-hist) show the [number of times a specific Zr concentration occurs]{.mark} in the dataset.
 
 Note that **histograms** [discretise the data]{.mark} into equal **bins**. The [bin size]{.bg} (e.g., the width and numbers of bins) can alter the visual representation of the dataset. Although functions such as `sns.histplots()` rely on algorithm that suggest the optimal number of bins, it is a good practice to explore this parameter.
 
 ```{python}
-#| lst-label: lst-sns-hist
-#| lst-cap: Visualising distributions using histograms.
+#| label: fig-sns-hist
+#| cap: Visualising distributions using histograms.
 
 fig, ax = plt.subplots()
 sns.histplot(data=df_traces, x='Zr')
@@ -285,12 +62,16 @@ ax.set_title('Zr distribution');
 
 :::
 
+::: {.callout-tip}
+## Visualising distributions of data with Seaborn
 
+*Seaborn* has a [great tutorial](https://seaborn.pydata.org/tutorial/distributions.html#distribution-tutorial) on visualising distributions of data - be sure to check it out at some point!
 
+:::
 
+### Descriptive parameters {.unnumbered}
 
-
-By looking at the Zr and St distributions from the figures above, we can intuitively understand the importance of describing [three different parameters]{.mark}:
+By looking at the distribution from @fig-sns-hist, we can intuitively understand the importance of describing [three different parameters]{.mark}:
 
 - The **location** - or where is [the central value(s)]{.mark} of the dataset;
 - The **dispersion** - or how [spread out]{.mark} is the distribution of data compared to the central values;
@@ -298,6 +79,12 @@ By looking at the Zr and St distributions from the figures above, we can intuiti
 
 
 #### Location {.unnumbered}
+
+We will review three measures of **location**:
+
+1. The [mean](#mean);
+2. The [median](#median);
+3. The [mode](#mode).
 
 ##### Mean {.unnumbered}
 
@@ -518,6 +305,12 @@ ax.legend()
 
 #### Dispersion {.unnumbered}
 
+We will review three measures of **dispersion**:
+
+1. The [range](#range);
+2. The [standard deviation](#variance-and-standard-deviation);
+3. The [interquartile range](#interquartile-range).
+
 ##### Range {.unnumbered}
 
 The first information we might want to get for a dataset is the range of values it covers, or *range*. For this, we need to get the minimum (`df.min()`) and maximum (`df.max()`) values, from which, when needed, the range can be calculated with @eq-range. It is however likely that the min/max functions will be more frequently used (@lst-univ-minmax).
@@ -723,8 +516,6 @@ plt.close(fig)
 ![Relationship of percentiles to a asymmetric distribution. The red dotted line shows the location of the mean.](img/fig-univ-pctA.png){#fig-univ-pctA width="80%"}
 
 
-
-
 The **interquartile range** ($IQR$) is the spread between the first ($Q_1$) and the third ($Q_3$), quartiles, which represent the 25^th^ and 75^th^ percentiles, respectively (see @tbl-univ-pct and @tip-univ-pcr for a relationship between percentiles, quartiles and deciles). It is simply computed as (@eq-IQR), and represents a range within which **50% of the data points** lie.
 
 $$
@@ -774,10 +565,11 @@ df_traces['Zr'].skew().round(2)
 ```
 
 
-#### Box-and-whiskers plots {.unnumbered}
+### Non-parametric distribution visualisation {.unnumbered}
 
+We have reviewed some descriptive parameters of distributions. Some parameters are **parametric**, which means that they [imply an underlying type of distribution]{.mark} (e.g., the [mean](#mean) and [standard deviation](#variance-and-standard-deviation) imply an **normal** distribution). Other parameters are **non-parametric**, and are in theory valid for [any type of distribution]{.mark}. For instance, the [IQR](#interquartile-range) provides a better representation of th range of asymmetrical distributions. However, it [still represents a range that does not convey the shape of the underlying distribution]{.mark}, so reporting a few percentiles (e.g., 10-90, 25-75) typically better convey an idea of spread and distribution shape.
 
-Although relying on percentiles - which better account for asymmetrical distributions, the [$IQR$ still represents a range that does not convey the shape of the underlying distribution]{.mark}. Reporting a few percentiles (e.g., 10-90, 25-75) typically better convey an idea of spread and distribution shape. Note that this is the idea behind [**box plots**]{.mark} (or **box and whiskers plots**; @fig-boxplot), which attempt to provide all components of the underlying distribution (e.g., location, dispersion, skewness) in a [non-paramteric]{.bg} way:
+One way to efficiently convey the structure of underlying data is to use methods for [non-parametric representation of distributions]{.mark}. [**Box plots**]{.mark} (or **box and whiskers plots**; @fig-boxplot), for instance, attempt to provide all components of the underlying distribution (e.g., location, dispersion, skewness) in a [non-paramteric]{.bg} way:
 
 - The **box** represents the 25^th^ and 75^th^ percentiles → $IQR$;
 - The **horizontal line** within the **box** represents the **median**;
@@ -789,13 +581,13 @@ Although relying on percentiles - which better account for asymmetrical distribu
 
 In *Seaborn*, box plots can be plotted using [`sns.boxplot()`](https://seaborn.pydata.org/generated/seaborn.boxplot.html). Two notes about box plots: 
 
-1. They are useful to compare the **location** and **dispersion** between variables (@lst-sns-boxplot);
+1. They are useful to compare the **location** and **dispersion** between variables (@fig-sns-boxplot);
 2. In *Seaborn*, whiskers extend by default 1.5 times the IQR from the first and third quartiles. This behaviour can be altered with the `whis` argument of `sns.boxplot()` (see the [doc](https://seaborn.pydata.org/generated/seaborn.boxplot.html))
 
 *Seaborn* offers two alternatives to boxplots:
 
-1. **Violin plots** ([`sns.violinplot()`](https://seaborn.pydata.org/generated/seaborn.violinplot.html)) are similar to box plots, but they approximate the underlying parametric data distribution using some smoothing algorithm (i.e. *kernel density estimation*). Without going into too much detail, this provides a good first approximation of the distribution, but [it can create some unrealistic artefacts]{.mark} (e.g., see the negative Sr concentrations in @lst-sns-violinplot).
-2. **Boxen plots** ([`sns.boxenplot()`](https://seaborn.pydata.org/generated/seaborn.boxenplot.html)) are designed to better represent the non-parametric distriubtion of large dataset than box plots. They divide the datasets into **many quantiles** (not just Q1-Q3), and typically provide more resolution in the **tails** of the distribution (@lst-sns-boxenplot).
+1. **Violin plots** ([`sns.violinplot()`](https://seaborn.pydata.org/generated/seaborn.violinplot.html)) are similar to box plots, but they approximate the underlying parametric data distribution using some smoothing algorithm (i.e. *kernel density estimation*). Without going into too much detail, this provides a good first approximation of the distribution, but [it can create some unrealistic artefacts]{.mark} (e.g., see the negative Sr concentrations in @fig-sns-violinplot).
+2. **Boxen plots** ([`sns.boxenplot()`](https://seaborn.pydata.org/generated/seaborn.boxenplot.html)) are designed to better represent the non-parametric distriubtion of large dataset than box plots. They divide the datasets into **many quantiles** (not just Q1-Q3), and typically provide more resolution in the **tails** of the distribution (@fig-sns-boxenplot).
 
 @tbl-sns provides a cheat sheet on which plot to use.
 
@@ -805,8 +597,8 @@ In *Seaborn*, box plots can be plotted using [`sns.boxplot()`](https://seaborn.p
 ## Box plot
 
 ```{python}
-#| lst-label: lst-sns-boxplot
-#| lst-cap: Visualising distributions using box-and-whisker plots.
+#| label: fig-sns-boxplot
+#| fig-cap: Visualising distributions using box-and-whisker plots.
 
 fig, ax = plt.subplots()
 sns.boxplot(data=df_traces[['Zr', 'Sr']], orient="h", ax=ax)
@@ -817,8 +609,8 @@ ax.set_title('Zr and Sr distribution');
 ## Violin plot
 
 ```{python}
-#| lst-label: lst-sns-violinplot
-#| lst-cap: Visualising distributions using violin plots.
+#| label: fig-sns-violinplot
+#| fig-cap: Visualising distributions using violin plots.
 
 fig, ax = plt.subplots()
 sns.violinplot(data=df_traces[['Zr', 'Sr']], orient="h", ax=ax)
@@ -829,8 +621,8 @@ ax.set_title('Zr and Sr distribution');
 ## Boxen plots
 
 ```{python}
-#| lst-label: lst-sns-boxenplot
-#| lst-cap: Visualising distributions using boxen plots.
+#| label: fig-sns-boxenplot
+#| fig-cap: Visualising distributions using boxen plots.
 
 fig, ax = plt.subplots()
 sns.boxenplot(data=df_traces[['Zr', 'Sr']], orient="h", ax=ax)
@@ -866,7 +658,7 @@ Take some time to get familiar with the use of these plotting functions!
 
 
 
-#### Grouping variables {.unnumbered}
+### Grouping variables {.unnumbered}
 
 Cool, we now have the tools to describe the behaviour of single [numerical]{.mark} variables. However, as described [here](#setting-up-the-exercise), we see that our dataset also contains [categorical]{.mark} variables, and we are going to see now how we can exploit them to apply what we just learned on **specific categories** of our dataset.
 
@@ -894,127 +686,3 @@ Pretty handy don't you think? Note that you can apply all the functions describe
 - Looking at the [documentation](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.groupby.html), it seems the `by` argument accepts a *label* (which is what we use in @lst-groupby) or a *list of labels*. Could it be that we can use more than one grouping variable? Such as `'Epoch'` and `'Eruption'`?
 :::
 
-
-### Bivariate analyses {.unnumbered}
-
-Up to now, the domain of [univariate analyses](#univariate-analyses) has allowed us to explore the properties of **one variable at the time**. Investigating the relationship between **two variables** is the topic of [bivariate analyses]{.mark}. One good visual starting point is to plot **pairwise relationships** of all the variables in our dataset.
-
-Let's go back to our `df_traces_sub` dataset. We can then plot a pairwise comparison plot using *Seaborn*'s `.pairplot()` function ([doc](https://seaborn.pydata.org/generated/seaborn.pairplot.html); @lst-sns-pairplot). We use the `hue` argument of th `.pairplot()` function to plot each epoch as a different color:
-
-```{python}
-#| echo: true
-#| lst-label: lst-sns-pairplot
-#| lst-cap: Pairwise comparison plot using Seaborn
-df_traces_sub = df_traces[['Epoch', 'U', 'Sc', 'Hf', 'Zr', 'Sr']]
-sns.pairplot(data=df_traces_sub, hue='Epoch')
-```
-
-
-
-::: {.callout-note}
-## Your turn!
-
-For single variables:
-
-- Based on the parameters described in the [previous section](#univariate-statistics) and looking at histograms (i.e., the diagonal plot), how would you describe their **distributions** of values?
-- Do they vary across eruptive epochs?
-
-Now, thinking about the relationship between **two variables**:
-
-- What variables behave in a similar way?
-- What variables don't?
-- Do you see any **clustering** emerge?
-
-:::
-
-
-#### Correlation {.unnumbered}
-
-From @lst-sns-pairplot we can fairly intuitively infer that some variables show [coupled]{.mark} behaviours (e.g., *Zr* tends to increase whe *Hf* does), whereas the behaviour of other variables suggests much less coupling (e.g., *Sc* and *Hf*). 
-
-
-The first measure used to quantify the joint variability of two variables $x$ and $y$ is the **covariance** (@eq-covar).
-
-$$
-Cov_{xy} = \frac{1}{n-1}\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})
-$$ {#eq-covar}
-
-The covariance depends on [the magnitudes]{.mark} of the two variables inspected and, consequently, it does not inform much about the [strength]{.mark} of the relationship. The **correlation coefficient** (@eq-corr) represents a normalized version of the covariance that allows to overcome this limitation. The correlation coefficient ranges from −1 to 1 and
-shows, by its magnitude, the strength of the linear relation.
-
-$$
-r_{xy} = \frac{Cov_{xy}}{\sigma_x \sigma_y} = \frac{\sum_{i=1}^n (x_i - \bar x)(y_i - \bar y)}{\sqrt{\sum_{i=1}^n (x_i - \bar x)^2}\;\sqrt{\sum_{i=1}^n (y_i - \bar y)^2}}
-$$ {#eq-corr}
-
-- $r_{xy} >0$ indicates a **positive relationship** between $x$ and $y$ (→ $y$ increases when $x$ does);
-- $r_{xy} <0$ indicates a **negative relationship** between $x$ and $y$ (→ $y$ decreases when $x$ increases);
-- $r_{xy} =0$ indicates **independence** between $x$ and $y$.
-
-
-
-
-```{python}
-#| echo: true
-#| lst-label: lst-label
-#| lst-cap: caption
-
-# Define a function to plot the correlation matrix. It takes one argument (i.e., a DataFrame)
-def corrMatrix(d):
-    
-    # Compute the correlation matrix
-    corr = d.corr()
-
-    # Generate a mask for the upper triangle
-    mask = np.triu(np.ones_like(corr, dtype=bool))
-
-    # Set up the matplotlib figure
-    f, ax = plt.subplots(figsize=(11, 9))
-
-    # Generate a custom diverging colormap
-    cmap = sns.diverging_palette(230, 20, as_cmap=True)
-
-    # Draw the heatmap with the mask and correct aspect ratio
-    sns.heatmap(corr, mask=mask, cmap=cmap, vmax=.7, vmin=-.7, center=0,
-                square=True, linewidths=.5, cbar_kws={"shrink": .5})
-
-
-# Keep only the numerical columns, i.e., from column index 9 to the last
-df_traces_sub = df_traces.iloc[:, 9:]
-corrMatrix(df_traces_sub)
-
-```
-
-
-::: {.callout-note}
-## Questions
-
-Two variables show relatively strong **negative correlations**. These are:
-
-```{python}
-#| echo: false
-mcq({       
-    'Sc and Pb': 0,
-    'Ba and Nd':  0,
-    'Sr and Ba':  1,   
-    'Tb and Er':  0, 
-    'Pb and Ce':  0,    
-})
-```
-
-Three variables show relatively **weak correlations**:
-
-```{python}
-#| echo: false
-mcq({       
-    'U, Yb and Hf': 0,
-    'Y, Ze and Nd':  0,
-    'Sr, Pr and Ba':  0,   
-    'Sc, Eu and Pb':  1, 
-    'Ce, Tb and Nd':  0,    
-})
-```
-
-
-:::
-
-#### Simple linear regression x {.unnumbered}

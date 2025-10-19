@@ -41,7 +41,7 @@ The objective of this class is by no way to make you an expert in Pandas and dat
 - [x] How to *rearrange* data (e.g., sorting values)
 - [x] How to *operate* on data (e.g., arithmetic and string operations)
 
-We first start by reviewing the [data structure](#pandas-data-structure) behind Pandas, then we will move on to a [coding exercise](#coding-playground) to make you familiar with some basic functionalities.
+We first start by reviewing the data structure behind *Pandas*, then we will move on to a few coding exercises to make you familiar with some basic functionalities.
 
 ## Slides
 

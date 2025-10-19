@@ -1,0 +1,271 @@
+---
+title: "Bivariate analyses"
+format:
+  html:
+    code-fold: false
+    code-line-numbers: true
+    css: [../assets/webex.css]
+    include-after-body: [../assets/webex.js]
+    embed-resources: true 
+jupyter: python3
+---
+
+```{python}
+#| echo: false
+from pywebexercises.exercises import mcq, longmcq, torf
+import matplotlib.pyplot as plt
+plt.rcParams.update({
+    "figure.facecolor":  (0.0, 0.0, 0.0, 0.0),  # red   with alpha = 30%
+})
+
+# Load libraries
+import pandas as pd # Import pandas
+import numpy as np
+import matplotlib.pyplot as plt # Import the pyplot module from matplotlib
+import seaborn as sns # Import seaborn
+
+# Import the dataset specifying which Excel sheet name to load the data from
+df_majors = pd.read_excel('https://github.com/ELSTE-Master/Data-Science/raw/refs/heads/main/Data/Smith_glass_post_NYT_data.xlsx', sheet_name='Supp_majors')
+df_traces = pd.read_excel('https://github.com/ELSTE-Master/Data-Science/raw/refs/heads/main/Data/Smith_glass_post_NYT_data.xlsx', sheet_name='Supp_traces')
+```
+
+Up to now, the domain of [univariate analyses](day2-3_univariate.qmd) has allowed us to explore the properties of **one variable at the time**. Investigating the relationship between **two variables** is the topic of [bivariate analyses]{.mark}. One good visual starting point to identify these is to plot **pairwise relationships** of all the variables in our dataset.
+
+Let's go back to our `df_traces_sub` dataset. We can then plot a pairwise comparison plot using *Seaborn*'s `.pairplot()` function ([doc](https://seaborn.pydata.org/generated/seaborn.pairplot.html); @lst-sns-pairplot). We use the `hue` argument of the `.pairplot()` function to plot each epoch in a different color:
+
+```{python}
+#| echo: true
+#| lst-label: lst-sns-pairplot
+#| lst-cap: Pairwise comparison plot using Seaborn
+df_traces_sub = df_traces[['Epoch', 'U', 'Sc', 'Hf', 'Zr', 'Sr']]
+sns.pairplot(data=df_traces_sub, hue='Epoch')
+```
+
+
+
+::: {.callout-note}
+## Your turn!
+
+For single variables:
+
+- Based on the parameters described in the [previous section](day2-3_univariate.qmd) and looking at histograms (i.e., the diagonal plot), how would you describe their **distributions** of values?
+- Do they vary across eruptive epochs?
+
+Now, thinking about the relationship between **two variables**:
+
+- What variables behave in a similar way?
+- What variables don't?
+- Do you see any **clustering** emerge?
+
+:::
+
+
+#### Correlation {.unnumbered}
+
+From @lst-sns-pairplot we can fairly intuitively get that some variables show [coupled]{.mark} behaviours (e.g., *Zr* tends to increase whe *Hf* does), whereas the behaviour of other variables suggests much less coupling (e.g., *Sc* and *Hf*). 
+
+The first measure used to quantify the joint variability of two variables $x$ and $y$ is the **covariance** (@eq-covar), which can be computed in *Pandas* using the `.cov()` function (@lst-bivar-cov).
+
+$$
+Cov_{xy} = \frac{1}{n-1}\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})
+$$ {#eq-covar}
+
+The covariance depends on [the magnitudes]{.mark} of the two variables inspected and, consequently, it does not inform much about the [strength]{.mark} of the relationship. The **correlation coefficient** (@eq-corr) represents a normalized version of the covariance that allows to overcome this limitation. The correlation coefficient ranges from −1 to 1 and shows, by its magnitude, the strength of the linear relation. It can be computed in *Pandas* using the `.corr()` function (@lst-bivar-cov).
+
+$$
+r_{xy} = \frac{Cov_{xy}}{\sigma_x \sigma_y} = \frac{\sum_{i=1}^n (x_i - \bar x)(y_i - \bar y)}{\sqrt{\sum_{i=1}^n (x_i - \bar x)^2}\;\sqrt{\sum_{i=1}^n (y_i - \bar y)^2}}
+$$ {#eq-corr}
+
+- $r_{xy} >0$ indicates a **positive relationship** between $x$ and $y$ (→ $y$ increases when $x$ does);
+- $r_{xy} <0$ indicates a **negative relationship** between $x$ and $y$ (→ $y$ decreases when $x$ increases);
+- $r_{xy} =0$ indicates **independence** between $x$ and $y$.
+
+```{python}
+#| echo: true
+#| lst-label: lst-bivar-cov
+#| lst-cap: Computing the covariance and correlation coefficient in Pandas. Both the .cov() and the .corr() functions require numerical data, so we first need to remove the Epoch column. Note that the range of values returned by .corr() ranges from -1 to 1.
+
+# We remove the "Epoch" column using the function drop() as it does not contain numerical values
+df_traces_sub = df_traces_sub.drop(columns='Epoch')
+
+# Compute the covariance
+df_traces_sub.cov()
+print(f"The covariance for U ranges from {df_traces_sub.cov()['U'].min():.2f} to {df_traces_sub.cov()['U'].max():.2f}")
+
+# Compute the correlation coefficient
+print(f"The correlation coefficients for U ranges from {df_traces_sub.corr()['U'].min():.2f} to {df_traces_sub.corr()['U'].max():.2f}")
+
+print('Correlation coefficient:')
+df_traces_sub.corr()
+
+```
+
+
+
+##### Correlation matrix {.unnumbered}
+
+Again, we are here interested in getting a first order knowledge of the possible relationships in our entire dataset, and one efficient way to assess correlations amongst **many** variables is a [correlation matrix]{.mark}.
+
+*Seaborn* does not include a native function to do so, but @lst-corr-mat shows a ready-to-use function to plot one. Don't hesitate to copy it and reuse it in your codes. @fig-corr-mat shows the resulting plot applied to the concentration columns of the trace elements dataset.
+
+```{python}
+#| echo: true
+#| lst-label: lst-corr-mat
+#| lst-cap: Function to compute produce a correlation matrix
+
+# Define a function to plot the correlation matrix. It takes one argument (i.e., a DataFrame)
+def corrMatrix(d):
+        
+    # Compute the correlation matrix
+    corr = d.corr()
+
+    # Generate a mask for the upper triangle
+    mask = np.triu(np.ones_like(corr, dtype=bool))
+
+    # Set up the matplotlib figure
+    f, ax = plt.subplots(figsize=(11, 9))
+
+    # Generate a custom diverging colormap
+    cmap = sns.diverging_palette(230, 20, as_cmap=True)
+
+    # Draw the heatmap with the mask and correct aspect ratio
+    sns.heatmap(corr, mask=mask, cmap=cmap, vmax=.7, vmin=-.7, center=0,
+                square=True, linewidths=.5, cbar_kws={"shrink": .5})
+```
+
+```{python}
+#| echo: true
+#| label: fig-corr-mat
+#| fig-cap: Correlation matrix for the trace elements dataset.
+
+# Keep only the numerical columns, i.e., from column index 10 to the last
+df_traces_sub = df_traces.iloc[:, 10:]
+corrMatrix(df_traces_sub)
+```
+
+
+::: {.callout-note}
+## Questions
+
+Two variables show relatively strong **negative correlations**. These are:
+
+```{python}
+#| echo: false
+mcq({       
+    'Sc and Pb': 0,
+    'Ba and Nd':  0,
+    'Sr and Ba':  1,   
+    'Tb and Er':  0, 
+    'Pb and Ce':  0,    
+})
+```
+
+Three variables show relatively **weak correlations**:
+
+```{python}
+#| echo: false
+mcq({       
+    'U, Yb and Hf': 0,
+    'Y, Ze and Nd':  0,
+    'Sr, Pr and Ba':  0,   
+    'Sc, Eu and Pb':  1, 
+    'Ce, Tb and Nd':  0,    
+})
+```
+
+
+:::
+
+#### A first look at linear regression {.unnumbered}
+
+Correlation coefficients provide a measure of the coupling between two continuous variables, and [linear regressions]{.mark} attempt modelling this relationship. A linear regression is typically expressed as (@eq-linreg):
+
+$$
+y = a + bx + \epsilon
+$$ {#eq-linreg}
+
+where:
+
+- $y$: dependent (response) variable
+- $x$: independent (predictor) variable
+- $a$: intercept → value of $y$ when $x=0$
+- $b$: slope → how much $y$ changes by unit of $x$
+- $\epsilon$: error term
+
+So, the goal of a regression for two continuous variables behaving in a linear fashion is [to estimate the values of $a$ and $b$ that best fit the observed data]{.mark}.
+
+*Seaborn* has some high-level functions to **plot** linear regressions. These functions are designed to [provide a quick overview]{.mark} of the model fit rather than a deep statistical investigation (which is commonly achieved using another library called [statsmodels](https://www.statsmodels.org/stable/index.html)). A thorough introduction to linear regression will be the topic of class 4, so for now let's just focus on the use of the *Seaborn* functions.
+
+The first function is [`sns.regplot()`](https://seaborn.pydata.org/generated/seaborn.regplot.html#seaborn.regplot), which produces:
+
+1. A scatter plot;
+2. A linear regression model fit;
+3. A confidence interval (by default 95% in *Seaborn* obtained through *bootstrapping*. The idea behind bootstrapping is to i)  randomly removing a proportion of original observations from the dataset, ii) refit the model and compare  it to the original fit and iii) repeat this a large number of times - typically thousands of times. For a very good fit, removing observations won't affect greatly the relationship, and the fit with the subset of points will be near to equal the fit with the complete dataset.
+
+@fig-reg shows two regression plots with the 95% confidence interval. They sure do look pretty, and `sns.regplot()` is a great and efficient way to have a first impression at what a first order polynomial fit would look like, [but be careful to not over-interpret them]{.mark}. If you want to further explore and constrain linear fits, do turn to [statsmodels](https://www.statsmodels.org/stable/index.html).
+
+```{python}
+#| echo: true
+#| label: fig-reg
+#| fig-cap: Regression plots obtained using Seaborn.
+
+# Set colors for plotting
+blue = '#2F4647'
+orange = '#EB811B'
+
+# Setup the plot. Note that we require 2 axes in 1 row, which returns a list of axes (i.e., [ax1, ax2])
+fig, [ax1, ax2] = plt.subplots(1,2, figsize=(10,4.5))
+sns.regplot(ax=ax1, data=df_traces, x='Zr', y='Hf', color=blue, line_kws=dict(color=orange))
+sns.regplot(ax=ax2, data=df_traces, x='Zr', y='Sc', color=blue, line_kws=dict(color=orange))
+
+# These two commands mainly make the plots look good on the website
+plt.tight_layout()
+plt.show()
+
+```
+
+A mandatory - but often overlooked - step to estimating a linear regression model is to [investigate whether the residuals show any structure]{.mark}. The residual at each data point $i$ is computed as (@eq-residuals):
+
+$$
+e_i = y_i - \hat{y}_i
+$$ {#eq-residuals}
+
+where:
+
+- $y_i$ is the measured value along the *y* axis;
+- $\hat{y}_i$ is the modelled value along the *y* axis;
+- $e_i$ is the residual (error term).
+
+Residuals - beyond being used to compute the $R^2$ coefficient of determination (@eq-r2), are critical to:
+
+1. **Diagnose model fit** (→ how much **unexplained variation** remains);
+2. **Detect patterns** that indicate problems (non-linearity, heteroscedasticity, outliers).
+
+$$
+R^2 = 1 - \frac{\sum_{i=1}^{n} (y_i - \hat{y}_i)^2}{\sum_{i=1}^{n} (y_i - \bar{y})^2}
+$$ {#eq-r2}
+
+[Structure in residuals]{.mark} might reveal a violation of linear regression assumptions. *Seaborn*'s function [`sns.residplot()`](https://seaborn.pydata.org/generated/seaborn.residplot.html) is designed to help with rapid investigation of the potential structure in residuals. @fig-resid shows the residuals for the same relationships as @fig-reg. We add the argument `lowess=True` to the function, which uses a [lowess filter](https://en.wikipedia.org/wiki/Local_regression) (i.e., think a combination of a moving average except a linear regression is performed rather than an average). This is useful to estimate the structure of the residuals.
+
+<!-- fig, ax2 = plt.subplots() -->
+<!-- sns.residplot(ax=ax2, data=df_traces, x='Zr', y='Hf', color=blue, lowess=True, line_kws=dict(color=orange)) -->
+
+```{python}
+#| echo: true
+#| label: fig-resid
+#| fig-cap: Residual plots obtained using Seaborn.
+
+fig, [ax1, ax2] = plt.subplots(1,2, figsize=(10,4.5))
+sns.residplot(ax=ax1, data=df_traces, x='Zr', y='Hf', color=blue, lowess=True, line_kws=dict(color=orange))
+sns.residplot(ax=ax2, data=df_traces, x='Zr', y='Sc', color=blue, lowess=True, line_kws=dict(color=orange))
+plt.tight_layout()
+plt.show()
+
+```
+
+::: {.callout-tip}
+## Estimating regression fits with Seaborn
+
+*Seaborn* has a [great tutorial](https://seaborn.pydata.org/tutorial/regression.html) on estimating regression fits - be sure to check it out at some point!
+
+:::
