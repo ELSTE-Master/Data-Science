@@ -30,13 +30,10 @@ df_traces = pd.read_excel('https://github.com/ELSTE-Master/Data-Science/raw/refs
 
 The objective of **descriptive statistics** is to [provide ways of capturing the properties of a given data set or sample]{.mark}. Using *Pandas* and *Seaborn*, we will review some [metrics, tools, and strategies]{.mark} that can be used to summarize a dataset, providing us with a quantitative basis to talk about it and compare it to other datasets.
 
-## Univariate analyses  {.unnumbered}
 
+The first aspect of descriptive statistics is **univariate analyses**, which focus on [capturing the properties of **single** variables at the time]{.mark}. We are not yet concerned in characterising the [relationships]{.mark} between two or more variables. The following sections introduce basic functions to visually analyse single variables and the most important parameters to describe them.
 
-
-By **univariate analyses**, we focus on [capturing the properties of **single** variables at the time]{.mark}. We are not yet concerned in characterising the [relationships]{.mark} between two or more variables. The following sections introduce basic functions to visually analyse single variables and the most important parameters to describe them.
-
-### Plotting data distributions {.unnumbered}
+## Plotting data distributions {.unnumbered}
 
 Let's focus on the Zircon concentration in Campi Flegrei's geochemical dataset. We start by simply [visualising]{.mark} the dataset to get an understanding of what we will talk about. The fist type of plot we will consider is a [histogram]{.mark}, which shows the [number of times a specific value occurs]{.mark} in a given variable. (@fig-sns-hist). In *Seaborn*, **Histograms** can be plotted using [`sns.histplots()`](https://seaborn.pydata.org/generated/seaborn.histplot.html), and (@fig-sns-hist) show the [number of times a specific Zr concentration occurs]{.mark} in the dataset.
 
@@ -69,7 +66,7 @@ ax.set_title('Zr distribution');
 
 :::
 
-### Descriptive parameters {.unnumbered}
+## Descriptive parameters {.unnumbered}
 
 By looking at the distribution from @fig-sns-hist, we can intuitively understand the importance of describing [three different parameters]{.mark}:
 
@@ -78,7 +75,7 @@ By looking at the distribution from @fig-sns-hist, we can intuitively understand
 - The **skewness** - or how [symmetrical]{.mark} is the distribution of data compared to the central values;
 
 
-#### Location {.unnumbered}
+### Location {.unnumbered}
 
 We will review three measures of **location**:
 
@@ -86,7 +83,7 @@ We will review three measures of **location**:
 2. The [median](#median);
 3. The [mode](#mode).
 
-##### Mean {.unnumbered}
+#### Mean {.unnumbered}
 
 The **mean** (or *arithmetic* mean - by opposition to *geometric* or *harmonic* means) is the [sum of the values divided by the number of values]{.mark} (@eq-mean):
 
@@ -105,7 +102,7 @@ The mean of a dataset can easily be computed with *Pandas* using the [`.mean()`]
 #| lst-label: lst-univ-mean
 #| lst-cap: Compute the mean for two significant digits.
 
-df_traces['Zr'].mean().round(2)
+df_traces[['Zr']].mean().round(2)
 ```
 
 
@@ -164,7 +161,7 @@ df_traces_sub.mean(axis=1).round(2).head()
 
 
 
-##### Median {.unnumbered}
+#### Median {.unnumbered}
 
 The **median** is the value [at the exact middle of the dataset]{.mark}, meaning that just as
 many elements lie above the median as below it. There is no easy formula to compute the median, instead we need to conceptually (@lst-univ-median-ex):
@@ -177,11 +174,12 @@ many elements lie above the median as below it. There is no easy formula to comp
 #| lst-label: lst-univ-median-ex
 #| lst-cap: Graphical representation of the median.
 
-fig, ax = plt.subplots()
-sns.ecdfplot(data=df_traces, y='Zr')
-ax.plot([.5,.5], [0, df_traces['Zr'].median()], color='orange', linestyle='--')
-ax.plot([.5,0], [df_traces['Zr'].median(), df_traces['Zr'].median()], color='orange', linestyle='--')
-ax.set_ylim([0,900])
+fig, ax = plt.subplots(figsize=(6,4))
+sns.ecdfplot(data=df_traces, x='Zr')
+ax.plot([0, df_traces['Zr'].median()], [.5,.5], color='orange', linestyle='--')
+ax.plot([df_traces['Zr'].median(), df_traces['Zr'].median()], [.5,0], color='orange', linestyle='--')
+ax.set_xlim([0,900])
+ax.set_ylim([0,1])
 ```
 
 Fortunately, we can also use the native *Pandas* [`.median`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.median.html) function (@lst-univ-median). 
@@ -211,7 +209,7 @@ mcq({
 :::
 
 
-##### Mode {.unnumbered}
+#### Mode {.unnumbered}
 
 The mode is the value or values that occur most frequently in a dataset. Conceptually, it corresponds to the peak(s) of a histogram of the data. A distribution can have one mode (unimodal), two modes (bimodal), or multiple modes (multimodal). In *Pandas*, the mode is computed using [`.mode()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mode.html).
 
@@ -280,8 +278,7 @@ plt.show()
 ```
 
 
-
-##### Summary {.unnumbered}
+#### Summary {.unnumbered}
 
 @lst-univ-mean-med illustrate the values of the mean and the median relative to the distribution shown in the histogram. There are a few things to keep in mind when choosing between mean and median to estimate the location of a dataset:
 
@@ -303,7 +300,7 @@ ax.legend()
 
 
 
-#### Dispersion {.unnumbered}
+### Dispersion {.unnumbered}
 
 We will review three measures of **dispersion**:
 
@@ -311,7 +308,7 @@ We will review three measures of **dispersion**:
 2. The [standard deviation](#variance-and-standard-deviation);
 3. The [interquartile range](#interquartile-range).
 
-##### Range {.unnumbered}
+#### Range {.unnumbered}
 
 The first information we might want to get for a dataset is the range of values it covers, or *range*. For this, we need to get the minimum (`df.min()`) and maximum (`df.max()`) values, from which, when needed, the range can be calculated with @eq-range. It is however likely that the min/max functions will be more frequently used (@lst-univ-minmax).
 
@@ -324,11 +321,16 @@ $$ {#eq-range}
 #| lst-label: lst-univ-minmax
 #| lst-cap: Compute the min and the max values of a column
 
-df_traces['Zr'].min()
-df_traces['Zr'].max()
-
+df_min = df_traces['Zr'].min()
+df_max = df_traces['Zr'].max()
+df_range = df_max - df_min
+print(f"The range of Zircon concentrations is {df_range:.2f}")
 ```
 
+::: {.callout-warning}
+## Don't use Python reserved keywords as variable names
+Names as `min`, `max` or `range` represent native Python variables and **cannot be used as variable names!**
+:::
 
 ::: {.callout-note}
 ## Question
@@ -347,7 +349,7 @@ mcq({
 
 :::
 
-##### Variance and standard deviation {.unnumbered}
+#### Variance and standard deviation {.unnumbered}
 
 The **variance** and **standard deviation** are two key measures of dispersion that describe how spread out the values in a dataset are.
 
@@ -384,7 +386,7 @@ df_traces_sub.std()
 
 
 
-##### Interquartile range {.unnumbered}
+#### Interquartile range {.unnumbered}
 
 If the **standard deviation** is valid only for [symmetrical]{.mark} distributions, what can we use for [asymmetrical]{.mark} ones? The **interquartile range** can help, but we first need to define [what are **percentiles**]{.mark}. We previously saw that the [median](#median) represents the [value at the middle of the dataset]{.mark}, which means that:
 
@@ -540,7 +542,7 @@ Using proportions of the dataset as measures of central tendencies and spread ca
 :::
 
 
-#### Skewness {.unnumbered}
+### Skewness {.unnumbered}
 
 The **skewness** measures [the asymmetry of a distribution]{.mark} and is computed as @eq-skew:
 
@@ -565,7 +567,7 @@ df_traces['Zr'].skew().round(2)
 ```
 
 
-### Non-parametric distribution visualisation {.unnumbered}
+## Non-parametric distribution visualisation {.unnumbered}
 
 We have reviewed some descriptive parameters of distributions. Some parameters are **parametric**, which means that they [imply an underlying type of distribution]{.mark} (e.g., the [mean](#mean) and [standard deviation](#variance-and-standard-deviation) imply an **normal** distribution). Other parameters are **non-parametric**, and are in theory valid for [any type of distribution]{.mark}. For instance, the [IQR](#interquartile-range) provides a better representation of the range of asymmetrical distributions. However, it [still represents a range that does not convey the shape of the underlying distribution]{.mark}, so reporting a few percentiles (e.g., 10-90, 25-75) typically better convey an idea of spread and distribution shape.
 
@@ -658,7 +660,7 @@ Take some time to get familiar with the use of these plotting functions!
 
 
 
-### Grouping variables {.unnumbered}
+## Grouping variables {.unnumbered}
 
 Cool, we now have the tools to describe the behaviour of single [numerical]{.mark} variables. However, as described [here](#setting-up-the-exercise), we see that our dataset also contains [categorical]{.mark} variables, and we are going to see now how we can exploit them to apply what we just learned on **specific categories** of our dataset.
 
