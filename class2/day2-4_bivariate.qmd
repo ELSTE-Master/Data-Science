@@ -60,7 +60,7 @@ Now, thinking about the relationship between **two variables**:
 :::
 
 
-#### Correlation {.unnumbered}
+## Correlation {.unnumbered}
 
 From @lst-sns-pairplot we can fairly intuitively get that some variables show [coupled]{.mark} behaviours (e.g., *Zr* tends to increase whe *Hf* does), whereas the behaviour of other variables suggests much less coupling (e.g., *Sc* and *Hf*). 
 
@@ -102,7 +102,7 @@ df_traces_sub.corr()
 
 
 
-##### Correlation matrix {.unnumbered}
+### Correlation matrix {.unnumbered}
 
 Again, we are here interested in getting a first order knowledge of the possible relationships in our entire dataset, and one efficient way to assess correlations amongst **many** variables is a [correlation matrix]{.mark}.
 
@@ -176,7 +176,7 @@ mcq({
 
 :::
 
-#### A first look at linear regression {.unnumbered}
+## A first look at linear regression {.unnumbered}
 
 Correlation coefficients provide a measure of the coupling between two continuous variables, and [linear regressions]{.mark} attempt modelling this relationship. A linear regression is typically expressed as (@eq-linreg):
 
@@ -224,7 +224,9 @@ plt.show()
 
 ```
 
-A mandatory - but often overlooked - step to estimating a linear regression model is to [investigate whether the residuals show any structure]{.mark}. The residual at each data point $i$ is computed as (@eq-residuals):
+### Residual analysis
+
+An important - but often overlooked - step to estimating a linear regression model is to [investigate whether the residuals show any structure]{.mark}. The residual at each data point $i$ is computed as (@eq-residuals):
 
 $$
 e_i = y_i - \hat{y}_i
@@ -245,7 +247,7 @@ $$
 R^2 = 1 - \frac{\sum_{i=1}^{n} (y_i - \hat{y}_i)^2}{\sum_{i=1}^{n} (y_i - \bar{y})^2}
 $$ {#eq-r2}
 
-[Structure in residuals]{.mark} might reveal a violation of linear regression assumptions. *Seaborn*'s function [`sns.residplot()`](https://seaborn.pydata.org/generated/seaborn.residplot.html) is designed to help with rapid investigation of the potential structure in residuals. @fig-resid shows the residuals for the same relationships as @fig-reg. We add the argument `lowess=True` to the function, which uses a [lowess filter](https://en.wikipedia.org/wiki/Local_regression) (i.e., think a combination of a moving average except a linear regression is performed rather than an average). This is useful to estimate the structure of the residuals.
+Any type of [structure in residuals]{.mark} might reveal a violation of linear regression assumptions. *Seaborn*'s function [`sns.residplot()`](https://seaborn.pydata.org/generated/seaborn.residplot.html) is designed to help with rapid investigation of the potential structure in residuals. @fig-resid shows the residuals for the same relationships as @fig-reg. We add the argument `lowess=True` to the function, which uses a [lowess filter](https://en.wikipedia.org/wiki/Local_regression) (i.e., think a combination of a moving average except a linear regression is performed rather than an average). This is useful to estimate the structure of the residuals.
 
 <!-- fig, ax2 = plt.subplots() -->
 <!-- sns.residplot(ax=ax2, data=df_traces, x='Zr', y='Hf', color=blue, lowess=True, line_kws=dict(color=orange)) -->
