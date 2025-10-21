@@ -22,6 +22,11 @@ plt.rcParams.update({
 import pandas as pd # Import pandas
 import matplotlib.pyplot as plt # Import the pyplot module from matplotlib
 import seaborn as sns # Import seaborn
+import numpy as np
+
+# Define the colours for plotting
+blue = '#2F4647'
+orange = '#EB811B'
 
 # Import the dataset specifying which Excel sheet name to load the data from
 df_majors = pd.read_excel('https://github.com/ELSTE-Master/Data-Science/raw/refs/heads/main/Data/Smith_glass_post_NYT_data.xlsx', sheet_name='Supp_majors')
@@ -38,26 +43,56 @@ The first aspect of descriptive statistics is **univariate analyses**, which foc
 Let's focus on the Zircon concentration in Campi Flegrei's geochemical dataset. We start by simply [visualising]{.mark} the dataset to get an understanding of what we will talk about. The fist type of plot we will consider is a [histogram]{.mark}, which shows the [number of times a specific value occurs]{.mark} in a given variable. (@fig-sns-hist). 
 
 
-A [histogram]{.mark} can be seen as a simple [estimator of the underlying probability distribution]{.mark} of the variable:
+Visualising the dataset is a good way to start getting an idea of its structure. A [histogram]{.mark} can be seen as a simple [estimator of the underlying probability distribution]{.mark} of the variable:
 
 - For a [discrete random variable]{.mark}, this corresponds to the [probability mass function (pmf)]{.mark}, denoted $p(x) = P(X = x)$, which assigns the probability that $X$ takes the value $x$.  
 - For a [continuous random variable]{.mark}, this corresponds to the [probability density function (pdf)]{.mark}, denoted $f(x)$, which describes how probability is distributed over intervals: the probability that $X$ lies in an interval $[a,b]$ is given by $\int_a^b f(x)\,dx$.
 
+It is important to differentiate between **theoretical distributions** (e.g., normal, log-normal etc) and the distribution of the **sample**, for which we often don't know the distribution. @fig-sns-hist_theoretical shows:
+
+- Orange line → **a continuous theoretical distribution** (here a normal distribution)
+- Blue histogram → **a discretised sample** (here taken from 1000 random numbers sampled from a normal distribution).
+
+```{python}
+#| label: fig-sns-hist_theoretical
+#| fig-cap: Difference between theoretical distributions and sample histogram
+#| echo: false
+
+data = np.random.normal(size=1000)
+fig, ax = plt.subplots()
+sns.histplot(data=data, color=blue, alpha=.5, label='Sample')
+# Compute normal pdf (using sample mean/std) and scale it to the histogram area, then plot it
+mu, sigma = data.mean(), data.std()
+x = np.linspace(-4,4, 300)
+pdf = (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp(-0.5 * ((x - mu) / sigma) ** 2)
+
+# Scale pdf to histogram total area so the line matches the bar heights
+hist_area = sum([p.get_height() * p.get_width() for p in ax.patches])
+pdf_scaled = pdf * hist_area
+
+ax.plot(x, pdf_scaled, color='orange', lw=2, label=f'Theoretical distribution')
+ax.legend(frameon=False)
+```
 
 
-In *Seaborn*, **Histograms** can be plotted using [`sns.histplots()`](https://seaborn.pydata.org/generated/seaborn.histplot.html), and (@fig-sns-hist) show the [number of times a specific Zr concentration occurs]{.mark} in the dataset.
 
-Note that **histograms** [discretise the data]{.mark} into equal **bins**. The [bin size]{.bg} (e.g., the width and numbers of bins) can alter the visual representation of the dataset. Although functions such as `sns.histplots()` rely on algorithm that suggest the optimal number of bins, it is a good practice to explore this parameter.
+In *Seaborn*, **Histograms** can be plotted using [`sns.histplots()`](https://seaborn.pydata.org/generated/seaborn.histplot.html). Applied to our dataset, @fig-sns-hist) show the [number of times a specific Zr concentration occurs]{.mark} in the dataset.
 
 ```{python}
 #| label: fig-sns-hist
-#| cap: Visualising distributions using histograms.
+#| fig-cap: Histogram of the Zirconium trace element
+
 
 fig, ax = plt.subplots()
 sns.histplot(data=df_traces, x='Zr')
 ax.set_xlabel('Zr (ppm)');
 ax.set_title('Zr distribution');
+
 ```
+
+Note that **histograms** [discretise the data]{.mark} into equal **bins**. The [bin size]{.bg} (e.g., the width and numbers of bins) can alter the visual representation of the dataset. Although functions such as `sns.histplots()` rely on algorithm that suggest the optimal number of bins, it is a good practice to explore this parameter.
+
+
 
 ::: {.callout-note} 
 ## Your turn
@@ -491,12 +526,9 @@ def plotArrow(ax,data,pct,c):
     # Plot the mean as a vertical red dotted line on the histogram axis
     ax.axvline(data.mean(), color='red', linestyle=':', linewidth=2)
 
-# Define the colours for plotting
-blue = '#2F4647'
-orange = '#EB811B'
 
 # Setup random data using a Normal distribution
-data = np.random.normal(size=10000)
+data = np.random.normal(size=1000)
 data = (data - data.min()) / (data.max() - data.min())*10
 datapct = np.percentile(data, [10, 25, 50, 75, 90])
 
@@ -504,7 +536,7 @@ datapct = np.percentile(data, [10, 25, 50, 75, 90])
 fig, ax = plt.subplots(figsize=(6, 4))
 
 # Left y axis
-sns.histplot(x=data, bins=50, color=blue, alpha=0.4, ax=ax, label='Density', element='step')
+sns.histplot(x=data, bins=20, color=blue, alpha=0.4, ax=ax, label='Density', element='step')
 ax.set_xlabel('Data value (arbitrary)')
 ax.set_ylabel('Count (= number of data points \nin each bin)', color=blue)
 ax.tick_params(axis='y', labelcolor=blue)
@@ -535,7 +567,7 @@ plt.close(fig)
 #| code-fold: true
 
 # Setup random data using a log-normal distribution
-data = np.random.lognormal(size=10000, sigma=.6)
+data = np.random.lognormal(size=1000, sigma=.4)
 data = (data - data.min()) / (data.max() - data.min())*10
 datapct = np.percentile(data, [10, 25, 50, 75, 90])
 
@@ -543,7 +575,7 @@ datapct = np.percentile(data, [10, 25, 50, 75, 90])
 fig, ax = plt.subplots(ncols=1, figsize=(6, 4))
 
 # Left y axis
-sns.histplot(x=data, bins=50, color=blue, alpha=0.4, ax=ax, legend=None, element='step')
+sns.histplot(x=data, bins=20, color=blue, alpha=0.4, ax=ax, legend=None, element='step')
 ax.set_xlabel('Data value (arbitrary)')
 ax.set_ylabel('Count (= number of data points \nin each bin)', color=blue)
 ax.tick_params(axis='y', labelcolor=blue)
@@ -562,7 +594,7 @@ plotArrow(ax2, data, 25, '#994E95')
 
 fig.tight_layout()
 fig.savefig("img/fig-univ-pctA.png", dpi=150, transparent=True)
-# plt.close(fig)
+plt.close(fig)
 ```
 
 ![Relationship of percentiles to a asymmetric distribution. The red dotted line shows the location of the mean.](img/fig-univ-pctA.png){#fig-univ-pctA width="80%"}

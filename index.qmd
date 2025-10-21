@@ -76,10 +76,18 @@ We won't have time to help you install Python on your computer **during the clas
 
 ### Assistants
 
-The course assistants are:
+The course assistants TAs are:
 
-- Simon Thivet (UNIGE / [Physical Volcanology and Geological Risk](https://www.unige.ch/sciences/terre/en/groups/physical-volcanology-and-geological-risk/staff/))
-- Filippo Salmaso (UNIGE / [Data Analytics Lab](https://farma-unites.unige.ch/en/data-analytics-lab/members))
+- **Simon Thivet** (UNIGE / [Physical Volcanology and Geological Risk](https://www.unige.ch/sciences/terre/en/groups/physical-volcanology-and-geological-risk/staff/))
+- **Filippo Salmaso** (UNIGE / [Data Analytics Lab](https://farma-unites.unige.ch/en/data-analytics-lab/members))
+
+The course also benefited from contributions from:
+
+- **Lionel Voirol** (UNIGE / [Data Analytics Lab](https://farma-unites.unige.ch/en/data-analytics-lab/members))
+- **Charline Lormand** (UNIGE / [MAGE](https://www.unige.ch/sciences/terre/en/groups/petrology-and-volcanology/staff/))
+- **Martin Miranda Muruzabal** (UNIGE / [MAGE](https://www.unige.ch/sciences/terre/en/groups/petrology-and-volcanology/staff/))
+
+
 
 ### A note on the use of LLMs
 

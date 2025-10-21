@@ -33,3 +33,10 @@ ENV/
 .mypy_cache/
 .pytest_cache/
 .ipynb_checkpoints/
+
+# ignore quarto generated files
+**/*.quarto_ipynb
+
+# ignore site
+_site/
+.quarto-cache/
