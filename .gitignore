@@ -43,8 +43,4 @@ _site/
 
 
 
-# ignore image in class2 that are regenerated
-class2/img/*.png
-
-
 
