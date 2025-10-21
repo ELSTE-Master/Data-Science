@@ -140,6 +140,8 @@ $$
 
 In practice, we rarely know the true correlations, so each entry $r(X_i, X_j)$ is typically estimated from a [sample]{.mark}, giving the [sample correlation]{.mark} between variables $X_i$ and $X_j$.
 
+
+
 *Seaborn* does not include a native function to do so, but @lst-corr-mat shows a ready-to-use function to plot one. Don't hesitate to copy it and reuse it in your codes. @fig-corr-mat shows the resulting plot applied to the concentration columns of the trace elements dataset.
 
 ```{python}
