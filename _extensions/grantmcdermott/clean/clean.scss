@@ -437,3 +437,15 @@ span[data-code-cell] {
 .cell-output {
   margin-top: 1.5em;
 }
+
+
+// wrappers to adjust image
+
+.img-up-50 {
+  position: relative;
+  top: -50px;
+}
+.img-down-50 {
+  position: relative;
+  top: 50px;
+}
