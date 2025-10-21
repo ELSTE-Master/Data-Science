@@ -1,0 +1,86 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Overview\"\n",
+        "format:\n",
+        "  html:\n",
+        "    code-fold: false\n",
+        "    code-line-numbers: true\n",
+        "    css: [../assets/webex.css]\n",
+        "    include-after-body: [../assets/webex.js]\n",
+        "    embed-resources: true \n",
+        "jupyter: python3\n",
+        "---"
+      ],
+      "id": "6eaf15c9"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: false\n",
+        "from pywebexercises.exercises import mcq, longmcq, torf\n",
+        "import matplotlib.pyplot as plt\n",
+        "plt.rcParams.update({\n",
+        "    \"figure.facecolor\":  (0.0, 0.0, 0.0, 0.0),  # red   with alpha = 30%\n",
+        "})"
+      ],
+      "id": "0cb24599",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "We will start our data science journey by learning a bit about the most useful Python library for this class: **Pandas**. As a reminder, a *library* is a set of tools we load on top of Python that provides new functionalities for a specific problem or type of analysis. Here, Pandas provides functions for **data manipulation and analysis**, handling structured data like tables or time series and facilitating numerous tasks you might encounter as a scientist. These include:\n",
+        "\n",
+        "- **Reading/writing data** from various commonly-used formats (CSV, Excel, SQL, JSON, etc.)\n",
+        "- Handling **missing data**\n",
+        "- **Filtering**, **sorting**, **reshaping** and **grouping** data\n",
+        "- **Aggregating** data (sum, mean, count, etc.)\n",
+        "- **Time series support** (date ranges, frequency conversions)\n",
+        "- **Statistical operations**\n",
+        "\n",
+        "## Today's objectives {.unnumbered}\n",
+        "\n",
+        "The objective of this class is by no way to make you an expert in Pandas and data science. Rather, the objective is to take you through the most basic manipulations in order to build the confidence to keep on exploring the use of scientific coding and to include it into your research pipeline. The objectives of this module are to review:\n",
+        "\n",
+        "- [x] What is a Pandas DataFrame and its basic anatomy\n",
+        "- [x] How to *load data* in a DataFrame\n",
+        "- [x] How to *access* data (e.g., query by label/position)\n",
+        "- [x] How to *filter* data (e.g., comparison and logical operators)\n",
+        "- [x] How to *rearrange* data (e.g., sorting values)\n",
+        "- [x] How to *operate* on data (e.g., arithmetic and string operations)\n",
+        "\n",
+        "We first start by reviewing the data structure behind *Pandas*, then we will move on to a few coding exercises to make you familiar with some basic functionalities.\n",
+        "\n",
+        "## Slides\n",
+        "\n",
+        "### Introduction \n",
+        "\n",
+        "- {{< fa file-pdf >}} [PDF](../slides/class1_intro.pdf)\n",
+        "- <i class=\"fa fa-window-restore\"></i> <a href=\"../slides/class1_intro.html\" target=\"_blank\">View in browser</a>\n",
+        "\n",
+        "### Intro to Pandas\n",
+        "\n",
+        "- {{< fa file-pdf >}} [PDF](../slides/class1_pandas.pdf)\n",
+        "- <i class=\"fa fa-window-restore\"></i> <a href=\"../slides/class1_pandas.html\" target=\"_blank\">View in browser</a>"
+      ],
+      "id": "1dc31887"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "display_name": "Python 3",
+      "language": "python",
+      "name": "python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

@@ -354,16 +354,16 @@ mcq({
 The **variance** and **standard deviation** are two key measures of dispersion that describe how spread out the values in a dataset are.
 
 - **Standard deviation** ($\sigma$) measures sum of squares differences between data points $x_i$ and the
-mean $\bar{x}$:
-    $$
-    \sigma = \sqrt{\frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1} }
-    $$
-    where $x_i$ are the data points, $\bar{x}$ is the mean, and $n$ is the number of observations.
+mean $\bar{x}$ (@eq-std):
+$$
+\sigma = \sqrt{\frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1} }
+$$ {#eq-std}
+where $x_i$ are the data points, $\bar{x}$ is the mean, and $n$ is the number of observations.
 
-- **Variance** ($\sigma^2$) is the square of the standard deviation:
-    $$
-    \sigma^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1} 
-    $$
+- **Variance** ($\sigma^2$) is the square of the standard deviation (@eq-var):
+$$
+\sigma^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1} 
+$$ {#eq-var}
     
 
 For now we will consider that they roughly measure the same thing. The standard deviation is in the same units as the data, making it easier to interpret.
@@ -446,7 +446,7 @@ blue = '#2F4647'
 orange = '#EB811B'
 
 # Setup random data using a Normal distribution
-data = np.random.normal(size=1000)
+data = np.random.normal(size=10000)
 data = (data - data.min()) / (data.max() - data.min())*10
 datapct = np.percentile(data, [10, 25, 50, 75, 90])
 
@@ -454,7 +454,7 @@ datapct = np.percentile(data, [10, 25, 50, 75, 90])
 fig, ax = plt.subplots(figsize=(6, 4))
 
 # Left y axis
-sns.histplot(x=data, bins=20, color=blue, alpha=0.4, ax=ax, label='Density', element='step')
+sns.histplot(x=data, bins=50, color=blue, alpha=0.4, ax=ax, label='Density', element='step')
 ax.set_xlabel('Data value (arbitrary)')
 ax.set_ylabel('Count (= number of data points \nin each bin)', color=blue)
 ax.tick_params(axis='y', labelcolor=blue)
@@ -485,7 +485,7 @@ plt.close(fig)
 #| code-fold: true
 
 # Setup random data using a log-normal distribution
-data = np.random.lognormal(size=1000, sigma=.4)
+data = np.random.lognormal(size=10000, sigma=.6)
 data = (data - data.min()) / (data.max() - data.min())*10
 datapct = np.percentile(data, [10, 25, 50, 75, 90])
 
@@ -493,7 +493,7 @@ datapct = np.percentile(data, [10, 25, 50, 75, 90])
 fig, ax = plt.subplots(ncols=1, figsize=(6, 4))
 
 # Left y axis
-sns.histplot(x=data, bins=20, color=blue, alpha=0.4, ax=ax, legend=None, element='step')
+sns.histplot(x=data, bins=50, color=blue, alpha=0.4, ax=ax, legend=None, element='step')
 ax.set_xlabel('Data value (arbitrary)')
 ax.set_ylabel('Count (= number of data points \nin each bin)', color=blue)
 ax.tick_params(axis='y', labelcolor=blue)
@@ -512,7 +512,7 @@ plotArrow(ax2, data, 25, '#994E95')
 
 fig.tight_layout()
 fig.savefig("img/fig-univ-pctA.png", dpi=150, transparent=True)
-plt.close(fig)
+# plt.close(fig)
 ```
 
 ![Relationship of percentiles to a asymmetric distribution. The red dotted line shows the location of the mean.](img/fig-univ-pctA.png){#fig-univ-pctA width="80%"}
@@ -574,8 +574,8 @@ We have reviewed some descriptive parameters of distributions. Some parameters a
 One way to efficiently convey the structure of underlying data is to use methods for [non-parametric representation of distributions]{.mark}. [**Box plots**]{.mark} (or **box and whiskers plots**; @fig-boxplot), for instance, attempt to provide all components of the underlying distribution (e.g., location, dispersion, skewness) in a [non-paramteric]{.bg} way:
 
 - The **box** represents the 25^th^ and 75^th^ percentiles → $IQR$;
-- The **horizontal line** within the **box** represents the **median**;
-- The **whiskers** reprents a range that usually extends 1.5 times the IQR from the first and third quartiles
+- The **line** within the **box** represents the **median**;
+- The **whiskers** represents a range that usually extends 1.5 times the IQR from the first and third quartiles
 - Any point that lies beyond the whiskers is considered an **outlier**, which is a point that [significantly different from the majority of observations]{.mark}.
 
 ![Component of a box and whiskers plot. The top box plot represents an asymmetrical distribution, the bottom one a symmetrical one.](img/fig-boxplot.png){#fig-boxplot width="80%"}
