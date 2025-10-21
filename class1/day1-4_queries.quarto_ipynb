@@ -1,0 +1,311 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Querying data\"\n",
+        "format:\n",
+        "  html:\n",
+        "    code-fold: false\n",
+        "    code-line-numbers: true\n",
+        "    css: [../assets/webex.css]\n",
+        "    include-after-body: [../assets/webex.js]\n",
+        "    embed-resources: true \n",
+        "jupyter: python3\n",
+        "---"
+      ],
+      "id": "12061c8b"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: false\n",
+        "from pywebexercises.exercises import mcq, longmcq, torf\n",
+        "import matplotlib.pyplot as plt\n",
+        "plt.rcParams.update({\n",
+        "    \"figure.facecolor\":  (0.0, 0.0, 0.0, 0.0),  # red   with alpha = 30%\n",
+        "})\n",
+        "import pandas as pd\n",
+        "df = pd.read_csv('https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data\n",
+        "df = df.set_index('Name')"
+      ],
+      "id": "02742645",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Querying data from a DataFrame {.unnumbered}\n",
+        "\n",
+        "Let's now review how we can access data contained in the DataFrame. This process, known as *indexing*, consists in specifying a row or a column (or ranges of rows and columns) where the data is stored. In `pandas`, there are two different ways to do that:\n",
+        "\n",
+        "- By `label`: data is queried using the actual index/column name (e.g., the `VEI` column in the DataFrame above)\n",
+        "- By `location`: data is queried using the column location (e.g., the 3rd row)\n",
+        "\n",
+        "### Label-based indexing {.unnumbered}\n",
+        "\n",
+        "![Label-based queries using `.loc`.](img/pandas_loc.png){#fig-pandas-loc}\n",
+        "\n",
+        "#### Querying rows {.unnumbered}\n",
+        "\n",
+        "When we know the exact label of the row or the column, we can use the `.loc` function to query the DataFrame (@fig-pandas-loc). Let's start by querying specific **rows**. We have [previously](day1-3_data_exploration.qmd#lst-set-index) defined the `Name` column as the *index* (i.e., row label), which means that we can simply pass the name of the volcano.\n"
+      ],
+      "id": "c70835eb"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# Get the row for \"Calbuco\" volcano\n",
+        "df.loc['Calbuco']"
+      ],
+      "id": "1e6fff41",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Note that the result is a *Series* (i.e., a 1-dimensional DataFrame where the columns become the index), not a DataFrame. If we want to **keep it as a DataFrame**, we can use double brackets. Double brackets can also be used to query **multiple rows**.\n"
+      ],
+      "id": "e3c29b0f"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "df.loc[['Calbuco']] # Query one row and return it as a DataFrame\n",
+        "df.loc[['Calbuco', 'Taal']] # Query multiple rows"
+      ],
+      "id": "b64b6be1",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "::: {.callout-note}\n",
+        "## Question\n",
+        "\n",
+        "What is the VEI recorded for Etna volcano?\n"
+      ],
+      "id": "fbb57c55"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: false\n",
+        "mcq({\n",
+        "    '1' : 0,\n",
+        "    '2' : 1,\n",
+        "    '3' : 0,\n",
+        "    '4' : 0,\n",
+        "    '5' : 0\n",
+        "})"
+      ],
+      "id": "29d04338",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "What is the eruption date for Taal volcano?\n"
+      ],
+      "id": "d01c7b29"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: false\n",
+        "mcq({\n",
+        "    '1980-05-18\t' : 0,\n",
+        "    '1991-04-02' : 0,\n",
+        "    '2020-01-12' : 1,\n",
+        "    '1997-06-25' : 0,\n",
+        "    '2023-02-13' : 0\n",
+        "})"
+      ],
+      "id": "07b36af3",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "\n",
+        "\n",
+        "::: {.callout-tip}\n",
+        "## Double brackets\n",
+        "In general, double brackets ``[[ ]]`` will return a DataFrame and not a Series. We will dominantly use this in the following examples.\n",
+        ":::\n",
+        "\n",
+        "\n",
+        "#### Querying columns {.unnumbered}\n",
+        "\n",
+        "Let's now query specific **columns**. For example, querying the `VEI` column can be achieved in different ways. The simplest is to use the column name directly. We can also query **multiple columns** using double brackets\n"
+      ],
+      "id": "af95f7d2"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "df[['VEI']] # Get the VEI column\n",
+        "df[['Country', 'VEI']] # Query multiple columns"
+      ],
+      "id": "c8e5acde",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Note that until now, we have only retrieved either rows or columns (@fig-pandas-loc). We can also retrieve specific values by specifying **both the row and the column**.\n"
+      ],
+      "id": "c684424b"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "df.loc[['Calbuco', 'Taal']][['Country', 'VEI']]"
+      ],
+      "id": "5409b6c0",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Position-based indexing {.unnumbered}\n",
+        "\n",
+        "::: {#cau-indexing .callout-caution}\n",
+        "## Indexing in Python\n",
+        "Remember that in Python, indexing starts from 0 - so the first row or column has an index of 0.\n",
+        ":::\n",
+        "\n",
+        "![Position-based queries using `.iloc`.](img/pandas_iloc.png){#fig-pandas-iloc}\n",
+        "\n",
+        "\n",
+        "Some situations require querying data by *location* instead of *label* - let's say for instance we need to retrieve rows 10-20. This is done using the `.iloc` function (instead of the `.loc` function previously used; @fig-pandas-iloc). Remember that Python uses zero-based indexing (@cau-indexing), meaning that the first element is at position 0, the second at position 1, and so on.\n",
+        "\n",
+        "The next example queries the first row - using again double brackets to return a **DataFrame**.\n"
+      ],
+      "id": "42905a27"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "df.iloc[[0]]"
+      ],
+      "id": "5c425091",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "#### Get ranges of rows {.unnumbered}\n",
+        "\n",
+        "We can get **a range of rows** using what is called *slicing*. This is done using the colon (`:`) operator. The next example queries rows 3 to 6 of the DataFrame. Note that the end index is exclusive, meaning that the element at the end index is not included in the result.\n"
+      ],
+      "id": "96a227be"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "df.iloc[2:6]"
+      ],
+      "id": "941f1bca",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "To get rows 3 to 6 and columns 2-3:\n"
+      ],
+      "id": "31499714"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "df.iloc[0:5, 1:3]"
+      ],
+      "id": "72a53a62",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "#### Count rows from the last {.unnumbered}\n",
+        "\n",
+        "To get the last 5 rows of the DataFrame:\n"
+      ],
+      "id": "477ecc5a"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "df.iloc[-5:]"
+      ],
+      "id": "6ad5d6a6",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "#### Combining position-based and label-based queries {.unnumbered}\n",
+        "\n",
+        "By experience, position-based queries is more used on *rows* than *columns*. For instance, we might want to access the first 10 rows because we don't know their associated labels, yet it is less likely that we ignore their *attributes*.\n",
+        "It is possible mix label-based and position-based indexing. For example, to get the first 5 rows and the `Country` and `VEI` columns:\n"
+      ],
+      "id": "2aa6e0c7"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "df.iloc[0:5][['Country', 'VEI']]"
+      ],
+      "id": "fed32442",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/home/lionel/.local/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
