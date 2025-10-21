@@ -35,8 +35,8 @@ import matplotlib.pyplot as plt # Import the pyplot module from matplotlib
 import seaborn as sns # Import seaborn
 
 # Import the dataset specifying which Excel sheet name to load the data from
-df_majors = pd.read_excel('https://github.com/ELSTE-Master/Data-Science/raw/refs/heads/main/Data/Smith_glass_post_NYT_data.xlsx', sheet_name='Supp_majors')
-df_traces = pd.read_excel('https://github.com/ELSTE-Master/Data-Science/raw/refs/heads/main/Data/Smith_glass_post_NYT_data.xlsx', sheet_name='Supp_traces')
+df_majors = pd.read_excel('https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/Smith_glass_post_NYT_data_majors.csv')
+df_traces = pd.read_excel('https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/Smith_glass_post_NYT_data_traces.csv')
 ```
 
 
