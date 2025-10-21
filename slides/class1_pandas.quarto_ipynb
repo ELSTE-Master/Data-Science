@@ -102,7 +102,11 @@
         "\n",
         "<span style=\"font-size: 0.5em;\"></span>\n"
       ],
+<<<<<<< HEAD
       "id": "8e446ec9"
+=======
+      "id": "e4dd92c8"
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
     },
     {
       "cell_type": "code",
@@ -114,7 +118,11 @@
         "# Import the required packages\n",
         "import pandas as pd"
       ],
+<<<<<<< HEAD
       "id": "5fe95785",
+=======
+      "id": "d4758e3a",
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
       "execution_count": null,
       "outputs": []
     },
@@ -129,7 +137,11 @@
         "\n",
         "<span style=\"font-size: 0.5em;\"></span>\n"
       ],
+<<<<<<< HEAD
       "id": "76b7c927"
+=======
+      "id": "34506f53"
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
     },
     {
       "cell_type": "code",
@@ -144,7 +156,11 @@
         "# Read the data\n",
         "df = pd.read_csv('https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data"
       ],
+<<<<<<< HEAD
       "id": "6e58d079",
+=======
+      "id": "d90eee2f",
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
       "execution_count": null,
       "outputs": []
     },
@@ -159,7 +175,11 @@
         "\n",
         "<span style=\"font-size: 0.5em;\"></span>\n"
       ],
+<<<<<<< HEAD
       "id": "7b42f5a1"
+=======
+      "id": "549143ff"
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
     },
     {
       "cell_type": "code",
@@ -177,7 +197,11 @@
         "# Show the first 3 rows\n",
         "df.head(3) "
       ],
+<<<<<<< HEAD
       "id": "47f97dcf",
+=======
+      "id": "4a4c2a51",
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
       "execution_count": null,
       "outputs": []
     },
@@ -196,7 +220,11 @@
         "\n",
         "<span style=\"font-size: 0.5em;\"></span>\n"
       ],
+<<<<<<< HEAD
       "id": "138dd242"
+=======
+      "id": "2d714fce"
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
     },
     {
       "cell_type": "code",
@@ -208,7 +236,11 @@
         "# Show the first 3 rows\n",
         "df.head(3) "
       ],
+<<<<<<< HEAD
       "id": "c67c15dd",
+=======
+      "id": "1a200fad",
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
       "execution_count": null,
       "outputs": []
     },
@@ -223,7 +255,11 @@
         "\n",
         "<span style=\"font-size: 0.5em;\"></span>\n"
       ],
+<<<<<<< HEAD
       "id": "9fc5b651"
+=======
+      "id": "8a3fbadd"
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
     },
     {
       "cell_type": "code",
@@ -238,7 +274,11 @@
         "# Show the first 3 rows\n",
         "df.head(3) "
       ],
+<<<<<<< HEAD
       "id": "573ce77d",
+=======
+      "id": "d5b9f1d0",
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
       "execution_count": null,
       "outputs": []
     },
@@ -282,7 +322,11 @@
         "- Sorting [numerical]{.bg}, [datetime]{.bg} or [strings]{.bg} using `.sort_values`\n",
         "- Importance of [documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html) to understand [arguments]{.bg}\n"
       ],
+<<<<<<< HEAD
       "id": "140ee25a"
+=======
+      "id": "9bd85cf0"
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
     },
     {
       "cell_type": "code",
@@ -293,7 +337,11 @@
         "\n",
         "df.sort_values('VEI').head() # Sort volcanoes by VEI in ascending number"
       ],
+<<<<<<< HEAD
       "id": "4d6fee2f",
+=======
+      "id": "cc13b0fd",
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
       "execution_count": null,
       "outputs": []
     },
@@ -306,7 +354,11 @@
         "- Sorting [numerical]{.bg}, [datetime]{.bg} or [strings]{.bg} using `.sort_values`\n",
         "- Importance of [documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html) to understand [arguments]{.bg}\n"
       ],
+<<<<<<< HEAD
       "id": "153fa5d5"
+=======
+      "id": "cc4159cc"
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
     },
     {
       "cell_type": "code",
@@ -318,7 +370,11 @@
         "df.sort_values('VEI').head() # Sort volcanoes by VEI in ascending number\n",
         "df.sort_values('Date', ascending=False).head() # Sort volcanoes by eruption dates from recent to old"
       ],
+<<<<<<< HEAD
       "id": "ce67af7c",
+=======
+      "id": "f8eb394e",
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
       "execution_count": null,
       "outputs": []
     },
@@ -331,7 +387,11 @@
         "- Sorting [numerical]{.bg}, [datetime]{.bg} or [strings]{.bg} using `.sort_values`\n",
         "- Importance of [documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html) to understand [arguments]{.bg}\n"
       ],
+<<<<<<< HEAD
       "id": "bbfd2962"
+=======
+      "id": "86c27e1c"
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
     },
     {
       "cell_type": "code",
@@ -344,7 +404,11 @@
         "df.sort_values('Date', ascending=False).head() # Sort volcanoes by eruption dates from recent to old\n",
         "df.sort_values('Country').head() # Also works on strings to sort alphabetically"
       ],
+<<<<<<< HEAD
       "id": "968919a8",
+=======
+      "id": "88c158e0",
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
       "execution_count": null,
       "outputs": []
     },
@@ -357,7 +421,11 @@
         "- Sorting [numerical]{.bg}, [datetime]{.bg} or [strings]{.bg} using `.sort_values`\n",
         "- Importance of [documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html) to understand [arguments]{.bg}\n"
       ],
+<<<<<<< HEAD
       "id": "726eaea0"
+=======
+      "id": "fda4f9a8"
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
     },
     {
       "cell_type": "code",
@@ -371,7 +439,11 @@
         "df.sort_values('Country').head() # Also works on strings to sort alphabetically\n",
         "df.sort_values(['Latitude', 'Longitude']).head() # Sorting using multiple columns"
       ],
+<<<<<<< HEAD
       "id": "d98783e0",
+=======
+      "id": "e441546f",
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
       "execution_count": null,
       "outputs": []
     },
@@ -434,7 +506,11 @@
         "::: {.column width=\"48%\"}\n",
         "::: {.fragment}\n"
       ],
+<<<<<<< HEAD
       "id": "a6bb5eb0"
+=======
+      "id": "767b6292"
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
     },
     {
       "cell_type": "code",
@@ -445,7 +521,11 @@
         "\n",
         "df.loc['Calbuco']"
       ],
+<<<<<<< HEAD
       "id": "d690078e",
+=======
+      "id": "a9d012ad",
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
       "execution_count": null,
       "outputs": []
     },
@@ -463,7 +543,11 @@
         "::: {.column width=\"48%\"}\n",
         "::: {.fragment}"
       ],
+<<<<<<< HEAD
       "id": "2a932069"
+=======
+      "id": "c2aaddcf"
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
     },
     {
       "cell_type": "code",
@@ -474,7 +558,11 @@
         "\n",
         "df.loc[['Calbuco']]"
       ],
+<<<<<<< HEAD
       "id": "f7fae8b3",
+=======
+      "id": "c5ee98df",
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
       "execution_count": null,
       "outputs": []
     },
@@ -499,7 +587,11 @@
         "\n",
         "::: {.fragment}"
       ],
+<<<<<<< HEAD
       "id": "bd5a4295"
+=======
+      "id": "ec2b0993"
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
     },
     {
       "cell_type": "code",
@@ -510,7 +602,11 @@
         "\n",
         "df.loc[['Calbuco', 'Taal']]"
       ],
+<<<<<<< HEAD
       "id": "81aa6cf0",
+=======
+      "id": "ce4b12c9",
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
       "execution_count": null,
       "outputs": []
     },
@@ -532,7 +628,11 @@
         "\n",
         "- **Option 1**: [with]{.bg} `.loc`:"
       ],
+<<<<<<< HEAD
       "id": "adc93419"
+=======
+      "id": "eb91f42d"
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
     },
     {
       "cell_type": "code",
@@ -542,7 +642,11 @@
         "# | echo: True\n",
         "df.loc[:, ['Country', 'VEI']].head(3)"
       ],
+<<<<<<< HEAD
       "id": "30d16e40",
+=======
+      "id": "f80aac3b",
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
       "execution_count": null,
       "outputs": []
     },
@@ -561,7 +665,11 @@
         "::: {.fragment}\n",
         "- **Option 2**: [without]{.bg} `.loc`:"
       ],
+<<<<<<< HEAD
       "id": "39843580"
+=======
+      "id": "fd72b05d"
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
     },
     {
       "cell_type": "code",
@@ -572,7 +680,11 @@
         "\n",
         "df[['Country', 'VEI']].head(3)"
       ],
+<<<<<<< HEAD
       "id": "c8165c80",
+=======
+      "id": "2f473dc0",
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
       "execution_count": null,
       "outputs": []
     },
@@ -594,7 +706,11 @@
         "\n",
         "- **Option 1**: Columns are specified [inside]{.bg} `.loc`:"
       ],
+<<<<<<< HEAD
       "id": "8be9014c"
+=======
+      "id": "25db35df"
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
     },
     {
       "cell_type": "code",
@@ -604,7 +720,11 @@
         "# | echo: True\n",
         "df.loc[['Calbuco', 'Taal'], ['Country', 'VEI']].head(3)"
       ],
+<<<<<<< HEAD
       "id": "3c336167",
+=======
+      "id": "4a1ca391",
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
       "execution_count": null,
       "outputs": []
     },
@@ -622,7 +742,11 @@
         "::: {.fragment}\n",
         "- **Option 2**: Columns are specified [outside]{.bg} `.loc`:"
       ],
+<<<<<<< HEAD
       "id": "82e3ee1c"
+=======
+      "id": "2c9ec0f2"
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
     },
     {
       "cell_type": "code",
@@ -633,7 +757,11 @@
         "\n",
         "df.loc[['Calbuco', 'Taal']][['Country', 'VEI']].head(3)"
       ],
+<<<<<<< HEAD
       "id": "8624c5f9",
+=======
+      "id": "df855087",
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
       "execution_count": null,
       "outputs": []
     },
@@ -670,7 +798,11 @@
         "\n",
         "- **One row** (first row):\n"
       ],
+<<<<<<< HEAD
       "id": "e0f23cdc"
+=======
+      "id": "5ca9256f"
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
     },
     {
       "cell_type": "code",
@@ -680,7 +812,11 @@
         "# | echo: True\n",
         "df.iloc[[0]]"
       ],
+<<<<<<< HEAD
       "id": "c7adfc87",
+=======
+      "id": "11ceeadb",
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
       "execution_count": null,
       "outputs": []
     },
@@ -698,7 +834,11 @@
         "::: {.fragment}\n",
         "- **Range of rows**: (rows 3-4):"
       ],
+<<<<<<< HEAD
       "id": "b6b78c0b"
+=======
+      "id": "bcafb40b"
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
     },
     {
       "cell_type": "code",
@@ -708,7 +848,11 @@
         "# | echo: True\n",
         "df.iloc[2:4]"
       ],
+<<<<<<< HEAD
       "id": "5a9480cc",
+=======
+      "id": "02eb05ce",
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
       "execution_count": null,
       "outputs": []
     },
@@ -727,7 +871,11 @@
         "- Example:\n",
         "  - Get the **last 5 rows** of the DataFrame:\n"
       ],
+<<<<<<< HEAD
       "id": "59cbedc4"
+=======
+      "id": "840ef6eb"
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
     },
     {
       "cell_type": "code",
@@ -737,7 +885,11 @@
         "# | echo: True\n",
         "df.iloc[-5:]"
       ],
+<<<<<<< HEAD
       "id": "826ede70",
+=======
+      "id": "2d64b325",
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
       "execution_count": null,
       "outputs": []
     },
@@ -751,7 +903,11 @@
         "  - **Rows** → *labels*\n",
         "  - **Columns** → *positions*\n"
       ],
+<<<<<<< HEAD
       "id": "f0e8a9b8"
+=======
+      "id": "aadd7c26"
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
     },
     {
       "cell_type": "code",
@@ -761,7 +917,11 @@
         "# | echo: True\n",
         "df.iloc[0:5][['Country', 'VEI']]"
       ],
+<<<<<<< HEAD
       "id": "63a21fc7",
+=======
+      "id": "16798649",
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
       "execution_count": null,
       "outputs": []
     },
@@ -798,7 +958,11 @@
         "\n",
         "<span style=\"font-size: 0.5em;\"></span>\n"
       ],
+<<<<<<< HEAD
       "id": "505d3282"
+=======
+      "id": "85d8fe58"
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
     },
     {
       "cell_type": "code",
@@ -809,7 +973,11 @@
         "a = 1\n",
         "b = 2"
       ],
+<<<<<<< HEAD
       "id": "f3746627",
+=======
+      "id": "4bf42a12",
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
       "execution_count": null,
       "outputs": []
     },
@@ -854,7 +1022,11 @@
         "::: {.column width=\"30%\"}\n",
         "::: {.fragment}"
       ],
+<<<<<<< HEAD
       "id": "f49ebe75"
+=======
+      "id": "44a0d0a9"
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
     },
     {
       "cell_type": "code",
@@ -864,7 +1036,11 @@
         "# | echo: True\n",
         "df['VEI'] == 4"
       ],
+<<<<<<< HEAD
       "id": "93be4ea0",
+=======
+      "id": "3dbf6b37",
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
       "execution_count": null,
       "outputs": []
     },
@@ -882,7 +1058,11 @@
         "::: {.column width=\"65%\"}\n",
         "::: {.fragment}"
       ],
+<<<<<<< HEAD
       "id": "022cce61"
+=======
+      "id": "86008901"
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
     },
     {
       "cell_type": "code",
@@ -892,7 +1072,11 @@
         "# | echo: True\n",
         "df.loc[df['VEI'] == 4]"
       ],
+<<<<<<< HEAD
       "id": "6c5b1ef6",
+=======
+      "id": "17e313f4",
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
       "execution_count": null,
       "outputs": []
     },
@@ -915,7 +1099,11 @@
         "\n",
         "- **Example**:\n"
       ],
+<<<<<<< HEAD
       "id": "dc1c2bba"
+=======
+      "id": "5daab7da"
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
     },
     {
       "cell_type": "code",
@@ -925,7 +1113,11 @@
         "# | echo: True\n",
         "df.loc[df['Country'] == 'Indonesia']"
       ],
+<<<<<<< HEAD
       "id": "57735464",
+=======
+      "id": "4df3f803",
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
       "execution_count": null,
       "outputs": []
     },
@@ -981,7 +1173,11 @@
         "::: {.fragment}\n",
         "- Round the `'Latitude'` to two decimals → [make sure you store the output]{.bg}!\n"
       ],
+<<<<<<< HEAD
       "id": "c8e29b9a"
+=======
+      "id": "981a8093"
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
     },
     {
       "cell_type": "code",
@@ -991,7 +1187,11 @@
         "# | echo: True\n",
         "df['Latitude'] = df['Latitude'].round(2)"
       ],
+<<<<<<< HEAD
       "id": "0b8e3dd5",
+=======
+      "id": "dc96b2be",
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
       "execution_count": null,
       "outputs": []
     },
@@ -1019,7 +1219,11 @@
         "::: {.fragment}\n",
         "- Divide `VEI` by 2 and store results a new column (→ `VEI_halved`)\n"
       ],
+<<<<<<< HEAD
       "id": "7ff0eae3"
+=======
+      "id": "7a554037"
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
     },
     {
       "cell_type": "code",
@@ -1029,7 +1233,11 @@
         "# | echo: True\n",
         "df['VEI_halved'] = df['VEI'] / 2"
       ],
+<<<<<<< HEAD
       "id": "6d0888d7",
+=======
+      "id": "12f36eda",
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
       "execution_count": null,
       "outputs": []
     },
@@ -1057,7 +1265,11 @@
         "::: {.fragment}\n",
         "- `VEI` power 2 and store results a new column (→ `VEI_pow2`)\n"
       ],
+<<<<<<< HEAD
       "id": "26a18e72"
+=======
+      "id": "c48b76d7"
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
     },
     {
       "cell_type": "code",
@@ -1067,7 +1279,11 @@
         "# | echo: True\n",
         "df['VEI_pow2'] = np.power(df['VEI'], 2)"
       ],
+<<<<<<< HEAD
       "id": "927aec20",
+=======
+      "id": "c559fff4",
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
       "execution_count": null,
       "outputs": []
     },
@@ -1086,14 +1302,25 @@
         "\n",
         "<iframe src=\"../class1/day1-6_operations.html\" width=\"100%\" height=\"400px\" style=\"border:none;\"></iframe>\n"
       ],
+<<<<<<< HEAD
       "id": "78e32a16"
+=======
+      "id": "e7471116"
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
     }
   ],
   "metadata": {
     "kernelspec": {
+<<<<<<< HEAD
       "display_name": "Python 3",
       "language": "python",
       "name": "python3"
+=======
+      "name": "python_env",
+      "language": "python",
+      "display_name": "python_env",
+      "path": "/home/lionel/.local/share/jupyter/kernels/python_env"
+>>>>>>> c807faacbcb77e8c13d41bde3583dd0e583ea718
     }
   },
   "nbformat": 4,

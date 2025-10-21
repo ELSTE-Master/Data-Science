@@ -60,30 +60,52 @@ Now, thinking about the relationship between **two variables**:
 :::
 
 
-## Correlation {.unnumbered}
+## Covariance and correlation {.unnumbered}
 
 From @lst-sns-pairplot we can fairly intuitively get that some variables show [coupled]{.mark} behaviours (e.g., *Zr* tends to increase whe *Hf* does), whereas the behaviour of other variables suggests much less coupling (e.g., *Sc* and *Hf*). 
 
-The first measure used to quantify the joint variability of two variables $x$ and $y$ is the **covariance** (@eq-covar), which can be computed in *Pandas* using the `.cov()` function (@lst-bivar-cov).
+The first measure used to quantify the joint variability of two random variables $X$ and $Y$ is the [theoretical covariance]{.mark}, defined as:  
+$$
+\mathrm{Cov}(X,Y) = \mathbb{E}\big[(X - \mathbb{E}[X])(Y - \mathbb{E}[Y])\big],
+$$
+
+where $\mathbb{E}[X]$ and $\mathbb{E}[Y]$ are the [expectations]{.mark} of $X$ and $Y$. The covariance captures the direction and magnitude of the linear relationship between the two variables. Positive values indicate that larger values of $X$ tend to correspond to larger values of $Y$, and negative values indicate the opposite.
+
+In practice, we rarely know the full distribution of $X$ and $Y$, so we compute the [sample covariance]{.mark} (@eq-covar) as an [estimator]{.mark} of the theoretical covariance from a dataset $x_1, \dots, x_n$ and $y_1, \dots, y_n$:
 
 $$
-Cov_{xy} = \frac{1}{n-1}\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})
-$$ {#eq-covar}
+\mathrm{Cov}(X,Y)_{\text{emp}}= \frac{1}{n-1}\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y}),
+$${#eq-covar}
 
-The covariance depends on [the magnitudes]{.mark} of the two variables inspected and, consequently, it does not inform much about the [strength]{.mark} of the relationship. The **correlation coefficient** (@eq-corr) represents a normalized version of the covariance that allows to overcome this limitation. The correlation coefficient ranges from −1 to 1 and shows, by its magnitude, the strength of the linear relation. It can be computed in *Pandas* using the `.corr()` function (@lst-bivar-cov).
+where $\bar{x}$ and $\bar{y}$ are the [sample means]{.mark}. In *Pandas*, this can be computed using the `.cov()` function (@lst-bivar-cov).
+
+The covariance depends on the [magnitudes]{.mark} of the variables, so it does not directly reflect the [strength]{.mark} of the relationship. To address this, the [correlation coefficient]{.mark} provides a normalized version of the covariance, ranging from $−1$ to $1$, which indicates both the direction and the strength of the linear relationship. The correlation coefficient is given by:
 
 $$
-r_{xy} = \frac{Cov_{xy}}{\sigma_x \sigma_y} = \frac{\sum_{i=1}^n (x_i - \bar x)(y_i - \bar y)}{\sqrt{\sum_{i=1}^n (x_i - \bar x)^2}\;\sqrt{\sum_{i=1}^n (y_i - \bar y)^2}}
-$$ {#eq-corr}
+r(X,Y)= \frac{\mathrm{Cov}(X,Y)}{\sigma_X \sigma_Y}
+$$
 
-- $r_{xy} >0$ indicates a **positive relationship** between $x$ and $y$ (→ $y$ increases when $x$ does);
-- $r_{xy} <0$ indicates a **negative relationship** between $x$ and $y$ (→ $y$ decreases when $x$ increases);
-- $r_{xy} =0$ indicates **independence** between $x$ and $y$.
+
+
+The [sample correlation]{.mark} (@eq-corr) is defined as 
+$$
+r(X,Y)_{\text{emp}} = \frac{\mathrm{Cov}(X,Y)_{\text{emp}}}{s_X s_Y} = \frac{\sum_{i=1}^n (x_i - \bar x)(y_i - \bar y)}{\sqrt{\sum_{i=1}^n (x_i - \bar x)^2}\;\sqrt{\sum_{i=1}^n (y_i - \bar y)^2}},
+$${#eq-corr}
+and can be computed in *Pandas* using the `.corr()` function (@lst-bivar-cov):
+
+
+
+where $s_X$ and $s_Y$ are the [sample standard deviations]{.mark} of $X$ and $Y$.
+
+
+- $r(X,Y)>0$ indicates a **positive relationship** between $X$ and $Y$ (→ $Y$ increases when $X$ does);
+- $r(X,Y)<0$ indicates a **negative relationship** between $X$ and $Y$ (→ $Y$ decreases when $X$ increases);
+- $r(X,Y) =0$ indicates **independence** between $X$ and $Y$.
 
 ```{python}
 #| echo: true
 #| lst-label: lst-bivar-cov
-#| lst-cap: Computing the covariance and correlation coefficient in Pandas. Both the .cov() and the .corr() functions require numerical data, so we first need to remove the Epoch column. Note that the range of values returned by .corr() ranges from -1 to 1.
+#| lst-cap: Computing the sample covariance and correlation coefficient in Pandas. Both the .cov() and the .corr() functions require numerical data, so we first need to remove the Epoch column. Note that the range of values returned by .corr() ranges from -1 to 1.
 
 # We remove the "Epoch" column using the function drop() as it does not contain numerical values
 df_traces_sub = df_traces_sub.drop(columns='Epoch')
@@ -104,7 +126,19 @@ df_traces_sub.corr()
 
 ### Correlation matrix {.unnumbered}
 
-Again, we are here interested in getting a first order knowledge of the possible relationships in our entire dataset, and one efficient way to assess correlations amongst **many** variables is a [correlation matrix]{.mark}.
+Again, we are here interested in getting a first order knowledge of the possible relationships in our entire dataset, and one efficient way to assess correlations amongst **many** variables is a [correlation matrix]{.mark}. A [correlation matrix]{.mark} is a square table showing the [pairwise correlations]{.mark} between all variables in a dataset. Suppose we have $p$ variables $(X_1, X_2, \dots, X_p)$. The [correlation matrix]{.mark} $\mathbf{C}$ collects all pairwise correlations:
+
+$$
+\mathbf{C} =
+\begin{pmatrix}
+1 & r(X_1,X_2) & \dots & r(X_1,X_p) \\
+r(X_2,X_1) & 1 & \dots & r(X_2,X_p) \\
+\vdots & \vdots & \ddots & \vdots \\
+r(X_p,X_1) & r(X_p,X_2) & \dots & 1
+\end{pmatrix}.
+$$
+
+In practice, we rarely know the true correlations, so each entry $r(X_i, X_j)$ is typically estimated from a [sample]{.mark}, giving the [sample correlation]{.mark} between variables $X_i$ and $X_j$.
 
 *Seaborn* does not include a native function to do so, but @lst-corr-mat shows a ready-to-use function to plot one. Don't hesitate to copy it and reuse it in your codes. @fig-corr-mat shows the resulting plot applied to the concentration columns of the trace elements dataset.
 
@@ -181,7 +215,7 @@ mcq({
 Correlation coefficients provide a measure of the coupling between two continuous variables, and [linear regressions]{.mark} attempt modelling this relationship. A linear regression is typically expressed as (@eq-linreg):
 
 $$
-y = a + bx + \epsilon
+y = a + bx + \varepsilon
 $$ {#eq-linreg}
 
 where:
@@ -190,7 +224,7 @@ where:
 - $x$: independent (predictor) variable
 - $a$: intercept → value of $y$ when $x=0$
 - $b$: slope → how much $y$ changes by unit of $x$
-- $\epsilon$: error term
+- $\varepsilon$: error term
 
 So, the goal of a regression for two continuous variables behaving in a linear fashion is [to estimate the values of $a$ and $b$ that best fit the observed data]{.mark}.
 
@@ -229,14 +263,14 @@ plt.show()
 An important - but often overlooked - step to estimating a linear regression model is to [investigate whether the residuals show any structure]{.mark}. The residual at each data point $i$ is computed as (@eq-residuals):
 
 $$
-e_i = y_i - \hat{y}_i
+\hat{\varepsilon}_i = y_i - \hat{y}_i
 $$ {#eq-residuals}
 
 where:
 
 - $y_i$ is the measured value along the *y* axis;
-- $\hat{y}_i$ is the modelled value along the *y* axis;
-- $e_i$ is the residual (error term).
+- $\hat{y}_i$ is the modelled value along the *y* axis defined as $\hat{y}_i = \hat{a} + \hat{b} x_i$, where $\hat{a}$ and $\hat{b}$ are the estimated intercept and slope of the linear regression;
+- $\hat{\varepsilon}_i$ is the residual (error term).
 
 Residuals - beyond being used to compute the $R^2$ coefficient of determination (@eq-r2), are critical to:
 

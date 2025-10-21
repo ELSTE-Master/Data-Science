@@ -35,7 +35,17 @@ The first aspect of descriptive statistics is **univariate analyses**, which foc
 
 ## Plotting data distributions {.unnumbered}
 
-Let's focus on the Zircon concentration in Campi Flegrei's geochemical dataset. We start by simply [visualising]{.mark} the dataset to get an understanding of what we will talk about. The fist type of plot we will consider is a [histogram]{.mark}, which shows the [number of times a specific value occurs]{.mark} in a given variable. (@fig-sns-hist). In *Seaborn*, **Histograms** can be plotted using [`sns.histplots()`](https://seaborn.pydata.org/generated/seaborn.histplot.html), and (@fig-sns-hist) show the [number of times a specific Zr concentration occurs]{.mark} in the dataset.
+Let's focus on the Zircon concentration in Campi Flegrei's geochemical dataset. We start by simply [visualising]{.mark} the dataset to get an understanding of what we will talk about. The fist type of plot we will consider is a [histogram]{.mark}, which shows the [number of times a specific value occurs]{.mark} in a given variable. (@fig-sns-hist). 
+
+
+A [histogram]{.mark} can be seen as a simple [estimator of the underlying probability distribution]{.mark} of the variable:
+
+- For a [discrete random variable]{.mark}, this corresponds to the [probability mass function (pmf)]{.mark}, denoted $p(x) = P(X = x)$, which assigns the probability that $X$ takes the value $x$.  
+- For a [continuous random variable]{.mark}, this corresponds to the [probability density function (pdf)]{.mark}, denoted $f(x)$, which describes how probability is distributed over intervals: the probability that $X$ lies in an interval $[a,b]$ is given by $\int_a^b f(x)\,dx$.
+
+
+
+In *Seaborn*, **Histograms** can be plotted using [`sns.histplots()`](https://seaborn.pydata.org/generated/seaborn.histplot.html), and (@fig-sns-hist) show the [number of times a specific Zr concentration occurs]{.mark} in the dataset.
 
 Note that **histograms** [discretise the data]{.mark} into equal **bins**. The [bin size]{.bg} (e.g., the width and numbers of bins) can alter the visual representation of the dataset. Although functions such as `sns.histplots()` rely on algorithm that suggest the optimal number of bins, it is a good practice to explore this parameter.
 
@@ -68,24 +78,34 @@ ax.set_title('Zr distribution');
 
 ## Descriptive parameters {.unnumbered}
 
-By looking at the distribution from @fig-sns-hist, we can intuitively understand the importance of describing [three different parameters]{.mark}:
+By looking at the distribution from @fig-sns-hist, we can intuitively understand the importance of describing [three different characteristics]{.mark} of the distribution:
 
 - The **location** - or where is [the central value(s)]{.mark} of the dataset;
 - The **dispersion** - or how [spread out]{.mark} is the distribution of data compared to the central values;
 - The **skewness** - or how [symmetrical]{.mark} is the distribution of data compared to the central values;
 
+These aspects can be quantified using different statistical measures. Some, like the expectation and variance, are based on [theoretical moments]{.mark} of the underlying random variable, while others, such as the median and interquartile range, rely on quantiles derived from the [cumulative distribution function]{.mark}. In practice, we do not know the distribution of the random variable of interest. Hence, we estimate these quantities on the sample by computing [estimators of these theoretical quantities]{.mark}.
 
 ### Location {.unnumbered}
 
-We will review three measures of **location**:
+We will review three measures of **location** and their corresponding estimators:
 
-1. The [mean](#mean);
-2. The [median](#median);
-3. The [mode](#mode).
+1. The expectation and the empirical [mean](#mean);
+2. The median and the empirical [median](#median);
+3. The mode and the empirical [mode](#mode).
 
-#### Mean {.unnumbered}
+#### Expectation and the empirical mean {.unnumbered}
+The [expectation]{.mark} (or [theoretical mean]{.mark}) of a random variable $X$ represents the average value that $X$ would take over an infinite number of repetitions of the same experiment. It is defined as the [first moment]{.mark} of the distribution of $X$:
 
-The **mean** (or *arithmetic* mean - by opposition to *geometric* or *harmonic* means) is the [sum of the values divided by the number of values]{.mark} (@eq-mean):
+- For a [discrete]{.mark} random variable with probability mass function $p(x)$:  
+$$\mathbb{E}[X] = \sum_x x\,p(x),$$ 
+
+- For a [continuous]{.mark} random variable with probability density function $f(x)$:  
+$$\mathbb{E}[X] = \int_{-\infty}^{\infty} x\,f(x)\,dx,$$
+
+Intuitively, the expectation describes the [center of mass]{.mark} of the probability distribution.
+
+The empirical counterpart of the expectation is the [mean]{.mark}. The [mean]{.mark} (or *arithmetic* mean - by opposition to *geometric* or *harmonic* means) is the [sum of the values divided by the number of values]{.mark} (@eq-mean):
 
 $$
 \bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i
@@ -96,7 +116,7 @@ The mean is meaningful to describe [**symmetric** distributions without **outlie
 - **Symmetric** means the number of items above the mean should be roughly the same as the number below;
 - **Outliers** are *extreme* values.
 
-The mean of a dataset can easily be computed with *Pandas* using the [`.mean()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mean.html) function (@lst-univ-mean). Note that we round the results to two significant digits using `.round(2)`.
+The empirical mean of a dataset can easily be computed with *Pandas* using the [`.mean()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mean.html) function (@lst-univ-mean). Note that we round the results to two significant digits using `.round(2)`.
 
 ```{python}
 #| lst-label: lst-univ-mean
@@ -109,7 +129,7 @@ df_traces[['Zr']].mean().round(2)
 ::: {.callout-note}
 ## Question
 
-What is the mean value for Strontium?
+What is the empirical mean value for Strontium?
 
 ```{python}
 #| echo: false
@@ -130,14 +150,14 @@ mcq({
 ::: {.callout-tip}
 ## Descriptive stats functions
 
-@lst-univ-mean shows how to compute the mean on one column, but the `.mean()` function - as well as most fuctions for descriptive stats - can be applied to entire DataFrames. For this, we need to understand a critical argument - `axis`.
+@lst-univ-mean shows how to compute the empirical mean on one column, but the `.mean()` function - as well as most fuctions for descriptive stats - can be applied to entire DataFrames. For this, we need to understand a critical argument - `axis`.
 
 - `axis = 0` is usually the default, and computes the mean [across all rows for each column]{.mark}(@lst-univ-mean-multi-row)
 - `axis = 1` usually makes sense when rows are labelled, and computes the mean [across all columns for each row]{.mark}(@lst-univ-mean-multi-col)
 
 ```{python}
 #| lst-label: lst-univ-mean-multi-row
-#| lst-cap: Compute the mean across rows.
+#| lst-cap: Compute the empirical mean across rows.
 # Create a subset of the df_traces containing numerical data
 df_traces_sub = df_traces[['Sc','Rb','Sr','Y','Zr','Nb','Cs']] 
 # Compute the mean across all rows
@@ -147,7 +167,7 @@ df_traces_sub.mean(axis=0).round(2).head()
 
 ```{python}
 #| lst-label: lst-univ-mean-multi-col
-#| lst-cap: Compute the mean across columns.
+#| lst-cap: Compute the empirical mean across columns.
 
 # Create a subset of the df_traces containing numerical data
 df_traces_sub = df_traces[['Sc','Rb','Sr','Y','Zr','Nb','Cs']] 
@@ -161,10 +181,21 @@ df_traces_sub.mean(axis=1).round(2).head()
 
 
 
-#### Median {.unnumbered}
+#### Median and empirical median {.unnumbered}
 
-The **median** is the value [at the exact middle of the dataset]{.mark}, meaning that just as
-many elements lie above the median as below it. There is no easy formula to compute the median, instead we need to conceptually (@lst-univ-median-ex):
+The [median]{.mark} of a random variable $X$ is the value that splits the distribution into two equal halves in terms of probability. Formally, the [theoretical median]{.mark} $m$ satisfies:
+
+$$
+P(X \le m) \ge 0.5 \quad \text{and} \quad P(X \ge m) \ge 0.5,
+$$
+
+or equivalently, using the cumulative distribution function $F_X(x)$:
+
+$$
+F_X(m) = P(X \le m) = 0.5.
+$$
+
+In practice, we usually only observe a finite [sample]{.mark} of $X$. The [empirical median]{.mark} is an [estimator]{.mark} of the theoretical median, defined as the middle value of the sorted sample. There is no easy formula to compute the empirical median, instead we need to conceptually (@lst-univ-median-ex):
 
 1. Order all values in ascending order and plot them against a normalised number of observations (this is called an empirical cumulative density function - or ECDF);
 2. On the x-axis, find the point dividing the dataset into two equal numbers of observations;
@@ -172,7 +203,7 @@ many elements lie above the median as below it. There is no easy formula to comp
 
 ```{python}
 #| lst-label: lst-univ-median-ex
-#| lst-cap: Graphical representation of the median.
+#| lst-cap: Graphical representation of the empirical median.
 
 fig, ax = plt.subplots(figsize=(6,4))
 sns.ecdfplot(data=df_traces, x='Zr')
@@ -194,13 +225,13 @@ df_traces['Zr'].median().round(2)
 ::: {.callout-note}
 ## Question
 
-What is the median value for Cesium?
+What is the empirical median value for Cesium?
 
 ```{python}
 #| echo: false
 mcq({
     '36.38' : 0,
-    '51.42' : 1,
+    '51.42' : 0,
     '23.99' : 1,
     '13.94' : 0,
 })
@@ -209,13 +240,18 @@ mcq({
 :::
 
 
-#### Mode {.unnumbered}
+#### Mode and empirical mode {.unnumbered}
 
-The mode is the value or values that occur most frequently in a dataset. Conceptually, it corresponds to the peak(s) of a histogram of the data. A distribution can have one mode (unimodal), two modes (bimodal), or multiple modes (multimodal). In *Pandas*, the mode is computed using [`.mode()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mode.html).
+The [mode]{.mark} of a random variable $X$ is the value that occurs most frequently in the distribution. Formally, the [theoretical mode]{.mark} $x_\text{mode}$ is:
 
-For **categorical** or **discrete numerical data**, the mode simply the value(s) that appear most often.
+- For a [discrete]{.mark} variable: $x_\text{mode} = \arg\max_x p(x)$, where $p(x)$ is the probability mass function.  
+- For a [continuous]{.mark} variable: $x_\text{mode} = \arg\max_x f(x)$, where $f(x)$ is the probability density function.
 
-For **continuous data**, [exact duplicates may be rare]{.mark}, and resulting modes might not be that meaningful (@fig-mode). As a result, we often bin the data into intervals first and find the most populated bin (@fig-mode-bin).
+The [empirical mode]{.mark} is an [estimator]{.mark} of the theoretical mode, defined as the most frequent value in a sample (discrete) or the peak of a density estimate (continuous). A distribution can have one mode (unimodal), two modes (bimodal), or multiple modes (multimodal). In *Pandas*, the empirical mode is computed using [`.mode()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mode.html).
+
+For **categorical** or **discrete numerical data**, the empirical mode simply the value(s) that appear most often.
+
+For **continuous data**, [exact duplicates may be rare]{.mark}, and resulting empirical modes might not be that meaningful (@fig-mode). As a result, we often bin the data into intervals first and find the most populated bin (@fig-mode-bin).
 
 ```{python}
 #| code-fold: true
@@ -246,7 +282,7 @@ plt.show()
 ```{python}
 #| code-fold: true
 #| label: fig-mode-bin
-#| fig-cap: Modes computed from a binned dataset.
+#| fig-cap: Empirical modes computed from a binned dataset.
 
 # Set the histogram's bin width
 binwidth = 50
@@ -280,7 +316,7 @@ plt.show()
 
 #### Summary {.unnumbered}
 
-@lst-univ-mean-med illustrate the values of the mean and the median relative to the distribution shown in the histogram. There are a few things to keep in mind when choosing between mean and median to estimate the location of a dataset:
+@lst-univ-mean-med illustrate the values of the empirical mean and the empirical median relative to the distribution shown in the histogram. There are a few things to keep in mind when choosing between the empirical mean and median to estimate the location of a dataset:
 
 - If a sample has a [symmetrical distribution]{.mark}, then **the mean and median are equal**.
 - If the distribution of a sample is [not symmetrical]{.mark}, **the mean should not be used**.
@@ -289,7 +325,7 @@ plt.show()
 
 ```{python}
 #| lst-label: lst-univ-mean-med
-#| lst-cap: Compute the median for two significant digits.
+#| lst-cap: Compute the empirical median for two significant digits.
 #| 
 fig, ax = plt.subplots()
 sns.histplot(data=df_traces, x='Zr')
@@ -302,18 +338,24 @@ ax.legend()
 
 ### Dispersion {.unnumbered}
 
-We will review three measures of **dispersion**:
+We will review three measures of [dispersion]{.mark} and their corresponding [estimators]{.mark}:
 
-1. The [range](#range);
-2. The [standard deviation](#variance-and-standard-deviation);
-3. The [interquartile range](#interquartile-range).
+1. The range and the empirical [range](#range);  
+2. The variance and standard deviation and the [sample variance and standard deviation](#variance-and-standard-deviation);  
+3. The interquartile range and the empirical [interquartile range](#interquartile-range).
 
-#### Range {.unnumbered}
 
-The first information we might want to get for a dataset is the range of values it covers, or *range*. For this, we need to get the minimum (`df.min()`) and maximum (`df.max()`) values, from which, when needed, the range can be calculated with @eq-range. It is however likely that the min/max functions will be more frequently used (@lst-univ-minmax).
+
+#### Range and empirical range {.unnumbered}
+
+The [range]{.mark} of a random variable $X$ is the difference between its maximum and minimum values:
+
+- The [theoretical range]{.mark} is defined as $R = \sup(X) - \inf(X)$, i.e., the difference between the largest and smallest possible values of $X$.  
+- The [empirical range]{.mark} is computed from a [sample]{.mark} as the difference between the maximum and minimum observed values. For this, we need to get the minimum (`df.min()`) and maximum (`df.max()`) values, from which, when needed, the range can be calculated with @eq-range. It is however likely that the min/max functions will be more frequently used (@lst-univ-minmax).
+
 
 $$
-\text{Range} = \max(x) - \min(x)
+R_\text{emp} = \max(x_1, \dots, x_n) - \min(x_1, \dots, x_n).
 $$ {#eq-range}
 
 
@@ -325,6 +367,7 @@ df_min = df_traces['Zr'].min()
 df_max = df_traces['Zr'].max()
 df_range = df_max - df_min
 print(f"The range of Zircon concentrations is {df_range:.2f}")
+
 ```
 
 ::: {.callout-warning}
@@ -335,38 +378,45 @@ Names as `min`, `max` or `range` represent native Python variables and **cannot 
 ::: {.callout-note}
 ## Question
 
-What is the mean value for Cesium?
+What is the empirical range for Cesium?
 
 ```{python}
 #| echo: false
 mcq({
-    '10.46' : 0,
-    '104.66' : 1,
-    '1045.59' : 1,
-    '10455.91' : 0,
+    '12.41' : 0,
+    '414.6' : 0,
+    '41.46' : 1,
+    '53.88' : 0,
 })
 ```
 
 :::
 
-#### Variance and standard deviation {.unnumbered}
+#### Variance and standard deviation and sample variance and standard deviation  {.unnumbered}
+The [variance]{.mark} and [standard deviation]{.mark} are two key measures of [dispersion]{.mark} that describe how spread out the values of a random variable $X$ are.
 
-The **variance** and **standard deviation** are two key measures of dispersion that describe how spread out the values in a dataset are.
-
-- **Standard deviation** ($\sigma$) measures sum of squares differences between data points $x_i$ and the
-mean $\bar{x}$ (@eq-std):
+- The [theoretical variance]{.mark} is defined as:
 $$
-\sigma = \sqrt{\frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1} }
-$$ {#eq-std}
-where $x_i$ are the data points, $\bar{x}$ is the mean, and $n$ is the number of observations.
-
-- **Variance** ($\sigma^2$) is the square of the standard deviation (@eq-var):
+\mathrm{Var}(X) =  \mathbb{E}[(X - \mathbb{E}[X])^2],
 $$
-\sigma^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1} 
-$$ {#eq-var}
-    
+and the [theoretical standard deviation]{.mark} is its square root:
+$$
+\sigma = \sqrt{\mathrm{Var}(X)}.
+$$
 
-For now we will consider that they roughly measure the same thing. The standard deviation is in the same units as the data, making it easier to interpret.
+- The [sample variance]{.mark} $s^2$ estimates the spread of the data around the [sample mean]{.mark} $\bar{x}$:
+$$
+s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1},
+$$
+where $x_1, \dots, x_n$ are the observed values and $n$ is the sample size.
+
+- The [sample standard deviation]{.mark} $s$ is the square root of the [sample variance]{.mark}:
+$$
+s = \sqrt{s^2}.
+$$
+
+
+Both the [sample variance]{.mark} and [sample standard deviation]{.mark} describe the spread of the data. While the [variance]{.mark} is expressed in squared units of the observations, the [standard deviation]{.mark} is in the same units as the data, making it easier to interpret.
 
 **Relation to the Gaussian distribution:**  
 For a Gaussian (normal) distribution, about 68% of the data falls within one standard deviation of the mean, about 95% within two standard deviations, and about 99.7% within three standard deviations. Thus, variance and standard deviation are fundamental for describing the spread and probability intervals of normally distributed data.
@@ -386,14 +436,14 @@ df_traces_sub.std()
 
 
 
-#### Interquartile range {.unnumbered}
+#### Interquartile range and the empirical interquartile range {.unnumbered}
 
-If the **standard deviation** is valid only for [symmetrical]{.mark} distributions, what can we use for [asymmetrical]{.mark} ones? The **interquartile range** can help, but we first need to define [what are **percentiles**]{.mark}. We previously saw that the [median](#median) represents the [value at the middle of the dataset]{.mark}, which means that:
+If the **standard deviation** is valid only for [symmetrical]{.mark} distributions, what can we use for [asymmetrical]{.mark} ones? The **interquartile range** can help, but we first need to define [what are **percentiles**]{.mark}. We previously saw that the empirical [median](#median) represents the [value at the middle of the dataset]{.mark}, which means that:
 
-- Half of the data points is **greater** than the median;
-- The other half is **smaller** than the median.
+- Half of the data points is **greater** than the empirical median;
+- The other half is **smaller** than the empirical median.
 
-The **median** therefore represents the **50^th^ percentile** of the dataset. In a similar way, we can ask ourselves:
+The empirical **median** therefore represents the **50^th^ percentile** of the dataset. In a similar way, we can ask ourselves:
 
 - *What is the value below which lie [25%]{.mark}  of the data?* → **25^th^ percentile**;
 - *What is the value below which lie [75%]{.mark} of the data?* → **75^th^ percentile**.
@@ -517,12 +567,21 @@ fig.savefig("img/fig-univ-pctA.png", dpi=150, transparent=True)
 
 ![Relationship of percentiles to a asymmetric distribution. The red dotted line shows the location of the mean.](img/fig-univ-pctA.png){#fig-univ-pctA width="80%"}
 
+The [interquartile range]{.mark} ($IQR$) is the spread between the first ($Q_1$) and third ($Q_3$) quartiles, which represent the 25$^\text{th}$ and 75$^\text{th}$ percentiles, respectively (see @tbl-univ-pct and @tip-univ-pcr for a relationship between percentiles, quartiles, and deciles).  
 
-The **interquartile range** ($IQR$) is the spread between the first ($Q_1$) and the third ($Q_3$), quartiles, which represent the 25^th^ and 75^th^ percentiles, respectively (see @tbl-univ-pct and @tip-univ-pcr for a relationship between percentiles, quartiles and deciles). It is simply computed as (@eq-IQR), and represents a range within which **50% of the data points** lie.
-
+- The [theoretical IQR]{.mark} of a random variable $X$ is defined as:
 $$
-\mathrm{IQR} = Q_3 - Q_1
+IQR = Q_3 - Q_1 = F_X^{-1}(0.75) - F_X^{-1}(0.25),
+$$
+where $F_X^{-1}$ is the inverse of the cumulative distribution function of $X$.  
+
+- The [empirical IQR]{.mark} is an [estimator]{.mark} of the theoretical IQR, computed from a [sample]{.mark} as the difference between the $75^\text{th}$ and $25^\text{th}$ percentiles of the observed data. It represents the range within which **50% of the sample values** lie:
+$$
+IQR_\text{emp} = Q_{3,\text{emp}} - Q_{1,\text{emp}}.
 $$ {#eq-IQR}
+
+The [IQR]{.mark} is a robust measure of [dispersion]{.mark}, less sensitive to extreme values than the [variance]{.mark} or [range]{.mark}.
+
 
 
 ::: {#tip-univ-pcr .callout-tip}
@@ -542,13 +601,22 @@ Using proportions of the dataset as measures of central tendencies and spread ca
 :::
 
 
-### Skewness {.unnumbered}
+### Skewness and sample skewness {.unnumbered}
 
-The **skewness** measures [the asymmetry of a distribution]{.mark} and is computed as @eq-skew:
+The [skewness]{.mark} measures [the asymmetry of a distribution]{.mark}, indicating whether the data are more spread out on one side of the [mean]{.mark} than the other.
 
+- The [theoretical skewness]{.mark} of a random variable $X$ is defined as:
 $$
-\text{Skewness} = \frac{1}{n} \sum_{i=1}^{n}\left(\frac{x_i-\bar{x}}{s}\right)^{3}
+\text{Skewness} = \frac{\mathbb{E}\big[(X - \mathbb{E}[X])^3\big]}{(\mathrm{Var}(X))^{3/2}},
+$$
+
+
+- The [sample skewness]{.mark} is an [estimator]{.mark} of the theoretical skewness, computed from a [sample]{.mark} $x_1, \dots, x_n$ and is computed as @eq-skew:
+$$
+\text{Skewness}_\text{emp} = \frac{1}{n} \sum_{i=1}^{n}\left(\frac{x_i-\bar{x}}{s}\right)^{3},
 $$ {#eq-skew}
+
+Positive skewness indicates a distribution with a longer right tail, while negative skewness indicates a longer left tail.
 
 In *Pandas*, the skewness can be computed using `.skew()` (@lst-univ-skew). The returned value indicates:
 
@@ -569,13 +637,14 @@ df_traces['Zr'].skew().round(2)
 
 ## Non-parametric distribution visualisation {.unnumbered}
 
-We have reviewed some descriptive parameters of distributions. Some parameters are **parametric**, which means that they [imply an underlying type of distribution]{.mark} (e.g., the [mean](#mean) and [standard deviation](#variance-and-standard-deviation) imply an **normal** distribution). Other parameters are **non-parametric**, and are in theory valid for [any type of distribution]{.mark}. For instance, the [IQR](#interquartile-range) provides a better representation of the range of asymmetrical distributions. However, it [still represents a range that does not convey the shape of the underlying distribution]{.mark}, so reporting a few percentiles (e.g., 10-90, 25-75) typically better convey an idea of spread and distribution shape.
+We have reviewed several measures that describe the central tendency and spread of a dataset. Depending on the characteristics of the data, some measures are more informative than others. For instance, the [mean]{.mark} and [standard deviation]{.mark} provide a concise summary of the center and spread, but they can be heavily influenced by extreme values or skewed distributions. In contrast, measures based on [percentiles]{.mark}, such as the [interquartile range (IQR)]{.mark}, describe the spread of the data without being overly sensitive to outliers. The [IQR]{.mark} captures the range of the central $50\%$ of the data, giving a robust sense of variability even in asymmetrical distributions. Reporting additional percentiles, such as the $10^\text{th}$ and $90^\text{th}$, can further help to convey the shape and spread of the dataset, providing a more complete picture than a single range or standard deviation alone. 
 
-One way to efficiently convey the structure of underlying data is to use methods for [non-parametric representation of distributions]{.mark}. [**Box plots**]{.mark} (or **box and whiskers plots**; @fig-boxplot), for instance, attempt to provide all components of the underlying distribution (e.g., location, dispersion, skewness) in a [non-paramteric]{.bg} way:
+One way to efficiently convey the structure of a dataset is through [non-parametric representations of distributions]{.mark}, which do not rely on assumptions about the underlying distribution. [Boxplots]{.mark} (or box-and-whiskers plots; @fig-boxplot) are a classic example: they summarize the data using a few key [quantiles]{.mark}, such as the [median]{.mark} and [interquartile range (IQR)]{.mark}. Because boxplots rely on these [order-based statistics]{.mark} rather than moments like the mean or variance, they are considered [non-parametric]{.mark}, making them especially useful for datasets that are skewed, contain outliers, or deviate from symmetry. By focusing on the spread and central tendency through quantiles, boxplots provide a robust visual summary of the data’s [location]{.mark}, [dispersion]{.mark}, and potential asymmetry.
 
-- The **box** represents the 25^th^ and 75^th^ percentiles → $IQR$;
-- The **line** within the **box** represents the **median**;
-- The **whiskers** represents a range that usually extends 1.5 times the IQR from the first and third quartiles
+
+- The **box** represents the $25^\text{th}$ and $75^\text{th}$ percentiles → $IQR$;
+- The **horizontal line** within the **box** represents the **median**;
+- The **whiskers** reprents a range that usually extends 1.5 times the IQR from the first and third quartiles
 - Any point that lies beyond the whiskers is considered an **outlier**, which is a point that [significantly different from the majority of observations]{.mark}.
 
 ![Component of a box and whiskers plot. The top box plot represents an asymmetrical distribution, the bottom one a symmetrical one.](img/fig-boxplot.png){#fig-boxplot width="80%"}
