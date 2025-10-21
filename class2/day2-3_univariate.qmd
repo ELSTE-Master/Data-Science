@@ -496,7 +496,7 @@ blue = '#2F4647'
 orange = '#EB811B'
 
 # Setup random data using a Normal distribution
-data = np.random.normal(size=1000)
+data = np.random.normal(size=10000)
 data = (data - data.min()) / (data.max() - data.min())*10
 datapct = np.percentile(data, [10, 25, 50, 75, 90])
 
@@ -504,7 +504,7 @@ datapct = np.percentile(data, [10, 25, 50, 75, 90])
 fig, ax = plt.subplots(figsize=(6, 4))
 
 # Left y axis
-sns.histplot(x=data, bins=20, color=blue, alpha=0.4, ax=ax, label='Density', element='step')
+sns.histplot(x=data, bins=50, color=blue, alpha=0.4, ax=ax, label='Density', element='step')
 ax.set_xlabel('Data value (arbitrary)')
 ax.set_ylabel('Count (= number of data points \nin each bin)', color=blue)
 ax.tick_params(axis='y', labelcolor=blue)
@@ -535,7 +535,7 @@ plt.close(fig)
 #| code-fold: true
 
 # Setup random data using a log-normal distribution
-data = np.random.lognormal(size=1000, sigma=.4)
+data = np.random.lognormal(size=10000, sigma=.6)
 data = (data - data.min()) / (data.max() - data.min())*10
 datapct = np.percentile(data, [10, 25, 50, 75, 90])
 
@@ -543,7 +543,7 @@ datapct = np.percentile(data, [10, 25, 50, 75, 90])
 fig, ax = plt.subplots(ncols=1, figsize=(6, 4))
 
 # Left y axis
-sns.histplot(x=data, bins=20, color=blue, alpha=0.4, ax=ax, legend=None, element='step')
+sns.histplot(x=data, bins=50, color=blue, alpha=0.4, ax=ax, legend=None, element='step')
 ax.set_xlabel('Data value (arbitrary)')
 ax.set_ylabel('Count (= number of data points \nin each bin)', color=blue)
 ax.tick_params(axis='y', labelcolor=blue)
@@ -562,7 +562,7 @@ plotArrow(ax2, data, 25, '#994E95')
 
 fig.tight_layout()
 fig.savefig("img/fig-univ-pctA.png", dpi=150, transparent=True)
-plt.close(fig)
+# plt.close(fig)
 ```
 
 ![Relationship of percentiles to a asymmetric distribution. The red dotted line shows the location of the mean.](img/fig-univ-pctA.png){#fig-univ-pctA width="80%"}

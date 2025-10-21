@@ -792,10 +792,13 @@ $$
 \sigma = \sqrt{\frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1} }
 $$
 
+<span style="font-size: 0.5em;"></span>
+
 :::: {.columns}
 ::: {.column width="48%"}
 
-- $\sigma$ is in the same unit as the data
+- $\sigma$ is in [the same unit as the data]{.bg}
+  - Easy to interpret
 - `df.std()`
 
 :::
@@ -818,7 +821,6 @@ df_traces['Zr'].std()
 
 
 ## Dispersion 2: Standard deviation {auto-animate="true"}
-
 
 The **standard deviation** ($\sigma$) is the sum of squares differences between data points $x_i$ and the
 mean $\bar{x}$ over $n$ observations:
@@ -878,4 +880,257 @@ plt.show()
 ::::
 
 
+
+
+## Dispersion 2.1: Variance
+
+
+The **variance** ($\sigma$) is the [average of squared deviations]{.bg} from the mean (→ the square of the standard deviation):
+$$
+\sigma^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1} 
+$$
+
+<span style="font-size: 0.5em;"></span>
+
+:::: {.columns}
+::: {.column width="54%"}
+
+- $\sigma^2$ is in **not** the same unit as the data
+- Used in modelling (e.g., ANOVA)
+- `df.var()`
+
+:::
+::: {.column width="46%"}
+
+<span style="font-size: 0.5em;"></span>
+
+```{python}
+#| echo: true
+#| eval: true
+
+df_traces['Zr'].var()
+
+```
+:::
+::::
+
+::: {.callout-tip}
+## Rule of thumb
+
+- Comparing data spread → [standard deviation]{.bg}
+- Statistical modelling → [variance]{.bg}
+
+:::
+
+
+## Dispersion 3: Interquartile range
+
+
+The **interquartile range** (IQR) indicates [how spread out the middle 50%]{.bg} of the data is.
+
+- Difference between the third quartile (Q3) and the first quartile (Q1):
+
+$$
+\mathrm{IQR} = Q_3 - Q_1
+$$ {#eq-IQR}
+
+- Q1: The value below which **25% of the data fall**
+- Q3: The value below which **75% of the data fall**
+
+
+## Dispersion 3: Interquartile range
+
+<span style="font-size: 0.5em;">&nbsp;</span>
+
+| **Measure**                | **Number of Divisions** | **Position(s) in Data / Percentile Equivalent**                           |
+| -------------------------- | ----------------------- | ------------------------------------------------------------------------- |
+| **Quartiles (Q1, Q2, Q3)** | 4 equal parts           | Q1 = 25th percentile, Q2 = 50th percentile (median), Q3 = 75th percentile |
+| **Deciles (D1 … D9)**      | 10 equal parts          | D1 = 10th percentile, D2 = 20th percentile, …, D9 = 90th percentile       |
+| **Percentiles (P1 … P99)** | 100 equal parts         | P1 = 1st percentile, P2 = 2nd percentile, …, P99 = 99th percentile        |
+: Relationship between quartiles, deciles and percentiles. {#tbl-univ-pct .striped}
+
+- [median]{.bg} = 
+  - 2nd quartile = Q2
+  - 5th decile = D5
+  - 50th percentile = P50
+
+
+
+
+## Dispersion 3: Interquartile range
+
+
+The **interquartile range** (IQR) indicates [how spread out the middle 50%]{.bg} of the data is.
+
+
+:::: {.columns}
+::: {.column width="48%"}
+
+<span style="font-size: 0.5em;"></span>
+
+$Q_1$ and $Q_3$ for a **symmetrical** distribution:
+
+![](../class2/img/fig-univ-pctS.png)
+
+
+:::
+::: {.column width="4%"}
+:::
+::: {.column width="48%"}
+
+<span style="font-size: 0.5em;"></span>
+
+$Q_1$ and $Q_3$ for an **asymmetrical** distribution:
+
+![](../class2/img/fig-univ-pctA.png)
+
+
+:::
+::::
+
+
+
+## Shape: Skewness
+
+
+The **skewness** measures [the asymmetry of a distribution]{.bg} and is computed as @eq-skew:
+
+$$
+\text{Skewness} = \frac{1}{n} \sum_{i=1}^{n}\left(\frac{x_i-\bar{x}}{s}\right)^{3}
+$$ {#eq-skew}
+:::: {.columns}
+::: {.column width="48%"}
+
+<span style="font-size: 0.5em;"></span>
+
+$Q_1$ and $Q_3$ for a **symmetrical** distribution:
+
+![](../class2/img/fig-univ-pctS.png)
+
+
+:::
+::: {.column width="4%"}
+:::
+::: {.column width="48%"}
+
+<span style="font-size: 0.5em;"></span>
+
+$Q_1$ and $Q_3$ for an **asymmetrical** distribution:
+
+![](../class2/img/fig-univ-pctA.png)
+
+
+:::
+::::
+
+
+
+## Distribution visualisation
+
+Beyond **histograms** → some plot types report indications of **location**, **dispersion** and **skewness**.
+
+**Box and whisker plots**
+
+:::: {.columns}
+::: {.column width="40%"}
+
+- **Box** → $IQR$ + median
+- **Whiskers**  1.5 times the IQR from Q1/Q3
+- **Outlier** → differs from the majority of observations
+
+:::
+
+::: {.column width="60%"}
+
+![](../class2/img/fig-boxplot.png){.img-up-50}
+
+:::
+::::
+
+
+
+## Distribution visualisation: Box plots
+
+<span style="font-size: 0.5em;">&nbsp;</span>
+
+:::: {.columns}
+::: {.column width="48%"}
+
+- `sns.boxplot()`
+- No density
+- No tail resolution
+
+:::
+::: {.column width="4%"}
+:::
+::: {.column width="48%"}
+
+```{python}
+#| echo: true
+#| eval: true
+
+fig, ax = plt.subplots()
+sns.boxplot(data=df_traces[['Zr', 'Sr']], orient="h", ax=ax)
+ax.set_xlabel('Concentration (ppm)');
+ax.set_title('Zr and Sr distribution');
+```
+:::
+::::
+
+
+## Distribution visualisation: Violin plots
+
+<span style="font-size: 0.5em;">&nbsp;</span>
+
+:::: {.columns}
+::: {.column width="48%"}
+
+- `sns.violinplot()`
+- Density estimate through Kernel Density Estimator → [artefacts]{.bg}
+- Some tail resolution, not always realistic
+
+:::
+::: {.column width="4%"}
+:::
+::: {.column width="48%"}
+
+```{python}
+#| echo: true
+#| eval: true
+
+fig, ax = plt.subplots()
+sns.violinplot(data=df_traces[['Zr', 'Sr']], orient="h", ax=ax)
+ax.set_xlabel('Concentration (ppm)');
+ax.set_title('Zr and Sr distribution');
+```
+:::
+::::
+
+## Distribution visualisation: Boxen plots
+
+<span style="font-size: 0.5em;">&nbsp;</span>
+
+:::: {.columns}
+::: {.column width="48%"}
+
+- `sns.boxenplot()`
+- Plots deciles → some density estimate
+- Good tail resolution
+
+:::
+::: {.column width="4%"}
+:::
+::: {.column width="48%"}
+
+```{python}
+#| echo: true
+#| eval: true
+
+fig, ax = plt.subplots()
+sns.boxenplot(data=df_traces[['Zr', 'Sr']], orient="h", ax=ax)
+ax.set_xlabel('Concentration (ppm)');
+ax.set_title('Zr and Sr distribution');
+```
+:::
+::::
 
