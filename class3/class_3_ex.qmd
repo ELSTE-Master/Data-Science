@@ -1,0 +1,507 @@
+---
+title: "Analysis of variance: Exercises"
+format: 
+  live-html:
+    theme: cosmo
+    css: ../assets/webex_2.css
+    include-after-body: ../assets/webex_2.js
+engine: knitr
+---
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
+
+
+
+
+
+
+
+```{r, echo = FALSE, results='asis'}
+knitr::opts_chunk$set(echo = FALSE)
+source("../assets/q_a_env.R")
+```
+
+<!-- MathJax for Rendering Math -->
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+
+### Question 1
+Suppose that you want to compare the means of $2$ groups, in which situation is Student's t-test a good approach:
+
+
+```{r, results='asis'}
+# Define questions choice and individual feedback for each question
+opts <- list(
+  list(value = "We need the following: (1) it is reasonable to assume that there are no outliers and (2) for moderate and small sample sizes the sample distribution should be at least approximately normal.",
+       feedback = "Not enough! We also need that the variances are the same between groups."),
+  list(value = "We need the following: (1) it is reasonable to assume that there are no outliers and (2) for moderate and small sample sizes the sample distribution should be at least approximately normal. If these criteria are met then we should test if the variances are the same between groups. If we can't reject the null, then we can use Student's t-test.",
+       feedback = "Nope, even though we can't reject the null, we are still not sure if the null is correct 😉. "),
+  list(
+    value = "We should do the following tests: (1) test if there are no outliers, (2) test if the data are normally distributed (one test per sample) and (3) test if the variances are the same. If we can't reject the null for all tests, then we should use Student's t-test.",
+    feedback = "Nope, even though we can't reject the null, we are still not sure if the null is correct 😉."
+  ),
+  answer = list(
+    value = "We need the following: (1) it is reasonable to assume that there are no outliers, (2) the variances of the two groups are known to be the same (or at least it is reasonable to assume that this is the case) and (3) for moderate and small sample sizes the sample distribution should be at least approximately normal.",
+    feedback = "Yes! 😎"
+  )
+)
+# render QA environment
+render_q_a_env(opts)
+```
+
+### Question 2
+Suppose that you want to compare the means of $2$ groups, in which situation is Welsh's t-test a good approach:
+
+
+```{r, results='asis'}
+# Define questions choice and individual feedback for each question
+opts <- list(
+  list(value = "When it is reasonable to assume that there are no outliers.",
+       feedback = "Nope, if the sample size is small we also need the empirical distribution to be reasonably close to a normal distribution."),
+  list(value = "When it is reasonable to assume that the sample distribution is at least approximately normal with not many outliers.",
+       feedback = "Nope, these outliers can potentially have a very large impact!"),
+  answer = list(
+    value = "When it is reasonable to assume that there are no outliers and the sample size is sufficiently large",
+    feedback = "Indeed, if the sample size is large enough, then we don't require the sample distribution to be close to a normal because of the central limit theorem."
+  ),
+  list(
+    value = "We need the following: (1) it is reasonable to assume that there are no outliers, (2) the variances of the two groups are known to be the same (or at least it is reasonable to assume that this is the case).",
+    feedback = "Nope, if the sample size is small we also need the empirical distribution to be reasonably close to a normal distribution. The assumption that the variances are the same is not needed."
+  )
+)
+# render QA environment
+render_q_a_env(opts)
+```
+
+
+
+### Question 3
+Suppose that you want to compare the means of $2$ groups, in which situation is Wilcoxon rank sum test inadequate:
+
+
+
+```{r, results='asis'}
+# Define questions choice and individual feedback for each question
+opts <- list(
+  list(value = "When there are no outliers.",
+       feedback = "Nope! 😆"),
+  answer = list(value = "When the distribution is not symmetric and the sample is large.",
+       feedback = "Yes! Since this test concerns the median and not the mean, the result can be quite different when the distribution is not symmetric."),
+  list(
+    value = "When it is reasonable to assume that there are no outliers and the sample distribution should be at least approximately normal.",
+    feedback = "Nope, it can still perform very well in this case. "
+  ),
+  list(
+    value = "When it is reasonable to assume that there are no outliers and the variances are the same.",
+    feedback = "Nope, it can still perform very well in this case."
+  )
+)
+# render QA environment
+render_q_a_env(opts)
+```
+
+
+### Question 4
+A researcher administers many hypothesis tests as part of a research project. He finds that, of $250$ tests $11$ were significant at the $5\%$ level. The researcher feels very proud of this fact and thinks that he makes a big discovery. What do you think of this situation?
+
+
+
+```{r, results='asis'}
+# Define questions choice and individual feedback for each question
+opts <- list(
+  list(value = "It is very interesting that \\(11\\) tests are significant.",
+       feedback = "Nope, because we did many tests..."),
+  list(value = "It is interesting that \\(11\\) tests are significant but since we did many tests we should find a theoretical argument for our analysis.",
+       feedback = "Finding a posteriori argument is always dangerous. ⚠️ "),
+  list(
+    value = "One would expect \\(12.5\\) (\\(5\\%\\) of \\(250\\)) significant tests even in the purely null case, merely by chance, so we should find at least \\(13\\) significant tests for the result to be interesting.",
+    feedback = "No, actually we would need a lot more... In fact, there is a probability of \\(48\\%\\) that one would obtain \\(13\\) or more significant tests by pure luck. 🤔 "
+  ),
+  answer = list(
+    value = "One would expect \\(12.5\\) (\\(5\\%\\) of \\(250\\)) significant tests even in the purely null case, merely by chance. So, finding only \\(11\\) significant results is actually somewhat disappointing.",
+    feedback = "Yes! In the class notes of John Wilder Tukey (who is a famous statistician and the inventor of many statistical methods, including the boxplot!), he used this example at Princeton University in \\(1976\\) to highlight the dangers of multiple testing (and introduce the idea of higher criticism) 🤔. "
+  )
+)
+# render QA environment
+render_q_a_env(opts)
+```
+
+
+
+
+
+# Comparing Diets A and B
+
+## Getting the data
+
+In this set of slides, we will replicate the `diet` data analysis example
+presented in the lectures slides, and we will compare diets A and B. Our first step is to load the data.
+
+
+```{python, echo=TRUE}
+# Import data
+import pandas as pd
+diet = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/diet.csv")
+```
+
+
+We can now take a look at the data.
+```{python, echo=TRUE}
+# Import data
+n = 5
+print(diet.head(n)) #print the first n rows of the dataset
+```
+
+To compare the effectiveness of the diets, we first compute the weight loss of the participants (i.e. initial weight - final weight), which can be done in `Python` as follows:
+
+```{python, echo=TRUE}
+# Compute weight loss
+diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
+```
+
+For this example, we consider diets A and B so we construct our "variables of interest", say `dietA` and `dietB`, by only selecting these diets. This can be done in `R` as follows:
+
+```{python, echo=TRUE}
+# Variable of interest
+dietA = diet["weight.loss"][diet["diet.type"]=="A"]
+dietB = diet["weight.loss"][diet["diet.type"]=="B"]
+```
+
+```{python, echo=TRUE}
+import matplotlib.pyplot as plt
+import numpy as np
+
+plt.figure(figsize=(6,4))
+
+# Boxplot without outliers
+plt.boxplot([dietA, dietB],
+            tick_labels=["Diet A", "Diet B"],
+            patch_artist=True,
+            boxprops=dict(facecolor="lightblue", color="blue"),
+            medianprops=dict(color="red"),
+            showfliers=False)  # don't show outliers in boxplot
+
+# Overlay all points with horizontal jitter
+for i, data in enumerate([dietA, dietB], start=1):
+    x = np.random.normal(i, 0.09, size=len(data))  # jitter for visibility
+    plt.scatter(x, data, alpha=0.7, color='orange', edgecolor='k', zorder=10)
+
+plt.ylabel("Weight loss (kg)")
+plt.title("Comparison of Weight Loss for Diets A and B")
+plt.show()
+```
+Based on the previous boxplot, Welch's t-test or Wilcoxon rank sum test are both reasonable choices. For this example we will use the Welch's t-test. To compare the effectiveness of diets A and B we start by defining the hypotheses:
+
+$H_{0}: \mu_A=\mu_B$ and $H_{a}: \mu_A\neq\mu_B$,
+
+where $\mu_A$ and $\mu_B$ denote the mean weight loss for diets A and B, respectively. We consider $\alpha = 0.05$ and compute the p-value as follows:
+
+```{python, echo=TRUE}
+from scipy import stats
+
+# Welch's t-test (equal_var=False makes it Welch)
+t_stat, p_value = stats.ttest_ind(dietA, dietB, equal_var=False)
+
+print("t-statistic:", round(t_stat, 4))
+print("p-value:", round(p_value, 4))
+```
+
+Since the p-value is equal to $96.22\%$ which is larger than $5\%$, we fail to reject the null hypothesis at the $95\%$ confidence level.
+
+# Exercise on the Diet dataset
+
+
+In the previous section, we compared diets A and B. In this section, we will consider the difference of the average weight loss between diets A and C. In particular, we are interested in testing whether diet C leads to a larger average weight loss than diet A.
+
+### Question 1
+How to plot the data?
+
+Complete the code below to obtain the boxplot to compare the empirical distributions of the weight loss of the two diets:
+
+
+:::: {.panel-tabset}
+
+## Exercise
+
+
+
+```{pyodide}
+#| exercise: ex_1
+import pandas as pd
+import matplotlib.pyplot as plt
+
+diet = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/diet.csv")
+# compute weight loss
+diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
+
+# Variable of interest
+dietA = diet["weight.loss"][diet["diet.type"]=="A"]
+dietC = diet["weight.loss"][diet["diet.type"]=="C"]
+
+# Side-by-side boxplot
+plt.figure(figsize=(6,4))
+plt.______([dietA, dietC],
+            labels=["Diet A", "Diet C"],
+            patch_artist=True,  # color the boxes
+            boxprops=dict(facecolor="lightblue", color="blue"),
+            medianprops=dict(color="red"))
+
+plt.ylabel("Weight loss (kg)")
+plt.title("Comparison of Weight Loss for Diets A and C")
+plt.show()
+```
+
+## Hints
+
+::: { .hint exercise="ex_1"}
+Consider using the `boxplot()` function from `matplotlib.pyplot`.
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Simulate some Gaussian data
+np.random.seed(123)
+group1 = np.random.normal(loc=5, scale=1, size=50)
+group2 = np.random.normal(loc=6, scale=1.5, size=50)
+
+# Side-by-side boxplot
+plt.figure(figsize=(6,4))
+plt.boxplot([group1, group2],
+            labels=["Group 1", "Group 2"],
+            patch_artist=True,
+            boxprops=dict(facecolor="lightblue", color="blue"),
+            medianprops=dict(color="red"))
+
+plt.ylabel("Value")
+plt.title("Boxplot of Simulated Gaussian Data")
+plt.show()
+```
+:::
+
+## Solution
+
+::: { .solution exercise="ex_1" }
+Use  the `boxplot()` function from `matplotlib.pyplot`:
+
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+diet = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/diet.csv")
+
+# compute weight loss
+diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
+
+# Variable of interest
+dietA = diet["weight.loss"][diet["diet.type"]=="A"]
+dietC = diet["weight.loss"][diet["diet.type"]=="C"]
+
+# Side-by-side boxplot
+plt.figure(figsize=(6,4))
+plt.boxplot([dietA, dietC],    #<1>
+            labels=["Diet A", "Diet C"],
+            patch_artist=True,  # color the boxes
+            boxprops=dict(facecolor="lightblue", color="blue"),
+            medianprops=dict(color="red"))
+
+plt.ylabel("Weight loss (kg)")
+plt.title("Comparison of Weight Loss for Diets A and C")
+plt.show()
+
+```
+1. Use `plt.boxplot()`
+:::
+
+::::
+
+### Question 2
+Which test should we use?
+
+Based on the graph you produce, which test appears to be the most appropriate to test if diet C leads to a larger average weight loss than diet A?
+
+
+```{r, results='asis'}
+# Define questions choice and individual feedback for each question
+opts <- list(
+  list(value = "Student's t-test.",
+       feedback = "The student t-test assumes that the variances of the two groups are the same. This is very hard to verify in practice and thus, it is preferable to avoid using this test."),
+  list(value = "Welch's t-test.",
+       feedback = "This is probably a suitable choice but one can argue that outliers are present in diet A so this may not be the optimal choice."),
+  answer = list(
+    value = "Wilcoxon test.",
+    feedback = "This is arguably the best choice for this problem."
+  )
+)
+# render QA environment
+render_q_a_env(opts)
+```
+
+### Question 3
+How to perform the test you selected?
+
+Complete the code below to test if diet C leads to a larger average weight loss than diet A. Remember that we are interested in testing if diet C leads to a larger weight loss than diet A.
+
+
+:::: {.panel-tabset}
+
+## Exercise
+
+
+
+```{pyodide}
+#| exercise: ex_2
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy import stats
+
+diet = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/diet.csv")
+# compute weight loss
+diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
+
+# Variable of interest
+dietA = diet["weight.loss"][diet["diet.type"]=="A"]
+dietC = diet["weight.loss"][diet["diet.type"]=="C"]
+
+# Wilcoxon rank-sum test (Mann–Whitney U)
+stat, p_value = ______(dietA, dietC, alternative =______)
+
+print("Wilcoxon statistic:", round(stat, 4))
+print("p-value:", round(p_value, 4))
+```
+
+## Hints
+
+::: { .hint exercise="ex_2"}
+Consider using the `mannwhitneyu()` function from `scipy.stats`. Make sure to specify the correct alternative hypothesis.
+
+:::
+
+## Solution
+
+::: { .solution exercise="ex_1" }
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy import stats
+
+diet = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/diet.csv")
+# compute weight loss
+diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
+
+# Variable of interest
+dietA = diet["weight.loss"][diet["diet.type"]=="A"]
+dietC = diet["weight.loss"][diet["diet.type"]=="C"]
+
+# Wilcoxon rank-sum test (Mann–Whitney U)
+stat, p_value = stats.mannwhitneyu(dietA, dietC, alternative ="less")
+
+print("Wilcoxon statistic:", round(stat, 4))
+print("p-value:", round(p_value, 4))
+
+```
+
+:::
+
+::::
+
+
+### Question 4
+What can we conclude?
+Based on the test you performed and considering a significance level of $5\%$, we can conclude that:
+
+
+```{r, results='asis'}
+# Define questions choice and individual feedback for each question
+opts <- list(
+  list(value = "We can reject the null hypothesis at the significance level of \\(5\\%\\) and conclude that diet A leads to a larger average weight loss than diet C.",
+       feedback = "Be careful with the order of the diets used in the statement."),
+  list(value = "We can be sure that diet C leads to a larger average weight loss than diet A.",
+       feedback = "Sadly, we can never be sure with statistical methods."),
+  answer = list(
+    value = "We can reject the null hypothesis at the significance level of \\(5\\%\\) and conclude that diet C leads to a larger average weight loss than diet A.",
+    feedback = "Yay! 👍"
+  ),
+  list(
+    value = "We cannot reject the null hypothesis at the significance level of \\(5\\%\\).",
+    feedback = "In this case the p-value is smaller than \\(5\\%\\) so we can reject the null hypothesis."
+  )
+)
+# render QA environment
+render_q_a_env(opts)
+```
+
+### Question 5
+Is diet A really so bad?
+
+A consultant who is hired by the company and promotes diet A is unhappy about your analysis as it indicates that diet C (promoted by a competing firm) is better in terms of weight loss. Thus the consultant constructs the following argument: to claim that a diet is more effective in terms of weight loss, we should have at least an average difference larger than one kg, otherwise the statistical difference is meaningless. Below we perform the test that the consultant is interested in:
+
+
+:::: {.panel-tabset}
+
+## Exercise
+
+
+
+```{pyodide}
+#| exercise: ex_2
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy import stats
+
+diet = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/diet.csv")
+# compute weight loss
+diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
+
+# Variable of interest
+dietA = diet["weight.loss"][diet["diet.type"]=="A"]
+dietC = diet["weight.loss"][diet["diet.type"]=="C"]
+dietC_adj = dietC +1  
+
+# Mann–Whitney U test, one-sided (Diet C - Diet A < mu)
+stat, p_value = stats.mannwhitneyu(dietC_adj, dietA, alternative="less")
+
+print("Wilcoxon statistic:", round(stat, 4))
+print("p-value:", round(p_value, 4))
+```
+
+## Hints
+
+::: { .hint exercise="ex_2"}
+Consider using the `mannwhitneyu()` function from `scipy.stats`. Make sure to specify the correct alternative hypothesis.
+
+:::
+
+## Solution
+
+::: { .solution exercise="ex_1" }
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy import stats
+
+diet = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/diet.csv")
+# compute weight loss
+diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
+
+# Variable of interest
+dietA = diet["weight.loss"][diet["diet.type"]=="A"]
+dietC = diet["weight.loss"][diet["diet.type"]=="C"]
+
+# Wilcoxon rank-sum test (Mann–Whitney U)
+stat, p_value = stats.mannwhitneyu(dietA, dietC, alternative ="less")
+
+print("Wilcoxon statistic:", round(stat, 4))
+print("p-value:", round(p_value, 4))
+
+```
+
+:::
+
+::::
