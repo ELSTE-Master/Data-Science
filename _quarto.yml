@@ -38,6 +38,10 @@ website:
         contents:
           - class3/class_3_intro.qmd
           - class3/class_3_slides.qmd
+      - section: "Class 4: Linear regression"
+        contents:
+          - class4/class_4_intro.qmd
+          - class4/class_4_slides.qmd
       - section: "Appendices"
         contents:
           - appendices/setup_vscode.qmd
