@@ -60,18 +60,14 @@ $selection-bg: #26351c !default;
   text-align: left;
 
   .title {
+    margin-bottom: 2rem; 
     color: $body-color;
     font-size: 1.4em;
     // font-weight: 350;
     font-weight: lighter;
   }
 
-  .subtitle {
-    color: $accent;
-    font-style: italic;
-    margin-top: 0em;
-    font-weight: lighter;
-  }
+
 
   .institute,
   .quarto-title-affiliation,
@@ -91,12 +87,40 @@ $selection-bg: #26351c !default;
     justify-content: left;
 
     .quarto-title-author {
-      padding-left: 0em;
-      padding-right: 0em;
+      padding-left: 1em;
+      padding-right: 1em;
       width: 100%;
     }
   }
 
+
+  .subtitle {
+    color: $accent;
+    font-style: italic;
+    margin-top: 0em;
+    font-weight: lighter;
+  }
+
+
+.quarto-title-ack {
+  position: relative;      // no absolute positioning
+  margin-top: 2rem;        // spacing between authors and ack
+  font-size: 1.1rem;
+  line-height: 1.6;
+  text-align: left;
+  color: $body-color;
+  opacity: 1;
+}
+
+  @media (max-width: 900px) {
+    .quarto-title-ack {
+      left: 1rem;
+      right: 1rem;
+      max-width: none;
+      bottom: 1rem;
+      font-size: 0.8rem;
+    }
+  }
 }
 
 

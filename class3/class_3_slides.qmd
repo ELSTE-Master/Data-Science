@@ -1,21 +1,28 @@
 ---
-title: "ELSTE Data science"
-subtitle: "Part 4: Analysis of Variance (ANOVA)"
-date: "October 15, 2025"
+title: Analysis of Variance (ANOVA) 
 author:
   - name: Sébastien Biass
     id: sb
     orcid: 0000-0002-1919-9473
     email: sebastien.biasse@unige.ch
     affiliation: 
-      - name: Earth Sciences
+      - name: Earth Sciences, University of Geneva
   - name: Stéphane Guerrier
     id: sg
     orcid: 0000-0003-0002-8794
     email: Stephane.Guerrier@unige.ch
     affiliation: 
-      - name: Earth Sciences
-      - name: Pharmaceutical Sciences
+      - name: Earth Sciences & Pharmaceutical Sciences, University of Geneva
+  - name: Dominique Couturier
+    id: DC
+    orcid: 0000-0001-5774-5036
+    affiliation: 
+      - name: Cancer Research UK, University of Cambridge
+  - name: Yuming Zhang
+    id: YZ
+    orcid: 0000-0003-2293-9601
+    affiliation: 
+      - name: T.H. Chan School of Public Health, Harvard University
 license: "CC BY"
 format:
   clean-revealjs:
@@ -25,11 +32,20 @@ format:
     mathjax: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
     slide-number: true
 footer: "This document was prepared with the help of Lionel Voirol and Filippo Salmaso"
-css: ["default.css"]
+css: [../assets/default.css]
 #jupyter: python3
-
-
 ---
+
+## How does it work? {.smaller}
+
+
+```{css}
+@media print {
+  .has-continuation {
+    display: block !important;
+  }
+}
+```
 
 ```{r}
 library(reticulate)
@@ -166,17 +182,10 @@ tidy_table <- function(x, terms, highlight_row = 1, highlight_color = "black", h
     kableExtra::row_spec(1:nrow(broom::tidy(x)), background = "white") %>%
     kableExtra::row_spec(highlight_row, bold = highlight_bold, color = highlight_color)
 }
-
-```{css}
-@media print {
-  .has-continuation {
-    display: block !important;
-  }
-}
 ```
 
 
-## How does it work? {.smaller}
+
 
 
 Statistical methods are based on several fundamental concepts, the most central of which is to consider the information available (in the form of data) resulting from a <span style="color:purple;">random process</span>.
@@ -236,10 +245,19 @@ include_graphics("../class3/img/great_pic.png")
 </div>
 
 
+
+<br>
+
 <div style="font-size:0.9em;">
 
 - The <span style="color:purple;">type I error</span> corresponds to the probability of rejecting $H_0$ when $H_0$ is true (also called <span style="color:purple;">false positive</span>). The <span style="color:blue;">type II error</span> corresponds to the probability of not rejecting $H_0$ when $H_a$ is true (also called <span style="color:blue;">false negative</span>).
+
+<br>
+
 - A test is of <span style="color:purple;">significance level</span> $\color{#e64173}{\alpha}$ when the probability of making a type I error equals $\alpha$. Usually we consider $\alpha = 5\%$, however, this can vary depending on the context.
+
+<br>
+
 - A test is of <span style="color:blue;">power</span> $\color{#6A5ACD}{\beta}$ when the probability to make a type II error is $1-\beta.$ In other words, the power of a test is its probability of rejecting $H_0$ when $H_0$ is false (or the probability of accepting $H_a$ when $H_a$ is true).
 
 </div>
@@ -495,7 +513,7 @@ include_graphics("../class3/img/dietAB.png")
 ```{python, echo=TRUE}
 # Import data
 import pandas as pd
-diet = pd.read_csv("/Users/filipposalmaso/Documents/Temporary_Stuff/Data-Science_copy/diet.csv")
+diet = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/diet.csv")
 n = 5
 print(diet.head(n)) #print the first n rows of the dataset
 
@@ -553,6 +571,8 @@ print("p-value:", round(p_value, 4))
 
 ## Results
 
+::: {.small-text}
+
 <span style="color:purple;">Define hypotheses</span>: $H_0: \mu_A = \mu_B, \quad H_a: \mu_A \neq \mu_B$
 
 
@@ -567,6 +587,8 @@ Welch's *t*-test appears suitable in this case, and therefore, we obtain $\text{
 We have $\text{p-value} > \alpha$
 so we **fail to reject the null hypothesis** at the significance level of $5\%$.
 
+:::
+
 
 ---
 
@@ -575,12 +597,18 @@ so we **fail to reject the null hypothesis** at the significance level of $5\%$.
 <span style="font-size:0.8em;">
 In practice, we often even encounter situations where we need to <span style="color:purple;">compare the means of more than 2 groups</span>. For example, we want to compare the weight loss efficacy of several diets, say diets <span style="color:#6A5ACD; font-weight:bold;">A</span>, <span style="color:#06bcf1; font-weight:bold;">B</span>, <span style="color:#8bb174; font-weight:bold;">C</span>. Your theory could, for example, be the following: 0 < <span style="color:#6A5ACD;">$\mu_A$</span> <span style="color:black;">=</span> <span style="color:#06bcf1;">$\mu_B$</span> < <span style="color:#8bb174;">$\mu_C$</span>. A possible approach to evaluate its validity:
 
+
+::: {.small-text}
 1. **Show that** <span style="color:#8bb174;">$\mu_C$</span> **is greater than** <span style="color:#6A5ACD;">$\mu_A$</span> **and** <span style="color:#06bcf1;">$\mu_B$</span> (Test 1: $H_0:$ <span style="color:#6A5ACD;">$\mu_A$</span> $=$ <span style="color:#8bb174;">$\mu_C$</span>, $H_a:$ <span style="color:#6A5ACD;">$\mu_A$</span> $<$ <span style="color:#8bb174;">$\mu_C$</span>; Test 2: $H_0:$ <span style="color:#06bcf1;">$\mu_B$</span> $=$ <span style="color:#8bb174;">$\mu_C$</span>, $H_a:$ <span style="color:#06bcf1;">$\mu_B$</span> $<$ <span style="color:#8bb174;">$\mu_C$</span>). Here we hope to **reject $H_0$ in both cases**.
 
 2. **Show that** <span style="color:#6A5ACD;">$\mu_A$</span> **and** <span style="color:#06bcf1;">$\mu_B$</span> **are greater than 0** (Test 3: $H_0:$ <span style="color:#6A5ACD;">$\mu_A$</span> $=0$, $H_a:$ <span style="color:#6A5ACD;">$\mu_A$</span> $>0$; Test 4: $H_0:$ <span style="color:#06bcf1;">$\mu_B$</span> $=0$, $H_a:$ <span style="color:#06bcf1;">$\mu_B$</span> $>0$). Here we also hope to **reject $H_0$ in both cases**.
 
 3. **Compare** <span style="color:#6A5ACD;">$\mu_A$</span> **and** <span style="color:#06bcf1;">$\mu_B$</span> (Test 5: $H_0:$ <span style="color:#6A5ACD;">$\mu_A$</span> $=$ <span style="color:#06bcf1;">$\mu_B$</span>, $H_a:$ <span style="color:#6A5ACD;">$\mu_A$</span> $\neq$ <span style="color:#06bcf1;">$\mu_B$</span>). Here we hope **not to reject $H_0$**. ⚠️ This does **not imply** that <span style="color:#6A5ACD;">$\mu_A$</span> $=$ <span style="color:#06bcf1;">$\mu_B$</span> is true, but at least the result would not contradict our theory.
 </span>
+
+
+
+:::
 
 ---
 
@@ -842,7 +870,7 @@ include_graphics("../class3/img/dietABC.png")
 ```{python, echo=TRUE}
 # Import data
 import pandas as pd
-diet = pd.read_csv("/Users/filipposalmaso/Documents/Temporary_Stuff/Data-Science_copy/diet.csv")
+diet = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/diet.csv")
 diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
 
 # Variable of interest
@@ -876,7 +904,7 @@ An educator believes that <span style="color:blue;">new directed reading activit
 ```{python, echo=TRUE}
 import pandas as pd
 
-reading = pd.read_csv("/Users/filipposalmaso/Documents/Temporary_Stuff/Data-Science_copy/reading.csv")
+reading = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/reading.csv")
 
 control = reading.loc[reading["group"] == "Control", "score"]
 print(control.head())
@@ -888,7 +916,7 @@ print(treatment.head())
 ```{python, eval=FALSE}
 import pandas as pd
 
-reading = pd.read_csv("/Users/filipposalmaso/Documents/Temporary_Stuff/Data-Science_copy/reading.csv")
+reading = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/reading.csv")
 
 control = reading.loc[reading["group"] == "Control", "score"]
 print(control.head())
@@ -1063,7 +1091,7 @@ import pandas as pd
 import statsmodels.formula.api as smf
 
 # Import data (if you haven't already)
-reading = pd.read_csv("/Users/filipposalmaso/Documents/Temporary_Stuff/Data-Science_copy/reading.csv")
+reading = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/reading.csv")
 
 # Fit a linear regression model
 mod1 = smf.ols(formula="score ~ group + age", data=reading).fit()
@@ -1174,7 +1202,7 @@ include_graphics("../class3/img/diag_mod1_v2.png")
 ## Model diagnostic ⚠️ {.smaller}
 
 ```{R, diag2_mod1, out.width = "90%", echo = F}
-include_graphics("pics/diag2_mod1.png")
+include_graphics("../class3/img/diag2_mod1.png")
 ```
 
 ---
@@ -1182,7 +1210,7 @@ include_graphics("pics/diag2_mod1.png")
 ## Model diagnostic ⚠️ {.smaller}
 
 ```{R, qqplot_mod1, out.width = "90%", echo = F}
-include_graphics("pics/qqplot_mod1.png")
+include_graphics("../class3/img/qqplot_mod1.png")
 ```
 
 ---
@@ -1233,7 +1261,7 @@ import pandas as pd
 import statsmodels.formula.api as smf
 
 # Import data (if you haven't already)
-reading = pd.read_csv("/Users/filipposalmaso/Documents/Temporary_Stuff/Data-Science_copy/reading.csv")
+reading = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/reading.csv")
 
 # Fit a linear regression model
 mod2 = smf.ols(formula="score ~ group*age", data=reading).fit()
@@ -1261,7 +1289,7 @@ We can obtain the estimated coefficients. Specifically,
 ## Model fit {.smaller}
 
 ```{R, pointswithmod2, out.width = "90%", echo = F}
-include_graphics("pics/points_with_mod2.png")
+include_graphics("../class3/img/points_with_mod2.png")
 ```
 
 ---
@@ -1269,7 +1297,7 @@ include_graphics("pics/points_with_mod2.png")
 ## Model diagnostic {.smaller}
 
 ```{R, diag_mod2_v2, out.width = "90%", echo = F}
-include_graphics("pics/diag_mod2_v2.png")
+include_graphics("../class3/img/diag_mod2_v2.png")
 ```
 
 ---
@@ -1277,7 +1305,7 @@ include_graphics("pics/diag_mod2_v2.png")
 ## Model diagnostic {.smaller}
 
 ```{R, diag2_mod2, out.width = "90%", echo = F}
-include_graphics("pics/diag2_mod2.png")
+include_graphics("../class3/img/diag2_mod2.png")
 ```
 
 ---
@@ -1285,7 +1313,7 @@ include_graphics("pics/diag2_mod2.png")
 ## Model diagnostic {.smaller}
 
 ```{R, qqplot_mod2, out.width = "90%", echo = F}
-include_graphics("pics/qqplot_mod2.png")
+include_graphics("../class3/img/qqplot_mod2.png")
 ```
 
 ---
@@ -1348,7 +1376,7 @@ import pandas as pd
 import statsmodels.formula.api as smf
 
 # Import data (if you haven't already)
-reading = pd.read_csv("/Users/filipposalmaso/Documents/Temporary_Stuff/Data-Science_copy/reading.csv")
+reading = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/reading.csv")
 reading["age_minus_six"] = reading["age"] - 6
 
 # Fit a linear regression model
@@ -1367,7 +1395,8 @@ import pandas as pd
 import statsmodels.formula.api as smf
 
 # Import data (if you haven't already)
-reading = pd.read_csv("/Users/filipposalmaso/Documents/Temporary_Stuff/Data-Science_copy/reading.csv")
+
+reading = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/reading.csv")
 reading["age_minus_six"] = reading["age"] - 6
 
 # Fit a linear regression model
@@ -1391,7 +1420,7 @@ print(round(mod3.aic, 4))
 ## Model fit {.smaller}
 
 ```{R, pointswithmod3, out.width = "90%", echo = F}
-include_graphics("pics/points_with_mod3.png")
+include_graphics("../class3/img/points_with_mod3.png")
 ```
 
 ---
@@ -1399,7 +1428,7 @@ include_graphics("pics/points_with_mod3.png")
 ## Model diagnostic {.smaller}
 
 ```{R, diag_mod3_v2, out.width = "90%", echo = F}
-include_graphics("pics/diag_mod3_v2.png")
+include_graphics("../class3/img/diag_mod3_v2.png")
 ```
 
 ---
@@ -1407,7 +1436,7 @@ include_graphics("pics/diag_mod3_v2.png")
 ## Model diagnostic {.smaller}
 
 ```{R, diag2_mod3, out.width = "90%", echo = F}
-include_graphics("pics/diag2_mod3.png")
+include_graphics("../class3/img/diag2_mod3.png")
 ```
 
 ---
@@ -1415,7 +1444,7 @@ include_graphics("pics/diag2_mod3.png")
 ## Model diagnostic {.smaller}
 
 ```{R, qqplot_mod3, out.width = "90%", echo = F}
-include_graphics("pics/qqplot_mod3.png")
+include_graphics("../class3/img/qqplot_mod3.png")
 ```
 
 ---
@@ -1435,7 +1464,7 @@ include_graphics("pics/qqplot_mod3.png")
 ## Extrapolating {.smaller}
 
 ```{R, out.width = "90%", echo = F}
-include_graphics("pics/extrapolating.png")
+include_graphics("../class3/img/extrapolating.png")
 ```
 
 <div style="font-size:0.8em;">

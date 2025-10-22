@@ -37,6 +37,7 @@ website:
       - section: "Class 3: Analysis of variance"
         contents:
           - class3/class_3_intro.qmd
+          - class3/class_3_slides.qmd
       - section: "Appendices"
         contents:
           - appendices/setup_vscode.qmd
