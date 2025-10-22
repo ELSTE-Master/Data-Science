@@ -34,6 +34,9 @@ website:
           - class2/day2-2_data_exploration.qmd
           - class2/day2-3_univariate.qmd
           - class2/day2-4_bivariate.qmd
+      - section: "Class 3: Analysis of variance"
+        contents:
+          - class3/class_3_intro.qmd
       - section: "Appendices"
         contents:
           - appendices/setup_vscode.qmd

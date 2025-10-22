@@ -1,0 +1,35 @@
+---
+title: "Overview"
+format:
+  html:
+    code-fold: false
+    code-line-numbers: true
+    css: [../assets/webex.css]
+    include-after-body: [../assets/webex.js]
+    embed-resources: true 
+jupyter: python3
+---
+
+```{python}
+#| echo: false
+from pywebexercises.exercises import mcq, longmcq, torf
+import matplotlib.pyplot as plt
+plt.rcParams.update({
+    "figure.facecolor":  (0.0, 0.0, 0.0, 0.0),  # red   with alpha = 30%
+})
+```
+
+
+
+## Today's objectives {.unnumbered}
+
+The objectives of this class are to review:
+
+- [x] Objective 1
+
+## Slides
+
+- {{< fa file-pdf >}} [PDF](../slides/class1_pandas.pdf)
+- <i class="fa fa-window-restore"></i> <a href="../slides/class1_pandas.html" target="_blank">View in browser</a>
+
+

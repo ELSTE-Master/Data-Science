@@ -1,0 +1,1445 @@
+---
+title: "ELSTE Data science"
+subtitle: "Part 4: Analysis of Variance (ANOVA)"
+date: "October 15, 2025"
+author:
+  - name: Sébastien Biass
+    id: sb
+    orcid: 0000-0002-1919-9473
+    email: sebastien.biasse@unige.ch
+    affiliation: 
+      - name: Earth Sciences
+  - name: Stéphane Guerrier
+    id: sg
+    orcid: 0000-0003-0002-8794
+    email: Stephane.Guerrier@unige.ch
+    affiliation: 
+      - name: Earth Sciences
+      - name: Pharmaceutical Sciences
+license: "CC BY"
+format:
+  clean-revealjs:
+    embed-resources: true
+    self-contained: true
+    self-contained-math: true
+    mathjax: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    slide-number: true
+footer: "This document was prepared with the help of Lionel Voirol and Filippo Salmaso"
+css: ["default.css"]
+#jupyter: python3
+
+
+---
+
+```{r}
+library(reticulate)
+# use_condaenv("myenv", required = TRUE)
+```
+
+```{r, setup, include=FALSE}
+# devtools::install_github("dill/emoGG")
+library(pacman)
+p_load(
+  broom, tidyverse,
+  latex2exp, ggplot2, ggthemes, ggforce, viridis, extrafont, gridExtra,
+  kableExtra, snakecase, janitor,
+  data.table, dplyr, estimatr,
+  lubridate, knitr, parallel,
+  lfe,
+  here, magrittr
+)
+
+# Define pink color
+red_pink <- "#e64173"
+turquoise <- "#20B2AA"
+orange <- "#FFA500"
+red <- "#fb6107"
+blue <- "#2b59c3"
+green <- "#8bb174"
+grey_light <- "grey70"
+grey_mid <- "grey50"
+grey_dark <- "grey20"
+grey = "#b4b4b4"
+purple <- "#6A5ACD"
+slate <- "#314f4f"
+
+# Knitr / chunk options
+knitr::opts_chunk$set(
+  comment = "",
+  fig.align = "center",
+  fig.height = 7,
+  fig.width = 10.5,
+  warning = FALSE,
+  message = FALSE,
+  dev = "svg"
+)
+
+options(device = function(file, width, height) {
+  svg(tempfile(), width = width, height = height)
+})
+options(crayon.enabled = FALSE)
+options(knitr.table.format = "html")
+
+# ggplot themes used in original slides (kept for later plotting)
+theme_empty <- theme_bw() + theme(
+  line = element_blank(),
+  rect = element_blank(),
+  strip.text = element_blank(),
+  axis.text = element_blank(),
+  plot.title = element_blank(),
+  axis.title = element_blank(),
+  plot.margin = structure(c(0, 0, -0.5, -1), unit = "lines", valid.unit = 3L, class = "unit"),
+  legend.position = "none"
+)
+
+theme_simple <- theme_bw() + theme(
+  line = element_blank(),
+  panel.grid = element_blank(),
+  rect = element_blank(),
+  strip.text = element_blank(),
+  axis.text.x = element_text(size = 18, family = "STIXGeneral"),
+  axis.text.y = element_blank(),
+  axis.ticks = element_blank(),
+  plot.title = element_blank(),
+  axis.title = element_blank(),
+  legend.position = "none"
+)
+
+theme_axes_math <- theme_void() + theme(
+  text = element_text(family = "MathJax_Math"),
+  axis.title = element_text(size = 22),
+  axis.title.x = element_text(hjust = .95, margin = margin(0.15, 0, 0, 0, unit = "lines")),
+  axis.title.y = element_text(vjust = .95, margin = margin(0, 0.15, 0, 0, unit = "lines")),
+  axis.line = element_line(color = "grey70", size = 0.25,
+                           arrow = arrow(angle = 30, length = unit(0.15, "inches"))),
+  plot.margin = structure(c(1, 0, 1, 0), unit = "lines", valid.unit = 3L, class = "unit"),
+  legend.position = "none"
+)
+
+theme_axes_serif <- theme_void() + theme(
+  text = element_text(family = "MathJax_Main"),
+  axis.title = element_text(size = 22),
+  axis.title.x = element_text(hjust = .95, margin = margin(0.15, 0, 0, 0, unit = "lines")),
+  axis.title.y = element_text(vjust = .95, margin = margin(0, 0.15, 0, 0, unit = "lines")),
+  axis.line = element_line(color = "grey70", size = 0.25,
+                           arrow = arrow(angle = 30, length = unit(0.15, "inches"))),
+  plot.margin = structure(c(1, 0, 1, 0), unit = "lines", valid.unit = 3L, class = "unit"),
+  legend.position = "none"
+)
+
+theme_axes <- theme_void() + theme(
+  text = element_text(family = "Fira Sans Book"),
+  axis.title = element_text(size = 18),
+  axis.title.x = element_text(hjust = .95, margin = margin(0.15, 0, 0, 0, unit = "lines")),
+  axis.title.y = element_text(vjust = .95, margin = margin(0, 0.15, 0, 0, unit = "lines")),
+  axis.line = element_line(color = grey_light, size = 0.25,
+                           arrow = arrow(angle = 30, length = unit(0.15, "inches"))),
+  plot.margin = structure(c(1, 0, 1, 0), unit = "lines", valid.unit = 3L, class = "unit"),
+  legend.position = "none"
+)
+
+theme_set(theme_gray(base_size = 20))
+
+# Column names and helper functions retained
+reg_columns <- c("Term", "Est.", "S.E.", "t stat.", "p-Value")
+
+format_pvi <- function(pv) {
+  ifelse(pv < 0.0001, "<0.0001", round(pv, 4) %>% format(scientific = FALSE))
+}
+format_pv <- function(pvs) lapply(X = pvs, FUN = format_pvi) %>% unlist()
+
+tidy_table <- function(x, terms, highlight_row = 1, highlight_color = "black", highlight_bold = TRUE, digits = c(NA, 3, 3, 2, 5), title = NULL) {
+  x %>%
+    broom::tidy() %>%
+    dplyr::select(1:5) %>%
+    dplyr::mutate(
+      term = terms,
+      p.value = format_pv(p.value)
+    ) %>%
+    kableExtra::kable(
+      col.names = reg_columns,
+      escape = FALSE,
+      digits = digits,
+      caption = title
+    ) %>%
+    kableExtra::kable_styling(font_size = 20) %>%
+    kableExtra::row_spec(1:nrow(broom::tidy(x)), background = "white") %>%
+    kableExtra::row_spec(highlight_row, bold = highlight_bold, color = highlight_color)
+}
+
+```{css}
+@media print {
+  .has-continuation {
+    display: block !important;
+  }
+}
+```
+
+
+## How does it work? {.smaller}
+
+
+Statistical methods are based on several fundamental concepts, the most central of which is to consider the information available (in the form of data) resulting from a <span style="color:purple;">random process</span>.
+
+As such, the data represent a <span style="color:blue;">random sample</span> of a totally or conceptually accessible <span style="color:blue;">population</span>.
+
+Then, <span style="color:purple;">statistical inference</span> allows to infer the properties of a population based on the observed sample. This includes deriving estimates and testing hypotheses.
+
+
+```{r sampling, out.width="45%", echo=FALSE}
+include_graphics("../class3/img/sampling.png")
+
+```
+<span style="font-size:0.7em;">Source: [luminousmen](luminousmen.com)</span>
+
+---
+
+
+## Hypothesis testing {.smaller}
+
+- In general (scientific) hypotheses can be translated into a set of (non-overlapping idealized) statistical hypotheses:
+
+<div style="text-align:center;">
+$$H_0: \theta\hspace{0.1cm} {\color{#eb078e}{\in}}\hspace{0.1cm}\Theta_0 \quad \text{and} \quad H_a: \theta\hspace{0.1cm} {\color{#eb078e}{\not\in}}\hspace{0.1cm}\Theta_0$$
+</div>
+
+- In a hypothesis test, the statement being tested is called the <span style="color:blue;">null hypothesis</span> $\color{#373895}{H_0}$. A hypothesis test is designed to assess the strength of the evidence against the null hypothesis.
+- The <span style="color:blue;">alternative hypothesis</span> $\color{#373895}{H_a}$ is the statement we hope or suspect to be true instead of $\color{#373895}{H_0}$.
+- Each hypothesis excludes the other, so that one can exclude one in favor of the other using the data.
+- <span style="color:purple;">Example:</span> a drug represses the progression of cancer
+
+<div style="text-align:center;">
+$$H_0: \mu_{\text{drug}}\hspace{0.1cm} {\color{#eb078e}{=}}\hspace{0.1cm}\mu_{\text{control}} \  \text{ and } \ H_a: \mu_{\text{drug}}\hspace{0.1cm}  {\color{#eb078e}{<}}\hspace{0.1cm}\mu_{\text{control}}.$$
+</div>
+
+
+
+---
+
+## Hypothesis testing {.smaller}
+
+
+```{R, out.width = "80%", echo = F}
+include_graphics("../class3/img/great_pic.png")
+```
+---
+
+## Hypothesis testing {.smaller}
+
+
+<div style="font-size:1.1em;">
+
+| **Outcome**         | **$H_0$ is true**                          | **$H_0$ is false**                        |
+|--------------------|--------------------------------------------|-------------------------------------------|
+| Can't reject $H_0$  | ✅ Correct decision (prob=$1-\alpha$)      | ⚠️ <span style="color:#ff5c5c;">Type II error (prob=$1-\beta$)</span> |
+| Reject $H_0$        | ⚠️ <span style="color:#ff5c5c;">Type I error (prob=$\alpha$)</span> | ✅ Correct decision (prob=$\beta$)      |
+</div>
+
+
+<div style="font-size:0.9em;">
+
+- The <span style="color:purple;">type I error</span> corresponds to the probability of rejecting $H_0$ when $H_0$ is true (also called <span style="color:purple;">false positive</span>). The <span style="color:blue;">type II error</span> corresponds to the probability of not rejecting $H_0$ when $H_a$ is true (also called <span style="color:blue;">false negative</span>).
+- A test is of <span style="color:purple;">significance level</span> $\color{#e64173}{\alpha}$ when the probability of making a type I error equals $\alpha$. Usually we consider $\alpha = 5\%$, however, this can vary depending on the context.
+- A test is of <span style="color:blue;">power</span> $\color{#6A5ACD}{\beta}$ when the probability to make a type II error is $1-\beta.$ In other words, the power of a test is its probability of rejecting $H_0$ when $H_0$ is false (or the probability of accepting $H_a$ when $H_a$ is true).
+
+</div>
+---
+
+## What are p-values? {.smaller}
+
+<div style="font-size:80%">
+In statistics, the <span style="color:#6A5ACD; font-weight:bold;">p-value</span> is defined as the probability of observing a test statistic that is at least as extreme as actually observed, assuming that the null hypothesis $H_0$ is true.  
+
+Informally, <span style="color:purple;">a p-value can be understood as a measure of plausibility of the null hypothesis given the data</span>. A small p-value indicates strong evidence against $H_0$.  
+
+When the p-value is small enough (i.e., smaller than the significance level $\alpha$), the test based on the null and alternative hypotheses is considered <span style="color:purple;">significant</span>, meaning we reject the null hypothesis in favor of the alternative. This is generally what we want because it "verifies" our (research) hypothesis.  
+
+When the p-value is not small enough, with the available data, we cannot reject the null hypothesis, so nothing can be concluded. 🤔  
+
+The obtained p-value summarizes the <span style="color:purple;">incompatibility between the data and the model</span> constructed under the set of assumptions.  
+
+::: {.figure style="text-align:center;"}
+<span style="font-size:0.9em; color:#6A5ACD;">"Absence of evidence is not evidence of absence."</span> <sup><span style="font-size:0.7em;">👋</span></sup>
+:::
+
+<span style="font-size:0.5em">👋 From the British Medical Journal.</span>
+</div>
+
+---
+
+## How to understand p-values? {.smaller}
+
+```{r, out.width = "30%", echo = F}
+include_graphics("../class3/img/p_value.png")
+```
+
+<span style="font-size:0.8em;">👋 If you want to know more have a look [here](https://xkcd.com/1478/).</span>
+
+---
+
+## P-values may be controversial {.smaller}
+
+<span style="color:purple;">P-values have been misused</span> many times because understanding what they mean is not intuitive!
+
+::: {.figure style="text-align:center;"}
+{{< video https://youtu.be/OEUJzKtCt00 width=800 height=450 >}}
+:::
+
+<span style="font-size:0.8em;">👋 If you want to know more have a look [here](https://fivethirtyeight.com/features/statisticians-found-one-thing-they-can-agree-on-its-time-to-stop-misusing-p-values/).</span>
+
+---
+
+## Quick review: Normal distribution {.smaller}
+
+<div style="font-size:80%">
+$$Y\sim N(\mu,\sigma^{2}), \ \ \ \ \ f_{Y}(y) = \frac{1}{\sqrt{2\pi{\color{drawColor6} \sigma}^{2}}}\ e^{-\frac{(y-{\color{drawColor6} \mu})^{2}}{2{\color{drawColor6} \sigma}^{2}}}$$
+
+$$\mathbb{E}[Y] = \mu, \ \ \ \ \ \ \ \ \ \ \ \ \text{Var}[Y] = \sigma^{2},$$
+
+$$Z = \frac{Y-\mu}{\sigma} \sim N(0,1), \ \ \ \ \ f_{Z}(z) = \frac{1}{\sqrt{2\pi}}\ e^{-\frac{z^{2}}{2}}.$$
+
+<span style="color:blue;">Probability density function of a normal distribution:</span>
+</div>
+
+
+
+```{r, normal, out.width="60%", echo = F}
+include_graphics("../class3/img/standardnormalpdf2.png")
+```
+
+
+---
+
+## Two-sample location tests {.smaller}
+
+In practice, we often encounter problems where our goal is <span style="color:purple;">to compare the means (or locations) of two samples</span>. For example,
+
+1. A scientist is interested in comparing the vaccine efficacy of the Pfizer-BioNTech and the Moderna vaccine.
+
+2. A bank wants to know which of two proposed plans will most increase the use of its credit cards.
+
+3. A psychologist wants to compare male and female college students' impression on a selected webpage.
+
+We will discuss three <span style="color:purple;">two-sample location tests</span>:
+
+1. <span style="color:blue;">Two independent sample Student's t-test</span>
+
+2. <span style="color:blue;">Two independent sample Welch's t-test</span>
+
+3. <span style="color:blue;">Two independent sample Mann-Whitney-Wilcoxon test</span>
+
+---
+
+## Two independent sample Student's t-test {.smaller}
+
+This test considers the following assumed model for group <span style="color:#6A5ACD; font-weight:bold;">A</span> and <span style="color:#06bcf1; font-weight:bold;">B</span>
+
+<div style="text-align:center;">
+$$X_{i(g)} = {\color{#eb078e}{\mu_{g}}}\hspace{0.1cm}+\hspace{0.1cm} \varepsilon_{i(g)} = \mu + {\color{#eb078e}{\delta_{g}}} \hspace{0.1cm}+\hspace{0.1cm} \varepsilon_{i(g)},$$
+</div>
+where $g=A,B$, $i=1,...,n_{g}$, $\varepsilon_{i(g)} \overset{iid}{\sim} N(0,\color{#eb078e}{\sigma^{2}}$$)$ and $\sum n_{g}\delta_{g} =0$. 
+
+📝 $\color{#6A5ACD}{n_A}$ $=$ sample size of group <span style="color:#6A5ACD; font-weight:bold;">A</span>, $\color{#6A5ACD}{\mu_{A} = \mu + \delta_A}$ $=$ population mean of group <span style="color:#6A5ACD; font-weight:bold;">A</span>, $\color{#06bcf1}{n_B}$ and $\color{#06bcf1}{\mu_{B} = \mu + \delta_B}$ are similarly defined for group <span style="color:#06bcf1; font-weight:bold;">B</span>.
+
+Hypotheses:
+
+<div style="text-align:center;">
+$H_0: \color{#6A5ACD}{\mu_A} \hspace{0.1cm}$$-\hspace{0.1cm} \color{#06bcf1}{\mu_B} \color{#eb078e}{=} \hspace{0.1cm}$$\mu_0\ \ \ \ \text{and} \ \ \ \ H_a: \color{#6A5ACD}{\mu_A}\hspace{0.1cm}$$-\hspace{0.1cm} \color{#06bcf1}{\mu_B} \ \hspace{0.1cm}$$\hspace{0.1cm} \big[ \color{#eb078e}{>}\hspace{0.1cm}$$\hspace{0.1cm} \text{ or } \color{#eb078e}{<}\hspace{0.1cm}$$\hspace{0.1cm} \text{ or } \color{#eb078e}{\neq}$$\big]\hspace{0.1cm}\mu_0.$
+</div>
+
+Test statistic's distribution under $H_0$:
+
+$$
+\color{#b4b4b4}{T = \frac{(\overline{X}_{A}-\overline{X}_{B})-\mu_0}{s_{p}\sqrt{n_{A}^{-1}+n_{B}^{-1}}} \ {\underset{H_0}{\sim}} \ \text{Student}(n_{A}+n_{B}-2).}
+$$
+
+---
+
+## Discussion — Student's t-test {.smaller}
+
+Python function:  
+
+
+<div style="font-size: 1.5em;">
+```{python, eval = FALSE, echo = TRUE}
+from scipy import stats
+
+stats.ttest_ind(a = ..., b = ..., alternative = ..., equal_var = True)
+```
+</div>
+
+This test strongly relies on the <span style="color:purple;">assumed absence of outliers</span>. If outliers appear to be present the Mann-Whitney-Wilcoxon test (see later) is (probably) a better option.
+
+For moderate and small sample sizes, the sample distribution should be at least <span style="color:purple;">approximately normal</span> with no strong skewness to ensure the reliability of the test.
+
+In practice, the assumption of equal variance is hard to verify so <span style="color:purple; font-weight:bold;">we recommend to avoid this test in practice</span>.
+
+
+---
+
+## Two independent sample Welch's t-test {.smaller}
+
+This test considers the following assumed model for group <span style="color:#6A5ACD; font-weight:bold;">A</span> and <span style="color:#06bcf1; font-weight:bold;">B</span>
+
+<div style="text-align:center;">
+$$X_{i(g)} = {\color{#eb078e}{\mu_{g}}}\hspace{0.1cm}+\hspace{0.1cm} \varepsilon_{i(g)} = \mu + {\color{#eb078e}{\delta_{g}}} \hspace{0.1cm}+\hspace{0.1cm} \varepsilon_{i(g)},$$
+</div>
+where $g=A,B$, $i=1,...,n_{g}$, $\varepsilon_{i(g)} \overset{iid}{\sim} N(0,\color{#eb078e}{\sigma_g^{2}}$$)$ and $\sum n_{g}\delta_{g} =0$. 
+
+📝 $\color{#6A5ACD}{n_A}$ $=$ sample size of group <span style="color:#6A5ACD; font-weight:bold;">A</span>, $\color{#6A5ACD}{\mu_{A} = \mu + \delta_A}$ $=$ population mean of group <span style="color:#6A5ACD; font-weight:bold;">A</span>, $\color{#06bcf1}{n_B}$ and $\color{#06bcf1}{\mu_{B} = \mu + \delta_B}$ are similarly defined for group <span style="color:#06bcf1; font-weight:bold;">B</span>.
+
+Hypotheses:
+
+<div style="text-align:center;">
+$$H_0: {\color{#6A5ACD}{\mu_A}} \hspace{0.1cm}-\hspace{0.1cm} {\color{#06bcf1}{\mu_B}} {\color{#eb078e}{=}} \hspace{0.1cm}\mu_0\ \ \ \ \text{and} \ \ \ \ H_a: {\color{#6A5ACD}{\mu_A}}\hspace{0.1cm}-\hspace{0.1cm} {\color{#06bcf1}{\mu_B}} \ \hspace{0.1cm}\hspace{0.1cm} \big[ {\color{#eb078e}{>}}\hspace{0.1cm}\hspace{0.1cm} \text{ or } {\color{#eb078e}{<}}\hspace{0.1cm}\hspace{0.1cm} \text{ or } {\color{#eb078e}{\neq}}\big]\hspace{0.1cm}\mu_0.$$
+</div>
+
+Test statistic's distribution under $H_0$:
+
+$$
+\color{#b4b4b4}{T = \frac{(\overline{X}_{A}-\overline{X}_{B})-\mu_0}{\sqrt{s^2_A/n_{A} + s^2_B/n_{B}}} \ {\underset{H_0}{\sim}} \ \text{Student}(df).}
+$$
+
+
+---
+
+## Discussion — Welch's t-test {.smaller}
+
+Python function:  
+
+
+<div style="font-size: 1.5em;">
+```{python, eval = FALSE, echo = TRUE}
+
+from scipy import stats
+
+stats.ttest_ind(a = ..., b = ..., alternative = ..., equal_var = False)
+```
+</div>
+
+This test strongly relies on the <span style="color:purple;">assumed absence of outliers</span>. If outliers appear to be present the Mann-Whitney-Wilcoxon test (see later) is (probably) a better option.
+
+For moderate and small sample sizes, the sample distribution should be at least <span style="color:purple;">approximately normal</span> with no strong skewness to ensure the reliability of the test.
+
+This test does not require the variances of the two groups to be equal. If the variances of the two groups are the same (which is rather unlikely in practice), the Welch's t-test loses a little bit of power compared to the Student's t-test.
+
+The computation of $df$ (i.e. the degrees of freedom of the distribution under the null) is beyond the scope of this class.
+
+
+
+---
+
+## Mann-Whitney-Wilcoxon test {.smaller}
+
+This test considers the following assumed model for group <span style="color:#6A5ACD; font-weight:bold;">A</span> and <span style="color:#06bcf1; font-weight:bold;">B</span>
+
+<div style="text-align:center;">
+$X_{i(g)} = \color{#eb078e}{\theta_{g}}\hspace{0.1cm}$$+\hspace{0.1cm} \varepsilon_{i(g)} = \theta + \color{#eb078e}{\delta_{g}} \hspace{0.1cm}$$+\hspace{0.1cm} \varepsilon_{i(g)}$,
+</div>
+where $g=A,B$, $i=1,...,n_{g}$, $\varepsilon_{i(g)} \overset{iid}{\sim} N(0,\color{#eb078e}{\sigma^{2}}$$)$ and $\sum n_{g}\delta_{g} =0$. 
+
+📝 $\color{#6A5ACD}{n_A}$ $=$ sample size of group <span style="color:#6A5ACD; font-weight:bold;">A</span>, $\color{#6A5ACD}{\theta_{A} = \theta + \delta_A}$ $=$ population mean of group <span style="color:#6A5ACD; font-weight:bold;">A</span>, $\color{#06bcf1}{n_B}$ and $\color{#06bcf1}{\theta_{B} = \theta + \delta_B}$ are similarly defined for group <span style="color:#06bcf1; font-weight:bold;">B</span>.
+
+Hypotheses:
+
+<div style="text-align:center;">
+$H_0: \color{#6A5ACD}{\theta_A} \hspace{0.1cm}$$-\hspace{0.1cm} \color{#06bcf1}{\theta_B} \color{#eb078e}{=} \hspace{0.1cm}$$\theta_0\ \ \ \ \text{and} \ \ \ \ H_a: \color{#6A5ACD}{\theta_A}\hspace{0.1cm}$$-\hspace{0.1cm} \color{#06bcf1}{\theta_B} \ \hspace{0.1cm}$$\hspace{0.1cm} \big[ \color{#eb078e}{>}\hspace{0.1cm}$$\hspace{0.1cm} \text{ or } \color{#eb078e}{<}\hspace{0.1cm}$$\hspace{0.1cm} \text{ or } \color{#eb078e}{\neq}$$\big]\hspace{0.1cm}\theta_0.$
+</div>
+
+Test statistic's distribution under $H_0$:
+
+$$
+\color{#b4b4b4}{Z = \frac{\sum_{i=1}^{n_{B}}R_{i(g)}-[n_{B}(n_{A}+n_{B}+1)/2]}{\sqrt{n_{A}n_{B}(n_{A}+n_{B}+1)/12}},}
+$$
+<span style="color:grey;">where</span> $\color{#b4b4b4}{R_{i(g)}}$ <span style="color:grey;">denotes the global rank of the</span> $\color{#b4b4b4}{i}$<span style="color:grey;">-th observation of group</span> $\color{#b4b4b4}{g}$<span style="color:grey;">.</span>
+
+---
+
+## Discussion – Mann–Whitney–Wilcoxon {.smaller}
+
+Python function:
+
+<div style="font-size: 1.5em;">
+```{python, eval = FALSE, echo = TRUE}
+from scipy import stats
+
+stats.ranksums(a = ..., b = ...)
+```
+</div>
+
+
+This test is "<span style="color:purple;">robust</span>" in the sense that (unlike the t-tests) it is not overly affected by outliers.
+
+For the Mann–Whitney–Wilcoxon test to be comparable to the t-tests (i.e. testing for the mean) we need to assume <span style="color:#6A5ACD; font-weight:bold;"> symmetric distributions </span> and <span style="color:#6A5ACD; font-weight:bold;"> equality in variances </span>.  
+
+Then, we have $\color{#6A5ACD}{\theta_A = \mu_A}$ and $\color{#06bcf1}{\theta_B = \mu_B}$.
+  
+Compared to the t-tests, the Mann–Whitney–Wilcoxon test is less powerful if their requirements (Gaussian and possibly same variances) are met.
+
+The distribution of this method under the null is complicated and can be obtained by different methods (e.g. exact, asymptotic normal, ...).  
+The details are beyond the scope of this class.
+
+---
+
+
+## Comparing diets A and B {.smaller}
+
+### Graph
+```{r dietB, out.width="80%", echo=FALSE}
+include_graphics("../class3/img/dietAB.png")
+```
+---
+
+
+## Import
+```{python, echo=TRUE}
+# Import data
+import pandas as pd
+diet = pd.read_csv("/Users/filipposalmaso/Documents/Temporary_Stuff/Data-Science_copy/diet.csv")
+n = 5
+print(diet.head(n)) #print the first n rows of the dataset
+
+# Compute weight loss
+diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
+
+# Select diet
+posA = diet["diet.type"] == "A"
+posB = diet["diet.type"] == "B"
+
+# Variable of interest
+dietA = diet["weight.loss"][diet["diet.type"]=="A"]
+dietB = diet["weight.loss"][diet["diet.type"]=="B"]
+```
+---
+
+## Student
+```{python, echo=TRUE}
+from scipy.stats import ttest_ind
+
+t_stat, p_val = ttest_ind(dietA, dietB, alternative="two-sided", equal_var=True)
+
+print("t-statistic:", round(t_stat, 4))
+print("p-value:", round(p_val, 4))
+```
+---
+
+
+## Welch
+```{python, echo=TRUE}
+from scipy import stats
+
+# Welch's t-test (equal_var=False makes it Welch)
+t_stat, p_value = stats.ttest_ind(dietA, dietB, equal_var=False)
+
+print("t-statistic:", round(t_stat, 4))
+print("p-value:", round(p_value, 4))
+```
+---
+
+
+## Wilcox
+```{python, echo=TRUE}
+from scipy import stats
+
+# Wilcoxon rank-sum test (Mann–Whitney U)
+stat, p_value = stats.ranksums(dietA, dietB)
+
+print("Wilcoxon statistic:", round(stat, 4))
+print("p-value:", round(p_value, 4))
+```
+---
+
+
+
+## Results
+
+<span style="color:purple;">Define hypotheses</span>: $H_0: \mu_A = \mu_B, \quad H_a: \mu_A \neq \mu_B$
+
+
+<span style="color:purple;">Define</span>  
+We consider $\alpha = 5\%$
+
+<span style="color:purple;">Compute p-value</span>  
+Welch's *t*-test appears suitable in this case, and therefore, we obtain $\text{p-value} = 96.22\%$
+(see R output tab for details).
+
+<span style="color:purple;">Conclusion</span>  
+We have $\text{p-value} > \alpha$
+so we **fail to reject the null hypothesis** at the significance level of $5\%$.
+
+
+---
+
+## Problems with multiple samples
+
+<span style="font-size:0.8em;">
+In practice, we often even encounter situations where we need to <span style="color:purple;">compare the means of more than 2 groups</span>. For example, we want to compare the weight loss efficacy of several diets, say diets <span style="color:#6A5ACD; font-weight:bold;">A</span>, <span style="color:#06bcf1; font-weight:bold;">B</span>, <span style="color:#8bb174; font-weight:bold;">C</span>. Your theory could, for example, be the following: 0 < <span style="color:#6A5ACD;">$\mu_A$</span> <span style="color:black;">=</span> <span style="color:#06bcf1;">$\mu_B$</span> < <span style="color:#8bb174;">$\mu_C$</span>. A possible approach to evaluate its validity:
+
+1. **Show that** <span style="color:#8bb174;">$\mu_C$</span> **is greater than** <span style="color:#6A5ACD;">$\mu_A$</span> **and** <span style="color:#06bcf1;">$\mu_B$</span> (Test 1: $H_0:$ <span style="color:#6A5ACD;">$\mu_A$</span> $=$ <span style="color:#8bb174;">$\mu_C$</span>, $H_a:$ <span style="color:#6A5ACD;">$\mu_A$</span> $<$ <span style="color:#8bb174;">$\mu_C$</span>; Test 2: $H_0:$ <span style="color:#06bcf1;">$\mu_B$</span> $=$ <span style="color:#8bb174;">$\mu_C$</span>, $H_a:$ <span style="color:#06bcf1;">$\mu_B$</span> $<$ <span style="color:#8bb174;">$\mu_C$</span>). Here we hope to **reject $H_0$ in both cases**.
+
+2. **Show that** <span style="color:#6A5ACD;">$\mu_A$</span> **and** <span style="color:#06bcf1;">$\mu_B$</span> **are greater than 0** (Test 3: $H_0:$ <span style="color:#6A5ACD;">$\mu_A$</span> $=0$, $H_a:$ <span style="color:#6A5ACD;">$\mu_A$</span> $>0$; Test 4: $H_0:$ <span style="color:#06bcf1;">$\mu_B$</span> $=0$, $H_a:$ <span style="color:#06bcf1;">$\mu_B$</span> $>0$). Here we also hope to **reject $H_0$ in both cases**.
+
+3. **Compare** <span style="color:#6A5ACD;">$\mu_A$</span> **and** <span style="color:#06bcf1;">$\mu_B$</span> (Test 5: $H_0:$ <span style="color:#6A5ACD;">$\mu_A$</span> $=$ <span style="color:#06bcf1;">$\mu_B$</span>, $H_a:$ <span style="color:#6A5ACD;">$\mu_A$</span> $\neq$ <span style="color:#06bcf1;">$\mu_B$</span>). Here we hope **not to reject $H_0$**. ⚠️ This does **not imply** that <span style="color:#6A5ACD;">$\mu_A$</span> $=$ <span style="color:#06bcf1;">$\mu_B$</span> is true, but at least the result would not contradict our theory.
+</span>
+
+---
+
+## Is there a problem in doing many tests? {.smaller}
+
+<span style="color:#6A5ACD; font-weight:bold;">Are jelly beans causing acne?</span> Maybe... but why only <span style="color:green; font-weight:bold;">green</span> ones? 🤨
+
+```{r green, out.width="45%", echo=FALSE}
+include_graphics("../class3/img/green.png")
+```
+<span style="font-size:0.7em;">Source: <a href="https://xkcd.com/882/">xkcd</a></span>
+
+
+---
+
+## Are jelly beans causing acne? {.smaller}
+
+```{r green1, out.width="85%", echo=FALSE}
+include_graphics("../class3/img/green1.png")
+```
+
+<span style="font-size:0.7em;">Source: <a href="https://xkcd.com/882/">xkcd</a></span>
+
+---
+
+## Maybe a specific color? {.smaller}
+
+```{r green2, out.width="85%", echo=FALSE}
+include_graphics("../class3/img/green2.png")
+```
+
+<span style="font-size:0.7em;">Source: <a href="https://xkcd.com/882/">xkcd</a></span>
+
+
+---
+
+## Maybe a specific color? {.smaller}
+
+```{r green3, out.width="85%", echo=FALSE}
+include_graphics("../class3/img/green3.png")
+```
+
+<span style="font-size:0.7em;">Source: <a href="https://xkcd.com/882/">xkcd</a></span>
+
+---
+
+## And finally... {.smaller}
+
+
+```{r green4, out.width="85%", echo=FALSE}
+include_graphics("../class3/img/green.png")
+```
+
+<span style="font-size:0.7em;">Source: <a href="https://xkcd.com/882/">xkcd</a></span>
+
+
+👋 <span class="smallest">If you want to know more about this comic, have a look <a href="https://www.explainxkcd.com/wiki/index.php/882:_Significant">here</a>.</span>
+
+
+---
+
+## Multiple testing can be dangerous! {.smaller}
+
+- Remember that a p-value is <span style="color:blue;">random</span> as its value depends on the data.
+- If multiple hypotheses are tested, the chance of observing a rare event increases, and therefore, the chance to incorrectly reject a null hypothesis (i.e. making a Type I error) increases.
+- For example, if we consider $k$ (independent) tests (whose null hypotheses are all correct), we have
+
+$$\begin{align}
+\alpha_k &= \Pr(\text{reject } H_0 \text{ at least once}) \\
+&= 1 - \Pr(\text{not reject } H_0 \text{ test 1}) \times \ldots \times \Pr(\text{not reject } H_0 \text{ test k})\\
+&= 1 - (1-\alpha) \times \ldots \times (1-\alpha) = 1 - (1-\alpha)^k
+\end{align}$$
+
+- Therefore, $\alpha_k$ increases rapidly with $k$ (e.g. $\alpha_1 = 0.05$, $\alpha_2 \approx 0.098$, $\alpha_{10} \approx 0.4013$, $\alpha_{100} \approx 0.9941$).
+- Hence <span style="color:purple;">performing multiple tests, with the same or different data, is dangerous</span> ⚠️ (but very common! 😟) as it can lead to significant results, when actually there are none!
+
+---
+
+## Possible solutions {.smaller}
+
+Suppose that we are interested in making $k$ tests and that we want the probability of rejecting the null at least once (assuming the null hypotheses to be correct for all tests) $\alpha_k$ to be equal to $\alpha$ (typically 5%). Instead of using $\alpha$ for the individual tests we will use $\alpha_c$ (i.e. a corrected $\alpha$). Then, for $k$ (potentially <span style="color:blue;">dependent</span>) tests we have
+
+$$\begin{align}
+\alpha_k &= \alpha = \Pr(\text{reject } H_0 \text{ at least once}) \\
+&= \Pr(\text{reject } H_0 \text{ test 1} \text{ OR } \ldots \text{ OR } \text{reject } H_0 \text{ test k})\\
+&{\color{#eb078e}{\leq}} \sum_{i = 1}^k \Pr(\text{reject } H_0 \text{ test i}) = \alpha_c \times k.
+\end{align}$$
+
+Solving for $\alpha_c$ we obtain: $\color{#6A5ACD}{\alpha_c = \alpha/k}$, which is called <span style="color:purple;">Bonferroni correction</span>. By making use of the <span style="color:purple;">Boole's inequality</span>, this approach does not require any assumptions about dependence among the tests or about how many of the null hypotheses are true.
+
+---
+
+## Possible solutions {.smaller}
+
+The Bonferroni correction can be conservative if there are a large number of tests, as it comes at the cost of reducing the power of the individual tests (e.g. if $\alpha = 5\%$ and $k = 20$, we get $\alpha_c = 0.05/20 = 0.25\%$). There exists a (slightly) "tighter" bound for $\alpha_k$, which is given by
+
+$$
+\alpha_k = \Pr(\text{reject } H_0 \text{ at least once}) \hspace{0.1cm} {\color{#eb078e}{\leq}} \hspace{0.1cm} 1 - (1 - \alpha_c)^k.
+$$
+Solving for $\alpha_c$ we obtain: $\color{#6A5ACD}{\alpha_c = 1 - (1 - \alpha)^{1/k}}$, which is called  <span style="color:purple;">Dunn–Šidák correction</span>. This correction is (slightly) less stringent than the Bonferroni correction (since $1 - (1 - \alpha)^{1/k} > \alpha/k$ for $k \geq 2$).
+
+There exist many other alternative methods for multiple testing corrections. It is important to mention that when $\text{\textit{k}}$ is large (say $>$ 100) the Bonferroni and Dunn–Šidák corrections become inapplicable and methods based on the idea of <span style="color:purple;">False Discovery Rate</span> should be preferred. However, these recent methods are beyond the scope of this class.
+
+---
+
+## Multiple-sample location tests {.smaller}
+
+To compare several means of different populations, a standard approach is to start our analysis by using the <span style="color:purple;">multiple-sample location tests</span>. More precisely, we proceed our analysis with the following steps:
+
+  - <span style="color:blue;">Step 1:</span> We first perform the multiple-sample location tests, where the null hypothesis states that all the locations are the same. If we cannot reject the null hypothesis, we stop our analysis here. Otherwise, we move on to Step 2.
+  - <span style="color:blue;">Step 2:</span> We compare the groups mutually (using $\alpha_c$) with two-sample location tests in order to verify our hypothesis.
+  
+We will discuss three <span style="color:purple;">multiple-sample location tests</span>:
+
+ 1. <span style="color:blue;">Fisher's one-way ANalysis Of VAriance (ANOVA)</span>
+ 2. <span style="color:blue;">Welch's one-way ANOVA</span>
+ 3. <span style="color:blue;">Kruskal-Wallis test</span>
+ 
+---
+
+## Fisher's one-way ANOVA {.smaller}
+
+This test considers the following assumed model for G groups
+$$X_{i(g)} = {\color{#eb078e}{\mu_{g}}} + \varepsilon_{i(g)} = \mu + {\color{#eb078e}{\delta_{g}}} + \varepsilon_{i(g)},$$
+where $g=1,\ldots, G$, $i=1,...,n_{g}$, $\varepsilon_{i(g)} \overset{iid}{\sim} N(0,{\color{#eb078e}{\sigma^{2}}})$ and $\sum n_{g}\delta_{g}=0$. 
+
+📝 $n_i =$ sample size of group $i$, $\mu_i = \mu + \delta_i =$ population mean of group $i$, $i=1,\ldots, G$.
+
+Hypotheses:
+$$H_0: {\color{#6A5ACD}{\mu_1}} {\color{#eb078e}{=}} {\color{#06bcf1}{\mu_2}} {\color{#eb078e}{=}} \ldots {\color{#eb078e}{=}} {\color{#8bb174}{\mu_G}} \ \ \ \ \text{and} \ \ \ \ H_a: \mu_i {\color{#eb078e}{\neq}} \mu_j \ \ \text{for at least one pair of} \ \ (i,j).$$
+
+Test statistic's distribution under $H_0$:
+
+$\color{#b4b4b4}{F = \frac{N s^2_{\overline{X}}}{s_p^2} \ {\underset{H_0}{\sim}} \ \text{Fisher}(G-1, N-G),}$
+<span style="color:grey;">where</span> $\small \color{#b4b4b4}{s^2_{\overline{X}} = \frac{1}{G-1} \sum_{g=1}^G \frac{n_g}{N} (\overline{X}_g - \overline{X})^2}$<span style="color:grey;">,
+
+</span> $\small \color{#b4b4b4}{s_p^2 = \frac{1}{N-G} \sum_{g=1}^G (n_g-1)s_g^2}$<span style="color:grey;">,</span> $\small \color{#b4b4b4}{N = \sum_{g=1}^G n_g}$<span style="color:grey;">, and</span> $\small \color{#b4b4b4}{\overline{X} = \frac{1}{N} \sum_{g=1}^G n_g \overline{X}_g}$<span style="color:grey;">.</span>
+
+---
+
+## Discussion - Fisher's one-way ANOVA {.smaller}
+
+Python function: 
+
+<div style="font-size: 1.5em;">
+```{python, eval = FALSE, echo = TRUE}
+
+from scipy import stats
+
+stats.f_oneway(group_A, group_B, group_C)
+```
+</div>
+
+This test strongly relies on the <span style="color:purple;">assumed absence of outliers</span>. If outliers appear to be present the Kruskal-Wallis test (see later) is (probably) a better option.
+
+For moderate and small sample sizes, the sample distribution should be at least <span style="color:purple;">approximately normal</span> with no strong skewness to ensure the reliability of the test.
+
+In practice, the assumption of equal variance is hard to verify so <span style="color:purple; font-weight:bold;">we recommend to avoid this test in practice</span>.
+
+---
+
+## Welch's one-way ANOVA {.smaller}
+
+This test considers the following assumed model for G groups
+$$X_{i(g)} = {\color{#eb078e}{\mu_{g}}} + \varepsilon_{i(g)} = \mu + {\color{#eb078e}{\delta_{g}}} + \varepsilon_{i(g)},$$
+where $g=1,\ldots, G$, $i=1,...,n_{g}$, $\varepsilon_{i(g)} \overset{iid}{\sim} N(0,{\color{#eb078e}{\sigma_g^{2}}})$ and $\sum n_{g}\delta_{g}=0$. 
+
+Hypotheses:
+$$H_0: {\color{#6A5ACD}{\mu_1}} {\color{#eb078e}{=}} {\color{#06bcf1}{\mu_2}} {\color{#eb078e}{=}} \ldots {\color{#eb078e}{=}} {\color{#8bb174}{\mu_G}} \ \ \ \ \text{and} \ \ \ \ H_a: \mu_i {\color{#eb078e}{\neq}} \mu_j \ \ \text{for at least one pair of} \ \ (i,j).$$
+
+Test statistic's distribution under $H_0$:
+$$\color{#b4b4b4}{F^* = \frac{s^{*^2}_{\overline{X}}}{1+\frac{2(G-2)}{3\Delta}} \ {\underset{H_0}{\sim}} \ \text{Fisher}(G-1, \Delta),}$$
+<span style="color:grey;">where</span> $\color{#b4b4b4}{s^{*^2}_{\overline{X}} = \frac{1}{G-1} \sum_{g=1}^G w_g (\overline{X}_g - \overline{X}^*)^2}$<span style="color:grey;">,</span> $\color{#b4b4b4}{\Delta = [\frac{3}{G^2-1} \sum_{g=1}^G \frac{1}{n_g} (1-\frac{w_g}{\sum_{g=1}^G w_g})]^{-1}}$<span style="color:grey;">,</span> $\color{#b4b4b4}{w_g = \frac{n_g}{s_g^2}}$<span style="color:grey;">,</span>
+
+<span style="color:grey;">and</span> $\small \color{#b4b4b4}{\overline{X}^* = \sum_{g=1}^G \frac{w_g\overline{X}_g}{\sum_{g=1}^G w_g}}$<span style="color:grey;">.</span>
+
+---
+
+## Discussion - Welch's one-way ANOVA {.smaller}
+
+Python function: 
+
+<div style="font-size: 1.5em;">
+```{python, eval = FALSE, echo = TRUE}
+
+from statsmodels.stats.oneway import anova_oneway
+
+anova_oneway(data, groups=groups, use_var='unequal', welch_correction=True)
+```
+</div>
+
+This test strongly relies on the <span style="color:purple;">assumed absence of outliers</span>. If outliers appear to be present the Kruskal-Wallis test (see later) is (probably) a better option.
+
+For moderate and small sample sizes, the sample distribution should be at least <span style="color:purple;">approximately normal</span> with no strong skewness to ensure the reliability of the test.
+
+This test does not require the variances of the groups to be equal. If the variances of all the groups are the same (which is rather unlikely in practice), the Welch's one-way ANOVA loses a little bit of power compared to the Fisher's one-way ANOVA.
+
+---
+
+## Kruskal-Wallis test {.smaller}
+
+This test considers the following assumed model for G groups
+$$X_{i(g)} = {\color{#eb078e}{\theta_{g}}} + \varepsilon_{i(g)} = \theta + {\color{#eb078e}{\delta_{g}}} + \varepsilon_{i(g)},$$
+where $g=1,\ldots, G$, $i=1,...,n_{g}$, $\varepsilon_{i(g)} \overset{iid}{\sim} N(0,{\color{#eb078e}{\sigma^{2}}})$ and $\sum n_{g}\delta_{g}=0$. 
+
+📝 $n_i =$ sample size of group $i$, $\theta_i = \theta + \delta_i =$ population <span style="color:purple;">location</span> of group $i$, $i=1,\ldots, G$.
+
+Hypotheses:
+$$H_0: {\color{#6A5ACD}{\theta_1}} {\color{#eb078e}{=}} {\color{#06bcf1}{\theta_2}} {\color{#eb078e}{=}} \ldots {\color{#eb078e}{=}} {\color{#8bb174}{\theta_G}} \ \ \ \ \text{and} \ \ \ \ H_a: \theta_i {\color{#eb078e}{\neq}} \theta_j \ \ \text{for at least one pair of} \ \ (i,j).$$
+
+
+$\color{#b4b4b4}{\text{Test statistic's distribution under } H_0: \quad 
+H = \frac{\frac{12}{N(N+1)} \sum_{g=1}^G \frac{\overline{R}_g}{n_g}-3(N-1)}{1-\frac{\sum_{v=1}^V{t_v^3 - t_v}}{N^3 - N}} 
+\ {\underset{H_0}{\sim}} \ \mathcal{X}(G-1)}$
+
+$\color{#b4b4b4}{\text{where } \overline{R}_g = \frac{1}{n_g} \sum_{i=1}^{n_g} R_{i(g)} \ \text{with } R_{i(g)} \ \text{denoting the global rank of the } i^{th} \ \text{observation of group } g,}$
+
+$\color{#b4b4b4}{V \ \text{is the number of different values/levels in } X \ \text{and } t_v \ \text{denotes the number of times a given}}$
+
+$\color{#b4b4b4}{\text{value/level occurred in } X.}$
+
+---
+
+## Discussion - Kruskal-Wallis test {.smaller}
+
+Python function: 
+
+<div style="font-size: 1.5em;">
+```{python, eval = FALSE, echo = TRUE}
+
+from scipy import stats
+
+stats.kruskal(group_A, group_B, group_C)
+```
+</div>
+
+
+- This test is "<span style="color:#eb078e;">robust</span>" in the sense that (unlike the one-way ANOVA) it is not overly affected by outliers.
+- For the Kruskal-Wallis test to be comparable to the one-way ANOVAs (i.e. testing for the mean) we need to assume: (1) The distributions are symmetric, (2) the variances are the same. Then, we have $\color{#eb078e}{\theta_i = \mu_i,\hspace{0.1cm} i=1,\ldots,G}$.
+- Compared to the one-way ANOVAs, the Kruskal-Wallis test is less powerful if their requirements (Gaussian and possibly same variances) are met.
+
+---
+
+## Exercise: Comparing diets A, B and C {.smaller}
+
+### Graph {.smaller}
+
+```{R, dietABC, out.width = "80%", echo = F}
+include_graphics("../class3/img/dietABC.png")
+```
+
+---
+
+## Exercise: Comparing diets A, B and C {.smaller}
+
+### Import {.smaller}
+
+<div style="font-size:1.5em;">
+```{python, echo=TRUE}
+# Import data
+import pandas as pd
+diet = pd.read_csv("/Users/filipposalmaso/Documents/Temporary_Stuff/Data-Science_copy/diet.csv")
+diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
+
+# Variable of interest
+dietA = diet["weight.loss"][diet["diet.type"]=="A"]
+dietB = diet["weight.loss"][diet["diet.type"]=="B"]
+dietC = diet["weight.loss"][diet["diet.type"]=="C"]
+
+# Create data frame
+dat = pd.DataFrame({
+    "response": list(dietA) + list(dietB) + list(dietC),
+    "groups": (["A"] * len(dietA)) + (["B"] * len(dietB)) + (["C"] * len(dietC))
+})
+```
+</div>
+
+---
+
+## Motivating Example: Reading Ability {.smaller}
+
+### Problem {.smaller}
+
+An educator believes that <span style="color:blue;">new directed reading activities</span> in the classroom can help elementary school students (6-12 years old) improve their reading ability. She arranged a pilot study where some students (chosen at random) of age 6 start to take part in these activities <span style="color:blue; font-weight:bold;">(treatment group)</span>, meanwhile other students continue with the <span style="color:purple;">classical curriculum</span> <span style="color:blue; font-weight:bold;">(control group)</span>. The educator wishes to evaluate the effectiveness of these activities so all students are given a Degree of Reading Power (DRP) test, which assesses their reading ability. 
+
+<span style="color:purple;">Can we conclude that these new directed reading activities can help elementary school students improve their reading ability?</span>
+
+## Motivating Example: Reading Ability {.smaller}
+
+### Data {.smaller}
+
+<div style="font-size:1.5em;">
+```{python, echo=TRUE}
+import pandas as pd
+
+reading = pd.read_csv("/Users/filipposalmaso/Documents/Temporary_Stuff/Data-Science_copy/reading.csv")
+
+control = reading.loc[reading["group"] == "Control", "score"]
+print(control.head())
+
+treatment = reading.loc[reading["group"] == "Treatment", "score"]
+print(treatment.head())
+
+```
+```{python, eval=FALSE}
+import pandas as pd
+
+reading = pd.read_csv("/Users/filipposalmaso/Documents/Temporary_Stuff/Data-Science_copy/reading.csv")
+
+control = reading.loc[reading["group"] == "Control", "score"]
+print(control.head())
+
+treatment = reading.loc[reading["group"] == "Treatment", "score"]
+print(treatment.head())
+
+```
+</div>
+
+
+---
+
+## Motivating Example: Reading Ability {.smaller}
+
+### Graph {.smaller}
+
+```{R, readingboxplot, out.width = "80%", echo = F}
+include_graphics("../class3/img/boxplot_reading.png")
+```
+
+---
+
+## Motivating Example: Reading Ability {.smaller}
+
+### Test {.smaller}
+
+1. <span style="color:blue;">Define hypotheses:</span> $H_0: \mu_T = \mu_C$ and $H_a: \mu_T > \mu_C$.
+2. <span style="color:blue;">Define</span> $\color{#6A5ACD}{\alpha}$: We consider $\alpha = 5\%$.
+3. <span style="color:blue;">Compute p-value</span>: p-value = $97.12\%$ (see Python code tab for details).
+4. <span style="color:blue;">Conclusion:</span> We have p-value > $\alpha$ so we cannot reject the null hypothesis at the significance level of 5%. 
+
+<span style="color:purple; font-weight:bold;">Remark:</span> Notice that the p-value for the test with opposite hypotheses is actually $100\%-97.12\%=2.88\% < \alpha$ (Why? 🤔). So we conclude, at the significance level of 5%, that the classical curriculum without these new directed reading activities actually improve students' reading ability more compared to the curriculum with these activities. 😬
+
+---
+
+## Motivating Example: Reading Ability {.smaller}
+
+### `Python` Code {.smaller}
+
+<div style="font-size:1.5em;">
+```{python, echo=TRUE}
+t_test_reading, p_value_reading = stats.ttest_ind(
+    treatment, control, equal_var=True, alternative='greater'
+)
+
+print(f"t-test: {t_test_reading:.4f}")
+print(f"p-value: {p_value_reading:.4f}")
+
+```
+</div>
+
+---
+
+## Is our analysis comprehensive? {.smaller}
+
+The educator points out that only students of 6-8 years old have participated in the new directed reading activities. In other words, in the sample she collected, the students in the treatment group are only of age 6 to 8, whereas the students in the control group vary from 6 to 12 years old. <span style="color:purple;">Is age a potential explanation to the difference we observe among the students' reading ability?</span>
+
+To make sure that the analysis is reliable, she includes the age information of the students, which can be accessed as follows:
+
+<div style="font-size:1.5em;">
+```{python, echo=TRUE}
+treatment_age = reading.loc[reading["group"] == "Treatment", "age"]
+control_age   = reading.loc[reading["group"] == "Control", "age"]
+```
+</div>
+
+---
+
+## Should age be taken into account? {.smaller}
+
+```{R, readingpoint, out.width = "90%", echo = F}
+include_graphics("../class3/img/reading_points.png")
+```
+
+---
+
+## Regression analysis {.smaller}
+
+- Regression analysis corresponds to a set of statistical methods for estimating the <span style="color:purple;">relationships</span> between a response variable $Y$ of primary interest (also called the *outcome variable*) and some explanatory variables $X_1, \ldots, X_p$ (also called *covariates*, *regressors*, *features* or *predictors*).
+- The relationship between the response variable $Y$ and the covariates is not <span style="color:blue;">deterministic</span> and we model the <span style="color:blue;">conditional expected value</span> (i.e. $\mathbb{E}[Y | X_1, \ldots, X_p]$).
+- Therefore, we consider the following (general) model:
+$$Y_i = \mathbb{E}[Y_i | X_{i1}, \ldots, X_{ip}] + \varepsilon_i,$$where $\mathbb{E}[\varepsilon_i] = 0$ and $i=1,\ldots,n$.
+- <span style="color:purple;">Example</span>: $\mathbb{E}[\text{reading abilities}_i| \ \text{age}_i, \text{treatment}_i, \ldots]$.
+
+---
+
+## Linear regression {.smaller}
+
+- The most common form of regression analysis is <span style="color:#eb078e;">linear regression</span>, in which 
+the conditional expected value $\color{#373895}{\mathbb{E}[Y | X_1, \ldots, X_p]}$ takes the form
+$$\color{#373895}{\mathbb{E}[Y_i| X_{i1}, \ldots, X_{ip}]} = \color{#373895}{\beta_0 + \beta_1 X_1 + \ldots + \beta_p X_p}.$$
+and $\color{#eb078e}{\varepsilon_i \overset{iid}{\sim} N(0, \sigma^2)}$.
+- Our general model can be expressed as
+$$Y_i = \color{#373895}{\mathbb{E}[Y_i | X_{i1}, \ldots, X_{ip}]} + \varepsilon_i = \color{#373895}{\beta_0 + \sum_{j = 1}^p \beta_j X_{ij}} + \varepsilon_i,$$
+and therefore,
+$$Y_i \color{#eb078e}{ \, \sim \, N}\left(\color{#373895}{\beta_0 + \sum_{j = 1}^p \beta_j X_{ij}}, \color{#eb078e}{\sigma^2}\right).$$
+
+---
+
+## Linear regression {.smaller}
+
+Therefore, this approach makes two (<span style="color:#eb078e;">strong</span>) assumptions:
+
+1. The conditional expected value $\mathbb{E}[Y | X_1, \ldots, X_p]$ is assumed to be a linear function of the covariates.
+2. The errors are assumed to be $iid$ Gaussian, i.e. $\color{#eb078e}{\varepsilon_i \overset{iid}{\sim} N(0, \sigma^2)}$, at least when the sample size is small to medium.
+
+⚠️ <span style="color:#eb078e;">In practice, it is important to assess if these assumptions are plausible.</span>
+
+The parameters of the model (i.e. $\beta_0, \beta_1, \ldots, \beta_p$ and $\sigma^2$) can be estimated by several methods. The most commonly used is the <span style="color:#eb078e;">least squares</span> approach where $\beta_0, \beta_1, \ldots, \beta_p$ are chosen such that
+
+$$\small \sum_{i = 1}^n \varepsilon_i^2 = \sum_{i = 1}^n \left(Y_i- \mathbb{E}[Y_i | X_{i1}, \ldots, X_{ip}]\right)^2 = \sum_{i = 1}^n \left(Y_i- \beta_0 - \sum_{j = 1}^p \beta_j X_{ij}\right)^2$$
+is <span style="color:#eb078e;">minimized</span>, which then allows to estimate $\sigma^2$ further on.
+
+---
+
+## Anscombe's quartet {.smaller}
+
+```{R, out.width = "80%", echo = F}
+include_graphics("../class3/img/Anscombe.png")
+```
+
+
+<div style="font-size:0.7em;">
+👋 Source: [Wikipedia](https://en.wikipedia.org/wiki/Anscombe%27s_quartet).
+</div>
+
+---
+
+## Example: Reading ability assessment {.smaller}
+
+In the reading ability example, we can formulate a linear regression model (without interaction) as follows:
+$${\color{#e64173}{\text{Score}_i}} = \beta_0 + \beta_1 {\color{#6A5ACD}{\text{Group}_i}} + \beta_2 {\color{#20B2AA}{\text{Age}_i}} + \epsilon_i, \quad \epsilon_i \overset{iid}{\sim} N(0, \sigma^2).$$
+
+- $\color{#e64173}{\text{Score}_i}$: score of the DRP test of the $i$-th student.
+
+- $\color{#6A5ACD}{\text{Group}_i}$: indicator of participation of the new directed reading activities for the $i$-th student (i.e. $\color{#6A5ACD}{\text{Group}_i} = 1$ if participate and $\color{#6A5ACD}{\text{Group}_i} = 0$ if not participate).
+
+- $\color{#20B2AA}{\text{Age}_i}$: age of the $i$-th student (related to *<span style="color:#20B2AA;">time since start of treatment</span>*). 
+
+With this model the two groups can be compared as the age effect is taken into account. The goal of the educator is now to assess if $\beta_1$ is <span style="color:#eb078e;">significantly larger than 0</span>.
+
+---
+
+## Example: Reading ability assessment {.smaller}
+
+### `Python` Code {.smaller}
+
+<span style="color:#eb078e;">Python function</span>:
+
+<div style="font-size:1.5em;">
+```{python, eval = FALSE, echo = TRUE}
+import statsmodels.formula.api as smf
+
+# Fit linear model using formula syntax
+model = smf.ols(formula="y ~ x1 + x2 + ... + xp", data=mydata).fit()
+
+# Show results
+print(model.summary())
+```
+</div>
+
+
+
+## Example: Reading ability assessment {.smaller}
+
+### Output {.smaller}
+
+
+```{python, echo = FALSE}
+import pandas as pd
+import statsmodels.formula.api as smf
+
+# Import data (if you haven't already)
+reading = pd.read_csv("/Users/filipposalmaso/Documents/Temporary_Stuff/Data-Science_copy/reading.csv")
+
+# Fit a linear regression model
+mod1 = smf.ols(formula="score ~ group + age", data=reading).fit()
+
+# Show summary
+print(mod1.summary())
+```
+
+---
+
+## Interpretation of coefficients {.smaller}
+
+We can obtain the estimated coefficients. Specifically,
+
+- $\hat{\beta}_0 = -7.8639$ represents the estimated baseline average score of the DRP test at birth (but what does it mean? 🤨).
+
+- $\hat{\beta}_1 = 6.3771$ means that <span style="color:#eb078e;">for a student of the same age</span>, participating in the new directed reading activities is estimated to increase their average score of the DRP test by 6.3771.
+
+- $\hat{\beta}_2 = 6.6457$ means that <span style="color:#eb078e;">when a student receives the same treatment</span> (either participate or not in the activities), their average score increases by 6.6457 as they become 1 year older. 
+
+Regression coefficients represent the mean change in the response variable <span style="color:blue;">for one unit of change</span> in the predictor variable <span style="color:blue;">while holding other covariates in the model constant</span>.
+
+---
+
+## Interpretation of coefficient p-values {.smaller}
+
+- We notice that for each coefficient $\beta_j$, there is a corresponding p-value associated to the (Wald t-)test of $H_0: \beta_j = 0$ and $H_a: \beta_j \neq 0$. 
+
+- <span style="color:#eb078e;">A covariate with a small p-value (typically smaller than 5%) is considered to be a significant (meaningful) addition to the model</span>, as changes in the values of such covariate can lead to changes in the response variable. 
+
+- On the other hand, a large p-value (typically larger than 5%) suggests that the corresponding covariate is not (significantly) associated with changes in the response or that we don't have enough evidence (data) to show its effect.
+
+- In this example, the coefficient p-value associated to the `group` covariate is $2.6 \times 10^{-3}$%. <span style="color:blue;">This suggests that taking into account the effect of `age`, the reading abilities of the students receiving the treatment is significantly</span> <span style="color:blue; font-weight:bold;">different</span> <span style="color:blue;">from the control group, at the significance level of 5%.</span> But this is not what we want! 
+
+---
+
+## Interpretation of coefficient p-values {.smaller}
+
+In the linear regression output, the coefficient p-value (which we denote as $p$ below) corresponds to a two-sided test. We can use this result to compute the p-value of a one-sided test using the following relations:
+
+<div style="font-size:1.1em;">
+
+|                       | $\small H_a: \beta_j > 0$                              | $\small H_a: \beta_j < 0$                              |
+|-----------------------|:-----------------------------------------------------:|:------------------------------------------------------:|
+| $\small \hat{\beta_j} > 0$ | ✅ Correct tail (prob = $p/2$)                        | ⚠️ <span style="color:#ff5c5c;">Wrong tail</span> (prob = $1 - p/2$) |
+| $\small \hat{\beta_j} < 0$ | ⚠️ <span style="color:#ff5c5c;">Wrong tail</span> (prob = $1 - p/2$) | ✅ Correct tail (prob = $p/2$)                        |
+
+</div>
+
+<div style="font-size:0.9em;">
+✅ = rejection region corresponds to the alternative  
+⚠️ = rejection region is in the opposite direction of the alternative
+</div>
+
+
+In our example, $\beta_1 = 6.3771$ and $p=2.6 \times 10^{-3}\%$. So the p-value of the test with hypotheses $H_0: \beta_1=0$ and $H_a: \beta_1>0$ is $2.6 \times 10^{-3}\% /2 \approx 1.3 \times 10^{-3}\%  < \alpha$. So we can conclude that these new directed reading activities can <span style="color:#eb078e;">significantly improve</span> students' reading ability compared to classical curriculum. 
+
+<span style="color:blue;">However, is our model plausible?</span> 🤔
+
+---
+
+## How good is our model? 🤔 {.smaller}
+
+```{R, pointswithmod1, out.width = "90%", echo = F}
+include_graphics("../class3/img/points_with_mod1.png")
+```
+
+---
+
+## Could we use the $R^2$? {.smaller}
+
+- The <span style="color:#eb078e;">coefficient of determination</span>, denoted as $R^2$ and often referred to as R-squared, corresponds to the proportion of the variance in the response variable that is "explained" by the model.  
+- $\color{#6A5ACD}{R^2}$ <span style="color:blue;">gives certain information about the goodness of fit of a model.</span> It measures how well the regression predictions approximate the real data points. An $R^2$ of 1 indicates that the regression predictions perfectly fit the data.
+-  However, the value of $R^2$ is <span style="color:#eb078e;">not related to the adequacy of our model to the data.</span>
+- ⚠️ Moreover, adding new covariates to the current model <span style="color:blue;">always</span> increases $R^2$, whether the additional covariates are significant or not. Therefore, $R^2$ alone cannot be used as a meaningful comparison of models with different covariates.
+- The <span style="color:#eb078e;">adjusted</span> $\color{#e64173}{R^2}$ is a modification of $R^2$ that aims to limit this issue. 
+
+---
+
+## Rexthor, the Dog-Bearer! {.smaller}
+
+```{R, rsquare, out.width = "90%", echo = F}
+include_graphics("../class3/img/linear_regression.png")
+```
+
+<div style="font-size:0.8em;">
+👋 If you want to know more have a look [here](https://www.explainxkcd.com/wiki/index.php/1725:_Linear_Regression).
+</div>
+
+---
+
+## Model diagnostic {.smaller}
+
+```{R, diagmod1, out.width = "90%", echo = F}
+include_graphics("../class3/img/diag_mod1.png")
+```
+
+---
+
+## Model diagnostic ⚠️ {.smaller}
+
+```{R, diag_mod1_v2, out.width = "90%", echo = F}
+include_graphics("../class3/img/diag_mod1_v2.png")
+```
+
+---
+
+## Model diagnostic ⚠️ {.smaller}
+
+```{R, diag2_mod1, out.width = "90%", echo = F}
+include_graphics("pics/diag2_mod1.png")
+```
+
+---
+
+## Model diagnostic ⚠️ {.smaller}
+
+```{R, qqplot_mod1, out.width = "90%", echo = F}
+include_graphics("pics/qqplot_mod1.png")
+```
+
+---
+
+## Let's update our model {.smaller}
+
+Our results suggest that the students of the group participating in these new directed reading activities progress more rapidly (which is actually more reasonable than our initial model 🤔). Therefore, we modify our model by adding an interaction term:
+
+$${\color{#e64173}{\text{Score}_i}} = \beta_0 + \beta_1 {\color{#6A5ACD}{\text{Group}_i}} + {\beta_2 \color{#20B2AA}{\text{Age}_i}} + \beta_3 {\color{#6A5ACD}{\text{Group}_i}}{\color{#20B2AA}{\text{Age}_i}} + \epsilon_i, \quad \epsilon_i \overset{iid}{\sim} N(0, \sigma^2).$$
+
+- $\color{#e64173}{\text{Score}_i}$: score of the DRP test of the $i$-th student.
+
+- $\color{#6A5ACD}{\text{Group}_i}$: indicator of participation of the new directed reading activities for the $i$-th student (i.e. $\color{#6A5ACD}{\text{Group}_i} = 1$ if participate and $\color{#6A5ACD}{\text{Group}_i} = 0$ if not participate).
+
+- $\color{#20B2AA}{\text{Age}_i}$: age of the $i$-th student (related to *<span style="color:blue;">time since start of treatment</span>*),
+
+The goal of the educator is now to assess if $\beta_1$ and/or $\beta_3$ are <span style="color:#eb078e;">significantly larger than 0.</span>
+
+---
+
+## Example: Reading ability assessment {.smaller}
+### `Python` Code 
+
+Here is the code to fit our second model:
+
+<div style="font-size:1.5em;">
+
+```{python, eval = FALSE, echo = TRUE}
+import pandas as pd
+import statsmodels.formula.api as smf
+
+# Import data (if you haven't already)
+reading = pd.read_csv("/Users/filipposalmaso/Documents/Temporary_Stuff/Data-Science_copy/reading.csv")
+
+# Fit a linear regression model
+mod2 = smf.ols(formula="score ~ group*age", data=reading).fit()
+
+# Show summary
+print(mod2.summary())
+```
+</div>
+
+## Example: Reading ability assessment {.smaller}
+### Output
+
+```{python, echo = FALSE}
+import pandas as pd
+import statsmodels.formula.api as smf
+
+# Import data (if you haven't already)
+reading = pd.read_csv("/Users/filipposalmaso/Documents/Temporary_Stuff/Data-Science_copy/reading.csv")
+
+# Fit a linear regression model
+mod2 = smf.ols(formula="score ~ group*age", data=reading).fit()
+
+# Show summary
+print(mod2.summary())
+```
+
+---
+
+## Interpretation of coefficients {.smaller}
+
+We can obtain the estimated coefficients. Specifically,
+
+- $\hat{\beta}_0 = -3.2489$ represents the estimated baseline average score of the DRP test at birth (but *again* what does it mean? 🙄)
+
+- $\hat{\beta}_1 = -36.0307$ means that <span style="color:#eb078e;">for a student of the same age</span>, participating in the new directed reading activities is estimated to decrease their average score of the DRP test by 36.0307 (does this make sense? 🧐).
+
+- $\hat{\beta}_2 = 6.1207$ means that for students not participating to the new directed reading activities, their average score increases by 6.1207 as they become 1 year older.
+
+- $\hat{\beta}_3 = 5.9539$ means that the average score of students participating in the new directed reading activities increases by 5.9539 as they become 1 year older <span style="color:#eb078e;">compared to the other students</span>. This means that the average score of students participating to the new program increases by 12.0746 (i.e. 6.1207 + 5.9539) as they become 1 year older.
+
+---
+
+## Model fit {.smaller}
+
+```{R, pointswithmod2, out.width = "90%", echo = F}
+include_graphics("pics/points_with_mod2.png")
+```
+
+---
+
+## Model diagnostic {.smaller}
+
+```{R, diag_mod2_v2, out.width = "90%", echo = F}
+include_graphics("pics/diag_mod2_v2.png")
+```
+
+---
+
+## Model diagnostic {.smaller}
+
+```{R, diag2_mod2, out.width = "90%", echo = F}
+include_graphics("pics/diag2_mod2.png")
+```
+
+---
+
+## Model diagnostic {.smaller}
+
+```{R, qqplot_mod2, out.width = "90%", echo = F}
+include_graphics("pics/qqplot_mod2.png")
+```
+
+---
+
+## Model selection {.smaller}
+
+In general, we prefer a <span style="color:#eb078e;">parsimonious approach to modeling</span> in the sense that we only choose a more complex model if the benefits are "<span style="color:#eb078e;">substantial</span>"<sup>👋</sup>. We want our model to be such that:
+
+1.  The model fits the data well.
+
+2.  Avoid (excessive) overfitting.
+
+Naturally these two objectives are <span style="color:#eb078e;">contradictory</span> and there are many ways to select a suitable model (actually this is one of the most active areas of research in modern Statistics). In this class, we will only consider one (simple) approach based on the <span style="color:#eb078e;">Akaike Information Criterion (AIC)</span>. This criterion corresponds to an <span style="color:blue;">estimator of prediction error</span> and thereby <span style="color:blue;">relative quality of statistical models for a given set of data</span>.
+
+<div style="font-size:0.6em;">
+👋  This point of view is based on <span style="color:#eb078e;">Occam's razor</span> (or law of parsimony), the problem-solving principle stipulating that "<span style="color:blue;">the simplest explanation is usually the right one</span>".
+</div>
+
+---
+
+## Model selection
+
+In `Python`, the AIC can be computed for a given model (i.e. use the output of the function `sfm.ols(...)` in `model.aic`.) For example, we can compare the AIC of the previously considered models as follows:
+
+```{python, eval=TRUE, echo=TRUE}
+print(round(mod1.aic, 4))     # First model (no interaction)
+print(round(mod2.aic, 4))     # Second model (with interaction)
+```
+
+As expected, these results suggest that the second model is more appropriate. <span style="color:#eb078e;">But should we further improve it?</span>
+
+---
+
+## Let's update our model (again) {.smaller}
+
+It should be reasonable that the average reading scores of the two groups are the same at the start of the program.
+
+$${\color{#e64173}{\text{Score}_i}} = \beta_0 + \beta_1 {\color{#20B2AA}{(\text{Age}_i - 6)}}  + \beta_2 {\color{#6A5ACD}{\text{Group}_i}}{\color{#20B2AA}{(\text{Age}_i - 6)}} + \epsilon_i, \quad \epsilon_i \overset{iid}{\sim} N(0, \sigma^2).$$
+
+- $\color{#e64173}{\text{Score}_i}$: score of the DRP test of the $i$-th student.
+
+- $\color{#6A5ACD}{\text{Group}_i}$: indicator of participation of the new directed reading activities for the $i$-th student (i.e. $\color{#6A5ACD}{\text{Group}_i} = 1$ if participate and $\color{#6A5ACD}{\text{Group}_i} = 0$ if not participate).
+
+- $\color{#20B2AA}{\text{Age}_i - 6}$: corresponds to the time since start of treatment of the $i$-th student. 
+
+With this model the two groups can be compared as the age effect is taken into account. The goal of the educator now is (<span style="color:#eb078e;">only!</span>) to assess if $\beta_1$ is <span style="color:#eb078e;">significantly larger than 0</span>.
+
+---
+
+## Example: Reading ability assessment {.smaller}
+### `Python` Code {.smaller}
+
+Here is the code to fit our third model:
+
+
+<div style="font-size:1.5em;">
+
+```{python, eval = FALSE, echo = TRUE}
+import pandas as pd
+import statsmodels.formula.api as smf
+
+# Import data (if you haven't already)
+reading = pd.read_csv("/Users/filipposalmaso/Documents/Temporary_Stuff/Data-Science_copy/reading.csv")
+reading["age_minus_six"] = reading["age"] - 6
+
+# Fit a linear regression model
+mod3 = smf.ols(formula="score ~ age_minus_six + group:age_minus_six", data=reading).fit()
+
+# Show summary
+print(mod3.summary())
+```
+</div>
+
+## Example: Reading ability assessment {.smaller}
+### Output {.smaller}
+
+```{python, echo = FALSE}
+import pandas as pd
+import statsmodels.formula.api as smf
+
+# Import data (if you haven't already)
+reading = pd.read_csv("/Users/filipposalmaso/Documents/Temporary_Stuff/Data-Science_copy/reading.csv")
+reading["age_minus_six"] = reading["age"] - 6
+
+# Fit a linear regression model
+mod3 = smf.ols(formula="score ~ age_minus_six + group:age_minus_six", data=reading).fit()
+
+# Show summary
+print(mod3.summary())
+```
+
+## Example: Reading ability assessment {.smaller}
+### AIC {.smaller}
+
+```{python, eval=TRUE, echo=TRUE}
+print(round(mod1.aic, 4))     
+print(round(mod2.aic, 4))     
+print(round(mod3.aic, 4))
+```
+
+---
+
+## Model fit {.smaller}
+
+```{R, pointswithmod3, out.width = "90%", echo = F}
+include_graphics("pics/points_with_mod3.png")
+```
+
+---
+
+## Model diagnostic {.smaller}
+
+```{R, diag_mod3_v2, out.width = "90%", echo = F}
+include_graphics("pics/diag_mod3_v2.png")
+```
+
+---
+
+## Model diagnostic {.smaller}
+
+```{R, diag2_mod3, out.width = "90%", echo = F}
+include_graphics("pics/diag2_mod3.png")
+```
+
+---
+
+## Model diagnostic {.smaller}
+
+```{R, qqplot_mod3, out.width = "90%", echo = F}
+include_graphics("pics/qqplot_mod3.png")
+```
+
+---
+
+## Concluding remarks {.smaller}
+
+- The last model we consider appears to fit the data, avoids overfitting and allows to answer whether the new reading activities are of interest. Indeed, the programs significantly improve the reading performance of the students (e.g. 5.81 more per year compared to control, p-value < 5%).
+
+- Our model <span style="color:#eb078e;">assumes a linear relationship</span> between the response and the covariates. However, this may be incorrect.
+
+- Our model <span style="color:#eb078e;">only considers independent data</span> (which may not be correct here).
+
+- Finally, linear regression <span style="color:#eb078e;">should not be used to extrapolate</span>, i.e. to estimate beyond the original observation range. For example, if we consider a 100 year-old person in this reading ability example, we would predict (using the third model) that the corresponding score of the DRP test would be 1157.59 and 611.45, respectively, with and without these activities. Does it really make sense? 😯
+
+---
+
+## Extrapolating {.smaller}
+
+```{R, out.width = "90%", echo = F}
+include_graphics("pics/extrapolating.png")
+```
+
+<div style="font-size:0.8em;">
+
+👋If you want to know more have a look [here](https://www.explainxkcd.com/wiki/index.php/605:_Extrapolating).
+
+</div>

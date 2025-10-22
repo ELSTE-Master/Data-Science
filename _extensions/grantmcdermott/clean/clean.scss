@@ -3,24 +3,10 @@
 // Custom colours and variables
 
 $jet: #131516;
-// $accent: #107895;
-// $accent2: #9a2515;
+$accent: #107895;
+$accent2: #9a2515;
 // $accent2: #e64173;
 $right-arrow: "\2192"; // Unicode character for right arrow
-
-$bg_dark: #23373b;
-$bg_light: #2F4647;
-$accent: #EB811B;
-$accent2: #2F4647;
-// $test: #ffffff;
-// $test: #e2a855;
-// $test: #003a66;
-// $test: #b72026;
-// $test: #14B03D;
-// $test: #666666;
-// $test: #d7191c;
-// $test: #1a9641;
-
 
 // fonts
 
@@ -39,12 +25,11 @@ Note: This theme uses the Roboto font family, which it imports from Google
   from the choice set if the family is installed locally.
 */
 @import url('https://fonts.googleapis.com/css?family=Roboto:200,200i,300,300i,350,350i,400,400i&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:200,300,400,700&display=swap');
 
 $font-family-sans-serif: "Roboto", sans-serif !default;
-$presentation-heading-font: "Roboto Slab", sans-serif !default;
+$presentation-heading-font: "Roboto", sans-serif !default;
 
-$presentation-heading-color: $bg_dark !default;
+$presentation-heading-color: $jet !default;
 $presentation-heading-font-weight: lighter;
 //$presentation-heading-line-height: 2;
 //$presentation-block-margin: 28px;
@@ -54,7 +39,7 @@ $presentation-font-size-root: 32px;
 //$body-bg: #f0f1eb !default;
 $body-color: $jet !default;
 $link-color: $accent !default;
-$selection-bg: $bg_light !default;
+$selection-bg: #26351c !default;
 
 
 /*-- scss:rules --*/
@@ -75,10 +60,10 @@ $selection-bg: $bg_light !default;
   text-align: left;
 
   .title {
-    color: $bg_dark;
+    color: $body-color;
     font-size: 1.4em;
     // font-weight: 350;
-    font-weight: bold;
+    font-weight: lighter;
   }
 
   .subtitle {
@@ -98,7 +83,7 @@ $selection-bg: $bg_light !default;
 
   .author,
   .quarto-title-author-name {
-    color: $bg_dark;
+    color: $body-color;
   }
 
   .quarto-title-authors {
@@ -114,14 +99,10 @@ $selection-bg: $bg_light !default;
 
 }
 
-/* slides.css */
-.reveal {
-  background-color: #fafafa;
-}
 
 .reveal h2 {
   // font-weight: 350;
-  font-weight: bold;
+  font-weight: lighter;
   font-size: 1.4em;
 }
 
@@ -140,48 +121,21 @@ $selection-bg: $bg_light !default;
   margin-top: 1.25em;
 }
 
+// alerts etc.
+
 .alert {
-  color: $accent;
+  color: $accent2;
 }
 
 .fg {
   color: var(--col, $jet);
 }
 
-// .bg {
-//   // background-color: var(--col, #fff);
-//   background-color: rgba($accent, 0.5);
-//   padding: 0.05em;
-//   border-radius: 2px;
-//   display: inline-block;
-// }
-
 .bg {
-  margin: 0 -0.2em;
-  padding: 0em 0.2em;
-  border-radius: 0.3em 0.15em;
-  background: transparent;
-  background-image: linear-gradient(
-    to right,
-    rgba($accent, 0.5) 4%,
-    rgba($accent, 0.4) 96%
-  );
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-}
-
-
-.reveal b,
-.reveal strong {
-  color: $bg_light;
-}
-
-// Seb 
-
-.small-gap {
-  display: block;
-  margin-top: 0.25em;  /* adjust smaller/larger as needed */
-  margin-bottom: 0.25em;
+  background-color: var(--col, #fff);
+  padding: 0.1em;
+  border-radius: 5px;
+  display: inline-block;
 }
 
 // lists
@@ -322,7 +276,6 @@ $selection-bg: $bg_light !default;
   padding: .23em; /* Adjust padding as needed */
   text-align: left; /* Adjust text alignment as needed */
   font-weight: lighter; /* Lighter font weight for main table text */
-  font-size: 0.85em;
 }
 
 /* Adds a bottom border to the table header row for distinction */
@@ -335,18 +288,6 @@ $selection-bg: $bg_light !default;
 /* Make column headers bold */
 .reveal table thead th {
   font-weight: bold;
-  text-align: left; /* Adjust text alignment as needed */
-  color: $bg_dark; /* Dark grey color for the header text */
-  border-top: 2px solid #D3D3D3; /* Add top border */
-  background-color: #fff;
-}
-
-.reveal table tbody tr:nth-child(even) {
-  background-color: rgba($bg_light, 0.1); /* striped rows */
-}
-
-.reveal table tbody tr:hover {
-  background-color: rgba($accent, 0.1); /* hover highlight */
 }
 
 /* Styling table captions */
@@ -408,44 +349,3 @@ $selection-bg: $bg_light !default;
 .reveal .columns6040 div.column:not(:first-child) {
   width: 40%;
 }      
-
-
-// Seb
-
-.reveal code {
-    color: $bg_light;
-    font-size: .875em;
-    background-color: #fff;
-    // background-color: rgba($bg_light, 0.25);
-    padding: 0.05em;
-    border-radius: 2px;
-    display: inline-block;
-    white-space: pre-wrap;
-    font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
-}
-
-// Change the size of code annotations
-span[data-code-cell] {
-  font-size: .775em;
-}
-
-.reveal .slides section .code-annotation-container-grid {
-  margin-top: 1.5em !important;
-}
-
-/* Add vertical space after code blocks with class 'sourceCode' */
-.cell-output {
-  margin-top: 1.5em;
-}
-
-
-// wrappers to adjust image
-
-.img-up-50 {
-  position: relative;
-  top: -50px;
-}
-.img-down-50 {
-  position: relative;
-  top: 50px;
-}
