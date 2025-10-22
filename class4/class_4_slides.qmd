@@ -87,7 +87,7 @@ print(treatment.head())
 ### Graph {.smaller}
 
 ```{R, readingboxplot, out.width = "80%", echo = F}
-include_graphics("../class3/img/boxplot_reading.png")
+knitr::include_graphics("../class3/img/boxplot_reading.png")
 ```
 
 ---
@@ -142,7 +142,7 @@ control_age   = reading.loc[reading["group"] == "Control", "age"]
 ## Should age be taken into account? {.smaller}
 
 ```{R, readingpoint, out.width = "90%", echo = F}
-include_graphics("../class3/img/reading_points.png")
+knitr::include_graphics("../class3/img/reading_points.png")
 ```
 
 ---
@@ -189,7 +189,7 @@ is <span style="color:#eb078e;">minimized</span>, which then allows to estimate 
 ## Anscombe's quartet {.smaller}
 
 ```{R, out.width = "80%", echo = F}
-include_graphics("../class3/img/Anscombe.png")
+knitr::include_graphics("../class3/img/Anscombe.png")
 ```
 
 
@@ -309,7 +309,7 @@ In our example, $\beta_1 = 6.3771$ and $p=2.6 \times 10^{-3}\%$. So the p-value 
 ## How good is our model? 🤔 {.smaller}
 
 ```{R, pointswithmod1, out.width = "90%", echo = F}
-include_graphics("../class3/img/points_with_mod1.png")
+knitr::include_graphics("../class3/img/points_with_mod1.png")
 ```
 
 ---
@@ -327,7 +327,7 @@ include_graphics("../class3/img/points_with_mod1.png")
 ## Rexthor, the Dog-Bearer! {.smaller}
 
 ```{R, rsquare, out.width = "90%", echo = F}
-include_graphics("../class3/img/linear_regression.png")
+knitr::include_graphics("../class3/img/linear_regression.png")
 ```
 
 <div style="font-size:0.8em;">
@@ -339,7 +339,7 @@ include_graphics("../class3/img/linear_regression.png")
 ## Model diagnostic {.smaller}
 
 ```{R, diagmod1, out.width = "90%", echo = F}
-include_graphics("../class3/img/diag_mod1.png")
+knitr::include_graphics("../class3/img/diag_mod1.png")
 ```
 
 ---
@@ -347,7 +347,7 @@ include_graphics("../class3/img/diag_mod1.png")
 ## Model diagnostic ⚠️ {.smaller}
 
 ```{R, diag_mod1_v2, out.width = "90%", echo = F}
-include_graphics("../class3/img/diag_mod1_v2.png")
+knitr::include_graphics("../class3/img/diag_mod1_v2.png")
 ```
 
 ---
@@ -355,7 +355,7 @@ include_graphics("../class3/img/diag_mod1_v2.png")
 ## Model diagnostic ⚠️ {.smaller}
 
 ```{R, diag2_mod1, out.width = "90%", echo = F}
-include_graphics("../class3/img/diag2_mod1.png")
+knitr::include_graphics("../class3/img/diag2_mod1.png")
 ```
 
 ---
@@ -363,7 +363,7 @@ include_graphics("../class3/img/diag2_mod1.png")
 ## Model diagnostic ⚠️ {.smaller}
 
 ```{R, qqplot_mod1, out.width = "90%", echo = F}
-include_graphics("../class3/img/qqplot_mod1.png")
+knitr::include_graphics("../class3/img/qqplot_mod1.png")
 ```
 
 ---
@@ -442,7 +442,7 @@ We can obtain the estimated coefficients. Specifically,
 ## Model fit {.smaller}
 
 ```{R, pointswithmod2, out.width = "90%", echo = F}
-include_graphics("../class3/img/points_with_mod2.png")
+knitr::include_graphics("../class3/img/points_with_mod2.png")
 ```
 
 ---
@@ -450,7 +450,7 @@ include_graphics("../class3/img/points_with_mod2.png")
 ## Model diagnostic {.smaller}
 
 ```{R, diag_mod2_v2, out.width = "90%", echo = F}
-include_graphics("../class3/img/diag_mod2_v2.png")
+knitr::include_graphics("../class3/img/diag_mod2_v2.png")
 ```
 
 ---
@@ -458,7 +458,7 @@ include_graphics("../class3/img/diag_mod2_v2.png")
 ## Model diagnostic {.smaller}
 
 ```{R, diag2_mod2, out.width = "90%", echo = F}
-include_graphics("../class3/img/diag2_mod2.png")
+knitr::include_graphics("../class3/img/diag2_mod2.png")
 ```
 
 ---
@@ -466,7 +466,7 @@ include_graphics("../class3/img/diag2_mod2.png")
 ## Model diagnostic {.smaller}
 
 ```{R, qqplot_mod2, out.width = "90%", echo = F}
-include_graphics("../class3/img/qqplot_mod2.png")
+knitr::include_graphics("../class3/img/qqplot_mod2.png")
 ```
 
 ---
@@ -573,7 +573,7 @@ print(round(mod3.aic, 4))
 ## Model fit {.smaller}
 
 ```{R, pointswithmod3, out.width = "90%", echo = F}
-include_graphics("../class3/img/points_with_mod3.png")
+knitr::include_graphics("../class3/img/points_with_mod3.png")
 ```
 
 ---
@@ -581,7 +581,7 @@ include_graphics("../class3/img/points_with_mod3.png")
 ## Model diagnostic {.smaller}
 
 ```{R, diag_mod3_v2, out.width = "90%", echo = F}
-include_graphics("../class3/img/diag_mod3_v2.png")
+knitr::include_graphics("../class3/img/diag_mod3_v2.png")
 ```
 
 ---
@@ -589,7 +589,7 @@ include_graphics("../class3/img/diag_mod3_v2.png")
 ## Model diagnostic {.smaller}
 
 ```{R, diag2_mod3, out.width = "90%", echo = F}
-include_graphics("../class3/img/diag2_mod3.png")
+knitr::include_graphics("../class3/img/diag2_mod3.png")
 ```
 
 ---
@@ -597,7 +597,7 @@ include_graphics("../class3/img/diag2_mod3.png")
 ## Model diagnostic {.smaller}
 
 ```{R, qqplot_mod3, out.width = "90%", echo = F}
-include_graphics("../class3/img/qqplot_mod3.png")
+knitr::include_graphics("../class3/img/qqplot_mod3.png")
 ```
 
 ---
@@ -617,7 +617,7 @@ include_graphics("../class3/img/qqplot_mod3.png")
 ## Extrapolating {.smaller}
 
 ```{R, out.width = "90%", echo = F}
-include_graphics("../class3/img/extrapolating.png")
+knitr::include_graphics("../class3/img/extrapolating.png")
 ```
 
 <div style="font-size:0.8em;">

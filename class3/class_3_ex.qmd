@@ -383,7 +383,7 @@ Consider using the `mannwhitneyu()` function from `scipy.stats`. Make sure to sp
 
 ## Solution
 
-::: { .solution exercise="ex_1" }
+::: { .solution exercise="ex_2" }
 
 ```python
 import pandas as pd
@@ -449,7 +449,7 @@ A consultant who is hired by the company and promotes diet A is unhappy about yo
 
 
 ```{pyodide}
-#| exercise: ex_2
+#| exercise: ex_3
 import pandas as pd
 import matplotlib.pyplot as plt
 from scipy import stats
@@ -461,27 +461,64 @@ diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
 # Variable of interest
 dietA = diet["weight.loss"][diet["diet.type"]=="A"]
 dietC = diet["weight.loss"][diet["diet.type"]=="C"]
-dietC_adj = dietC +1  
 
-# Mann–Whitney U test, one-sided (Diet C - Diet A < mu)
-stat, p_value = stats.mannwhitneyu(dietC_adj, dietA, alternative="less")
-
-print("Wilcoxon statistic:", round(stat, 4))
-print("p-value:", round(p_value, 4))
 ```
 
 ## Hints
 
-::: { .hint exercise="ex_2"}
+::: { .hint exercise="ex_3"}
 Consider using the `mannwhitneyu()` function from `scipy.stats`. Make sure to specify the correct alternative hypothesis.
 
 :::
 
 ## Solution
 
-::: { .solution exercise="ex_1" }
+::: { .solution exercise="ex_3" }
 
 ```python
+
+```
+
+:::
+
+::::
+
+### Question 6
+Based on this test, we obtain a p-value of 5.747% (which could make you think that the consultant picked one kg for a good reason...🤔). Therefore, the consultant claims that it is statistically proven that the two diets are equally effective in terms of weights loss. What do you think of this argument?
+
+
+
+```{r, results='asis'}
+# Define questions choice and individual feedback for each question
+opts <- list(
+  list(value = "The consultant showed that the average difference in terms of weight loss is equal to one kg, so his claim is incorrect.",
+       feedback = "Nope, we can never 'accept' the null."),
+  list(value = "The consultant is correct, there is indeed not much difference between the two diets.",
+       feedback = "Nope!"),
+  answer = list(
+    value = "The claim of the consultant is incorrect for the following reasons. First, there is no good reason to compare a difference of one kg and second, we can never accept the null hypothesis!",
+    feedback = "Yay! 👍"
+  ),
+  list(
+    value = "The consultant showed that the average difference in terms of weight loss is equal to one kg, so his claim is correct.",
+    feedback = "Nope, we can never 'accept' the null."
+  )
+)
+# render QA environment
+render_q_a_env(opts)
+```
+
+### Question 7
+The competing company that promotes diet C is unhappy about the claims made by the consultant. So they hire their own consultant, who selects a difference of $950$ grams. Please complete the following test this second consultant wants to perform:
+
+:::: {.panel-tabset}
+
+## Exercise
+
+
+
+```{pyodide}
+#| exercise: ex_4
 import pandas as pd
 import matplotlib.pyplot as plt
 from scipy import stats
@@ -494,14 +531,49 @@ diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
 dietA = diet["weight.loss"][diet["diet.type"]=="A"]
 dietC = diet["weight.loss"][diet["diet.type"]=="C"]
 
-# Wilcoxon rank-sum test (Mann–Whitney U)
-stat, p_value = stats.mannwhitneyu(dietA, dietC, alternative ="less")
+```
 
-print("Wilcoxon statistic:", round(stat, 4))
-print("p-value:", round(p_value, 4))
+## Hints
+
+::: { .hint exercise="ex_4"}
+Consider using the `mannwhitneyu()` function from `scipy.stats`. Make sure to specify the correct alternative hypothesis.
+
+:::
+
+## Solution
+
+::: { .solution exercise="ex_4" }
+
+```python
 
 ```
 
 :::
 
 ::::
+
+
+### Question 8
+Then, the (second) consultant claims that diet C leads to an average weight loss that is significantly larger by $950$ grams than diet A. What do you think of this argument:
+
+
+
+```{r, results='asis'}
+# Define questions choice and individual feedback for each question
+opts <- list(
+  list(value = "The claim is correct because the p-value is smaller than 5%.",
+       feedback = "In some sense, this answer is correct... but why did the consultant pick 950 grams?"),
+  list(value = "The claim is incorrect because we can't accept the null hypothesis.",
+       feedback = "In this case, we can reject the null."),
+  answer = list(
+    value = "The claim is incorrect because the hypothesis was constructed after looking at the known results.",
+    feedback = "Yes, this is an example of HARKing, an acronym coined by Norbert Kerr that refers to the questionable practice of hypothesizing after the results are known. Nevertheless, this is a very common practice...😅"
+  )
+)
+# render QA environment
+render_q_a_env(opts)
+```
+
+
+
+# Exercise on the Coastal Giant Salamanders dataset
