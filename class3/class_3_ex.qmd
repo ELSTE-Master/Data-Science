@@ -577,3 +577,31 @@ render_q_a_env(opts)
 
 
 # Exercise on the Coastal Giant Salamanders dataset
+
+In this section, we use data from Environmental Data Initiative (EDI) on Coastal Giant Salamanders collected in HJ Andrews Experimental Forest, Oregon. Measurements were taken in two sections of Mack Creek: one located in old-growth forest (OG) and the other in a clear-cut area (CC) harvested in 1963. 
+
+Forest harvesting can influence stream conditions, which may affect salamander growth and body size. A scientist is interested in testing whether there is a difference in average weight of Coastal Giant Salamanders between OG and CC.
+
+We will use a two-sample t-test to assess whether salamander size differs significantly between the two sites.
+
+### Question 1
+What are the hypotheses?
+
+### Question 2
+As previously mentioned, we want to compare the two locations (OG and CC) to assess whether the average size of Coastal Giant Salamanders differs between forest types. Using this information, please complete the code below to construct the variables of interest:
+
+
+### Question 3
+Next, we wish to visualize the empirical distribution of the data in order to select a suitable test. Complete the code below to construct boxplots comparing the two groups:
+
+### Question 4
+Based on this graph, which of the following test appears to be the most suitable?
+
+### Question 5 
+Perform the test
+
+### Question 6
+Based on the p-value you obtained, what can you conclude (assuming $\alpha$=0.05)
+
+### Question 7
+Therefore, we can now formulate a conclusion about the claim that the average size of Coastal Giant Salamanders differs between the two locations (OG and CC).
