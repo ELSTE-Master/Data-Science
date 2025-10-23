@@ -5,7 +5,7 @@ date: "2025-10-22"
 ---
 
 ```{r}
-mod = lm(ice_duration ~ year*lakeid, data = ntl_icecover)
-summary(mod)
-acf(mod$resid)
+# mod = lm(ice_duration ~ year*lakeid, data = ntl_icecover)
+# summary(mod)
+# acf(mod$resid)
 ```

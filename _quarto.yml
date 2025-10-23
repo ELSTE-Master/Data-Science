@@ -43,6 +43,7 @@ website:
         contents:
           - class4/class_4_intro.qmd
           - class4/class_4_slides.qmd
+          - class4/class_4_ex.qmd
       - section: "Appendices"
         contents:
           - appendices/setup_vscode.qmd
