@@ -481,7 +481,7 @@ Python function:
 ```{python, eval = FALSE, echo = TRUE}
 from scipy import stats
 
-stats.ranksums(a = ..., b = ...)
+stats.mannwhitneyu(a = ..., b = ...)
 ```
 </div>
 
@@ -560,7 +560,7 @@ print("p-value:", round(p_value, 4))
 from scipy import stats
 
 # Wilcoxon rank-sum test (Mann–Whitney U)
-stat, p_value = stats.ranksums(dietA, dietB)
+stat, p_value = stats.mannwhitneyu(dietA, dietB)
 
 print("Wilcoxon statistic:", round(stat, 4))
 print("p-value:", round(p_value, 4))
