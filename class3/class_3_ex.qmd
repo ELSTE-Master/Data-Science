@@ -259,27 +259,6 @@ plt.show()
 ::: { .hint exercise="ex_1"}
 Consider using the `boxplot()` function from `matplotlib.pyplot`.
 
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-
-# Simulate some Gaussian data
-np.random.seed(123)
-group1 = np.random.normal(loc=5, scale=1, size=50)
-group2 = np.random.normal(loc=6, scale=1.5, size=50)
-
-# Side-by-side boxplot
-plt.figure(figsize=(6,4))
-plt.boxplot([group1, group2],
-            labels=["Group 1", "Group 2"],
-            patch_artist=True,
-            boxprops=dict(facecolor="lightblue", color="blue"),
-            medianprops=dict(color="red"))
-
-plt.ylabel("Value")
-plt.title("Boxplot of Simulated Gaussian Data")
-plt.show()
-```
 :::
 
 ## Solution
@@ -462,12 +441,17 @@ diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
 dietA = diet["weight.loss"][diet["diet.type"]=="A"]
 dietC = diet["weight.loss"][diet["diet.type"]=="C"]
 
+
+stat, p_value = ______(______, ______, ______)
+print(f"Mann-Whitney U test statistic: {stat}")
+print(f"P-value: {p_value}")
 ```
 
 ## Hints
 
 ::: { .hint exercise="ex_3"}
-Consider using the `mannwhitneyu()` function from `scipy.stats`. Make sure to specify the correct alternative hypothesis.
+Consider using the `mannwhitneyu()` function from `scipy.stats`. In `Python`, `scipy.stats.mannwhitneyu()` does not include an argument that allows to specify the hypothesized difference between group median, but you can reproduce the same test by **shifting one sample** by that hypothesized difference.  
+
 
 :::
 
@@ -476,7 +460,22 @@ Consider using the `mannwhitneyu()` function from `scipy.stats`. Make sure to sp
 ::: { .solution exercise="ex_3" }
 
 ```python
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy import stats
 
+diet = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/diet.csv")
+# compute weight loss
+diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
+
+# Variable of interest
+dietA = diet["weight.loss"][diet["diet.type"]=="A"]
+dietC = diet["weight.loss"][diet["diet.type"]=="C"]
+
+
+stat, p_value = stats.mannwhitneyu(dietA+1, dietC, alternative="less")
+print(f"Mann-Whitney U test statistic: {stat}")
+print(f"P-value: {p_value}")
 ```
 
 :::
@@ -484,7 +483,7 @@ Consider using the `mannwhitneyu()` function from `scipy.stats`. Make sure to sp
 ::::
 
 ### Question 6
-Based on this test, we obtain a p-value of 5.747% (which could make you think that the consultant picked one kg for a good reason...🤔). Therefore, the consultant claims that it is statistically proven that the two diets are equally effective in terms of weights loss. What do you think of this argument?
+Based on this test, we obtain a p-value of $5.747\%$ (which could make you think that the consultant picked one kg for a good reason...🤔). Therefore, the consultant claims that it is statistically proven that the two diets are equally effective in terms of weights loss. What do you think of this argument?
 
 
 
@@ -531,12 +530,17 @@ diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
 dietA = diet["weight.loss"][diet["diet.type"]=="A"]
 dietC = diet["weight.loss"][diet["diet.type"]=="C"]
 
+
+stat, p_value = ______(______, ______, ______)
+print(f"Mann-Whitney U test statistic: {stat}")
+print(f"P-value: {p_value}")
+
 ```
 
 ## Hints
 
 ::: { .hint exercise="ex_4"}
-Consider using the `mannwhitneyu()` function from `scipy.stats`. Make sure to specify the correct alternative hypothesis.
+Consider using the `mannwhitneyu()` function from `scipy.stats`. In `Python`, `scipy.stats.mannwhitneyu()` does not include an argument that allows to specify the hypothesized difference between group median, but you can reproduce the same test by **shifting one sample** by that hypothesized difference.  
 
 :::
 
@@ -545,7 +549,22 @@ Consider using the `mannwhitneyu()` function from `scipy.stats`. Make sure to sp
 ::: { .solution exercise="ex_4" }
 
 ```python
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy import stats
 
+diet = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/diet.csv")
+# compute weight loss
+diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
+
+# Variable of interest
+dietA = diet["weight.loss"][diet["diet.type"]=="A"]
+dietC = diet["weight.loss"][diet["diet.type"]=="C"]
+
+
+stat, p_value = stats.mannwhitneyu(dietA+0.95, dietC, alternative="less")
+print(f"Mann-Whitney U test statistic: {stat}")
+print(f"P-value: {p_value}")
 ```
 
 :::
