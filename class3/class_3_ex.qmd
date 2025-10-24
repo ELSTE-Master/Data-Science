@@ -162,7 +162,7 @@ To compare the effectiveness of the diets, we first compute the weight loss of t
 diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
 ```
 
-For this example, we consider diets A and B so we construct our "variables of interest", say `dietA` and `dietB`, by only selecting these diets. This can be done in `R` as follows:
+For this example, we consider diets A and B so we construct our "variables of interest", say `dietA` and `dietB`, by only selecting these diets. This can be done in `Python` as follows:
 
 ```{python, echo=TRUE}
 # Variable of interest
@@ -769,7 +769,7 @@ print(f"T-statistic: {t_stat:.3f}")
 print(f"P-value: {p_val:.3f}")
 ```
 
-He concludes that there is no evidence from the data to suggest that the average size of Coastal Giant Salamanders differs between the two locations. What do you think  of this procedure?
+He concludes that there is no evidence from the data to suggest that the average weight of Coastal Giant Salamanders differs between the two locations. What do you think  of this procedure?
 
 
 ```{r, results='asis'}
@@ -781,8 +781,8 @@ value = "The procedure is appropriate. The t-test is robust to outliers and non-
 feedback = "No, the t-test is sensitive to outliers, which can distort the results."
 ),
 answer = list(
-value = "The t-test may not be appropriate because there are outliers. A non-parametric test like the Wilcoxon rank-sum test would be more suitable.",
-feedback = "Yes! The presence of outliers makes the t-test unreliable. The Wilcoxon test compares medians and is less sensitive to extreme values."
+value = "The t-test may not be appropriate because there are outliers.",
+feedback = "Yes! The presence of outliers makes the t-test unreliable."
 ),
 list(
 value = "The t-test is wrong because it assumes equal variances, which is not the case here.",
@@ -809,10 +809,10 @@ opts <- list(
   list(value = "Student's t-test.",
        feedback = "The student t-test assumes that the variances of the two groups are the same. This is very hard to verify in practice and thus, it is preferable to avoid using this test."),
   list(value = "Welch's t-test.",
-       feedback = "This is probably a suitable choice but one can argue that outliers are present in diet A so this may not be the optimal choice."),
+       feedback = "This is probably a suitable choice but one can argue that outliers are present in weight distributions so this may not be the optimal choice."),
   answer = list(
     value = "Wilcoxon test.",
-    feedback = "This is arguably the best choice for this problem."
+    feedback = "This is arguably the best choice for this problem. The Wilcoxon test compares medians and is less sensitive to extreme values."
   )
 )
 # render QA environment
