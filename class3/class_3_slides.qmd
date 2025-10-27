@@ -188,11 +188,11 @@ tidy_table <- function(x, terms, highlight_row = 1, highlight_color = "black", h
 
 
 
-Statistical methods are based on several fundamental concepts, the most central of which is to consider the information available (in the form of data) resulting from a <span style="color:purple;">random process</span>.
+Statistical methods are based on several fundamental concepts, the most central of which is to consider the information available (in the form of data) resulting from a <span style="color:#eb078e;">random process</span>.
 
-As such, the data represent a <span style="color:blue;">random sample</span> of a totally or conceptually accessible <span style="color:blue;">population</span>.
+As such, the data represent a <span style="color:#6A5ACD;">random sample</span> of a totally or conceptually accessible <span style="color:#6A5ACD;">population</span>.
 
-Then, <span style="color:purple;">statistical inference</span> allows to infer the properties of a population based on the observed sample. This includes deriving estimates and testing hypotheses.
+Then, <span style="color:#eb078e;">statistical inference</span> allows to infer the properties of a population based on the observed sample. This includes deriving estimates and testing hypotheses.
 
 
 ```{r sampling, out.width="45%", echo=FALSE}
@@ -212,10 +212,10 @@ include_graphics("../class3/img/sampling.png")
 $$H_0: \theta\hspace{0.1cm} {\color{#eb078e}{\in}}\hspace{0.1cm}\Theta_0 \quad \text{and} \quad H_a: \theta\hspace{0.1cm} {\color{#eb078e}{\not\in}}\hspace{0.1cm}\Theta_0$$
 </div>
 
-- In a hypothesis test, the statement being tested is called the <span style="color:blue;">null hypothesis</span> $\color{#373895}{H_0}$. A hypothesis test is designed to assess the strength of the evidence against the null hypothesis.
-- The <span style="color:blue;">alternative hypothesis</span> $\color{#373895}{H_a}$ is the statement we hope or suspect to be true instead of $\color{#373895}{H_0}$.
+- In a hypothesis test, the statement being tested is called the <span style="color:#6A5ACD;">null hypothesis</span> $\color{#373895}{H_0}$. A hypothesis test is designed to assess the strength of the evidence against the null hypothesis.
+- The <span style="color:#6A5ACD;">alternative hypothesis</span> $\color{#373895}{H_a}$ is the statement we hope or suspect to be true instead of $\color{#373895}{H_0}$.
 - Each hypothesis excludes the other, so that one can exclude one in favor of the other using the data.
-- <span style="color:purple;">Example:</span> a drug represses the progression of cancer
+- <span style="color:#eb078e;">Example:</span> a drug represses the progression of cancer
 
 <div style="text-align:center;">
 $$H_0: \mu_{\text{drug}}\hspace{0.1cm} {\color{#eb078e}{=}}\hspace{0.1cm}\mu_{\text{control}} \  \text{ and } \ H_a: \mu_{\text{drug}}\hspace{0.1cm}  {\color{#eb078e}{<}}\hspace{0.1cm}\mu_{\text{control}}.$$
@@ -250,38 +250,36 @@ include_graphics("../class3/img/great_pic.png")
 
 <div style="font-size:0.9em;">
 
-- The <span style="color:purple;">type I error</span> corresponds to the probability of rejecting $H_0$ when $H_0$ is true (also called <span style="color:purple;">false positive</span>). The <span style="color:blue;">type II error</span> corresponds to the probability of not rejecting $H_0$ when $H_a$ is true (also called <span style="color:blue;">false negative</span>).
+- The <span style="color:#eb078e;">type I error</span> corresponds to the probability of rejecting $H_0$ when $H_0$ is true (also called <span style="color:#eb078e;">false positive</span>). The <span style="color:#6A5ACD;">type II error</span> corresponds to the probability of not rejecting $H_0$ when $H_a$ is true (also called <span style="color:#6A5ACD;">false negative</span>).
 
 <br>
 
-- A test is of <span style="color:purple;">significance level</span> $\color{#e64173}{\alpha}$ when the probability of making a type I error equals $\alpha$. Usually we consider $\alpha = 5\%$, however, this can vary depending on the context.
+- A test is of <span style="color:#eb078e;">significance level</span> $\color{#e64173}{\alpha}$ when the probability of making a type I error equals $\alpha$. Usually we consider $\alpha = 5\%$, however, this can vary depending on the context.
 
 <br>
 
-- A test is of <span style="color:blue;">power</span> $\color{#6A5ACD}{\beta}$ when the probability to make a type II error is $1-\beta.$ In other words, the power of a test is its probability of rejecting $H_0$ when $H_0$ is false (or the probability of accepting $H_a$ when $H_a$ is true).
+- A test is of <span style="color:#6A5ACD;">power</span> $\color{#6A5ACD}{\beta}$ when the probability to make a type II error is $1-\beta.$ In other words, the power of a test is its probability of rejecting $H_0$ when $H_0$ is false (or the probability of accepting $H_a$ when $H_a$ is true).
 
 </div>
 ---
 
 ## What are p-values? {.smaller}
 
-<div style="font-size:80%">
 In statistics, the <span style="color:#6A5ACD; font-weight:bold;">p-value</span> is defined as the probability of observing a test statistic that is at least as extreme as actually observed, assuming that the null hypothesis $H_0$ is true.  
 
-Informally, <span style="color:purple;">a p-value can be understood as a measure of plausibility of the null hypothesis given the data</span>. A small p-value indicates strong evidence against $H_0$.  
+Informally, <span style="color:#eb078e;">a p-value can be understood as a measure of plausibility of the null hypothesis given the data</span>. A small p-value indicates strong evidence against $H_0$.  
 
-When the p-value is small enough (i.e., smaller than the significance level $\alpha$), the test based on the null and alternative hypotheses is considered <span style="color:purple;">significant</span>, meaning we reject the null hypothesis in favor of the alternative. This is generally what we want because it "verifies" our (research) hypothesis.  
+When the p-value is small enough (i.e., smaller than the significance level $\alpha$), the test based on the null and alternative hypotheses is considered <span style="color:#eb078e;">significant</span>, meaning we reject the null hypothesis in favor of the alternative. This is generally what we want because it "verifies" our (research) hypothesis.  
 
 When the p-value is not small enough, with the available data, we cannot reject the null hypothesis, so nothing can be concluded. 🤔  
 
-The obtained p-value summarizes the <span style="color:purple;">incompatibility between the data and the model</span> constructed under the set of assumptions.  
+The obtained p-value summarizes the <span style="color:#eb078e;">incompatibility between the data and the model</span> constructed under the set of assumptions.  
 
 ::: {.figure style="text-align:center;"}
 <span style="font-size:0.9em; color:#6A5ACD;">"Absence of evidence is not evidence of absence."</span> <sup><span style="font-size:0.7em;">👋</span></sup>
 :::
 
 <span style="font-size:0.5em">👋 From the British Medical Journal.</span>
-</div>
 
 ---
 
@@ -297,7 +295,7 @@ include_graphics("../class3/img/p_value.png")
 
 ## P-values may be controversial {.smaller}
 
-<span style="color:purple;">P-values have been misused</span> many times because understanding what they mean is not intuitive!
+<span style="color:#eb078e;">P-values have been misused</span> many times because understanding what they mean is not intuitive!
 
 ::: {.figure style="text-align:center;"}
 {{< video https://youtu.be/OEUJzKtCt00 width=800 height=450 >}}
@@ -316,7 +314,7 @@ $$\mathbb{E}[Y] = \mu, \ \ \ \ \ \ \ \ \ \ \ \ \text{Var}[Y] = \sigma^{2},$$
 
 $$Z = \frac{Y-\mu}{\sigma} \sim N(0,1), \ \ \ \ \ f_{Z}(z) = \frac{1}{\sqrt{2\pi}}\ e^{-\frac{z^{2}}{2}}.$$
 
-<span style="color:blue;">Probability density function of a normal distribution:</span>
+<span style="color:#6A5ACD;">Probability density function of a normal distribution:</span>
 </div>
 
 
@@ -330,7 +328,7 @@ include_graphics("../class3/img/standardnormalpdf2.png")
 
 ## Two-sample location tests {.smaller}
 
-In practice, we often encounter problems where our goal is <span style="color:purple;">to compare the means (or locations) of two samples</span>. For example,
+In practice, we often encounter problems where our goal is <span style="color:#eb078e;">to compare the means (or locations) of two samples</span>. For example,
 
 1. A scientist is interested in comparing the vaccine efficacy of the Pfizer-BioNTech and the Moderna vaccine.
 
@@ -338,13 +336,13 @@ In practice, we often encounter problems where our goal is <span style="color:pu
 
 3. A psychologist wants to compare male and female college students' impression on a selected webpage.
 
-We will discuss three <span style="color:purple;">two-sample location tests</span>:
+We will discuss three <span style="color:#eb078e;">two-sample location tests</span>:
 
-1. <span style="color:blue;">Two independent sample Student's t-test</span>
+1. <span style="color:#6A5ACD;">Two independent sample Student's t-test</span>
 
-2. <span style="color:blue;">Two independent sample Welch's t-test</span>
+2. <span style="color:#6A5ACD;">Two independent sample Welch's t-test</span>
 
-3. <span style="color:blue;">Two independent sample Mann-Whitney-Wilcoxon test</span>
+3. <span style="color:#6A5ACD;">Two independent sample Mann-Whitney-Wilcoxon test</span>
 
 ---
 
@@ -386,11 +384,11 @@ stats.ttest_ind(a = ..., b = ..., alternative = ..., equal_var = True)
 ```
 </div>
 
-This test strongly relies on the <span style="color:purple;">assumed absence of outliers</span>. If outliers appear to be present the Mann-Whitney-Wilcoxon test (see later) is (probably) a better option.
+This test strongly relies on the <span style="color:#eb078e;">assumed absence of outliers</span>. If outliers appear to be present the Mann-Whitney-Wilcoxon test (see later) is (probably) a better option.
 
-For moderate and small sample sizes, the sample distribution should be at least <span style="color:purple;">approximately normal</span> with no strong skewness to ensure the reliability of the test.
+For moderate and small sample sizes, the sample distribution should be at least <span style="color:#eb078e;">approximately normal</span> with no strong skewness to ensure the reliability of the test.
 
-In practice, the assumption of equal variance is hard to verify so <span style="color:purple; font-weight:bold;">we recommend to avoid this test in practice</span>.
+In practice, the assumption of equal variance is hard to verify so <span style="color:#eb078e; font-weight:bold;">we recommend to avoid this test in practice</span>.
 
 
 ---
@@ -435,9 +433,9 @@ stats.ttest_ind(a = ..., b = ..., alternative = ..., equal_var = False)
 ```
 </div>
 
-This test strongly relies on the <span style="color:purple;">assumed absence of outliers</span>. If outliers appear to be present the Mann-Whitney-Wilcoxon test (see later) is (probably) a better option.
+This test strongly relies on the <span style="color:#eb078e;">assumed absence of outliers</span>. If outliers appear to be present the Mann-Whitney-Wilcoxon test (see later) is (probably) a better option.
 
-For moderate and small sample sizes, the sample distribution should be at least <span style="color:purple;">approximately normal</span> with no strong skewness to ensure the reliability of the test.
+For moderate and small sample sizes, the sample distribution should be at least <span style="color:#eb078e;">approximately normal</span> with no strong skewness to ensure the reliability of the test.
 
 This test does not require the variances of the two groups to be equal. If the variances of the two groups are the same (which is rather unlikely in practice), the Welch's t-test loses a little bit of power compared to the Student's t-test.
 
@@ -486,7 +484,7 @@ stats.mannwhitneyu(a = ..., b = ...)
 </div>
 
 
-This test is "<span style="color:purple;">robust</span>" in the sense that (unlike the t-tests) it is not overly affected by outliers.
+This test is "<span style="color:#eb078e;">robust</span>" in the sense that (unlike the t-tests) it is not overly affected by outliers.
 
 For the Mann–Whitney–Wilcoxon test to be comparable to the t-tests (i.e. testing for the mean) we need to assume <span style="color:#6A5ACD; font-weight:bold;"> symmetric distributions </span> and <span style="color:#6A5ACD; font-weight:bold;"> equality in variances </span>.  
 
@@ -573,37 +571,42 @@ print("p-value:", round(p_value, 4))
 
 ::: {.small-text}
 
-<span style="color:purple;">Define hypotheses</span>: $H_0: \mu_A = \mu_B, \quad H_a: \mu_A \neq \mu_B$
+- Step 1: <span style="color:#eb078e;">Define hypotheses </span>$H_0: \mu_A = \mu_B, \quad H_a: \mu_A \neq \mu_B$
 
 
-<span style="color:purple;">Define</span>  
-We consider $\alpha = 5\%$
+\vspace{1cm}
 
-<span style="color:purple;">Compute p-value</span>  
+
+- Step 2: <span style="color:#eb078e;">Define $\color{#eb078e}{\alpha}$</span> We consider $\alpha = 5\%$
+
+\vspace{1cm}
+
+- Step 3: <span style="color:#eb078e;">Compute p-value</span>  
 Welch's *t*-test appears suitable in this case, and therefore, we obtain $\text{p-value} = 96.22\%$
-(see R output tab for details).
+(see Python output tab for details).
 
-<span style="color:purple;">Conclusion</span>  
+\vspace{1cm}
+
+- Step 4: <span style="color:#eb078e;">Conclusion</span>  
 We have $\text{p-value} > \alpha$
-so we **fail to reject the null hypothesis** at the significance level of $5\%$.
+so we fail to reject the null hypothesis at the significance level of $5\%$.
 
 :::
-
 
 ---
 
 ## Problems with multiple samples
 
 <span style="font-size:0.8em;">
-In practice, we often even encounter situations where we need to <span style="color:purple;">compare the means of more than 2 groups</span>. For example, we want to compare the weight loss efficacy of several diets, say diets <span style="color:#6A5ACD; font-weight:bold;">A</span>, <span style="color:#06bcf1; font-weight:bold;">B</span>, <span style="color:#8bb174; font-weight:bold;">C</span>. Your theory could, for example, be the following: 0 < <span style="color:#6A5ACD;">$\mu_A$</span> <span style="color:black;">=</span> <span style="color:#06bcf1;">$\mu_B$</span> < <span style="color:#8bb174;">$\mu_C$</span>. A possible approach to evaluate its validity:
+In practice, we often even encounter situations where we need to <span style="color:#eb078e;">compare the means of more than 2 groups</span>. For example, we want to compare the weight loss efficacy of several diets, say diets <span style="color:#6A5ACD; font-weight:bold;">A</span>, <span style="color:#06bcf1; font-weight:bold;">B</span>, <span style="color:#8bb174; font-weight:bold;">C</span>. Your theory could, for example, be the following: 0 < <span style="color:#6A5ACD;">$\mu_A$</span> <span style="color:black;">=</span> <span style="color:#06bcf1;">$\mu_B$</span> < <span style="color:#8bb174;">$\mu_C$</span>. A possible approach to evaluate its validity:
 
 
 ::: {.small-text}
-1. **Show that** <span style="color:#8bb174;">$\mu_C$</span> **is greater than** <span style="color:#6A5ACD;">$\mu_A$</span> **and** <span style="color:#06bcf1;">$\mu_B$</span> (Test 1: $H_0:$ <span style="color:#6A5ACD;">$\mu_A$</span> $=$ <span style="color:#8bb174;">$\mu_C$</span>, $H_a:$ <span style="color:#6A5ACD;">$\mu_A$</span> $<$ <span style="color:#8bb174;">$\mu_C$</span>; Test 2: $H_0:$ <span style="color:#06bcf1;">$\mu_B$</span> $=$ <span style="color:#8bb174;">$\mu_C$</span>, $H_a:$ <span style="color:#06bcf1;">$\mu_B$</span> $<$ <span style="color:#8bb174;">$\mu_C$</span>). Here we hope to **reject $H_0$ in both cases**.
+1. Show that <span style="color:#8bb174;">$\mu_C$</span> is greater than <span style="color:#6A5ACD;">$\mu_A$</span> and <span style="color:#06bcf1;">$\mu_B$</span> (Test 1: $H_0:$ <span style="color:#6A5ACD;">$\mu_A$</span> $=$ <span style="color:#8bb174;">$\mu_C$</span>, $H_a:$ <span style="color:#6A5ACD;">$\mu_A$</span> $<$ <span style="color:#8bb174;">$\mu_C$</span>; Test 2: $H_0:$ <span style="color:#06bcf1;">$\mu_B$</span> $=$ <span style="color:#8bb174;">$\mu_C$</span>, $H_a:$ <span style="color:#06bcf1;">$\mu_B$</span> $<$ <span style="color:#8bb174;">$\mu_C$</span>). Here we hope to reject $H_0$ in both cases.
 
-2. **Show that** <span style="color:#6A5ACD;">$\mu_A$</span> **and** <span style="color:#06bcf1;">$\mu_B$</span> **are greater than 0** (Test 3: $H_0:$ <span style="color:#6A5ACD;">$\mu_A$</span> $=0$, $H_a:$ <span style="color:#6A5ACD;">$\mu_A$</span> $>0$; Test 4: $H_0:$ <span style="color:#06bcf1;">$\mu_B$</span> $=0$, $H_a:$ <span style="color:#06bcf1;">$\mu_B$</span> $>0$). Here we also hope to **reject $H_0$ in both cases**.
+2. Show that <span style="color:#6A5ACD;">$\mu_A$</span> and <span style="color:#06bcf1;">$\mu_B$</span> are greater than 0 (Test 3: $H_0:$ <span style="color:#6A5ACD;">$\mu_A$</span> $=0$, $H_a:$ <span style="color:#6A5ACD;">$\mu_A$</span> $>0$; Test 4: $H_0:$ <span style="color:#06bcf1;">$\mu_B$</span> $=0$, $H_a:$ <span style="color:#06bcf1;">$\mu_B$</span> $>0$). Here we also hope to reject $H_0$ in both cases.
 
-3. **Compare** <span style="color:#6A5ACD;">$\mu_A$</span> **and** <span style="color:#06bcf1;">$\mu_B$</span> (Test 5: $H_0:$ <span style="color:#6A5ACD;">$\mu_A$</span> $=$ <span style="color:#06bcf1;">$\mu_B$</span>, $H_a:$ <span style="color:#6A5ACD;">$\mu_A$</span> $\neq$ <span style="color:#06bcf1;">$\mu_B$</span>). Here we hope **not to reject $H_0$**. ⚠️ This does **not imply** that <span style="color:#6A5ACD;">$\mu_A$</span> $=$ <span style="color:#06bcf1;">$\mu_B$</span> is true, but at least the result would not contradict our theory.
+3. Compare <span style="color:#6A5ACD;">$\mu_A$</span> and <span style="color:#06bcf1;">$\mu_B$</span> (Test 5: $H_0:$ <span style="color:#6A5ACD;">$\mu_A$</span> $=$ <span style="color:#06bcf1;">$\mu_B$</span>, $H_a:$ <span style="color:#6A5ACD;">$\mu_A$</span> $\neq$ <span style="color:#06bcf1;">$\mu_B$</span>). Here we hope **not to reject $H_0$**. ⚠️ This does **not imply** that <span style="color:#6A5ACD;">$\mu_A$</span> $=$ <span style="color:#06bcf1;">$\mu_B$</span> is true, but at least the result would not contradict our theory.
 </span>
 
 
@@ -672,7 +675,9 @@ include_graphics("../class3/img/green.png")
 
 ## Multiple testing can be dangerous! {.smaller}
 
-- Remember that a p-value is <span style="color:blue;">random</span> as its value depends on the data.
+<div style="font-size: 1.1em;">
+
+- Remember that a p-value is <span style="color:#6A5ACD;">random</span> as its value depends on the data.
 - If multiple hypotheses are tested, the chance of observing a rare event increases, and therefore, the chance to incorrectly reject a null hypothesis (i.e. making a Type I error) increases.
 - For example, if we consider $k$ (independent) tests (whose null hypotheses are all correct), we have
 
@@ -683,13 +688,17 @@ $$\begin{align}
 \end{align}$$
 
 - Therefore, $\alpha_k$ increases rapidly with $k$ (e.g. $\alpha_1 = 0.05$, $\alpha_2 \approx 0.098$, $\alpha_{10} \approx 0.4013$, $\alpha_{100} \approx 0.9941$).
-- Hence <span style="color:purple;">performing multiple tests, with the same or different data, is dangerous</span> ⚠️ (but very common! 😟) as it can lead to significant results, when actually there are none!
+- Hence <span style="color:#eb078e;">performing multiple tests, with the same or different data, is dangerous</span> ⚠️ (but very common! 😟) as it can lead to significant results, when actually there are none!
 
+</div>
 ---
 
 ## Possible solutions {.smaller}
 
-Suppose that we are interested in making $k$ tests and that we want the probability of rejecting the null at least once (assuming the null hypotheses to be correct for all tests) $\alpha_k$ to be equal to $\alpha$ (typically 5%). Instead of using $\alpha$ for the individual tests we will use $\alpha_c$ (i.e. a corrected $\alpha$). Then, for $k$ (potentially <span style="color:blue;">dependent</span>) tests we have
+<div style="font-size: 1.1em;">
+
+
+Suppose that we are interested in making $k$ tests and that we want the probability of rejecting the null at least once (assuming the null hypotheses to be correct for all tests) $\alpha_k$ to be equal to $\alpha$ (typically 5%). Instead of using $\alpha$ for the individual tests we will use $\alpha_c$ (i.e. a corrected $\alpha$). Then, for $k$ (potentially <span style="color:#6A5ACD;">dependent</span>) tests we have
 
 $$\begin{align}
 \alpha_k &= \alpha = \Pr(\text{reject } H_0 \text{ at least once}) \\
@@ -697,35 +706,47 @@ $$\begin{align}
 &{\color{#eb078e}{\leq}} \sum_{i = 1}^k \Pr(\text{reject } H_0 \text{ test i}) = \alpha_c \times k.
 \end{align}$$
 
-Solving for $\alpha_c$ we obtain: $\color{#6A5ACD}{\alpha_c = \alpha/k}$, which is called <span style="color:purple;">Bonferroni correction</span>. By making use of the <span style="color:purple;">Boole's inequality</span>, this approach does not require any assumptions about dependence among the tests or about how many of the null hypotheses are true.
+Solving for $\alpha_c$ we obtain: $\color{#6A5ACD}{\alpha_c = \alpha/k}$, which is called <span style="color:#eb078e;">Bonferroni correction</span>. By making use of the <span style="color:#eb078e;">Boole's inequality</span>, this approach does not require any assumptions about dependence among the tests or about how many of the null hypotheses are true.
+
+</div> 
 
 ---
 
 ## Possible solutions {.smaller}
 
-The Bonferroni correction can be conservative if there are a large number of tests, as it comes at the cost of reducing the power of the individual tests (e.g. if $\alpha = 5\%$ and $k = 20$, we get $\alpha_c = 0.05/20 = 0.25\%$). There exists a (slightly) "tighter" bound for $\alpha_k$, which is given by
+<div style="font-size: 1.1em;">
+
+
+- The Bonferroni correction can be conservative if there are a large number of tests, as it comes at the cost of reducing the power of the individual tests (e.g. if $\alpha = 5\%$ and $k = 20$, we get $\alpha_c = 0.05/20 = 0.25\%$). There exists a (slightly) "tighter" bound for $\alpha_k$, which is given by
 
 $$
 \alpha_k = \Pr(\text{reject } H_0 \text{ at least once}) \hspace{0.1cm} {\color{#eb078e}{\leq}} \hspace{0.1cm} 1 - (1 - \alpha_c)^k.
 $$
-Solving for $\alpha_c$ we obtain: $\color{#6A5ACD}{\alpha_c = 1 - (1 - \alpha)^{1/k}}$, which is called  <span style="color:purple;">Dunn–Šidák correction</span>. This correction is (slightly) less stringent than the Bonferroni correction (since $1 - (1 - \alpha)^{1/k} > \alpha/k$ for $k \geq 2$).
 
-There exist many other alternative methods for multiple testing corrections. It is important to mention that when $\text{\textit{k}}$ is large (say $>$ 100) the Bonferroni and Dunn–Šidák corrections become inapplicable and methods based on the idea of <span style="color:purple;">False Discovery Rate</span> should be preferred. However, these recent methods are beyond the scope of this class.
+- Solving for $\alpha_c$ we obtain: $\color{#6A5ACD}{\alpha_c = 1 - (1 - \alpha)^{1/k}}$, which is called  <span style="color:#eb078e;">Dunn–Šidák correction</span>. This correction is (slightly) less stringent than the Bonferroni correction (since $1 - (1 - \alpha)^{1/k} > \alpha/k$ for $k \geq 2$).
+
+- There exist many other alternative methods for multiple testing corrections. It is important to mention that when $\text{\textit{k}}$ is large (say $>$ 100) the Bonferroni and Dunn–Šidák corrections become inapplicable and methods based on the idea of <span style="color:#eb078e;">False Discovery Rate</span> should be preferred. However, these recent methods are beyond the scope of this class.
+
+</div>
 
 ---
 
 ## Multiple-sample location tests {.smaller}
 
-To compare several means of different populations, a standard approach is to start our analysis by using the <span style="color:purple;">multiple-sample location tests</span>. More precisely, we proceed our analysis with the following steps:
+<div style="font-size: 1.1em;">
 
-  - <span style="color:blue;">Step 1:</span> We first perform the multiple-sample location tests, where the null hypothesis states that all the locations are the same. If we cannot reject the null hypothesis, we stop our analysis here. Otherwise, we move on to Step 2.
-  - <span style="color:blue;">Step 2:</span> We compare the groups mutually (using $\alpha_c$) with two-sample location tests in order to verify our hypothesis.
+To compare several means of different populations, a standard approach is to start our analysis by using the <span style="color:#eb078e;">multiple-sample location tests</span>. More precisely, we proceed our analysis with the following steps:
+
+  - <span style="color:#6A5ACD;">Step 1:</span> We first perform the multiple-sample location tests, where the null hypothesis states that all the locations are the same. If we cannot reject the null hypothesis, we stop our analysis here. Otherwise, we move on to Step 2.
+  - <span style="color:#6A5ACD;">Step 2:</span> We compare the groups mutually (using $\alpha_c$) with two-sample location tests in order to verify our hypothesis.
   
-We will discuss three <span style="color:purple;">multiple-sample location tests</span>:
+We will discuss three <span style="color:#eb078e;">multiple-sample location tests</span>:
 
- 1. <span style="color:blue;">Fisher's one-way ANalysis Of VAriance (ANOVA)</span>
- 2. <span style="color:blue;">Welch's one-way ANOVA</span>
- 3. <span style="color:blue;">Kruskal-Wallis test</span>
+ 1. <span style="color:#6A5ACD;">Fisher's one-way ANalysis Of VAriance (ANOVA)</span>
+ 2. <span style="color:#6A5ACD;">Welch's one-way ANOVA</span>
+ 3. <span style="color:#6A5ACD;">Kruskal-Wallis test</span>
+ 
+</div>
  
 ---
 
@@ -762,11 +783,23 @@ stats.f_oneway(group_A, group_B, group_C)
 ```
 </div>
 
-This test strongly relies on the <span style="color:purple;">assumed absence of outliers</span>. If outliers appear to be present the Kruskal-Wallis test (see later) is (probably) a better option.
 
-For moderate and small sample sizes, the sample distribution should be at least <span style="color:purple;">approximately normal</span> with no strong skewness to ensure the reliability of the test.
+<div style="font-size: 1.1em;">
 
-In practice, the assumption of equal variance is hard to verify so <span style="color:purple; font-weight:bold;">we recommend to avoid this test in practice</span>.
+\vspace{1cm}
+
+- This test strongly relies on the <span style="color:#eb078e;">assumed absence of outliers</span>. If outliers appear to be present the Kruskal-Wallis test (see later) is (probably) a better option.
+
+\vspace{1cm}
+
+- For moderate and small sample sizes, the sample distribution should be at least <span style="color:#eb078e;">approximately normal</span> with no strong skewness to ensure the reliability of the test.
+
+\vspace{1cm}
+
+
+- In practice, the assumption of equal variance is hard to verify so <span style="color:#eb078e; font-weight:bold;">we recommend to avoid this test in practice</span>.
+
+</div>
 
 ---
 
@@ -800,9 +833,9 @@ anova_oneway(data, groups=groups, use_var='unequal', welch_correction=True)
 ```
 </div>
 
-This test strongly relies on the <span style="color:purple;">assumed absence of outliers</span>. If outliers appear to be present the Kruskal-Wallis test (see later) is (probably) a better option.
+This test strongly relies on the <span style="color:#eb078e;">assumed absence of outliers</span>. If outliers appear to be present the Kruskal-Wallis test (see later) is (probably) a better option.
 
-For moderate and small sample sizes, the sample distribution should be at least <span style="color:purple;">approximately normal</span> with no strong skewness to ensure the reliability of the test.
+For moderate and small sample sizes, the sample distribution should be at least <span style="color:#eb078e;">approximately normal</span> with no strong skewness to ensure the reliability of the test.
 
 This test does not require the variances of the groups to be equal. If the variances of all the groups are the same (which is rather unlikely in practice), the Welch's one-way ANOVA loses a little bit of power compared to the Fisher's one-way ANOVA.
 
@@ -814,7 +847,7 @@ This test considers the following assumed model for G groups
 $$X_{i(g)} = {\color{#eb078e}{\theta_{g}}} + \varepsilon_{i(g)} = \theta + {\color{#eb078e}{\delta_{g}}} + \varepsilon_{i(g)},$$
 where $g=1,\ldots, G$, $i=1,...,n_{g}$, $\varepsilon_{i(g)} \overset{iid}{\sim} N(0,{\color{#eb078e}{\sigma^{2}}})$ and $\sum n_{g}\delta_{g}=0$. 
 
-📝 $n_i =$ sample size of group $i$, $\theta_i = \theta + \delta_i =$ population <span style="color:purple;">location</span> of group $i$, $i=1,\ldots, G$.
+📝 $n_i =$ sample size of group $i$, $\theta_i = \theta + \delta_i =$ population <span style="color:#eb078e;">location</span> of group $i$, $i=1,\ldots, G$.
 
 Hypotheses:
 $$H_0: {\color{#6A5ACD}{\theta_1}} {\color{#eb078e}{=}} {\color{#06bcf1}{\theta_2}} {\color{#eb078e}{=}} \ldots {\color{#eb078e}{=}} {\color{#8bb174}{\theta_G}} \ \ \ \ \text{and} \ \ \ \ H_a: \theta_i {\color{#eb078e}{\neq}} \theta_j \ \ \text{for at least one pair of} \ \ (i,j).$$
