@@ -77,7 +77,7 @@ dietC = diet["weight.loss"][diet["diet.type"]=="C"]
 Next, we construct boxplots to compare the empirical distributions of the three diets as follows:
 
 
-```{python, echo=TRUE}
+```{python, echo=TRUE, fig.align = 'center'}
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -106,7 +106,7 @@ Based on the previous graph, we decide to first employ a Kruskal-Wallis test to 
 
 We start with a Kruskal-Wallis test with the following hypotheses:
 
-$H_{0}: \mu_A=\mu_B=\mu_C$ and $H_{a}: H_0$ is false. 
+$$H_{0}: \mu_A=\mu_B=\mu_C \quad \text{and} \quad H_{a}: H_0 \ \text{is false}.$$ 
 
 where $\mu_A$, $\mu_B$ and $\mu_C$ denote the mean weight loss for diets A, B and C, respectively. As usual, we consider $\alpha = 0.05$.
 

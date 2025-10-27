@@ -26,8 +26,6 @@ Because we discuss both two-sample and multi-sample scenarios, this class bridge
 
 ## Today's objectives {.unnumbered}
 
-The objectives of this class are to review:
-
 The objectives of this class are to:
 
 - [x] Review core concepts: hypotheses, errors (Type I/II), p-values, and power  

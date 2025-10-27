@@ -207,7 +207,7 @@ weight_OG = df_salamander["weight_g"][df_salamander["section"]=="OG"]
 t_stat, p_val = stats.ttest_ind(weight_CC, weight_OG, equal_var=False)
 
 print(f"T-statistic: {t_stat:.3f}")
-print(f"P-value: {p_val:.3f}")
+print(f"p-value: {p_val:.3f}")
 ```
 
 He concludes that there is no evidence from the data to suggest that the average weight of Coastal Giant Salamanders differs between the two locations. What do you think  of this procedure?
@@ -248,7 +248,7 @@ Based on the empirical distribution of the weights of salamander for the two loc
 # Define questions choice and individual feedback for each question
 opts <- list(
   list(value = "Student's t-test.",
-       feedback = "The student t-test assumes that the variances of the two groups are the same. This is very hard to verify in practice and thus, it is preferable to avoid using this test."),
+       feedback = "The Student's t-test assumes that the variances of the two groups are the same. This is very hard to verify in practice and thus, it is preferable to avoid using this test."),
   list(value = "Welch's t-test.",
        feedback = "This is probably a suitable choice but one can argue that outliers are present in weight distributions so this may not be the optimal choice."),
   answer = list(
@@ -282,7 +282,7 @@ weight_OG = df_salamander["weight_g"][df_salamander["section"]=="OG"]
 
 stat, p_value = ______(weight_CC, weight_OG)
 print(f"Mann-Whitney U test statistic: {stat}")
-print(f"P-value: {p_value}")
+print(f"p-value: {p_value}")
 
 ```
 
