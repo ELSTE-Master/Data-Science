@@ -1,0 +1,131 @@
+---
+title: "Review exercises"
+format: 
+  live-html:
+    theme: cosmo
+    css: ../assets/webex_2.css
+    include-after-body: ../assets/webex_2.js
+engine: knitr
+---
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
+
+
+
+
+
+
+
+```{r, echo = FALSE, results='asis'}
+knitr::opts_chunk$set(echo = FALSE)
+source("../assets/q_a_env.R")
+```
+
+<!-- MathJax for Rendering Math -->
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+
+### Question 1
+Suppose that you want to compare the means of $2$ groups, in which situation is Student's t-test a good approach:
+
+
+```{r, results='asis'}
+# Define questions choice and individual feedback for each question
+opts <- list(
+  list(value = "We need the following: (1) it is reasonable to assume that there are no outliers and (2) for moderate and small sample sizes the sample distribution should be at least approximately normal.",
+       feedback = "Not enough! We also need that the variances are the same between groups."),
+  list(value = "We need the following: (1) it is reasonable to assume that there are no outliers and (2) for moderate and small sample sizes the sample distribution should be at least approximately normal. If these criteria are met then we should test if the variances are the same between groups. If we can't reject the null, then we can use Student's t-test.",
+       feedback = "Nope, even though we can't reject the null, we are still not sure if the null is correct 😉. "),
+  list(
+    value = "We should do the following tests: (1) test if there are no outliers, (2) test if the data are normally distributed (one test per sample) and (3) test if the variances are the same. If we can't reject the null for all tests, then we should use Student's t-test.",
+    feedback = "Nope, even though we can't reject the null, we are still not sure if the null is correct 😉."
+  ),
+  answer = list(
+    value = "We need the following: (1) it is reasonable to assume that there are no outliers, (2) the variances of the two groups are known to be the same (or at least it is reasonable to assume that this is the case) and (3) for moderate and small sample sizes the sample distribution should be at least approximately normal.",
+    feedback = "Yes! 😎"
+  )
+)
+# render QA environment
+render_q_a_env(opts)
+```
+
+### Question 2
+Suppose that you want to compare the means of $2$ groups, in which situation is Welsh's t-test a good approach:
+
+
+```{r, results='asis'}
+# Define questions choice and individual feedback for each question
+opts <- list(
+  list(value = "When it is reasonable to assume that there are no outliers.",
+       feedback = "Nope, if the sample size is small we also need the empirical distribution to be reasonably close to a normal distribution."),
+  list(value = "When it is reasonable to assume that the sample distribution is at least approximately normal with not many outliers.",
+       feedback = "Nope, these outliers can potentially have a very large impact!"),
+  answer = list(
+    value = "When it is reasonable to assume that there are no outliers and the sample size is sufficiently large",
+    feedback = "Indeed, if the sample size is large enough, then we don't require the sample distribution to be close to a normal because of the central limit theorem."
+  ),
+  list(
+    value = "We need the following: (1) it is reasonable to assume that there are no outliers, (2) the variances of the two groups are known to be the same (or at least it is reasonable to assume that this is the case).",
+    feedback = "Nope, if the sample size is small we also need the empirical distribution to be reasonably close to a normal distribution. The assumption that the variances are the same is not needed."
+  )
+)
+# render QA environment
+render_q_a_env(opts)
+```
+
+
+
+### Question 3
+Suppose that you want to compare the means of $2$ groups, in which situation is Wilcoxon rank sum test inadequate:
+
+
+
+```{r, results='asis'}
+# Define questions choice and individual feedback for each question
+opts <- list(
+  list(value = "When there are no outliers.",
+       feedback = "Nope! 😆"),
+  answer = list(value = "When the distribution is not symmetric and the sample is large.",
+       feedback = "Yes! Since this test concerns the median and not the mean, the result can be quite different when the distribution is not symmetric."),
+  list(
+    value = "When it is reasonable to assume that there are no outliers and the sample distribution should be at least approximately normal.",
+    feedback = "Nope, it can still perform very well in this case. "
+  ),
+  list(
+    value = "When it is reasonable to assume that there are no outliers and the variances are the same.",
+    feedback = "Nope, it can still perform very well in this case."
+  )
+)
+# render QA environment
+render_q_a_env(opts)
+```
+
+
+### Question 4
+A researcher administers many hypothesis tests as part of a research project. He finds that, of $250$ tests $11$ were significant at the $5\%$ level. The researcher feels very proud of this fact and thinks that he makes a big discovery. What do you think of this situation?
+
+
+
+```{r, results='asis'}
+# Define questions choice and individual feedback for each question
+opts <- list(
+  list(value = "It is very interesting that \\(11\\) tests are significant.",
+       feedback = "Nope, because we did many tests..."),
+  list(value = "It is interesting that \\(11\\) tests are significant but since we did many tests we should find a theoretical argument for our analysis.",
+       feedback = "Finding a posteriori argument is always dangerous. ⚠️ "),
+  list(
+    value = "One would expect \\(12.5\\) (\\(5\\%\\) of \\(250\\)) significant tests even in the purely null case, merely by chance, so we should find at least \\(13\\) significant tests for the result to be interesting.",
+    feedback = "No, actually we would need a lot more... In fact, there is a probability of \\(48\\%\\) that one would obtain \\(13\\) or more significant tests by pure luck. 🤔 "
+  ),
+  answer = list(
+    value = "One would expect \\(12.5\\) (\\(5\\%\\) of \\(250\\)) significant tests even in the purely null case, merely by chance. So, finding only \\(11\\) significant results is actually somewhat disappointing.",
+    feedback = "Yes! In the class notes of John Wilder Tukey (who is a famous statistician and the inventor of many statistical methods, including the boxplot!), he used this example at Princeton University in \\(1976\\) to highlight the dangers of multiple testing (and introduce the idea of higher criticism) 🤔. "
+  )
+)
+# render QA environment
+render_q_a_env(opts)
+```
+

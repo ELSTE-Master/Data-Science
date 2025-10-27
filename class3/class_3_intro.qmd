@@ -39,7 +39,8 @@ The objectives of this class are to:
 
 ## Slides
 
-- {{< fa file-pdf >}} [PDF](../slides/class1_pandas.pdf)
+- {{< fa file-pdf >}} [PDF](class_3_slides.pdf)
 
+- <i class="fa fa-window-restore"></i> <a href="../class3/class_3_slides.html" target="_blank">View in browser</a>
 
 
