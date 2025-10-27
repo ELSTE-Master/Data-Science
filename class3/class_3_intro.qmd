@@ -37,6 +37,7 @@ The objectives of this class are to:
 - [x] Apply multiple testing corrections using Bonferroni and Dunn–Šidák methods  
 - [x] Perform and report analyses in Python clearly and effectively
 
+
 ## Slides
 
 - {{< fa file-pdf >}} [PDF](class_3_slides.pdf)
