@@ -6,23 +6,23 @@ author:
     orcid: 0000-0002-1919-9473
     email: sebastien.biasse@unige.ch
     affiliation: 
-      - name: Earth Sciences, University of Geneva
+      - name: Earth Sciences, University of Geneva 🇨🇭
   - name: Stéphane Guerrier
     id: sg
     orcid: 0000-0003-0002-8794
     email: Stephane.Guerrier@unige.ch
     affiliation: 
-      - name: Earth Sciences & Pharmaceutical Sciences, University of Geneva
+      - name: Earth Sciences & Pharmaceutical Sciences, University of Geneva 🇨🇭
   - name: Dominique Couturier
     id: DC
     orcid: 0000-0001-5774-5036
     affiliation: 
-      - name: Cancer Research UK, University of Cambridge
+      - name: Cancer Research UK, University of Cambridge 🇬🇧
   - name: Yuming Zhang
     id: YZ
     orcid: 0000-0003-2293-9601
     affiliation: 
-      - name: T.H. Chan School of Public Health, Harvard University
+      - name: T.H. Chan School of Public Health, Harvard University 🇺🇸
 license: "CC BY"
 format:
   clean-revealjs:
