@@ -34,7 +34,7 @@ The objectives of this class are to review:
 
 ## Slides
 
-- {{< fa file-pdf >}} [PDF](../slides/class1_pandas.pdf)
-- <i class="fa fa-window-restore"></i> <a href="../slides/class1_pandas.html" target="_blank">View in browser</a>
+- {{< fa file-pdf >}} [PDF](class_2_slides_EDA.pdf)
+- <i class="fa fa-window-restore"></i> <a href="../slides/class2_EDA.html" target="_blank">View in browser</a>
 
 

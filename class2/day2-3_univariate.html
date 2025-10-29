@@ -1,0 +1,2122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Univariate analyses – ELSTE Data Science Master Course</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../class2/day2-4_bivariate.html" rel="next">
+<link href="../class2/day2-2_data_exploration.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-f07512a1df6b41bf618e21cd23a84702.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../custom.css">
+<link rel="stylesheet" href="../assets/webex.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../class2/day2-1_intro.html">Class 2: Descriptive stats</a></li><li class="breadcrumb-item"><a href="../class2/day2-3_univariate.html">Univariate analyses</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">ELSTE Data Science Course</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/ELSTE-Master/Data-Science" title="GitHub" class="quarto-navigation-tool px-1" aria-label="GitHub"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ELSTE Data Science Master Course</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Class 1: Pandas</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class1/day1-1_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class1/day1-2_pandas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Intro to Pandas</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class1/day1-3_data_exploration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data structure</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class1/day1-4_queries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Querying data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class1/day1-5_filtering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filtering data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class1/day1-6_operations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Operations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class1/day1-summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Summary</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Class 2: Descriptive stats</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class2/day2-1_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class2/day2-2_data_exploration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data exploration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class2/day2-3_univariate.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Univariate analyses</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class2/day2-4_bivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bivariate analyses</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Class 3: Analysis of variance</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class3/class_3_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class3/class_3_ex_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Review exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class3/class_3_ex_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Examples diet data part I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class3/class_3_ex_3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises diet data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class3/class_3_ex_4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Examples diet data part II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class3/class_3_ex_5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises abundance data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/setup_vscode.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Setup VS Code</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/jupyter_markdown_summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Markdown for Jupyter</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#plotting-data-distributions" id="toc-plotting-data-distributions" class="nav-link active" data-scroll-target="#plotting-data-distributions">Plotting data distributions</a></li>
+  <li><a href="#descriptive-parameters" id="toc-descriptive-parameters" class="nav-link" data-scroll-target="#descriptive-parameters">Descriptive parameters</a>
+  <ul>
+  <li><a href="#location" id="toc-location" class="nav-link" data-scroll-target="#location">Location</a>
+  <ul class="collapse">
+  <li><a href="#expectation-and-the-empirical-mean" id="toc-expectation-and-the-empirical-mean" class="nav-link" data-scroll-target="#expectation-and-the-empirical-mean">Expectation and the empirical mean</a></li>
+  <li><a href="#median-and-empirical-median" id="toc-median-and-empirical-median" class="nav-link" data-scroll-target="#median-and-empirical-median">Median and empirical median</a></li>
+  <li><a href="#mode-and-empirical-mode" id="toc-mode-and-empirical-mode" class="nav-link" data-scroll-target="#mode-and-empirical-mode">Mode and empirical mode</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  </ul></li>
+  <li><a href="#dispersion" id="toc-dispersion" class="nav-link" data-scroll-target="#dispersion">Dispersion</a>
+  <ul class="collapse">
+  <li><a href="#range-and-empirical-range" id="toc-range-and-empirical-range" class="nav-link" data-scroll-target="#range-and-empirical-range">Range and empirical range</a></li>
+  <li><a href="#variance-and-standard-deviation-and-sample-variance-and-standard-deviation" id="toc-variance-and-standard-deviation-and-sample-variance-and-standard-deviation" class="nav-link" data-scroll-target="#variance-and-standard-deviation-and-sample-variance-and-standard-deviation">Variance and standard deviation and sample variance and standard deviation</a></li>
+  <li><a href="#interquartile-range-and-the-empirical-interquartile-range" id="toc-interquartile-range-and-the-empirical-interquartile-range" class="nav-link" data-scroll-target="#interquartile-range-and-the-empirical-interquartile-range">Interquartile range and the empirical interquartile range</a></li>
+  </ul></li>
+  <li><a href="#skewness-and-sample-skewness" id="toc-skewness-and-sample-skewness" class="nav-link" data-scroll-target="#skewness-and-sample-skewness">Skewness and sample skewness</a></li>
+  </ul></li>
+  <li><a href="#non-parametric-distribution-visualisation" id="toc-non-parametric-distribution-visualisation" class="nav-link" data-scroll-target="#non-parametric-distribution-visualisation">Non-parametric distribution visualisation</a></li>
+  <li><a href="#grouping-variables" id="toc-grouping-variables" class="nav-link" data-scroll-target="#grouping-variables">Grouping variables</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../class2/day2-1_intro.html">Class 2: Descriptive stats</a></li><li class="breadcrumb-item"><a href="../class2/day2-3_univariate.html">Univariate analyses</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Univariate analyses</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>The objective of <strong>descriptive statistics</strong> is to <mark>provide ways of capturing the properties of a given data set or sample</mark>. Using <em>Pandas</em> and <em>Seaborn</em>, we will review some <mark>metrics, tools, and strategies</mark> that can be used to summarize a dataset, providing us with a quantitative basis to talk about it and compare it to other datasets.</p>
+<p>The first aspect of descriptive statistics is <strong>univariate analyses</strong>, which focus on <mark>capturing the properties of <strong>single</strong> variables at the time</mark>. We are not yet concerned in characterising the <mark>relationships</mark> between two or more variables. The following sections introduce basic functions to visually analyse single variables and the most important parameters to describe them.</p>
+<section id="plotting-data-distributions" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="plotting-data-distributions">Plotting data distributions</h2>
+<p>Let’s focus on the Zircon concentration in Campi Flegrei’s geochemical dataset. We start by simply <mark>visualising</mark> the dataset to get an understanding of what we will talk about. The fist type of plot we will consider is a <mark>histogram</mark>, which shows the <mark>number of times a specific value occurs</mark> in a given variable. (<a href="#fig-sns-hist" class="quarto-xref">Figure&nbsp;2</a>).</p>
+<p>Visualising the dataset is a good way to start getting an idea of its structure. A <mark>histogram</mark> can be seen as a simple <mark>estimator of the underlying probability distribution</mark> of the variable:</p>
+<ul>
+<li>For a <mark>discrete random variable</mark>, this corresponds to the <mark>probability mass function (pmf)</mark>, denoted <span class="math inline">\(p(x) = P(X = x)\)</span>, which assigns the probability that <span class="math inline">\(X\)</span> takes the value <span class="math inline">\(x\)</span>.<br>
+</li>
+<li>For a <mark>continuous random variable</mark>, this corresponds to the <mark>probability density function (pdf)</mark>, denoted <span class="math inline">\(f(x)\)</span>, which describes how probability is distributed over intervals: the probability that <span class="math inline">\(X\)</span> lies in an interval <span class="math inline">\([a,b]\)</span> is given by <span class="math inline">\(\int_a^b f(x)\,dx\)</span>.</li>
+</ul>
+<p>It is important to differentiate between <strong>theoretical distributions</strong> (e.g., normal, log-normal etc) and the distribution of the <strong>sample</strong>, for which we often don’t know the distribution. <a href="#fig-sns-hist_theoretical" class="quarto-xref">Figure&nbsp;1</a> shows:</p>
+<ul>
+<li>Orange line → <strong>a continuous theoretical distribution</strong> (here a normal distribution)</li>
+<li>Blue histogram → <strong>a discretised sample</strong> (here taken from 1000 random numbers sampled from a normal distribution).</li>
+</ul>
+<div id="cell-fig-sns-hist_theoretical" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display">
+<div id="fig-sns-hist_theoretical" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sns-hist_theoretical-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="day2-3_univariate_files/figure-html/fig-sns-hist_theoretical-output-1.png" width="593" height="411" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sns-hist_theoretical-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Difference between theoretical distributions and sample histogram
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In <em>Seaborn</em>, <strong>Histograms</strong> can be plotted using <a href="https://seaborn.pydata.org/generated/seaborn.histplot.html"><code>sns.histplots()</code></a>. Applied to our dataset, <a href="#fig-sns-hist" class="quarto-xref">Figure&nbsp;2</a>) show the <mark>number of times a specific Zr concentration occurs</mark> in the dataset.</p>
+<div id="cell-fig-sns-hist" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb1-2"><a href="#cb1-2"></a>sns.histplot(data<span class="op">=</span>df_traces, x<span class="op">=</span><span class="st">'Zr'</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a>ax.set_xlabel(<span class="st">'Zr (ppm)'</span>)<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>ax.set_title(<span class="st">'Zr distribution'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="fig-sns-hist" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sns-hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="day2-3_univariate_files/figure-html/fig-sns-hist-output-1.png" width="585" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sns-hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Histogram of the Zirconium trace element
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Note that <strong>histograms</strong> <mark>discretise the data</mark> into equal <strong>bins</strong>. The <span class="bg">bin size</span> (e.g., the width and numbers of bins) can alter the visual representation of the dataset. Although functions such as <code>sns.histplots()</code> rely on algorithm that suggest the optimal number of bins, it is a good practice to explore this parameter.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Your turn
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Histograms <mark>discretise the data</mark> into equal <strong>bins</strong>. The documentation of <a href="https://seaborn.pydata.org/generated/seaborn.histplot.html"><code>sns.histplots()</code></a> shows that the function accepts various arguments (e.g., <code>bins</code>, <code>binwidth</code>, <code>binrange</code>) to modify how bins are defined. For now, let’s focus on the <code>bins</code> argument, which takes an <code>int</code> number defining the number of bins. The number of bins can critically alter the representation of a histogram. For instance, try:
+<ul>
+<li><code>bins=10</code></li>
+<li><code>bins=100</code></li>
+</ul></li>
+<li>Try and plotting more than one column to <code>sns.histplots()</code> (→ provide a list of column names to <code>x</code>). How does it look? What are the limitations?</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Visualising distributions of data with Seaborn
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Seaborn</em> has a <a href="https://seaborn.pydata.org/tutorial/distributions.html#distribution-tutorial">great tutorial</a> on visualising distributions of data - be sure to check it out at some point!</p>
+</div>
+</div>
+</section>
+<section id="descriptive-parameters" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="descriptive-parameters">Descriptive parameters</h2>
+<p>By looking at the distribution from <a href="#fig-sns-hist" class="quarto-xref">Figure&nbsp;2</a>, we can intuitively understand the importance of describing <mark>three different characteristics</mark> of the distribution:</p>
+<ul>
+<li>The <strong>location</strong> - or where is <mark>the central value(s)</mark> of the dataset;</li>
+<li>The <strong>dispersion</strong> - or how <mark>spread out</mark> is the distribution of data compared to the central values;</li>
+<li>The <strong>skewness</strong> - or how <mark>symmetrical</mark> is the distribution of data compared to the central values;</li>
+</ul>
+<p>These aspects can be quantified using different statistical measures. Some, like the expectation and variance, are based on <mark>theoretical moments</mark> of the underlying random variable, while others, such as the median and interquartile range, rely on quantiles derived from the <mark>cumulative distribution function</mark>. In practice, we do not know the distribution of the random variable of interest. Hence, we estimate these quantities on the sample by computing <mark>estimators of these theoretical quantities</mark>.</p>
+<section id="location" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="location">Location</h3>
+<p>We will review three measures of <strong>location</strong> and their corresponding estimators:</p>
+<ol type="1">
+<li>The expectation and the empirical <a href="#mean">mean</a>;</li>
+<li>The median and the empirical <a href="#median">median</a>;</li>
+<li>The mode and the empirical <a href="#mode">mode</a>.</li>
+</ol>
+<section id="expectation-and-the-empirical-mean" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="expectation-and-the-empirical-mean">Expectation and the empirical mean</h4>
+<p>The <mark>expectation</mark> (or <mark>theoretical mean</mark>) of a random variable <span class="math inline">\(X\)</span> represents the average value that <span class="math inline">\(X\)</span> would take over an infinite number of repetitions of the same experiment. It is defined as the <mark>first moment</mark> of the distribution of <span class="math inline">\(X\)</span>:</p>
+<ul>
+<li><p>For a <mark>discrete</mark> random variable with probability mass function <span class="math inline">\(p(x)\)</span>:<br>
+<span class="math display">\[\mathbb{E}[X] = \sum_x x\,p(x),\]</span></p></li>
+<li><p>For a <mark>continuous</mark> random variable with probability density function <span class="math inline">\(f(x)\)</span>:<br>
+<span class="math display">\[\mathbb{E}[X] = \int_{-\infty}^{\infty} x\,f(x)\,dx,\]</span></p></li>
+</ul>
+<p>Intuitively, the expectation describes the <mark>center of mass</mark> of the probability distribution.</p>
+<p>The empirical counterpart of the expectation is the <mark>mean</mark>. The <mark>mean</mark> (or <em>arithmetic</em> mean - by opposition to <em>geometric</em> or <em>harmonic</em> means) is the <mark>sum of the values divided by the number of values</mark> (<a href="#eq-mean" class="quarto-xref">Equation&nbsp;1</a>):</p>
+<p><span id="eq-mean"><span class="math display">\[
+\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i
+\tag{1}\]</span></span></p>
+<p>The mean is meaningful to describe <mark><strong>symmetric</strong> distributions without <strong>outliers</strong></mark>, where:</p>
+<ul>
+<li><strong>Symmetric</strong> means the number of items above the mean should be roughly the same as the number below;</li>
+<li><strong>Outliers</strong> are <em>extreme</em> values.</li>
+</ul>
+<p>The empirical mean of a dataset can easily be computed with <em>Pandas</em> using the <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mean.html"><code>.mean()</code></a> function (<a href="#lst-univ-mean" class="quarto-xref">Listing&nbsp;1</a>). Note that we round the results to two significant digits using <code>.round(2)</code>.</p>
+<div id="c588ebeb" class="cell" data-execution_count="4">
+<div id="lst-univ-mean" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-mean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;1: Compute the mean for two significant digits.
+</figcaption>
+<div aria-describedby="lst-univ-mean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="lst-univ-mean"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="lst-univ-mean-1"><a href="#lst-univ-mean-1" aria-hidden="true" tabindex="-1"></a>df_traces[[<span class="st">'Zr'</span>]].mean().<span class="bu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>Zr    365.38
+dtype: float64</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What is the empirical mean value for Strontium?</p>
+<div id="af95d451" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display no-overflow-x" data-execution_count="5">
+<select class="webex-select"><option value="blank"></option><option value="0">365.38</option><option value="answer">516.42</option><option value="0">219.38</option><option value="0">123.94</option></select>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Descriptive stats functions
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><a href="#lst-univ-mean" class="quarto-xref">Listing&nbsp;1</a> shows how to compute the empirical mean on one column, but the <code>.mean()</code> function - as well as most fuctions for descriptive stats - can be applied to entire DataFrames. For this, we need to understand a critical argument - <code>axis</code>.</p>
+<ul>
+<li><code>axis = 0</code> is usually the default, and computes the mean <mark>across all rows for each column</mark>(<a href="#lst-univ-mean-multi-row" class="quarto-xref">Listing&nbsp;2</a>)</li>
+<li><code>axis = 1</code> usually makes sense when rows are labelled, and computes the mean <mark>across all columns for each row</mark>(<a href="#lst-univ-mean-multi-col" class="quarto-xref">Listing&nbsp;3</a>)</li>
+</ul>
+<div id="c9f056e4" class="cell" data-execution_count="6">
+<div id="lst-univ-mean-multi-row" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-mean-multi-row-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;2: Compute the empirical mean across rows.
+</figcaption>
+<div aria-describedby="lst-univ-mean-multi-row-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="lst-univ-mean-multi-row"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="lst-univ-mean-multi-row-1"><a href="#lst-univ-mean-multi-row-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a subset of the df_traces containing numerical data</span></span>
+<span id="lst-univ-mean-multi-row-2"><a href="#lst-univ-mean-multi-row-2" aria-hidden="true" tabindex="-1"></a>df_traces_sub <span class="op">=</span> df_traces[[<span class="st">'Sc'</span>,<span class="st">'Rb'</span>,<span class="st">'Sr'</span>,<span class="st">'Y'</span>,<span class="st">'Zr'</span>,<span class="st">'Nb'</span>,<span class="st">'Cs'</span>]] </span>
+<span id="lst-univ-mean-multi-row-3"><a href="#lst-univ-mean-multi-row-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the mean across all rows</span></span>
+<span id="lst-univ-mean-multi-row-4"><a href="#lst-univ-mean-multi-row-4" aria-hidden="true" tabindex="-1"></a>df_traces_sub.mean(axis<span class="op">=</span><span class="dv">0</span>).<span class="bu">round</span>(<span class="dv">2</span>).head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>Sc      0.20
+Rb    343.82
+Sr    516.42
+Y      31.33
+Zr    365.38
+dtype: float64</code></pre>
+</div>
+</div>
+<div id="ffdcffd0" class="cell" data-execution_count="7">
+<div id="lst-univ-mean-multi-col" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-mean-multi-col-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;3: Compute the empirical mean across columns.
+</figcaption>
+<div aria-describedby="lst-univ-mean-multi-col-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="lst-univ-mean-multi-col"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="lst-univ-mean-multi-col-1"><a href="#lst-univ-mean-multi-col-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a subset of the df_traces containing numerical data</span></span>
+<span id="lst-univ-mean-multi-col-2"><a href="#lst-univ-mean-multi-col-2" aria-hidden="true" tabindex="-1"></a>df_traces_sub <span class="op">=</span> df_traces[[<span class="st">'Sc'</span>,<span class="st">'Rb'</span>,<span class="st">'Sr'</span>,<span class="st">'Y'</span>,<span class="st">'Zr'</span>,<span class="st">'Nb'</span>,<span class="st">'Cs'</span>]] </span>
+<span id="lst-univ-mean-multi-col-3"><a href="#lst-univ-mean-multi-col-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the mean across all columns</span></span>
+<span id="lst-univ-mean-multi-col-4"><a href="#lst-univ-mean-multi-col-4" aria-hidden="true" tabindex="-1"></a>df_traces_sub.mean(axis<span class="op">=</span><span class="dv">1</span>).<span class="bu">round</span>(<span class="dv">2</span>).head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>0    198.32
+1    188.41
+2    188.48
+3    200.69
+4    198.42
+dtype: float64</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="median-and-empirical-median" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="median-and-empirical-median">Median and empirical median</h4>
+<p>The <mark>median</mark> of a random variable <span class="math inline">\(X\)</span> is the value that splits the distribution into two equal halves in terms of probability. Formally, the <mark>theoretical median</mark> <span class="math inline">\(m\)</span> satisfies:</p>
+<p><span class="math display">\[
+P(X \le m) \ge 0.5 \quad \text{and} \quad P(X \ge m) \ge 0.5,
+\]</span></p>
+<p>or equivalently, using the cumulative distribution function <span class="math inline">\(F_X(x)\)</span>:</p>
+<p><span class="math display">\[
+F_X(m) = P(X \le m) = 0.5.
+\]</span></p>
+<p>In practice, we usually only observe a finite <mark>sample</mark> of <span class="math inline">\(X\)</span>. The <mark>empirical median</mark> is an <mark>estimator</mark> of the theoretical median, defined as the middle value of the sorted sample. There is no easy formula to compute the empirical median, instead we need to conceptually (<a href="#lst-univ-median-ex" class="quarto-xref">Listing&nbsp;4</a>):</p>
+<ol type="1">
+<li>Order all values in ascending order and plot them against a normalised number of observations (this is called an empirical cumulative density function - or ECDF);</li>
+<li>On the x-axis, find the point dividing the dataset into two equal numbers of observations;</li>
+<li>Read the value on the y-axis that intersects the ECDF.</li>
+</ol>
+<div id="9d721cff" class="cell" data-execution_count="8">
+<div id="lst-univ-median-ex" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-median-ex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;4: Graphical representation of the empirical median.
+</figcaption>
+<div aria-describedby="lst-univ-median-ex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="lst-univ-median-ex"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="lst-univ-median-ex-1"><a href="#lst-univ-median-ex-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">4</span>))</span>
+<span id="lst-univ-median-ex-2"><a href="#lst-univ-median-ex-2" aria-hidden="true" tabindex="-1"></a>sns.ecdfplot(data<span class="op">=</span>df_traces, x<span class="op">=</span><span class="st">'Zr'</span>)</span>
+<span id="lst-univ-median-ex-3"><a href="#lst-univ-median-ex-3" aria-hidden="true" tabindex="-1"></a>ax.plot([<span class="dv">0</span>, df_traces[<span class="st">'Zr'</span>].median()], [<span class="fl">.5</span>,<span class="fl">.5</span>], color<span class="op">=</span><span class="st">'orange'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="lst-univ-median-ex-4"><a href="#lst-univ-median-ex-4" aria-hidden="true" tabindex="-1"></a>ax.plot([df_traces[<span class="st">'Zr'</span>].median(), df_traces[<span class="st">'Zr'</span>].median()], [<span class="fl">.5</span>,<span class="dv">0</span>], color<span class="op">=</span><span class="st">'orange'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="lst-univ-median-ex-5"><a href="#lst-univ-median-ex-5" aria-hidden="true" tabindex="-1"></a>ax.set_xlim([<span class="dv">0</span>,<span class="dv">900</span>])</span>
+<span id="lst-univ-median-ex-6"><a href="#lst-univ-median-ex-6" aria-hidden="true" tabindex="-1"></a>ax.set_ylim([<span class="dv">0</span>,<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="day2-3_univariate_files/figure-html/cell-9-output-1.png" width="527" height="361" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Fortunately, we can also use the native <em>Pandas</em> <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.median.html"><code>.median</code></a> function (<a href="#lst-univ-median" class="quarto-xref">Listing&nbsp;5</a>).</p>
+<div id="8445526f" class="cell" data-execution_count="9">
+<div id="lst-univ-median" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-median-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;5: Compute the median for two significant digits.
+</figcaption>
+<div aria-describedby="lst-univ-median-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="lst-univ-median"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="lst-univ-median-1"><a href="#lst-univ-median-1" aria-hidden="true" tabindex="-1"></a>df_traces[<span class="st">'Zr'</span>].median().<span class="bu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>np.float64(339.41)</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What is the empirical median value for Cesium?</p>
+<div id="911e6317" class="cell" data-execution_count="10">
+<div class="cell-output cell-output-display no-overflow-x" data-execution_count="10">
+<select class="webex-select"><option value="blank"></option><option value="0">36.38</option><option value="0">51.42</option><option value="answer">23.99</option><option value="0">13.94</option></select>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="mode-and-empirical-mode" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="mode-and-empirical-mode">Mode and empirical mode</h4>
+<p>The <mark>mode</mark> of a random variable <span class="math inline">\(X\)</span> is the value that occurs most frequently in the distribution. Formally, the <mark>theoretical mode</mark> <span class="math inline">\(x_\text{mode}\)</span> is:</p>
+<ul>
+<li>For a <mark>discrete</mark> variable: <span class="math inline">\(x_\text{mode} = \arg\max_x p(x)\)</span>, where <span class="math inline">\(p(x)\)</span> is the probability mass function.<br>
+</li>
+<li>For a <mark>continuous</mark> variable: <span class="math inline">\(x_\text{mode} = \arg\max_x f(x)\)</span>, where <span class="math inline">\(f(x)\)</span> is the probability density function.</li>
+</ul>
+<p>The <mark>empirical mode</mark> is an <mark>estimator</mark> of the theoretical mode, defined as the most frequent value in a sample (discrete) or the peak of a density estimate (continuous). A distribution can have one mode (unimodal), two modes (bimodal), or multiple modes (multimodal). In <em>Pandas</em>, the empirical mode is computed using <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mode.html"><code>.mode()</code></a>.</p>
+<p>For <strong>categorical</strong> or <strong>discrete numerical data</strong>, the empirical mode simply the value(s) that appear most often.</p>
+<p>For <strong>continuous data</strong>, <mark>exact duplicates may be rare</mark>, and resulting empirical modes might not be that meaningful (<a href="#fig-mode" class="quarto-xref">Figure&nbsp;3</a>). As a result, we often bin the data into intervals first and find the most populated bin (<a href="#fig-mode-bin" class="quarto-xref">Figure&nbsp;4</a>).</p>
+<div id="cell-fig-mode" class="cell" data-execution_count="11">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Calculate the modes</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>modes <span class="op">=</span> df_traces[<span class="st">'Zr'</span>].mode().<span class="bu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co"># Set the histogram's bin width</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>binwidth <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co"># Plot the histogram</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb6-9"><a href="#cb6-9"></a>sns.histplot(data<span class="op">=</span>df_traces, x<span class="op">=</span><span class="st">'Zr'</span>, ax<span class="op">=</span>ax, binwidth<span class="op">=</span><span class="dv">50</span>)</span>
+<span id="cb6-10"><a href="#cb6-10"></a></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co"># Plot the modes</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="cf">for</span> i, m <span class="kw">in</span> <span class="bu">enumerate</span>(modes):</span>
+<span id="cb6-13"><a href="#cb6-13"></a>    ax.axvline(m, color<span class="op">=</span><span class="st">'darkorange'</span>, lw<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb6-14"><a href="#cb6-14"></a></span>
+<span id="cb6-15"><a href="#cb6-15"></a>ax.set_xlabel(<span class="st">'Zr (ppm)'</span>)</span>
+<span id="cb6-16"><a href="#cb6-16"></a></span>
+<span id="cb6-17"><a href="#cb6-17"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-mode" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="day2-3_univariate_files/figure-html/fig-mode-output-1.png" width="585" height="429" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Modes computed from a continuous dataset.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-fig-mode-bin" class="cell" data-execution_count="12">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Set the histogram's bin width</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>binwidth <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co"># Make the bin range</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>minVal <span class="op">=</span> <span class="bu">int</span>(df_traces[<span class="st">'Zr'</span>].<span class="bu">min</span>()) <span class="co"># Minimum value of the dataset, convert it to an integer</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>maxVal <span class="op">=</span> <span class="bu">int</span>(df_traces[<span class="st">'Zr'</span>].<span class="bu">max</span>()) <span class="co"># Maximum value of the dataset, convert it to an integer</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>binsVal <span class="op">=</span> <span class="bu">range</span>(minVal, maxVal, binwidth)</span>
+<span id="cb7-8"><a href="#cb7-8"></a>binned <span class="op">=</span> pd.cut(df_traces[<span class="st">'Zr'</span>], bins<span class="op">=</span>binsVal)</span>
+<span id="cb7-9"><a href="#cb7-9"></a>modes <span class="op">=</span> binned.mode()<span class="op">;</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a></span>
+<span id="cb7-11"><a href="#cb7-11"></a></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="co"># Convert modes to numeric positions (handles numeric modes and Interval modes from pd.cut)</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a>numeric_modes <span class="op">=</span> []</span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="cf">for</span> m <span class="kw">in</span> modes:</span>
+<span id="cb7-15"><a href="#cb7-15"></a>    numeric_modes.append((m.left <span class="op">+</span> m.right) <span class="op">/</span> <span class="dv">2</span>)  <span class="co"># midpoint of the interval</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a></span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="co"># Plot the histogram</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb7-19"><a href="#cb7-19"></a>sns.histplot(data<span class="op">=</span>df_traces, x<span class="op">=</span><span class="st">'Zr'</span>, ax<span class="op">=</span>ax, binwidth<span class="op">=</span><span class="dv">50</span>)</span>
+<span id="cb7-20"><a href="#cb7-20"></a></span>
+<span id="cb7-21"><a href="#cb7-21"></a><span class="co"># Plot the modes</span></span>
+<span id="cb7-22"><a href="#cb7-22"></a><span class="cf">for</span> i, mval <span class="kw">in</span> <span class="bu">enumerate</span>(numeric_modes):</span>
+<span id="cb7-23"><a href="#cb7-23"></a>    ax.axvline(mval, color<span class="op">=</span><span class="st">'darkorange'</span>, lw<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb7-24"><a href="#cb7-24"></a></span>
+<span id="cb7-25"><a href="#cb7-25"></a>ax.set_xlabel(<span class="st">'Zr (ppm)'</span>)</span>
+<span id="cb7-26"><a href="#cb7-26"></a></span>
+<span id="cb7-27"><a href="#cb7-27"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-mode-bin" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mode-bin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="day2-3_univariate_files/figure-html/fig-mode-bin-output-1.png" width="585" height="429" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mode-bin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Empirical modes computed from a binned dataset.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="summary" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="summary">Summary</h4>
+<p><a href="#lst-univ-mean-med" class="quarto-xref">Listing&nbsp;6</a> illustrate the values of the empirical mean and the empirical median relative to the distribution shown in the histogram. There are a few things to keep in mind when choosing between the empirical mean and median to estimate the location of a dataset:</p>
+<ul>
+<li>If a sample has a <mark>symmetrical distribution</mark>, then <strong>the mean and median are equal</strong>.</li>
+<li>If the distribution of a sample is <mark>not symmetrical</mark>, <strong>the mean should not be used</strong>.</li>
+<li>The <mark>mean is highly sensitive to outliers</mark>, whereas the median is not.</li>
+</ul>
+<div id="57fad5a0" class="cell" data-execution_count="13">
+<div id="lst-univ-mean-med" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-mean-med-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;6: Compute the empirical median for two significant digits.
+</figcaption>
+<div aria-describedby="lst-univ-mean-med-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="lst-univ-mean-med"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="lst-univ-mean-med-1"><a href="#lst-univ-mean-med-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="lst-univ-mean-med-2"><a href="#lst-univ-mean-med-2" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>df_traces, x<span class="op">=</span><span class="st">'Zr'</span>)</span>
+<span id="lst-univ-mean-med-3"><a href="#lst-univ-mean-med-3" aria-hidden="true" tabindex="-1"></a>ax.axvline(df_traces[<span class="st">'Zr'</span>].mean(), color<span class="op">=</span><span class="st">'darkorange'</span>, lw<span class="op">=</span><span class="dv">3</span>, label<span class="op">=</span><span class="st">'Mean'</span>)</span>
+<span id="lst-univ-mean-med-4"><a href="#lst-univ-mean-med-4" aria-hidden="true" tabindex="-1"></a>ax.axvline(df_traces[<span class="st">'Zr'</span>].median(), color<span class="op">=</span><span class="st">'darkviolet'</span>, lw<span class="op">=</span><span class="dv">3</span>, label<span class="op">=</span><span class="st">'Median'</span>)</span>
+<span id="lst-univ-mean-med-5"><a href="#lst-univ-mean-med-5" aria-hidden="true" tabindex="-1"></a>ax.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="day2-3_univariate_files/figure-html/cell-14-output-1.png" width="585" height="429" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="dispersion" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="dispersion">Dispersion</h3>
+<p>We will review three measures of <mark>dispersion</mark> and their corresponding <mark>estimators</mark>:</p>
+<ol type="1">
+<li>The range and the empirical <a href="#range">range</a>;<br>
+</li>
+<li>The variance and standard deviation and the <a href="#variance-and-standard-deviation">sample variance and standard deviation</a>;<br>
+</li>
+<li>The interquartile range and the empirical <a href="#interquartile-range">interquartile range</a>.</li>
+</ol>
+<section id="range-and-empirical-range" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="range-and-empirical-range">Range and empirical range</h4>
+<p>The <mark>range</mark> of a random variable <span class="math inline">\(X\)</span> is the difference between its maximum and minimum values:</p>
+<ul>
+<li>The <mark>theoretical range</mark> is defined as <span class="math inline">\(R = \sup(X) - \inf(X)\)</span>, i.e., the difference between the largest and smallest possible values of <span class="math inline">\(X\)</span>.<br>
+</li>
+<li>The <mark>empirical range</mark> is computed from a <mark>sample</mark> as the difference between the maximum and minimum observed values. For this, we need to get the minimum (<code>df.min()</code>) and maximum (<code>df.max()</code>) values, from which, when needed, the range can be calculated with <a href="#eq-range" class="quarto-xref">Equation&nbsp;2</a>. It is however likely that the min/max functions will be more frequently used (<a href="#lst-univ-minmax" class="quarto-xref">Listing&nbsp;7</a>).</li>
+</ul>
+<p><span id="eq-range"><span class="math display">\[
+R_\text{emp} = \max(x_1, \dots, x_n) - \min(x_1, \dots, x_n).
+\tag{2}\]</span></span></p>
+<div id="f04d25c5" class="cell" data-execution_count="14">
+<div id="lst-univ-minmax" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-minmax-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;7: Compute the min and the max values of a column
+</figcaption>
+<div aria-describedby="lst-univ-minmax-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="lst-univ-minmax"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="lst-univ-minmax-1"><a href="#lst-univ-minmax-1" aria-hidden="true" tabindex="-1"></a>df_min <span class="op">=</span> df_traces[<span class="st">'Zr'</span>].<span class="bu">min</span>()</span>
+<span id="lst-univ-minmax-2"><a href="#lst-univ-minmax-2" aria-hidden="true" tabindex="-1"></a>df_max <span class="op">=</span> df_traces[<span class="st">'Zr'</span>].<span class="bu">max</span>()</span>
+<span id="lst-univ-minmax-3"><a href="#lst-univ-minmax-3" aria-hidden="true" tabindex="-1"></a>df_range <span class="op">=</span> df_max <span class="op">-</span> df_min</span>
+<span id="lst-univ-minmax-4"><a href="#lst-univ-minmax-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The range of Zircon concentrations is </span><span class="sc">{</span>df_range<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The range of Zircon concentrations is 734.76</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Don’t use Python reserved keywords as variable names
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Names as <code>min</code>, <code>max</code> or <code>range</code> represent native Python variables and <strong>cannot be used as variable names!</strong></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What is the empirical range for Cesium?</p>
+<div id="e6f6a6a7" class="cell" data-execution_count="15">
+<div class="cell-output cell-output-display no-overflow-x" data-execution_count="15">
+<select class="webex-select"><option value="blank"></option><option value="0">12.41</option><option value="0">414.6</option><option value="answer">41.46</option><option value="0">53.88</option></select>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="variance-and-standard-deviation-and-sample-variance-and-standard-deviation" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="variance-and-standard-deviation-and-sample-variance-and-standard-deviation">Variance and standard deviation and sample variance and standard deviation</h4>
+<p>The <mark>variance</mark> and <mark>standard deviation</mark> are two key measures of <mark>dispersion</mark> that describe how spread out the values of a random variable <span class="math inline">\(X\)</span> are.</p>
+<ul>
+<li><p>The <mark>theoretical variance</mark> is defined as: <span class="math display">\[
+\mathrm{Var}(X) =  \mathbb{E}[(X - \mathbb{E}[X])^2],
+\]</span> and the <mark>theoretical standard deviation</mark> is its square root: <span class="math display">\[
+\sigma = \sqrt{\mathrm{Var}(X)}.
+\]</span></p></li>
+<li><p>The <mark>sample variance</mark> <span class="math inline">\(s^2\)</span> estimates the spread of the data around the <mark>sample mean</mark> <span class="math inline">\(\bar{x}\)</span>: <span class="math display">\[
+s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1},
+\]</span> where <span class="math inline">\(x_1, \dots, x_n\)</span> are the observed values and <span class="math inline">\(n\)</span> is the sample size.</p></li>
+<li><p>The <mark>sample standard deviation</mark> <span class="math inline">\(s\)</span> is the square root of the <mark>sample variance</mark>: <span class="math display">\[
+s = \sqrt{s^2}.
+\]</span></p></li>
+</ul>
+<p>Both the <mark>sample variance</mark> and <mark>sample standard deviation</mark> describe the spread of the data. While the <mark>variance</mark> is expressed in squared units of the observations, the <mark>standard deviation</mark> is in the same units as the data, making it easier to interpret.</p>
+<p><strong>Relation to the Gaussian distribution:</strong><br>
+For a Gaussian (normal) distribution, about 68% of the data falls within one standard deviation of the mean, about 95% within two standard deviations, and about 99.7% within three standard deviations. Thus, variance and standard deviation are fundamental for describing the spread and probability intervals of normally distributed data.</p>
+<p>You can compute these in pandas using <code>.var()</code> and <code>.std()</code>:</p>
+<div id="fb68be8b" class="cell" data-execution_count="16">
+<div id="lst-univ-std" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-std-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;8: Compute the variance and standard deviation across columns.
+</figcaption>
+<div aria-describedby="lst-univ-std-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="lst-univ-std"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="lst-univ-std-1"><a href="#lst-univ-std-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the variance of a single column:</span></span>
+<span id="lst-univ-std-2"><a href="#lst-univ-std-2" aria-hidden="true" tabindex="-1"></a>df_traces[<span class="st">'Zr'</span>].var()</span>
+<span id="lst-univ-std-3"><a href="#lst-univ-std-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the standard deviation of all columns in the DataFrame. In this case, you need to make sure that all columns are numerical.</span></span>
+<span id="lst-univ-std-4"><a href="#lst-univ-std-4" aria-hidden="true" tabindex="-1"></a>df_traces_sub.std()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<pre><code>Sc      0.096033
+Rb     46.931995
+Sr    241.922439
+Y       7.369875
+Zr    118.409962
+Nb     18.185616
+Cs      6.851486
+dtype: float64</code></pre>
+</div>
+</div>
+</section>
+<section id="interquartile-range-and-the-empirical-interquartile-range" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="interquartile-range-and-the-empirical-interquartile-range">Interquartile range and the empirical interquartile range</h4>
+<p>If the <strong>standard deviation</strong> is valid only for <mark>symmetrical</mark> distributions, what can we use for <mark>asymmetrical</mark> ones? The <strong>interquartile range</strong> can help, but we first need to define <mark>what are <strong>percentiles</strong></mark>. We previously saw that the empirical <a href="#median">median</a> represents the <mark>value at the middle of the dataset</mark>, which means that:</p>
+<ul>
+<li>Half of the data points is <strong>greater</strong> than the empirical median;</li>
+<li>The other half is <strong>smaller</strong> than the empirical median.</li>
+</ul>
+<p>The empirical <strong>median</strong> therefore represents the <strong>50<sup>th</sup> percentile</strong> of the dataset. In a similar way, we can ask ourselves:</p>
+<ul>
+<li><em>What is the value below which lie <mark>25%</mark> of the data?</em> → <strong>25<sup>th</sup> percentile</strong>;</li>
+<li><em>What is the value below which lie <mark>75%</mark> of the data?</em> → <strong>75<sup>th</sup> percentile</strong>.</li>
+</ul>
+<p><a href="#fig-univ-pctS" class="quarto-xref">Figure&nbsp;5</a> and <a href="#fig-univ-pctA" class="quarto-xref">Figure&nbsp;6</a> show the relationship between the percentiles and the underlying distribution of data, where:</p>
+<ul>
+<li>The blue area shows the <mark>histogram</mark> (→ <strong>how many</strong> data points fall into a specific bin = discrete range of values?)</li>
+<li>The orange curve shows the <mark>cumulative</mark> function (→ <strong>what proportion</strong> of data falls below a specific value?)</li>
+</ul>
+<p><a href="#fig-univ-pctS" class="quarto-xref">Figure&nbsp;5</a> shows the percentiles of a <strong>symmetric</strong> distribution, and demonstrates how i) the median value <strong>is equal</strong> to the mean and ii) the 25<sup>th</sup>and 75<sup>th</sup> percentile are <strong>equally dispersed</strong> around the median. In contrast, for <strong>asymmetric</strong> distributions, <a href="#fig-univ-pctA" class="quarto-xref">Figure&nbsp;6</a> shows that i) the median and mean values <strong>increasingly diverge</strong> and ii) the 25<sup>th</sup>and 75<sup>th</sup> percentile are <strong>asymmetrically dispersed</strong> around the median.</p>
+<div id="1bfcdd20" class="cell" data-execution_count="17">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Import the libraries</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="im">from</span> matplotlib.patches <span class="im">import</span> FancyArrowPatch</span>
+<span id="cb10-6"><a href="#cb10-6"></a></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="co"># Function to plot the arrow</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="kw">def</span> plotArrow(ax,data,pct,c):</span>
+<span id="cb10-9"><a href="#cb10-9"></a>    arrowH <span class="op">=</span> FancyArrowPatch(</span>
+<span id="cb10-10"><a href="#cb10-10"></a>        (ax.get_xlim()[<span class="dv">1</span>], pct<span class="op">/</span><span class="dv">100</span>), (np.percentile(data, pct), pct<span class="op">/</span><span class="dv">100</span>),</span>
+<span id="cb10-11"><a href="#cb10-11"></a>        arrowstyle<span class="op">=</span><span class="st">'-|&gt;'</span>,  <span class="co"># style: arrow with single head</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a>        color<span class="op">=</span>c,</span>
+<span id="cb10-13"><a href="#cb10-13"></a>        mutation_scale<span class="op">=</span><span class="dv">15</span>,  <span class="co"># size of arrow head</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a>        linewidth<span class="op">=</span><span class="dv">2</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a>    )</span>
+<span id="cb10-16"><a href="#cb10-16"></a>    ax.add_patch(arrowH)</span>
+<span id="cb10-17"><a href="#cb10-17"></a></span>
+<span id="cb10-18"><a href="#cb10-18"></a>    value <span class="op">=</span> np.percentile(data, pct)</span>
+<span id="cb10-19"><a href="#cb10-19"></a>    ax.text(<span class="dv">8</span>, pct<span class="op">/</span><span class="dv">100</span> <span class="op">+</span> <span class="fl">0.03</span>, <span class="ss">f"</span><span class="sc">{</span>pct<span class="sc">}</span><span class="ss">th: </span><span class="sc">{</span>value<span class="sc">:.2f}</span><span class="ss">"</span>, color<span class="op">=</span>c, ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'bottom'</span>, fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb10-20"><a href="#cb10-20"></a></span>
+<span id="cb10-21"><a href="#cb10-21"></a>    arrowD <span class="op">=</span> FancyArrowPatch(</span>
+<span id="cb10-22"><a href="#cb10-22"></a>        (np.percentile(data, pct), pct<span class="op">/</span><span class="dv">100</span>), (np.percentile(data, pct), <span class="dv">0</span>),</span>
+<span id="cb10-23"><a href="#cb10-23"></a>        arrowstyle<span class="op">=</span><span class="st">'-|&gt;'</span>,  <span class="co"># style: arrow with single head</span></span>
+<span id="cb10-24"><a href="#cb10-24"></a>        color<span class="op">=</span>c,</span>
+<span id="cb10-25"><a href="#cb10-25"></a>        mutation_scale<span class="op">=</span><span class="dv">15</span>,  <span class="co"># size of arrow head</span></span>
+<span id="cb10-26"><a href="#cb10-26"></a>        linewidth<span class="op">=</span><span class="dv">2</span></span>
+<span id="cb10-27"><a href="#cb10-27"></a>    )</span>
+<span id="cb10-28"><a href="#cb10-28"></a>    ax.add_patch(arrowD)</span>
+<span id="cb10-29"><a href="#cb10-29"></a>    <span class="co"># Plot the mean as a vertical red dotted line on the histogram axis</span></span>
+<span id="cb10-30"><a href="#cb10-30"></a>    ax.axvline(data.mean(), color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">':'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb10-31"><a href="#cb10-31"></a></span>
+<span id="cb10-32"><a href="#cb10-32"></a></span>
+<span id="cb10-33"><a href="#cb10-33"></a><span class="co"># Setup random data using a Normal distribution</span></span>
+<span id="cb10-34"><a href="#cb10-34"></a>data <span class="op">=</span> np.random.normal(size<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb10-35"><a href="#cb10-35"></a>data <span class="op">=</span> (data <span class="op">-</span> data.<span class="bu">min</span>()) <span class="op">/</span> (data.<span class="bu">max</span>() <span class="op">-</span> data.<span class="bu">min</span>())<span class="op">*</span><span class="dv">10</span></span>
+<span id="cb10-36"><a href="#cb10-36"></a>datapct <span class="op">=</span> np.percentile(data, [<span class="dv">10</span>, <span class="dv">25</span>, <span class="dv">50</span>, <span class="dv">75</span>, <span class="dv">90</span>])</span>
+<span id="cb10-37"><a href="#cb10-37"></a></span>
+<span id="cb10-38"><a href="#cb10-38"></a><span class="co"># Set the plots</span></span>
+<span id="cb10-39"><a href="#cb10-39"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">4</span>))</span>
+<span id="cb10-40"><a href="#cb10-40"></a></span>
+<span id="cb10-41"><a href="#cb10-41"></a><span class="co"># Left y axis</span></span>
+<span id="cb10-42"><a href="#cb10-42"></a>sns.histplot(x<span class="op">=</span>data, bins<span class="op">=</span><span class="dv">20</span>, color<span class="op">=</span>blue, alpha<span class="op">=</span><span class="fl">0.4</span>, ax<span class="op">=</span>ax, label<span class="op">=</span><span class="st">'Density'</span>, element<span class="op">=</span><span class="st">'step'</span>)</span>
+<span id="cb10-43"><a href="#cb10-43"></a>ax.set_xlabel(<span class="st">'Data value (arbitrary)'</span>)</span>
+<span id="cb10-44"><a href="#cb10-44"></a>ax.set_ylabel(<span class="st">'Count (= number of data points </span><span class="ch">\n</span><span class="st">in each bin)'</span>, color<span class="op">=</span>blue)</span>
+<span id="cb10-45"><a href="#cb10-45"></a>ax.tick_params(axis<span class="op">=</span><span class="st">'y'</span>, labelcolor<span class="op">=</span>blue)</span>
+<span id="cb10-46"><a href="#cb10-46"></a>ax.set_title(<span class="st">'Percentiles of a symmetric distribution'</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb10-47"><a href="#cb10-47"></a></span>
+<span id="cb10-48"><a href="#cb10-48"></a><span class="co"># Add a right y axis</span></span>
+<span id="cb10-49"><a href="#cb10-49"></a>ax2 <span class="op">=</span> ax.twinx()</span>
+<span id="cb10-50"><a href="#cb10-50"></a>sns.ecdfplot(x<span class="op">=</span>data, ax<span class="op">=</span>ax2, color<span class="op">=</span>orange, label<span class="op">=</span><span class="st">'Cumulative density'</span>)</span>
+<span id="cb10-51"><a href="#cb10-51"></a>ax2.set_ylabel(<span class="st">'CDF (= proportion of data</span><span class="ch">\n</span><span class="st"> points below the data value)'</span>, color<span class="op">=</span>orange)</span>
+<span id="cb10-52"><a href="#cb10-52"></a>ax2.tick_params(axis<span class="op">=</span><span class="st">'y'</span>, labelcolor<span class="op">=</span>orange)</span>
+<span id="cb10-53"><a href="#cb10-53"></a></span>
+<span id="cb10-54"><a href="#cb10-54"></a><span class="co"># Plot the arrows</span></span>
+<span id="cb10-55"><a href="#cb10-55"></a>plotArrow(ax2, data, <span class="dv">75</span>, <span class="st">'#1D6996'</span>)</span>
+<span id="cb10-56"><a href="#cb10-56"></a>plotArrow(ax2, data, <span class="dv">50</span>, <span class="st">'#0F8554'</span>)</span>
+<span id="cb10-57"><a href="#cb10-57"></a>plotArrow(ax2, data, <span class="dv">25</span>, <span class="st">'#994E95'</span>)</span>
+<span id="cb10-58"><a href="#cb10-58"></a></span>
+<span id="cb10-59"><a href="#cb10-59"></a>fig.tight_layout()</span>
+<span id="cb10-60"><a href="#cb10-60"></a></span>
+<span id="cb10-61"><a href="#cb10-61"></a>fig.savefig(<span class="st">"img/fig-univ-pctS.png"</span>, dpi<span class="op">=</span><span class="dv">150</span>, transparent<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-62"><a href="#cb10-62"></a>plt.close(fig)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="fig-univ-pctS" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-univ-pctS-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/fig-univ-pctS.png" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-univ-pctS-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Relationship of percentiles to a symmetric distribution. The red dotted line shows the location of the mean.
+</figcaption>
+</figure>
+</div>
+<div id="0984d023" class="cell" data-execution_count="18">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Setup random data using a log-normal distribution</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>data <span class="op">=</span> np.random.lognormal(size<span class="op">=</span><span class="dv">1000</span>, sigma<span class="op">=</span><span class="fl">.4</span>)</span>
+<span id="cb11-3"><a href="#cb11-3"></a>data <span class="op">=</span> (data <span class="op">-</span> data.<span class="bu">min</span>()) <span class="op">/</span> (data.<span class="bu">max</span>() <span class="op">-</span> data.<span class="bu">min</span>())<span class="op">*</span><span class="dv">10</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>datapct <span class="op">=</span> np.percentile(data, [<span class="dv">10</span>, <span class="dv">25</span>, <span class="dv">50</span>, <span class="dv">75</span>, <span class="dv">90</span>])</span>
+<span id="cb11-5"><a href="#cb11-5"></a></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="co"># Set the plots</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a>fig, ax <span class="op">=</span> plt.subplots(ncols<span class="op">=</span><span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">4</span>))</span>
+<span id="cb11-8"><a href="#cb11-8"></a></span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="co"># Left y axis</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a>sns.histplot(x<span class="op">=</span>data, bins<span class="op">=</span><span class="dv">20</span>, color<span class="op">=</span>blue, alpha<span class="op">=</span><span class="fl">0.4</span>, ax<span class="op">=</span>ax, legend<span class="op">=</span><span class="va">None</span>, element<span class="op">=</span><span class="st">'step'</span>)</span>
+<span id="cb11-11"><a href="#cb11-11"></a>ax.set_xlabel(<span class="st">'Data value (arbitrary)'</span>)</span>
+<span id="cb11-12"><a href="#cb11-12"></a>ax.set_ylabel(<span class="st">'Count (= number of data points </span><span class="ch">\n</span><span class="st">in each bin)'</span>, color<span class="op">=</span>blue)</span>
+<span id="cb11-13"><a href="#cb11-13"></a>ax.tick_params(axis<span class="op">=</span><span class="st">'y'</span>, labelcolor<span class="op">=</span>blue)</span>
+<span id="cb11-14"><a href="#cb11-14"></a>ax.set_title(<span class="st">'Percentiles of an asymmetric distribution'</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb11-15"><a href="#cb11-15"></a></span>
+<span id="cb11-16"><a href="#cb11-16"></a><span class="co"># Add a right y axis</span></span>
+<span id="cb11-17"><a href="#cb11-17"></a>ax2 <span class="op">=</span> ax.twinx()</span>
+<span id="cb11-18"><a href="#cb11-18"></a>sns.ecdfplot(x<span class="op">=</span>data, ax<span class="op">=</span>ax2, color<span class="op">=</span>orange, legend<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb11-19"><a href="#cb11-19"></a>ax2.set_ylabel(<span class="st">'CDF (= proportion of data</span><span class="ch">\n</span><span class="st"> points below the data value)'</span>, color<span class="op">=</span>orange)</span>
+<span id="cb11-20"><a href="#cb11-20"></a>ax2.tick_params(axis<span class="op">=</span><span class="st">'y'</span>, labelcolor<span class="op">=</span>orange)</span>
+<span id="cb11-21"><a href="#cb11-21"></a></span>
+<span id="cb11-22"><a href="#cb11-22"></a><span class="co"># Plot the arrows</span></span>
+<span id="cb11-23"><a href="#cb11-23"></a>plotArrow(ax2, data, <span class="dv">75</span>, <span class="st">'#1D6996'</span>)</span>
+<span id="cb11-24"><a href="#cb11-24"></a>plotArrow(ax2, data, <span class="dv">50</span>, <span class="st">'#0F8554'</span>)</span>
+<span id="cb11-25"><a href="#cb11-25"></a>plotArrow(ax2, data, <span class="dv">25</span>, <span class="st">'#994E95'</span>)</span>
+<span id="cb11-26"><a href="#cb11-26"></a></span>
+<span id="cb11-27"><a href="#cb11-27"></a>fig.tight_layout()</span>
+<span id="cb11-28"><a href="#cb11-28"></a>fig.savefig(<span class="st">"img/fig-univ-pctA.png"</span>, dpi<span class="op">=</span><span class="dv">150</span>, transparent<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb11-29"><a href="#cb11-29"></a>plt.close(fig)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="fig-univ-pctA" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-univ-pctA-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/fig-univ-pctA.png" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-univ-pctA-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Relationship of percentiles to a asymmetric distribution. The red dotted line shows the location of the mean.
+</figcaption>
+</figure>
+</div>
+<p>The <mark>interquartile range</mark> (<span class="math inline">\(IQR\)</span>) is the spread between the first (<span class="math inline">\(Q_1\)</span>) and third (<span class="math inline">\(Q_3\)</span>) quartiles, which represent the 25<span class="math inline">\(^\text{th}\)</span> and 75<span class="math inline">\(^\text{th}\)</span> percentiles, respectively (see <a href="#tbl-univ-pct" class="quarto-xref">Table&nbsp;1</a> and <a href="#tip-univ-pcr" class="quarto-xref">Tip&nbsp;1</a> for a relationship between percentiles, quartiles, and deciles).</p>
+<ul>
+<li><p>The <mark>theoretical IQR</mark> of a random variable <span class="math inline">\(X\)</span> is defined as: <span class="math display">\[
+IQR = Q_3 - Q_1 = F_X^{-1}(0.75) - F_X^{-1}(0.25),
+\]</span> where <span class="math inline">\(F_X^{-1}\)</span> is the inverse of the cumulative distribution function of <span class="math inline">\(X\)</span>.</p></li>
+<li><p>The <mark>empirical IQR</mark> is an <mark>estimator</mark> of the theoretical IQR, computed from a <mark>sample</mark> as the difference between the <span class="math inline">\(75^\text{th}\)</span> and <span class="math inline">\(25^\text{th}\)</span> percentiles of the observed data. It represents the range within which <strong>50% of the sample values</strong> lie: <span id="eq-IQR"><span class="math display">\[
+IQR_\text{emp} = Q_{3,\text{emp}} - Q_{1,\text{emp}}.
+\tag{3}\]</span></span></p></li>
+</ul>
+<p>The <mark>IQR</mark> is a robust measure of <mark>dispersion</mark>, less sensitive to extreme values than the <mark>variance</mark> or <mark>range</mark>.</p>
+<div id="tip-univ-pcr" class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip&nbsp;1: Quartiles, deciles and percentiles
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Using proportions of the dataset as measures of central tendencies and spread can be done using different strategies to divide the distribution, but they really refer to the same underlying values. <a href="#tbl-univ-pct" class="quarto-xref">Table&nbsp;1</a> summarises the differences between quartiles, deciles and percentiles.</p>
+<div id="tbl-univ-pct" class="striped quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-univ-pct-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Relationship between quartiles, deciles and percentiles.
+</figcaption>
+<div aria-describedby="tbl-univ-pct-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table-striped caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 14%">
+<col style="width: 45%">
+<col style="width: 24%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Measure</strong></th>
+<th><strong>Number of Divisions</strong></th>
+<th><strong>Position(s) in Data / Percentile Equivalent</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Quartiles (Q1, Q2, Q3)</strong></td>
+<td>4 equal parts</td>
+<td>Q1 = 25th percentile, Q2 = 50th percentile (median), Q3 = 75th percentile</td>
+<td>Divides data into 4 equal-sized groups</td>
+</tr>
+<tr class="even">
+<td><strong>Deciles (D1 … D9)</strong></td>
+<td>10 equal parts</td>
+<td>D1 = 10th percentile, D2 = 20th percentile, …, D9 = 90th percentile</td>
+<td>Divides data into 10 equal-sized groups</td>
+</tr>
+<tr class="odd">
+<td><strong>Percentiles (P1 … P99)</strong></td>
+<td>100 equal parts</td>
+<td>P1 = 1st percentile, P2 = 2nd percentile, …, P99 = 99th percentile</td>
+<td>Divides data into 100 equal-sized groups</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="skewness-and-sample-skewness" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="skewness-and-sample-skewness">Skewness and sample skewness</h3>
+<p>The <mark>skewness</mark> measures <mark>the asymmetry of a distribution</mark>, indicating whether the data are more spread out on one side of the <mark>mean</mark> than the other.</p>
+<ul>
+<li><p>The <mark>theoretical skewness</mark> of a random variable <span class="math inline">\(X\)</span> is defined as: <span class="math display">\[
+\text{Skewness} = \frac{\mathbb{E}\big[(X - \mathbb{E}[X])^3\big]}{(\mathrm{Var}(X))^{3/2}},
+\]</span></p></li>
+<li><p>The <mark>sample skewness</mark> is an <mark>estimator</mark> of the theoretical skewness, computed from a <mark>sample</mark> <span class="math inline">\(x_1, \dots, x_n\)</span> and is computed as <a href="#eq-skew" class="quarto-xref">Equation&nbsp;4</a>: <span id="eq-skew"><span class="math display">\[
+\text{Skewness}_\text{emp} = \frac{1}{n} \sum_{i=1}^{n}\left(\frac{x_i-\bar{x}}{s}\right)^{3},
+\tag{4}\]</span></span></p></li>
+</ul>
+<p>Positive skewness indicates a distribution with a longer right tail, while negative skewness indicates a longer left tail.</p>
+<p>In <em>Pandas</em>, the skewness can be computed using <code>.skew()</code> (<a href="#lst-univ-skew" class="quarto-xref">Listing&nbsp;9</a>). The returned value indicates:</p>
+<ul>
+<li><strong>0</strong>: <mark>Symmetric</mark> → e.g., normal distribution</li>
+<li><strong>&gt;0</strong>: <mark>Righ-skewed</mark> → a tail extends to the right</li>
+<li><strong>&lt;0</strong>: <mark>Left-skewed</mark> → a tail extends to the left</li>
+</ul>
+<div id="5eee4914" class="cell" data-execution_count="19">
+<div id="lst-univ-skew" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-skew-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;9: Skewness of the <code>Zr</code> dataset.
+</figcaption>
+<div aria-describedby="lst-univ-skew-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="lst-univ-skew"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="lst-univ-skew-1"><a href="#lst-univ-skew-1" aria-hidden="true" tabindex="-1"></a>df_traces[<span class="st">'Zr'</span>].skew().<span class="bu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<pre><code>np.float64(1.27)</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="non-parametric-distribution-visualisation" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="non-parametric-distribution-visualisation">Non-parametric distribution visualisation</h2>
+<p>We have reviewed several measures that describe the central tendency and spread of a dataset. Depending on the characteristics of the data, some measures are more informative than others. For instance, the <mark>mean</mark> and <mark>standard deviation</mark> provide a concise summary of the center and spread, but they can be heavily influenced by extreme values or skewed distributions. In contrast, measures based on <mark>percentiles</mark>, such as the <mark>interquartile range (IQR)</mark>, describe the spread of the data without being overly sensitive to outliers. The <mark>IQR</mark> captures the range of the central <span class="math inline">\(50\%\)</span> of the data, giving a robust sense of variability even in asymmetrical distributions. Reporting additional percentiles, such as the <span class="math inline">\(10^\text{th}\)</span> and <span class="math inline">\(90^\text{th}\)</span>, can further help to convey the shape and spread of the dataset, providing a more complete picture than a single range or standard deviation alone.</p>
+<p>One way to efficiently convey the structure of a dataset is through <mark>non-parametric representations of distributions</mark>, which do not rely on assumptions about the underlying distribution. <mark>Boxplots</mark> (or box-and-whiskers plots; <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;7</a>) are a classic example: they summarize the data using a few key <mark>quantiles</mark>, such as the <mark>median</mark> and <mark>interquartile range (IQR)</mark>. Because boxplots rely on these <mark>order-based statistics</mark> rather than moments like the mean or variance, they are considered <mark>non-parametric</mark>, making them especially useful for datasets that are skewed, contain outliers, or deviate from symmetry. By focusing on the spread and central tendency through quantiles, boxplots provide a robust visual summary of the data’s <mark>location</mark>, <mark>dispersion</mark>, and potential asymmetry.</p>
+<ul>
+<li>The <strong>box</strong> represents the <span class="math inline">\(25^\text{th}\)</span> and <span class="math inline">\(75^\text{th}\)</span> percentiles → <span class="math inline">\(IQR\)</span>;</li>
+<li>The <strong>horizontal line</strong> within the <strong>box</strong> represents the <strong>median</strong>;</li>
+<li>The <strong>whiskers</strong> reprents a range that usually extends 1.5 times the IQR from the first and third quartiles</li>
+<li>Any point that lies beyond the whiskers is considered an <strong>outlier</strong>, which is a point that <mark>significantly different from the majority of observations</mark>.</li>
+</ul>
+<div id="fig-boxplot" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boxplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/fig-boxplot.png" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Component of a box and whiskers plot. The top box plot represents an asymmetrical distribution, the bottom one a symmetrical one.
+</figcaption>
+</figure>
+</div>
+<p>In <em>Seaborn</em>, box plots can be plotted using <a href="https://seaborn.pydata.org/generated/seaborn.boxplot.html"><code>sns.boxplot()</code></a>. Two notes about box plots:</p>
+<ol type="1">
+<li>They are useful to compare the <strong>location</strong> and <strong>dispersion</strong> between variables (<a href="#fig-sns-boxplot" class="quarto-xref">Figure&nbsp;8</a>);</li>
+<li>In <em>Seaborn</em>, whiskers extend by default 1.5 times the IQR from the first and third quartiles. This behaviour can be altered with the <code>whis</code> argument of <code>sns.boxplot()</code> (see the <a href="https://seaborn.pydata.org/generated/seaborn.boxplot.html">doc</a>)</li>
+</ol>
+<p><em>Seaborn</em> offers two alternatives to boxplots:</p>
+<ol type="1">
+<li><strong>Violin plots</strong> (<a href="https://seaborn.pydata.org/generated/seaborn.violinplot.html"><code>sns.violinplot()</code></a>) are similar to box plots, but they approximate the underlying parametric data distribution using some smoothing algorithm (i.e.&nbsp;<em>kernel density estimation</em>). Without going into too much detail, this provides a good first approximation of the distribution, but <mark>it can create some unrealistic artefacts</mark> (e.g., see the negative Sr concentrations in <a href="#fig-sns-violinplot" class="quarto-xref">Figure&nbsp;9</a>).</li>
+<li><strong>Boxen plots</strong> (<a href="https://seaborn.pydata.org/generated/seaborn.boxenplot.html"><code>sns.boxenplot()</code></a>) are designed to better represent the non-parametric distriubtion of large dataset than box plots. They divide the datasets into <strong>many quantiles</strong> (not just Q1-Q3), and typically provide more resolution in the <strong>tails</strong> of the distribution (<a href="#fig-sns-boxenplot" class="quarto-xref">Figure&nbsp;10</a>).</li>
+</ol>
+<p><a href="#tbl-sns" class="quarto-xref">Table&nbsp;2</a> provides a cheat sheet on which plot to use.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">Box plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Violin plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Boxen plots</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div id="cell-fig-sns-boxplot" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb13-2"><a href="#cb13-2"></a>sns.boxplot(data<span class="op">=</span>df_traces[[<span class="st">'Zr'</span>, <span class="st">'Sr'</span>]], orient<span class="op">=</span><span class="st">"h"</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb13-3"><a href="#cb13-3"></a>ax.set_xlabel(<span class="st">'Concentration (ppm)'</span>)<span class="op">;</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>ax.set_title(<span class="st">'Zr and Sr distribution'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="fig-sns-boxplot" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sns-boxplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="day2-3_univariate_files/figure-html/fig-sns-boxplot-output-1.png" width="564" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sns-boxplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: Visualising distributions using box-and-whisker plots.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div id="cell-fig-sns-violinplot" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb14-2"><a href="#cb14-2"></a>sns.violinplot(data<span class="op">=</span>df_traces[[<span class="st">'Zr'</span>, <span class="st">'Sr'</span>]], orient<span class="op">=</span><span class="st">"h"</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb14-3"><a href="#cb14-3"></a>ax.set_xlabel(<span class="st">'Concentration (ppm)'</span>)<span class="op">;</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>ax.set_title(<span class="st">'Zr and Sr distribution'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="fig-sns-violinplot" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sns-violinplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="day2-3_univariate_files/figure-html/fig-sns-violinplot-output-1.png" width="564" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sns-violinplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9: Visualising distributions using violin plots.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<div id="cell-fig-sns-boxenplot" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb15-2"><a href="#cb15-2"></a>sns.boxenplot(data<span class="op">=</span>df_traces[[<span class="st">'Zr'</span>, <span class="st">'Sr'</span>]], orient<span class="op">=</span><span class="st">"h"</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb15-3"><a href="#cb15-3"></a>ax.set_xlabel(<span class="st">'Concentration (ppm)'</span>)<span class="op">;</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a>ax.set_title(<span class="st">'Zr and Sr distribution'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="fig-sns-boxenplot" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sns-boxenplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="day2-3_univariate_files/figure-html/fig-sns-boxenplot-output-1.png" width="564" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sns-boxenplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10: Visualising distributions using boxen plots.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="tbl-sns" class="striped quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Simple rules on which plot to choose to represent data distributions.
+</figcaption>
+<div aria-describedby="tbl-sns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table-striped caption-top table">
+<colgroup>
+<col style="width: 27%">
+<col style="width: 21%">
+<col style="width: 24%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th>Box Plot</th>
+<th>Boxen Plot</th>
+<th>Violin Plot</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Data size</td>
+<td>Small/medium</td>
+<td>Large</td>
+<td>Any</td>
+</tr>
+<tr class="even">
+<td>Shows tails well?</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td>Shows data density?</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>Complexity</td>
+<td>Simple</td>
+<td>Moderate</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<td>Implementation</td>
+<td><code>sns.boxplot()</code></td>
+<td><code>sns.boxenplot()</code></td>
+<td><code>sns.violinplot()</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Your turn
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Take some time to get familiar with the use of these plotting functions!</p>
+<ul>
+<li>Plot different/more variables</li>
+<li>Check out the documentation</li>
+<li>Ask questions!</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="grouping-variables" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="grouping-variables">Grouping variables</h2>
+<p>Cool, we now have the tools to describe the behaviour of single <mark>numerical</mark> variables. However, as described <a href="#setting-up-the-exercise">here</a>, we see that our dataset also contains <mark>categorical</mark> variables, and we are going to see now how we can exploit them to apply what we just learned on <strong>specific categories</strong> of our dataset.</p>
+<p>For the sake of simplicity, let’s make a subset of the trace elements dataset, from which we select:</p>
+<ol type="1">
+<li>5 <mark>numerical</mark> data → <em>U</em>, <em>Sc</em>, <em>Hf</em>, <em>Zr</em>, <em>Sr</em></li>
+<li>1 <mark>categorical</mark> data → <em>Epoch</em></li>
+</ol>
+<p><em>Panda</em> as a very handy function to <mark>group data by categorical variables</mark>: <code>.groupby</code> (<a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.groupby.html">doc</a>). Let’s compute the mean value of the different trace elements for each epoch (<a href="#lst-groupby" class="quarto-xref">Listing&nbsp;10</a>):</p>
+<div id="18e9c210" class="cell" data-execution_count="23">
+<div id="lst-groupby" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-groupby-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;10: Grouping data and computing the mean
+</figcaption>
+<div aria-describedby="lst-groupby-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="lst-groupby"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="lst-groupby-1"><a href="#lst-groupby-1" aria-hidden="true" tabindex="-1"></a>df_traces_sub <span class="op">=</span> df_traces[[<span class="st">'Epoch'</span>, <span class="st">'U'</span>, <span class="st">'Sc'</span>, <span class="st">'Hf'</span>, <span class="st">'Zr'</span>, <span class="st">'Sr'</span>]]</span>
+<span id="lst-groupby-2"><a href="#lst-groupby-2" aria-hidden="true" tabindex="-1"></a>df_traces_sub.groupby(by<span class="op">=</span><span class="st">'Epoch'</span>).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">U</th>
+<th data-quarto-table-cell-role="th">Sc</th>
+<th data-quarto-table-cell-role="th">Hf</th>
+<th data-quarto-table-cell-role="th">Zr</th>
+<th data-quarto-table-cell-role="th">Sr</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Epoch</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">one</td>
+<td>7.191232</td>
+<td>0.272517</td>
+<td>5.892144</td>
+<td>257.126861</td>
+<td>786.792362</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">three</td>
+<td>11.788916</td>
+<td>0.148395</td>
+<td>9.159857</td>
+<td>407.192193</td>
+<td>390.263016</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">three-b</td>
+<td>10.908569</td>
+<td>0.138119</td>
+<td>8.455954</td>
+<td>392.716029</td>
+<td>422.469727</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">two</td>
+<td>15.087289</td>
+<td>0.272342</td>
+<td>12.777728</td>
+<td>574.092093</td>
+<td>147.769833</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Pretty handy don’t you think? Note that you can apply all the functions described above (e.g., <code>.median()</code> or <code>.percentiles()</code>) to a <code>groupby</code> object.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Try and apply other statistical functions to your dataset.</li>
+<li>Looking at the <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.groupby.html">documentation</a>, it seems the <code>by</code> argument accepts a <em>label</em> (which is what we use in <a href="#lst-groupby" class="quarto-xref">Listing&nbsp;10</a>) or a <em>list of labels</em>. Could it be that we can use more than one grouping variable? Such as <code>'Epoch'</code> and <code>'Eruption'</code>?</li>
+</ul>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+
+/*
+Acknowledgments. This file is from webexercises:
+  Barr D, DeBruine L (2023). webexercises: Create Interactive Web Exercises in
+  'R Markdown' (Formerly 'webex'). R package version 1.1.0.9000,
+  https://github.com/psyteachr/webexercises.
+*/
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../class2/day2-2_data_exploration.html" class="pagination-link" aria-label="Data exploration">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Data exploration</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../class2/day2-4_bivariate.html" class="pagination-link" aria-label="Bivariate analyses">
+        <span class="nav-page-text">Bivariate analyses</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2025 - <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.en">CC BY-NC-SA 4.0</a> - Sébastien Biass &amp; Stéphane Guerrier</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

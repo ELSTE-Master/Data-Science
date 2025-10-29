@@ -47,10 +47,10 @@ We first start by reviewing the data structure behind *Pandas*, then we will mov
 
 ### Introduction 
 
-- {{< fa file-pdf >}} [PDF](../slides/class1_intro.pdf)
+- {{< fa file-pdf >}} [PDF](class_1_slides_intro.pdf)
 - <i class="fa fa-window-restore"></i> <a href="../slides/class1_intro.html" target="_blank">View in browser</a>
 
 ### Intro to Pandas
 
-- {{< fa file-pdf >}} [PDF](../slides/class1_pandas.pdf)
+- {{< fa file-pdf >}} [PDF](class_1_slides_pandas.pdf)
 - <i class="fa fa-window-restore"></i> <a href="../slides/class1_pandas.html" target="_blank">View in browser</a>
