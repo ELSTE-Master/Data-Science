@@ -9,6 +9,13 @@ author:
     email: sebastien.biasse@unige.ch
     affiliation: 
       - name: Earth Sciences
+  - name: Stéphane Guerrier
+    id: sg
+    orcid: 0000-0003-0002-8794
+    email: Stephane.Guerrier@unige.ch
+    affiliation: 
+      - name: Earth Sciences
+      - name: Pharmaceutical Sciences
 
 ---
 

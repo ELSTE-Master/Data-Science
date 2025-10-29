@@ -9,6 +9,13 @@ author:
     email: sebastien.biasse@unige.ch
     affiliation: 
       - name: Earth Sciences
+  - name: Stéphane Guerrier
+    id: sg
+    orcid: 0000-0003-0002-8794
+    email: Stephane.Guerrier@unige.ch
+    affiliation: 
+      - name: Earth Sciences
+      - name: Pharmaceutical Sciences
 
 ---
 
@@ -119,8 +126,8 @@ orange = '#EB811B'
 import pandas as pd # Import pandas
 
 # Import the dataset specifying which Excel sheet name to load the data from
-df_majors = pd.read_excel('https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/Smith_glass_post_NYT_data_majors.csv')
-df_traces = pd.read_excel('https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/Smith_glass_post_NYT_data_traces.csv')
+df_majors = pd.read_csv('https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/Smith_glass_post_NYT_data_majors.csv')
+df_traces = pd.read_csv('https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/Smith_glass_post_NYT_data_traces.csv')
 ```
 
 
@@ -1196,6 +1203,19 @@ ax.set_title('Zr and Sr distribution');
 
 # Bivariate analyses {background-color="#2F4647"}
 
+## Bivariate analyses
+
+- **Univariate analyses**: properties of one variable at the time
+- **Bivariate analyses**: investigate the **relationship** between two variables
+
+::: {.fragment }
+
+1. **Visually** → pairwise comparison
+2. Using **covariance/correlation** → correlation matrix
+3. First look at **linear regression** → only visually for now
+
+:::
+
 ## Pairwise comparison
 
 :::: {.columns}
@@ -1224,5 +1244,212 @@ sns.pairplot(data=df_traces_sub, hue='Epoch')
 
 
 
+## Covariance
+
+- The [covariance]{.bg} captures **the direction and magnitude of the linear relationship between the two variables**
+- The [sample covariance]{.bg} is an **estimator** of the theoretical covariance:
+
+$$
+\mathrm{Cov}(X,Y)_{\text{emp}}= \frac{1}{n-1}\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y}),
+$$
+
+- **Positive**: Increase in $X$ → increase in $Y$
+- **Negative**: Increase in $X$ → decrease in $Y$
+
+**Problem**: depends on the [magnitudes]{.bg} of the variables, so it does not directly reflect the [strength]{.bg} of the relationship
 
 
+
+## Correlation
+
+- The [correlation coefficient]{.bg} provides **a normalized version** of the covariance
+  - Ranges from $−1$ to $1$
+  - Indicates both the direction and the strength of the linear relationship
+- The [sample correlation]{.bg} is computed as:
+
+$$
+r(X,Y)_{\text{emp}} = \frac{\mathrm{Cov}(X,Y)_{\text{emp}}}{s_X s_Y} = \frac{\sum_{i=1}^n (x_i - \bar x)(y_i - \bar y)}{\sqrt{\sum_{i=1}^n (x_i - \bar x)^2}\;\sqrt{\sum_{i=1}^n (y_i - \bar y)^2}},
+$$
+
+- $r(X,Y)=-1$/$1$ → "perfect" **relationship** between $X$ and $Y$
+- $r(X,Y)=0$ →  **independence** between $X$ and $Y$.
+
+## Correlation matrix
+
+- [Correlation matrix]{.bg} → square table showing the [pairwise correlations]{.bg} between all variables in a dataset
+- Suppose we have $p$ variables $(X_1, X_2, \dots, X_p)$ → the [correlation matrix]{.bg} $\mathbf{C}$ is:
+
+$$
+\mathbf{C} =
+\begin{pmatrix}
+1 & r(X_1,X_2) & \dots & r(X_1,X_p) \\
+r(X_2,X_1) & 1 & \dots & r(X_2,X_p) \\
+\vdots & \vdots & \ddots & \vdots \\
+r(X_p,X_1) & r(X_p,X_2) & \dots & 1
+\end{pmatrix}.
+$$
+
+## Correlation matrix
+
+:::: {.columns}
+::: {.column width="48%"}
+Correlation matrix for trace elements
+
+- Use **sample** correlation coefficient $r$
+  - **Red:** positive relationship
+  - **Blue:** negative relationship
+  - **White:** no relationship
+
+:::
+::: {.column width="4%"}
+:::
+::: {.column width="48%"}
+
+```{python}
+#| echo: false
+#| eval: true
+
+# Define a function to plot the correlation matrix. It takes one argument (i.e., a DataFrame)
+def corrMatrix(d):
+        
+    # Compute the correlation matrix
+    corr = d.corr()
+
+    # Generate a mask for the upper triangle
+    mask = np.triu(np.ones_like(corr, dtype=bool))
+
+    # Set up the matplotlib figure
+    f, ax = plt.subplots(figsize=(11, 9))
+
+    # Generate a custom diverging colormap
+    cmap = sns.diverging_palette(230, 20, as_cmap=True)
+
+    # Draw the heatmap with the mask and correct aspect ratio
+    sns.heatmap(corr, mask=mask, cmap=cmap, vmax=.7, vmin=-.7, center=0,
+                square=True, linewidths=.5, cbar_kws={"shrink": .5})
+
+# Keep only the numerical columns, i.e., from column index 10 to the last
+df_traces_sub = df_traces.iloc[:, 10:]
+corrMatrix(df_traces_sub)
+```
+:::
+::::
+
+
+
+## Linear regression
+
+- Correlation coefficients → measure of coupling between two continuous variables
+- [linear regressions]{.bg} attempt modelling this relationship
+
+:::: {.columns}
+::: {.column width="30%"}
+$$
+y = a + bx + \varepsilon
+$$ 
+:::
+::: {.column width="4%"}
+:::
+::: {.column width="66%"}
+where:
+
+- $y$: dependent (response) variable
+- $x$: independent (predictor) variable
+- $a$: intercept → value of $y$ when $x=0$
+- $b$: slope → how much $y$ changes by unit of $x$
+- $\varepsilon$: error term
+:::
+::::
+
+→ **Objective:** Estimate the values of $a$ and $b$ that best fit the observed data
+
+
+## Linear regression with Seaborn
+
+*Seaborn* has high level functions to **visualise** regressions → `sns.regplot()` that produce:
+
+:::: {.columns}
+::: {.column width="58%"}
+1. A scatter plot;
+2. A linear regression model fit;
+3. A confidence interval
+
+::: {.fragment }
+
+→ [**Be critical**]{.bg}
+
+→ Further investigations [require dedicated stats packages]{.bg}
+
+:::
+
+
+:::
+::: {.column width="4%"}
+:::
+::: {.column width="38%" .img-up-75}
+
+
+```{python}
+#| echo: false
+#| eval: true
+
+# Setup the plot. Note that we require 2 axes in 1 row, which returns a list of axes (i.e., [ax1, ax2])
+fig, [ax1, ax2] = plt.subplots(2,1, figsize=(6,9))
+sns.regplot(ax=ax1, data=df_traces, x='Zr', y='Hf', color=blue, line_kws=dict(color=orange))
+sns.regplot(ax=ax2, data=df_traces, x='Zr', y='Sc', color=blue, line_kws=dict(color=orange))
+
+# These two commands mainly make the plots look good on the website
+plt.tight_layout()
+plt.show()
+
+```
+:::
+::::
+
+
+
+## Residual analysis with Seaborn
+
+Linear regression → [do residuals show any structure]{.bg}?? → `sns.residplot()`
+
+:::: {.columns}
+::: {.column width="58%"}
+Residuals are necessary to:
+
+1. **Diagnose model fit** (→ how much **unexplained variation** remains);
+2. **Detect patterns** that indicate problems (non-linearity, heteroscedasticity, outliers).
+
+::: {.fragment }
+Any type of [structure in residuals]{.bg} might reveal a **violation of linear regression assumptions**.
+:::
+
+
+:::
+::: {.column width="4%"}
+:::
+::: {.column width="38%" .img-up-75}
+
+
+```{python}
+#| echo: false
+#| eval: true
+
+# Setup the plot. Note that we require 2 axes in 1 row, which returns a list of axes (i.e., [ax1, ax2])
+fig, [ax1, ax2] = plt.subplots(2,1, figsize=(6,9))
+sns.residplot(ax=ax1, data=df_traces, x='Zr', y='Hf', color=blue, lowess=True, line_kws=dict(color=orange))
+sns.residplot(ax=ax2, data=df_traces, x='Zr', y='Sc', color=blue, lowess=True, line_kws=dict(color=orange))
+plt.tight_layout()
+plt.show()
+
+```
+:::
+::::
+
+## Your turn!
+
+- Go to [https://elste-master.github.io/Data-Science/](https://elste-master.github.io/Data-Science/)
+  - Class 2 > [Bivariate analyses]{.bg}
+  - Explore the structure of the glass geochemistry or [your]{.bg} dataset
+  - Get used to the various functions
+
+<iframe src="../class2/day2-4_bivariate.html" width="100%" height="400px" style="border:none;"></iframe>

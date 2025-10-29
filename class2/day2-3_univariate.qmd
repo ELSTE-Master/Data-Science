@@ -29,8 +29,8 @@ blue = '#2F4647'
 orange = '#EB811B'
 
 # Import the dataset specifying which Excel sheet name to load the data from
-df_majors = pd.read_excel('https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/Smith_glass_post_NYT_data_majors.csv')
-df_traces = pd.read_excel('https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/Smith_glass_post_NYT_data_traces.csv')
+df_majors = pd.read_csv('https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/Smith_glass_post_NYT_data_majors.csv')
+df_traces = pd.read_csv('https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/Smith_glass_post_NYT_data_traces.csv')
 ```
 
 The objective of **descriptive statistics** is to [provide ways of capturing the properties of a given data set or sample]{.mark}. Using *Pandas* and *Seaborn*, we will review some [metrics, tools, and strategies]{.mark} that can be used to summarize a dataset, providing us with a quantitative basis to talk about it and compare it to other datasets.
