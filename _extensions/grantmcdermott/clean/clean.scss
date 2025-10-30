@@ -3,10 +3,24 @@
 // Custom colours and variables
 
 $jet: #131516;
-$accent: #107895;
-$accent2: #9a2515;
+// $accent: #107895;
+// $accent2: #9a2515;
 // $accent2: #e64173;
 $right-arrow: "\2192"; // Unicode character for right arrow
+
+$bg_dark: #23373b;
+$bg_light: #2F4647;
+$accent: #EB811B;
+$accent2: #2F4647;
+// $test: #ffffff;
+// $test: #e2a855;
+// $test: #003a66;
+// $test: #b72026;
+// $test: #14B03D;
+// $test: #666666;
+// $test: #d7191c;
+// $test: #1a9641;
+
 
 // fonts
 
@@ -25,11 +39,12 @@ Note: This theme uses the Roboto font family, which it imports from Google
   from the choice set if the family is installed locally.
 */
 @import url('https://fonts.googleapis.com/css?family=Roboto:200,200i,300,300i,350,350i,400,400i&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:200,300,400,700&display=swap');
 
 $font-family-sans-serif: "Roboto", sans-serif !default;
-$presentation-heading-font: "Roboto", sans-serif !default;
+$presentation-heading-font: "Roboto Slab", sans-serif !default;
 
-$presentation-heading-color: $jet !default;
+$presentation-heading-color: $bg_dark !default;
 $presentation-heading-font-weight: lighter;
 //$presentation-heading-line-height: 2;
 //$presentation-block-margin: 28px;
@@ -39,7 +54,7 @@ $presentation-font-size-root: 32px;
 //$body-bg: #f0f1eb !default;
 $body-color: $jet !default;
 $link-color: $accent !default;
-$selection-bg: #26351c !default;
+$selection-bg: $bg_light !default;
 
 
 /*-- scss:rules --*/
@@ -60,10 +75,16 @@ $selection-bg: #26351c !default;
   text-align: left;
 
   .title {
-    margin-bottom: 2rem; 
-    color: $body-color;
+    color: $bg_dark;
     font-size: 1.4em;
     // font-weight: 350;
+    font-weight: bold;
+  }
+
+  .subtitle {
+    color: $accent;
+    font-style: italic;
+    margin-top: 0em;
     font-weight: lighter;
   }
 
@@ -79,7 +100,7 @@ $selection-bg: #26351c !default;
 
   .author,
   .quarto-title-author-name {
-    color: $body-color;
+    color: $bg_dark;
   }
 
   .quarto-title-authors {
@@ -87,8 +108,8 @@ $selection-bg: #26351c !default;
     justify-content: left;
 
     .quarto-title-author {
-      padding-left: 1em;
-      padding-right: 1em;
+      padding-left: 0em;
+      padding-right: 0em;
       width: 100%;
     }
   }
@@ -126,7 +147,7 @@ $selection-bg: #26351c !default;
 
 .reveal h2 {
   // font-weight: 350;
-  font-weight: lighter;
+  font-weight: bold;
   font-size: 1.4em;
 }
 
@@ -148,18 +169,47 @@ $selection-bg: #26351c !default;
 // alerts etc.
 
 .alert {
-  color: $accent2;
+  color: $accent;
 }
 
 .fg {
   color: var(--col, $jet);
 }
 
+// .bg {
+//   // background-color: var(--col, #fff);
+//   background-color: rgba($accent, 0.5);
+//   padding: 0.05em;
+//   border-radius: 2px;
+//   display: inline-block;
+// }
+
 .bg {
-  background-color: var(--col, #fff);
-  padding: 0.1em;
-  border-radius: 5px;
-  display: inline-block;
+  margin: 0 -0.2em;
+  padding: 0em 0.2em;
+  border-radius: 0.3em 0.15em;
+  background: transparent;
+  background-image: linear-gradient(
+    to right,
+    rgba($accent, 0.5) 4%,
+    rgba($accent, 0.4) 96%
+  );
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+
+.reveal b,
+.reveal strong {
+  color: $bg_light;
+}
+
+// Seb 
+
+.small-gap {
+  display: block;
+  margin-top: 0.25em;  /* adjust smaller/larger as needed */
+  margin-bottom: 0.25em;
 }
 
 // lists
@@ -380,8 +430,7 @@ $selection-bg: #26351c !default;
 .reveal code {
     color: $bg_light;
     font-size: .875em;
-    background-color: #fff;
-    // background-color: rgba($bg_light, 0.25);
+    background-color: rgba($bg_light, 0.25);
     padding: 0.05em;
     border-radius: 2px;
     display: inline-block;
@@ -403,7 +452,9 @@ span[data-code-cell] {
   margin-top: 1.5em;
 }
 
-
+.reveal {
+  background-color: #fafafa; /* light gray */
+}
 // wrappers to adjust image
 
 .img-up-50 {
