@@ -1,0 +1,41 @@
+---
+title: "Overview"
+format:
+  html:
+    code-fold: false
+    code-line-numbers: true
+    css: [../assets/webex.css]
+    include-after-body: [../assets/webex.js]
+    embed-resources: true 
+jupyter: python3
+---
+
+```{python}
+#| echo: false
+from pywebexercises.exercises import mcq, longmcq, torf
+import matplotlib.pyplot as plt
+plt.rcParams.update({
+    "figure.facecolor":  (0.0, 0.0, 0.0, 0.0),  # red   with alpha = 30%
+})
+```
+
+
+This session introduces **linear regression** as a framework for quantifying relationships between a numeric outcome and one or more predictors. We discuss how to incorporate categorical variables and interaction terms, and how to interpret coefficients along with their associated uncertainty (standard errors, confidence intervals, and p-values). We emphasize key assumptions (e.g., linearity, additivity, homoscedasticity, normal errors, independence), model diagnostics (e.g., residual plots, QQ plots), effect sizes, and prediction. We also highlight the connection between regression and two-sample tests by showing how the t-test can be viewed as a special case of the linear model framework.
+
+## Today’s objectives {.unnumbered}
+
+The objectives of this class are to:
+
+- [x] Review core concepts: hypotheses, p-values, confidence intervals, and how they arise in regression  
+- [x] Fit and interpret linear regression models
+- [x] Encode categorical variables and add interaction terms; interpret conditional effects  
+- [x] Check assumptions and run diagnostics: residual patterns, QQ plots, heteroscedasticity, independence, ...
+- [x] Compare and select models: adjusted $R^2$, AIC; consider transformations when appropriate  
+- [x] Communicate effect sizes and predictions (point & interval) and implement analyses in Python (`pandas` + `statsmodels`)
+
+## Slides
+
+- {{< fa file-pdf >}} [PDF](../slides/class1_pandas.pdf)
+
+
+

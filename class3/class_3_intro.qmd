@@ -1,0 +1,45 @@
+---
+title: "Overview"
+format:
+  html:
+    code-fold: false
+    code-line-numbers: true
+    css: [../assets/webex.css]
+    include-after-body: [../assets/webex.js]
+    embed-resources: true 
+jupyter: python3
+---
+
+```{python}
+#| echo: false
+from pywebexercises.exercises import mcq, longmcq, torf
+import matplotlib.pyplot as plt
+plt.rcParams.update({
+    "figure.facecolor":  (0.0, 0.0, 0.0, 0.0),  # red   with alpha = 30%
+})
+```
+
+
+This session introduces **Analysis of Variance** (ANOVA) as a principled way to compare locations (means) across two or more groups, building on hypothesis testing, p-values, and multiple-comparisons control. We cover Student’s and Welch’s t-tests, the Mann–Whitney–Wilcoxon test, Fisher’s one-way ANOVA, Welch’s ANOVA (unequal variances), and the Kruskal–Wallis test (rank-based alternative), with emphasis on assumptions, diagnostics, and effect sizes.
+
+Because we discuss both two-sample and multi-sample scenarios, this class bridges t-tests and ANOVA within a unified inferential framework.
+
+## Today's objectives {.unnumbered}
+
+The objectives of this class are to:
+
+- [x] Review core concepts: hypotheses, errors (Type I/II), p-values, and power  
+- [x] Understand when to use Student’s t-test, Welch’s t-test, or the Mann–Whitney–Wilcoxon test for two groups  
+- [x] Understand when to use Fisher’s ANOVA, Welch’s ANOVA, or the Kruskal–Wallis test for multiple groups  
+- [x] Assess key assumptions: normality, variance homogeneity, and independence  
+- [x] Apply multiple testing corrections using Bonferroni and Dunn–Šidák methods  
+- [x] Perform and report analyses in Python clearly and effectively
+
+
+## Slides
+
+- {{< fa file-pdf >}} [PDF](class_3_slides.pdf)
+
+- <i class="fa fa-window-restore"></i> <a href="../class3/class_3_slides.html" target="_blank">View in browser</a>
+
+

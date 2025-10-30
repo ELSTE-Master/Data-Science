@@ -1,0 +1,627 @@
+---
+title: Linear Regression
+author:
+  - name: Sébastien Biass
+    id: sb
+    orcid: 0000-0002-1919-9473
+    email: sebastien.biasse@unige.ch
+    affiliation: 
+      - name: Earth Sciences, University of Geneva
+  - name: Stéphane Guerrier
+    id: sg
+    orcid: 0000-0003-0002-8794
+    email: Stephane.Guerrier@unige.ch
+    affiliation: 
+      - name: Earth Sciences & Pharmaceutical Sciences, University of Geneva
+  - name: Dominique Couturier
+    id: DC
+    orcid: 0000-0001-5774-5036
+    affiliation: 
+      - name: Cancer Research UK, University of Cambridge
+  - name: Yuming Zhang
+    id: YZ
+    orcid: 0000-0003-2293-9601
+    affiliation: 
+      - name: T.H. Chan School of Public Health, Harvard University
+license: "CC BY"
+format:
+  clean-revealjs:
+    embed-resources: true
+    self-contained: true
+    self-contained-math: true
+    mathjax: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    slide-number: true
+footer: "This document was prepared with the help of Lionel Voirol and Filippo Salmaso"
+css: [../assets/default.css]
+#jupyter: python3
+---
+
+
+
+## Motivating Example: Reading Ability {.smaller}
+
+
+
+### Problem {.smaller}
+
+An educator believes that <span style="color:blue;">new directed reading activities</span> in the classroom can help elementary school students (6-12 years old) improve their reading ability. She arranged a pilot study where some students (chosen at random) of age 6 start to take part in these activities <span style="color:blue; font-weight:bold;">(treatment group)</span>, meanwhile other students continue with the <span style="color:purple;">classical curriculum</span> <span style="color:blue; font-weight:bold;">(control group)</span>. The educator wishes to evaluate the effectiveness of these activities so all students are given a Degree of Reading Power (DRP) test, which assesses their reading ability. 
+
+<span style="color:purple;">Can we conclude that these new directed reading activities can help elementary school students improve their reading ability?</span>
+
+## Motivating Example: Reading Ability {.smaller}
+
+### Data {.smaller}
+
+<div style="font-size:1.5em;">
+```{python, echo=TRUE}
+import pandas as pd
+
+reading = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/reading.csv")
+
+control = reading.loc[reading["group"] == "Control", "score"]
+print(control.head())
+
+treatment = reading.loc[reading["group"] == "Treatment", "score"]
+print(treatment.head())
+
+```
+```{python, eval=FALSE}
+import pandas as pd
+
+reading = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/reading.csv")
+
+control = reading.loc[reading["group"] == "Control", "score"]
+print(control.head())
+
+treatment = reading.loc[reading["group"] == "Treatment", "score"]
+print(treatment.head())
+
+```
+</div>
+
+
+---
+
+## Motivating Example: Reading Ability {.smaller}
+
+### Graph {.smaller}
+
+```{R, readingboxplot, out.width = "80%", echo = F}
+knitr::include_graphics("../class3/img/boxplot_reading.png")
+```
+
+---
+
+## Motivating Example: Reading Ability {.smaller}
+
+### Test {.smaller}
+
+1. <span style="color:blue;">Define hypotheses:</span> $H_0: \mu_T = \mu_C$ and $H_a: \mu_T > \mu_C$.
+2. <span style="color:blue;">Define</span> $\color{#6A5ACD}{\alpha}$: We consider $\alpha = 5\%$.
+3. <span style="color:blue;">Compute p-value</span>: p-value = $97.12\%$ (see Python code tab for details).
+4. <span style="color:blue;">Conclusion:</span> We have p-value > $\alpha$ so we cannot reject the null hypothesis at the significance level of 5%. 
+
+<span style="color:purple; font-weight:bold;">Remark:</span> Notice that the p-value for the test with opposite hypotheses is actually $100\%-97.12\%=2.88\% < \alpha$ (Why? 🤔). So we conclude, at the significance level of 5%, that the classical curriculum without these new directed reading activities actually improve students' reading ability more compared to the curriculum with these activities. 😬
+
+---
+
+## Motivating Example: Reading Ability {.smaller}
+
+### `Python` Code {.smaller}
+
+<div style="font-size:1.5em;">
+```{python, echo=TRUE}
+from scipy import stats
+t_test_reading, p_value_reading = stats.ttest_ind(
+    treatment, control, equal_var=True, alternative='greater'
+)
+
+print(f"t-test: {t_test_reading:.4f}")
+print(f"p-value: {p_value_reading:.4f}")
+
+```
+</div>
+
+---
+
+## Is our analysis comprehensive? {.smaller}
+
+The educator points out that only students of 6-8 years old have participated in the new directed reading activities. In other words, in the sample she collected, the students in the treatment group are only of age 6 to 8, whereas the students in the control group vary from 6 to 12 years old. <span style="color:purple;">Is age a potential explanation to the difference we observe among the students' reading ability?</span>
+
+To make sure that the analysis is reliable, she includes the age information of the students, which can be accessed as follows:
+
+<div style="font-size:1.5em;">
+```{python, echo=TRUE}
+treatment_age = reading.loc[reading["group"] == "Treatment", "age"]
+control_age   = reading.loc[reading["group"] == "Control", "age"]
+```
+</div>
+
+---
+
+## Should age be taken into account? {.smaller}
+
+```{R, readingpoint, out.width = "90%", echo = F}
+knitr::include_graphics("../class3/img/reading_points.png")
+```
+
+---
+
+## Regression analysis {.smaller}
+
+- Regression analysis corresponds to a set of statistical methods for estimating the <span style="color:purple;">relationships</span> between a response variable $Y$ of primary interest (also called the *outcome variable*) and some explanatory variables $X_1, \ldots, X_p$ (also called *covariates*, *regressors*, *features* or *predictors*).
+- The relationship between the response variable $Y$ and the covariates is not <span style="color:blue;">deterministic</span> and we model the <span style="color:blue;">conditional expected value</span> (i.e. $\mathbb{E}[Y | X_1, \ldots, X_p]$).
+- Therefore, we consider the following (general) model:
+$$Y_i = \mathbb{E}[Y_i | X_{i1}, \ldots, X_{ip}] + \varepsilon_i,$$where $\mathbb{E}[\varepsilon_i] = 0$ and $i=1,\ldots,n$.
+- <span style="color:purple;">Example</span>: $\mathbb{E}[\text{reading abilities}_i| \ \text{age}_i, \text{treatment}_i, \ldots]$.
+
+---
+
+## Linear regression {.smaller}
+
+- The most common form of regression analysis is <span style="color:#eb078e;">linear regression</span>, in which 
+the conditional expected value $\color{#373895}{\mathbb{E}[Y | X_1, \ldots, X_p]}$ takes the form
+$$\color{#373895}{\mathbb{E}[Y_i| X_{i1}, \ldots, X_{ip}]} = \color{#373895}{\beta_0 + \beta_1 X_1 + \ldots + \beta_p X_p}.$$
+and $\color{#eb078e}{\varepsilon_i \overset{iid}{\sim} N(0, \sigma^2)}$.
+- Our general model can be expressed as
+$$Y_i = \color{#373895}{\mathbb{E}[Y_i | X_{i1}, \ldots, X_{ip}]} + \varepsilon_i = \color{#373895}{\beta_0 + \sum_{j = 1}^p \beta_j X_{ij}} + \varepsilon_i,$$
+and therefore,
+$$Y_i \color{#eb078e}{ \, \sim \, N}\left(\color{#373895}{\beta_0 + \sum_{j = 1}^p \beta_j X_{ij}}, \color{#eb078e}{\sigma^2}\right).$$
+
+---
+
+## Linear regression {.smaller}
+
+Therefore, this approach makes two (<span style="color:#eb078e;">strong</span>) assumptions:
+
+1. The conditional expected value $\mathbb{E}[Y | X_1, \ldots, X_p]$ is assumed to be a linear function of the covariates.
+2. The errors are assumed to be $iid$ Gaussian, i.e. $\color{#eb078e}{\varepsilon_i \overset{iid}{\sim} N(0, \sigma^2)}$, at least when the sample size is small to medium.
+
+⚠️ <span style="color:#eb078e;">In practice, it is important to assess if these assumptions are plausible.</span>
+
+The parameters of the model (i.e. $\beta_0, \beta_1, \ldots, \beta_p$ and $\sigma^2$) can be estimated by several methods. The most commonly used is the <span style="color:#eb078e;">least squares</span> approach where $\beta_0, \beta_1, \ldots, \beta_p$ are chosen such that
+
+$$\small \sum_{i = 1}^n \varepsilon_i^2 = \sum_{i = 1}^n \left(Y_i- \mathbb{E}[Y_i | X_{i1}, \ldots, X_{ip}]\right)^2 = \sum_{i = 1}^n \left(Y_i- \beta_0 - \sum_{j = 1}^p \beta_j X_{ij}\right)^2$$
+is <span style="color:#eb078e;">minimized</span>, which then allows to estimate $\sigma^2$ further on.
+
+---
+
+## Anscombe's quartet {.smaller}
+
+```{R, out.width = "80%", echo = F}
+knitr::include_graphics("../class3/img/Anscombe.png")
+```
+
+
+<div style="font-size:0.7em;">
+👋 Source: [Wikipedia](https://en.wikipedia.org/wiki/Anscombe%27s_quartet).
+</div>
+
+---
+
+## Example: Reading ability assessment {.smaller}
+
+In the reading ability example, we can formulate a linear regression model (without interaction) as follows:
+$${\color{#e64173}{\text{Score}_i}} = \beta_0 + \beta_1 {\color{#6A5ACD}{\text{Group}_i}} + \beta_2 {\color{#20B2AA}{\text{Age}_i}} + \epsilon_i, \quad \epsilon_i \overset{iid}{\sim} N(0, \sigma^2).$$
+
+- $\color{#e64173}{\text{Score}_i}$: score of the DRP test of the $i$-th student.
+
+- $\color{#6A5ACD}{\text{Group}_i}$: indicator of participation of the new directed reading activities for the $i$-th student (i.e. $\color{#6A5ACD}{\text{Group}_i} = 1$ if participate and $\color{#6A5ACD}{\text{Group}_i} = 0$ if not participate).
+
+- $\color{#20B2AA}{\text{Age}_i}$: age of the $i$-th student (related to *<span style="color:#20B2AA;">time since start of treatment</span>*). 
+
+With this model the two groups can be compared as the age effect is taken into account. The goal of the educator is now to assess if $\beta_1$ is <span style="color:#eb078e;">significantly larger than 0</span>.
+
+---
+
+## Example: Reading ability assessment {.smaller}
+
+### `Python` Code {.smaller}
+
+<span style="color:#eb078e;">Python function</span>:
+
+<div style="font-size:1.5em;">
+```{python, eval = FALSE, echo = TRUE}
+import statsmodels.formula.api as smf
+
+# Fit linear model using formula syntax
+model = smf.ols(formula="y ~ x1 + x2 + ... + xp", data=mydata).fit()
+
+# Show results
+print(model.summary())
+```
+</div>
+
+
+
+## Example: Reading ability assessment {.smaller}
+
+### Output {.smaller}
+
+
+```{python, echo = FALSE}
+import pandas as pd
+import statsmodels.formula.api as smf
+
+# Import data (if you haven't already)
+reading = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/reading.csv")
+
+# Fit a linear regression model
+mod1 = smf.ols(formula="score ~ group + age", data=reading).fit()
+
+# Show summary
+print(mod1.summary())
+```
+
+---
+
+## Interpretation of coefficients {.smaller}
+
+We can obtain the estimated coefficients. Specifically,
+
+- $\hat{\beta}_0 = -7.8639$ represents the estimated baseline average score of the DRP test at birth (but what does it mean? 🤨).
+
+- $\hat{\beta}_1 = 6.3771$ means that <span style="color:#eb078e;">for a student of the same age</span>, participating in the new directed reading activities is estimated to increase their average score of the DRP test by 6.3771.
+
+- $\hat{\beta}_2 = 6.6457$ means that <span style="color:#eb078e;">when a student receives the same treatment</span> (either participate or not in the activities), their average score increases by 6.6457 as they become 1 year older. 
+
+Regression coefficients represent the mean change in the response variable <span style="color:blue;">for one unit of change</span> in the predictor variable <span style="color:blue;">while holding other covariates in the model constant</span>.
+
+---
+
+## Interpretation of coefficient p-values {.smaller}
+
+- We notice that for each coefficient $\beta_j$, there is a corresponding p-value associated to the (Wald t-)test of $H_0: \beta_j = 0$ and $H_a: \beta_j \neq 0$. 
+
+- <span style="color:#eb078e;">A covariate with a small p-value (typically smaller than 5%) is considered to be a significant (meaningful) addition to the model</span>, as changes in the values of such covariate can lead to changes in the response variable. 
+
+- On the other hand, a large p-value (typically larger than 5%) suggests that the corresponding covariate is not (significantly) associated with changes in the response or that we don't have enough evidence (data) to show its effect.
+
+- In this example, the coefficient p-value associated to the `group` covariate is $2.6 \times 10^{-3}$%. <span style="color:blue;">This suggests that taking into account the effect of `age`, the reading abilities of the students receiving the treatment is significantly</span> <span style="color:blue; font-weight:bold;">different</span> <span style="color:blue;">from the control group, at the significance level of 5%.</span> But this is not what we want! 
+
+---
+
+## Interpretation of coefficient p-values {.smaller}
+
+In the linear regression output, the coefficient p-value (which we denote as $p$ below) corresponds to a two-sided test. We can use this result to compute the p-value of a one-sided test using the following relations:
+
+<div style="font-size:1.1em;">
+
+|                       | $\small H_a: \beta_j > 0$                              | $\small H_a: \beta_j < 0$                              |
+|-----------------------|:-----------------------------------------------------:|:------------------------------------------------------:|
+| $\small \hat{\beta_j} > 0$ | ✅ Correct tail (prob = $p/2$)                        | ⚠️ <span style="color:#ff5c5c;">Wrong tail</span> (prob = $1 - p/2$) |
+| $\small \hat{\beta_j} < 0$ | ⚠️ <span style="color:#ff5c5c;">Wrong tail</span> (prob = $1 - p/2$) | ✅ Correct tail (prob = $p/2$)                        |
+
+</div>
+
+<div style="font-size:0.9em;">
+✅ = rejection region corresponds to the alternative  
+⚠️ = rejection region is in the opposite direction of the alternative
+</div>
+
+
+In our example, $\beta_1 = 6.3771$ and $p=2.6 \times 10^{-3}\%$. So the p-value of the test with hypotheses $H_0: \beta_1=0$ and $H_a: \beta_1>0$ is $2.6 \times 10^{-3}\% /2 \approx 1.3 \times 10^{-3}\%  < \alpha$. So we can conclude that these new directed reading activities can <span style="color:#eb078e;">significantly improve</span> students' reading ability compared to classical curriculum. 
+
+<span style="color:blue;">However, is our model plausible?</span> 🤔
+
+---
+
+## How good is our model? 🤔 {.smaller}
+
+```{R, pointswithmod1, out.width = "90%", echo = F}
+knitr::include_graphics("../class3/img/points_with_mod1.png")
+```
+
+---
+
+## Could we use the $R^2$? {.smaller}
+
+- The <span style="color:#eb078e;">coefficient of determination</span>, denoted as $R^2$ and often referred to as R-squared, corresponds to the proportion of the variance in the response variable that is "explained" by the model.  
+- $\color{#6A5ACD}{R^2}$ <span style="color:blue;">gives certain information about the goodness of fit of a model.</span> It measures how well the regression predictions approximate the real data points. An $R^2$ of 1 indicates that the regression predictions perfectly fit the data.
+-  However, the value of $R^2$ is <span style="color:#eb078e;">not related to the adequacy of our model to the data.</span>
+- ⚠️ Moreover, adding new covariates to the current model <span style="color:blue;">always</span> increases $R^2$, whether the additional covariates are significant or not. Therefore, $R^2$ alone cannot be used as a meaningful comparison of models with different covariates.
+- The <span style="color:#eb078e;">adjusted</span> $\color{#e64173}{R^2}$ is a modification of $R^2$ that aims to limit this issue. 
+
+---
+
+## Rexthor, the Dog-Bearer! {.smaller}
+
+```{R, rsquare, out.width = "90%", echo = F}
+knitr::include_graphics("../class3/img/linear_regression.png")
+```
+
+<div style="font-size:0.8em;">
+👋 If you want to know more have a look [here](https://www.explainxkcd.com/wiki/index.php/1725:_Linear_Regression).
+</div>
+
+---
+
+## Model diagnostic {.smaller}
+
+```{R, diagmod1, out.width = "90%", echo = F}
+knitr::include_graphics("../class3/img/diag_mod1.png")
+```
+
+---
+
+## Model diagnostic ⚠️ {.smaller}
+
+```{R, diag_mod1_v2, out.width = "90%", echo = F}
+knitr::include_graphics("../class3/img/diag_mod1_v2.png")
+```
+
+---
+
+## Model diagnostic ⚠️ {.smaller}
+
+```{R, diag2_mod1, out.width = "90%", echo = F}
+knitr::include_graphics("../class3/img/diag2_mod1.png")
+```
+
+---
+
+## Model diagnostic ⚠️ {.smaller}
+
+```{R, qqplot_mod1, out.width = "90%", echo = F}
+knitr::include_graphics("../class3/img/qqplot_mod1.png")
+```
+
+---
+
+## Let's update our model {.smaller}
+
+Our results suggest that the students of the group participating in these new directed reading activities progress more rapidly (which is actually more reasonable than our initial model 🤔). Therefore, we modify our model by adding an interaction term:
+
+$${\color{#e64173}{\text{Score}_i}} = \beta_0 + \beta_1 {\color{#6A5ACD}{\text{Group}_i}} + {\beta_2 \color{#20B2AA}{\text{Age}_i}} + \beta_3 {\color{#6A5ACD}{\text{Group}_i}}{\color{#20B2AA}{\text{Age}_i}} + \epsilon_i, \quad \epsilon_i \overset{iid}{\sim} N(0, \sigma^2).$$
+
+- $\color{#e64173}{\text{Score}_i}$: score of the DRP test of the $i$-th student.
+
+- $\color{#6A5ACD}{\text{Group}_i}$: indicator of participation of the new directed reading activities for the $i$-th student (i.e. $\color{#6A5ACD}{\text{Group}_i} = 1$ if participate and $\color{#6A5ACD}{\text{Group}_i} = 0$ if not participate).
+
+- $\color{#20B2AA}{\text{Age}_i}$: age of the $i$-th student (related to *<span style="color:blue;">time since start of treatment</span>*),
+
+The goal of the educator is now to assess if $\beta_1$ and/or $\beta_3$ are <span style="color:#eb078e;">significantly larger than 0.</span>
+
+---
+
+## Example: Reading ability assessment {.smaller}
+### `Python` Code 
+
+Here is the code to fit our second model:
+
+<div style="font-size:1.5em;">
+
+```{python, eval = FALSE, echo = TRUE}
+import pandas as pd
+import statsmodels.formula.api as smf
+
+# Import data (if you haven't already)
+reading = pd.read_csv("/Users/filipposalmaso/Documents/Temporary_Stuff/Data-Science_copy/reading.csv")
+
+# Fit a linear regression model
+mod2 = smf.ols(formula="score ~ group*age", data=reading).fit()
+
+# Show summary
+print(mod2.summary())
+```
+</div>
+
+## Example: Reading ability assessment {.smaller}
+### Output
+
+```{python, echo = FALSE}
+import pandas as pd
+import statsmodels.formula.api as smf
+
+# Import data (if you haven't already)
+reading = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/reading.csv")
+
+# Fit a linear regression model
+mod2 = smf.ols(formula="score ~ group*age", data=reading).fit()
+
+# Show summary
+print(mod2.summary())
+```
+
+---
+
+## Interpretation of coefficients {.smaller}
+
+We can obtain the estimated coefficients. Specifically,
+
+- $\hat{\beta}_0 = -3.2489$ represents the estimated baseline average score of the DRP test at birth (but *again* what does it mean? 🙄)
+
+- $\hat{\beta}_1 = -36.0307$ means that <span style="color:#eb078e;">for a student of the same age</span>, participating in the new directed reading activities is estimated to decrease their average score of the DRP test by 36.0307 (does this make sense? 🧐).
+
+- $\hat{\beta}_2 = 6.1207$ means that for students not participating to the new directed reading activities, their average score increases by 6.1207 as they become 1 year older.
+
+- $\hat{\beta}_3 = 5.9539$ means that the average score of students participating in the new directed reading activities increases by 5.9539 as they become 1 year older <span style="color:#eb078e;">compared to the other students</span>. This means that the average score of students participating to the new program increases by 12.0746 (i.e. 6.1207 + 5.9539) as they become 1 year older.
+
+---
+
+## Model fit {.smaller}
+
+```{R, pointswithmod2, out.width = "90%", echo = F}
+knitr::include_graphics("../class3/img/points_with_mod2.png")
+```
+
+---
+
+## Model diagnostic {.smaller}
+
+```{R, diag_mod2_v2, out.width = "90%", echo = F}
+knitr::include_graphics("../class3/img/diag_mod2_v2.png")
+```
+
+---
+
+## Model diagnostic {.smaller}
+
+```{R, diag2_mod2, out.width = "90%", echo = F}
+knitr::include_graphics("../class3/img/diag2_mod2.png")
+```
+
+---
+
+## Model diagnostic {.smaller}
+
+```{R, qqplot_mod2, out.width = "90%", echo = F}
+knitr::include_graphics("../class3/img/qqplot_mod2.png")
+```
+
+---
+
+## Model selection {.smaller}
+
+In general, we prefer a <span style="color:#eb078e;">parsimonious approach to modeling</span> in the sense that we only choose a more complex model if the benefits are "<span style="color:#eb078e;">substantial</span>"<sup>👋</sup>. We want our model to be such that:
+
+1.  The model fits the data well.
+
+2.  Avoid (excessive) overfitting.
+
+Naturally these two objectives are <span style="color:#eb078e;">contradictory</span> and there are many ways to select a suitable model (actually this is one of the most active areas of research in modern Statistics). In this class, we will only consider one (simple) approach based on the <span style="color:#eb078e;">Akaike Information Criterion (AIC)</span>. This criterion corresponds to an <span style="color:blue;">estimator of prediction error</span> and thereby <span style="color:blue;">relative quality of statistical models for a given set of data</span>.
+
+<div style="font-size:0.6em;">
+👋  This point of view is based on <span style="color:#eb078e;">Occam's razor</span> (or law of parsimony), the problem-solving principle stipulating that "<span style="color:blue;">the simplest explanation is usually the right one</span>".
+</div>
+
+---
+
+## Model selection
+
+In `Python`, the AIC can be computed for a given model (i.e. use the output of the function `sfm.ols(...)` in `model.aic`.) For example, we can compare the AIC of the previously considered models as follows:
+
+```{python, eval=TRUE, echo=TRUE}
+print(round(mod1.aic, 4))     # First model (no interaction)
+print(round(mod2.aic, 4))     # Second model (with interaction)
+```
+
+As expected, these results suggest that the second model is more appropriate. <span style="color:#eb078e;">But should we further improve it?</span>
+
+---
+
+## Let's update our model (again) {.smaller}
+
+It should be reasonable that the average reading scores of the two groups are the same at the start of the program.
+
+$${\color{#e64173}{\text{Score}_i}} = \beta_0 + \beta_1 {\color{#20B2AA}{(\text{Age}_i - 6)}}  + \beta_2 {\color{#6A5ACD}{\text{Group}_i}}{\color{#20B2AA}{(\text{Age}_i - 6)}} + \epsilon_i, \quad \epsilon_i \overset{iid}{\sim} N(0, \sigma^2).$$
+
+- $\color{#e64173}{\text{Score}_i}$: score of the DRP test of the $i$-th student.
+
+- $\color{#6A5ACD}{\text{Group}_i}$: indicator of participation of the new directed reading activities for the $i$-th student (i.e. $\color{#6A5ACD}{\text{Group}_i} = 1$ if participate and $\color{#6A5ACD}{\text{Group}_i} = 0$ if not participate).
+
+- $\color{#20B2AA}{\text{Age}_i - 6}$: corresponds to the time since start of treatment of the $i$-th student. 
+
+With this model the two groups can be compared as the age effect is taken into account. The goal of the educator now is (<span style="color:#eb078e;">only!</span>) to assess if $\beta_1$ is <span style="color:#eb078e;">significantly larger than 0</span>.
+
+---
+
+## Example: Reading ability assessment {.smaller}
+### `Python` Code {.smaller}
+
+Here is the code to fit our third model:
+
+
+<div style="font-size:1.5em;">
+
+```{python, eval = FALSE, echo = TRUE}
+import pandas as pd
+import statsmodels.formula.api as smf
+
+# Import data (if you haven't already)
+reading = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/reading.csv")
+reading["age_minus_six"] = reading["age"] - 6
+
+# Fit a linear regression model
+mod3 = smf.ols(formula="score ~ age_minus_six + group:age_minus_six", data=reading).fit()
+
+# Show summary
+print(mod3.summary())
+```
+</div>
+
+## Example: Reading ability assessment {.smaller}
+### Output {.smaller}
+
+```{python, echo = FALSE}
+import pandas as pd
+import statsmodels.formula.api as smf
+
+# Import data (if you haven't already)
+
+reading = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/reading.csv")
+reading["age_minus_six"] = reading["age"] - 6
+
+# Fit a linear regression model
+mod3 = smf.ols(formula="score ~ age_minus_six + group:age_minus_six", data=reading).fit()
+
+# Show summary
+print(mod3.summary())
+```
+
+## Example: Reading ability assessment {.smaller}
+### AIC {.smaller}
+
+```{python, eval=TRUE, echo=TRUE}
+print(round(mod1.aic, 4))     
+print(round(mod2.aic, 4))     
+print(round(mod3.aic, 4))
+```
+
+---
+
+## Model fit {.smaller}
+
+```{R, pointswithmod3, out.width = "90%", echo = F}
+knitr::include_graphics("../class3/img/points_with_mod3.png")
+```
+
+---
+
+## Model diagnostic {.smaller}
+
+```{R, diag_mod3_v2, out.width = "90%", echo = F}
+knitr::include_graphics("../class3/img/diag_mod3_v2.png")
+```
+
+---
+
+## Model diagnostic {.smaller}
+
+```{R, diag2_mod3, out.width = "90%", echo = F}
+knitr::include_graphics("../class3/img/diag2_mod3.png")
+```
+
+---
+
+## Model diagnostic {.smaller}
+
+```{R, qqplot_mod3, out.width = "90%", echo = F}
+knitr::include_graphics("../class3/img/qqplot_mod3.png")
+```
+
+---
+
+## Concluding remarks {.smaller}
+
+- The last model we consider appears to fit the data, avoids overfitting and allows to answer whether the new reading activities are of interest. Indeed, the programs significantly improve the reading performance of the students (e.g. 5.81 more per year compared to control, p-value < 5%).
+
+- Our model <span style="color:#eb078e;">assumes a linear relationship</span> between the response and the covariates. However, this may be incorrect.
+
+- Our model <span style="color:#eb078e;">only considers independent data</span> (which may not be correct here).
+
+- Finally, linear regression <span style="color:#eb078e;">should not be used to extrapolate</span>, i.e. to estimate beyond the original observation range. For example, if we consider a 100 year-old person in this reading ability example, we would predict (using the third model) that the corresponding score of the DRP test would be 1157.59 and 611.45, respectively, with and without these activities. Does it really make sense? 😯
+
+---
+
+## Extrapolating {.smaller}
+
+```{R, out.width = "90%", echo = F}
+knitr::include_graphics("../class3/img/extrapolating.png")
+```
+
+<div style="font-size:0.8em;">
+
+👋If you want to know more have a look [here](https://www.explainxkcd.com/wiki/index.php/605:_Extrapolating).
+
+</div>

@@ -1,0 +1,347 @@
+---
+title: "Exercises abundance data"
+format: 
+  live-html:
+    theme: cosmo
+    css: ../assets/webex_2.css
+    include-after-body: ../assets/webex_2.js
+engine: knitr
+---
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
+
+
+
+
+
+
+
+```{r, echo = FALSE, results='asis'}
+knitr::opts_chunk$set(echo = FALSE)
+source("../assets/q_a_env.R")
+```
+
+<!-- MathJax for Rendering Math -->
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+
+---
+
+
+In this section, we use data from Environmental Data Initiative (EDI) on Coastal Giant Salamanders collected in HJ Andrews Experimental Forest, Oregon. Measurements were taken in two sections of Mack Creek: one located in old-growth forest (OG) and the other in a clear-cut area (CC) harvested in 1963. The dataset is extracted from the `and_vertebrates` dataset of the `R` package `lterdatasampler`.
+
+Forest harvesting can influence stream conditions, which may affect salamander growth and body size. A scientist is interested in testing whether there is a difference in average weight of Coastal Giant Salamanders between OG and CC. We will use a two-sample t-test to assess whether salamander size differs significantly between the two sites.
+
+::: {style="text-align:center;"}
+
+
+```{R, out.width = "55%", echo = F}
+knitr::include_graphics("../class3/img/salamander.jpg")
+```
+
+:::
+
+
+### Question 1
+Define $\mu_{OG}$ and $\mu_{CC}$ as the expectation of the weight of the salmanders from old-growth forest and from clear-cut area respectively. Which hypotheses should you consider to assess the validity of the previously mentioned claim:
+
+
+```{r, results='asis'}
+# Define questions choice and individual feedback for each question
+opts <- list(
+   answer =list(value = "\\( H_0: \\mu_{OG} = \\mu_{CC} \\), \\( H_a: \\mu_{OG} \\neq \\mu_{CC} \\)",
+       feedback = "Yes!"),
+  list(value = "\\( H_0: \\mu_{OG} \\neq \\mu_{CC} \\), \\( H_a: \\mu_{OG}= \\mu_{CC} \\)",
+       feedback = "Nope, the null hypothesis always contains the equality."),
+  list(
+    value = "\\( H_0: \\mu_{OG} = \\mu_{CC} \\), \\( H_a: \\mu_{OG} > \\mu_{CC} \\)",
+    feedback = "No, we want to test if there is a difference, not if one is larger than the other."
+  ),
+  list(value="\\( H_0: \\mu_{OG} = \\mu_{CC} \\), \\( H_a: \\mu_{OG} < \\mu_{CC} \\)",
+       feedback = "No, we want to test if there is a difference, not if one is larger than the other.")
+)
+# render QA environment
+render_q_a_env(opts)
+```
+
+### Question 2
+As previously mentioned, we want to compare the two locations (OG and CC) to assess whether the average size of Coastal Giant Salamanders differs between forest types. Using this information, please complete the code below to construct the variables of interest:
+
+:::: {.panel-tabset}
+
+## Exercise
+
+
+
+```{pyodide}
+#| exercise: ex_5
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df_salamander = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/salamander_weights.csv")
+df_salamander.head()
+
+# Variable of interest
+weight_CC = df_salamander["weight_g"][df_salamander["section"]==______]
+weight_OG = df_salamander["weight_g"][df_salamander["section"]==______]
+
+
+```
+
+## Hints
+
+::: { .hint exercise="ex_5"}
+Select the weights corresponding to each section using boolean indexing.
+:::
+
+## Solution
+
+::: { .solution exercise="ex_5" }
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df_salamander = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/salamander_weights.csv")
+df_salamander.head()
+
+# Variable of interest
+weight_CC = df_salamander["weight_g"][df_salamander["section"]=="CC"]
+weight_OG = df_salamander["weight_g"][df_salamander["section"]=="OG"]
+
+```
+
+:::
+
+::::
+
+
+### Question 3
+Next, we wish to visualize the empirical distribution of the data in order to select a suitable test. Complete the code below to construct boxplots comparing the two groups:
+
+:::: {.panel-tabset}
+
+## Exercise
+
+
+
+```{pyodide}
+#| exercise: ex_6
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df_salamander = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/salamander_weights.csv")
+df_salamander.head()
+
+# Variable of interest
+weight_CC = df_salamander["weight_g"][df_salamander["section"]==______]
+weight_OG = df_salamander["weight_g"][df_salamander["section"]==______]
+
+# Side-by-side boxplot
+plt.figure(figsize=(6,4))
+______([______, ______],    #<1>
+            labels=["CC", "OG"],
+            patch_artist=True,  # color the boxes
+            boxprops=dict(facecolor="lightblue", color="blue"),
+            medianprops=dict(color="red"))
+
+plt.ylabel("Weight (g)")
+plt.show()
+
+```
+
+## Hints
+
+::: { .hint exercise="ex_6"}
+Consider using the function `boxplot()` from `matplotlib.pyplot`.
+
+:::
+
+## Solution
+
+::: { .solution exercise="ex_6" }
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df_salamander = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/salamander_weights.csv")
+df_salamander.head()
+
+# Variable of interest
+weight_CC = df_salamander["weight_g"][df_salamander["section"]=="CC"]
+weight_OG = df_salamander["weight_g"][df_salamander["section"]=="OG"]
+
+# Side-by-side boxplot
+plt.figure(figsize=(6,4))
+plt.boxplot([weight_CC, weight_OG],    #<1>
+            labels=["CC", "OG"],
+            patch_artist=True,  # color the boxes
+            boxprops=dict(facecolor="lightblue", color="blue"),
+            medianprops=dict(color="red"))
+
+plt.ylabel("Weight (g)")
+plt.show()
+```
+
+:::
+
+::::
+
+
+### Question 4
+One of your colleague run the following test to compare the two locations (OG and CC):
+```{python, echo=TRUE}
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy import stats
+df_salamander = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/salamander_weights.csv")
+
+# Variable of interest
+weight_CC = df_salamander["weight_g"][df_salamander["section"]=="CC"]
+weight_OG = df_salamander["weight_g"][df_salamander["section"]=="OG"]
+# Perform independent two-sample t-test (assuming unequal variances)
+t_stat, p_val = stats.ttest_ind(weight_CC, weight_OG, equal_var=False)
+
+print(f"T-statistic: {t_stat:.3f}")
+print(f"p-value: {p_val:.3f}")
+```
+
+He concludes that there is no evidence from the data to suggest that the average weight of Coastal Giant Salamanders differs between the two locations. What do you think  of this procedure?
+
+
+```{r, results='asis'}
+# Define questions choice and individual feedback for each question
+
+opts <- list(
+list(
+value = "The procedure is appropriate. The t-test is robust to outliers and non-normality.",
+feedback = "No, the t-test is sensitive to outliers, which can distort the results."
+),
+answer = list(
+value = "The t-test may not be appropriate because there are outliers.",
+feedback = "Yes! The presence of outliers makes the t-test unreliable."
+),
+list(
+value = "The t-test is wrong because it assumes equal variances, which is not the case here.",
+feedback = "No, the argument `equal_var = FALSE` already performs Welch’s t-test, which does not assume equal variances."
+),
+list(
+value = "The test should compare the variances instead of the means.",
+feedback = "No. The goal is to compare the central tendency (mean or median), not the variability."
+)
+)
+# render QA environment
+render_q_a_env(opts)
+```
+
+ 
+
+
+### Question 5
+Based on the empirical distribution of the weights of salamander for the two locations, which of the following test appears to be the most suitable?
+
+```{r, results='asis'}
+# Define questions choice and individual feedback for each question
+opts <- list(
+  list(value = "Student's t-test.",
+       feedback = "The Student's t-test assumes that the variances of the two groups are the same. This is very hard to verify in practice and thus, it is preferable to avoid using this test."),
+  list(value = "Welch's t-test.",
+       feedback = "This is probably a suitable choice but one can argue that outliers are present in weight distributions so this may not be the optimal choice."),
+  answer = list(
+    value = "Wilcoxon test.",
+    feedback = "This is arguably the best choice for this problem. The Wilcoxon test compares medians and is less sensitive to extreme values."
+  )
+)
+# render QA environment
+render_q_a_env(opts)
+```
+
+### Question 6
+Complete the code below to test whether the average size of Coastal Giant Salamanders differs between the two locations (OG and CC) using the appropriate test you selected in Question 5.
+
+
+:::: {.panel-tabset}
+
+## Exercise
+
+```{pyodide}
+#| exercise: ex_7
+import pandas as pd
+import scipy.stats as stats
+
+df_salamander = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/salamander_weights.csv")
+df_salamander.head()
+
+# Variable of interest
+weight_CC = df_salamander["weight_g"][df_salamander["section"]=="CC"]
+weight_OG = df_salamander["weight_g"][df_salamander["section"]=="OG"]
+
+stat, p_value = ______(weight_CC, weight_OG)
+print(f"Mann-Whitney U test statistic: {stat}")
+print(f"p-value: {p_value}")
+
+```
+
+## Hints
+
+::: { .hint exercise="ex_7"}
+Consider using the function `mannwhitneyu()` from `scipy.stats`.
+
+:::
+
+## Solution
+
+::: { .solution exercise="ex_7" }
+
+```python
+import pandas as pd
+import scipy.stats as stats
+
+df_salamander = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/salamander_weights.csv")
+df_salamander.head()
+
+# Variable of interest
+weight_CC = df_salamander["weight_g"][df_salamander["section"]=="CC"]
+weight_OG = df_salamander["weight_g"][df_salamander["section"]=="OG"]
+
+stat, p_value = stats.mannwhitneyu(weight_CC, weight_OG)
+print(f"Mann-Whitney U test statistic: {stat}")
+print(f"P-value: {p_value}")
+```
+
+:::
+
+::::
+
+
+### Question 7
+Based on the p-value you obtained, what can you conclude (assuming $\alpha=0.05$)
+
+```{r, results='asis'}
+opts <- list(
+list(
+value = "We accept the null hypothesis that the median sizes are equal between OG and CC.",
+feedback = "No. We never accept the null hypothesis. A p-value below \\(0.05\\) leads us to reject it."
+),
+answer = list(
+value = "We reject the null hypothesis and conclude that the median salamander size differs between OG and CC.",
+feedback = "Yes! Since the p-value is below \\(0.05\\), we have evidence that the medians differ between the two groups."
+),
+list(
+value = "We conclude that salamanders from OG are heavier than those from CC.",
+feedback = "Not necessarily, the test only indicates that a difference exists, not its direction unless the alternative hypothesis was one-sided."
+),
+list(
+value = "We cannot conclude anything because the test only works for normal data.",
+feedback = "No, the Mann–Whitney U test is non-parametric and does not require normality."
+)
+)
+# render QA environment
+render_q_a_env(opts)
+```
+
+

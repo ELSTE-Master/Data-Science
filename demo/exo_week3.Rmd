@@ -1,0 +1,76 @@
+---
+title: "Untitled"
+output: html_document
+date: "2025-10-22"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In this section, we use data from Environmental Data Initiative (EDI) on Coastal Giant Salamanders collected in HJ Andrews Experimental Forest, Oregon. Measurements were taken in two sections of Mack Creek: one located in old-growth forest (OG) and the other in a clear-cut area (CC) harvested in 1963.
+
+Forest harvesting can influence stream conditions, which may affect salamander growth and body size. A scientist is interested in testing whether there is a difference in average weight of Coastal Giant Salamanders between OG and CC.
+
+We will use a two-sample t-test to assess whether salamander size differs significantly between the two sites.
+
+QUESTION WHAT ARE THE HYPOTHESES? (SEE 5.1)
+
+As previously mentioned, we want to compare the two locations (OG and CC) to assess whether the average size of Coastal Giant Salamanders differs between forest types. Using this information, please complete the code below to construct the variables of interest:
+
+CODE
+
+Next, we wish to visualize the empirical distribution of the data in order to select a suitable test. Complete the code below to construct boxplots comparing the two groups:
+
+CODE
+
+Based on this graph, which of the following test appears to be the most suitable?
+
+Student's t-test.
+
+Welch's t-test.
+
+Wilcoxon test.
+
+Based on the p-value you obtained, what can you conclude (assuming α=0.05)
+
+Accept the null hypothesis.
+
+Reject the alternative hypothesis.
+
+Reject the null and accept the alternative hypothesis.
+
+Fail to reject the null hypothesis.
+
+Therefore, we can now formulate a conclusion about the claim that the average size of Coastal Giant Salamanders differs between the two locations (OG and CC).
+
+
+Since we were able to accept the alternative hypothesis it is certain that the claim is correct.
+
+Since we were able to accept the alternative hypothesis we can't conclude anything.
+
+Since we were able the accept the null hypothesis it is plausible that the claim is correct.
+
+Since we were able to accept the alternative hypothesis it is plausible that the claim is correct.
+
+
+```{r}
+library(lterdatasampler)
+
+index1 = and_vertebrates$year > 2018
+index2 = and_vertebrates$species == "Coastal giant salamander"
+index3 = and_vertebrates$section == "CC"
+index4 = and_vertebrates$section == "OG"
+
+X = and_vertebrates[index1 & index2 & index3,]
+Y = and_vertebrates[index1 & index2 & index4,]
+
+boxplot(X$weight_g, Y$weight_g)
+t.test(X$weight_g, Y$weight_g)
+wilcox.test(X$weight_g, Y$weight_g)
+```
+
+
+REF
+
+Gregory, S.V. and I. Arismendi. 2020. Aquatic Vertebrate Population Study in Mack Creek, Andrews Experimental Forest, 1987 to present ver 14. Environmental Data Initiative. doi:10.6073/pasta/7c78d662e847cdbe33584add8f809165

@@ -1,0 +1,409 @@
+---
+title: "Exercises diet data"
+format: 
+  live-html:
+    theme: cosmo
+    css: ../assets/webex_2.css
+    include-after-body: ../assets/webex_2.js
+engine: knitr
+---
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
+
+
+
+
+
+
+
+```{r, echo = FALSE, results='asis'}
+knitr::opts_chunk$set(echo = FALSE)
+source("../assets/q_a_env.R")
+```
+
+<!-- MathJax for Rendering Math -->
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+
+
+In the previous section, we compared diets A and B. In this section, we will consider the difference of the average weight loss between diets A and C. In particular, we are interested in testing whether diet C leads to a larger average weight loss than diet A.
+
+### Question 1
+How to plot the data?
+
+Complete the code below to obtain the boxplot to compare the empirical distributions of the weight loss of the two diets:
+
+
+:::: {.panel-tabset}
+
+## Exercise
+
+
+
+```{pyodide}
+#| exercise: ex_1
+import pandas as pd
+import matplotlib.pyplot as plt
+
+diet = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/diet.csv")
+# compute weight loss
+diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
+
+# Variable of interest
+dietA = diet["weight.loss"][diet["diet.type"]=="A"]
+dietC = diet["weight.loss"][diet["diet.type"]=="C"]
+
+# Side-by-side boxplot
+plt.figure(figsize=(6,4))
+plt.______([dietA, dietC],
+            labels=["Diet A", "Diet C"],
+            patch_artist=True,  # color the boxes
+            boxprops=dict(facecolor="lightblue", color="blue"),
+            medianprops=dict(color="red"))
+
+plt.ylabel("Weight loss (kg)")
+plt.title("Comparison of Weight Loss for Diets A and C")
+plt.show()
+```
+
+## Hints
+
+::: { .hint exercise="ex_1"}
+Consider using the `boxplot()` function from `matplotlib.pyplot`.
+
+:::
+
+## Solution
+
+::: { .solution exercise="ex_1" }
+Use  the `boxplot()` function from `matplotlib.pyplot`:
+
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+diet = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/diet.csv")
+
+# compute weight loss
+diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
+
+# Variable of interest
+dietA = diet["weight.loss"][diet["diet.type"]=="A"]
+dietC = diet["weight.loss"][diet["diet.type"]=="C"]
+
+# Side-by-side boxplot
+plt.figure(figsize=(6,4))
+plt.boxplot([dietA, dietC],    #<1>
+            labels=["Diet A", "Diet C"],
+            patch_artist=True,  # color the boxes
+            boxprops=dict(facecolor="lightblue", color="blue"),
+            medianprops=dict(color="red"))
+
+plt.ylabel("Weight loss (kg)")
+plt.title("Comparison of Weight Loss for Diets A and C")
+plt.show()
+
+```
+1. Use `plt.boxplot()`
+:::
+
+::::
+
+### Question 2
+Which test should we use?
+
+Based on the graph you produce, which test appears to be the most appropriate to test if diet C leads to a larger average weight loss than diet A?
+
+
+```{r, results='asis'}
+# Define questions choice and individual feedback for each question
+opts <- list(
+  list(value = "Student's t-test.",
+       feedback = "The student t-test assumes that the variances of the two groups are the same. This is very hard to verify in practice and thus, it is preferable to avoid using this test."),
+  list(value = "Welch's t-test.",
+       feedback = "This is probably a suitable choice but one can argue that outliers are present in diet A so this may not be the optimal choice."),
+  answer = list(
+    value = "Wilcoxon test.",
+    feedback = "This is arguably the best choice for this problem."
+  )
+)
+# render QA environment
+render_q_a_env(opts)
+```
+
+### Question 3
+How to perform the test you selected?
+
+Complete the code below to test if diet C leads to a larger average weight loss than diet A. Remember that we are interested in testing if diet C leads to a larger weight loss than diet A.
+
+
+:::: {.panel-tabset}
+
+## Exercise
+
+
+
+```{pyodide}
+#| exercise: ex_2
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy import stats
+
+diet = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/diet.csv")
+# compute weight loss
+diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
+
+# Variable of interest
+dietA = diet["weight.loss"][diet["diet.type"]=="A"]
+dietC = diet["weight.loss"][diet["diet.type"]=="C"]
+
+# Wilcoxon rank-sum test (Mann–Whitney U)
+stat, p_value = ______(dietA, dietC, alternative =______)
+
+print("Wilcoxon statistic:", round(stat, 4))
+print("p-value:", round(p_value, 4))
+```
+
+## Hints
+
+::: { .hint exercise="ex_2"}
+Consider using the `mannwhitneyu()` function from `scipy.stats`. Make sure to specify the correct alternative hypothesis.
+
+:::
+
+## Solution
+
+::: { .solution exercise="ex_2" }
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy import stats
+
+diet = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/diet.csv")
+# compute weight loss
+diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
+
+# Variable of interest
+dietA = diet["weight.loss"][diet["diet.type"]=="A"]
+dietC = diet["weight.loss"][diet["diet.type"]=="C"]
+
+# Wilcoxon rank-sum test (Mann–Whitney U)
+stat, p_value = stats.mannwhitneyu(dietA, dietC, alternative ="less")
+
+print("Wilcoxon statistic:", round(stat, 4))
+print("p-value:", round(p_value, 4))
+
+```
+
+:::
+
+::::
+
+
+### Question 4
+What can we conclude?
+Based on the test you performed and considering a significance level of $5\%$, we can conclude that:
+
+
+```{r, results='asis'}
+# Define questions choice and individual feedback for each question
+opts <- list(
+  list(value = "We can reject the null hypothesis at the significance level of \\(5\\%\\) and conclude that diet A leads to a larger average weight loss than diet C.",
+       feedback = "Be careful with the order of the diets used in the statement."),
+  list(value = "We can be sure that diet C leads to a larger average weight loss than diet A.",
+       feedback = "Sadly, we can never be sure with statistical methods."),
+  answer = list(
+    value = "We can reject the null hypothesis at the significance level of \\(5\\%\\) and conclude that diet C leads to a larger average weight loss than diet A.",
+    feedback = "Yay! 👍"
+  ),
+  list(
+    value = "We cannot reject the null hypothesis at the significance level of \\(5\\%\\).",
+    feedback = "In this case the p-value is smaller than \\(5\\%\\) so we can reject the null hypothesis."
+  )
+)
+# render QA environment
+render_q_a_env(opts)
+```
+
+### Question 5
+Is diet A really so bad?
+
+A consultant who is hired by the company and promotes diet A is unhappy about your analysis as it indicates that diet C (promoted by a competing firm) is better in terms of weight loss. Thus the consultant constructs the following argument: to claim that a diet is more effective in terms of weight loss, we should have at least an average difference larger than one kg, otherwise the statistical difference is meaningless. Below we perform the test that the consultant is interested in:
+
+
+:::: {.panel-tabset}
+
+## Exercise
+
+
+
+```{pyodide}
+#| exercise: ex_3
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy import stats
+
+diet = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/diet.csv")
+# compute weight loss
+diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
+
+# Variable of interest
+dietA = diet["weight.loss"][diet["diet.type"]=="A"]
+dietC = diet["weight.loss"][diet["diet.type"]=="C"]
+
+
+stat, p_value = ______(______, ______, ______)
+print(f"Mann-Whitney U test statistic: {stat}")
+print(f"P-value: {p_value}")
+```
+
+## Hints
+
+::: { .hint exercise="ex_3"}
+Consider using the `mannwhitneyu()` function from `scipy.stats`. In `Python`, `scipy.stats.mannwhitneyu()` does not include an argument that allows to specify the hypothesized difference between group median, but you can reproduce the same test by **shifting one sample** by that hypothesized difference.  
+
+
+:::
+
+## Solution
+
+::: { .solution exercise="ex_3" }
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy import stats
+
+diet = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/diet.csv")
+# compute weight loss
+diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
+
+# Variable of interest
+dietA = diet["weight.loss"][diet["diet.type"]=="A"]
+dietC = diet["weight.loss"][diet["diet.type"]=="C"]
+
+
+stat, p_value = stats.mannwhitneyu(dietA+1, dietC, alternative="less")
+print(f"Mann-Whitney U test statistic: {stat}")
+print(f"P-value: {p_value}")
+```
+
+:::
+
+::::
+
+### Question 6
+Based on this test, we obtain a p-value of $5.747\%$ (which could make you think that the consultant picked one kg for a good reason...🤔). Therefore, the consultant claims that it is statistically proven that the two diets are equally effective in terms of weights loss. What do you think of this argument?
+
+
+
+```{r, results='asis'}
+# Define questions choice and individual feedback for each question
+opts <- list(
+  list(value = "The consultant showed that the average difference in terms of weight loss is equal to one kg, so his claim is incorrect.",
+       feedback = "Nope, we can never 'accept' the null."),
+  list(value = "The consultant is correct, there is indeed not much difference between the two diets.",
+       feedback = "Nope!"),
+  answer = list(
+    value = "The claim of the consultant is incorrect for the following reasons. First, there is no good reason to compare a difference of one kg and second, we can never accept the null hypothesis!",
+    feedback = "Yay! 👍"
+  ),
+  list(
+    value = "The consultant showed that the average difference in terms of weight loss is equal to one kg, so his claim is correct.",
+    feedback = "Nope, we can never 'accept' the null."
+  )
+)
+# render QA environment
+render_q_a_env(opts)
+```
+
+### Question 7
+The competing company that promotes diet C is unhappy about the claims made by the consultant. So they hire their own consultant, who selects a difference of $950$ grams. Please complete the following test this second consultant wants to perform:
+
+:::: {.panel-tabset}
+
+## Exercise
+
+
+
+```{pyodide}
+#| exercise: ex_4
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy import stats
+
+diet = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/diet.csv")
+# compute weight loss
+diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
+
+# Variable of interest
+dietA = diet["weight.loss"][diet["diet.type"]=="A"]
+dietC = diet["weight.loss"][diet["diet.type"]=="C"]
+
+
+stat, p_value = ______(______, ______, ______)
+print(f"Mann-Whitney U test statistic: {stat}")
+print(f"P-value: {p_value}")
+
+```
+
+## Hints
+
+::: { .hint exercise="ex_4"}
+Consider using the `mannwhitneyu()` function from `scipy.stats`. In `Python`, `scipy.stats.mannwhitneyu()` does not include an argument that allows to specify the hypothesized difference between group median, but you can reproduce the same test by **shifting one sample** by that hypothesized difference.  
+
+:::
+
+## Solution
+
+::: { .solution exercise="ex_4" }
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy import stats
+
+diet = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/diet.csv")
+# compute weight loss
+diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
+
+# Variable of interest
+dietA = diet["weight.loss"][diet["diet.type"]=="A"]
+dietC = diet["weight.loss"][diet["diet.type"]=="C"]
+
+
+stat, p_value = stats.mannwhitneyu(dietA+0.95, dietC, alternative="less")
+print(f"Mann-Whitney U test statistic: {stat}")
+print(f"P-value: {p_value}")
+```
+
+:::
+
+::::
+
+
+### Question 8
+Then, the (second) consultant claims that diet C leads to an average weight loss that is significantly larger by $950$ grams than diet A. What do you think of this argument:
+
+
+
+```{r, results='asis'}
+# Define questions choice and individual feedback for each question
+opts <- list(
+  list(value = "The claim is correct because the p-value is smaller than 5%.",
+       feedback = "In some sense, this answer is correct... but why did the consultant pick 950 grams?"),
+  list(value = "The claim is incorrect because we can't accept the null hypothesis.",
+       feedback = "In this case, we can reject the null."),
+  answer = list(
+    value = "The claim is incorrect because the hypothesis was constructed after looking at the known results.",
+    feedback = "Yes, this is an example of HARKing, an acronym coined by Norbert Kerr that refers to the questionable practice of hypothesizing after the results are known. Nevertheless, this is a very common practice...😅"
+  )
+)
+# render QA environment
+render_q_a_env(opts)
+```
