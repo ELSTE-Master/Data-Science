@@ -573,19 +573,17 @@ print("p-value:", round(p_value, 4))
 
 - Step 1: <span style="color:#eb078e;">Define hypotheses </span>$H_0: \mu_A = \mu_B, \quad H_a: \mu_A \neq \mu_B$
 
-
-\vspace{1cm}
-
+<br>
 
 - Step 2: <span style="color:#eb078e;">Define $\color{#eb078e}{\alpha}$</span> We consider $\alpha = 5\%$
 
-\vspace{1cm}
+<br>
 
 - Step 3: <span style="color:#eb078e;">Compute p-value</span>  
 Welch's *t*-test appears suitable in this case, and therefore, we obtain $\text{p-value} = 96.22\%$
 (see Python output tab for details).
 
-\vspace{1cm}
+<br>
 
 - Step 4: <span style="color:#eb078e;">Conclusion</span>  
 We have $\text{p-value} > \alpha$

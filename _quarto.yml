@@ -73,6 +73,9 @@ format:
     toc-expand: 1      # how much to auto-expand initially
     resources:
     - class3/class_3_slides.pdf
+    - class1/class_1_slides_intro.pdf
+    - class1/class_1_slides_pandas.pdf
+    - class2/class_2_slides_EDA.pdf
   # pdf:
   #   documentclass: scrreprt
   # revealjs: default # slides output
