@@ -1,0 +1,85 @@
+---
+title: "Example reading data: estimation"
+format: 
+  live-html:
+    theme: cosmo
+    css: ../assets/webex_2.css
+    include-after-body: ../assets/webex_2.js
+engine: knitr
+---
+
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
+
+
+In this exercise, we will replicate the analysis of the `reading` dataset
+presented in the lectures slides. Our first step is to load the data . We can load the data as follows:
+
+```{python, echo=TRUE}
+# Import data
+import pandas as pd
+reading = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/reading.csv")
+```
+
+
+We can now take a look at the data.
+```{python, echo=TRUE}
+# Import data
+n = 5
+print(reading.head(n)) #print the first n rows of the dataset
+```
+
+# Comparing groups
+
+To compare the two groups (i.e. `Control` and `Treatment`), we can start by comparing the empirical distributions using boxplots similarly to the graph presented in slide 2. For this purpose, we will construct two new variables, called `control` and `treatment`, which correspond to the scores in these groups. This can be done as follows:
+
+
+```{python, echo=TRUE}
+control = reading['score'][reading['group'] == 'Control']
+treatment = reading['score'][reading['group'] == 'Treatment']
+```
+
+# Representing the distribution of the score between groups
+
+Using these variables we can easily represent the conditional distribution of the score as follows:
+
+```{python, echo=TRUE}
+import matplotlib.pyplot as plt
+
+# Create the boxplot
+plt.figure(figsize=(6, 5))
+plt.boxplot([control, treatment], labels=['Control', 'Treatment'])
+
+# Add labels and title
+plt.ylabel('Score')
+plt.title('Comparison of Reading Scores by Group')
+
+# Show the plot
+plt.show()
+```
+
+
+
+# Modelling 
+
+As suggested in slide 9, a possible model is given by:
+$$
+\text { Score }_i=\beta_0+\beta_1 \text { Group }_i+\beta_2 \text { Age }_i+\epsilon_i, \quad \epsilon_i \stackrel{i i d}{\sim} \mathcal{N}\left(0, \sigma^2\right)
+$$
+We will refer to this model as "Model 1". The parameters of this first model can be estimated using the function `smf.ols` as follows:
+
+```{python, echo=TRUE}
+import statsmodels.formula.api as smf
+
+# Fit the linear model
+mod1 = smf.ols('score ~ group + age', data=reading).fit()
+```
+
+
+The summary of the fitted model can then be printed with:
+
+```{python}
+# Display the summary
+mod1.summary()
+```

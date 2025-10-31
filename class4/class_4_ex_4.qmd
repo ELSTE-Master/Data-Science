@@ -1,0 +1,39 @@
+---
+title: "Example reading data: improving our model"
+format: 
+  live-html:
+    theme: cosmo
+    css: ../assets/webex_2.css
+    include-after-body: ../assets/webex_2.js
+engine: knitr
+---
+
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
+
+
+We have seen in the previous section that our model didn't appear suitable for our data. In the lecture slides, we propose the following alternative model:
+
+$$
+\text { Score }_i=\beta_0+\beta_1 \text { Group }_i+\beta_2 \text { Age }_i+\beta_3 \text { Group }_i \text { Age }_i+\epsilon_i, \quad \epsilon_i \stackrel{i i d}{\sim} \mathcal{N}\left(0, \sigma^2\right)
+$$
+
+The parameters of this second model can be estimated as follows:
+
+
+
+```{python, echo=TRUE}
+import pandas as pd
+import matplotlib.pyplot as plt
+import statsmodels.formula.api as smf
+import numpy as np
+
+reading = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/reading.csv")
+
+# Fit the linear model: score ~ group + age
+mod2 = smf.ols('score ~ group*age', data=reading).fit()
+mod2.summary()
+
+```
+
