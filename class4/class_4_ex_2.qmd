@@ -67,7 +67,7 @@ plt.show()
 ```{python, echo=TRUE}
 # Fit the linear model: score ~ group + age
 mod1 = smf.ols('score ~ group + age', data=reading).fit()
-mod1.summary()
+print(mod1.summary())
 
 
 ```

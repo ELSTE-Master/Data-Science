@@ -1,0 +1,122 @@
+---
+title: "Exercises ice duration data"
+format: 
+  live-html:
+    theme: cosmo
+    css: ../assets/webex_2.css
+    include-after-body: ../assets/webex_2.js
+engine: knitr
+---
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
+
+
+
+
+
+
+
+```{r, echo = FALSE, results='asis'}
+knitr::opts_chunk$set(echo = FALSE)
+source("../assets/q_a_env.R")
+```
+
+<!-- MathJax for Rendering Math -->
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+
+---
+
+In this exercise ...
+
+According to the EPA, lake ice duration can be an indicator of climate change. This is because lake ice is dependent on several environmental factors, so changes in these factors will influence the formation of ice on top of lakes. As a result, the study and analysis of lake ice formation can inform scientists about how quickly the climate is changing, and are critical to minimizing disruptions to lake ecosystems. We can examine the ice duration of Lake Mendota, Lake Monona, and Lake Wingra, three lakes in the Madison, WI area. The dataset is extracted from the `and_vertebrates` dataset of the `R` package `lterdatasampler`.
+
+
+
+::: {style="text-align:center;"}
+
+
+```{R, out.width = "55%", echo = F}
+knitr::include_graphics("../class3/img/salamander.jpg")
+```
+
+:::
+
+
+### Question 1
+Define $\mu_{OG}$ and $\mu_{CC}$ as the expectation of the weight of the salmanders from old-growth forest and from clear-cut area respectively. Which hypotheses should you consider to assess the validity of the previously mentioned claim:
+
+
+```{r, results='asis'}
+# Define questions choice and individual feedback for each question
+opts <- list(
+   answer =list(value = "\\( H_0: \\mu_{OG} = \\mu_{CC} \\), \\( H_a: \\mu_{OG} \\neq \\mu_{CC} \\)",
+       feedback = "Yes!"),
+  list(value = "\\( H_0: \\mu_{OG} \\neq \\mu_{CC} \\), \\( H_a: \\mu_{OG}= \\mu_{CC} \\)",
+       feedback = "Nope, the null hypothesis always contains the equality."),
+  list(
+    value = "\\( H_0: \\mu_{OG} = \\mu_{CC} \\), \\( H_a: \\mu_{OG} > \\mu_{CC} \\)",
+    feedback = "No, we want to test if there is a difference, not if one is larger than the other."
+  ),
+  list(value="\\( H_0: \\mu_{OG} = \\mu_{CC} \\), \\( H_a: \\mu_{OG} < \\mu_{CC} \\)",
+       feedback = "No, we want to test if there is a difference, not if one is larger than the other.")
+)
+# render QA environment
+render_q_a_env(opts)
+```
+
+### Question 2
+As previously mentioned, we want to compare the two locations (OG and CC) to assess whether the average size of Coastal Giant Salamanders differs between forest types. Using this information, please complete the code below to construct the variables of interest:
+
+:::: {.panel-tabset}
+
+## Exercise
+
+
+
+```{pyodide}
+#| exercise: ex_5
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df_salamander = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/salamander_weights.csv")
+df_salamander.head()
+
+# Variable of interest
+weight_CC = df_salamander["weight_g"][df_salamander["section"]==______]
+weight_OG = df_salamander["weight_g"][df_salamander["section"]==______]
+
+
+```
+
+## Hints
+
+::: { .hint exercise="ex_5"}
+Select the weights corresponding to each section using boolean indexing.
+:::
+
+## Solution
+
+::: { .solution exercise="ex_5" }
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df_salamander = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/salamander_weights.csv")
+df_salamander.head()
+
+# Variable of interest
+weight_CC = df_salamander["weight_g"][df_salamander["section"]=="CC"]
+weight_OG = df_salamander["weight_g"][df_salamander["section"]=="OG"]
+
+```
+
+:::
+
+::::
+
+

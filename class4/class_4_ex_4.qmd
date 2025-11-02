@@ -28,12 +28,184 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import statsmodels.formula.api as smf
 import numpy as np
+import scipy.stats as stats
 
 reading = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/reading.csv")
 
 # Fit the linear model: score ~ group + age
 mod2 = smf.ols('score ~ group*age', data=reading).fit()
-mod2.summary()
+print(mod2.summary())
+```
+
+
+To assess its adequacy, we compare the predictions and data as follows:
+
+
+
+```{python, echo=TRUE}
+age_to_predict = np.arange(6, 13)
+data_control = pd.DataFrame({"age": age_to_predict, "group": "Control"})
+data_treatment = pd.DataFrame({"age": age_to_predict, "group": "Treatment"})
+
+prediction_control = mod2.predict(data_control)
+prediction_treatment = mod2.predict(data_treatment)
+
+# Define custom colors
+colors = {
+    'Control': '#c4bedf',    # soft purple-blue
+    'Treatment': '#f6aed5'   # soft pink
+}
+
+# Map colors to groups
+group_col = reading["group"].map(colors)
+
+plt.figure(figsize=(7, 5))
+plt.scatter(reading["age"], reading["score"], c=group_col, label=None)
+plt.plot(age_to_predict, prediction_control, color=colors['Control'], label="Control")
+plt.plot(age_to_predict, prediction_treatment, color=colors['Treatment'], label="Treatment")
+plt.xlabel("Age")
+plt.ylabel("Score")
+plt.legend()
+plt.title("Model 2 Predictions vs Data")
+plt.show()
+```
+
+Based on this graph, our second model appears to be more adequate than our first model. We can also compare the AIC of these two models as follows:
+
+```{python, echo=FALSE}
+mod1 = smf.ols('score ~ group + age', data=reading).fit()
+```
+
+
+```{python, echo=TRUE}
+#  Compare AICs of Model 1 and Model 2
+print("AIC(mod1):", round(mod1.aic,2))
+print("AIC(mod2):", round(mod2.aic,2))
+```
+
+
+This approach also suggests that the second model is more adequate. Similarly to what we did previously, we can construct the model diagnostic graphs as follows:
+
+
+```{python, echo=TRUE}
+import scipy.stats as stats
+#  residuals vs fitted values for Model 2
+colors = {
+    'Control': '#c4bedf',
+    'Treatment': '#f6aed5'
+}
+group_col = reading["group"].map(colors)
+
+plt.figure(figsize=(6, 5))
+plt.scatter(mod2.fittedvalues, mod2.resid, c=group_col)
+plt.xlabel("Fitted values")
+plt.ylabel("Residuals")
+plt.title("Residuals vs Fitted (Model 2)")
+plt.show()
+
+#  Q–Q plot for residuals (Model 2) 
+plt.figure(figsize=(6, 5))
+(osm, osr), (slope, intercept, r) = stats.probplot(mod2.resid, dist="norm")
+# Black dots
+plt.scatter(osm, osr, color='black', s=20)
+
+# Black reference line
+plt.plot(osm, slope * osm + intercept, color='black', linewidth=1.5)
+plt.title("Normal Q–Q Plot of Residuals")
+plt.xlabel("Theoretical Quantiles")
+plt.ylabel("Sample Quantiles")
+plt.show()
+```
+
+
+Both graphs suggest that the model is a reasonable approximation for the data we considering. However, in the lecture slides we consider a third model which is given by:
+
+
+$$
+\text { Score }_i=\beta_0+\beta_1\left(\text { Age }_i-6\right)+\beta_2 \text { Group }_i\left(\text { Age }_i-6\right)+\epsilon_i, \quad \epsilon_i \stackrel{i i d}{\sim} \mathcal{N}\left(0, \sigma^2\right)
+$$
+
+To consider this model we first need to construct the variable "Age - 6", which can be done as follows:
+
+
+```{python, echo=TRUE}
+# Create the variable age_minus_6
+reading["age_minus_6"] = reading["age"] - 6
+```
+
+
+Then, the parameters of this third model can be estimated as follows:
+
+```{python, echo=TRUE}
+# Fit the model
+mod3 = smf.ols("score ~ age_minus_6 + group:age_minus_6", data=reading).fit()
+print(mod3.summary())
+```
+
+
+To assess the model adequacy, we compare the predictions and data as follows (note that this model is based on `age_minus_6` and not `age`):
+
+```{python, echo=TRUE}
+#  Compare predictions and data 
+age_to_predict = np.arange(0, 7)
+data_control = pd.DataFrame({
+    "age_minus_6": age_to_predict,
+    "group": "Control"
+})
+data_treatment = pd.DataFrame({
+    "age_minus_6": age_to_predict,
+    "group": "Treatment"
+})
+
+prediction_control = mod3.predict(data_control)
+prediction_treatment = mod3.predict(data_treatment)
+
+plt.figure(figsize=(7, 5))
+plt.scatter(reading["age"], reading["score"], c=group_col, label=None)
+plt.plot(age_to_predict + 6, prediction_control, color=colors['Control'], label="Control")
+plt.plot(age_to_predict + 6, prediction_treatment, color=colors['Treatment'], label="Treatment")
+plt.xlabel("Age")
+plt.ylabel("Score")
+plt.legend()
+plt.title("Model 3 Predictions vs Data")
+plt.show()
+```
+
+
+Based on this graph, our third model appears to be a better fit compared to the second model. We can also compare the AIC of the models we have considered as follows:
+
+```{python, echo=TRUE}
+# Compare AICs of the three models
+print("AIC(mod1):", round(mod1.aic,2))
+print("AIC(mod2):", round(mod2.aic,2))
+print("AIC(mod3):", round(mod3.aic,2))
+```
+
+
+This approach suggests that the third model is the most adequate among all three models we have considered. Finally, we can construct the model diagnostic graphs as follows:
+
+```{python, echo=TRUE}
+#  Diagnostic plots for Model 3 
+plt.figure(figsize=(6, 5))
+plt.scatter(mod3.fittedvalues, mod3.resid, c=group_col)
+plt.xlabel("Fitted values")
+plt.ylabel("Residuals")
+plt.title("Residuals vs Fitted (Model 3)")
+plt.show()
+
+#  QQ plot for residuals of Model 3 
+plt.figure(figsize=(6, 5))
+(osm, osr), (slope, intercept, r) = stats.probplot(mod3.resid, dist="norm")
+# Black dots
+plt.scatter(osm, osr, color='black', s=20)
+
+# Black reference line
+plt.plot(osm, slope * osm + intercept, color='black', linewidth=1.5)
+plt.title("Normal Q–Q Plot of Residuals")
+plt.xlabel("Theoretical Quantiles")
+plt.ylabel("Sample Quantiles")
+plt.show()
+
 
 ```
 

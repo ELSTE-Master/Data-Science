@@ -79,9 +79,17 @@ This graph clearly illustrates the limitation of our model. We can also construc
 
 ```{python}
 import scipy.stats as stats
+(osm, osr), (slope, intercept, r) = stats.probplot(residuals, dist="norm")
 plt.figure(figsize=(6, 5))
-stats.probplot(residuals, dist="norm", plot=plt)
+
+# Black dots
+plt.scatter(osm, osr, color='black', s=20)
+
+# Black reference line
+plt.plot(osm, slope * osm + intercept, color='black', linewidth=1.5)
 plt.title("Normal Q–Q Plot of Residuals")
+plt.xlabel("Theoretical Quantiles")
+plt.ylabel("Sample Quantiles")
 plt.show()
 
 ```

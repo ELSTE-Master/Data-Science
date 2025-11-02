@@ -49,6 +49,8 @@ website:
           - class4/class_4_ex_2.qmd
           - class4/class_4_ex_3.qmd
           - class4/class_4_ex_4.qmd
+          - class4/class_4_ex_5.qmd
+          - class4/class_4_ex_6.qmd
       - section: "Appendices"
         contents:
           - appendices/setup_vscode.qmd

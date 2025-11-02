@@ -30,7 +30,7 @@ n = 5
 print(reading.head(n)) #print the first n rows of the dataset
 ```
 
-# Comparing groups
+## Comparing groups
 
 To compare the two groups (i.e. `Control` and `Treatment`), we can start by comparing the empirical distributions using boxplots similarly to the graph presented in slide 2. For this purpose, we will construct two new variables, called `control` and `treatment`, which correspond to the scores in these groups. This can be done as follows:
 
@@ -40,7 +40,7 @@ control = reading['score'][reading['group'] == 'Control']
 treatment = reading['score'][reading['group'] == 'Treatment']
 ```
 
-# Representing the distribution of the score between groups
+## Representing the distribution of the score between groups
 
 Using these variables we can easily represent the conditional distribution of the score as follows:
 
@@ -61,7 +61,7 @@ plt.show()
 
 
 
-# Modelling 
+## Modelling 
 
 As suggested in slide 9, a possible model is given by:
 $$
@@ -81,5 +81,5 @@ The summary of the fitted model can then be printed with:
 
 ```{python}
 # Display the summary
-mod1.summary()
+print(mod1.summary())
 ```
