@@ -1,9 +1,19 @@
 library(lterdatasampler)
 data("ntl_icecover")
 ntl_icecover
+unique(ntl_icecover$lakeid)
 plot(ice_duration ~ year, data = ntl_icecover, col = lakeid)
 unique(ntl_icecover$lakeid)
 table(ntl_icecover$lakeid)
+
+sum(is.na(ntl_icecover))
+df = na.omit(ntl_icecover)
+
+# save in csv
+write.csv(df, "Data/df_icecover.csv", row.names = FALSE)
+
+unique(df$lakeid)
+
 # use ggplot2 do a plot of ice_duration vs year colored by lakeid
 library(ggplot2)
 ggplot(ntl_icecover, aes(x = year, y = ice_duration, color = lakeid)) +
