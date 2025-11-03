@@ -403,7 +403,7 @@ import pandas as pd
 import statsmodels.formula.api as smf
 
 # Import data (if you haven't already)
-reading = pd.read_csv("/Users/filipposalmaso/Documents/Temporary_Stuff/Data-Science_copy/reading.csv")
+reading = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/reading.csv")
 
 # Fit a linear regression model
 mod2 = smf.ols(formula="score ~ group*age", data=reading).fit()
