@@ -28,48 +28,31 @@ source("../assets/q_a_env.R")
 </script>
 
 
----
 
-In this exercise ...
-
-According to the EPA, lake ice duration can be an indicator of climate change. This is because lake ice is dependent on several environmental factors, so changes in these factors will influence the formation of ice on top of lakes. As a result, the study and analysis of lake ice formation can inform scientists about how quickly the climate is changing, and are critical to minimizing disruptions to lake ecosystems. We can examine the ice duration of Lake Mendota, Lake Monona, and Lake Wingra, three lakes in the Madison, WI area. The dataset is extracted from the `and_vertebrates` dataset of the `R` package `lterdatasampler`.
-
-
+In this exercise we will model lake ice duration data using linear regression models. According to the United States Environmental Protection Agency, lake ice duration can be an indicator of climate change. This is because lake ice is dependent on several environmental factors, so changes in these factors will influence the formation of ice on top of lakes. As a result, the study and analysis of lake ice formation can inform scientists about how quickly the climate is changing, and are critical to minimizing disruptions to lake ecosystems. We can examine the ice duration of Lake Mendota and Lake Monona in the Madison, WI area. The dataset is extracted from the `ntl_icecover` dataset of the `R` package `lterdatasampler`.
 
 ::: {style="text-align:center;"}
 
 
-```{R, out.width = "55%", echo = F}
-knitr::include_graphics("../class3/img/salamander.jpg")
+```{R, out.width = "100%", echo = F}
+knitr::include_graphics("../class4/img/lakeice.jpg")
 ```
 
 :::
 
 
-### Question 1
-Define $\mu_{OG}$ and $\mu_{CC}$ as the expectation of the weight of the salmanders from old-growth forest and from clear-cut area respectively. Which hypotheses should you consider to assess the validity of the previously mentioned claim:
-
-
-```{r, results='asis'}
-# Define questions choice and individual feedback for each question
-opts <- list(
-   answer =list(value = "\\( H_0: \\mu_{OG} = \\mu_{CC} \\), \\( H_a: \\mu_{OG} \\neq \\mu_{CC} \\)",
-       feedback = "Yes!"),
-  list(value = "\\( H_0: \\mu_{OG} \\neq \\mu_{CC} \\), \\( H_a: \\mu_{OG}= \\mu_{CC} \\)",
-       feedback = "Nope, the null hypothesis always contains the equality."),
-  list(
-    value = "\\( H_0: \\mu_{OG} = \\mu_{CC} \\), \\( H_a: \\mu_{OG} > \\mu_{CC} \\)",
-    feedback = "No, we want to test if there is a difference, not if one is larger than the other."
-  ),
-  list(value="\\( H_0: \\mu_{OG} = \\mu_{CC} \\), \\( H_a: \\mu_{OG} < \\mu_{CC} \\)",
-       feedback = "No, we want to test if there is a difference, not if one is larger than the other.")
-)
-# render QA environment
-render_q_a_env(opts)
+You can load the data as follows:
+```{python, echo=TRUE}
+import pandas as pd
+import matplotlib.pyplot as plt
+df_icecover = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/df_icecover.csv")
+df_icecover.head()
 ```
 
-### Question 2
-As previously mentioned, we want to compare the two locations (OG and CC) to assess whether the average size of Coastal Giant Salamanders differs between forest types. Using this information, please complete the code below to construct the variables of interest:
+## Question 1
+Complete the code below to visualize the ice duration over the years for both lakes.
+
+
 
 :::: {.panel-tabset}
 
@@ -78,40 +61,273 @@ As previously mentioned, we want to compare the two locations (OG and CC) to ass
 
 
 ```{pyodide}
-#| exercise: ex_5
+#| exercise: ex_1
 import pandas as pd
 import matplotlib.pyplot as plt
 
-df_salamander = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/salamander_weights.csv")
-df_salamander.head()
+df_icecover = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/df_icecover.csv")
 
-# Variable of interest
-weight_CC = df_salamander["weight_g"][df_salamander["section"]==______]
-weight_OG = df_salamander["weight_g"][df_salamander["section"]==______]
+# Filter lakes
+df_lake_mendota = df_icecover[df_icecover['lakeid'] == ______]
+df_lake_monona  = ______[df_icecover['lakeid'] == ______]
 
+# Colors
+mycol = ["#6a5acd", "#e64173"]
+
+# Plot
+plt.figure(figsize=(8,5))
+______(df_lake_mendota['year'], df_lake_mendota['ice_duration'], 'o', color=mycol[0], label='Mendota')
+______(df_lake_monona['year'], df_lake_monona['ice_duration'], 'o', color=mycol[1], label='Monona')
+
+plt.xlabel("Year")
+plt.ylabel("Ice duration (days)")
+plt.title("Ice duration over years")
+plt.legend(loc="upper right")
+plt.xticks(rotation=45)
+plt.grid(True)
+plt.show()
+```
+
+## Hints
+
+::: { .hint exercise="ex_1"}
+Select the observations corresponding to each lake using boolean indexing and plot the data using `matplotlib`.
+:::
+
+## Solution
+
+::: { .solution exercise="ex_1" }
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+df_icecover = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/df_icecover.csv")
+
+# Filter lakes
+df_lake_mendota = df_icecover[df_icecover['lakeid'] == "Lake Mendota"]
+df_lake_monona  = df_icecover[df_icecover['lakeid'] == "Lake Monona"]
+
+# Colors
+mycol = ["#6a5acd", "#e64173"]
+
+# Plot
+plt.figure(figsize=(8,5))
+plt.plot(df_lake_mendota['year'], df_lake_mendota['ice_duration'], 'o', color=mycol[0], label='Mendota')
+plt.plot(df_lake_monona['year'], df_lake_monona['ice_duration'], 'o', color=mycol[1], label='Monona')
+
+plt.xlabel("Year")
+plt.ylabel("Ice duration (days)")
+plt.title("Ice duration over years")
+plt.legend(loc="upper right")
+plt.xticks(rotation=45)
+plt.grid(True)
+plt.show()
+```
+
+:::
+
+::::
+
+
+
+
+
+### Question 2
+One of your colleague proposes to consider the following models to analyze the ice duration data:
+$$
+\text{IceCover}_i = \beta_0 + \beta_1 \text{Year}_i + \epsilon_i
+$$
+He estimates the model and obtain the following results:
+```{python, echo=TRUE}
+import pandas as pd
+import matplotlib.pyplot as plt
+import statsmodels.formula.api as smf
+import numpy as np
+
+df_icecover = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/df_icecover.csv")
+mod1 = smf.ols("ice_duration ~ year", data=df_icecover).fit()
+print(mod1.summary())
+```
+
+He wants to test if the ice duration is reducing over the years, regardless of the lake. What are the correct hyptheses to test this claim?
+
+```{r, results='asis'}
+# Define questions choice and individual feedback for each question
+opts <- list(
+  answer = list(
+    value = "\\( H_0: \\beta_1 = 0 \\), \\( H_a: \\beta_1 < 0 \\)",
+    feedback = "Yes! The alternative hypothesis tests if ice duration decreases over the years."
+  ),
+  list(
+    value = "\\( H_0: \\beta_1 = 0 \\), \\( H_a: \\beta_1 > 0 \\)",
+    feedback = "No, this would test if ice duration is increasing over the years."
+  ),
+  list(
+    value = "\\( H_0: \\beta_1 = 0 \\), \\( H_a: \\beta_1 \\neq 0 \\)",
+    feedback = "This tests for any change (increase or decrease), not specifically a reduction."
+  ),
+  list(
+    value = "\\( H_0: \\beta_1 \\neq 0 \\), \\( H_a: \\beta_1 = 0 \\)",
+    feedback = "No, the null hypothesis should always contain equality."
+  )
+)
+# render QA environment
+render_q_a_env(opts)
+```
+
+
+### Question 3
+How do you interpret the coefficent associated with $\beta_0$ in `mod1`?
+
+```{r, results='asis'}
+# Define questions choice and individual feedback for each question
+opts <- list(
+  answer = list(
+    value = "The estimated ice duration when year is \\(0\\).",
+    feedback = "Correct! \\( \\beta_0 \\) represents the estimated ice duration when year is \\(0\\)."
+  ),
+  list(
+    value = "The estimated ice duration in the first year of observation.",
+    feedback = "No, \\( \\beta_0 \\) corresponds to year \\(0\\), not the first year of observation."
+  ),
+  list(
+    value = "The average ice duration across all years.",
+    feedback = "No, \\( \\beta_0 \\) is not an average, it is the intercept of the regression line."
+  ),
+  list(
+    value = "The change in ice duration for a one-year increase.",
+    feedback = "No, this describes \\( \\beta_1 \\), not \\( \\beta_0 \\)."
+  )
+)
+# render QA environment
+render_q_a_env(opts)
+```
+
+
+### Question 4
+A second colleague of yours proposes to consider the following model to analyze the ice duration data:
+$$
+\text{IceCover}_i = \beta_0 + \beta_1 \text{Year}_i + \beta_2 \text{LakeID}_i + \epsilon_i
+$$
+More precisely, she wants to test if the ice duration is reducing over the years, while including an intercept for each lake. 
+
+She estimates the model and obtain the following results:
+```{python, echo=TRUE}
+import pandas as pd
+import matplotlib.pyplot as plt
+import statsmodels.formula.api as smf
+import numpy as np
+df_icecover = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/df_icecover.csv")
+mod2 = smf.ols("ice_duration ~ year + lakeid", data=df_icecover).fit()
+print(mod2.summary())
+```
+
+
+Complete the following code to plot the data points and the regression lines for both lakes.
+
+:::: {.panel-tabset}
+
+## Exercise
+```{pyodide}
+#| exercise: ex_2
+import pandas as pd
+import matplotlib.pyplot as plt
+import statsmodels.formula.api as smf
+import numpy as np
+
+# Load data
+df_icecover = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/df_icecover.csv")
+
+# Fit linear model with lake-specific intercepts
+mod2 = smf.ols("ice_duration ~ year + lakeid", data=df_icecover).fit()
+print(mod2.summary())
+
+# Separate lakes
+df_mendota = df_icecover[df_icecover['lakeid'] == "Lake Mendota"]
+df_monona  = df_icecover[df_icecover['lakeid'] == "Lake Monona"]
+
+# Colors
+colors = ["#6a5acd", "#e64173"]
+
+# Plot data points
+plt.figure(figsize=(8,5))
+plt.scatter(df_mendota['year'], df_mendota['ice_duration'], color=colors[0], label="Mendota")
+plt.scatter(df_monona['year'], df_monona['ice_duration'], color=colors[1], label="Monona")
+
+# Prepare years for predictions
+years = np.linspace(df_icecover['year'].min(), df_icecover['year'].max(), 200)
+
+# Predict for Mendota
+pred_mendota = mod2.______(pd.DataFrame({'year': years, 'lakeid': 'Lake Mendota'}))
+plt.plot(years, pred_mendota, color=colors[0], linestyle='-', linewidth=2)
+
+# Predict for Monona
+pred_monona = mod2.______(pd.DataFrame({'year': years, 'lakeid': 'Lake Monona'}))
+plt.plot(years, pred_monona, color=colors[1], linestyle='-', linewidth=2)
+
+# Labels, legend, title
+plt.xlabel("Year")
+plt.ylabel("Ice duration (days)")
+plt.title("Ice duration over years with regression lines")
+plt.legend()
+plt.grid(True)
+plt.show()
 
 ```
 
 ## Hints
 
-::: { .hint exercise="ex_5"}
-Select the weights corresponding to each section using boolean indexing.
+::: { .hint exercise="ex_2"}
+Use the method `predict` of the fitted model to obtain the predicted values for each lake over a range of years, and plot these predictions as lines on top of the scatter plot of the data points.
 :::
 
 ## Solution
 
-::: { .solution exercise="ex_5" }
+::: { .solution exercise="ex_2" }
 
 ```python
 import pandas as pd
 import matplotlib.pyplot as plt
+import statsmodels.formula.api as smf
+import numpy as np
 
-df_salamander = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/salamander_weights.csv")
-df_salamander.head()
+# Load data
+df_icecover = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/df_icecover.csv")
 
-# Variable of interest
-weight_CC = df_salamander["weight_g"][df_salamander["section"]=="CC"]
-weight_OG = df_salamander["weight_g"][df_salamander["section"]=="OG"]
+# Fit linear model with lake-specific intercepts
+mod2 = smf.ols("ice_duration ~ year + lakeid", data=df_icecover).fit()
+print(mod2.summary())
+
+# Separate lakes
+df_mendota = df_icecover[df_icecover['lakeid'] == "Lake Mendota"]
+df_monona  = df_icecover[df_icecover['lakeid'] == "Lake Monona"]
+
+# Colors
+colors = ["#6a5acd", "#e64173"]
+
+# Plot data points
+plt.figure(figsize=(8,5))
+plt.scatter(df_mendota['year'], df_mendota['ice_duration'], color=colors[0], label="Mendota")
+plt.scatter(df_monona['year'], df_monona['ice_duration'], color=colors[1], label="Monona")
+
+# Prepare years for predictions
+years = np.linspace(df_icecover['year'].min(), df_icecover['year'].max(), 200)
+
+# Predict for Mendota
+pred_mendota = mod2.predict(pd.DataFrame({'year': years, 'lakeid': 'Lake Mendota'}))
+plt.plot(years, pred_mendota, color=colors[0], linestyle='-', linewidth=2)
+
+# Predict for Monona
+pred_monona = mod2.predict(pd.DataFrame({'year': years, 'lakeid': 'Lake Monona'}))
+plt.plot(years, pred_monona, color=colors[1], linestyle='-', linewidth=2)
+
+# Labels, legend, title
+plt.xlabel("Year")
+plt.ylabel("Ice duration (days)")
+plt.title("Ice duration over years with regression lines")
+plt.legend()
+plt.grid(True)
+plt.show()
 
 ```
 
@@ -119,4 +335,395 @@ weight_OG = df_salamander["weight_g"][df_salamander["section"]=="OG"]
 
 ::::
 
+
+### Question 5
+A third colleague of yours proposes to consider the following model to analyze the ice duration data:
+$$
+\text{IceCover}_i = \beta_0 + \beta_1 \text{Year}_i + \beta_2 \text{LakeID}_i + \beta_3 \text{Year}_i \times \text{LakeID}_i + \epsilon_i
+$$
+What is the correct formula to specify this model in `statsmodels`?
+
+```{r, results='asis'}
+# Define questions choice and individual feedback for each question
+opts <- list(
+ 
+  list(
+    value = "<code>ice_duration ~ year + lakeid</code>",
+    feedback = "No, this formula does not include the interaction term."
+  ),
+  list(
+    value = "<code>ice_duration ~ year</code>",
+    feedback = "No, this formula does not include lakeid or the interaction term."
+  ),
+   answer = list(
+    value = "<code>ice_duration ~ year * lakeid</code>",
+    feedback = "Correct! The <code>*</code> operator includes both main effects and the interaction term."
+  ),
+  list(
+    value = "<code>ice_duration ~ year / lakeid</code>",
+    feedback = "No, the <code>/</code> operator is not used for interactions in `statsmodels`."
+  )
+)
+# render QA environment
+render_q_a_env(opts)
+```
+
+### Question 6
+She estimates the model and obtain the following results:
+```{python, echo=TRUE}
+import pandas as pd
+import matplotlib.pyplot as plt
+import statsmodels.formula.api as smf
+import numpy as np
+df_icecover = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/df_icecover.csv")
+mod3 = smf.ols("ice_duration ~ year + lakeid + year:lakeid", data=df_icecover).fit()
+print(mod3.summary())
+```
+
+
+This colleague wants to test whether the ice duration is decreasing at different rates for the two lakes. What would be the appropriate hypotheses for this test?
+
+```{r, results='asis'}
+# Define questions choice and individual feedback for each question
+opts <- list(
+  answer = list(
+    value = "\\( H_0: \\beta_3 = 0 \\), \\( H_a: \\beta_3 \\neq 0 \\)",
+    feedback = "Correct! Testing if the interaction term is significantly different from zero checks if the rates of change differ between lakes."),
+  list(
+    value = "\\( H_0: \\beta_1 = 0 \\), \\( H_a: \\beta_1 < 0 \\)",
+    feedback = "No, this tests if ice duration decreases over years in general, not if the rates differ between lakes."
+  ),
+  list(
+    value = "\\( H_0: \\beta_2 = 0 \\), \\( H_a: \\beta_2 \\neq 0 \\)",
+    feedback = "No, this tests if there is a difference in intercepts between lakes, not the rates of change."
+  ),
+  list(
+    value = "\\( H_0: \\beta_3 = 0 \\), \\( H_a: \\beta_3 < 0 \\)",
+    feedback = "No, the alternative hypothesis should test for any difference, not just a decrease."
+  )
+)
+# render QA environment
+render_q_a_env(opts)
+```
+
+
+### Question 7
+
+What is the p-value associated with this test according to the model summary above?
+
+```{r, results='asis'}
+# Define questions choice and individual feedback for each question
+opts <- list(
+  answer = list(
+    value = "\\(0.685\\)",
+    feedback = "Correct!"
+  ),
+  list(
+    value = "\\(0.675\\)",
+    feedback = "No, this is the p-value for the coefficient associated with the intercept of Lake Monona."
+  ),
+  list(
+    value = "\\(-0.0159\\)",
+    feedback = "No, this is the estimated coefficient for the interaction term."
+  ),
+  list(
+    value = "\\(0.039\\)",
+    feedback = "No, this is the estimated standard deviation of the estimated coefficient for the interaction term."
+  )
+)
+# render QA environment
+render_q_a_env(opts)
+```
+
+### Question 8
+How do you conclude regarding the difference in ice duration reduction rates between the two lakes (considering $\alpha=0.05$)?
+
+
+```{r, results='asis'}
+# Define questions choice and individual feedback for each question
+opts <- list(
+  
+  list(
+    value = "We reject \\(H_0\\), there is evidence from the data that the slope for ice duration differs between the two lakes",
+    feedback = "No, the p-value is greater than 0.05, so we fail to reject the null hypothesis."
+  ),
+  answer = list(
+    value = "We can not reject \\(H_0\\), there is no evidence from the data that the slope for ice duration differs between the two lakes",
+    feedback = "Correct! The p-value is greater than 0.05, so we fail to reject the null hypothesis."
+  ),
+  list(
+    value="We can not reject \\(H_0\\). Therefore the slopes are exactly equal and there is absolutely no difference between the lakes' trends",
+    feedback = "No, failing to reject the null hypothesis does not imply that the slopes are exactly equal."
+  ),
+  list(
+  value="We reject \\(H_0\\) because the coefficient for year (\\(\\beta_1\\)) is significantly negative, so the trends must differ between lakes",
+  feedback="No. A significant main effect for year indicates a common downward trend overall, but it does not test whether the slopes differ between lakes")
+)
+# render QA environment
+render_q_a_env(opts)
+```
+
+
+
+### Question 9
+Complete the following code to plot the data points and the regression lines for both lakes according to the third model.
+
+
+:::: {.panel-tabset}
+
+## Exercise
+```{pyodide}
+#| exercise: ex_3
+import pandas as pd
+import matplotlib.pyplot as plt
+import statsmodels.formula.api as smf
+import numpy as np
+
+# Load data
+df_icecover = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/df_icecover.csv")
+
+# Fit linear model with lake-specific intercepts
+mod3 = smf.ols(______, data=df_icecover).fit()
+print(mod3.summary())
+
+# Separate lakes
+df_mendota = df_icecover[df_icecover['lakeid'] == "Lake Mendota"]
+df_monona  = df_icecover[df_icecover['lakeid'] == "Lake Monona"]
+
+# Colors
+colors = ["#6a5acd", "#e64173"]
+
+# Plot data points
+plt.figure(figsize=(8,5))
+plt.scatter(df_mendota['year'], df_mendota['ice_duration'], color=colors[0], label="Mendota")
+plt.scatter(df_monona['year'], df_monona['ice_duration'], color=colors[1], label="Monona")
+
+# Prepare years for predictions
+years = np.linspace(df_icecover['year'].min(), df_icecover['year'].max(), 200)
+
+# Predict for Mendota
+pred_mendota = ______(pd.DataFrame({'year': years, 'lakeid': 'Lake Mendota'}))
+plt.plot(years, pred_mendota, color=colors[0], linestyle='-', linewidth=2)
+
+# Predict for Monona
+pred_monona = ______(pd.DataFrame({'year': years, 'lakeid': 'Lake Monona'}))
+plt.plot(years, pred_monona, color=colors[1], linestyle='-', linewidth=2)
+
+# Labels, legend, title
+plt.xlabel("Year")
+plt.ylabel("Ice duration (days)")
+plt.title("Ice duration over years with regression lines")
+plt.legend()
+plt.grid(True)
+plt.show()
+
+```
+
+## Hints
+
+::: { .hint exercise="ex_3"}
+Use the method `predict` of the fitted model to obtain the predicted values for each lake over a range of years, and plot these predictions as lines on top of the scatter plot of the data points.
+:::
+
+## Solution
+
+::: { .solution exercise="ex_3" }
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+import statsmodels.formula.api as smf
+import numpy as np
+
+# Load data
+df_icecover = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/df_icecover.csv")
+
+# Fit linear model with lake-specific intercepts
+mod3 = smf.ols("ice_duration ~ year + lakeid + year:lakeid", data=df_icecover).fit()
+print(mod3.summary())
+
+# Separate lakes
+df_mendota = df_icecover[df_icecover['lakeid'] == "Lake Mendota"]
+df_monona  = df_icecover[df_icecover['lakeid'] == "Lake Monona"]
+
+# Colors
+colors = ["#6a5acd", "#e64173"]
+
+# Plot data points
+plt.figure(figsize=(8,5))
+plt.scatter(df_mendota['year'], df_mendota['ice_duration'], color=colors[0], label="Mendota")
+plt.scatter(df_monona['year'], df_monona['ice_duration'], color=colors[1], label="Monona")
+
+# Prepare years for predictions
+years = np.linspace(df_icecover['year'].min(), df_icecover['year'].max(), 200)
+
+# Predict for Mendota
+pred_mendota = mod3.predict(pd.DataFrame({'year': years, 'lakeid': 'Lake Mendota'}))
+plt.plot(years, pred_mendota, color=colors[0], linestyle='-', linewidth=2)
+
+# Predict for Monona
+pred_monona = mod3.predict(pd.DataFrame({'year': years, 'lakeid': 'Lake Monona'}))
+plt.plot(years, pred_monona, color=colors[1], linestyle='-', linewidth=2)
+
+# Labels, legend, title
+plt.xlabel("Year")
+plt.ylabel("Ice duration (days)")
+plt.title("Ice duration over years with regression lines")
+plt.legend()
+plt.grid(True)
+plt.show()
+
+```
+
+:::
+
+::::
+
+
+### Question 10
+
+A climatologist uses `mod3` to predict the ice duration in the year $2500$ for both lakes and obtains the following results:
+
+```{python, echo=TRUE}
+import pandas as pd
+import matplotlib.pyplot as plt
+import statsmodels.formula.api as smf
+import numpy as np
+
+# Load data
+df_icecover = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/df_icecover.csv")
+# Fit linear model with lake-specific intercepts and trend
+mod3 = smf.ols("ice_duration ~ year + lakeid + year:lakeid", data=df_icecover).fit()
+# Define levels for the categorical variable
+lake_levels = df_icecover['lakeid'].astype('category').cat.categories
+# Predict for Mendota
+pred_mendota = mod3.predict(pd.DataFrame({
+    'year': [2500], 
+    'lakeid': pd.Categorical(['Lake Mendota'], categories=lake_levels)
+}))
+# Predict for Monona
+pred_monona = mod3.predict(pd.DataFrame({
+    'year': [2500], 
+    'lakeid': pd.Categorical(['Lake Monona'], categories=lake_levels)
+}))
+
+print(f"Predicted ice duration in 2500 for Lake Mendota: {pred_mendota.values[0]:.2f} days")
+print(f"Predicted ice duration in 2500 for Lake Monona: {pred_monona.values[0]:.2f} days")
+```
+Is this prediction reliable? Justify your answer.
+
+
+
+
+```{r, results='asis'}
+# Define questions choice and individual feedback for each question
+opts <- list(
+  list(
+    value = "Yes. The model gives a numeric prediction, so it is reliable even far into the future.",
+    feedback = "No. A numeric prediction does not guarantee reliability. The model was fitted on historical data and may not be valid far outside the observed range."
+  ),
+  answer = list(
+    value = "No. The prediction is not reliable. It is a large extrapolation beyond the data range and even yields an impossible/negative ice duration.",
+    feedback = "Correct! Predicting for year \\(2500\\) is extreme extrapolation. Linear model behavior outside the observed years is uncertain."
+  ),
+  list(
+    value = "No. Because the interaction term is not statistically significant, the model cannot be used for prediction at all.",
+    feedback = "No. Non-significant interaction only means there is little evidence of different slopes between lakes in the sample. The main issue here is extrapolation and unrealistic predicted values."
+  ),
+  list(
+    value = "Yes, predictions at any year are valid.",
+    feedback = "No."
+  )
+)
+
+# render QA environment
+render_q_a_env(opts)
+```
+
+
+
+
+
+
+### Question 11
+Based on the AIC values, which model would you select among the three models fitted above?
+
+```{python, echo=TRUE}
+import pandas as pd
+import statsmodels.formula.api as smf
+import numpy as np
+df_icecover = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/df_icecover.csv")
+mod1 = smf.ols("ice_duration ~ year", data=df_icecover).fit()
+mod2 = smf.ols("ice_duration ~ year + lakeid", data=df_icecover).fit()
+mod3 = smf.ols("ice_duration ~ year + lakeid + year:lakeid", data=df_icecover).fit()
+aic_values = pd.DataFrame({
+    'Model': ['mod1', 'mod2', 'mod3'],
+    'AIC': [mod1.aic, mod2.aic, mod3.aic]
+})
+print(aic_values)
+```
+
+
+```{r, results='asis'}
+opts <- list(
+  list(
+    value = "Model 3, because it is the most complex and therefore should always fit the data best.",
+    feedback = "No. Although more complex models can fit data better, AIC penalizes complexity. Model 3 has the highest AIC, so it is not preferred."
+  ),
+  
+  list(
+    value = "Model 2 (with lake-specific intercepts), because it has the lowest AIC among the three models.",
+    feedback = "No. Model 2’s AIC (2819.40) is higher than Model 1’s (2817.76), so Model 1 is preferred."
+  ),
+  answer = list(
+    value = "Model 1, because it has the lowest AIC among the three models.",
+    feedback = "Correct! Model 1 has the smallest AIC value (2817.76), indicating it provides the best balance between model fit and simplicity."
+  ),
+  list(
+    value = "Model 1, because simpler models are always better regardless of AIC.",
+    feedback = "Not quite. Model 1 is preferred because it actually has the lowest AIC, not just because it’s simpler."
+  )
+)
+
+
+# render QA environment
+render_q_a_env(opts)
+```
+
+
+
+
+
+
+
+
+### Question 12
+An expert say that the data are actually not independent because the ice duration in a given year might be correlated with the ice duration in the previous year. Is this a problem to perform inference with the models fitted above?
+
+
+
+```{r, results='asis'}
+opts <- list(
+  list(
+    value = "No, correlation between observations across years does not matter for linear regression.",
+    feedback = "No. Autocorrelation violates the independence assumption of the residuals, which can make standard errors and hypothesis tests unreliable."
+  ),
+  answer = list(
+    value = "Yes, it can be a problem because correlated observations violate the independence assumption required for linear regression.",
+    feedback = "Correct! When residuals are autocorrelated, standard errors may be underestimated, leading to incorrect p-values and confidence intervals."
+  ),
+  list(
+    value = "No, as long as the model includes <code>year</code> as a covariate, independence is automatically ensured.",
+    feedback = "No. Including 'year' as a covariate does not guarantee that residuals are independent across time."
+  ),
+  list(
+    value = "Yes, but only if the sample size is very small.",
+    feedback = "Autocorrelation affects inference regardless of sample size."
+  )
+)
+
+# render QA environment
+render_q_a_env(opts)
+
+```
 
