@@ -44,9 +44,9 @@ css: [../assets/default.css]
 
 ### Problem {.smaller}
 
-An educator believes that <span style="color:blue;">new directed reading activities</span> in the classroom can help elementary school students (6-12 years old) improve their reading ability. She arranged a pilot study where some students (chosen at random) of age 6 start to take part in these activities <span style="color:blue; font-weight:bold;">(treatment group)</span>, meanwhile other students continue with the <span style="color:purple;">classical curriculum</span> <span style="color:blue; font-weight:bold;">(control group)</span>. The educator wishes to evaluate the effectiveness of these activities so all students are given a Degree of Reading Power (DRP) test, which assesses their reading ability. 
+An educator believes that <span style="color:blue;">new directed reading activities</span> in the classroom can help elementary school students (6-12 years old) improve their reading ability. She arranged a pilot study where some students (chosen at random) of age 6 start to take part in these activities <span style="color:blue; font-weight:bold;">(treatment group)</span>, meanwhile other students continue with the <span style="color:#eb078e;">classical curriculum</span> <span style="color:blue; font-weight:bold;">(control group)</span>. The educator wishes to evaluate the effectiveness of these activities so all students are given a Degree of Reading Power (DRP) test, which assesses their reading ability. 
 
-<span style="color:purple;">Can we conclude that these new directed reading activities can help elementary school students improve their reading ability?</span>
+<span style="color:#eb078e;">Can we conclude that these new directed reading activities can help elementary school students improve their reading ability?</span>
 
 ## Motivating Example: Reading Ability {.smaller}
 
@@ -103,7 +103,7 @@ knitr::include_graphics("../class3/img/boxplot_reading.png")
 3. <span style="color:blue;">Compute p-value</span>: p-value = $97.12\%$ (see Python code tab for details).
 4. <span style="color:blue;">Conclusion:</span> We have p-value > $\alpha$ so we cannot reject the null hypothesis at the significance level of 5%. 
 
-<span style="color:purple; font-weight:bold;">Remark:</span> Notice that the p-value for the test with opposite hypotheses is actually $100\%-97.12\%=2.88\% < \alpha$ (Why? 🤔). So we conclude, at the significance level of 5%, that the classical curriculum without these new directed reading activities actually improve students' reading ability more compared to the curriculum with these activities. 😬
+<span style="color:#eb078e; font-weight:bold;">Remark:</span> Notice that the p-value for the test with opposite hypotheses is actually $100\%-97.12\%=2.88\% < \alpha$ (Why? 🤔). So we conclude, at the significance level of 5%, that the classical curriculum without these new directed reading activities actually improve students' reading ability more compared to the curriculum with these activities. 😬
 
 ---
 
@@ -128,7 +128,7 @@ print(f"p-value: {p_value_reading:.4f}")
 
 ## Is our analysis comprehensive? {.smaller}
 
-The educator points out that only students of 6-8 years old have participated in the new directed reading activities. In other words, in the sample she collected, the students in the treatment group are only of age 6 to 8, whereas the students in the control group vary from 6 to 12 years old. <span style="color:purple;">Is age a potential explanation to the difference we observe among the students' reading ability?</span>
+The educator points out that only students of 6-8 years old have participated in the new directed reading activities. In other words, in the sample she collected, the students in the treatment group are only of age 6 to 8, whereas the students in the control group vary from 6 to 12 years old. <span style="color:#eb078e;">Is age a potential explanation to the difference we observe among the students' reading ability?</span>
 
 To make sure that the analysis is reliable, she includes the age information of the students, which can be accessed as follows:
 
@@ -153,11 +153,11 @@ knitr::include_graphics("../class3/img/reading_points.png")
 
 ## Regression analysis {.smaller}
 
-- Regression analysis corresponds to a set of statistical methods for estimating the <span style="color:purple;">relationships</span> between a response variable $Y$ of primary interest (also called the *outcome variable*) and some explanatory variables $X_1, \ldots, X_p$ (also called *covariates*, *regressors*, *features* or *predictors*).
+- Regression analysis corresponds to a set of statistical methods for estimating the <span style="color:#eb078e;">relationships</span> between a response variable $Y$ of primary interest (also called the *outcome variable*) and some explanatory variables $X_1, \ldots, X_p$ (also called *covariates*, *regressors*, *features* or *predictors*).
 - The relationship between the response variable $Y$ and the covariates is not <span style="color:blue;">deterministic</span> and we model the <span style="color:blue;">conditional expected value</span> (i.e. $\mathbb{E}[Y | X_1, \ldots, X_p]$).
 - Therefore, we consider the following (general) model:
 $$Y_i = \mathbb{E}[Y_i | X_{i1}, \ldots, X_{ip}] + \varepsilon_i,$$where $\mathbb{E}[\varepsilon_i] = 0$ and $i=1,\ldots,n$.
-- <span style="color:purple;">Example</span>: $\mathbb{E}[\text{reading abilities}_i| \ \text{age}_i, \text{treatment}_i, \ldots]$.
+- <span style="color:#eb078e;">Example</span>: $\mathbb{E}[\text{reading abilities}_i| \ \text{age}_i, \text{treatment}_i, \ldots]$.
 
 ---
 

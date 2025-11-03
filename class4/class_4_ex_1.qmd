@@ -49,7 +49,7 @@ import matplotlib.pyplot as plt
 
 # Create the boxplot
 plt.figure(figsize=(6, 5))
-plt.boxplot([control, treatment], labels=['Control', 'Treatment'])
+plt.boxplot([control, treatment], tick_labels=['Control', 'Treatment']);
 
 # Add labels and title
 plt.ylabel('Score')
