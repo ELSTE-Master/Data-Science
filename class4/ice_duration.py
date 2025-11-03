@@ -94,6 +94,6 @@ plt.show()
 
 
 # predict using mod3 for years 2050
-future_years = pd.DataFrame({'year': [2500], 'lakeid': ['Lake Mendota']})
+future_years = pd.DataFrame({'year': [2450], 'lakeid': ['Lake Mendota']})
 pred_2050_mendota = mod2.predict(future_years)
 print(f"Predicted ice duration for Lake Mendota in 2050: {pred_2050_mendota.values[0]:.2f} days")
