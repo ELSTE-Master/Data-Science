@@ -29,7 +29,7 @@ source("../assets/q_a_env.R")
 
 
 
-In this exercise we will model lake ice duration data using linear regression models. According to the United States Environmental Protection Agency, lake ice duration can be an indicator of climate change. This is because lake ice is dependent on several environmental factors, so changes in these factors will influence the formation of ice on top of lakes. As a result, the study and analysis of lake ice formation can inform scientists about how quickly the climate is changing, and are critical to minimizing disruptions to lake ecosystems. We can examine the ice duration of Lake Mendota and Lake Monona in the Madison, WI area. The dataset is extracted from the `ntl_icecover` dataset of the `R` package `lterdatasampler`.
+In this exercise we will model lake ice duration data using linear regression models. According to the United States Environmental Protection Agency, lake ice duration can be an indicator of climate change. This is because lake ice is dependent on several environmental factors, so changes in these factors will influence the formation of ice on top of lakes. As a result, the study and analysis of lake ice formation can inform scientists about how quickly the climate is changing, and are critical to minimizing disruptions to lake ecosystems. We can examine the ice duration of Lake Mendota and Lake Monona in the are of Madison, WI. The dataset is extracted from the `ntl_icecover` dataset of the `R` package `lterdatasampler`.
 
 ::: {style="text-align:center;"}
 
@@ -436,7 +436,7 @@ render_q_a_env(opts)
 ```
 
 ### Question 8
-How do you conclude regarding the difference in ice duration reduction rates between the two lakes (considering $\alpha=0.05$)?
+What can you conclude regarding the difference in ice duration between the two lakes (considering $\alpha=0.05$)?
 
 
 ```{r, results='asis'}
@@ -448,11 +448,11 @@ opts <- list(
     feedback = "No, the p-value is greater than 0.05, so we fail to reject the null hypothesis."
   ),
   answer = list(
-    value = "We can not reject \\(H_0\\), there is no evidence from the data that the slope for ice duration differs between the two lakes",
+    value = "We cannot reject \\(H_0\\), there is no evidence from the data that the slope for ice duration differs between the two lakes",
     feedback = "Correct! The p-value is greater than 0.05, so we fail to reject the null hypothesis."
   ),
   list(
-    value="We can not reject \\(H_0\\). Therefore the slopes are exactly equal and there is absolutely no difference between the lakes' trends",
+    value="We cannot reject \\(H_0\\). Therefore the slopes are exactly equal and there is absolutely no difference between the lakes' trends",
     feedback = "No, failing to reject the null hypothesis does not imply that the slopes are exactly equal."
   ),
   list(
@@ -698,7 +698,7 @@ render_q_a_env(opts)
 
 
 ### Question 12
-An expert say that the data are actually not independent because the ice duration in a given year might be correlated with the ice duration in the previous year. Is this a problem to perform inference with the models fitted above?
+An expert says that the data are actually not independent because the ice duration in a given year might be correlated with the ice duration in the previous year. Is this a problem to perform inference with the models fitted above?
 
 
 
