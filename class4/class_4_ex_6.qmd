@@ -381,7 +381,7 @@ print(mod3.summary())
 ```
 
 
-This colleague wants to test whether the ice duration is decreasing at different rates for the two lakes. What would be the appropriate hypotheses for this test?
+This colleague wants to test whether the ice duration is evolving at different rates for the two lakes. What would be the appropriate hypotheses for this test?
 
 ```{r, results='asis'}
 # Define questions choice and individual feedback for each question
