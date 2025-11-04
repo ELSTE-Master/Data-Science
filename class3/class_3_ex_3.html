@@ -320,12 +320,65 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
- <span class="menu-text">Appendices</span></a>
+ <span class="menu-text">Class 4: Linear regression</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class4/class_4_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class4/class_4_ex_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Example reading data: estimation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class4/class_4_ex_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Example reading data: prediction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class4/class_4_ex_3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Example reading data: model diagnostic</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class4/class_4_ex_4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Example reading data: improving our model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class4/class_4_ex_5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Example reading data: confidence intervals for predictions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class4/class_4_ex_6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises ice duration data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../appendices/setup_vscode.html" class="sidebar-item-text sidebar-link">
@@ -437,8 +490,8 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfMSJ9LCJjb2RlIjoi
 <h3 class="anchored" data-anchor-id="question-2">Question 2</h3>
 <p>Which test should we use?</p>
 <p>Based on the graph you produce, which test appears to be the most appropriate to test if diet C leads to a larger average weight loss than diet A?</p>
-<div id="radio_TDXBJIVVHB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TDXBJIVVHB" value="" data-feedback="The student t-test assumes that the variances of the two groups are the same. This is very hard to verify in practice and thus, it is preferable to avoid using this test."> <span>Student's t-test.</span></label><label><input type="radio" autocomplete="off" name="radio_TDXBJIVVHB" value="" data-feedback="This is probably a suitable choice but one can argue that outliers are present in diet A so this may not be the optimal choice."> <span>Welch's t-test.</span></label><label><input type="radio" autocomplete="off" name="radio_TDXBJIVVHB" value="answer" data-feedback="This is arguably the best choice for this problem."> <span>Wilcoxon test.</span></label>
+<div id="radio_FUQGKJMOZZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FUQGKJMOZZ" value="" data-feedback="The student t-test assumes that the variances of the two groups are the same. This is very hard to verify in practice and thus, it is preferable to avoid using this test."> <span>Student's t-test.</span></label><label><input type="radio" autocomplete="off" name="radio_FUQGKJMOZZ" value="" data-feedback="This is probably a suitable choice but one can argue that outliers are present in diet A so this may not be the optimal choice."> <span>Welch's t-test.</span></label><label><input type="radio" autocomplete="off" name="radio_FUQGKJMOZZ" value="answer" data-feedback="This is arguably the best choice for this problem."> <span>Wilcoxon test.</span></label>
 <div class="webex-feedback-box">
 
 </div>
@@ -495,8 +548,8 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfMiJ9LCJjb2RlIjoi
 <section id="question-4" class="level3">
 <h3 class="anchored" data-anchor-id="question-4">Question 4</h3>
 <p>What can we conclude? Based on the test you performed and considering a significance level of <span class="math inline">\(5\%\)</span>, we can conclude that:</p>
-<div id="radio_YDPVWZFXIN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YDPVWZFXIN" value="" data-feedback="Be careful with the order of the diets used in the statement."> <span>We can reject the null hypothesis at the significance level of \(5\%\) and conclude that diet A leads to a larger average weight loss than diet C.</span></label><label><input type="radio" autocomplete="off" name="radio_YDPVWZFXIN" value="" data-feedback="Sadly, we can never be sure with statistical methods."> <span>We can be sure that diet C leads to a larger average weight loss than diet A.</span></label><label><input type="radio" autocomplete="off" name="radio_YDPVWZFXIN" value="answer" data-feedback="Yay! 👍"> <span>We can reject the null hypothesis at the significance level of \(5\%\) and conclude that diet C leads to a larger average weight loss than diet A.</span></label><label><input type="radio" autocomplete="off" name="radio_YDPVWZFXIN" value="" data-feedback="In this case the p-value is smaller than \(5\%\) so we can reject the null hypothesis."> <span>We cannot reject the null hypothesis at the significance level of \(5\%\).</span></label>
+<div id="radio_QQMHOBFARM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QQMHOBFARM" value="" data-feedback="Be careful with the order of the diets used in the statement."> <span>We can reject the null hypothesis at the significance level of \(5\%\) and conclude that diet A leads to a larger average weight loss than diet C.</span></label><label><input type="radio" autocomplete="off" name="radio_QQMHOBFARM" value="" data-feedback="Sadly, we can never be sure with statistical methods."> <span>We can be sure that diet C leads to a larger average weight loss than diet A.</span></label><label><input type="radio" autocomplete="off" name="radio_QQMHOBFARM" value="answer" data-feedback="Yay! 👍"> <span>We can reject the null hypothesis at the significance level of \(5\%\) and conclude that diet C leads to a larger average weight loss than diet A.</span></label><label><input type="radio" autocomplete="off" name="radio_QQMHOBFARM" value="" data-feedback="In this case the p-value is smaller than \(5\%\) so we can reject the null hypothesis."> <span>We cannot reject the null hypothesis at the significance level of \(5\%\).</span></label>
 <div class="webex-feedback-box">
 
 </div>
@@ -552,8 +605,8 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfMyJ9LCJjb2RlIjoi
 <section id="question-6" class="level3">
 <h3 class="anchored" data-anchor-id="question-6">Question 6</h3>
 <p>Based on this test, we obtain a p-value of <span class="math inline">\(5.747\%\)</span> (which could make you think that the consultant picked one kg for a good reason…🤔). Therefore, the consultant claims that it is statistically proven that the two diets are equally effective in terms of weights loss. What do you think of this argument?</p>
-<div id="radio_IBNGXEJQEK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_IBNGXEJQEK" value="" data-feedback="Nope, we can never 'accept' the null."> <span>The consultant showed that the average difference in terms of weight loss is equal to one kg, so his claim is incorrect.</span></label><label><input type="radio" autocomplete="off" name="radio_IBNGXEJQEK" value="" data-feedback="Nope!"> <span>The consultant is correct, there is indeed not much difference between the two diets.</span></label><label><input type="radio" autocomplete="off" name="radio_IBNGXEJQEK" value="answer" data-feedback="Yay! 👍"> <span>The claim of the consultant is incorrect for the following reasons. First, there is no good reason to compare a difference of one kg and second, we can never accept the null hypothesis!</span></label><label><input type="radio" autocomplete="off" name="radio_IBNGXEJQEK" value="" data-feedback="Nope, we can never 'accept' the null."> <span>The consultant showed that the average difference in terms of weight loss is equal to one kg, so his claim is correct.</span></label>
+<div id="radio_TFJETTYYIL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TFJETTYYIL" value="" data-feedback="Nope, we can never 'accept' the null."> <span>The consultant showed that the average difference in terms of weight loss is equal to one kg, so his claim is incorrect.</span></label><label><input type="radio" autocomplete="off" name="radio_TFJETTYYIL" value="" data-feedback="Nope!"> <span>The consultant is correct, there is indeed not much difference between the two diets.</span></label><label><input type="radio" autocomplete="off" name="radio_TFJETTYYIL" value="answer" data-feedback="Yay! 👍"> <span>The claim of the consultant is incorrect for the following reasons. First, there is no good reason to compare a difference of one kg and second, we can never accept the null hypothesis!</span></label><label><input type="radio" autocomplete="off" name="radio_TFJETTYYIL" value="" data-feedback="Nope, we can never 'accept' the null."> <span>The consultant showed that the average difference in terms of weight loss is equal to one kg, so his claim is correct.</span></label>
 <div class="webex-feedback-box">
 
 </div>
@@ -608,8 +661,8 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfNCJ9LCJjb2RlIjoi
 <section id="question-8" class="level3">
 <h3 class="anchored" data-anchor-id="question-8">Question 8</h3>
 <p>Then, the (second) consultant claims that diet C leads to an average weight loss that is significantly larger by <span class="math inline">\(950\)</span> grams than diet A. What do you think of this argument:</p>
-<div id="radio_KXLVVNIXJS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KXLVVNIXJS" value="" data-feedback="In some sense, this answer is correct... but why did the consultant pick 950 grams?"> <span>The claim is correct because the p-value is smaller than 5%.</span></label><label><input type="radio" autocomplete="off" name="radio_KXLVVNIXJS" value="" data-feedback="In this case, we can reject the null."> <span>The claim is incorrect because we can't accept the null hypothesis.</span></label><label><input type="radio" autocomplete="off" name="radio_KXLVVNIXJS" value="answer" data-feedback="Yes, this is an example of HARKing, an acronym coined by Norbert Kerr that refers to the questionable practice of hypothesizing after the results are known. Nevertheless, this is a very common practice...😅"> <span>The claim is incorrect because the hypothesis was constructed after looking at the known results.</span></label>
+<div id="radio_CRIPLGFKTA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CRIPLGFKTA" value="" data-feedback="In some sense, this answer is correct... but why did the consultant pick 950 grams?"> <span>The claim is correct because the p-value is smaller than 5%.</span></label><label><input type="radio" autocomplete="off" name="radio_CRIPLGFKTA" value="" data-feedback="In this case, we can reject the null."> <span>The claim is incorrect because we can't accept the null hypothesis.</span></label><label><input type="radio" autocomplete="off" name="radio_CRIPLGFKTA" value="answer" data-feedback="Yes, this is an example of HARKing, an acronym coined by Norbert Kerr that refers to the questionable practice of hypothesizing after the results are known. Nevertheless, this is a very common practice...😅"> <span>The claim is incorrect because the hypothesis was constructed after looking at the known results.</span></label>
 <div class="webex-feedback-box">
 
 </div>

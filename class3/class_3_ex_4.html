@@ -320,12 +320,65 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
- <span class="menu-text">Appendices</span></a>
+ <span class="menu-text">Class 4: Linear regression</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class4/class_4_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class4/class_4_ex_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Example reading data: estimation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class4/class_4_ex_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Example reading data: prediction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class4/class_4_ex_3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Example reading data: model diagnostic</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class4/class_4_ex_4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Example reading data: improving our model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class4/class_4_ex_5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Example reading data: confidence intervals for predictions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class4/class_4_ex_6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises ice duration data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../appendices/setup_vscode.html" class="sidebar-item-text sidebar-link">
@@ -426,7 +479,7 @@ window.Quarto = {
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>            medianprops<span class="op">=</span><span class="bu">dict</span>(color<span class="op">=</span><span class="st">"red"</span>),</span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>            showfliers<span class="op">=</span><span class="va">False</span>)  <span class="co"># don't show outliers in boxplot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>{'whiskers': [&lt;matplotlib.lines.Line2D object at 0x77a513fbfa30&gt;, &lt;matplotlib.lines.Line2D object at 0x77a513fbfd30&gt;, &lt;matplotlib.lines.Line2D object at 0x77a513d74be0&gt;, &lt;matplotlib.lines.Line2D object at 0x77a513d74dc0&gt;, &lt;matplotlib.lines.Line2D object at 0x77a513d75c30&gt;, &lt;matplotlib.lines.Line2D object at 0x77a513d75f30&gt;], 'caps': [&lt;matplotlib.lines.Line2D object at 0x77a513d74070&gt;, &lt;matplotlib.lines.Line2D object at 0x77a513d74370&gt;, &lt;matplotlib.lines.Line2D object at 0x77a513d750c0&gt;, &lt;matplotlib.lines.Line2D object at 0x77a513d753c0&gt;, &lt;matplotlib.lines.Line2D object at 0x77a513d76230&gt;, &lt;matplotlib.lines.Line2D object at 0x77a513d76530&gt;], 'boxes': [&lt;matplotlib.patches.PathPatch object at 0x77a513fbe710&gt;, &lt;matplotlib.patches.PathPatch object at 0x77a513d74610&gt;, &lt;matplotlib.patches.PathPatch object at 0x77a513d75660&gt;], 'medians': [&lt;matplotlib.lines.Line2D object at 0x77a513d74670&gt;, &lt;matplotlib.lines.Line2D object at 0x77a513d756c0&gt;, &lt;matplotlib.lines.Line2D object at 0x77a5143dfa00&gt;], 'fliers': [], 'means': []}</code></pre>
+<pre><code>{'whiskers': [&lt;matplotlib.lines.Line2D object at 0x7a2b563cba00&gt;, &lt;matplotlib.lines.Line2D object at 0x7a2b563cbd00&gt;, &lt;matplotlib.lines.Line2D object at 0x7a2b5617cbb0&gt;, &lt;matplotlib.lines.Line2D object at 0x7a2b5617cd90&gt;, &lt;matplotlib.lines.Line2D object at 0x7a2b5617dc00&gt;, &lt;matplotlib.lines.Line2D object at 0x7a2b5617df00&gt;], 'caps': [&lt;matplotlib.lines.Line2D object at 0x7a2b563cbfd0&gt;, &lt;matplotlib.lines.Line2D object at 0x7a2b5617c340&gt;, &lt;matplotlib.lines.Line2D object at 0x7a2b5617d090&gt;, &lt;matplotlib.lines.Line2D object at 0x7a2b5617d390&gt;, &lt;matplotlib.lines.Line2D object at 0x7a2b5617e200&gt;, &lt;matplotlib.lines.Line2D object at 0x7a2b5617e500&gt;], 'boxes': [&lt;matplotlib.patches.PathPatch object at 0x7a2b563ca6e0&gt;, &lt;matplotlib.patches.PathPatch object at 0x7a2b5617c5e0&gt;, &lt;matplotlib.patches.PathPatch object at 0x7a2b5617d630&gt;], 'medians': [&lt;matplotlib.lines.Line2D object at 0x7a2b5617c640&gt;, &lt;matplotlib.lines.Line2D object at 0x7a2b5617d690&gt;, &lt;matplotlib.lines.Line2D object at 0x7a2b567eb9d0&gt;], 'fliers': [], 'means': []}</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Overlay all points with horizontal jitter</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, data <span class="kw">in</span> <span class="bu">enumerate</span>([dietA, dietB, dietC], start<span class="op">=</span><span class="dv">1</span>):</span>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Linear regression: Exercises – ELSTE Data Science Master Course</title>
+<title>Example reading data: estimation – ELSTE Data Science Master Course</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,6 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../class4/class_4_ex_2.html" rel="next">
+<link href="../class4/class_4_intro.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -137,20 +139,272 @@ window.Quarto = {
 <link rel="stylesheet" href="../assets/webex_2.css">
 </head>
 
-<body class="fullcontent">
+<body class="nav-sidebar floating fullcontent">
 
 <div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../class4/class_4_intro.html">Class 4: Linear regression</a></li><li class="breadcrumb-item"><a href="../class4/class_4_ex_1.html">Example reading data: estimation</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">ELSTE Data Science Course</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/ELSTE-Master/Data-Science" title="GitHub" class="quarto-navigation-tool px-1" aria-label="GitHub"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ELSTE Data Science Master Course</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Class 1: Pandas</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class1/day1-1_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class1/day1-2_pandas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Intro to Pandas</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class1/day1-3_data_exploration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data structure</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class1/day1-4_queries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Querying data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class1/day1-5_filtering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filtering data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class1/day1-6_operations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Operations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class1/day1-summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Summary</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Class 2: Descriptive stats</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class2/day2-1_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class2/day2-2_data_exploration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data exploration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class2/day2-3_univariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Univariate analyses</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class2/day2-4_bivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bivariate analyses</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Class 3: Analysis of variance</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class3/class_3_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class3/class_3_ex_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Review exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class3/class_3_ex_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Examples diet data part I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class3/class_3_ex_3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises diet data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class3/class_3_ex_4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Examples diet data part II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class3/class_3_ex_5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises abundance data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Class 4: Linear regression</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class4/class_4_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class4/class_4_ex_1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Example reading data: estimation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class4/class_4_ex_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Example reading data: prediction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class4/class_4_ex_3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Example reading data: model diagnostic</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class4/class_4_ex_4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Example reading data: improving our model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class4/class_4_ex_5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Example reading data: confidence intervals for predictions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class4/class_4_ex_6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises ice duration data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/setup_vscode.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Setup VS Code</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/jupyter_markdown_summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Markdown for Jupyter</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../class4/class_4_intro.html">Class 4: Linear regression</a></li><li class="breadcrumb-item"><a href="../class4/class_4_ex_1.html">Example reading data: estimation</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Linear regression: Exercises</h1>
+<h1 class="title">Example reading data: estimation</h1>
 </div>
 
 
@@ -167,86 +421,107 @@ window.Quarto = {
 </header>
 
 
-<!-- MathJax for Rendering Math -->
-<script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
-</script>
-<section id="question-1" class="level3">
-<h3 class="anchored" data-anchor-id="question-1">Question 1</h3>
-<p>Suppose that you want to compare the means of <span class="math inline">\(2\)</span> groups, in which situation is Student’s t-test a good approach:</p>
-<div id="radio_XXQTCQYONB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XXQTCQYONB" value="" data-feedback="Not enough! We also need that the variances are the same between groups."> <span>We need the following: (1) it is reasonable to assume that there are no outliers and (2) for moderate and small sample sizes the sample distribution should be at least approximately normal.</span></label><label><input type="radio" autocomplete="off" name="radio_XXQTCQYONB" value="" data-feedback="Nope, even though we can't reject the null, we are still not sure if the null is correct 😉. "> <span>We need the following: (1) it is reasonable to assume that there are no outliers and (2) for moderate and small sample sizes the sample distribution should be at least approximately normal. If these criteria are met then we should test if the variances are the same between groups. If we can't reject the null, then we can use Student's t-test.</span></label><label><input type="radio" autocomplete="off" name="radio_XXQTCQYONB" value="" data-feedback="Nope, even though we can't reject the null, we are still not sure if the null is correct 😉."> <span>We should do the following tests: (1) test if there are no outliers, (2) test if the data are normally distributed (one test per sample) and (3) test if the variances are the same. If we can't reject the null for all tests, then we should use Student's t-test.</span></label><label><input type="radio" autocomplete="off" name="radio_XXQTCQYONB" value="answer" data-feedback="Yes! 😎"> <span>We need the following: (1) it is reasonable to assume that there are no outliers, (2) the variances of the two groups are known to be the same (or at least it is reasonable to assume that this is the case) and (3) for moderate and small sample sizes the sample distribution should be at least approximately normal.</span></label>
-<div class="webex-feedback-box">
-
+<p>In this exercise, we will replicate the analysis of the <code>reading</code> dataset presented in the lectures slides. Our first step is to load the data . We can load the data as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import data</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>reading <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/reading.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can now take a look at the data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(reading.head(n)) <span class="co">#print the first n rows of the dataset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   id      score        age    group
+0   1  59.988809  10.937378  Control
+1   2  60.394867  10.261197  Control
+2   3  70.023947  11.795009  Control
+3   4  41.477072   6.471665  Control
+4   5  29.154968   6.321822  Control</code></pre>
+</div>
+</div>
+<section id="comparing-groups" class="level2">
+<h2 class="anchored" data-anchor-id="comparing-groups">Comparing groups</h2>
+<p>To compare the two groups (i.e.&nbsp;<code>Control</code> and <code>Treatment</code>), we can start by comparing the empirical distributions using boxplots similarly to the graph presented in slide 2. For this purpose, we will construct two new variables, called <code>control</code> and <code>treatment</code>, which correspond to the scores in these groups. This can be done as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>control <span class="op">=</span> reading[<span class="st">'score'</span>][reading[<span class="st">'group'</span>] <span class="op">==</span> <span class="st">'Control'</span>]</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>treatment <span class="op">=</span> reading[<span class="st">'score'</span>][reading[<span class="st">'group'</span>] <span class="op">==</span> <span class="st">'Treatment'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="representing-the-distribution-of-the-score-between-groups" class="level2">
+<h2 class="anchored" data-anchor-id="representing-the-distribution-of-the-score-between-groups">Representing the distribution of the score between groups</h2>
+<p>Using these variables we can easily represent the conditional distribution of the score as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the boxplot</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>plt.boxplot([control, treatment], tick_labels<span class="op">=</span>[<span class="st">'Control'</span>, <span class="st">'Treatment'</span>])<span class="op">;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Add labels and title</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Score'</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Comparison of Reading Scores by Group'</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the plot</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="class_4_ex_1_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
-<section id="question-1-1" class="level3">
-<h3 class="anchored" data-anchor-id="question-1-1">Question 1</h3>
-<p>How to plot the data?</p>
-<p>Complete the code below to obtain the boxplot to compare the empirical distributions of the weight loss of the two diets:</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Exercise</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Hints</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Solution</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<div class="cell" data-exercise="ex_1">
-<div>
-<div id="pyodide-1" class="exercise-cell">
+<section id="modelling" class="level2">
+<h2 class="anchored" data-anchor-id="modelling">Modelling</h2>
+<p>As suggested in slide 9, a possible model is given by: <span class="math display">\[
+\text { Score }_i=\beta_0+\beta_1 \text { Group }_i+\beta_2 \text { Age }_i+\epsilon_i, \quad \epsilon_i \stackrel{i i d}{\sim} \mathcal{N}\left(0, \sigma^2\right)
+\]</span> We will refer to this model as “Model 1”. The parameters of this first model can be estimated using the function <code>smf.ols</code> as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the linear model</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>mod1 <span class="op">=</span> smf.ols(<span class="st">'score ~ group + age'</span>, data<span class="op">=</span>reading).fit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The summary of the fitted model can then be printed with:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the summary</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mod1.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  score   R-squared:                       0.859
+Model:                            OLS   Adj. R-squared:                  0.854
+Method:                 Least Squares   F-statistic:                     173.0
+Date:                Tue, 04 Nov 2025   Prob (F-statistic):           6.16e-25
+Time:                        11:26:31   Log-Likelihood:                -173.13
+No. Observations:                  60   AIC:                             352.3
+Df Residuals:                      57   BIC:                             358.6
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+======================================================================================
+                         coef    std err          t      P&gt;|t|      [0.025      0.975]
+--------------------------------------------------------------------------------------
+Intercept             -7.8639      3.324     -2.366      0.021     -14.520      -1.208
+group[T.Treatment]     6.3771      1.393      4.578      0.000       3.587       9.167
+age                    6.6457      0.370     17.985      0.000       5.906       7.386
+==============================================================================
+Omnibus:                        0.633   Durbin-Watson:                   2.068
+Prob(Omnibus):                  0.729   Jarque-Bera (JB):                0.386
+Skew:                           0.196   Prob(JB):                        0.824
+Kurtosis:                       3.013   Cond. No.                         50.7
+==============================================================================
 
-</div>
-<script type="pyodide-1-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfMSJ9LCJjb2RlIjoiaW1wb3J0IHBhbmRhcyBhcyBwZFxuaW1wb3J0IG1hdHBsb3RsaWIucHlwbG90IGFzIHBsdFxuXG5kaWV0ID0gcGQucmVhZF9jc3YoXCJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vRUxTVEUtTWFzdGVyL0RhdGEtU2NpZW5jZS9tYWluL0RhdGEvZGlldC5jc3ZcIilcbiMgY29tcHV0ZSB3ZWlnaHQgbG9zc1xuZGlldFtcIndlaWdodC5sb3NzXCJdID0gZGlldFtcImluaXRpYWwud2VpZ2h0XCJdIC0gZGlldFtcImZpbmFsLndlaWdodFwiXVxuXG4jIFZhcmlhYmxlIG9mIGludGVyZXN0XG5kaWV0QSA9IGRpZXRbXCJ3ZWlnaHQubG9zc1wiXVtkaWV0W1wiZGlldC50eXBlXCJdPT1cIkFcIl1cbmRpZXRDID0gZGlldFtcIndlaWdodC5sb3NzXCJdW2RpZXRbXCJkaWV0LnR5cGVcIl09PVwiQ1wiXVxuXG4jIFNpZGUtYnktc2lkZSBib3hwbG90XG5wbHQuZmlndXJlKGZpZ3NpemU9KDYsNCkpXG5wbHQuX19fX19fKFtkaWV0QSwgZGlldENdLFxuICAgICAgICAgICAgbGFiZWxzPVtcIkRpZXQgQVwiLCBcIkRpZXQgQ1wiXSxcbiAgICAgICAgICAgIHBhdGNoX2FydGlzdD1UcnVlLCAgIyBjb2xvciB0aGUgYm94ZXNcbiAgICAgICAgICAgIGJveHByb3BzPWRpY3QoZmFjZWNvbG9yPVwibGlnaHRibHVlXCIsIGNvbG9yPVwiYmx1ZVwiKSxcbiAgICAgICAgICAgIG1lZGlhbnByb3BzPWRpY3QoY29sb3I9XCJyZWRcIikpXG5cbnBsdC55bGFiZWwoXCJXZWlnaHQgbG9zcyAoa2cpXCIpXG5wbHQudGl0bGUoXCJDb21wYXJpc29uIG9mIFdlaWdodCBMb3NzIGZvciBEaWV0cyBBIGFuZCBDXCIpXG5wbHQuc2hvdygpIn0=
-</script>
-</div>
-</div>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_1">
-<p>Consider using the <code>boxplot()</code> function from <code>matplotlib.pyplot</code>.</p>
-</div>
-</div>
-<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex_1">
-<p>Use the <code>boxplot()</code> function from <code>matplotlib.pyplot</code>:</p>
-<div class="sourceCode" id="annotated-cell-1"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="annotated-cell-1-2"><a href="#annotated-cell-1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="annotated-cell-1-3"><a href="#annotated-cell-1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-1-4"><a href="#annotated-cell-1-4" aria-hidden="true" tabindex="-1"></a>diet <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/diet.csv"</span>)</span>
-<span id="annotated-cell-1-5"><a href="#annotated-cell-1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-1-6"><a href="#annotated-cell-1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># compute weight loss</span></span>
-<span id="annotated-cell-1-7"><a href="#annotated-cell-1-7" aria-hidden="true" tabindex="-1"></a>diet[<span class="st">"weight.loss"</span>] <span class="op">=</span> diet[<span class="st">"initial.weight"</span>] <span class="op">-</span> diet[<span class="st">"final.weight"</span>]</span>
-<span id="annotated-cell-1-8"><a href="#annotated-cell-1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-1-9"><a href="#annotated-cell-1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Variable of interest</span></span>
-<span id="annotated-cell-1-10"><a href="#annotated-cell-1-10" aria-hidden="true" tabindex="-1"></a>dietA <span class="op">=</span> diet[<span class="st">"weight.loss"</span>][diet[<span class="st">"diet.type"</span>]<span class="op">==</span><span class="st">"A"</span>]</span>
-<span id="annotated-cell-1-11"><a href="#annotated-cell-1-11" aria-hidden="true" tabindex="-1"></a>dietC <span class="op">=</span> diet[<span class="st">"weight.loss"</span>][diet[<span class="st">"diet.type"</span>]<span class="op">==</span><span class="st">"C"</span>]</span>
-<span id="annotated-cell-1-12"><a href="#annotated-cell-1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-1-13"><a href="#annotated-cell-1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Side-by-side boxplot</span></span>
-<span id="annotated-cell-1-14"><a href="#annotated-cell-1-14" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">4</span>))</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-1-15" class="code-annotation-target"><a href="#annotated-cell-1-15" aria-hidden="true" tabindex="-1"></a>plt.boxplot([dietA, dietC],</span>
-<span id="annotated-cell-1-16"><a href="#annotated-cell-1-16" aria-hidden="true" tabindex="-1"></a>            labels<span class="op">=</span>[<span class="st">"Diet A"</span>, <span class="st">"Diet C"</span>],</span>
-<span id="annotated-cell-1-17"><a href="#annotated-cell-1-17" aria-hidden="true" tabindex="-1"></a>            patch_artist<span class="op">=</span><span class="va">True</span>,  <span class="co"># color the boxes</span></span>
-<span id="annotated-cell-1-18"><a href="#annotated-cell-1-18" aria-hidden="true" tabindex="-1"></a>            boxprops<span class="op">=</span><span class="bu">dict</span>(facecolor<span class="op">=</span><span class="st">"lightblue"</span>, color<span class="op">=</span><span class="st">"blue"</span>),</span>
-<span id="annotated-cell-1-19"><a href="#annotated-cell-1-19" aria-hidden="true" tabindex="-1"></a>            medianprops<span class="op">=</span><span class="bu">dict</span>(color<span class="op">=</span><span class="st">"red"</span>))</span>
-<span id="annotated-cell-1-20"><a href="#annotated-cell-1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-1-21"><a href="#annotated-cell-1-21" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Weight loss (kg)"</span>)</span>
-<span id="annotated-cell-1-22"><a href="#annotated-cell-1-22" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Comparison of Weight Loss for Diets A and C"</span>)</span>
-<span id="annotated-cell-1-23"><a href="#annotated-cell-1-23" aria-hidden="true" tabindex="-1"></a>plt.show()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-1" data-code-lines="15" data-code-annotation="1">Use <code>plt.boxplot()</code></span>
-</dd>
-</dl>
-</div>
-</div>
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</code></pre>
 </div>
 </div>
 
 
-<script type="pyodide-data">
-eyJvcHRpb25zIjp7ImVudiI6eyJQTE9UTFlfUkVOREVSRVIiOiJwbG90bHlfbWltZXR5cGUifSwiaW5kZXhVUkwiOiJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvcHlvZGlkZS92MC4yOC4xL2Z1bGwvIn0sInBhY2thZ2VzIjp7InBrZ3MiOlsicHlvZGlkZV9odHRwIiwibWljcm9waXAiLCJpcHl0aG9uIl19fQ==
-</script>
 <script type="ojs-module-contents">
-eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJweW9kaWRlLTEiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8xID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBleGVyY2lzZSBjb25maWd1cmF0aW9uXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKFxuICAgIHtcbiAgICAgIGlkOiBcInB5b2RpZGUtMS1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IocHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF9weW9kaWRlX3ZhbHVlXzEgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzEsIHt9KTtcbl9weW9kaWRlX2ZlZWRiYWNrXzEgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBQeW9kaWRlR3JhZGVyKF9weW9kaWRlX3ZhbHVlXzEuZXZhbHVhdG9yKTtcbiAgY29uc3QgZmVlZGJhY2sgPSBhd2FpdCBncmFkZXIuZ3JhZGVFeGVyY2lzZSgpO1xuICBpZiAoIWZlZWRiYWNrKSByZXR1cm4gZW1wdHlGZWVkYmFjaztcbiAgcmV0dXJuIGZlZWRiYWNrO1xufVxuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtcHJlbHVkZSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InB5b2RpZGVPanMgPSB7XG4gIGNvbnN0IHtcbiAgICBQeW9kaWRlRXZhbHVhdG9yLFxuICAgIFB5b2RpZGVFbnZpcm9ubWVudE1hbmFnZXIsXG4gICAgc2V0dXBQeXRob24sXG4gICAgc3RhcnRQeW9kaWRlV29ya2VyLFxuICAgIGI2NERlY29kZSxcbiAgICBjb2xsYXBzZVBhdGgsXG4gIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHN0YXR1c0NvbnRhaW5lciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiZXhlcmNpc2UtbG9hZGluZy1zdGF0dXNcIik7XG4gIGNvbnN0IGluZGljYXRvckNvbnRhaW5lciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiZXhlcmNpc2UtbG9hZGluZy1pbmRpY2F0b3JcIik7XG4gIGluZGljYXRvckNvbnRhaW5lci5jbGFzc0xpc3QucmVtb3ZlKFwiZC1ub25lXCIpO1xuXG4gIGxldCBzdGF0dXNUZXh0ID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcImRpdlwiKVxuICBzdGF0dXNUZXh0LmNsYXNzTGlzdCA9IFwiZXhlcmNpc2UtbG9hZGluZy1kZXRhaWxzXCI7XG4gIHN0YXR1c1RleHQgPSBzdGF0dXNDb250YWluZXIuYXBwZW5kQ2hpbGQoc3RhdHVzVGV4dCk7XG4gIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgSW5pdGlhbGlzZWA7XG5cbiAgLy8gSG9pc3QgaW5kaWNhdG9yIG91dCBmcm9tIGZpbmFsIHNsaWRlIHdoZW4gcnVubmluZyB1bmRlciByZXZlYWxcbiAgY29uc3QgcmV2ZWFsU3RhdHVzID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5yZXZlYWwgLmV4ZXJjaXNlLWxvYWRpbmctaW5kaWNhdG9yXCIpO1xuICBpZiAocmV2ZWFsU3RhdHVzKSB7XG4gICAgcmV2ZWFsU3RhdHVzLnJlbW92ZSgpO1xuICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIucmV2ZWFsID4gLnNsaWRlc1wiKS5hcHBlbmRDaGlsZChyZXZlYWxTdGF0dXMpO1xuICB9XG5cbiAgLy8gTWFrZSBhbnkgcmV2ZWFsIHNsaWRlcyB3aXRoIGxpdmUgY2VsbHMgc2Nyb2xsYWJsZVxuICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKFwiLnJldmVhbCAuZXhlcmNpc2UtY2VsbFwiKS5mb3JFYWNoKChlbCkgPT4ge1xuICAgIGVsLmNsb3Nlc3QoJ3NlY3Rpb24uc2xpZGUnKS5jbGFzc0xpc3QuYWRkKFwic2Nyb2xsYWJsZVwiKTtcbiAgfSlcblxuICAvLyBQeW9kaWRlIHN1cHBsZW1lbnRhbCBkYXRhIGFuZCBvcHRpb25zXG4gIGNvbnN0IGRhdGFDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtZGF0YVxcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGRhdGEgPSBKU09OLnBhcnNlKGI2NERlY29kZShkYXRhQ29udGVudCkpO1xuXG4gIC8vIEdyYWIgbGlzdCBvZiByZXNvdXJjZXMgdG8gYmUgZG93bmxvYWRlZFxuICBjb25zdCBmaWxlc0NvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwidmZzLWZpbGVcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBmaWxlcyA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKGZpbGVzQ29udGVudCkpO1xuXG4gIGxldCBweW9kaWRlUHJvbWlzZSA9IChhc3luYyAoKSA9PiB7XG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBQeW9kaWRlYDtcbiAgICBjb25zdCBweW9kaWRlID0gYXdhaXQgc3RhcnRQeW9kaWRlV29ya2VyKGRhdGEub3B0aW9ucyk7XG5cbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIHBhY2thZ2U6IG1pY3JvcGlwYDtcbiAgICBhd2FpdCBweW9kaWRlLmxvYWRQYWNrYWdlKFwibWljcm9waXBcIik7XG4gICAgY29uc3QgbWljcm9waXAgPSBhd2FpdCBweW9kaWRlLnB5aW1wb3J0KFwibWljcm9waXBcIik7XG4gICAgYXdhaXQgZGF0YS5wYWNrYWdlcy5wa2dzLm1hcCgocGtnKSA9PiAoKSA9PiB7XG4gICAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIHBhY2thZ2U6ICR7cGtnfWA7XG4gICAgICByZXR1cm4gbWljcm9waXAuaW5zdGFsbChwa2cpO1xuICAgIH0pLnJlZHVjZSgoY3VyLCBuZXh0KSA9PiBjdXIudGhlbihuZXh0KSwgUHJvbWlzZS5yZXNvbHZlKCkpO1xuICAgIGF3YWl0IG1pY3JvcGlwLmRlc3Ryb3koKTtcblxuICAgIC8vIERvd25sb2FkIGFuZCBpbnN0YWxsIHJlc291cmNlc1xuICAgIGF3YWl0IGZpbGVzLm1hcCgoZmlsZSkgPT4gYXN5bmMgKCkgPT4ge1xuICAgICAgY29uc3QgbmFtZSA9IGZpbGUuc3Vic3RyaW5nKGZpbGUubGFzdEluZGV4T2YoJy8nKSArIDEpO1xuICAgICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyByZXNvdXJjZTogJHtuYW1lfWA7XG4gICAgICBjb25zdCByZXNwb25zZSA9IGF3YWl0IGZldGNoKGZpbGUpO1xuICAgICAgaWYgKCFyZXNwb25zZS5vaykge1xuICAgICAgICB0aHJvdyBuZXcgRXJyb3IoYENhbid0IGRvd25sb2FkIFxcYCR7ZmlsZX1cXGAuIEVycm9yICR7cmVzcG9uc2Uuc3RhdHVzfTogXCIke3Jlc3BvbnNlLnN0YXR1c1RleHR9XCIuYCk7XG4gICAgICB9XG4gICAgICBjb25zdCBkYXRhID0gYXdhaXQgcmVzcG9uc2UuYXJyYXlCdWZmZXIoKTtcblxuICAgICAgLy8gU3RvcmUgVVJMcyBpbiB0aGUgY3dkIHdpdGhvdXQgYW55IHN1YmRpcmVjdG9yeSBzdHJ1Y3R1cmVcbiAgICAgIGlmIChmaWxlLmluY2x1ZGVzKFwiOi8vXCIpKSB7XG4gICAgICAgIGZpbGUgPSBuYW1lO1xuICAgICAgfVxuXG4gICAgICAvLyBDb2xsYXBzZSBoaWdoZXIgZGlyZWN0b3J5IHN0cnVjdHVyZVxuICAgICAgZmlsZSA9IGNvbGxhcHNlUGF0aChmaWxlKTtcblxuICAgICAgLy8gQ3JlYXRlIGRpcmVjdG9yeSB0cmVlLCBpZ25vcmluZyBcImRpcmVjdG9yeSBleGlzdHNcIiBWRlMgZXJyb3JzXG4gICAgICBjb25zdCBwYXJ0cyA9IGZpbGUuc3BsaXQoJy8nKS5zbGljZSgwLCAtMSk7XG4gICAgICBsZXQgcGF0aCA9ICcnO1xuICAgICAgd2hpbGUgKHBhcnRzLmxlbmd0aCA+IDApIHtcbiAgICAgICAgcGF0aCArPSBwYXJ0cy5zaGlmdCgpICsgJy8nO1xuICAgICAgICB0cnkge1xuICAgICAgICAgIGF3YWl0IHB5b2RpZGUuRlMubWtkaXIocGF0aCk7XG4gICAgICAgIH0gY2F0Y2ggKGUpIHtcbiAgICAgICAgICBpZiAoZS5uYW1lICE9PSBcIkVycm5vRXJyb3JcIikgdGhyb3cgZTtcbiAgICAgICAgICBpZiAoZS5lcnJubyAhPT0gMjApIHtcbiAgICAgICAgICAgIGNvbnN0IGVycm9yVGV4dFB0ciA9IGF3YWl0IHB5b2RpZGUuX21vZHVsZS5fc3RyZXJyb3IoZS5lcnJubyk7XG4gICAgICAgICAgICBjb25zdCBlcnJvclRleHQgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuVVRGOFRvU3RyaW5nKGVycm9yVGV4dFB0cik7XG4gICAgICAgICAgICB0aHJvdyBuZXcgRXJyb3IoYEZpbGVzeXN0ZW0gRXJyb3IgJHtlLmVycm5vfSBcIiR7ZXJyb3JUZXh0fVwiLmApO1xuICAgICAgICAgIH1cbiAgICAgICAgfVxuICAgICAgfVxuXG4gICAgICAvLyBXcml0ZSB0aGlzIGZpbGUgdG8gdGhlIFZGU1xuICAgICAgdHJ5IHtcbiAgICAgICAgcmV0dXJuIGF3YWl0IHB5b2RpZGUuRlMud3JpdGVGaWxlKGZpbGUsIG5ldyBVaW50OEFycmF5KGRhdGEpKTtcbiAgICAgIH0gY2F0Y2ggKGUpIHtcbiAgICAgICAgaWYgKGUubmFtZSAhPT0gXCJFcnJub0Vycm9yXCIpIHRocm93IGU7XG4gICAgICAgIGNvbnN0IGVycm9yVGV4dFB0ciA9IGF3YWl0IHB5b2RpZGUuX21vZHVsZS5fc3RyZXJyb3IoZS5lcnJubyk7XG4gICAgICAgIGNvbnN0IGVycm9yVGV4dCA9IGF3YWl0IHB5b2RpZGUuX21vZHVsZS5VVEY4VG9TdHJpbmcoZXJyb3JUZXh0UHRyKTtcbiAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBGaWxlc3lzdGVtIEVycm9yICR7ZS5lcnJub30gXCIke2Vycm9yVGV4dH1cIi5gKTtcbiAgICAgIH1cbiAgICB9KS5yZWR1Y2UoKGN1ciwgbmV4dCkgPT4gY3VyLnRoZW4obmV4dCksIFByb21pc2UucmVzb2x2ZSgpKTtcblxuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgUHlvZGlkZSBlbnZpcm9ubWVudCBzZXR1cGA7XG4gICAgYXdhaXQgc2V0dXBQeXRob24ocHlvZGlkZSk7XG5cbiAgICBzdGF0dXNUZXh0LnJlbW92ZSgpO1xuICAgIGlmIChzdGF0dXNDb250YWluZXIuY2hpbGRyZW4ubGVuZ3RoID09IDApIHtcbiAgICAgIHN0YXR1c0NvbnRhaW5lci5wYXJlbnROb2RlLnJlbW92ZSgpO1xuICAgIH1cbiAgICByZXR1cm4gcHlvZGlkZTtcbiAgfSkoKS5jYXRjaCgoZXJyKSA9PiB7XG4gICAgc3RhdHVzVGV4dC5zdHlsZS5jb2xvciA9IFwidmFyKC0tZXhlcmNpc2UtZWRpdG9yLWhsLWVyLCAjQUQwMDAwKVwiO1xuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBlcnIubWVzc2FnZTtcbiAgICAvL2luZGljYXRvckNvbnRhaW5lci5xdWVyeVNlbGVjdG9yKFwiLnNwaW5uZXItZ3Jvd1wiKS5jbGFzc0xpc3QuYWRkKFwiZC1ub25lXCIpO1xuICAgIHRocm93IGVycjtcbiAgfSk7XG5cbiAgLy8gS2VlcCB0cmFjayBvZiBpbml0aWFsIE9KUyBibG9jayByZW5kZXJcbiAgY29uc3QgcmVuZGVyZWRPanMgPSB7fTtcblxuICBjb25zdCBwcm9jZXNzID0gYXN5bmMgKGNvbnRleHQsIGlucHV0cykgPT4ge1xuICAgIGNvbnN0IHB5b2RpZGUgPSBhd2FpdCBweW9kaWRlUHJvbWlzZTtcbiAgICBjb25zdCBldmFsdWF0b3IgPSBuZXcgUHlvZGlkZUV2YWx1YXRvcihweW9kaWRlLCBjb250ZXh0KTtcbiAgICBhd2FpdCBldmFsdWF0b3IucHJvY2VzcyhpbnB1dHMpO1xuICAgIHJldHVybiBldmFsdWF0b3IuY29udGFpbmVyO1xuICB9XG5cbiAgcmV0dXJuIHtcbiAgICBweW9kaWRlUHJvbWlzZSxcbiAgICByZW5kZXJlZE9qcyxcbiAgICBwcm9jZXNzLFxuICB9O1xufVxuIn1dfQ==
+eyJjb250ZW50cyI6W119
 </script>
 <div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
 <div id="exercise-loading-status" class="d-flex gap-2">
@@ -768,6 +1043,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../class4/class_4_intro.html" class="pagination-link" aria-label="Overview">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Overview</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../class4/class_4_ex_2.html" class="pagination-link" aria-label="Example reading data: prediction">
+        <span class="nav-page-text">Example reading data: prediction</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
