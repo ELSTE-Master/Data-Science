@@ -339,12 +339,35 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
- <span class="menu-text">Appendices</span></a>
+ <span class="menu-text">Exam</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exam/exam_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Instructions and documents</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exam/exam_data_description.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data description</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../appendices/setup_vscode.html" class="sidebar-item-text sidebar-link">
@@ -393,8 +416,8 @@ window.Quarto = {
 <section id="question-1" class="level3">
 <h3 class="anchored" data-anchor-id="question-1">Question 1</h3>
 <p>Suppose that you want to compare the means of <span class="math inline">\(2\)</span> groups, in which situation is Student’s t-test a good approach:</p>
-<div id="radio_UWHVCXPUZX" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UWHVCXPUZX" value="" data-feedback="Not enough! We also need that the variances are the same between groups."> <span>We need the following: (1) it is reasonable to assume that there are no outliers and (2) for moderate and small sample sizes the sample distribution should be at least approximately normal.</span></label><label><input type="radio" autocomplete="off" name="radio_UWHVCXPUZX" value="" data-feedback="Nope, even though we can't reject the null, we are still not sure if the null is correct 😉. "> <span>We need the following: (1) it is reasonable to assume that there are no outliers and (2) for moderate and small sample sizes the sample distribution should be at least approximately normal. If these criteria are met then we should test if the variances are the same between groups. If we can't reject the null, then we can use Student's t-test.</span></label><label><input type="radio" autocomplete="off" name="radio_UWHVCXPUZX" value="" data-feedback="Nope, even though we can't reject the null, we are still not sure if the null is correct 😉."> <span>We should do the following tests: (1) test if there are no outliers, (2) test if the data are normally distributed (one test per sample) and (3) test if the variances are the same. If we can't reject the null for all tests, then we should use Student's t-test.</span></label><label><input type="radio" autocomplete="off" name="radio_UWHVCXPUZX" value="answer" data-feedback="Yes! 😎"> <span>We need the following: (1) it is reasonable to assume that there are no outliers, (2) the variances of the two groups are known to be the same (or at least it is reasonable to assume that this is the case) and (3) for moderate and small sample sizes the sample distribution should be at least approximately normal.</span></label>
+<div id="radio_RXEMEHUFHQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RXEMEHUFHQ" value="" data-feedback="Not enough! We also need that the variances are the same between groups."> <span>We need the following: (1) it is reasonable to assume that there are no outliers and (2) for moderate and small sample sizes the sample distribution should be at least approximately normal.</span></label><label><input type="radio" autocomplete="off" name="radio_RXEMEHUFHQ" value="" data-feedback="Nope, even though we can't reject the null, we are still not sure if the null is correct 😉. "> <span>We need the following: (1) it is reasonable to assume that there are no outliers and (2) for moderate and small sample sizes the sample distribution should be at least approximately normal. If these criteria are met then we should test if the variances are the same between groups. If we can't reject the null, then we can use Student's t-test.</span></label><label><input type="radio" autocomplete="off" name="radio_RXEMEHUFHQ" value="" data-feedback="Nope, even though we can't reject the null, we are still not sure if the null is correct 😉."> <span>We should do the following tests: (1) test if there are no outliers, (2) test if the data are normally distributed (one test per sample) and (3) test if the variances are the same. If we can't reject the null for all tests, then we should use Student's t-test.</span></label><label><input type="radio" autocomplete="off" name="radio_RXEMEHUFHQ" value="answer" data-feedback="Yes! 😎"> <span>We need the following: (1) it is reasonable to assume that there are no outliers, (2) the variances of the two groups are known to be the same (or at least it is reasonable to assume that this is the case) and (3) for moderate and small sample sizes the sample distribution should be at least approximately normal.</span></label>
 <div class="webex-feedback-box">
 
 </div>
@@ -403,8 +426,8 @@ window.Quarto = {
 <section id="question-2" class="level3">
 <h3 class="anchored" data-anchor-id="question-2">Question 2</h3>
 <p>Suppose that you want to compare the means of <span class="math inline">\(2\)</span> groups, in which situation is Welsh’s t-test a good approach:</p>
-<div id="radio_CYTADELGLL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CYTADELGLL" value="" data-feedback="Nope, if the sample size is small we also need the empirical distribution to be reasonably close to a normal distribution."> <span>When it is reasonable to assume that there are no outliers.</span></label><label><input type="radio" autocomplete="off" name="radio_CYTADELGLL" value="" data-feedback="Nope, these outliers can potentially have a very large impact!"> <span>When it is reasonable to assume that the sample distribution is at least approximately normal with not many outliers.</span></label><label><input type="radio" autocomplete="off" name="radio_CYTADELGLL" value="answer" data-feedback="Indeed, if the sample size is large enough, then we don't require the sample distribution to be close to a normal because of the central limit theorem."> <span>When it is reasonable to assume that there are no outliers and the sample size is sufficiently large</span></label><label><input type="radio" autocomplete="off" name="radio_CYTADELGLL" value="" data-feedback="Nope, if the sample size is small we also need the empirical distribution to be reasonably close to a normal distribution. The assumption that the variances are the same is not needed."> <span>We need the following: (1) it is reasonable to assume that there are no outliers, (2) the variances of the two groups are known to be the same (or at least it is reasonable to assume that this is the case).</span></label>
+<div id="radio_ATJNIXGIJF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ATJNIXGIJF" value="" data-feedback="Nope, if the sample size is small we also need the empirical distribution to be reasonably close to a normal distribution."> <span>When it is reasonable to assume that there are no outliers.</span></label><label><input type="radio" autocomplete="off" name="radio_ATJNIXGIJF" value="" data-feedback="Nope, these outliers can potentially have a very large impact!"> <span>When it is reasonable to assume that the sample distribution is at least approximately normal with not many outliers.</span></label><label><input type="radio" autocomplete="off" name="radio_ATJNIXGIJF" value="answer" data-feedback="Indeed, if the sample size is large enough, then we don't require the sample distribution to be close to a normal because of the central limit theorem."> <span>When it is reasonable to assume that there are no outliers and the sample size is sufficiently large</span></label><label><input type="radio" autocomplete="off" name="radio_ATJNIXGIJF" value="" data-feedback="Nope, if the sample size is small we also need the empirical distribution to be reasonably close to a normal distribution. The assumption that the variances are the same is not needed."> <span>We need the following: (1) it is reasonable to assume that there are no outliers, (2) the variances of the two groups are known to be the same (or at least it is reasonable to assume that this is the case).</span></label>
 <div class="webex-feedback-box">
 
 </div>
@@ -413,8 +436,8 @@ window.Quarto = {
 <section id="question-3" class="level3">
 <h3 class="anchored" data-anchor-id="question-3">Question 3</h3>
 <p>Suppose that you want to compare the means of <span class="math inline">\(2\)</span> groups, in which situation is Wilcoxon rank sum test inadequate:</p>
-<div id="radio_IHEXQYABPZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_IHEXQYABPZ" value="" data-feedback="Nope! 😆"> <span>When there are no outliers.</span></label><label><input type="radio" autocomplete="off" name="radio_IHEXQYABPZ" value="answer" data-feedback="Yes! Since this test concerns the median and not the mean, the result can be quite different when the distribution is not symmetric."> <span>When the distribution is not symmetric and the sample is large.</span></label><label><input type="radio" autocomplete="off" name="radio_IHEXQYABPZ" value="" data-feedback="Nope, it can still perform very well in this case. "> <span>When it is reasonable to assume that there are no outliers and the sample distribution should be at least approximately normal.</span></label><label><input type="radio" autocomplete="off" name="radio_IHEXQYABPZ" value="" data-feedback="Nope, it can still perform very well in this case."> <span>When it is reasonable to assume that there are no outliers and the variances are the same.</span></label>
+<div id="radio_UDZEGOLVSU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UDZEGOLVSU" value="" data-feedback="Nope! 😆"> <span>When there are no outliers.</span></label><label><input type="radio" autocomplete="off" name="radio_UDZEGOLVSU" value="answer" data-feedback="Yes! Since this test concerns the median and not the mean, the result can be quite different when the distribution is not symmetric."> <span>When the distribution is not symmetric and the sample is large.</span></label><label><input type="radio" autocomplete="off" name="radio_UDZEGOLVSU" value="" data-feedback="Nope, it can still perform very well in this case. "> <span>When it is reasonable to assume that there are no outliers and the sample distribution should be at least approximately normal.</span></label><label><input type="radio" autocomplete="off" name="radio_UDZEGOLVSU" value="" data-feedback="Nope, it can still perform very well in this case."> <span>When it is reasonable to assume that there are no outliers and the variances are the same.</span></label>
 <div class="webex-feedback-box">
 
 </div>
@@ -423,8 +446,8 @@ window.Quarto = {
 <section id="question-4" class="level3">
 <h3 class="anchored" data-anchor-id="question-4">Question 4</h3>
 <p>A researcher administers many hypothesis tests as part of a research project. He finds that, of <span class="math inline">\(250\)</span> tests <span class="math inline">\(11\)</span> were significant at the <span class="math inline">\(5\%\)</span> level. The researcher feels very proud of this fact and thinks that he makes a big discovery. What do you think of this situation?</p>
-<div id="radio_WSIHXHWRUY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WSIHXHWRUY" value="" data-feedback="Nope, because we did many tests..."> <span>It is very interesting that \(11\) tests are significant.</span></label><label><input type="radio" autocomplete="off" name="radio_WSIHXHWRUY" value="" data-feedback="Finding a posteriori argument is always dangerous. ⚠️ "> <span>It is interesting that \(11\) tests are significant but since we did many tests we should find a theoretical argument for our analysis.</span></label><label><input type="radio" autocomplete="off" name="radio_WSIHXHWRUY" value="" data-feedback="No, actually we would need a lot more... In fact, there is a probability of \(48\%\) that one would obtain \(13\) or more significant tests by pure luck. 🤔 "> <span>One would expect \(12.5\) (\(5\%\) of \(250\)) significant tests even in the purely null case, merely by chance, so we should find at least \(13\) significant tests for the result to be interesting.</span></label><label><input type="radio" autocomplete="off" name="radio_WSIHXHWRUY" value="answer" data-feedback="Yes! In the class notes of John Wilder Tukey (who is a famous statistician and the inventor of many statistical methods, including the boxplot!), he used this example at Princeton University in \(1976\) to highlight the dangers of multiple testing (and introduce the idea of higher criticism) 🤔. "> <span>One would expect \(12.5\) (\(5\%\) of \(250\)) significant tests even in the purely null case, merely by chance. So, finding only \(11\) significant results is actually somewhat disappointing.</span></label>
+<div id="radio_SWKFBTSKZX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SWKFBTSKZX" value="" data-feedback="Nope, because we did many tests..."> <span>It is very interesting that \(11\) tests are significant.</span></label><label><input type="radio" autocomplete="off" name="radio_SWKFBTSKZX" value="" data-feedback="Finding a posteriori argument is always dangerous. ⚠️ "> <span>It is interesting that \(11\) tests are significant but since we did many tests we should find a theoretical argument for our analysis.</span></label><label><input type="radio" autocomplete="off" name="radio_SWKFBTSKZX" value="" data-feedback="No, actually we would need a lot more... In fact, there is a probability of \(48\%\) that one would obtain \(13\) or more significant tests by pure luck. 🤔 "> <span>One would expect \(12.5\) (\(5\%\) of \(250\)) significant tests even in the purely null case, merely by chance, so we should find at least \(13\) significant tests for the result to be interesting.</span></label><label><input type="radio" autocomplete="off" name="radio_SWKFBTSKZX" value="answer" data-feedback="Yes! In the class notes of John Wilder Tukey (who is a famous statistician and the inventor of many statistical methods, including the boxplot!), he used this example at Princeton University in \(1976\) to highlight the dangers of multiple testing (and introduce the idea of higher criticism) 🤔. "> <span>One would expect \(12.5\) (\(5\%\) of \(250\)) significant tests even in the purely null case, merely by chance. So, finding only \(11\) significant results is actually somewhat disappointing.</span></label>
 <div class="webex-feedback-box">
 
 </div>

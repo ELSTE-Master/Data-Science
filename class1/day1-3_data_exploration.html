@@ -5213,12 +5213,35 @@ margin: 1em 0;
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
- <span class="menu-text">Appendices</span></a>
+ <span class="menu-text">Exam</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exam/exam_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Instructions and documents</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exam/exam_data_description.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data description</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../appendices/setup_vscode.html" class="sidebar-item-text sidebar-link">
@@ -5453,7 +5476,7 @@ Remember that *functions* can take different *arguments*, which are extra keywor
 - `index_col=0`: Specify that the index of the file is the first column. More on that soon if this is unclear.
 - `parse_dates=['Date']`: Specify that the `Date` column should be treated as a date object.
 ::: -->
-<div id="42feb4bd" class="cell" data-execution_count="3">
+<div id="19aac0ae" class="cell" data-execution_count="3">
 <div id="lst-load-data" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-load-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -5541,7 +5564,7 @@ Listing 1: Loading data from a csv file
 <li><code>.set_index()</code>: Uses a column as the DataFrame’s index</li>
 <li><code>.reset_index()</code>: Removes the column’s index back to a sequential numbering as in <a href="#lst-load-data" class="quarto-xref">Listing 1</a>.</li>
 </ul>
-<div id="dd2a1103" class="cell" data-execution_count="4">
+<div id="2acef5b2" class="cell" data-execution_count="4">
 <div id="lst-set-index" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-set-index-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -5686,7 +5709,7 @@ Your turn!
 <li><code>axis</code>: Specifies whether sorting rows (<code>axis = 0</code> - in which case <code>by</code> is a column name) or sorting columns (<code>axis = 1</code>, in which case <code>by</code> is an index value). The documentation specifies <code>axis = 0</code>, which means that rows will be sorted if <code>axis</code> is not specified.</li>
 <li><code>ascending</code>: Using a <em>bool</em> (remember, this is a True/False behaviour), specifies if values are sorted in <em>ascending</em> (<code>ascending = True</code>, default behaviour is not specified) or <em>descending</em> (<code>ascending = False</code>) order.</li>
 </ol>
-<div id="9a70c324" class="cell" data-execution_count="5">
+<div id="bb0c3cfa" class="cell" data-execution_count="5">
 <div id="lst-sort" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-sort-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -5712,7 +5735,7 @@ Question
 </div>
 <div class="callout-body-container callout-body">
 <p>After sorting the data in <strong>descending order</strong> by VEI and time, what are the three first volcanoes?</p>
-<div id="7a034de3" class="cell" data-execution_count="6">
+<div id="5044ef06" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="5">
 <select class="webex-select"><option value="blank"></option><option value="0">Nyiragongo, Ontake, Kīlauea</option><option value="0">Kīlauea, Ontake, Nyiragongo</option><option value="answer">Pinatubo, El Chichon, St Helens</option><option value="0">St Helens, El Chichon, Pinatubo</option></select>
 </div>

@@ -373,12 +373,35 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
- <span class="menu-text">Appendices</span></a>
+ <span class="menu-text">Exam</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exam/exam_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Instructions and documents</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exam/exam_data_description.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data description</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../appendices/setup_vscode.html" class="sidebar-item-text sidebar-link">
@@ -441,8 +464,8 @@ window.Quarto = {
 <section id="question-1" class="level3">
 <h3 class="anchored" data-anchor-id="question-1">Question 1</h3>
 <p>Define <span class="math inline">\(\mu_{OG}\)</span> and <span class="math inline">\(\mu_{CC}\)</span> as the expectation of the weight of the salmanders from old-growth forest and from clear-cut area respectively. Which hypotheses should you consider to assess the validity of the previously mentioned claim:</p>
-<div id="radio_WGPJDEAPBY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WGPJDEAPBY" value="answer" data-feedback="Yes!"> <span>\( H_0: \mu_{OG} = \mu_{CC} \), \( H_a: \mu_{OG} \neq \mu_{CC} \)</span></label><label><input type="radio" autocomplete="off" name="radio_WGPJDEAPBY" value="" data-feedback="Nope, the null hypothesis always contains the equality."> <span>\( H_0: \mu_{OG} \neq \mu_{CC} \), \( H_a: \mu_{OG}= \mu_{CC} \)</span></label><label><input type="radio" autocomplete="off" name="radio_WGPJDEAPBY" value="" data-feedback="No, we want to test if there is a difference, not if one is larger than the other."> <span>\( H_0: \mu_{OG} = \mu_{CC} \), \( H_a: \mu_{OG} &gt; \mu_{CC} \)</span></label><label><input type="radio" autocomplete="off" name="radio_WGPJDEAPBY" value="" data-feedback="No, we want to test if there is a difference, not if one is larger than the other."> <span>\( H_0: \mu_{OG} = \mu_{CC} \), \( H_a: \mu_{OG} &lt; \mu_{CC} \)</span></label>
+<div id="radio_AXVVDGAOOT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AXVVDGAOOT" value="answer" data-feedback="Yes!"> <span>\( H_0: \mu_{OG} = \mu_{CC} \), \( H_a: \mu_{OG} \neq \mu_{CC} \)</span></label><label><input type="radio" autocomplete="off" name="radio_AXVVDGAOOT" value="" data-feedback="Nope, the null hypothesis always contains the equality."> <span>\( H_0: \mu_{OG} \neq \mu_{CC} \), \( H_a: \mu_{OG}= \mu_{CC} \)</span></label><label><input type="radio" autocomplete="off" name="radio_AXVVDGAOOT" value="" data-feedback="No, we want to test if there is a difference, not if one is larger than the other."> <span>\( H_0: \mu_{OG} = \mu_{CC} \), \( H_a: \mu_{OG} &gt; \mu_{CC} \)</span></label><label><input type="radio" autocomplete="off" name="radio_AXVVDGAOOT" value="" data-feedback="No, we want to test if there is a difference, not if one is larger than the other."> <span>\( H_0: \mu_{OG} = \mu_{CC} \), \( H_a: \mu_{OG} &lt; \mu_{CC} \)</span></label>
 <div class="webex-feedback-box">
 
 </div>
@@ -562,8 +585,8 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfNiJ9LCJjb2RlIjoi
 </div>
 </div>
 <p>He concludes that there is no evidence from the data to suggest that the average weight of Coastal Giant Salamanders differs between the two locations. What do you think of this procedure?</p>
-<div id="radio_PLEIVQUAPV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PLEIVQUAPV" value="" data-feedback="No, the t-test is sensitive to outliers, which can distort the results."> <span>The procedure is appropriate. The t-test is robust to outliers and non-normality.</span></label><label><input type="radio" autocomplete="off" name="radio_PLEIVQUAPV" value="answer" data-feedback="Yes! The presence of outliers makes the t-test unreliable."> <span>The t-test may not be appropriate because there are outliers.</span></label><label><input type="radio" autocomplete="off" name="radio_PLEIVQUAPV" value="" data-feedback="No, the argument `equal_var = FALSE` already performs Welch’s t-test, which does not assume equal variances."> <span>The t-test is wrong because it assumes equal variances, which is not the case here.</span></label><label><input type="radio" autocomplete="off" name="radio_PLEIVQUAPV" value="" data-feedback="No. The goal is to compare the central tendency (mean or median), not the variability."> <span>The test should compare the variances instead of the means.</span></label>
+<div id="radio_ROCKLAGBVZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ROCKLAGBVZ" value="" data-feedback="No, the t-test is sensitive to outliers, which can distort the results."> <span>The procedure is appropriate. The t-test is robust to outliers and non-normality.</span></label><label><input type="radio" autocomplete="off" name="radio_ROCKLAGBVZ" value="answer" data-feedback="Yes! The presence of outliers makes the t-test unreliable."> <span>The t-test may not be appropriate because there are outliers.</span></label><label><input type="radio" autocomplete="off" name="radio_ROCKLAGBVZ" value="" data-feedback="No, the argument `equal_var = FALSE` already performs Welch’s t-test, which does not assume equal variances."> <span>The t-test is wrong because it assumes equal variances, which is not the case here.</span></label><label><input type="radio" autocomplete="off" name="radio_ROCKLAGBVZ" value="" data-feedback="No. The goal is to compare the central tendency (mean or median), not the variability."> <span>The test should compare the variances instead of the means.</span></label>
 <div class="webex-feedback-box">
 
 </div>
@@ -572,8 +595,8 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfNiJ9LCJjb2RlIjoi
 <section id="question-5" class="level3">
 <h3 class="anchored" data-anchor-id="question-5">Question 5</h3>
 <p>Based on the empirical distribution of the weights of salamander for the two locations, which of the following test appears to be the most suitable?</p>
-<div id="radio_OXHZJCKQDY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OXHZJCKQDY" value="" data-feedback="The Student's t-test assumes that the variances of the two groups are the same. This is very hard to verify in practice and thus, it is preferable to avoid using this test."> <span>Student's t-test.</span></label><label><input type="radio" autocomplete="off" name="radio_OXHZJCKQDY" value="" data-feedback="This is probably a suitable choice but one can argue that outliers are present in weight distributions so this may not be the optimal choice."> <span>Welch's t-test.</span></label><label><input type="radio" autocomplete="off" name="radio_OXHZJCKQDY" value="answer" data-feedback="This is arguably the best choice for this problem. The Wilcoxon test compares medians and is less sensitive to extreme values."> <span>Wilcoxon test.</span></label>
+<div id="radio_TPSXKQZMMP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TPSXKQZMMP" value="" data-feedback="The Student's t-test assumes that the variances of the two groups are the same. This is very hard to verify in practice and thus, it is preferable to avoid using this test."> <span>Student's t-test.</span></label><label><input type="radio" autocomplete="off" name="radio_TPSXKQZMMP" value="" data-feedback="This is probably a suitable choice but one can argue that outliers are present in weight distributions so this may not be the optimal choice."> <span>Welch's t-test.</span></label><label><input type="radio" autocomplete="off" name="radio_TPSXKQZMMP" value="answer" data-feedback="This is arguably the best choice for this problem. The Wilcoxon test compares medians and is less sensitive to extreme values."> <span>Wilcoxon test.</span></label>
 <div class="webex-feedback-box">
 
 </div>
@@ -625,8 +648,8 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfNyJ9LCJjb2RlIjoi
 <section id="question-7" class="level3">
 <h3 class="anchored" data-anchor-id="question-7">Question 7</h3>
 <p>Based on the p-value you obtained, what can you conclude (assuming <span class="math inline">\(\alpha=0.05\)</span>)</p>
-<div id="radio_VCOHXJKQFL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VCOHXJKQFL" value="" data-feedback="No. We never accept the null hypothesis. A p-value below \(0.05\) leads us to reject it."> <span>We accept the null hypothesis that the median sizes are equal between OG and CC.</span></label><label><input type="radio" autocomplete="off" name="radio_VCOHXJKQFL" value="answer" data-feedback="Yes! Since the p-value is below \(0.05\), we have evidence that the medians differ between the two groups."> <span>We reject the null hypothesis and conclude that the median salamander size differs between OG and CC.</span></label><label><input type="radio" autocomplete="off" name="radio_VCOHXJKQFL" value="" data-feedback="Not necessarily, the test only indicates that a difference exists, not its direction unless the alternative hypothesis was one-sided."> <span>We conclude that salamanders from OG are heavier than those from CC.</span></label><label><input type="radio" autocomplete="off" name="radio_VCOHXJKQFL" value="" data-feedback="No, the Mann–Whitney U test is non-parametric and does not require normality."> <span>We cannot conclude anything because the test only works for normal data.</span></label>
+<div id="radio_THXKOEBQWY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_THXKOEBQWY" value="" data-feedback="No. We never accept the null hypothesis. A p-value below \(0.05\) leads us to reject it."> <span>We accept the null hypothesis that the median sizes are equal between OG and CC.</span></label><label><input type="radio" autocomplete="off" name="radio_THXKOEBQWY" value="answer" data-feedback="Yes! Since the p-value is below \(0.05\), we have evidence that the medians differ between the two groups."> <span>We reject the null hypothesis and conclude that the median salamander size differs between OG and CC.</span></label><label><input type="radio" autocomplete="off" name="radio_THXKOEBQWY" value="" data-feedback="Not necessarily, the test only indicates that a difference exists, not its direction unless the alternative hypothesis was one-sided."> <span>We conclude that salamanders from OG are heavier than those from CC.</span></label><label><input type="radio" autocomplete="off" name="radio_THXKOEBQWY" value="" data-feedback="No, the Mann–Whitney U test is non-parametric and does not require normality."> <span>We cannot conclude anything because the test only works for normal data.</span></label>
 <div class="webex-feedback-box">
 
 </div>

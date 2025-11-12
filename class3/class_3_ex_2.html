@@ -373,12 +373,35 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
- <span class="menu-text">Appendices</span></a>
+ <span class="menu-text">Exam</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exam/exam_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Instructions and documents</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exam/exam_data_description.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data description</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../appendices/setup_vscode.html" class="sidebar-item-text sidebar-link">
@@ -474,7 +497,7 @@ window.Quarto = {
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>            medianprops<span class="op">=</span><span class="bu">dict</span>(color<span class="op">=</span><span class="st">"red"</span>),</span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>            showfliers<span class="op">=</span><span class="va">False</span>) <span class="co"># don't show outliers in boxplot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>{'whiskers': [&lt;matplotlib.lines.Line2D object at 0x7b51fc1a3490&gt;, &lt;matplotlib.lines.Line2D object at 0x7b51fc1a3790&gt;, &lt;matplotlib.lines.Line2D object at 0x7b51fc1f4640&gt;, &lt;matplotlib.lines.Line2D object at 0x7b51fc1f4940&gt;], 'caps': [&lt;matplotlib.lines.Line2D object at 0x7b51fc1a3a90&gt;, &lt;matplotlib.lines.Line2D object at 0x7b51fc1a3d90&gt;, &lt;matplotlib.lines.Line2D object at 0x7b51fc1f4c40&gt;, &lt;matplotlib.lines.Line2D object at 0x7b51fc1f4f40&gt;], 'boxes': [&lt;matplotlib.patches.PathPatch object at 0x7b51fc1a3040&gt;, &lt;matplotlib.patches.PathPatch object at 0x7b51fc1f4070&gt;], 'medians': [&lt;matplotlib.lines.Line2D object at 0x7b51fc1f40d0&gt;, &lt;matplotlib.lines.Line2D object at 0x7b51fc1f5240&gt;], 'fliers': [], 'means': []}</code></pre>
+<pre><code>{'whiskers': [&lt;matplotlib.lines.Line2D object at 0x7aee0b7cb490&gt;, &lt;matplotlib.lines.Line2D object at 0x7aee0b7cb790&gt;, &lt;matplotlib.lines.Line2D object at 0x7aee0b61c640&gt;, &lt;matplotlib.lines.Line2D object at 0x7aee0b61c940&gt;], 'caps': [&lt;matplotlib.lines.Line2D object at 0x7aee0b7cba90&gt;, &lt;matplotlib.lines.Line2D object at 0x7aee0b7cbd90&gt;, &lt;matplotlib.lines.Line2D object at 0x7aee0b61cc40&gt;, &lt;matplotlib.lines.Line2D object at 0x7aee0b61cf40&gt;], 'boxes': [&lt;matplotlib.patches.PathPatch object at 0x7aee0b7cb040&gt;, &lt;matplotlib.patches.PathPatch object at 0x7aee0b61c070&gt;], 'medians': [&lt;matplotlib.lines.Line2D object at 0x7aee0b61c0d0&gt;, &lt;matplotlib.lines.Line2D object at 0x7aee0b61d240&gt;], 'fliers': [], 'means': []}</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Overlay all points with horizontal jitter</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, data <span class="kw">in</span> <span class="bu">enumerate</span>([dietA, dietB], start<span class="op">=</span><span class="dv">1</span>):</span>
