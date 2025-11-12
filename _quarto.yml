@@ -51,6 +51,10 @@ website:
           - class4/class_4_ex_4.qmd
           - class4/class_4_ex_5.qmd
           - class4/class_4_ex_6.qmd
+      - section: "Exam"
+        contents:
+          - exam/exam_intro.qmd
+          - exam/exam_data_description.qmd
       - section: "Appendices"
         contents:
           - appendices/setup_vscode.qmd
@@ -86,6 +90,7 @@ format:
     - class1/class_1_slides_pandas.pdf
     - class2/class_2_slides_EDA.pdf
     - class4/class_4_slides.pdf
+    - exam/exam_2025_answer_sheet.docx
   # pdf:
   #   documentclass: scrreprt
   # revealjs: default # slides output

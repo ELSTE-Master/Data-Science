@@ -1,0 +1,42 @@
+---
+title: "Data description"
+format:
+  html:
+    code-fold: false
+    code-line-numbers: true
+    css: [../assets/webex.css]
+    include-after-body: [../assets/webex.js]
+    embed-resources: true 
+jupyter: python3 
+---
+
+
+## Maple Trees and Calcium Treatment
+::: {style="text-align:center;"}
+<p align="center">
+<img src="../exam/img/maple_leaf.jpg" width="70%">
+</p>
+:::
+
+Acid rain has affected forests in northeastern North America by leaching essential nutrients, especially calcium, from soils. The loss of calcium can weaken trees and slow their growth. Sugar maples are ecologically important and economically valuable for maple syrup production. To study the effect of calcium on sugar maples trees health, researchers at the Hubbard Brook Experimental Forest in New Hampshire examined sugar maple seedlings. More precisely, researchers measured several indicators of seedling health in calcium-treated and untreated watersheds. 
+
+You are provided with a dataset containing measurements from sugar maple seedlings grown in these two watersheds: one treated with calcium-rich water (`W1`) and one left untreated (`Reference`). Your task is to analyze the data to determine whether calcium treatment has a significant effect on seedling health, focusing on leaf area as a key indicator of growth and vitality, and to identify which variables are most strongly associated with leaf growth.
+
+You can load the dataset in your `Python` environment using the following code:
+
+```{python, eval=TRUE}
+import pandas as pd
+df_maple = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/df_maple.csv")
+df_maple.head(5)
+```
+
+
+The dataset includes the following variables:
+
+- `watershed`: Factor indicating treatment group (`W1` = calcium-treated, `Reference` = untreated)
+- `elevation`: Elevation level of the site where the sample was collected (`Low` or `Mid`)
+- `stem_length`: A number denoting the height of the seedling in millimeters
+- `leaf_area`: A number denoting the area of the sampled leaf in square centimeters
+- `stem_dry_mass`: A number denoting the dry mass of the stem in grams
+
+

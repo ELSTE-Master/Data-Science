@@ -1,0 +1,52 @@
+---
+title: "Instructions and documents"
+format:
+  html:
+    code-fold: false
+    code-line-numbers: true
+    css: [../assets/webex.css]
+    include-after-body: [../assets/webex.js]
+    embed-resources: true 
+jupyter: python3
+---
+
+```{python}
+#| echo: false
+from pywebexercises.exercises import mcq, longmcq, torf
+import matplotlib.pyplot as plt
+plt.rcParams.update({
+    "figure.facecolor":  (0.0, 0.0, 0.0, 0.0),  # red   with alpha = 30%
+})
+```
+
+## Instructions
+
+The final exam has 12 questions.
+
+The duration of the exam is 60 minutes.
+
+The questions are either multiple choice questions or open questions. For the multiple choice questions, there is **only one correct answer**. For the open questions, please write a **short text** to answer. 
+
+The exam is open book and open web (AI-powered chat engines like ChatGPT are not allowed). You are not allowed to communicate with your classmates, which is considered as cheating. If you are caught cheating, you will get 0 point for the whole exam. 
+
+You must use the provided Word template to answer all questions. The template will either be available for download on the course website or distributed to you directly. Please save your file using the following format: **"Firstname_Lastname.docx"** (for example, Sebastien_Biasse.docx), and make sure to **add your name inside the word file**.
+
+At the end of the exam, you will be asked to submit only this Word file, either by uploading it to the specified online location (details to be announced) or by handing in a printed copy.
+
+Each question is worth 1 point. In addition, you get 1 point for writing your name inside the submission file and 1 point for naming your submission file correctly. 
+
+We will evaluate the top 11 out of 12 answers, and your score will be calculated based on a maximum of 13 points (11 for the best answers, plus two points for correctly including your name in the submission file and naming the file accurately).
+
+Good luck!
+
+## Documents
+
+
+- <a href="exam_2025_answer_sheet.docx" download class="btn">
+  <i class="bi bi-download"></i> Download answer sheet
+</a>
+
+
+
+
+
