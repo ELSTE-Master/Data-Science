@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>NumPy and SciPy – ELSTE Data Science Master Course</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../appendices/doc_statsmodels.html" rel="next">
+<link href="../appendices/doc_visualisation.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-d2dc1000e36a39b18fb3f054b99b4004.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../custom.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../appendices/setup_vscode.html">Appendices</a></li><li class="breadcrumb-item"><a href="../appendices/function_reference.html">Function reference</a></li><li class="breadcrumb-item"><a href="../appendices/doc_numpy_scipy.html">NumPy and SciPy</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">ELSTE Data Science Course</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/ELSTE-Master/Data-Science" title="GitHub" class="quarto-navigation-tool px-1" aria-label="GitHub"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ELSTE Data Science Master Course</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Class 1: Pandas</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class1/day1-1_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class1/day1-2_pandas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Intro to Pandas</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class1/day1-3_data_exploration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data structure</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class1/day1-4_queries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Querying data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class1/day1-5_filtering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filtering data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class1/day1-6_operations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Operations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class1/day1-summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Summary</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Class 2: Descriptive stats</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class2/day2-1_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class2/day2-2_data_exploration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data exploration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class2/day2-3_univariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Univariate analyses</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class2/day2-4_bivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bivariate analyses</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/setup_vscode.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Setup VS Code</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/jupyter_markdown_summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Markdown for Jupyter</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Function reference</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/function_reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Function reference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/doc_pandas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pandas</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/doc_visualisation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Matplotlib and Seaborn</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/doc_numpy_scipy.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">NumPy and SciPy</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/doc_statsmodels.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statsmodels</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/doc_python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Python essentials</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#numerical-np-arange" id="toc-numerical-np-arange" class="nav-link active" data-scroll-target="#numerical-np-arange"><code>np.arange()</code></a></li>
+  <li><a href="#numerical-np-linspace" id="toc-numerical-np-linspace" class="nav-link" data-scroll-target="#numerical-np-linspace"><code>np.linspace()</code></a></li>
+  <li><a href="#numerical-np-percentile" id="toc-numerical-np-percentile" class="nav-link" data-scroll-target="#numerical-np-percentile"><code>np.percentile()</code></a></li>
+  <li><a href="#numerical-np-power" id="toc-numerical-np-power" class="nav-link" data-scroll-target="#numerical-np-power"><code>np.power()</code></a></li>
+  <li><a href="#numerical-np-sqrt" id="toc-numerical-np-sqrt" class="nav-link" data-scroll-target="#numerical-np-sqrt"><code>np.sqrt()</code></a></li>
+  <li><a href="#numerical-np-log" id="toc-numerical-np-log" class="nav-link" data-scroll-target="#numerical-np-log"><code>np.log()</code></a></li>
+  <li><a href="#numerical-np-log10" id="toc-numerical-np-log10" class="nav-link" data-scroll-target="#numerical-np-log10"><code>np.log10()</code></a></li>
+  <li><a href="#numerical-np-exp" id="toc-numerical-np-exp" class="nav-link" data-scroll-target="#numerical-np-exp"><code>np.exp()</code></a></li>
+  <li><a href="#numerical-np-floor" id="toc-numerical-np-floor" class="nav-link" data-scroll-target="#numerical-np-floor"><code>np.floor()</code></a></li>
+  <li><a href="#numerical-np-ceil" id="toc-numerical-np-ceil" class="nav-link" data-scroll-target="#numerical-np-ceil"><code>np.ceil()</code></a></li>
+  <li><a href="#numerical-np-ones-like" id="toc-numerical-np-ones-like" class="nav-link" data-scroll-target="#numerical-np-ones-like"><code>np.ones_like()</code></a></li>
+  <li><a href="#numerical-np-triu" id="toc-numerical-np-triu" class="nav-link" data-scroll-target="#numerical-np-triu"><code>np.triu()</code></a></li>
+  <li><a href="#numerical-np-random-normal" id="toc-numerical-np-random-normal" class="nav-link" data-scroll-target="#numerical-np-random-normal"><code>np.random.normal()</code></a></li>
+  <li><a href="#numerical-np-random-lognormal" id="toc-numerical-np-random-lognormal" class="nav-link" data-scroll-target="#numerical-np-random-lognormal"><code>np.random.lognormal()</code></a></li>
+  <li><a href="#numerical-array-mean" id="toc-numerical-array-mean" class="nav-link" data-scroll-target="#numerical-array-mean"><code>array.mean()</code></a></li>
+  <li><a href="#numerical-array-min" id="toc-numerical-array-min" class="nav-link" data-scroll-target="#numerical-array-min"><code>array.min()</code></a></li>
+  <li><a href="#numerical-array-max" id="toc-numerical-array-max" class="nav-link" data-scroll-target="#numerical-array-max"><code>array.max()</code></a></li>
+  <li><a href="#numerical-array-std" id="toc-numerical-array-std" class="nav-link" data-scroll-target="#numerical-array-std"><code>array.std()</code></a></li>
+  <li><a href="#numerical-stats-ttest-ind" id="toc-numerical-stats-ttest-ind" class="nav-link" data-scroll-target="#numerical-stats-ttest-ind"><code>stats.ttest_ind()</code></a></li>
+  <li><a href="#numerical-stats-mannwhitneyu" id="toc-numerical-stats-mannwhitneyu" class="nav-link" data-scroll-target="#numerical-stats-mannwhitneyu"><code>stats.mannwhitneyu()</code></a></li>
+  <li><a href="#numerical-stats-kruskal" id="toc-numerical-stats-kruskal" class="nav-link" data-scroll-target="#numerical-stats-kruskal"><code>stats.kruskal()</code></a></li>
+  <li><a href="#numerical-stats-probplot" id="toc-numerical-stats-probplot" class="nav-link" data-scroll-target="#numerical-stats-probplot"><code>stats.probplot()</code></a></li>
+  <li><a href="#numerical-stats-f-oneway" id="toc-numerical-stats-f-oneway" class="nav-link" data-scroll-target="#numerical-stats-f-oneway"><code>stats.f_oneway()</code></a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../appendices/setup_vscode.html">Appendices</a></li><li class="breadcrumb-item"><a href="../appendices/function_reference.html">Function reference</a></li><li class="breadcrumb-item"><a href="../appendices/doc_numpy_scipy.html">NumPy and SciPy</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">NumPy and SciPy</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This reference explains the NumPy and SciPy tools used in classes 1–4. Each entry gives a purpose, the arguments most useful in this course, an example, and a practical note. Follow <strong>Official documentation</strong> for the complete API.</p>
+<p>Examples use the course datasets: <code>df</code> is the eruption table, <code>df_traces</code> the geochemical table, <code>reading</code> the reading-score table, and <code>df_icecover</code> the lake table. Samples such as <code>dietA</code> and <code>dietB</code> have already been selected. Variables such as <code>data</code>, <code>ax</code>, and <code>mod1</code> refer to the array, axes, or fitted model described in the lesson. Snippets illustrate individual operations rather than forming a script to run from top to bottom.</p>
+<p>Import <code>numpy as np</code> and <code>from scipy import stats</code>. Numerical transformations apply element by element. Statistical tests require a defensible sampling design and appropriate assumptions.</p>
+<section id="numerical-np-arange" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-np-arange"><code>np.arange()</code></h2>
+<p><strong>Purpose:</strong> Create a sequence with a chosen step.</p>
+<p><strong>Main arguments:</strong> <code>start</code>, <code>stop</code>, <code>step</code>: range; stop is excluded.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ages <span class="op">=</span> np.arange(<span class="dv">6</span>, <span class="dv">13</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Produces ages 6 through 12.</p>
+<p><a href="https://numpy.org/doc/stable/reference/generated/numpy.arange.html">Official documentation</a></p>
+</section>
+<section id="numerical-np-linspace" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-np-linspace"><code>np.linspace()</code></h2>
+<p><strong>Purpose:</strong> Create evenly spaced values across an interval.</p>
+<p><strong>Main arguments:</strong> <code>start</code>, <code>stop</code>: endpoints; <code>num</code>: number of values.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">200</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Includes both endpoints by default.</p>
+<p><a href="https://numpy.org/doc/stable/reference/generated/numpy.linspace.html">Official documentation</a></p>
+</section>
+<section id="numerical-np-percentile" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-np-percentile"><code>np.percentile()</code></h2>
+<p><strong>Also used as:</strong> <code>.percentiles</code>.</p>
+<p><strong>Purpose:</strong> Find thresholds below which chosen percentages of values fall.</p>
+<p><strong>Main arguments:</strong> <code>a</code>: observations; <code>q</code>: percentages from 0 to 100.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>quartiles <span class="op">=</span> np.percentile(data, [<span class="dv">25</span>, <span class="dv">50</span>, <span class="dv">75</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> This is <code>percentile</code>, not <code>percentiles</code>. Missing values require separate handling.</p>
+<p><a href="https://numpy.org/doc/stable/reference/generated/numpy.percentile.html">Official documentation</a></p>
+</section>
+<section id="numerical-np-power" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-np-power"><code>np.power()</code></h2>
+<p><strong>Purpose:</strong> Raise each value to a power.</p>
+<p><strong>Main arguments:</strong> <code>x1</code>: values; <code>x2</code>: exponent.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>squared <span class="op">=</span> np.power(df_traces[<span class="st">'Zr'</span>], <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> The operation applies element by element.</p>
+<p><a href="https://numpy.org/doc/stable/reference/generated/numpy.power.html">Official documentation</a></p>
+</section>
+<section id="numerical-np-sqrt" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-np-sqrt"><code>np.sqrt()</code></h2>
+<p><strong>Purpose:</strong> Take square roots element by element.</p>
+<p><strong>Main arguments:</strong> <code>x</code>: values.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>root <span class="op">=</span> np.sqrt(df_traces[<span class="st">'Zr'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Real-valued square roots require nonnegative values.</p>
+<p><a href="https://numpy.org/doc/stable/reference/generated/numpy.sqrt.html">Official documentation</a></p>
+</section>
+<section id="numerical-np-log" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-np-log"><code>np.log()</code></h2>
+<p><strong>Purpose:</strong> Take natural logarithms.</p>
+<p><strong>Main arguments:</strong> <code>x</code>: positive values.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>logged <span class="op">=</span> np.log(df_traces[<span class="st">'Zr'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Zero and negative values are not valid for a finite real logarithm.</p>
+<p><a href="https://numpy.org/doc/stable/reference/generated/numpy.log.html">Official documentation</a></p>
+</section>
+<section id="numerical-np-log10" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-np-log10"><code>np.log10()</code></h2>
+<p><strong>Purpose:</strong> Take base-10 logarithms.</p>
+<p><strong>Main arguments:</strong> <code>x</code>: positive values.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>logged <span class="op">=</span> np.log10(df_traces[<span class="st">'Zr'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Document the transformation and its scientific meaning.</p>
+<p><a href="https://numpy.org/doc/stable/reference/generated/numpy.log10.html">Official documentation</a></p>
+</section>
+<section id="numerical-np-exp" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-np-exp"><code>np.exp()</code></h2>
+<p><strong>Purpose:</strong> Calculate the exponential of each value.</p>
+<p><strong>Main arguments:</strong> <code>x</code>: values.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>original_scale <span class="op">=</span> np.exp(logged)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Inverts a natural logarithm, not a base-10 logarithm.</p>
+<p><a href="https://numpy.org/doc/stable/reference/generated/numpy.exp.html">Official documentation</a></p>
+</section>
+<section id="numerical-np-floor" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-np-floor"><code>np.floor()</code></h2>
+<p><strong>Purpose:</strong> Round each value down to the next integer.</p>
+<p><strong>Main arguments:</strong> <code>x</code>: values.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>rounded <span class="op">=</span> np.floor(df[<span class="st">'Latitude'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Rounding down is towards negative infinity.</p>
+<p><a href="https://numpy.org/doc/stable/reference/generated/numpy.floor.html">Official documentation</a></p>
+</section>
+<section id="numerical-np-ceil" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-np-ceil"><code>np.ceil()</code></h2>
+<p><strong>Purpose:</strong> Round each value up to the next integer.</p>
+<p><strong>Main arguments:</strong> <code>x</code>: values.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>rounded <span class="op">=</span> np.ceil(df[<span class="st">'Latitude'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Rounding up is towards positive infinity.</p>
+<p><a href="https://numpy.org/doc/stable/reference/generated/numpy.ceil.html">Official documentation</a></p>
+</section>
+<section id="numerical-np-ones-like" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-np-ones-like"><code>np.ones_like()</code></h2>
+<p><strong>Purpose:</strong> Create ones with the same shape as another array.</p>
+<p><strong>Main arguments:</strong> <code>a</code>: reference array; <code>dtype</code>: optional output type.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> np.ones_like(correlation, dtype<span class="op">=</span><span class="bu">bool</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> The dtype controls whether the ones are numbers or Boolean values.</p>
+<p><a href="https://numpy.org/doc/stable/reference/generated/numpy.ones_like.html">Official documentation</a></p>
+</section>
+<section id="numerical-np-triu" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-np-triu"><code>np.triu()</code></h2>
+<p><strong>Purpose:</strong> Keep the upper triangle of a matrix and zero the remainder.</p>
+<p><strong>Main arguments:</strong> <code>m</code>: matrix; <code>k</code>: diagonal offset.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> np.triu(np.ones_like(correlation, dtype<span class="op">=</span><span class="bu">bool</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Used to hide duplicate correlations in a heatmap.</p>
+<p><a href="https://numpy.org/doc/stable/reference/generated/numpy.triu.html">Official documentation</a></p>
+</section>
+<section id="numerical-np-random-normal" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-np-random-normal"><code>np.random.normal()</code></h2>
+<p><strong>Purpose:</strong> Simulate observations from a normal distribution.</p>
+<p><strong>Main arguments:</strong> <code>loc</code>: mean; <code>scale</code>: standard deviation; <code>size</code>: number or shape.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.random.normal(loc<span class="op">=</span><span class="dv">0</span>, scale<span class="op">=</span><span class="dv">1</span>, size<span class="op">=</span><span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Simulated values change between runs unless the generator is seeded.</p>
+<p><a href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.normal.html">Official documentation</a></p>
+</section>
+<section id="numerical-np-random-lognormal" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-np-random-lognormal"><code>np.random.lognormal()</code></h2>
+<p><strong>Purpose:</strong> Simulate positive observations with a log-normal distribution.</p>
+<p><strong>Main arguments:</strong> <code>mean</code>, <code>sigma</code>: mean and standard deviation on the log scale; <code>size</code>: sample size.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.random.lognormal(mean<span class="op">=</span><span class="dv">0</span>, sigma<span class="op">=</span><span class="fl">0.4</span>, size<span class="op">=</span><span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Parameters describe the underlying normal distribution, not the observed mean and standard deviation.</p>
+<p><a href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.lognormal.html">Official documentation</a></p>
+</section>
+<section id="numerical-array-mean" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-array-mean"><code>array.mean()</code></h2>
+<p><strong>Also used as:</strong> <code>np.mean</code>.</p>
+<p><strong>Purpose:</strong> Average array values.</p>
+<p><strong>Main arguments:</strong> <code>axis</code>: direction of the summary.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>average <span class="op">=</span> data.mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Unlike pandas, ordinary NumPy means do not automatically ignore NaN.</p>
+<p><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.mean.html">Official documentation</a></p>
+</section>
+<section id="numerical-array-min" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-array-min"><code>array.min()</code></h2>
+<p><strong>Also used as:</strong> <code>np.min</code>.</p>
+<p><strong>Purpose:</strong> Find the smallest array value.</p>
+<p><strong>Main arguments:</strong> <code>axis</code>: direction of the summary.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>minimum <span class="op">=</span> data.<span class="bu">min</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Returns an observed extreme.</p>
+<p><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.min.html">Official documentation</a></p>
+</section>
+<section id="numerical-array-max" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-array-max"><code>array.max()</code></h2>
+<p><strong>Also used as:</strong> <code>np.max</code>.</p>
+<p><strong>Purpose:</strong> Find the largest array value.</p>
+<p><strong>Main arguments:</strong> <code>axis</code>: direction of the summary.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>maximum <span class="op">=</span> data.<span class="bu">max</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Returns an observed extreme.</p>
+<p><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.max.html">Official documentation</a></p>
+</section>
+<section id="numerical-array-std" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-array-std"><code>array.std()</code></h2>
+<p><strong>Also used as:</strong> <code>np.std</code>.</p>
+<p><strong>Purpose:</strong> Compute the standard deviation of array values.</p>
+<p><strong>Main arguments:</strong> <code>axis</code>: direction; <code>ddof</code>: denominator adjustment.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>spread <span class="op">=</span> data.std(ddof<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> NumPy defaults to <code>ddof=0</code>; pandas defaults to <code>ddof=1</code>.</p>
+<p><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.std.html">Official documentation</a></p>
+</section>
+<section id="numerical-stats-ttest-ind" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-stats-ttest-ind"><code>stats.ttest_ind()</code></h2>
+<p><strong>Also used as:</strong> <code>ttest_ind</code>, <code>scipy.stats.ttest_ind</code>.</p>
+<p><strong>Purpose:</strong> Compare the means of two independent samples.</p>
+<p><strong>Main arguments:</strong> <code>a</code>, <code>b</code>: samples; <code>equal_var=False</code>: Welch test; <code>alternative</code>: two-sided, less or greater.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> stats.ttest_ind(dietA, dietB, equal_var<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> A large p-value does not establish equal means. Independence and the suitability of the mean still matter.</p>
+<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.html">Official documentation</a></p>
+</section>
+<section id="numerical-stats-mannwhitneyu" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-stats-mannwhitneyu"><code>stats.mannwhitneyu()</code></h2>
+<p><strong>Also used as:</strong> <code>mannwhitneyu</code>, <code>scipy.stats.mannwhitneyu</code>.</p>
+<p><strong>Purpose:</strong> Compare the relative ordering of two independent samples.</p>
+<p><strong>Main arguments:</strong> <code>x</code>, <code>y</code>: samples; <code>alternative</code>: two-sided, less or greater.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> stats.mannwhitneyu(dietA, dietC, alternative<span class="op">=</span><span class="st">"less"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> A median-shift interpretation needs additional distributional assumptions; the test is not universally a test of medians.</p>
+<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mannwhitneyu.html">Official documentation</a></p>
+</section>
+<section id="numerical-stats-kruskal" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-stats-kruskal"><code>stats.kruskal()</code></h2>
+<p><strong>Also used as:</strong> <code>kruskal</code>, <code>scipy.stats.kruskal</code>.</p>
+<p><strong>Purpose:</strong> Compare ranks across two or more independent groups.</p>
+<p><strong>Main arguments:</strong> Pass one sample per group.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> stats.kruskal(dietA, dietB, dietC)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> A significant result does not identify the differing pairs; follow-up comparisons require multiplicity control.</p>
+<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kruskal.html">Official documentation</a></p>
+</section>
+<section id="numerical-stats-probplot" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-stats-probplot"><code>stats.probplot()</code></h2>
+<p><strong>Also used as:</strong> <code>probplot</code>, <code>scipy.stats.probplot</code>.</p>
+<p><strong>Purpose:</strong> Compare ordered sample values with theoretical quantiles.</p>
+<p><strong>Main arguments:</strong> <code>x</code>: sample; <code>dist</code>: distribution, such as <code>"norm"</code>; <code>plot</code>: optional plotting target.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>stats.probplot(mod1.resid, dist<span class="op">=</span><span class="st">"norm"</span>, plot<span class="op">=</span>ax)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> A Q–Q plot is a diagnostic, not proof that a distribution is normal.</p>
+<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.probplot.html">Official documentation</a></p>
+</section>
+<section id="numerical-stats-f-oneway" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-stats-f-oneway"><code>stats.f_oneway()</code></h2>
+<p><strong>Also used as:</strong> <code>f_oneway</code>, <code>scipy.stats.f_oneway</code>.</p>
+<p><strong>Purpose:</strong> Perform a one-way ANOVA comparing group means.</p>
+<p><strong>Main arguments:</strong> Pass the independent groups as separate samples.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> stats.f_oneway(dietA, dietB, dietC)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Classical ANOVA assumes equal population variances; a significant result does not identify which means differ.</p>
+<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.f_oneway.html">Official documentation</a></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../appendices/doc_visualisation.html" class="pagination-link" aria-label="Matplotlib and Seaborn">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Matplotlib and Seaborn</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../appendices/doc_statsmodels.html" class="pagination-link" aria-label="Statsmodels">
+        <span class="nav-page-text">Statsmodels</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 - <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.en">CC BY-NC-SA 4.0</a> - Sébastien Biass &amp; Stéphane Guerrier</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

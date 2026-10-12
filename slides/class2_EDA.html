@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-57476271c5f0467c372e20ff5d25630e.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.40">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2a367172f4fe7d9182ebf8e09f85cb4e.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.27">
 
   <meta name="author" content="Sébastien Biass">
   <meta name="author" content="Stéphane Guerrier">
-  <meta name="dcterms.date" content="2025-10-22">
+  <meta name="dcterms.date" content="2026-10-21">
   <title>ELSTE Data Science Master Course – Exploratory data analysis</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -31,8 +31,9 @@
       vertical-align: middle;
     }
     /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -43,7 +44,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -96,12 +97,15 @@
     code span.vs { color: #da4453; } /* VerbatimString */
     code span.wa { color: #da4453; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-95643f154ae858b59b0a18ec1009c36c.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-d48b06b10c2493297ef9b216b6d9b6df.css">
+  <link rel="stylesheet" href="assets/slides.css">
+  <link rel="stylesheet" href="../assets/slides-images.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/verticator/verticator.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
@@ -190,7 +194,7 @@
       margin-right: 0; 
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
   
   <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
@@ -231,7 +235,7 @@ Stéphane Guerrier <a href="https://orcid.org/0000-0003-0002-8794" class="quarto
     </div>
 </div>
 
-  <p class="date">October 22, 2025</p>
+  <p class="date">October 21, 2026</p>
 </section>
 <section id="todays-objectives" class="slide level2">
 <h2>Today’s objectives</h2>
@@ -246,11 +250,11 @@ Stéphane Guerrier <a href="https://orcid.org/0000-0003-0002-8794" class="quarto
 <li><strong>This week:</strong> You received / compiled / produced a new dataset</li>
 <li>Review common tasks / method to get accustomed to the dataset
 <ul>
-<li>Understand its <strong>structure</strong> → what <span class="bg">type of data</span> does it contain</li>
-<li>Explore it <strong>visually</strong> → <span class="bg">plotting</span> with dedicated libraries</li>
-<li>Describe <strong>single variables</strong> → <span class="bg">univariate</span> analyses</li>
-<li>Assess coupled behaviours of <strong>two variables</strong> → <span class="bg">bivariate</span> analyses</li>
-<li>First attempt at <strong>modelling</strong> these behaviours → <span class="bg">linear regressions</span></li>
+<li>Understand its <strong>structure</strong> → what <span class="alert">type of data</span> does it contain</li>
+<li>Explore it <strong>visually</strong> → <span class="alert">plotting</span> with dedicated libraries</li>
+<li>Describe <strong>single variables</strong> → <span class="alert">univariate</span> analyses</li>
+<li>Assess coupled behaviours of <strong>two variables</strong> → <span class="alert">bivariate</span> analyses</li>
+<li>First attempt at <strong>modelling</strong> these behaviours → <span class="alert">linear regressions</span></li>
 </ul></li>
 </ul>
 </div>
@@ -271,7 +275,7 @@ Stéphane Guerrier <a href="https://orcid.org/0000-0003-0002-8794" class="quarto
 </ul></li>
 </ul>
 
-<img data-src="img/gmap.png" class="r-stretch"></section>
+<img data-src="img2/gmap.png" class="r-stretch"></section>
 <section id="caldera-forming-eruptions-cycles" class="slide level2">
 <h2>Caldera-forming eruptions cycles</h2>
 
@@ -319,21 +323,21 @@ Stéphane Guerrier <a href="https://orcid.org/0000-0003-0002-8794" class="quarto
 </ul></li>
 </ul>
 <p><span style="font-size: 0.5em;"></span></p>
-<div id="491d0077" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># Load Pandas</span></span>
+<div id="180a0bf9" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># Load Pandas</span></span>
 <span id="cb1-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd <span class="co"># Import pandas</span></span>
 <span id="cb1-3"><a></a></span>
 <span id="cb1-4"><a></a><span class="co"># Import the dataset specifying which Excel sheet name to load the data from</span></span>
 <span id="cb1-5"><a></a>df_majors <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/Smith_glass_post_NYT_data_majors.csv'</span>)</span>
-<span id="cb1-6"><a></a>df_traces <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/Smith_glass_post_NYT_data_traces.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-6"><a></a>df_traces <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/Smith_glass_post_NYT_data_traces.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="inspecting-the-dataset" class="slide level2">
 <h2>Inspecting the dataset</h2>
 <div class="columns">
 <div class="column" style="width:48%;">
-<div id="c6b8b39f" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>df_traces.head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="5fed18a7" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>df_traces.head(<span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 <style scoped="">
@@ -350,7 +354,7 @@ Stéphane Guerrier <a href="https://orcid.org/0000-0003-0002-8794" class="quarto
     }
 </style>
 
-<table class="dataframe caption-top" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top" data-border="1">
 <thead>
 <tr class="header" style="text-align: right;">
 <th data-quarto-table-cell-role="th"></th>
@@ -379,7 +383,7 @@ Stéphane Guerrier <a href="https://orcid.org/0000-0003-0002-8794" class="quarto
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th data-quarto-table-cell-role="th">0</th>
 <td>1915</td>
 <td>63</td>
 <td>Astroni 7</td>
@@ -403,7 +407,7 @@ Stéphane Guerrier <a href="https://orcid.org/0000-0003-0002-8794" class="quarto
 <td>9.20</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th data-quarto-table-cell-role="th">1</th>
 <td>1916</td>
 <td>63</td>
 <td>Astroni 7</td>
@@ -427,7 +431,7 @@ Stéphane Guerrier <a href="https://orcid.org/0000-0003-0002-8794" class="quarto
 <td>10.46</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th data-quarto-table-cell-role="th">2</th>
 <td>1917</td>
 <td>63</td>
 <td>Astroni 7</td>
@@ -451,7 +455,7 @@ Stéphane Guerrier <a href="https://orcid.org/0000-0003-0002-8794" class="quarto
 <td>8.73</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th data-quarto-table-cell-role="th">3</th>
 <td>1918</td>
 <td>63</td>
 <td>Astroni 7</td>
@@ -475,7 +479,7 @@ Stéphane Guerrier <a href="https://orcid.org/0000-0003-0002-8794" class="quarto
 <td>9.79</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th data-quarto-table-cell-role="th">4</th>
 <td>1919</td>
 <td>63</td>
 <td>Astroni 7</td>
@@ -508,8 +512,8 @@ Stéphane Guerrier <a href="https://orcid.org/0000-0003-0002-8794" class="quarto
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:48%;">
-<div id="205787fc" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>df_traces.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="da61d717" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>df_traces.info()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
 RangeIndex: 370 entries, 0 to 369
@@ -585,7 +589,7 @@ memory usage: 107.1+ KB</code></pre>
 <h3 id="numerical-data">Numerical data</h3>
 <hr>
 <ul>
-<li>Represent <span class="bg">quantities or measurable values</span></li>
+<li>Represent <span class="alert">quantities or measurable values</span></li>
 <li><strong>Quantitative</strong>
 <ul>
 <li><em>Discrete</em>: Earthquake counts</li>
@@ -601,7 +605,7 @@ memory usage: 107.1+ KB</code></pre>
 <h3 id="categorical-data">Categorical data</h3>
 <hr>
 <ul>
-<li>Represent <span class="bg">categories or groups</span> of data</li>
+<li>Represent <span class="alert">categories or groups</span> of data</li>
 <li><strong>Qualitative</strong> / semi-quantitative
 <ul>
 <li><em>Nominal</em>: No order → Landslide type</li>
@@ -701,9 +705,9 @@ memory usage: 107.1+ KB</code></pre>
 </ul></li>
 </ul>
 <p><span style="font-size: 0.5em;"></span></p>
-<div id="41ebe2d5" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt <span class="co"># Import the pyplot module from matplotlib</span></span>
-<span id="cb5-2"><a></a><span class="im">import</span> seaborn <span class="im">as</span> sns <span class="co"># Import seaborn</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="48bbc29b" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt <span class="co"># Import the pyplot module from matplotlib</span></span>
+<span id="cb5-2"><a></a><span class="im">import</span> seaborn <span class="im">as</span> sns <span class="co"># Import seaborn</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="anatomy-of-a-figure" class="slide level2">
@@ -719,8 +723,8 @@ memory usage: 107.1+ KB</code></pre>
 </ul></li>
 </ul>
 <p><span style="font-size: 0.5em;"></span></p>
-<div id="8ae4b2cf" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="bc16609d" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div><div class="column" style="width:4%;">
 
@@ -773,9 +777,9 @@ memory usage: 107.1+ KB</code></pre>
 <section id="plotting-example" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Plotting example</h2>
 <p><span style="font-size: 0.5em;"></span></p>
-<div id="d40c689f" class="cell columns column-output-location" data-execution_count="7">
+<div id="18aef09e" class="cell columns column-output-location" data-execution_count="7">
 <div class="column">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb7-1" class="hljs-ln-code"><a></a><span class="co"># Define some data</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb7-1" class="hljs-ln-code"><a></a><span class="co"># Define some data</span></span>
 <span id="cb7-2" class="hljs-ln-code"><a></a>data1 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>]</span>
 <span id="cb7-3" class="hljs-ln-code"><a></a>data2 <span class="op">=</span> [<span class="dv">7</span>, <span class="dv">3</span>, <span class="dv">9</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">4</span>]</span>
 <span id="cb7-4" class="hljs-ln-code"><a></a></span>
@@ -784,7 +788,7 @@ memory usage: 107.1+ KB</code></pre>
 <span id="cb7-7" class="hljs-ln-code"><a></a></span>
 <span id="cb7-8" class="hljs-ln-code"><a></a><span class="co"># Plot the data</span></span>
 <span id="cb7-9" class="hljs-ln-code"><a></a>ax.plot(data1, data1, color<span class="op">=</span><span class="st">'aqua'</span>, label<span class="op">=</span><span class="st">'Line'</span>)</span>
-<span id="cb7-10" class="hljs-ln-code"><a></a>ax.scatter(data1, data2, color<span class="op">=</span><span class="st">'purple'</span>, label<span class="op">=</span><span class="st">'scatter'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-10" class="hljs-ln-code"><a></a>ax.scatter(data1, data2, color<span class="op">=</span><span class="st">'purple'</span>, label<span class="op">=</span><span class="st">'scatter'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column fragment">
 <div class="cell-output cell-output-display">
 <div>
@@ -798,9 +802,9 @@ memory usage: 107.1+ KB</code></pre>
 <section id="plotting-example-1" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Plotting example</h2>
 <p><span style="font-size: 0.5em;"></span></p>
-<div id="8784c6c2" class="cell columns column-output-location" data-execution_count="8">
+<div id="d94fc53b" class="cell columns column-output-location" data-execution_count="8">
 <div class="column">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb8-1" class="hljs-ln-code"><a></a><span class="co"># Define some data</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb8-1" class="hljs-ln-code"><a></a><span class="co"># Define some data</span></span>
 <span id="cb8-2" class="hljs-ln-code"><a></a>data1 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>]</span>
 <span id="cb8-3" class="hljs-ln-code"><a></a>data2 <span class="op">=</span> [<span class="dv">7</span>, <span class="dv">3</span>, <span class="dv">9</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">4</span>]</span>
 <span id="cb8-4" class="hljs-ln-code"><a></a></span>
@@ -816,7 +820,7 @@ memory usage: 107.1+ KB</code></pre>
 <span id="cb8-14" class="hljs-ln-code"><a></a>ax.set_ylabel(<span class="st">'y Label'</span>)</span>
 <span id="cb8-15" class="hljs-ln-code"><a></a></span>
 <span id="cb8-16" class="hljs-ln-code"><a></a><span class="co"># Only to make it look pretty on the presentation</span></span>
-<span id="cb8-17" class="hljs-ln-code"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-17" class="hljs-ln-code"><a></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column fragment">
 <div class="cell-output cell-output-display">
 <div>
@@ -843,12 +847,12 @@ memory usage: 107.1+ KB</code></pre>
 <section id="seaborn-example" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Seaborn example</h2>
 <p><span style="font-size: 0.5em;"></span></p>
-<div id="4bb74572" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb9-1" class="hljs-ln-code"><a></a><span class="co"># Define figure + axes</span></span>
+<div id="4edb92e6" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb9-1" class="hljs-ln-code"><a></a><span class="co"># Define figure + axes</span></span>
 <span id="cb9-2" class="hljs-ln-code"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb9-3" class="hljs-ln-code"><a></a><span class="co"># Plot with seaborn (remember, we imported it as sns)</span></span>
 <span id="cb9-4" class="hljs-ln-code"><a></a><span class="co"># df_traces is the geochemical dataset imported previously</span></span>
-<span id="cb9-5" class="hljs-ln-code"><a></a>sns.scatterplot(ax<span class="op">=</span>ax, data<span class="op">=</span>df_traces, x<span class="op">=</span><span class="st">'Rb'</span>, y<span class="op">=</span><span class="st">'Sr'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-5" class="hljs-ln-code"><a></a>sns.scatterplot(ax<span class="op">=</span>ax, data<span class="op">=</span>df_traces, x<span class="op">=</span><span class="st">'Rb'</span>, y<span class="op">=</span><span class="st">'Sr'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -861,12 +865,12 @@ memory usage: 107.1+ KB</code></pre>
 <section id="seaborn-example-1" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Seaborn example</h2>
 <p><span style="font-size: 0.5em;"></span></p>
-<div id="3403820e" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb10-1" class="hljs-ln-code"><a></a><span class="co"># Define figure + axes</span></span>
+<div id="eb4a9506" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb10-1" class="hljs-ln-code"><a></a><span class="co"># Define figure + axes</span></span>
 <span id="cb10-2" class="hljs-ln-code"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb10-3" class="hljs-ln-code"><a></a><span class="co"># Plot with seaborn (remember, we imported it as sns)</span></span>
 <span id="cb10-4" class="hljs-ln-code"><a></a><span class="co"># df_traces is the geochemical dataset imported previously</span></span>
-<span id="cb10-5" class="hljs-ln-code"><a></a>sns.scatterplot(ax<span class="op">=</span>ax, data<span class="op">=</span>df_traces, x<span class="op">=</span><span class="st">'Rb'</span>, y<span class="op">=</span><span class="st">'Sr'</span>, hue<span class="op">=</span><span class="st">'Epoch'</span>, size<span class="op">=</span><span class="st">"SiO2* (EMP)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-5" class="hljs-ln-code"><a></a>sns.scatterplot(ax<span class="op">=</span>ax, data<span class="op">=</span>df_traces, x<span class="op">=</span><span class="st">'Rb'</span>, y<span class="op">=</span><span class="st">'Sr'</span>, hue<span class="op">=</span><span class="st">'Epoch'</span>, size<span class="op">=</span><span class="st">"SiO2* (EMP)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -881,8 +885,8 @@ memory usage: 107.1+ KB</code></pre>
 <ul>
 <li>Go to <a href="https://elste-master.github.io/Data-Science/">https://elste-master.github.io/Data-Science/</a>
 <ul>
-<li>Class 2 &gt; <span class="bg">Data exploration</span></li>
-<li>Explore the structure of the glass geochemistry or <span class="bg">your</span> dataset</li>
+<li>Class 2 &gt; <span class="alert">Data exploration</span></li>
+<li>Explore the structure of the glass geochemistry or <span class="alert">your</span> dataset</li>
 <li>Get used to plotting functions</li>
 </ul></li>
 </ul>
@@ -898,9 +902,9 @@ memory usage: 107.1+ KB</code></pre>
 <h2>Descriptive statistics</h2>
 <p><span style="font-size: 0.5em;">&nbsp;</span></p>
 <ul>
-<li><strong>Descriptive statistics</strong> → <span class="bg">provide ways of capturing the properties of a given data set or sample</span>.</li>
-<li><code>Pandas</code> and <code>Seaborn</code> → review <span class="bg">metrics, tools, and strategies</span> to summarize a dataset</li>
-<li>Providing us with a <span class="bg">quantitative basis</span> to describe it and compare it to other datasets</li>
+<li><strong>Descriptive statistics</strong> → <span class="alert">provide ways of capturing the properties of a given data set or sample</span>.</li>
+<li><code>Pandas</code> and <code>Seaborn</code> → review <span class="alert">metrics, tools, and strategies</span> to summarize a dataset</li>
+<li>Providing us with a <span class="alert">quantitative basis</span> to describe it and compare it to other datasets</li>
 </ul>
 </section></section>
 <section>
@@ -911,15 +915,15 @@ memory usage: 107.1+ KB</code></pre>
 <section id="univariate-analyses-1" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Univariate analyses</h2>
 <ul>
-<li><strong>Objective</strong> <span class="bg">capturing the properties of <strong>single</strong> variables at the time</span></li>
+<li><strong>Objective</strong> <span class="alert">capturing the properties of <strong>single</strong> variables at the time</span></li>
 <li>Fist step: review the samples distribution using <strong>histograms</strong>
 <ul>
-<li>Divides dataset into <strong>equal intervals</strong> → <span class="bg">bins</span></li>
+<li>Divides dataset into <strong>equal intervals</strong> → <span class="alert">bins</span></li>
 <li><strong>Counts the value</strong> in each bin</li>
-<li>Represents the <span class="bg">distribution</span> of data</li>
+<li>Represents the <span class="alert">distribution</span> of data</li>
 </ul></li>
 </ul>
-<div id="b02278cb" class="cell" data-execution_count="11">
+<div id="f6dfa7cf" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -932,28 +936,28 @@ memory usage: 107.1+ KB</code></pre>
 <section id="univariate-analyses-2" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Univariate analyses</h2>
 <ul>
-<li><strong>Objective</strong> <span class="bg">capturing the properties of <strong>single</strong> variables at the time</span></li>
+<li><strong>Objective</strong> <span class="alert">capturing the properties of <strong>single</strong> variables at the time</span></li>
 <li>Fist step: review the samples distribution using <strong>histograms</strong>
 <ul>
-<li>Divides dataset into <strong>equal intervals</strong> → <span class="bg">bins</span></li>
+<li>Divides dataset into <strong>equal intervals</strong> → <span class="alert">bins</span></li>
 <li><strong>Counts the value</strong> in each bin</li>
-<li>Represents the <span class="bg">distribution</span> of data</li>
+<li>Represents the <span class="alert">distribution</span> of data</li>
 </ul></li>
 </ul>
 <div class="columns">
 <div class="column" style="width:48%;">
 <p><span style="font-size: 0.5em;">&nbsp;</span> Automatic number of bins:</p>
-<div id="e8f830bb" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb11-1" class="hljs-ln-code"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<div id="403cc386" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb11-1" class="hljs-ln-code"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb11-2" class="hljs-ln-code"><a></a><span class="co"># Plot histogram</span></span>
 <span id="cb11-3" class="hljs-ln-code"><a></a>sns.histplot(data<span class="op">=</span>df_traces, x<span class="op">=</span><span class="st">'Zr'</span>, color<span class="op">=</span>blue, alpha<span class="op">=</span><span class="fl">.5</span>)</span>
 <span id="cb11-4" class="hljs-ln-code"><a></a>ax.set_xlabel(<span class="st">'Zr (ppm)'</span>)<span class="op">;</span></span>
-<span id="cb11-5" class="hljs-ln-code"><a></a>ax.set_title(<span class="st">'Zr distribution'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-5" class="hljs-ln-code"><a></a>ax.set_title(<span class="st">'Zr distribution'</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:48%;">
-<div id="99626f40" class="cell" data-execution_count="13">
+<div id="fccc11cf" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -967,28 +971,28 @@ memory usage: 107.1+ KB</code></pre>
 <section id="univariate-analyses-3" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Univariate analyses</h2>
 <ul>
-<li><strong>Objective</strong> <span class="bg">capturing the properties of <strong>single</strong> variables at the time</span></li>
+<li><strong>Objective</strong> <span class="alert">capturing the properties of <strong>single</strong> variables at the time</span></li>
 <li>Fist step: review the samples distribution using <strong>histograms</strong>
 <ul>
-<li>Divides dataset into <strong>equal intervals</strong> → <span class="bg">bins</span></li>
+<li>Divides dataset into <strong>equal intervals</strong> → <span class="alert">bins</span></li>
 <li><strong>Counts the value</strong> in each bin</li>
-<li>Represents the <span class="bg">distribution</span> of data</li>
+<li>Represents the <span class="alert">distribution</span> of data</li>
 </ul></li>
 </ul>
 <div class="columns">
 <div class="column" style="width:48%;">
 <p><span style="font-size: 0.5em;">&nbsp;</span> 10 bins:</p>
-<div id="86bbb7a4" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb12-1" class="hljs-ln-code"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<div id="2ee63ccd" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb12-1" class="hljs-ln-code"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb12-2" class="hljs-ln-code"><a></a><span class="co"># Plot histogram</span></span>
 <span id="cb12-3" class="hljs-ln-code"><a></a>sns.histplot(data<span class="op">=</span>df_traces, x<span class="op">=</span><span class="st">'Zr'</span>, bins<span class="op">=</span><span class="dv">10</span>, color<span class="op">=</span>blue, alpha<span class="op">=</span><span class="fl">.5</span>)</span>
 <span id="cb12-4" class="hljs-ln-code"><a></a>ax.set_xlabel(<span class="st">'Zr (ppm)'</span>)<span class="op">;</span></span>
-<span id="cb12-5" class="hljs-ln-code"><a></a>ax.set_title(<span class="st">'Zr distribution'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-5" class="hljs-ln-code"><a></a>ax.set_title(<span class="st">'Zr distribution'</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:48%;">
-<div id="34b886f8" class="cell" data-execution_count="15">
+<div id="d12b3318" class="cell" data-execution_count="15">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1002,28 +1006,28 @@ memory usage: 107.1+ KB</code></pre>
 <section id="univariate-analyses-4" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Univariate analyses</h2>
 <ul>
-<li><strong>Objective</strong> <span class="bg">capturing the properties of <strong>single</strong> variables at the time</span></li>
+<li><strong>Objective</strong> <span class="alert">capturing the properties of <strong>single</strong> variables at the time</span></li>
 <li>Fist step: review the samples distribution using <strong>histograms</strong>
 <ul>
-<li>Divides dataset into <strong>equal intervals</strong> → <span class="bg">bins</span></li>
+<li>Divides dataset into <strong>equal intervals</strong> → <span class="alert">bins</span></li>
 <li><strong>Counts the value</strong> in each bin</li>
-<li>Represents the <span class="bg">distribution</span> of data</li>
+<li>Represents the <span class="alert">distribution</span> of data</li>
 </ul></li>
 </ul>
 <div class="columns">
 <div class="column" style="width:48%;">
 <p><span style="font-size: 0.5em;">&nbsp;</span> 200 bins:</p>
-<div id="bc6d2e6b" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb13-1" class="hljs-ln-code"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<div id="6a5fb668" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb13-1" class="hljs-ln-code"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb13-2" class="hljs-ln-code"><a></a><span class="co"># Plot histogram</span></span>
 <span id="cb13-3" class="hljs-ln-code"><a></a>sns.histplot(data<span class="op">=</span>df_traces, x<span class="op">=</span><span class="st">'Zr'</span>, bins<span class="op">=</span><span class="dv">200</span>, color<span class="op">=</span>blue, alpha<span class="op">=</span><span class="fl">.5</span>)</span>
 <span id="cb13-4" class="hljs-ln-code"><a></a>ax.set_xlabel(<span class="st">'Zr (ppm)'</span>)<span class="op">;</span></span>
-<span id="cb13-5" class="hljs-ln-code"><a></a>ax.set_title(<span class="st">'Zr distribution'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-5" class="hljs-ln-code"><a></a>ax.set_title(<span class="st">'Zr distribution'</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:48%;">
-<div id="d6bf98e4" class="cell" data-execution_count="17">
+<div id="9b5b0d60" class="cell" data-execution_count="17">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1040,14 +1044,14 @@ memory usage: 107.1+ KB</code></pre>
 <div class="columns">
 <div class="column" style="width:48%;">
 <ul>
-<li>The <strong>location</strong> - or where is <span class="bg">the central value(s)</span> of the dataset;</li>
-<li>The <strong>dispersion</strong> - or how <span class="bg">spread out</span> is the distribution of data compared to the central values;</li>
-<li>The <strong>skewness</strong> - or how <span class="bg">symmetrical</span> is the distribution of data compared to the central values;</li>
+<li>The <strong>location</strong> - or where is <span class="alert">the central value(s)</span> of the dataset;</li>
+<li>The <strong>dispersion</strong> - or how <span class="alert">spread out</span> is the distribution of data compared to the central values;</li>
+<li>The <strong>skewness</strong> - or how <span class="alert">symmetrical</span> is the distribution of data compared to the central values;</li>
 </ul>
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:48%;">
-<div id="6cff77d6" class="cell" data-execution_count="18">
+<div id="25f9f144" class="cell" data-execution_count="18">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1062,16 +1066,16 @@ memory usage: 107.1+ KB</code></pre>
 <h2>Descriptive parameters</h2>
 <p><span style="font-size: 0.5em;"></span></p>
 <ul>
-<li><strong>Ideally</strong> → able to constrain <span class="bg">full distributions</span> of <span class="math inline">\(X\)</span>
+<li><strong>Ideally</strong> → able to constrain <span class="alert">full distributions</span> of <span class="math inline">\(X\)</span>
 <ul>
 <li><strong>theoretical moments</strong></li>
 </ul></li>
-<li><strong>In practice</strong> → only observe a finite <span class="bg">sample</span> of <span class="math inline">\(X\)</span>
+<li><strong>In practice</strong> → only observe a finite <span class="alert">sample</span> of <span class="math inline">\(X\)</span>
 <ul>
 <li><strong>estimators</strong></li>
 </ul></li>
 </ul>
-<div id="d69f0d75" class="cell" data-execution_count="19">
+<div id="51132cb0" class="cell" data-execution_count="19">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1083,23 +1087,23 @@ memory usage: 107.1+ KB</code></pre>
 </section>
 <section id="location-i-mean" class="slide level2">
 <h2>Location I: Mean</h2>
-<p>The <strong>mean</strong> is the <span class="bg">sum of the values divided by the number of values</span>:</p>
+<p>The <strong>mean</strong> is the <span class="alert">sum of the values divided by the number of values</span>:</p>
 <p><span class="math display">\[
 \bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i
 \]</span></p>
 <ul>
-<li>Meaningful to describe <span class="bg">symmetrical distributions</span></li>
-<li>Very <strong>sensitive</strong> to <span class="bg">outliers</span></li>
+<li>Meaningful to describe <span class="alert">symmetrical distributions</span></li>
+<li>Very <strong>sensitive</strong> to <span class="alert">outliers</span></li>
 <li><code>df.mean()</code></li>
 </ul>
 <p><span style="font-size: 0.5em;"></span></p>
 <div class="fragment">
-<div id="c1dbaa80" class="cell columns column-output-location" data-execution_count="20">
+<div id="9821bc2c" class="cell columns column-output-location" data-execution_count="20">
 <div class="column">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a><span class="co"># One column</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a><span class="co"># One column</span></span>
 <span id="cb14-2"><a></a>df_traces[[<span class="st">'Zr'</span>]].mean().<span class="bu">round</span>(<span class="dv">2</span>)</span>
 <span id="cb14-3"><a></a><span class="co"># Multiple columns</span></span>
-<span id="cb14-4"><a></a>df_traces[[<span class="st">'Zr'</span>,<span class="st">'Rb'</span>,<span class="st">'Sr'</span>]].mean().<span class="bu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-4"><a></a>df_traces[[<span class="st">'Zr'</span>,<span class="st">'Rb'</span>,<span class="st">'Sr'</span>]].mean().<span class="bu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column">
 <div class="cell-output cell-output-display" data-execution_count="15">
 <pre><code>Zr    365.39
@@ -1112,14 +1116,14 @@ dtype: float64</code></pre>
 </section>
 <section id="location-ii-median" class="slide level2">
 <h2>Location II: Median</h2>
-<p>The <strong>median</strong> is the value <span class="bg">at the exact middle of the dataset</span>.</p>
+<p>The <strong>median</strong> is the value <span class="alert">at the exact middle of the dataset</span>.</p>
 <div class="columns">
 <div class="column" style="width:48%;">
 <ul>
 <li>No equation, use of ECDF</li>
 <li><code>df.median()</code></li>
 </ul>
-<div id="1e5a24d9" class="cell" data-execution_count="21">
+<div id="bc010234" class="cell" data-execution_count="21">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1132,11 +1136,11 @@ dtype: float64</code></pre>
 
 </div><div class="column" style="width:48%;">
 <p><span style="font-size: 0.5em;">&nbsp;</span></p>
-<div id="3166e379" class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a><span class="co"># One column</span></span>
+<div id="7b037871" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a><span class="co"># One column</span></span>
 <span id="cb16-2"><a></a>df_traces[[<span class="st">'Zr'</span>]].median().<span class="bu">round</span>(<span class="dv">2</span>)</span>
 <span id="cb16-3"><a></a><span class="co"># Multiple columns</span></span>
-<span id="cb16-4"><a></a>df_traces[[<span class="st">'Zr'</span>,<span class="st">'Rb'</span>,<span class="st">'Sr'</span>]].median().<span class="bu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-4"><a></a>df_traces[[<span class="st">'Zr'</span>,<span class="st">'Rb'</span>,<span class="st">'Sr'</span>]].median().<span class="bu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
 <pre><code>Zr    339.0
 Rb    347.5
@@ -1148,14 +1152,14 @@ dtype: float64</code></pre>
 </section>
 <section id="location-iii-mode" class="slide level2">
 <h2>Location III: Mode</h2>
-<p>The <strong>mode</strong> is the value <span class="bg">that occur most frequently in a dataset</span>.</p>
+<p>The <strong>mode</strong> is the value <span class="alert">that occur most frequently in a dataset</span>.</p>
 <ul>
 <li><strong>Categorical</strong> or <strong>discrete numerical data</strong>: value(s) that appear most often.</li>
 <li>For <strong>continuous data</strong>, exact duplicates may be rare</li>
 </ul>
-<div id="f511060b" class="cell columns column-output-location" data-execution_count="23">
+<div id="a0b4f957" class="cell columns column-output-location" data-execution_count="23">
 <div class="column">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a><span class="co"># Calculate the modes</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a><span class="co"># Calculate the modes</span></span>
 <span id="cb18-2"><a></a>modes <span class="op">=</span> df_traces[<span class="st">'Zr'</span>].mode().<span class="bu">round</span>(<span class="dv">2</span>)</span>
 <span id="cb18-3"><a></a></span>
 <span id="cb18-4"><a></a><span class="co"># Plot the histogram</span></span>
@@ -1166,7 +1170,7 @@ dtype: float64</code></pre>
 <span id="cb18-9"><a></a>[ax.axvline(m, color<span class="op">=</span><span class="st">'darkorange'</span>, lw<span class="op">=</span><span class="dv">2</span>) <span class="cf">for</span> i, m <span class="kw">in</span> <span class="bu">enumerate</span>(modes)]</span>
 <span id="cb18-10"><a></a></span>
 <span id="cb18-11"><a></a>ax.set_xlabel(<span class="st">'Zr (ppm)'</span>)</span>
-<span id="cb18-12"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-12"><a></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column">
 <div class="cell-output cell-output-display">
 <div>
@@ -1198,7 +1202,7 @@ dtype: float64</code></pre>
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:48%;">
-<div id="06187a30" class="cell" data-execution_count="24">
+<div id="c703d4e0" class="cell" data-execution_count="24">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1226,11 +1230,11 @@ dtype: float64</code></pre>
 
 </div><div class="column" style="width:48%;">
 <p><span style="font-size: 0.5em;">&nbsp;</span></p>
-<div id="a0b12878" class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a></a>df_min <span class="op">=</span> df_traces[<span class="st">'Zr'</span>].<span class="bu">min</span>()</span>
+<div id="5d30b358" class="cell" data-execution_count="25">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a></a>df_min <span class="op">=</span> df_traces[<span class="st">'Zr'</span>].<span class="bu">min</span>()</span>
 <span id="cb19-2"><a></a>df_max <span class="op">=</span> df_traces[<span class="st">'Zr'</span>].<span class="bu">max</span>()</span>
 <span id="cb19-3"><a></a>df_range <span class="op">=</span> df_max <span class="op">-</span> df_min</span>
-<span id="cb19-4"><a></a><span class="bu">print</span>(<span class="ss">f"The range of Zircon concentrations is </span><span class="sc">{</span>df_range<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-4"><a></a><span class="bu">print</span>(<span class="ss">f"The range of Zircon concentrations is </span><span class="sc">{</span>df_range<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>The range of Zircon concentrations is 735.00</code></pre>
 </div>
@@ -1261,7 +1265,7 @@ s = \sqrt{\frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1} }
 <div class="columns">
 <div class="column" style="width:48%;">
 <ul>
-<li><span class="math inline">\(s\)</span> is in <span class="bg">the same unit as the data</span>
+<li><span class="math inline">\(s\)</span> is in <span class="alert">the same unit as the data</span>
 <ul>
 <li>Easy to interpret</li>
 </ul></li>
@@ -1271,8 +1275,8 @@ s = \sqrt{\frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1} }
 
 </div><div class="column" style="width:48%;">
 <p><span style="font-size: 0.5em;"></span></p>
-<div id="5893858c" class="cell" data-execution_count="26">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb21-1" class="hljs-ln-code"><a></a>df_traces[<span class="st">'Zr'</span>].std()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="db1d759a" class="cell" data-execution_count="26">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb21-1" class="hljs-ln-code"><a></a>df_traces[<span class="st">'Zr'</span>].std()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
 <pre><code>np.float64(118.39358315895393)</code></pre>
 </div>
@@ -1292,11 +1296,11 @@ s = \sqrt{\frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1} }
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:48%;">
-<div id="0ea11f90" class="cell" data-execution_count="27">
+<div id="0299e9da" class="cell" data-execution_count="27">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="class2_EDA_files/figure-revealjs/cell-28-output-1.png" width="851" height="456"></p>
+<p><img data-src="class2_EDA_files/figure-revealjs/cell-28-output-1.png" width="854" height="456"></p>
 </figure>
 </div>
 </div>
@@ -1305,7 +1309,7 @@ s = \sqrt{\frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1} }
 </section>
 <section id="dispersion-2.1-variance" class="slide level2">
 <h2>Dispersion 2.1: Variance</h2>
-<p>The <strong>variance</strong> (<span class="math inline">\(s^2\)</span>) is the <span class="bg">average of squared deviations</span> from the mean (→ the square of the standard deviation): <span class="math display">\[
+<p>The <strong>variance</strong> (<span class="math inline">\(s^2\)</span>) is the <span class="alert">average of squared deviations</span> from the mean (→ the square of the standard deviation): <span class="math display">\[
 s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}
 \]</span></p>
 <p><span style="font-size: 0.5em;"></span></p>
@@ -1318,8 +1322,8 @@ s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}
 </ul>
 </div><div class="column" style="width:46%;">
 <p><span style="font-size: 0.5em;"></span></p>
-<div id="53ea76bf" class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a>df_traces[<span class="st">'Zr'</span>].var()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="308f68a6" class="cell" data-execution_count="28">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a>df_traces[<span class="st">'Zr'</span>].var()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
 <pre><code>np.float64(14017.04053321614)</code></pre>
 </div>
@@ -1335,8 +1339,8 @@ s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}
 </div>
 <div class="callout-content">
 <ul>
-<li>Comparing data spread → <span class="bg">standard deviation</span></li>
-<li>Statistical modelling → <span class="bg">variance</span></li>
+<li>Comparing data spread → <span class="alert">standard deviation</span></li>
+<li>Statistical modelling → <span class="alert">variance</span></li>
 </ul>
 </div>
 </div>
@@ -1344,13 +1348,13 @@ s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}
 </section>
 <section id="dispersion-3-interquartile-range" class="slide level2">
 <h2>Dispersion 3: Interquartile range</h2>
-<p>The <strong>interquartile range</strong> (IQR) indicates <span class="bg">how spread out the middle 50%</span> of the data is.</p>
+<p>The <strong>interquartile range</strong> (IQR) indicates <span class="alert">how spread out the middle 50%</span> of the data is.</p>
 <ul>
 <li>Difference between the third quartile (Q3) and the first quartile (Q1):</li>
 </ul>
 <p><span id="eq-IQR"><span class="math display">\[
 \mathrm{IQR} = Q_3 - Q_1
-\qquad(1)\]</span></span></p>
+\tag{1}\]</span></span></p>
 <ul>
 <li>Q1: The value below which <strong>25% of the data fall</strong></li>
 <li>Q3: The value below which <strong>75% of the data fall</strong></li>
@@ -1400,7 +1404,7 @@ Table&nbsp;1: Relationship between quartiles, deciles and percentiles.
 </figure>
 </div>
 <ul>
-<li><span class="bg">median</span> =
+<li><span class="alert">median</span> =
 <ul>
 <li>2nd quartile = Q2</li>
 <li>5th decile = D5</li>
@@ -1410,7 +1414,7 @@ Table&nbsp;1: Relationship between quartiles, deciles and percentiles.
 </section>
 <section id="dispersion-3-interquartile-range-2" class="slide level2">
 <h2>Dispersion 3: Interquartile range</h2>
-<p>The <strong>interquartile range</strong> (IQR) indicates <span class="bg">how spread out the middle 50%</span> of the data is.</p>
+<p>The <strong>interquartile range</strong> (IQR) indicates <span class="alert">how spread out the middle 50%</span> of the data is.</p>
 <div class="columns">
 <div class="column" style="width:48%;">
 <p><span style="font-size: 0.5em;"></span></p>
@@ -1426,20 +1430,20 @@ Table&nbsp;1: Relationship between quartiles, deciles and percentiles.
 </section>
 <section id="shape-skewness" class="slide level2">
 <h2>Shape: Skewness</h2>
-<p>The <strong>skewness</strong> measures <span class="bg">the asymmetry of a distribution</span> and is computed as:</p>
+<p>The <strong>skewness</strong> measures <span class="alert">the asymmetry of a distribution</span> and is computed as:</p>
 <p><span class="math display">\[
 \text{Skewness} = \frac{1}{n} \sum_{i=1}^{n}\left(\frac{x_i-\bar{x}}{s}\right)^{3}
 \]</span></p>
 <p>In <em>Pandas</em>, the skewness can be computed using <code>.skew()</code></p>
 <ul>
-<li><strong>0</strong>: <span class="bg">Symmetric</span> → e.g., normal distribution</li>
-<li><strong>&gt;0</strong>: <span class="bg">Righ-skewed</span> → a tail extends to the right</li>
-<li><strong>&lt;0</strong>: <span class="bg">Left-skewed</span> → a tail extends to the left</li>
+<li><strong>0</strong>: <span class="alert">Symmetric</span> → e.g., normal distribution</li>
+<li><strong>&gt;0</strong>: <span class="alert">Righ-skewed</span> → a tail extends to the right</li>
+<li><strong>&lt;0</strong>: <span class="alert">Left-skewed</span> → a tail extends to the left</li>
 </ul>
 </section>
 <section id="distribution-visualisation" class="slide level2">
 <h2>Distribution visualisation</h2>
-<p>Beyond <strong>histograms</strong> → some plot types report <span class="bg">empirical</span> indications of <strong>location</strong>, <strong>dispersion</strong> and <strong>skewness</strong>.</p>
+<p>Beyond <strong>histograms</strong> → some plot types report <span class="alert">empirical</span> indications of <strong>location</strong>, <strong>dispersion</strong> and <strong>skewness</strong>.</p>
 <p><strong>Box and whisker plots</strong></p>
 <div class="columns">
 <div class="column" style="width:40%;">
@@ -1465,11 +1469,11 @@ Table&nbsp;1: Relationship between quartiles, deciles and percentiles.
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:48%;">
-<div id="95aafc6d" class="cell" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<div id="441eeb92" class="cell" data-execution_count="29">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb25-2"><a></a>sns.boxplot(data<span class="op">=</span>df_traces[[<span class="st">'Zr'</span>, <span class="st">'Sr'</span>]], orient<span class="op">=</span><span class="st">"h"</span>, ax<span class="op">=</span>ax)</span>
 <span id="cb25-3"><a></a>ax.set_xlabel(<span class="st">'Concentration (ppm)'</span>)<span class="op">;</span></span>
-<span id="cb25-4"><a></a>ax.set_title(<span class="st">'Zr and Sr distribution'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-4"><a></a>ax.set_title(<span class="st">'Zr and Sr distribution'</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1487,17 +1491,17 @@ Table&nbsp;1: Relationship between quartiles, deciles and percentiles.
 <div class="column" style="width:48%;">
 <ul>
 <li><code>sns.violinplot()</code></li>
-<li>Density estimate through Kernel Density Estimator → <span class="bg">artefacts</span></li>
+<li>Density estimate through Kernel Density Estimator → <span class="alert">artefacts</span></li>
 <li>Some tail resolution, not always realistic</li>
 </ul>
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:48%;">
-<div id="2615b781" class="cell" data-execution_count="30">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<div id="198bb502" class="cell" data-execution_count="30">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb26-2"><a></a>sns.violinplot(data<span class="op">=</span>df_traces[[<span class="st">'Zr'</span>, <span class="st">'Sr'</span>]], orient<span class="op">=</span><span class="st">"h"</span>, ax<span class="op">=</span>ax)</span>
 <span id="cb26-3"><a></a>ax.set_xlabel(<span class="st">'Concentration (ppm)'</span>)<span class="op">;</span></span>
-<span id="cb26-4"><a></a>ax.set_title(<span class="st">'Zr and Sr distribution'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-4"><a></a>ax.set_title(<span class="st">'Zr and Sr distribution'</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1521,11 +1525,11 @@ Table&nbsp;1: Relationship between quartiles, deciles and percentiles.
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:48%;">
-<div id="d1ae1f8f" class="cell" data-execution_count="31">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<div id="1b2a53b9" class="cell" data-execution_count="31">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb27-2"><a></a>sns.boxenplot(data<span class="op">=</span>df_traces[[<span class="st">'Zr'</span>, <span class="st">'Sr'</span>]], orient<span class="op">=</span><span class="st">"h"</span>, ax<span class="op">=</span>ax)</span>
 <span id="cb27-3"><a></a>ax.set_xlabel(<span class="st">'Concentration (ppm)'</span>)<span class="op">;</span></span>
-<span id="cb27-4"><a></a>ax.set_title(<span class="st">'Zr and Sr distribution'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-4"><a></a>ax.set_title(<span class="st">'Zr and Sr distribution'</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1541,8 +1545,8 @@ Table&nbsp;1: Relationship between quartiles, deciles and percentiles.
 <ul>
 <li>Go to <a href="https://elste-master.github.io/Data-Science/">https://elste-master.github.io/Data-Science/</a>
 <ul>
-<li>Class 2 &gt; <span class="bg">Univariate analyses</span></li>
-<li>Explore the structure of the glass geochemistry or <span class="bg">your</span> dataset</li>
+<li>Class 2 &gt; <span class="alert">Univariate analyses</span></li>
+<li>Explore the structure of the glass geochemistry or <span class="alert">your</span> dataset</li>
 <li>Get used to the various functions</li>
 </ul></li>
 </ul>
@@ -1580,11 +1584,11 @@ Table&nbsp;1: Relationship between quartiles, deciles and percentiles.
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:56%;">
-<div id="4c1c6ae1" class="cell" data-execution_count="32">
+<div id="6474a6cf" class="cell" data-execution_count="32">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="class2_EDA_files/figure-revealjs/cell-33-output-1.png" width="1341" height="1172"></p>
+<p><img data-src="class2_EDA_files/figure-revealjs/cell-33-output-1.png" width="1342" height="1172"></p>
 </figure>
 </div>
 </div>
@@ -1594,8 +1598,8 @@ Table&nbsp;1: Relationship between quartiles, deciles and percentiles.
 <section id="covariance" class="slide level2">
 <h2>Covariance</h2>
 <ul>
-<li>The <span class="bg">covariance</span> captures <strong>the direction and magnitude of the linear relationship between the two variables</strong></li>
-<li>The <span class="bg">sample covariance</span> is an <strong>estimator</strong> of the theoretical covariance:</li>
+<li>The <span class="alert">covariance</span> captures <strong>the direction and magnitude of the linear relationship between the two variables</strong></li>
+<li>The <span class="alert">sample covariance</span> is an <strong>estimator</strong> of the theoretical covariance:</li>
 </ul>
 <p><span class="math display">\[
 \mathrm{Cov}(X,Y)_{\text{emp}}= \frac{1}{n-1}\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y}),
@@ -1604,17 +1608,17 @@ Table&nbsp;1: Relationship between quartiles, deciles and percentiles.
 <li><strong>Positive</strong>: Increase in <span class="math inline">\(X\)</span> → increase in <span class="math inline">\(Y\)</span></li>
 <li><strong>Negative</strong>: Increase in <span class="math inline">\(X\)</span> → decrease in <span class="math inline">\(Y\)</span></li>
 </ul>
-<p><strong>Problem</strong>: depends on the <span class="bg">magnitudes</span> of the variables, so it does not directly reflect the <span class="bg">strength</span> of the relationship</p>
+<p><strong>Problem</strong>: depends on the <span class="alert">magnitudes</span> of the variables, so it does not directly reflect the <span class="alert">strength</span> of the relationship</p>
 </section>
 <section id="correlation" class="slide level2">
 <h2>Correlation</h2>
 <ul>
-<li>The <span class="bg">correlation coefficient</span> provides <strong>a normalized version</strong> of the covariance
+<li>The <span class="alert">correlation coefficient</span> provides <strong>a normalized version</strong> of the covariance
 <ul>
 <li>Ranges from <span class="math inline">\(−1\)</span> to <span class="math inline">\(1\)</span></li>
 <li>Indicates both the direction and the strength of the linear relationship</li>
 </ul></li>
-<li>The <span class="bg">sample correlation</span> is computed as:</li>
+<li>The <span class="alert">sample correlation</span> is computed as:</li>
 </ul>
 <p><span class="math display">\[
 r(X,Y)_{\text{emp}} = \frac{\mathrm{Cov}(X,Y)_{\text{emp}}}{s_X s_Y} = \frac{\sum_{i=1}^n (x_i - \bar x)(y_i - \bar y)}{\sqrt{\sum_{i=1}^n (x_i - \bar x)^2}\;\sqrt{\sum_{i=1}^n (y_i - \bar y)^2}},
@@ -1627,8 +1631,8 @@ r(X,Y)_{\text{emp}} = \frac{\mathrm{Cov}(X,Y)_{\text{emp}}}{s_X s_Y} = \frac{\su
 <section id="correlation-matrix" class="slide level2">
 <h2>Correlation matrix</h2>
 <ul>
-<li><span class="bg">Correlation matrix</span> → square table showing the <span class="bg">pairwise correlations</span> between all variables in a dataset</li>
-<li>Suppose we have <span class="math inline">\(p\)</span> variables <span class="math inline">\((X_1, X_2, \dots, X_p)\)</span> → the <span class="bg">correlation matrix</span> <span class="math inline">\(\mathbf{C}\)</span> is:</li>
+<li><span class="alert">Correlation matrix</span> → square table showing the <span class="alert">pairwise correlations</span> between all variables in a dataset</li>
+<li>Suppose we have <span class="math inline">\(p\)</span> variables <span class="math inline">\((X_1, X_2, \dots, X_p)\)</span> → the <span class="alert">correlation matrix</span> <span class="math inline">\(\mathbf{C}\)</span> is:</li>
 </ul>
 <p><span class="math display">\[
 \mathbf{C} =
@@ -1656,7 +1660,7 @@ r(X_p,X_1) &amp; r(X_p,X_2) &amp; \dots &amp; 1
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:48%;">
-<div id="2bf9ab30" class="cell" data-execution_count="33">
+<div id="b6fd3a56" class="cell" data-execution_count="33">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1671,7 +1675,7 @@ r(X_p,X_1) &amp; r(X_p,X_2) &amp; \dots &amp; 1
 <h2>Linear regression</h2>
 <ul>
 <li>Correlation coefficients → measure of coupling between two continuous variables</li>
-<li><span class="bg">linear regressions</span> attempt modelling this relationship</li>
+<li><span class="alert">linear regressions</span> attempt modelling this relationship</li>
 </ul>
 <div class="columns">
 <div class="column" style="width:30%;">
@@ -1703,13 +1707,13 @@ y = a + bx + \varepsilon
 <li>A confidence interval</li>
 </ol>
 <div class="fragment">
-<p>→ <span class="bg"><strong>Be critical</strong></span></p>
-<p>→ Further investigations <span class="bg">require dedicated stats packages</span></p>
+<p>→ <span class="alert"><strong>Be critical</strong></span></p>
+<p>→ Further investigations <span class="alert">require dedicated stats packages</span></p>
 </div>
 </div><div class="column" style="width:4%;">
 
 </div><div class="column img-up-75" style="width:38%;">
-<div id="288efb07" class="cell" data-execution_count="34">
+<div id="ecf7a5e4" class="cell" data-execution_count="34">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1722,7 +1726,7 @@ y = a + bx + \varepsilon
 </section>
 <section id="residual-analysis-with-seaborn" class="slide level2">
 <h2>Residual analysis with Seaborn</h2>
-<p>Linear regression → <span class="bg">do residuals show any structure</span>?? → <code>sns.residplot()</code></p>
+<p>Linear regression → <span class="alert">do residuals show any structure</span>?? → <code>sns.residplot()</code></p>
 <div class="columns">
 <div class="column" style="width:58%;">
 <p>Residuals are necessary to:</p>
@@ -1731,12 +1735,12 @@ y = a + bx + \varepsilon
 <li><strong>Detect patterns</strong> that indicate problems (non-linearity, heteroscedasticity, outliers).</li>
 </ol>
 <div class="fragment">
-<p>Any type of <span class="bg">structure in residuals</span> might reveal a <strong>violation of linear regression assumptions</strong>.</p>
+<p>Any type of <span class="alert">structure in residuals</span> might reveal a <strong>violation of linear regression assumptions</strong>.</p>
 </div>
 </div><div class="column" style="width:4%;">
 
 </div><div class="column img-up-75" style="width:38%;">
-<div id="e7f00c10" class="cell" data-execution_count="35">
+<div id="8ea86d95" class="cell" data-execution_count="35">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1752,8 +1756,8 @@ y = a + bx + \varepsilon
 <ul>
 <li>Go to <a href="https://elste-master.github.io/Data-Science/">https://elste-master.github.io/Data-Science/</a>
 <ul>
-<li>Class 2 &gt; <span class="bg">Bivariate analyses</span></li>
-<li>Explore the structure of the glass geochemistry or <span class="bg">your</span> dataset</li>
+<li>Class 2 &gt; <span class="alert">Bivariate analyses</span></li>
+<li>Explore the structure of the glass geochemistry or <span class="alert">your</span> dataset</li>
 <li>Get used to the various functions</li>
 </ul></li>
 </ul>
@@ -1777,6 +1781,7 @@ y = a + bx + \varepsilon
   <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
   <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../site_libs/revealjs/plugin/verticator/verticator.js"></script>
   <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -1800,6 +1805,7 @@ y = a + bx + \varepsilon
 'jumpToSlide': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
+'verticator': {"themetag":"h1","color":"","inversecolor":"","skipuncounted":false,"clickable":true,"position":"auto","offset":"3vmin","autogenerate":true,"tooltip":"title","scale":0.75,"debug":true},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -1925,7 +1931,7 @@ y = a + bx + \varepsilon
         previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
-        transition: 'slide',
+        transition: 'fade',
 
         // Transition speed (default/fast/slow)
         transitionSpeed: 'fast',
@@ -1970,7 +1976,7 @@ y = a + bx + \varepsilon
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, Verticator, QuartoSupport,
 
           RevealMath,
           RevealNotes,
@@ -1979,191 +1985,380 @@ y = a + bx + \varepsilon
         ]
       });
     </script>
+    <script>
+    (function () {
+      function boot() {
+        if (!window.Reveal) return setTimeout(boot, 50);
+
+        function update() {
+          const slides = Array.from(document.querySelectorAll(".reveal .slides section"))
+            .filter(s => !s.classList.contains("stack"))
+            // ignore hidden slides
+            .filter(s => s.getAttribute("data-visibility") !== "hidden");
+
+          const groups = new Map();
+
+          for (const slide of slides) {
+            const h = slide.querySelector("h1, h2, h3");
+            if (!h) continue;
+            const t = h.textContent.trim();
+            if (!groups.has(t)) groups.set(t, []);
+            groups.get(t).push(h);
+          }
+
+          for (const [title, hs] of groups.entries()) {
+            if (hs.length < 2) continue;
+            hs.forEach((h, i) => {
+              h.textContent = `${title} (${i + 1}/${hs.length})`;
+            });
+          }
+        }
+
+        function openLinksInNewTab() {
+          document.querySelectorAll(".reveal .slides a[href]").forEach(link => {
+            const href = link.getAttribute("href");
+
+            // Keep in-slide navigation, annotations and image lightboxes local.
+            if (!href || href.startsWith("#") || link.classList.contains("lightbox")) {
+              return;
+            }
+
+            link.setAttribute("target", "_blank");
+            link.setAttribute("rel", "noopener noreferrer");
+          });
+        }
+
+        Reveal.on("ready", () => {
+          update();
+          openLinksInNewTab();
+        });
+        update();
+        openLinksInNewTab();
+      }
+
+      boot();
+    })();
+    </script>
     <script id="quarto-html-after-body" type="application/javascript">
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-      const toggleBodyColorMode = (bsSheetEl) => {
-        const mode = bsSheetEl.getAttribute("data-mode");
-        const bodyEl = window.document.querySelector("body");
-        if (mode === "dark") {
-          bodyEl.classList.add("quarto-dark");
-          bodyEl.classList.remove("quarto-light");
-        } else {
-          bodyEl.classList.add("quarto-light");
-          bodyEl.classList.remove("quarto-dark");
-        }
-      }
-      const toggleBodyColorPrimary = () => {
-        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-        if (bsSheetEl) {
-          toggleBodyColorMode(bsSheetEl);
-        }
-      }
-      toggleBodyColorPrimary();  
-      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-      tabsets.forEach(function(tabset) {
-        const tabby = new Tabby('#' + tabset.id);
-      });
-      const isCodeAnnotation = (el) => {
-        for (const clz of el.classList) {
-          if (clz.startsWith('code-annotation-')) {                     
-            return true;
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
           }
+          return false;
         }
-        return false;
-      }
-      const onCopySuccess = function(e) {
-        // button target
-        const button = e.trigger;
-        // don't keep focus
-        button.blur();
-        // flash "checked"
-        button.classList.add('code-copy-button-checked');
-        var currentTitle = button.getAttribute("title");
-        button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
-        setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
           }
-          button.setAttribute("title", currentTitle);
-          button.classList.remove('code-copy-button-checked');
-        }, 1000);
-        // clear code selection
-        e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
           for (const childEl of codeEl.children) {
             if (isCodeAnnotation(childEl)) {
               childEl.remove();
             }
           }
           return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
-      });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
-        });
-        clipboardModal.on('success', onCopySuccess);
-      }
-        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-        var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp("https:\/\/ELSTE-Master\.github\.io\/Data-Science\/");
-        var isInternal = (href) => {
-            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
-        // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-        for (var i=0; i<links.length; i++) {
-          const link = links[i];
-          if (!isInternal(link.href)) {
-            // undo the damage that might have been done by quarto-nav.js in the case of
-            // links that we want to consider external
-            if (link.dataset.originalHref !== undefined) {
-              link.href = link.dataset.originalHref;
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
             }
           }
-        }
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-        const config = {
-          allowHTML: true,
-          maxWidth: 500,
-          delay: 100,
-          arrow: false,
-          appendTo: function(el) {
-              return el.closest('section.slide') || el.parentElement;
-          },
-          interactive: true,
-          interactiveBorder: 10,
-          theme: 'light-border',
-          placement: 'bottom-start',
-        };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
-          config['offset'] = [0,0];
-          config['maxWidth'] = 700;
-        window.tippy(el, config); 
-      }
-      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-      for (var i=0; i<noterefs.length; i++) {
-        const ref = noterefs[i];
-        tippyHover(ref, function() {
-          // use id or data attribute instead here
-          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-          try { href = new URL(href).hash; } catch {}
-          const id = href.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note) {
-            return note.innerHTML;
-          } else {
-            return "";
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
           }
-        });
-      }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
           }
-        } else {
-          return undefined;
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
         }
-      };
-      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-      for (var i=0; i<bibliorefs.length; i++) {
-        const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
-              }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
           });
         }
-      }
-    });
-    </script>
+            let selectedAnnoteEl;
+            const selectorForAnnotation = ( cell, annotation) => {
+              let cellAttr = 'data-code-cell="' + cell + '"';
+              let lineAttr = 'data-code-annotation="' +  annotation + '"';
+              const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+              return selector;
+            }
+            const selectCodeLines = (annoteEl) => {
+              const doc = window.document;
+              const targetCell = annoteEl.getAttribute("data-target-cell");
+              const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+              const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+              const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+              const lineIds = lines.map((line) => {
+                return targetCell + "-" + line;
+              })
+              let top = null;
+              let height = null;
+              let parent = null;
+              if (lineIds.length > 0) {
+                  //compute the position of the single el (top and bottom and make a div)
+                  const el = window.document.getElementById(lineIds[0]);
+                  top = el.offsetTop;
+                  height = el.offsetHeight;
+                  parent = el.parentElement.parentElement;
+                if (lineIds.length > 1) {
+                  const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+                  const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+                  height = bottom - top;
+                }
+                if (top !== null && height !== null && parent !== null) {
+                  // cook up a div (if necessary) and position it 
+                  let div = window.document.getElementById("code-annotation-line-highlight");
+                  if (div === null) {
+                    div = window.document.createElement("div");
+                    div.setAttribute("id", "code-annotation-line-highlight");
+                    div.style.position = 'absolute';
+                    parent.appendChild(div);
+                  }
+                  div.style.top = top - 2 + "px";
+                  div.style.height = height + 4 + "px";
+                  div.style.left = 0;
+                  let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+                  if (gutterDiv === null) {
+                    gutterDiv = window.document.createElement("div");
+                    gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                    gutterDiv.style.position = 'absolute';
+                    const codeCell = window.document.getElementById(targetCell);
+                    const gutter = codeCell.querySelector('.code-annotation-gutter');
+                    gutter.appendChild(gutterDiv);
+                  }
+                  gutterDiv.style.top = top - 2 + "px";
+                  gutterDiv.style.height = height + 4 + "px";
+                }
+                selectedAnnoteEl = annoteEl;
+              }
+            };
+            const unselectCodeLines = () => {
+              const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+              elementsIds.forEach((elId) => {
+                const div = window.document.getElementById(elId);
+                if (div) {
+                  div.remove();
+                }
+              });
+              selectedAnnoteEl = undefined;
+            };
+              // Handle positioning of the toggle
+          window.addEventListener(
+            "resize",
+            throttle(() => {
+              elRect = undefined;
+              if (selectedAnnoteEl) {
+                selectCodeLines(selectedAnnoteEl);
+              }
+            }, 10)
+          );
+          function throttle(fn, ms) {
+          let throttle = false;
+          let timer;
+            return (...args) => {
+              if(!throttle) { // first call gets through
+                  fn.apply(this, args);
+                  throttle = true;
+              } else { // all the others get throttled
+                  if(timer) clearTimeout(timer); // cancel #2
+                  timer = setTimeout(() => {
+                    fn.apply(this, args);
+                    timer = throttle = false;
+                  }, ms);
+              }
+            };
+          }
+            const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+            for (let i=0; i<annoteTargets.length; i++) {
+              const annoteTarget = annoteTargets[i];
+              const targetCell = annoteTarget.getAttribute("data-target-cell");
+              const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+              const contentFn = () => {
+                const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+                if (content) {
+                  const tipContent = content.cloneNode(true);
+                  tipContent.classList.add("code-annotation-tip-content");
+                  return tipContent.outerHTML;
+                }
+              }
+              const config = {
+                allowHTML: true,
+                content: contentFn,
+                onShow: (instance) => {
+                  selectCodeLines(instance.reference);
+                  instance.reference.classList.add('code-annotation-active');
+                  window.tippy.hideAll();
+                },
+                onHide: (instance) => {
+                  unselectCodeLines();
+                  instance.reference.classList.remove('code-annotation-active');
+                },
+                maxWidth: 300,
+                delay: [50, 0],
+                duration: [200, 0],
+                offset: [5, 10],
+                arrow: true,
+                appendTo: function(el) {
+                  return el.parentElement.parentElement.parentElement;
+                },
+                interactive: true,
+                interactiveBorder: 10,
+                theme: 'light-border',
+                placement: 'right',
+                popperOptions: {
+                  modifiers: [
+                  {
+                    name: 'flip',
+                    options: {
+                      flipVariations: false, // true by default
+                      allowedAutoPlacements: ['right'],
+                      fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                    },
+                  },
+                  {
+                    name: 'preventOverflow',
+                    options: {
+                      mainAxis: false,
+                      altAxis: false
+                    }
+                  }
+                  ]        
+                }      
+              };
+              window.tippy(annoteTarget, config); 
+            }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
     
 
 </body></html>

@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Pandas – ELSTE Data Science Master Course</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../appendices/doc_visualisation.html" rel="next">
+<link href="../appendices/function_reference.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-d2dc1000e36a39b18fb3f054b99b4004.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../custom.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../appendices/setup_vscode.html">Appendices</a></li><li class="breadcrumb-item"><a href="../appendices/function_reference.html">Function reference</a></li><li class="breadcrumb-item"><a href="../appendices/doc_pandas.html">Pandas</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">ELSTE Data Science Course</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/ELSTE-Master/Data-Science" title="GitHub" class="quarto-navigation-tool px-1" aria-label="GitHub"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ELSTE Data Science Master Course</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Class 1: Pandas</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class1/day1-1_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class1/day1-2_pandas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Intro to Pandas</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class1/day1-3_data_exploration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data structure</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class1/day1-4_queries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Querying data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class1/day1-5_filtering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filtering data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class1/day1-6_operations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Operations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class1/day1-summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Summary</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Class 2: Descriptive stats</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class2/day2-1_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class2/day2-2_data_exploration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data exploration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class2/day2-3_univariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Univariate analyses</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class2/day2-4_bivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bivariate analyses</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/setup_vscode.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Setup VS Code</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/jupyter_markdown_summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Markdown for Jupyter</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Function reference</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/function_reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Function reference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/doc_pandas.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Pandas</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/doc_visualisation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Matplotlib and Seaborn</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/doc_numpy_scipy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NumPy and SciPy</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/doc_statsmodels.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statsmodels</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/doc_python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Python essentials</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#pandas-read-csv" id="toc-pandas-read-csv" class="nav-link active" data-scroll-target="#pandas-read-csv"><code>read_csv()</code></a></li>
+  <li><a href="#pandas-read-excel" id="toc-pandas-read-excel" class="nav-link" data-scroll-target="#pandas-read-excel"><code>read_excel()</code></a></li>
+  <li><a href="#pandas-dataframe" id="toc-pandas-dataframe" class="nav-link" data-scroll-target="#pandas-dataframe"><code>DataFrame()</code></a></li>
+  <li><a href="#pandas-categorical" id="toc-pandas-categorical" class="nav-link" data-scroll-target="#pandas-categorical"><code>Categorical()</code></a></li>
+  <li><a href="#pandas-cut" id="toc-pandas-cut" class="nav-link" data-scroll-target="#pandas-cut"><code>cut()</code></a></li>
+  <li><a href="#pandas-head" id="toc-pandas-head" class="nav-link" data-scroll-target="#pandas-head"><code>head()</code></a></li>
+  <li><a href="#pandas-tail" id="toc-pandas-tail" class="nav-link" data-scroll-target="#pandas-tail"><code>tail()</code></a></li>
+  <li><a href="#pandas-info" id="toc-pandas-info" class="nav-link" data-scroll-target="#pandas-info"><code>info()</code></a></li>
+  <li><a href="#pandas-set-index" id="toc-pandas-set-index" class="nav-link" data-scroll-target="#pandas-set-index"><code>set_index()</code></a></li>
+  <li><a href="#pandas-reset-index" id="toc-pandas-reset-index" class="nav-link" data-scroll-target="#pandas-reset-index"><code>reset_index()</code></a></li>
+  <li><a href="#pandas-sort-values" id="toc-pandas-sort-values" class="nav-link" data-scroll-target="#pandas-sort-values"><code>sort_values()</code></a></li>
+  <li><a href="#pandas-round" id="toc-pandas-round" class="nav-link" data-scroll-target="#pandas-round"><code>round()</code></a></li>
+  <li><a href="#pandas-abs" id="toc-pandas-abs" class="nav-link" data-scroll-target="#pandas-abs"><code>abs()</code></a></li>
+  <li><a href="#pandas-apply" id="toc-pandas-apply" class="nav-link" data-scroll-target="#pandas-apply"><code>apply()</code></a></li>
+  <li><a href="#pandas-clip" id="toc-pandas-clip" class="nav-link" data-scroll-target="#pandas-clip"><code>clip()</code></a></li>
+  <li><a href="#pandas-fillna" id="toc-pandas-fillna" class="nav-link" data-scroll-target="#pandas-fillna"><code>fillna()</code></a></li>
+  <li><a href="#pandas-mean" id="toc-pandas-mean" class="nav-link" data-scroll-target="#pandas-mean"><code>mean()</code></a></li>
+  <li><a href="#pandas-median" id="toc-pandas-median" class="nav-link" data-scroll-target="#pandas-median"><code>median()</code></a></li>
+  <li><a href="#pandas-mode" id="toc-pandas-mode" class="nav-link" data-scroll-target="#pandas-mode"><code>mode()</code></a></li>
+  <li><a href="#pandas-min" id="toc-pandas-min" class="nav-link" data-scroll-target="#pandas-min"><code>min()</code></a></li>
+  <li><a href="#pandas-max" id="toc-pandas-max" class="nav-link" data-scroll-target="#pandas-max"><code>max()</code></a></li>
+  <li><a href="#pandas-var" id="toc-pandas-var" class="nav-link" data-scroll-target="#pandas-var"><code>var()</code></a></li>
+  <li><a href="#pandas-std" id="toc-pandas-std" class="nav-link" data-scroll-target="#pandas-std"><code>std()</code></a></li>
+  <li><a href="#pandas-skew" id="toc-pandas-skew" class="nav-link" data-scroll-target="#pandas-skew"><code>skew()</code></a></li>
+  <li><a href="#pandas-cov" id="toc-pandas-cov" class="nav-link" data-scroll-target="#pandas-cov"><code>cov()</code></a></li>
+  <li><a href="#pandas-corr" id="toc-pandas-corr" class="nav-link" data-scroll-target="#pandas-corr"><code>corr()</code></a></li>
+  <li><a href="#pandas-groupby" id="toc-pandas-groupby" class="nav-link" data-scroll-target="#pandas-groupby"><code>groupby()</code></a></li>
+  <li><a href="#pandas-drop" id="toc-pandas-drop" class="nav-link" data-scroll-target="#pandas-drop"><code>drop()</code></a></li>
+  <li><a href="#pandas-astype" id="toc-pandas-astype" class="nav-link" data-scroll-target="#pandas-astype"><code>astype()</code></a></li>
+  <li><a href="#pandas-unique" id="toc-pandas-unique" class="nav-link" data-scroll-target="#pandas-unique"><code>unique()</code></a></li>
+  <li><a href="#pandas-map" id="toc-pandas-map" class="nav-link" data-scroll-target="#pandas-map"><code>map()</code></a></li>
+  <li><a href="#pandas-get" id="toc-pandas-get" class="nav-link" data-scroll-target="#pandas-get"><code>get()</code></a></li>
+  <li><a href="#pandas-shape" id="toc-pandas-shape" class="nav-link" data-scroll-target="#pandas-shape"><code>shape</code></a></li>
+  <li><a href="#pandas-index" id="toc-pandas-index" class="nav-link" data-scroll-target="#pandas-index"><code>index</code></a></li>
+  <li><a href="#pandas-columns" id="toc-pandas-columns" class="nav-link" data-scroll-target="#pandas-columns"><code>columns</code></a></li>
+  <li><a href="#pandas-dtypes" id="toc-pandas-dtypes" class="nav-link" data-scroll-target="#pandas-dtypes"><code>dtypes</code></a></li>
+  <li><a href="#pandas-loc" id="toc-pandas-loc" class="nav-link" data-scroll-target="#pandas-loc"><code>loc</code></a></li>
+  <li><a href="#pandas-iloc" id="toc-pandas-iloc" class="nav-link" data-scroll-target="#pandas-iloc"><code>iloc</code></a></li>
+  <li><a href="#pandas-str-contains" id="toc-pandas-str-contains" class="nav-link" data-scroll-target="#pandas-str-contains"><code>str.contains()</code></a></li>
+  <li><a href="#pandas-str-startswith" id="toc-pandas-str-startswith" class="nav-link" data-scroll-target="#pandas-str-startswith"><code>str.startswith()</code></a></li>
+  <li><a href="#pandas-str-endswith" id="toc-pandas-str-endswith" class="nav-link" data-scroll-target="#pandas-str-endswith"><code>str.endswith()</code></a></li>
+  <li><a href="#pandas-str-len" id="toc-pandas-str-len" class="nav-link" data-scroll-target="#pandas-str-len"><code>str.len()</code></a></li>
+  <li><a href="#pandas-str-upper" id="toc-pandas-str-upper" class="nav-link" data-scroll-target="#pandas-str-upper"><code>str.upper()</code></a></li>
+  <li><a href="#pandas-str-lower" id="toc-pandas-str-lower" class="nav-link" data-scroll-target="#pandas-str-lower"><code>str.lower()</code></a></li>
+  <li><a href="#pandas-str-replace" id="toc-pandas-str-replace" class="nav-link" data-scroll-target="#pandas-str-replace"><code>str.replace()</code></a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../appendices/setup_vscode.html">Appendices</a></li><li class="breadcrumb-item"><a href="../appendices/function_reference.html">Function reference</a></li><li class="breadcrumb-item"><a href="../appendices/doc_pandas.html">Pandas</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Pandas</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This reference explains the Pandas tools used in classes 1–4. Each entry gives a purpose, the arguments most useful in this course, an example, and a practical note. Follow <strong>Official documentation</strong> for the complete API.</p>
+<p>Examples use the course datasets: <code>df</code> is the eruption table, <code>df_traces</code> the geochemical table, <code>reading</code> the reading-score table, and <code>df_icecover</code> the lake table. Samples such as <code>dietA</code> and <code>dietB</code> have already been selected. Variables such as <code>data</code>, <code>ax</code>, and <code>mod1</code> refer to the array, axes, or fitted model described in the lesson. Snippets illustrate individual operations rather than forming a script to run from top to bottom.</p>
+<p>Import <code>pandas as pd</code>. Methods use parentheses, such as <code>df.head()</code>; attributes such as <code>df.shape</code> do not. Indexers <code>.loc</code> and <code>.iloc</code> use square brackets. Many transformations return a result: assign it if you want to keep it.</p>
+<section id="pandas-read-csv" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-read-csv"><code>read_csv()</code></h2>
+<p><strong>Purpose:</strong> Read a CSV file into a DataFrame.</p>
+<p><strong>Main arguments:</strong> <code>filepath_or_buffer</code>: path or URL; <code>parse_dates</code>: column names to interpret as dates; <code>sep</code>: field separator.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'data/dummy_volcanoes.csv'</span>, parse_dates<span class="op">=</span>[<span class="st">'Date'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Check the column names and types after loading.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html">Official documentation</a></p>
+</section>
+<section id="pandas-read-excel" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-read-excel"><code>read_excel()</code></h2>
+<p><strong>Purpose:</strong> Read a worksheet from an Excel file.</p>
+<p><strong>Main arguments:</strong> <code>io</code>: file path; <code>sheet_name</code>: worksheet name or position.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_excel(<span class="st">'geochemistry.xlsx'</span>, sheet_name<span class="op">=</span><span class="st">'Supp_traces'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Use <code>read_csv()</code> for the CSV versions supplied in the course.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.read_excel.html">Official documentation</a></p>
+</section>
+<section id="pandas-dataframe" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-dataframe"><code>DataFrame()</code></h2>
+<p><strong>Purpose:</strong> Create a labelled table from columns or records.</p>
+<p><strong>Main arguments:</strong> <code>data</code>: dictionary, array or records; <code>index</code>: optional row labels.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>new_data <span class="op">=</span> pd.DataFrame({<span class="st">'age'</span>: [<span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>], <span class="st">'group'</span>: <span class="st">'Control'</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Columns used for prediction must match those in the model formula.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">Official documentation</a></p>
+</section>
+<section id="pandas-categorical" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-categorical"><code>Categorical()</code></h2>
+<p><strong>Purpose:</strong> Represent a variable as categories rather than continuous numbers.</p>
+<p><strong>Main arguments:</strong> <code>values</code>: observations; <code>categories</code>: optional allowed categories; <code>ordered</code>: whether their order has meaning.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_icecover[<span class="st">'lakeid'</span>] <span class="op">=</span> pd.Categorical(df_icecover[<span class="st">'lakeid'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> A numeric code can still represent a category.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.Categorical.html">Official documentation</a></p>
+</section>
+<section id="pandas-cut" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-cut"><code>cut()</code></h2>
+<p><strong>Purpose:</strong> Divide numerical values into intervals.</p>
+<p><strong>Main arguments:</strong> <code>x</code>: values; <code>bins</code>: interval boundaries or number of intervals; <code>labels</code>: optional interval labels.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>binned <span class="op">=</span> pd.cut(df_traces[<span class="st">'Zr'</span>], bins<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> The chosen boundaries affect the resulting categories.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.cut.html">Official documentation</a></p>
+</section>
+<section id="pandas-head" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-head"><code>head()</code></h2>
+<p><strong>Purpose:</strong> Display the first rows.</p>
+<p><strong>Main arguments:</strong> <code>n</code>: number of rows; default is 5.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df.head(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> A preview does not describe every observation.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.head.html">Official documentation</a></p>
+</section>
+<section id="pandas-tail" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-tail"><code>tail()</code></h2>
+<p><strong>Purpose:</strong> Display the last rows.</p>
+<p><strong>Main arguments:</strong> <code>n</code>: number of rows; default is 5.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df.tail(<span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Useful for checking the end of a file.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.tail.html">Official documentation</a></p>
+</section>
+<section id="pandas-info" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-info"><code>info()</code></h2>
+<p><strong>Purpose:</strong> Print column types and non-missing counts.</p>
+<p><strong>Main arguments:</strong> Usually no arguments are needed.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df.info()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Prints a summary; its return value is not the summary table.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.info.html">Official documentation</a></p>
+</section>
+<section id="pandas-set-index" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-set-index"><code>set_index()</code></h2>
+<p><strong>Purpose:</strong> Use one or more columns as row labels.</p>
+<p><strong>Main arguments:</strong> <code>keys</code>: column name or names.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.set_index(<span class="st">'Name'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Store the returned DataFrame; labels need not be unique.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.set_index.html">Official documentation</a></p>
+</section>
+<section id="pandas-reset-index" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-reset-index"><code>reset_index()</code></h2>
+<p><strong>Purpose:</strong> Restore a sequential row index.</p>
+<p><strong>Main arguments:</strong> <code>drop</code>: discard the old index instead of keeping it as a column.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.reset_index()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> By default, the former index becomes a column.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.reset_index.html">Official documentation</a></p>
+</section>
+<section id="pandas-sort-values" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-sort-values"><code>sort_values()</code></h2>
+<p><strong>Purpose:</strong> Sort observations by one or more columns.</p>
+<p><strong>Main arguments:</strong> <code>by</code>: column names; <code>ascending</code>: increasing or decreasing order.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.sort_values([<span class="st">'VEI'</span>, <span class="st">'Date'</span>], ascending<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Sorting returns a new result unless explicitly performed in place.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html">Official documentation</a></p>
+</section>
+<section id="pandas-round" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-round"><code>round()</code></h2>
+<p><strong>Purpose:</strong> Round numbers to a chosen number of decimal places.</p>
+<p><strong>Main arguments:</strong> <code>decimals</code>: number of decimal places.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Latitude_rounded'</span>] <span class="op">=</span> df[<span class="st">'Latitude'</span>].<span class="bu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Decimal places are different from significant figures.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.round.html">Official documentation</a></p>
+</section>
+<section id="pandas-abs" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-abs"><code>abs()</code></h2>
+<p><strong>Purpose:</strong> Take the absolute value of each number.</p>
+<p><strong>Main arguments:</strong> No arguments are needed.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>distance <span class="op">=</span> df[<span class="st">'Latitude'</span>].<span class="bu">abs</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Useful when the size of an offset matters more than its sign.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.abs.html">Official documentation</a></p>
+</section>
+<section id="pandas-apply" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-apply"><code>apply()</code></h2>
+<p><strong>Purpose:</strong> Apply a function to values or rows/columns.</p>
+<p><strong>Main arguments:</strong> <code>func</code>: function to apply; DataFrame <code>axis=0</code> works by column and <code>axis=1</code> by row.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>rounded_down <span class="op">=</span> df[<span class="st">'Latitude'</span>].<span class="bu">apply</span>(np.floor)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Passing a function is different from calling it immediately.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.apply.html">Official documentation</a></p>
+</section>
+<section id="pandas-clip" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-clip"><code>clip()</code></h2>
+<p><strong>Purpose:</strong> Limit values to a lower and/or upper bound.</p>
+<p><strong>Main arguments:</strong> <code>lower</code>, <code>upper</code>: allowed bounds.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>bounded <span class="op">=</span> df[<span class="st">'Latitude'</span>].clip(lower<span class="op">=-</span><span class="dv">90</span>, upper<span class="op">=</span><span class="dv">90</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Clipping changes values; it is not a substitute for investigating errors.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.clip.html">Official documentation</a></p>
+</section>
+<section id="pandas-fillna" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-fillna"><code>fillna()</code></h2>
+<p><strong>Purpose:</strong> Replace missing values.</p>
+<p><strong>Main arguments:</strong> <code>value</code>: replacement value.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>filled <span class="op">=</span> df[<span class="st">'VEI'</span>].fillna(<span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Zero is an observed value, not a neutral replacement for missing data. Interpolation uses a separate method.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.fillna.html">Official documentation</a></p>
+</section>
+<section id="pandas-mean" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-mean"><code>mean()</code></h2>
+<p><strong>Purpose:</strong> Compute an arithmetic mean.</p>
+<p><strong>Main arguments:</strong> <code>axis=0</code>: by column; <code>axis=1</code>: by row; <code>skipna</code>: ignore missing values.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df_traces[[<span class="st">'Rb'</span>, <span class="st">'Sr'</span>]].mean(axis<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Only average comparable quantities; outliers can strongly affect the mean.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mean.html">Official documentation</a></p>
+</section>
+<section id="pandas-median" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-median"><code>median()</code></h2>
+<p><strong>Purpose:</strong> Compute the middle value of sorted observations.</p>
+<p><strong>Main arguments:</strong> <code>axis</code>: direction of the summary; <code>skipna</code>: ignore missing values.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df_traces[<span class="st">'Zr'</span>].median()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> For an even number of observations, the median averages the two middle values.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.median.html">Official documentation</a></p>
+</section>
+<section id="pandas-mode" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-mode"><code>mode()</code></h2>
+<p><strong>Purpose:</strong> Return the most frequent value or values.</p>
+<p><strong>Main arguments:</strong> <code>dropna</code>: whether to exclude missing values.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df_traces[<span class="st">'Zr'</span>].mode()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> May return several values; exact modes can be uninformative for continuous measurements.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mode.html">Official documentation</a></p>
+</section>
+<section id="pandas-min" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-min"><code>min()</code></h2>
+<p><strong>Purpose:</strong> Find the smallest observed value.</p>
+<p><strong>Main arguments:</strong> <code>axis</code>: direction of the summary; <code>skipna</code>: ignore missing values.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df_traces[<span class="st">'Zr'</span>].<span class="bu">min</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> The sample minimum is not necessarily the population minimum.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.min.html">Official documentation</a></p>
+</section>
+<section id="pandas-max" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-max"><code>max()</code></h2>
+<p><strong>Purpose:</strong> Find the largest observed value.</p>
+<p><strong>Main arguments:</strong> <code>axis</code>: direction of the summary; <code>skipna</code>: ignore missing values.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df_traces[<span class="st">'Zr'</span>].<span class="bu">max</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> The sample maximum is not necessarily the population maximum.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.max.html">Official documentation</a></p>
+</section>
+<section id="pandas-var" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-var"><code>var()</code></h2>
+<p><strong>Purpose:</strong> Estimate variance using squared deviations from the mean.</p>
+<p><strong>Main arguments:</strong> <code>ddof</code>: denominator is sample size minus <code>ddof</code>; pandas defaults to 1.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df_traces[<span class="st">'Zr'</span>].var()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Variance has squared units; select numerical columns.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.var.html">Official documentation</a></p>
+</section>
+<section id="pandas-std" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-std"><code>std()</code></h2>
+<p><strong>Purpose:</strong> Estimate standard deviation.</p>
+<p><strong>Main arguments:</strong> <code>ddof</code>: pandas defaults to 1; <code>axis</code>: direction of the summary.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df_traces[[<span class="st">'Rb'</span>, <span class="st">'Sr'</span>]].std()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Standard deviation has the same units as the measurements.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.std.html">Official documentation</a></p>
+</section>
+<section id="pandas-skew" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-skew"><code>skew()</code></h2>
+<p><strong>Purpose:</strong> Estimate the asymmetry of a distribution.</p>
+<p><strong>Main arguments:</strong> <code>axis</code>: direction of the summary; <code>skipna</code>: ignore missing values.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df_traces[<span class="st">'Zr'</span>].skew()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Positive values indicate a longer right tail; inspect the distribution as well.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.skew.html">Official documentation</a></p>
+</section>
+<section id="pandas-cov" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-cov"><code>cov()</code></h2>
+<p><strong>Purpose:</strong> Compute pairwise sample covariances.</p>
+<p><strong>Main arguments:</strong> <code>min_periods</code>: minimum number of paired observations; <code>ddof</code>: degrees-of-freedom adjustment.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>df_traces[[<span class="st">'Rb'</span>, <span class="st">'Sr'</span>, <span class="st">'Zr'</span>]].cov()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Magnitude depends on the variables’ units and scales.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.cov.html">Official documentation</a></p>
+</section>
+<section id="pandas-corr" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-corr"><code>corr()</code></h2>
+<p><strong>Purpose:</strong> Compute pairwise correlations.</p>
+<p><strong>Main arguments:</strong> <code>method</code>: Pearson, Spearman or Kendall; <code>min_periods</code>: minimum paired observations.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df_traces[[<span class="st">'Rb'</span>, <span class="st">'Sr'</span>, <span class="st">'Zr'</span>]].corr(method<span class="op">=</span><span class="st">'pearson'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Correlation does not establish causation; Pearson measures linear association.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.corr.html">Official documentation</a></p>
+</section>
+<section id="pandas-groupby" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-groupby"><code>groupby()</code></h2>
+<p><strong>Purpose:</strong> Split observations into groups for subsequent summaries.</p>
+<p><strong>Main arguments:</strong> <code>by</code>: column name or list of names.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>df_traces.groupby(<span class="st">'Epoch'</span>)[[<span class="st">'Rb'</span>, <span class="st">'Sr'</span>]].mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Returns a GroupBy object; follow it with a summary such as <code>mean()</code>.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html">Official documentation</a></p>
+</section>
+<section id="pandas-drop" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-drop"><code>drop()</code></h2>
+<p><strong>Purpose:</strong> Remove selected rows or columns.</p>
+<p><strong>Main arguments:</strong> <code>labels</code>: names to remove; <code>columns</code>: column names.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>numerical <span class="op">=</span> df_traces_sub.drop(columns<span class="op">=</span>[<span class="st">'Epoch'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> By default the returned table must be assigned if you want to retain it.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop.html">Official documentation</a></p>
+</section>
+<section id="pandas-astype" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-astype"><code>astype()</code></h2>
+<p><strong>Purpose:</strong> Convert the stored type of a column or table.</p>
+<p><strong>Main arguments:</strong> <code>dtype</code>: target type.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>df_icecover[<span class="st">'year'</span>] <span class="op">=</span> df_icecover[<span class="st">'year'</span>].astype(<span class="bu">int</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Conversion fails when values cannot be represented by the requested type.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.astype.html">Official documentation</a></p>
+</section>
+<section id="pandas-unique" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-unique"><code>unique()</code></h2>
+<p><strong>Purpose:</strong> Return distinct values in a Series.</p>
+<p><strong>Main arguments:</strong> No arguments are needed.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>reading[<span class="st">'group'</span>].unique()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Preserves first-appearance order; it does not sort or count the values.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.Series.unique.html">Official documentation</a></p>
+</section>
+<section id="pandas-map" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-map"><code>map()</code></h2>
+<p><strong>Purpose:</strong> Replace or transform each value in a Series.</p>
+<p><strong>Main arguments:</strong> <code>arg</code>: mapping dictionary or function.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>colours <span class="op">=</span> reading[<span class="st">'group'</span>].<span class="bu">map</span>({<span class="st">'Control'</span>: <span class="st">'blue'</span>, <span class="st">'Treatment'</span>: <span class="st">'orange'</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Values absent from a dictionary mapping become missing.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.Series.map.html">Official documentation</a></p>
+</section>
+<section id="pandas-get" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-get"><code>get()</code></h2>
+<p><strong>Purpose:</strong> Retrieve a labelled value with a fallback.</p>
+<p><strong>Main arguments:</strong> <code>key</code>: label; <code>default</code>: value returned when the label is missing.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>b_group <span class="op">=</span> mod1.params.get(<span class="st">'group[T.Treatment]'</span>, <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> A fallback is useful only when its meaning is justified.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.Series.get.html">Official documentation</a></p>
+</section>
+<section id="pandas-shape" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-shape"><code>shape</code></h2>
+<p><strong>Purpose:</strong> Read the number of rows and columns.</p>
+<p><strong>Main arguments:</strong> This is an attribute: do not add parentheses.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>rows, columns <span class="op">=</span> df.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.shape.html">Official documentation</a></p>
+</section>
+<section id="pandas-index" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-index"><code>index</code></h2>
+<p><strong>Purpose:</strong> Read row labels.</p>
+<p><strong>Main arguments:</strong> This is an attribute: do not add parentheses.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> df.index</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.index.html">Official documentation</a></p>
+</section>
+<section id="pandas-columns" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-columns"><code>columns</code></h2>
+<p><strong>Purpose:</strong> Read column labels.</p>
+<p><strong>Main arguments:</strong> This is an attribute: do not add parentheses.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>names <span class="op">=</span> df.columns</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.columns.html">Official documentation</a></p>
+</section>
+<section id="pandas-dtypes" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-dtypes"><code>dtypes</code></h2>
+<p><strong>Purpose:</strong> Read the stored type of each column.</p>
+<p><strong>Main arguments:</strong> This is an attribute: do not add parentheses.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>types <span class="op">=</span> df.dtypes</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Types stored in Python and scientific variable types are different concepts.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.dtypes.html">Official documentation</a></p>
+</section>
+<section id="pandas-loc" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-loc"><code>loc</code></h2>
+<p><strong>Purpose:</strong> Select rows and columns by labels or a Boolean mask.</p>
+<p><strong>Main arguments:</strong> Use square brackets: <code>row_selection, column_selection</code>.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>selected <span class="op">=</span> df.loc[[<span class="st">'Calbuco'</span>, <span class="st">'Taal'</span>], [<span class="st">'Country'</span>, <span class="st">'VEI'</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Use <code>:</code> to retain all rows or columns; label slices include their endpoint.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.loc.html">Official documentation</a></p>
+</section>
+<section id="pandas-iloc" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-iloc"><code>iloc</code></h2>
+<p><strong>Purpose:</strong> Select rows and columns by integer position.</p>
+<p><strong>Main arguments:</strong> Use square brackets: row positions, then column positions.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>selected <span class="op">=</span> df.iloc[<span class="dv">0</span>:<span class="dv">5</span>, <span class="dv">1</span>:<span class="dv">3</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Positions start at zero; the end of a slice is excluded.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.iloc.html">Official documentation</a></p>
+</section>
+<section id="pandas-str-contains" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-str-contains"><code>str.contains()</code></h2>
+<p><strong>Purpose:</strong> Test whether text contains a pattern.</p>
+<p><strong>Main arguments:</strong> <code>pat</code>: text or regular expression; <code>regex=False</code>: literal text; <code>na=False</code>: treat missing values as non-matches.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> df[<span class="st">'Country'</span>].<span class="bu">str</span>.contains(<span class="st">'I'</span>, regex<span class="op">=</span><span class="va">False</span>, na<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> The examples using a <code>Name</code> column require that it has not been moved to the index.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.Series.str.contains.html">Official documentation</a></p>
+</section>
+<section id="pandas-str-startswith" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-str-startswith"><code>str.startswith()</code></h2>
+<p><strong>Purpose:</strong> Test whether text starts with a prefix.</p>
+<p><strong>Main arguments:</strong> <code>pat</code>: prefix; <code>na</code>: result for missing values.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> df[<span class="st">'Country'</span>].<span class="bu">str</span>.startswith(<span class="st">'I'</span>, na<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.Series.str.startswith.html">Official documentation</a></p>
+</section>
+<section id="pandas-str-endswith" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-str-endswith"><code>str.endswith()</code></h2>
+<p><strong>Purpose:</strong> Test whether text ends with a suffix.</p>
+<p><strong>Main arguments:</strong> <code>pat</code>: suffix; <code>na</code>: result for missing values.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> df[<span class="st">'Country'</span>].<span class="bu">str</span>.endswith(<span class="st">'a'</span>, na<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.Series.str.endswith.html">Official documentation</a></p>
+</section>
+<section id="pandas-str-len" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-str-len"><code>str.len()</code></h2>
+<p><strong>Purpose:</strong> Count the characters in each string.</p>
+<p><strong>Main arguments:</strong> No arguments are needed.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>lengths <span class="op">=</span> df[<span class="st">'Country'</span>].<span class="bu">str</span>.<span class="bu">len</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> This is different from Python <code>len()</code>, which counts elements in the Series.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.Series.str.len.html">Official documentation</a></p>
+</section>
+<section id="pandas-str-upper" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-str-upper"><code>str.upper()</code></h2>
+<p><strong>Purpose:</strong> Convert text to uppercase.</p>
+<p><strong>Main arguments:</strong> No arguments are needed.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>upper <span class="op">=</span> df[<span class="st">'Country'</span>].<span class="bu">str</span>.upper()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Store the result if you want to retain it.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.Series.str.upper.html">Official documentation</a></p>
+</section>
+<section id="pandas-str-lower" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-str-lower"><code>str.lower()</code></h2>
+<p><strong>Purpose:</strong> Convert text to lowercase.</p>
+<p><strong>Main arguments:</strong> No arguments are needed.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>lower <span class="op">=</span> df[<span class="st">'Country'</span>].<span class="bu">str</span>.lower()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Useful when normalising text before comparisons.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.Series.str.lower.html">Official documentation</a></p>
+</section>
+<section id="pandas-str-replace" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-str-replace"><code>str.replace()</code></h2>
+<p><strong>Purpose:</strong> Replace part of each string.</p>
+<p><strong>Main arguments:</strong> <code>pat</code>: text to find; <code>repl</code>: replacement; <code>regex=False</code>: literal replacement.</p>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>renamed <span class="op">=</span> df[<span class="st">'Country'</span>].<span class="bu">str</span>.replace(<span class="st">'USA'</span>, <span class="st">'United States'</span>, regex<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Remember:</strong> Use ordinary Series <code>map()</code> when replacing complete category labels.</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.Series.str.replace.html">Official documentation</a></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../appendices/function_reference.html" class="pagination-link" aria-label="Function reference">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Function reference</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../appendices/doc_visualisation.html" class="pagination-link" aria-label="Matplotlib and Seaborn">
+        <span class="nav-page-text">Matplotlib and Seaborn</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 - <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.en">CC BY-NC-SA 4.0</a> - Sébastien Biass &amp; Stéphane Guerrier</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
