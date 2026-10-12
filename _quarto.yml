@@ -1,5 +1,25 @@
 project:
   type: website
+  # Render the current online course first, then its slides.
+  render:
+    - index.qmd
+    - class1/day1*.qmd
+    - class2/day2*.qmd
+    - class3/class_3_intro.qmd
+    - class3/class_3_ex_*.qmd
+    - class4/class_4_intro.qmd
+    - class4/class_4_ex_*.qmd
+    - exam/*.qmd
+    - appendices/*.qmd
+    - slides/class*.qmd
+    - class3/class_3_slides.qmd
+    - class4/class_4_slides.qmd
+  resources:
+    - slides/img/**
+    - slides/img2/**
+  # PDFs are made from the finished HTML; partial previews skip this step.
+  post-render:
+    - python3 slides2pdf.py --post-render
   
 website:
   title: "ELSTE Data Science Master Course"
@@ -34,35 +54,43 @@ website:
           - class2/day2-2_data_exploration.qmd
           - class2/day2-3_univariate.qmd
           - class2/day2-4_bivariate.qmd
-      - section: "Class 3: Analysis of variance"
-        contents:
-          - class3/class_3_intro.qmd
-          - class3/class_3_ex_1.qmd
-          - class3/class_3_ex_2.qmd
-          - class3/class_3_ex_3.qmd
-          - class3/class_3_ex_4.qmd
-          - class3/class_3_ex_5.qmd
-      - section: "Class 4: Linear regression"
-        contents:
-          - class4/class_4_intro.qmd
-          - class4/class_4_ex_1.qmd
-          - class4/class_4_ex_2.qmd
-          - class4/class_4_ex_3.qmd
-          - class4/class_4_ex_4.qmd
-          - class4/class_4_ex_5.qmd
-          - class4/class_4_ex_6.qmd
-      - section: "Exam"
-        contents:
-          - exam/exam_intro.qmd
-          - exam/exam_data_description.qmd
+      # - section: "Class 3: Analysis of variance"
+      #   contents:
+      #     - class3/class_3_intro.qmd
+      #     - class3/class_3_ex_1.qmd
+      #     - class3/class_3_ex_2.qmd
+      #     - class3/class_3_ex_3.qmd
+      #     - class3/class_3_ex_4.qmd
+      #     - class3/class_3_ex_5.qmd
+      # - section: "Class 4: Linear regression"
+      #   contents:
+      #     - class4/class_4_intro.qmd
+      #     - class4/class_4_ex_1.qmd
+      #     - class4/class_4_ex_2.qmd
+      #     - class4/class_4_ex_3.qmd
+      #     - class4/class_4_ex_4.qmd
+      #     - class4/class_4_ex_5.qmd
+      #     - class4/class_4_ex_6.qmd
+      # - section: "Exam"
+      #   contents:
+      #     - exam/exam_intro.qmd
+      #     - exam/exam_data_description.qmd
       - section: "Appendices"
         contents:
           - appendices/setup_vscode.qmd
           - appendices/jupyter_markdown_summary.qmd
+          - section: "Function reference"
+            contents:
+              - appendices/function_reference.qmd
+              - appendices/doc_pandas.qmd
+              - appendices/doc_visualisation.qmd
+              - appendices/doc_numpy_scipy.qmd
+              - appendices/doc_statsmodels.qmd
+              - appendices/doc_python.qmd
       # - references.qmd
   page-footer:
     background: "#fafafa"
-    center: "© 2025 - [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.en) - Sébastien Biass & Stéphane Guerrier"
+    center: "© 2026 - [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.en) - Sébastien Biass & Stéphane Guerrier"
   # navbar:
   #   right:
   #     - icon: github
@@ -90,7 +118,7 @@ format:
     - class1/class_1_slides_pandas.pdf
     - class2/class_2_slides_EDA.pdf
     - class4/class_4_slides.pdf
-    - exam/exam_2025_answer_sheet.docx
+    # - exam/exam_2026_answer_sheet.docx
   # pdf:
   #   documentclass: scrreprt
   # revealjs: default # slides output

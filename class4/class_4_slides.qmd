@@ -32,7 +32,7 @@ format:
     mathjax: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
     slide-number: true
 footer: "This document was prepared with the help of Lionel Voirol and Filippo Salmaso"
-css: [../assets/default.css]
+css: [../assets/default.css, ../assets/slides-images.css]
 #jupyter: python3
 ---
 

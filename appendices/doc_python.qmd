@@ -1,0 +1,179 @@
+---
+title: "Python essentials"
+lang: en
+execute:
+  eval: false
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    number-sections: false
+    code-annotations: hover
+---
+
+This reference explains the Python essentials tools used in classes 1–4. Each entry gives a purpose, the arguments most useful in this course, an example, and a practical note. Follow **Official documentation** for the complete API.
+
+Examples use the course datasets: `df` is the eruption table, `df_traces` the geochemical table, `reading` the reading-score table, and `df_icecover` the lake table. Samples such as `dietA` and `dietB` have already been selected. Variables such as `data`, `ax`, and `mod1` refer to the array, axes, or fitted model described in the lesson. Snippets illustrate individual operations rather than forming a script to run from top to bottom.
+
+## `print()` {#python-print}
+
+**Purpose:** Display values or text.
+
+**Main arguments:** Pass one or more values; `sep` controls their separator.
+
+**Example:**
+
+```python
+print("p-value:", p_value)
+```
+
+**Remember:** Displays output; it does not save a result.
+
+[Official documentation](https://docs.python.org/3/library/functions.html#print)
+
+## `len()` {#python-len}
+
+**Purpose:** Count elements in an object.
+
+**Main arguments:** `obj`: list, array, string or table.
+
+**Example:**
+
+```python
+n = len(dietA)
+```
+
+**Remember:** For a DataFrame, this counts rows.
+
+[Official documentation](https://docs.python.org/3/library/functions.html#len)
+
+## `round()` {#python-round}
+
+**Purpose:** Round a single number.
+
+**Main arguments:** `number`: value; `ndigits`: decimal places.
+
+**Example:**
+
+```python
+rounded = round(p_value, 4)
+```
+
+**Remember:** For a whole pandas column, use its `.round()` method.
+
+[Official documentation](https://docs.python.org/3/library/functions.html#round)
+
+## `int()` {#python-int}
+
+**Purpose:** Convert a value to an integer.
+
+**Main arguments:** `x`: number or valid integer text.
+
+**Example:**
+
+```python
+minimum = int(df_traces["Zr"].min())
+```
+
+**Remember:** For a non-integer number, this truncates towards zero.
+
+[Official documentation](https://docs.python.org/3/library/functions.html#int)
+
+## `dict()` {#python-dict}
+
+**Purpose:** Construct a dictionary of named values.
+
+**Main arguments:** Pass keyword pairs or key/value pairs.
+
+**Example:**
+
+```python
+style = dict(facecolor="lightblue", color="blue")
+```
+
+**Remember:** Equivalent to a dictionary literal such as `{"color": "blue"}`.
+
+[Official documentation](https://docs.python.org/3/library/functions.html#dict)
+
+## `enumerate()` {#python-enumerate}
+
+**Purpose:** Loop over elements while also receiving their position.
+
+**Main arguments:** `iterable`: values; `start`: first counter value.
+
+**Example:**
+
+```python
+for i, group in enumerate([dietA, dietB], start=1):
+    print(i, len(group))
+```
+
+**Remember:** The counter is separate from pandas row labels.
+
+[Official documentation](https://docs.python.org/3/library/functions.html#enumerate)
+
+## `range()` {#python-range}
+
+**Purpose:** Generate integer positions for a loop.
+
+**Main arguments:** `start`, `stop`, `step`; stop is excluded.
+
+**Example:**
+
+```python
+for i in range(3):
+    print(i)
+```
+
+**Remember:** Produces 0, 1 and 2 in this example.
+
+[Official documentation](https://docs.python.org/3/library/functions.html#range)
+
+## `sum()` {#python-sum}
+
+**Purpose:** Add the values in an iterable.
+
+**Main arguments:** `iterable`: numbers; `start`: optional starting value.
+
+**Example:**
+
+```python
+total_area = sum([p.get_height() * p.get_width() for p in ax.patches])
+```
+
+**Remember:** Different from a column’s pandas summary method.
+
+[Official documentation](https://docs.python.org/3/library/functions.html#sum)
+
+## `list.append()` {#python-list-append}
+
+**Purpose:** Add one element to the end of a list.
+
+**Main arguments:** `object`: the value to add.
+
+**Example:**
+
+```python
+numeric_modes.append((interval.left + interval.right) / 2)
+```
+
+**Remember:** Changes the list in place and returns None.
+
+[Official documentation](https://docs.python.org/3/tutorial/datastructures.html#more-on-lists)
+
+## `list()` {#python-list}
+
+**Purpose:** Create a list from an iterable.
+
+**Main arguments:** `iterable`: values to collect; omit it for an empty list.
+
+**Example:**
+
+```python
+column_names = list(df.columns)
+```
+
+**Remember:** A list stores an ordered collection of values.
+
+[Official documentation](https://docs.python.org/3/library/functions.html#func-list)
+

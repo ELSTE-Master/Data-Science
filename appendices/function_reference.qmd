@@ -1,0 +1,16 @@
+---
+title: "Function reference"
+lang: en
+---
+
+Use these short reference pages alongside the lessons. The **(doc)** links point directly to the relevant entry.
+
+| Reference | What it covers |
+|---|---|
+| [Pandas](doc_pandas.qmd) | Loading, selecting, transforming and summarising tables. |
+| [Matplotlib and Seaborn](doc_visualisation.qmd) | Figures, plotting functions and visual customisation. |
+| [NumPy and SciPy](doc_numpy_scipy.qmd) | Arrays, transformations, simulations and statistical tests. |
+| [Statsmodels](doc_statsmodels.qmd) | Linear models, predictions, intervals and diagnostics. |
+| [Python essentials](doc_python.qmd) | Basic functions and list operations used in examples. |
+
+The references describe the functions and attributes used for analysis, including those introduced in the statistical slides. Utilities that generate the website’s quizzes are not required for students’ analyses.

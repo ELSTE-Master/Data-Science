@@ -1,7 +1,7 @@
 ---
 title: "Exploratory data analysis"
 subtitle: "How to start making data talk"
-date: "October 22, 2025"
+date: "October 21, 2026"
 author:
   - name: Sébastien Biass
     id: sb
@@ -42,11 +42,11 @@ orange = '#EB811B'
 ::: {.fragment}
 - **This week:** You received / compiled / produced a new dataset
 - Review common tasks / method to get accustomed to the dataset
-  - Understand its **structure** → what [type of data]{.bg} does it contain
-  - Explore it **visually** → [plotting]{.bg} with dedicated libraries
-  - Describe **single variables** → [univariate]{.bg} analyses
-  - Assess coupled behaviours of **two variables** → [bivariate]{.bg} analyses
-  - First attempt at **modelling** these behaviours → [linear regressions]{.bg}
+  - Understand its **structure** → what [type of data]{.alert} does it contain
+  - Explore it **visually** → [plotting]{.alert} with dedicated libraries
+  - Describe **single variables** → [univariate]{.alert} analyses
+  - Assess coupled behaviours of **two variables** → [bivariate]{.alert} analyses
+  - First attempt at **modelling** these behaviours → [linear regressions]{.alert}
 :::
 
 
@@ -59,7 +59,7 @@ orange = '#EB811B'
   - Campanian Ignimbrite (CI), ~39 ka ago
   - Neapolitan Yellow Tuff (NYT), ~15 ka ago
 
-![](img/gmap.png)
+![](img2/gmap.png)
 
 ## Caldera-forming eruptions cycles
 
@@ -183,7 +183,7 @@ df_traces.info()
 
 ---
 
-- Represent [quantities or measurable values]{.bg}
+- Represent [quantities or measurable values]{.alert}
 - **Quantitative**
   - *Discrete*: Earthquake counts
   - *Continuous*: Temperature
@@ -203,7 +203,7 @@ df_traces.info()
 
 ---
 
-- Represent [categories or groups]{.bg} of data
+- Represent [categories or groups]{.alert} of data
 - **Qualitative** / semi-quantitative
   - *Nominal*: No order → Landslide type
   - *Ordinal*: Order → rank
@@ -421,8 +421,8 @@ sns.scatterplot(ax=ax, data=df_traces, x='Rb', y='Sr', hue='Epoch', size="SiO2* 
 ## Your turn!
 
 - Go to [https://elste-master.github.io/Data-Science/](https://elste-master.github.io/Data-Science/)
-  - Class 2 > [Data exploration]{.bg}
-  - Explore the structure of the glass geochemistry or [your]{.bg} dataset
+  - Class 2 > [Data exploration]{.alert}
+  - Explore the structure of the glass geochemistry or [your]{.alert} dataset
   - Get used to plotting functions
 
 
@@ -436,19 +436,19 @@ sns.scatterplot(ax=ax, data=df_traces, x='Rb', y='Sr', hue='Epoch', size="SiO2* 
 
 <span style="font-size: 0.5em;">&nbsp;</span>
 
-- **Descriptive statistics** → [provide ways of capturing the properties of a given data set or sample]{.bg}. 
-- `Pandas` and `Seaborn` → review [metrics, tools, and strategies]{.bg} to summarize a dataset
-- Providing us with a [quantitative basis]{.bg} to describe it and compare it to other datasets
+- **Descriptive statistics** → [provide ways of capturing the properties of a given data set or sample]{.alert}. 
+- `Pandas` and `Seaborn` → review [metrics, tools, and strategies]{.alert} to summarize a dataset
+- Providing us with a [quantitative basis]{.alert} to describe it and compare it to other datasets
 
 # Univariate analyses {background-color="#2F4647"}
 
 ## Univariate analyses {auto-animate="true"}
 
-- **Objective** [capturing the properties of **single** variables at the time]{.bg}
+- **Objective** [capturing the properties of **single** variables at the time]{.alert}
 - Fist step: review the samples distribution using **histograms**
-  - Divides dataset into **equal intervals** → [bins]{.bg}
+  - Divides dataset into **equal intervals** → [bins]{.alert}
   - **Counts the value** in each bin
-  - Represents the [distribution]{.bg} of data
+  - Represents the [distribution]{.alert} of data
 
 
 ```{python}
@@ -480,11 +480,11 @@ ax.legend(frameon=False)
 
 ## Univariate analyses {auto-animate="true"}
 
-- **Objective** [capturing the properties of **single** variables at the time]{.bg}
+- **Objective** [capturing the properties of **single** variables at the time]{.alert}
 - Fist step: review the samples distribution using **histograms**
-  - Divides dataset into **equal intervals** → [bins]{.bg}
+  - Divides dataset into **equal intervals** → [bins]{.alert}
   - **Counts the value** in each bin
-  - Represents the [distribution]{.bg} of data
+  - Represents the [distribution]{.alert} of data
 
 :::: {.columns}
 ::: {.column width="48%"}
@@ -524,11 +524,11 @@ ax.set_title('Zr distribution');
 
 ## Univariate analyses {auto-animate="true"}
 
-- **Objective** [capturing the properties of **single** variables at the time]{.bg}
+- **Objective** [capturing the properties of **single** variables at the time]{.alert}
 - Fist step: review the samples distribution using **histograms**
-  - Divides dataset into **equal intervals** → [bins]{.bg}
+  - Divides dataset into **equal intervals** → [bins]{.alert}
   - **Counts the value** in each bin
-  - Represents the [distribution]{.bg} of data
+  - Represents the [distribution]{.alert} of data
 
 :::: {.columns}
 ::: {.column width="48%"}
@@ -566,11 +566,11 @@ ax.set_title('Zr distribution');
 
 ## Univariate analyses {auto-animate="true"}
 
-- **Objective** [capturing the properties of **single** variables at the time]{.bg}
+- **Objective** [capturing the properties of **single** variables at the time]{.alert}
 - Fist step: review the samples distribution using **histograms**
-  - Divides dataset into **equal intervals** → [bins]{.bg}
+  - Divides dataset into **equal intervals** → [bins]{.alert}
   - **Counts the value** in each bin
-  - Represents the [distribution]{.bg} of data
+  - Represents the [distribution]{.alert} of data
 
 :::: {.columns}
 ::: {.column width="48%"}
@@ -613,9 +613,9 @@ Intuitive importance of describing **three different characteristics** of the di
 
 :::: {.columns}
 ::: {.column width="48%"}
-- The **location** - or where is [the central value(s)]{.bg} of the dataset;
-- The **dispersion** - or how [spread out]{.bg} is the distribution of data compared to the central values;
-- The **skewness** - or how [symmetrical]{.bg} is the distribution of data compared to the central values;
+- The **location** - or where is [the central value(s)]{.alert} of the dataset;
+- The **dispersion** - or how [spread out]{.alert} is the distribution of data compared to the central values;
+- The **skewness** - or how [symmetrical]{.alert} is the distribution of data compared to the central values;
 
 :::
 ::: {.column width="4%"}
@@ -640,9 +640,9 @@ ax.set_title('Zr distribution');
 
 <span style="font-size: 0.5em;"></span>
 
-- **Ideally** → able to constrain [full distributions]{.bg} of $X$
+- **Ideally** → able to constrain [full distributions]{.alert} of $X$
   - **theoretical moments**
-- **In practice** → only observe a finite [sample]{.bg} of $X$ 
+- **In practice** → only observe a finite [sample]{.alert} of $X$ 
   - **estimators**
 
 
@@ -671,14 +671,14 @@ ax.legend(frameon=False)
 
 ## Location I: Mean
 
-The **mean** is the [sum of the values divided by the number of values]{.bg}:
+The **mean** is the [sum of the values divided by the number of values]{.alert}:
 
 $$
 \bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i
 $$ 
 
-- Meaningful to describe [symmetrical distributions]{.bg}
-- Very **sensitive** to [outliers]{.bg}
+- Meaningful to describe [symmetrical distributions]{.alert}
+- Very **sensitive** to [outliers]{.alert}
 - `df.mean()`
 
 <span style="font-size: 0.5em;"></span>
@@ -701,7 +701,7 @@ df_traces[['Zr','Rb','Sr']].mean().round(2)
 
 ## Location II: Median
 
-The **median** is the value [at the exact middle of the dataset]{.bg}.
+The **median** is the value [at the exact middle of the dataset]{.alert}.
 
 :::: {.columns}
 ::: {.column width="48%"}
@@ -743,7 +743,7 @@ df_traces[['Zr','Rb','Sr']].median().round(2)
 
 ## Location III: Mode
 
-The **mode** is the value [that occur most frequently in a dataset]{.bg}.
+The **mode** is the value [that occur most frequently in a dataset]{.alert}.
 
 - **Categorical** or **discrete numerical data**: value(s) that appear most often.
 - For **continuous data**, exact duplicates may be rare
@@ -787,7 +787,6 @@ plt.show()
 ```{python}
 #| echo: false
 #| eval: true
-#| output-location: column
 
 
 
@@ -875,7 +874,7 @@ $$
 :::: {.columns}
 ::: {.column width="48%"}
 
-- $s$ is in [the same unit as the data]{.bg}
+- $s$ is in [the same unit as the data]{.alert}
   - Easy to interpret
 - `df.std()`
 
@@ -959,7 +958,7 @@ plt.show()
 ## Dispersion 2.1: Variance
 
 
-The **variance** ($s^2$) is the [average of squared deviations]{.bg} from the mean (→ the square of the standard deviation):
+The **variance** ($s^2$) is the [average of squared deviations]{.alert} from the mean (→ the square of the standard deviation):
 $$
 s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1} 
 $$
@@ -991,8 +990,8 @@ df_traces['Zr'].var()
 ::: {.callout-tip}
 ## Rule of thumb
 
-- Comparing data spread → [standard deviation]{.bg}
-- Statistical modelling → [variance]{.bg}
+- Comparing data spread → [standard deviation]{.alert}
+- Statistical modelling → [variance]{.alert}
 
 :::
 
@@ -1000,7 +999,7 @@ df_traces['Zr'].var()
 ## Dispersion 3: Interquartile range
 
 
-The **interquartile range** (IQR) indicates [how spread out the middle 50%]{.bg} of the data is.
+The **interquartile range** (IQR) indicates [how spread out the middle 50%]{.alert} of the data is.
 
 - Difference between the third quartile (Q3) and the first quartile (Q1):
 
@@ -1023,7 +1022,7 @@ $$ {#eq-IQR}
 | **Percentiles (P1 … P99)** | 100 equal parts         | P1 = 1st percentile, P2 = 2nd percentile, …, P99 = 99th percentile        |
 : Relationship between quartiles, deciles and percentiles. {#tbl-univ-pct .striped}
 
-- [median]{.bg} = 
+- [median]{.alert} = 
   - 2nd quartile = Q2
   - 5th decile = D5
   - 50th percentile = P50
@@ -1034,7 +1033,7 @@ $$ {#eq-IQR}
 ## Dispersion 3: Interquartile range
 
 
-The **interquartile range** (IQR) indicates [how spread out the middle 50%]{.bg} of the data is.
+The **interquartile range** (IQR) indicates [how spread out the middle 50%]{.alert} of the data is.
 
 
 :::: {.columns}
@@ -1067,7 +1066,7 @@ $Q_1$ and $Q_3$ for an **asymmetrical** distribution:
 ## Shape: Skewness
 
 
-The **skewness** measures [the asymmetry of a distribution]{.bg} and is computed as:
+The **skewness** measures [the asymmetry of a distribution]{.alert} and is computed as:
 
 $$
 \text{Skewness} = \frac{1}{n} \sum_{i=1}^{n}\left(\frac{x_i-\bar{x}}{s}\right)^{3}
@@ -1075,15 +1074,15 @@ $$
 
 In *Pandas*, the skewness can be computed using `.skew()`
 
-- **0**: [Symmetric]{.bg} → e.g., normal distribution
-- **>0**: [Righ-skewed]{.bg} → a tail extends to the right
-- **<0**: [Left-skewed]{.bg} → a tail extends to the left
+- **0**: [Symmetric]{.alert} → e.g., normal distribution
+- **>0**: [Righ-skewed]{.alert} → a tail extends to the right
+- **<0**: [Left-skewed]{.alert} → a tail extends to the left
 
 
 
 ## Distribution visualisation
 
-Beyond **histograms** → some plot types report [empirical]{.bg} indications of **location**, **dispersion** and **skewness**.
+Beyond **histograms** → some plot types report [empirical]{.alert} indications of **location**, **dispersion** and **skewness**.
 
 **Box and whisker plots**
 
@@ -1142,7 +1141,7 @@ ax.set_title('Zr and Sr distribution');
 ::: {.column width="48%"}
 
 - `sns.violinplot()`
-- Density estimate through Kernel Density Estimator → [artefacts]{.bg}
+- Density estimate through Kernel Density Estimator → [artefacts]{.alert}
 - Some tail resolution, not always realistic
 
 :::
@@ -1194,8 +1193,8 @@ ax.set_title('Zr and Sr distribution');
 ## Your turn!
 
 - Go to [https://elste-master.github.io/Data-Science/](https://elste-master.github.io/Data-Science/)
-  - Class 2 > [Univariate analyses]{.bg}
-  - Explore the structure of the glass geochemistry or [your]{.bg} dataset
+  - Class 2 > [Univariate analyses]{.alert}
+  - Explore the structure of the glass geochemistry or [your]{.alert} dataset
   - Get used to the various functions
 
 <iframe src="../class2/day2-3_univariate.html" width="100%" height="400px" style="border:none;"></iframe>
@@ -1246,8 +1245,8 @@ sns.pairplot(data=df_traces_sub, hue='Epoch')
 
 ## Covariance
 
-- The [covariance]{.bg} captures **the direction and magnitude of the linear relationship between the two variables**
-- The [sample covariance]{.bg} is an **estimator** of the theoretical covariance:
+- The [covariance]{.alert} captures **the direction and magnitude of the linear relationship between the two variables**
+- The [sample covariance]{.alert} is an **estimator** of the theoretical covariance:
 
 $$
 \mathrm{Cov}(X,Y)_{\text{emp}}= \frac{1}{n-1}\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y}),
@@ -1256,16 +1255,16 @@ $$
 - **Positive**: Increase in $X$ → increase in $Y$
 - **Negative**: Increase in $X$ → decrease in $Y$
 
-**Problem**: depends on the [magnitudes]{.bg} of the variables, so it does not directly reflect the [strength]{.bg} of the relationship
+**Problem**: depends on the [magnitudes]{.alert} of the variables, so it does not directly reflect the [strength]{.alert} of the relationship
 
 
 
 ## Correlation
 
-- The [correlation coefficient]{.bg} provides **a normalized version** of the covariance
+- The [correlation coefficient]{.alert} provides **a normalized version** of the covariance
   - Ranges from $−1$ to $1$
   - Indicates both the direction and the strength of the linear relationship
-- The [sample correlation]{.bg} is computed as:
+- The [sample correlation]{.alert} is computed as:
 
 $$
 r(X,Y)_{\text{emp}} = \frac{\mathrm{Cov}(X,Y)_{\text{emp}}}{s_X s_Y} = \frac{\sum_{i=1}^n (x_i - \bar x)(y_i - \bar y)}{\sqrt{\sum_{i=1}^n (x_i - \bar x)^2}\;\sqrt{\sum_{i=1}^n (y_i - \bar y)^2}},
@@ -1276,8 +1275,8 @@ $$
 
 ## Correlation matrix
 
-- [Correlation matrix]{.bg} → square table showing the [pairwise correlations]{.bg} between all variables in a dataset
-- Suppose we have $p$ variables $(X_1, X_2, \dots, X_p)$ → the [correlation matrix]{.bg} $\mathbf{C}$ is:
+- [Correlation matrix]{.alert} → square table showing the [pairwise correlations]{.alert} between all variables in a dataset
+- Suppose we have $p$ variables $(X_1, X_2, \dots, X_p)$ → the [correlation matrix]{.alert} $\mathbf{C}$ is:
 
 $$
 \mathbf{C} =
@@ -1340,7 +1339,7 @@ corrMatrix(df_traces_sub)
 ## Linear regression
 
 - Correlation coefficients → measure of coupling between two continuous variables
-- [linear regressions]{.bg} attempt modelling this relationship
+- [linear regressions]{.alert} attempt modelling this relationship
 
 :::: {.columns}
 ::: {.column width="30%"}
@@ -1376,9 +1375,9 @@ where:
 
 ::: {.fragment }
 
-→ [**Be critical**]{.bg}
+→ [**Be critical**]{.alert}
 
-→ Further investigations [require dedicated stats packages]{.bg}
+→ Further investigations [require dedicated stats packages]{.alert}
 
 :::
 
@@ -1410,7 +1409,7 @@ plt.show()
 
 ## Residual analysis with Seaborn
 
-Linear regression → [do residuals show any structure]{.bg}?? → `sns.residplot()`
+Linear regression → [do residuals show any structure]{.alert}?? → `sns.residplot()`
 
 :::: {.columns}
 ::: {.column width="58%"}
@@ -1420,7 +1419,7 @@ Residuals are necessary to:
 2. **Detect patterns** that indicate problems (non-linearity, heteroscedasticity, outliers).
 
 ::: {.fragment }
-Any type of [structure in residuals]{.bg} might reveal a **violation of linear regression assumptions**.
+Any type of [structure in residuals]{.alert} might reveal a **violation of linear regression assumptions**.
 :::
 
 
@@ -1448,8 +1447,8 @@ plt.show()
 ## Your turn!
 
 - Go to [https://elste-master.github.io/Data-Science/](https://elste-master.github.io/Data-Science/)
-  - Class 2 > [Bivariate analyses]{.bg}
-  - Explore the structure of the glass geochemistry or [your]{.bg} dataset
+  - Class 2 > [Bivariate analyses]{.alert}
+  - Explore the structure of the glass geochemistry or [your]{.alert} dataset
   - Get used to the various functions
 
 <iframe src="../class2/day2-4_bivariate.html" width="100%" height="400px" style="border:none;"></iframe>

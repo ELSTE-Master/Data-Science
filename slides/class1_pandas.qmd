@@ -1,7 +1,7 @@
 ---
 title: "Intro to Python and Pandas"
 subtitle: "DataFrames for Data Science"
-date: "October 15, 2025"
+date: "October 14, 2026"
 author:
   - name: Sébastien Biass
     id: sb
@@ -29,7 +29,7 @@ We assume that you all followed Guy Simpson's Python crash course
 
 <span style="font-size: 0.5em;"></span>
 
-`pandas`: A **package** for [data manipulation and analysis]{.bg} handling **structured data**
+`pandas`: A **package** for [data manipulation and analysis]{.alert} handling **structured data**
 
 - **Reading/writing data** from common formats (CSV, Excel, JSON, etc.)
 - Handling **missing data**
@@ -40,13 +40,13 @@ We assume that you all followed Guy Simpson's Python crash course
 
 ## Today's objectives
 
-Understand what is a `pandas` [DataFrame]{.bg} and its [basic anatomy]{.bg}
+Understand what is a `pandas` [DataFrame]{.alert} and its [basic anatomy]{.alert}
 
-- How to [load data]{.bg} in a DataFrame
-- How to [access]{.bg} data → *query by label/position*
-- How to [filter]{.bg} data → *comparison and logical operators*
-- How to [rearrange]{.bg} data → *sorting values*
-- How to [operate]{.bg} on data → *arithmetic and string operations*
+- How to [load data]{.alert} in a DataFrame
+- How to [access]{.alert} data → *query by label/position*
+- How to [filter]{.alert} data → *comparison and logical operators*
+- How to [rearrange]{.alert} data → *sorting values*
+- How to [operate]{.alert} on data → *arithmetic and string operations*
 
 # Introduction to pandas {background-color="#2F4647"}
 
@@ -55,7 +55,7 @@ Understand what is a `pandas` [DataFrame]{.bg} and its [basic anatomy]{.bg}
 ![](../class1/img/pandas-1.png)
 
 ::: {.fragment}
-- Similar to *Excel* → contains *tabular data* composed of [rows]{.bg} and [columns]{.bg}
+- Similar to *Excel* → contains *tabular data* composed of [rows]{.alert} and [columns]{.alert}
 :::
 
 ::: {.fragment}
@@ -69,9 +69,9 @@ Understand what is a `pandas` [DataFrame]{.bg} and its [basic anatomy]{.bg}
 ![](../class1/img/pandas-2.png)
 
 ::: {.fragment}
-- Unlike *Excel*, **rows** and **columns** can be [labelled]{.bg}
-  - [Index]{.bg} refers to the label of the **rows**. In the *index*, **values are usually unique** - meaning that each entry has a different label.
-  - [Column]{.bg} refers to the label of - logically - the **columns**
+- Unlike *Excel*, **rows** and **columns** can be [labelled]{.alert}
+  - [Index]{.alert} refers to the label of the **rows**. In the *index*, **values are usually unique** - meaning that each entry has a different label.
+  - [Column]{.alert} refers to the label of - logically - the **columns**
 :::
 
 # Data structure {background-color="#2F4647"}
@@ -98,14 +98,13 @@ Synthetic dataset of **selected volcanic eruptions** → first 5 rows:
 ## Setting up the notebook {auto-animate="true"}
 
 - We start by importing the `pandas` library
-- We import it under the name [pd]{.bg} - which is faster to type!
+- We import it under the name [pd]{.alert} - which is faster to type!
 
 <span style="font-size: 0.5em;"></span>
 
 ```{python}
-# | eval: False 
-# | echo: True 
-
+#| eval: false
+#| echo: true
 # Import the required packages
 import pandas as pd
 ```
@@ -113,14 +112,13 @@ import pandas as pd
 ## Setting up the notebook {auto-animate="true"}
 
 - We then load the specified data with the `pd.read_csv()` function
-- This returns a [DataFrame]{.bg} object in a variable named `df`
+- This returns a [DataFrame]{.alert} object in a variable named `df`
 
 <span style="font-size: 0.5em;"></span>
 
 ```{python}
-# | eval: False 
-# | echo: True
-
+#| eval: false
+#| echo: true
 # Import the required packages
 import pandas as pd
 
@@ -131,15 +129,14 @@ df = pd.read_csv('https://raw.githubusercontent.com/ELSTE-Master/Data-Science/ma
 ## Setting up the notebook {auto-animate="true"}
 
 - We print some data for inspection with `df.head()`
-- The functions are now directly called from the [DataFrame]{.bg} `df` object 
+- The functions are now directly called from the [DataFrame]{.alert} `df` object 
 
 <span style="font-size: 0.5em;"></span>
 
 
 ```{python}
-# | eval: True 
-# | echo: True
-
+#| eval: true
+#| echo: true
 # Import the required packages
 import pandas as pd
 
@@ -162,9 +159,8 @@ df.head(3)
 <span style="font-size: 0.5em;"></span>
 
 ```{python}
-# | eval: True 
-# | echo: True
-
+#| eval: true
+#| echo: true
 # Show the first 3 rows
 df.head(3) 
 ```
@@ -177,9 +173,8 @@ df.head(3)
 <span style="font-size: 0.5em;"></span>
 
 ```{python}
-# | eval: True 
-# | echo: True
-
+#| eval: true
+#| echo: true
 # Set the index to the 'Name' column
 df = df.set_index('Name')
 
@@ -221,38 +216,35 @@ df.head(3)
 
 ## Sorting data {auto-animate="true"}
 
-- Sorting [numerical]{.bg}, [datetime]{.bg} or [strings]{.bg} using `.sort_values`
-- Importance of [documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html) to understand [arguments]{.bg}
+- Sorting [numerical]{.alert}, [datetime]{.alert} or [strings]{.alert} using `.sort_values`
+- Importance of [documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html) to understand [arguments]{.alert}
 
 ```{python}
-# | eval: True 
-# | echo: True
-
+#| eval: true
+#| echo: true
 df.sort_values('VEI').head() # Sort volcanoes by VEI in ascending number
 ```
 
 ## Sorting data {auto-animate="true"}
 
-- Sorting [numerical]{.bg}, [datetime]{.bg} or [strings]{.bg} using `.sort_values`
-- Importance of [documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html) to understand [arguments]{.bg}
+- Sorting [numerical]{.alert}, [datetime]{.alert} or [strings]{.alert} using `.sort_values`
+- Importance of [documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html) to understand [arguments]{.alert}
 
 ```{python}
-# | eval: True 
-# | echo: True
-
+#| eval: true
+#| echo: true
 df.sort_values('VEI').head() # Sort volcanoes by VEI in ascending number
 df.sort_values('Date', ascending=False).head() # Sort volcanoes by eruption dates from recent to old
 ```
 
 ## Sorting data {auto-animate="true"}
 
-- Sorting [numerical]{.bg}, [datetime]{.bg} or [strings]{.bg} using `.sort_values`
-- Importance of [documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html) to understand [arguments]{.bg}
+- Sorting [numerical]{.alert}, [datetime]{.alert} or [strings]{.alert} using `.sort_values`
+- Importance of [documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html) to understand [arguments]{.alert}
 
 ```{python}
-# | eval: True 
-# | echo: True
-
+#| eval: true
+#| echo: true
 df.sort_values('VEI').head() # Sort volcanoes by VEI in ascending number
 df.sort_values('Date', ascending=False).head() # Sort volcanoes by eruption dates from recent to old
 df.sort_values('Country').head() # Also works on strings to sort alphabetically
@@ -260,13 +252,12 @@ df.sort_values('Country').head() # Also works on strings to sort alphabetically
 
 ## Sorting data {auto-animate="true"}
 
-- Sorting [numerical]{.bg}, [datetime]{.bg} or [strings]{.bg} using `.sort_values`
-- Importance of [documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html) to understand [arguments]{.bg}
+- Sorting [numerical]{.alert}, [datetime]{.alert} or [strings]{.alert} using `.sort_values`
+- Importance of [documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html) to understand [arguments]{.alert}
 
 ```{python}
-# | eval: True 
-# | echo: True
-
+#| eval: true
+#| echo: true
 df.sort_values('VEI').head() # Sort volcanoes by VEI in ascending number
 df.sort_values('Date', ascending=False).head() # Sort volcanoes by eruption dates from recent to old
 df.sort_values('Country').head() # Also works on strings to sort alphabetically
@@ -277,7 +268,7 @@ df.sort_values(['Latitude', 'Longitude']).head() # Sorting using multiple column
 ## Your turn!
 
 - Go to [https://elste-master.github.io/Data-Science/](https://elste-master.github.io/Data-Science/)
-  - Class 1 > [Data Structure]{.bg}
+  - Class 1 > [Data Structure]{.alert}
 
 <span style="font-size: 0.5em;"></span>
 
@@ -295,9 +286,9 @@ df.sort_values(['Latitude', 'Longitude']).head() # Sorting using multiple column
 
 ## Accessing data in a DataFrame
 
-**Option 1**: [label-based]{.bg} indexing
+**Option 1**: [label-based]{.alert} indexing
 
-- Use the [labels]{.bg} of **index** and **columns** to retrieve data
+- Use the [labels]{.alert} of **index** and **columns** to retrieve data
 - Function to use: `df.loc`
 
 ::: {.fragment}
@@ -308,9 +299,9 @@ df.sort_values(['Latitude', 'Longitude']).head() # Sorting using multiple column
 
 ## Accessing data in a DataFrame
 
-**Option 2**: [position-based]{.bg} indexing
+**Option 2**: [position-based]{.alert} indexing
 
-- Use the [positions]{.bg} of **index** and **columns** to retrieve data
+- Use the [positions]{.alert} of **index** and **columns** to retrieve data
 - Function to use: `df.iloc`
 
 ::: {.fragment}
@@ -319,7 +310,7 @@ df.sort_values(['Latitude', 'Longitude']).head() # Sorting using multiple column
 
 ## Label-based indexing: Rows
 
-- **Query a [row]{.bg}** with `.loc` → Use **square brackets** `[ ]`
+- **Query a [row]{.alert}** with `.loc` → Use **square brackets** `[ ]`
   - Query the *row* for which the *index label* is `Calbuco`
   - Returns all *columns*
 
@@ -330,13 +321,12 @@ df.sort_values(['Latitude', 'Longitude']).head() # Sorting using multiple column
 ::: {.fragment}
 
 ```{python}
-# | eval: True 
-# | echo: True
-
+#| eval: true
+#| echo: true
 df.loc['Calbuco']
 ```
 
-→ Returns a [pd.Series]{.bg}
+→ Returns a [pd.Series]{.alert}
 :::
 :::
 
@@ -346,13 +336,12 @@ df.loc['Calbuco']
 ::: {.column width="48%"}
 ::: {.fragment}
 ```{python}
-# | eval: True 
-# | echo: True
-
+#| eval: true
+#| echo: true
 df.loc[['Calbuco']]
 ```
 
-→ Returns a [pd.DataFrame]{.bg}
+→ Returns a [pd.DataFrame]{.alert}
 
 :::
 :::
@@ -361,7 +350,7 @@ df.loc[['Calbuco']]
 
 ## Label-based indexing: Rows
 
-- **Query [multiple rows]{.bg}**  with `.loc`
+- **Query [multiple rows]{.alert}**  with `.loc`
   - Query the *rows* for which the *index labels* are `Calbuco` or `Taal`
   - Returns all *columns*
 
@@ -369,16 +358,15 @@ df.loc[['Calbuco']]
 
 ::: {.fragment}
 ```{python}
-# | eval: True 
-# | echo: True
-
+#| eval: true
+#| echo: true
 df.loc[['Calbuco', 'Taal']]
 ```
 :::
 
 ## Label-based indexing: Columns
 
-- **Query [columns]{.bg}** 
+- **Query [columns]{.alert}** 
   - Query the *columns* for which the *column labels* are `Country` or `VEI`
   - Returns all *rows*
 
@@ -386,10 +374,10 @@ df.loc[['Calbuco', 'Taal']]
 ::: {.column width="48%"}
 ::: {.fragment}
 
-- **Option 1**: [with]{.bg} `.loc`:
+- **Option 1**: [with]{.alert} `.loc`:
 ```{python}
-# | eval: True 
-# | echo: True
+#| eval: true
+#| echo: true
 df.loc[:, ['Country', 'VEI']].head(3)
 ```
 :::
@@ -401,11 +389,10 @@ df.loc[:, ['Country', 'VEI']].head(3)
 
 ::: {.column width="48%"}
 ::: {.fragment}
-- **Option 2**: [without]{.bg} `.loc`:
+- **Option 2**: [without]{.alert} `.loc`:
 ```{python}
-# | eval: True 
-# | echo: True
-
+#| eval: true
+#| echo: true
 df[['Country', 'VEI']].head(3)
 ```
 
@@ -421,10 +408,10 @@ df[['Country', 'VEI']].head(3)
 ::: {.column width="48%"}
 ::: {.fragment}
 
-- **Option 1**: Columns are specified [inside]{.bg} `.loc`:
+- **Option 1**: Columns are specified [inside]{.alert} `.loc`:
 ```{python}
-# | eval: True 
-# | echo: True
+#| eval: true
+#| echo: true
 df.loc[['Calbuco', 'Taal'], ['Country', 'VEI']].head(3)
 ```
 :::
@@ -435,11 +422,10 @@ df.loc[['Calbuco', 'Taal'], ['Country', 'VEI']].head(3)
 
 ::: {.column width="48%"}
 ::: {.fragment}
-- **Option 2**: Columns are specified [outside]{.bg} `.loc`:
+- **Option 2**: Columns are specified [outside]{.alert} `.loc`:
 ```{python}
-# | eval: True 
-# | echo: True
-
+#| eval: true
+#| echo: true
 df.loc[['Calbuco', 'Taal']][['Country', 'VEI']].head(3)
 ```
 
@@ -461,7 +447,7 @@ df.loc[['Calbuco', 'Taal']][['Country', 'VEI']].head(3)
 
 ## Position-based indexing: Rows
 
-- **Query a [row]{.bg}** with `.iloc`
+- **Query a [row]{.alert}** with `.iloc`
   - Returns all *columns*
 
 <span style="font-size: 0.5em;"></span>
@@ -473,8 +459,8 @@ df.loc[['Calbuco', 'Taal']][['Country', 'VEI']].head(3)
 - **One row** (first row):
 
 ```{python}
-# | eval: True 
-# | echo: True
+#| eval: true
+#| echo: true
 df.iloc[[0]]
 ```
 :::
@@ -487,8 +473,8 @@ df.iloc[[0]]
 ::: {.fragment}
 - **Range of rows**: (rows 3-4):
 ```{python}
-# | eval: True 
-# | echo: True
+#| eval: true
+#| echo: true
 df.iloc[2:4]
 ```
 
@@ -499,25 +485,25 @@ df.iloc[2:4]
 
 ## Position-based indexing: Rows
 
-- Query rows [from the end]{.bg}:
+- Query rows [from the end]{.alert}:
 - Example:
   - Get the **last 5 rows** of the DataFrame:
 
 ```{python}
-# | eval: True 
-# | echo: True
+#| eval: true
+#| echo: true
 df.iloc[-5:]
 ```
 
 ## Position-based and label-based queries
 
-- Mix [position-based]{.bg} and [label-based]{.bg} indexing:
+- Mix [position-based]{.alert} and [label-based]{.alert} indexing:
   - **Rows** → *labels*
   - **Columns** → *positions*
 
 ```{python}
-# | eval: True 
-# | echo: True
+#| eval: true
+#| echo: true
 df.iloc[0:5][['Country', 'VEI']]
 ```
 
@@ -525,7 +511,7 @@ df.iloc[0:5][['Country', 'VEI']]
 ## Your turn!
 
 - Go to [https://elste-master.github.io/Data-Science/](https://elste-master.github.io/Data-Science/)
-  - Class 1 > [Querying data]{.bg}
+  - Class 1 > [Querying data]{.alert}
 
 <span style="font-size: 0.5em;"></span>
 
@@ -539,7 +525,7 @@ df.iloc[0:5][['Country', 'VEI']]
 
 ## Boolean indexing
 
-- **Filtering** data with [boolean indexing]{.bg}
+- **Filtering** data with [boolean indexing]{.alert}
   - Returns either `True` or `False` depending on whether the **condition** is satisfied
 
 
@@ -552,8 +538,8 @@ df.iloc[0:5][['Country', 'VEI']]
 <span style="font-size: 0.5em;"></span>
 
 ```{python}
-# | eval: True 
-# | echo: True
+#| eval: true
+#| echo: true
 a = 1
 b = 2
 ```
@@ -594,8 +580,8 @@ b = 2
 ::: {.column width="30%"}
 ::: {.fragment}
 ```{python}
-# | eval: True 
-# | echo: True
+#| eval: true
+#| echo: true
 df['VEI'] == 4
 ```
 
@@ -609,8 +595,8 @@ df['VEI'] == 4
 ::: {.column width="65%"}
 ::: {.fragment}
 ```{python}
-# | eval: True 
-# | echo: True
+#| eval: true
+#| echo: true
 df.loc[df['VEI'] == 4]
 ```
 :::
@@ -621,7 +607,7 @@ df.loc[df['VEI'] == 4]
 
 ## Boolean indexing: Strings
 
-- **Filtering** also works with [strings]{.bg}
+- **Filtering** also works with [strings]{.alert}
   - Use **string comparison** operations
 
 <span style="font-size: 0.5em;"></span>
@@ -629,15 +615,15 @@ df.loc[df['VEI'] == 4]
 - **Example**:
 
 ```{python}
-# | eval: True 
-# | echo: True
+#| eval: true
+#| echo: true
 df.loc[df['Country'] == 'Indonesia']
 ```
 
 
 ## Boolean indexing: Strings
 
-- **Filtering** also works with [strings]{.bg}
+- **Filtering** also works with [strings]{.alert}
   - Use **string comparison** operations
 
 <span style="font-size: 0.5em;"></span>
@@ -656,7 +642,7 @@ df.loc[df['Country'] == 'Indonesia']
 ## Your turn!
 
 - Go to [https://elste-master.github.io/Data-Science/](https://elste-master.github.io/Data-Science/)
-  - Class 1 > [Filtering data]{.bg}
+  - Class 1 > [Filtering data]{.alert}
 
 <span style="font-size: 0.5em;"></span>
 
@@ -668,7 +654,7 @@ df.loc[df['Country'] == 'Indonesia']
 
 ## Data management operations
 
-- Common [data management]{.bg} functions for pandas columns:
+- Common [data management]{.alert} functions for pandas columns:
 
 | Operation         | Example                                 | Description                                         |
 |-------------------|-----------------------------------------|-----------------------------------------------------|
@@ -681,11 +667,11 @@ df.loc[df['Country'] == 'Indonesia']
 <span style="font-size: 0.5em;"></span>
 
 ::: {.fragment}
-- Round the `'Latitude'` to two decimals → [make sure you store the output]{.bg}!
+- Round the `'Latitude'` to two decimals → [make sure you store the output]{.alert}!
 
 ```{python}
-# | eval: False 
-# | echo: True
+#| eval: false
+#| echo: true
 df['Latitude'] = df['Latitude'].round(2)
 ```
 
@@ -693,7 +679,7 @@ df['Latitude'] = df['Latitude'].round(2)
 
 ## Arithmetic operations
 
-- [Arithmetic operations]{.bg} on parts of the DataFrame (→ *columns*) using native Python arithmetic operators
+- [Arithmetic operations]{.alert} on parts of the DataFrame (→ *columns*) using native Python arithmetic operators
 
 | Operation      | Symbol | Example                | Description                                 |
 |----------------|--------|------------------------|---------------------------------------------|
@@ -710,8 +696,8 @@ df['Latitude'] = df['Latitude'].round(2)
 - Divide `VEI` by 2 and store results a new column (→ `VEI_halved`)
 
 ```{python}
-# | eval: False 
-# | echo: True
+#| eval: false
+#| echo: true
 df['VEI_halved'] = df['VEI'] / 2
 ```
 
@@ -719,7 +705,7 @@ df['VEI_halved'] = df['VEI'] / 2
 
 ## Expanded arithmetic operations
 
-- The range of [arithmetic operations]{.bg} can be expanded using `numpy`
+- The range of [arithmetic operations]{.alert} can be expanded using `numpy`
 
 
 | Operation         | Symbol       | Example                        | Description                                      |
@@ -736,8 +722,8 @@ df['VEI_halved'] = df['VEI'] / 2
 - `VEI` power 2 and store results a new column (→ `VEI_pow2`)
 
 ```{python}
-# | eval: False 
-# | echo: True
+#| eval: false
+#| echo: true
 df['VEI_pow2'] = np.power(df['VEI'], 2)
 ```
 
@@ -746,7 +732,7 @@ df['VEI_pow2'] = np.power(df['VEI'], 2)
 ## Your turn!
 
 - Go to [https://elste-master.github.io/Data-Science/](https://elste-master.github.io/Data-Science/)
-  - Class 1 > [Operations]{.bg}
+  - Class 1 > [Operations]{.alert}
 
 <span style="font-size: 0.5em;"></span>
 

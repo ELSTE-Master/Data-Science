@@ -2,11 +2,12 @@
 title: "Univariate analyses"
 format:
   html:
+    code-annotations: hover
     code-fold: false
     code-line-numbers: true
     css: [../assets/webex.css]
     include-after-body: [../assets/webex.js]
-    embed-resources: true 
+    embed-resources: false
 jupyter: python3
 ---
 
@@ -76,7 +77,10 @@ ax.legend(frameon=False)
 
 
 
-In *Seaborn*, **Histograms** can be plotted using [`sns.histplots()`](https://seaborn.pydata.org/generated/seaborn.histplot.html). Applied to our dataset, @fig-sns-hist) show the [number of times a specific Zr concentration occurs]{.mark} in the dataset.
+In *Seaborn*, **Histograms** can be plotted using [`sns.histplot()`](https://seaborn.pydata.org/generated/seaborn.histplot.html) [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-histplot). Applied to our dataset, @fig-sns-hist) show the [number of times a specific Zr concentration occurs]{.mark} in the dataset.
+
+
+**Function reference:** `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots); `sns.histplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-histplot); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title).
 
 ```{python}
 #| label: fig-sns-hist
@@ -90,17 +94,17 @@ ax.set_title('Zr distribution');
 
 ```
 
-Note that **histograms** [discretise the data]{.mark} into equal **bins**. The [bin size]{.bg} (e.g., the width and numbers of bins) can alter the visual representation of the dataset. Although functions such as `sns.histplots()` rely on algorithm that suggest the optimal number of bins, it is a good practice to explore this parameter.
+Note that **histograms** [discretise the data]{.mark} into equal **bins**. The [bin size]{.bg} (e.g., the width and numbers of bins) can alter the visual representation of the dataset. Although functions such as `sns.histplot()` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-histplot) rely on algorithm that suggest the optimal number of bins, it is a good practice to explore this parameter.
 
 
 
 ::: {.callout-note} 
 ## Your turn
 
-- Histograms [discretise the data]{.mark} into equal **bins**. The documentation of [`sns.histplots()`](https://seaborn.pydata.org/generated/seaborn.histplot.html) shows that the function accepts various arguments (e.g., `bins`, `binwidth`, `binrange`) to modify how bins are defined. For now, let's focus on the `bins` argument, which takes an `int` number defining the number of bins. The number of bins can critically alter the representation of a histogram. For instance, try:
+- Histograms [discretise the data]{.mark} into equal **bins**. The documentation of [`sns.histplot()`](https://seaborn.pydata.org/generated/seaborn.histplot.html) [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-histplot) shows that the function accepts various arguments (e.g., `bins`, `binwidth`, `binrange`) to modify how bins are defined. For now, let's focus on the `bins` argument, which takes an `int` [(doc)](../appendices/doc_python.qmd#python-int) number defining the number of bins. The number of bins can critically alter the representation of a histogram. For instance, try:
   - `bins=10`
   - `bins=100`
-- Try and plotting more than one column to `sns.histplots()` (→ provide a list of column names to `x`). How does it look? What are the limitations?
+- Try and plotting more than one column to `sns.histplot()` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-histplot) (→ provide a list of column names to `x`). How does it look? What are the limitations?
 
 :::
 
@@ -151,7 +155,10 @@ The mean is meaningful to describe [**symmetric** distributions without **outlie
 - **Symmetric** means the number of items above the mean should be roughly the same as the number below;
 - **Outliers** are *extreme* values.
 
-The empirical mean of a dataset can easily be computed with *Pandas* using the [`.mean()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mean.html) function (@lst-univ-mean). Note that we round the results to two significant digits using `.round(2)`.
+The empirical mean of a dataset can easily be computed with *Pandas* using the [`.mean()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mean.html) [(doc)](../appendices/doc_pandas.qmd#pandas-mean) function (@lst-univ-mean). Note that we round the results to two significant digits using `.round(2)` [(doc)](../appendices/doc_pandas.qmd#pandas-round).
+
+
+**Function reference:** `round` [(doc)](../appendices/doc_pandas.qmd#pandas-round); `mean` [(doc)](../appendices/doc_pandas.qmd#pandas-mean).
 
 ```{python}
 #| lst-label: lst-univ-mean
@@ -185,30 +192,40 @@ mcq({
 ::: {.callout-tip}
 ## Descriptive stats functions
 
-@lst-univ-mean shows how to compute the empirical mean on one column, but the `.mean()` function - as well as most fuctions for descriptive stats - can be applied to entire DataFrames. For this, we need to understand a critical argument - `axis`.
+@lst-univ-mean shows how to compute the empirical mean on one column, but the `.mean()` [(doc)](../appendices/doc_pandas.qmd#pandas-mean) function - as well as most fuctions for descriptive stats - can be applied to entire DataFrames. For this, we need to understand a critical argument - `axis`.
 
 - `axis = 0` is usually the default, and computes the mean [across all rows for each column]{.mark}(@lst-univ-mean-multi-row)
 - `axis = 1` usually makes sense when rows are labelled, and computes the mean [across all columns for each row]{.mark}(@lst-univ-mean-multi-col)
 
+
+**Function reference:** `head` [(doc)](../appendices/doc_pandas.qmd#pandas-head); `round` [(doc)](../appendices/doc_pandas.qmd#pandas-round); `mean` [(doc)](../appendices/doc_pandas.qmd#pandas-mean).
+
 ```{python}
 #| lst-label: lst-univ-mean-multi-row
 #| lst-cap: Compute the empirical mean across rows.
-# Create a subset of the df_traces containing numerical data
-df_traces_sub = df_traces[['Sc','Rb','Sr','Y','Zr','Nb','Cs']] 
-# Compute the mean across all rows
-df_traces_sub.mean(axis=0).round(2).head()
+df_traces_sub = df_traces[['Sc','Rb','Sr','Y','Zr','Nb','Cs']] # <1>
+df_traces_sub.mean(axis=0).round(2).head() # <2>
 
 ```
+
+1. Create a subset of the df_traces containing numerical data
+2. Compute the mean across all rows
+
+
+
+**Function reference:** `head` [(doc)](../appendices/doc_pandas.qmd#pandas-head); `round` [(doc)](../appendices/doc_pandas.qmd#pandas-round); `mean` [(doc)](../appendices/doc_pandas.qmd#pandas-mean).
 
 ```{python}
 #| lst-label: lst-univ-mean-multi-col
 #| lst-cap: Compute the empirical mean across columns.
 
-# Create a subset of the df_traces containing numerical data
-df_traces_sub = df_traces[['Sc','Rb','Sr','Y','Zr','Nb','Cs']] 
-# Compute the mean across all columns
-df_traces_sub.mean(axis=1).round(2).head()
+df_traces_sub = df_traces[['Sc','Rb','Sr','Y','Zr','Nb','Cs']] # <1>
+df_traces_sub.mean(axis=1).round(2).head() # <2>
 ```
+
+1. Create a subset of the df_traces containing numerical data
+2. Compute the mean across all columns
+
 
 
 :::
@@ -236,9 +253,13 @@ In practice, we usually only observe a finite [sample]{.mark} of $X$. The [empir
 2. On the x-axis, find the point dividing the dataset into two equal numbers of observations;
 3. Read the value on the y-axis that intersects the ECDF.
 
+
+**Function reference:** `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots); `sns.ecdfplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-ecdfplot); `ax.plot` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-plot); `median` [(doc)](../appendices/doc_pandas.qmd#pandas-median); `ax.set_xlim` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlim); `ax.set_ylim` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylim).
+
 ```{python}
 #| lst-label: lst-univ-median-ex
 #| lst-cap: Graphical representation of the empirical median.
+#| echo: false
 
 fig, ax = plt.subplots(figsize=(6,4))
 sns.ecdfplot(data=df_traces, x='Zr')
@@ -248,7 +269,10 @@ ax.set_xlim([0,900])
 ax.set_ylim([0,1])
 ```
 
-Fortunately, we can also use the native *Pandas* [`.median`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.median.html) function (@lst-univ-median). 
+Fortunately, we can also use the native *Pandas* [`.median`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.median.html) [(doc)](../appendices/doc_pandas.qmd#pandas-median) function (@lst-univ-median).
+
+
+**Function reference:** `round` [(doc)](../appendices/doc_pandas.qmd#pandas-round); `median` [(doc)](../appendices/doc_pandas.qmd#pandas-median).
 
 ```{python}
 #| lst-label: lst-univ-median
@@ -282,29 +306,28 @@ The [mode]{.mark} of a random variable $X$ is the value that occurs most frequen
 - For a [discrete]{.mark} variable: $x_\text{mode} = \arg\max_x p(x)$, where $p(x)$ is the probability mass function.  
 - For a [continuous]{.mark} variable: $x_\text{mode} = \arg\max_x f(x)$, where $f(x)$ is the probability density function.
 
-The [empirical mode]{.mark} is an [estimator]{.mark} of the theoretical mode, defined as the most frequent value in a sample (discrete) or the peak of a density estimate (continuous). A distribution can have one mode (unimodal), two modes (bimodal), or multiple modes (multimodal). In *Pandas*, the empirical mode is computed using [`.mode()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mode.html).
+The [empirical mode]{.mark} is an [estimator]{.mark} of the theoretical mode, defined as the most frequent value in a sample (discrete) or the peak of a density estimate (continuous). A distribution can have one mode (unimodal), two modes (bimodal), or multiple modes (multimodal). In *Pandas*, the empirical mode is computed using [`.mode()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mode.html) [(doc)](../appendices/doc_pandas.qmd#pandas-mode).
 
 For **categorical** or **discrete numerical data**, the empirical mode simply the value(s) that appear most often.
 
 For **continuous data**, [exact duplicates may be rare]{.mark}, and resulting empirical modes might not be that meaningful (@fig-mode). As a result, we often bin the data into intervals first and find the most populated bin (@fig-mode-bin).
+
+
+**Function reference:** `round` [(doc)](../appendices/doc_pandas.qmd#pandas-round); `mode` [(doc)](../appendices/doc_pandas.qmd#pandas-mode); `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots); `sns.histplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-histplot); `enumerate` [(doc)](../appendices/doc_python.qmd#python-enumerate); `ax.axvline` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-axvline); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
 
 ```{python}
 #| code-fold: true
 #| label: fig-mode
 #| fig-cap: Modes computed from a continuous dataset.
 
-# Calculate the modes
-modes = df_traces['Zr'].mode().round(2)
+modes = df_traces['Zr'].mode().round(2) # <1>
 
-# Set the histogram's bin width
-binwidth = 50
+binwidth = 50 # <2>
 
-# Plot the histogram
-fig, ax = plt.subplots()
+fig, ax = plt.subplots() # <3>
 sns.histplot(data=df_traces, x='Zr', ax=ax, binwidth=50)
 
-# Plot the modes
-for i, m in enumerate(modes):
+for i, m in enumerate(modes): # <4>
     ax.axvline(m, color='darkorange', lw=2)
 
 ax.set_xlabel('Zr (ppm)')
@@ -313,40 +336,53 @@ plt.show()
 
 ```
 
+1. Calculate the modes
+2. Set the histogram's bin width
+3. Plot the histogram
+4. Plot the modes
+
+
+
+
+**Function reference:** `int` [(doc)](../appendices/doc_python.qmd#python-int); `min` [(doc)](../appendices/doc_pandas.qmd#pandas-min); `max` [(doc)](../appendices/doc_pandas.qmd#pandas-max); `range` [(doc)](../appendices/doc_python.qmd#python-range); `cut` [(doc)](../appendices/doc_pandas.qmd#pandas-cut); `mode` [(doc)](../appendices/doc_pandas.qmd#pandas-mode); `list.append` [(doc)](../appendices/doc_python.qmd#python-list-append); `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots); `sns.histplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-histplot); `enumerate` [(doc)](../appendices/doc_python.qmd#python-enumerate); `ax.axvline` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-axvline); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
 
 ```{python}
 #| code-fold: true
 #| label: fig-mode-bin
 #| fig-cap: Empirical modes computed from a binned dataset.
 
-# Set the histogram's bin width
-binwidth = 50
+binwidth = 50 # <1>
 
-# Make the bin range
-minVal = int(df_traces['Zr'].min()) # Minimum value of the dataset, convert it to an integer
-maxVal = int(df_traces['Zr'].max()) # Maximum value of the dataset, convert it to an integer
+minVal = int(df_traces['Zr'].min()) # <2>
+maxVal = int(df_traces['Zr'].max()) # <3>
 binsVal = range(minVal, maxVal, binwidth)
 binned = pd.cut(df_traces['Zr'], bins=binsVal)
 modes = binned.mode();
 
 
-# Convert modes to numeric positions (handles numeric modes and Interval modes from pd.cut)
-numeric_modes = []
+numeric_modes = [] # <4>
 for m in modes:
-    numeric_modes.append((m.left + m.right) / 2)  # midpoint of the interval
+    numeric_modes.append((m.left + m.right) / 2) # <5>
 
-# Plot the histogram
-fig, ax = plt.subplots()
+fig, ax = plt.subplots() # <6>
 sns.histplot(data=df_traces, x='Zr', ax=ax, binwidth=50)
 
-# Plot the modes
-for i, mval in enumerate(numeric_modes):
+for i, mval in enumerate(numeric_modes): # <7>
     ax.axvline(mval, color='darkorange', lw=2)
 
 ax.set_xlabel('Zr (ppm)')
 
 plt.show()
 ```
+
+1. Set the histogram's bin width
+2. Make the bin range Minimum value of the dataset, convert it to an integer
+3. Maximum value of the dataset, convert it to an integer
+4. Convert modes to numeric positions (handles numeric modes and Interval modes from pd.cut)
+5. midpoint of the interval
+6. Plot the histogram
+7. Plot the modes
+
 
 
 #### Summary {.unnumbered}
@@ -357,6 +393,9 @@ plt.show()
 - If the distribution of a sample is [not symmetrical]{.mark}, **the mean should not be used**.
 - The [mean is highly sensitive to outliers]{.mark}, whereas the median is not.
 
+
+
+**Function reference:** `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots); `sns.histplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-histplot); `ax.axvline` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-axvline); `mean` [(doc)](../appendices/doc_pandas.qmd#pandas-mean); `median` [(doc)](../appendices/doc_pandas.qmd#pandas-median); `ax.legend` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-legend).
 
 ```{python}
 #| lst-label: lst-univ-mean-med
@@ -386,13 +425,16 @@ We will review three measures of [dispersion]{.mark} and their corresponding [es
 The [range]{.mark} of a random variable $X$ is the difference between its maximum and minimum values:
 
 - The [theoretical range]{.mark} is defined as $R = \sup(X) - \inf(X)$, i.e., the difference between the largest and smallest possible values of $X$.  
-- The [empirical range]{.mark} is computed from a [sample]{.mark} as the difference between the maximum and minimum observed values. For this, we need to get the minimum (`df.min()`) and maximum (`df.max()`) values, from which, when needed, the range can be calculated with @eq-range. It is however likely that the min/max functions will be more frequently used (@lst-univ-minmax).
+- The [empirical range]{.mark} is computed from a [sample]{.mark} as the difference between the maximum and minimum observed values. For this, we need to get the minimum (`df.min()` [(doc)](../appendices/doc_pandas.qmd#pandas-min)) and maximum (`df.max()` [(doc)](../appendices/doc_pandas.qmd#pandas-max)) values, from which, when needed, the range can be calculated with @eq-range. It is however likely that the min/max functions will be more frequently used (@lst-univ-minmax).
 
 
 $$
 R_\text{emp} = \max(x_1, \dots, x_n) - \min(x_1, \dots, x_n).
 $$ {#eq-range}
 
+
+
+**Function reference:** `min` [(doc)](../appendices/doc_pandas.qmd#pandas-min); `max` [(doc)](../appendices/doc_pandas.qmd#pandas-max); `print` [(doc)](../appendices/doc_python.qmd#python-print).
 
 ```{python}
 #| lst-label: lst-univ-minmax
@@ -407,7 +449,7 @@ print(f"The range of Zircon concentrations is {df_range:.2f}")
 
 ::: {.callout-warning}
 ## Don't use Python reserved keywords as variable names
-Names as `min`, `max` or `range` represent native Python variables and **cannot be used as variable names!**
+Names as `min` [(doc)](../appendices/doc_pandas.qmd#pandas-min), `max` [(doc)](../appendices/doc_pandas.qmd#pandas-max) or `range` [(doc)](../appendices/doc_python.qmd#python-range) represent native Python variables and **cannot be used as variable names!**
 :::
 
 ::: {.callout-note}
@@ -456,18 +498,23 @@ Both the [sample variance]{.mark} and [sample standard deviation]{.mark} describ
 **Relation to the Gaussian distribution:**  
 For a Gaussian (normal) distribution, about 68% of the data falls within one standard deviation of the mean, about 95% within two standard deviations, and about 99.7% within three standard deviations. Thus, variance and standard deviation are fundamental for describing the spread and probability intervals of normally distributed data.
 
-You can compute these in pandas using `.var()` and `.std()`:
+You can compute these in pandas using `.var()` [(doc)](../appendices/doc_pandas.qmd#pandas-var) and `.std()` [(doc)](../appendices/doc_pandas.qmd#pandas-std):
+
+
+**Function reference:** `var` [(doc)](../appendices/doc_pandas.qmd#pandas-var); `std` [(doc)](../appendices/doc_pandas.qmd#pandas-std).
 
 ```{python}
 #| lst-label: lst-univ-std
 #| lst-cap: Compute the variance and standard deviation across columns.
 
-# Compute the variance of a single column:
-df_traces['Zr'].var()
-# Compute the standard deviation of all columns in the DataFrame. In this case, you need to make sure that all columns are numerical.
-df_traces_sub.std()
+df_traces['Zr'].var() # <1>
+df_traces_sub.std() # <2>
 
 ```
+
+1. Compute the variance of a single column:
+2. Compute the standard deviation of all columns in the DataFrame. In this case, you need to make sure that all columns are numerical.
+
 
 
 
@@ -492,22 +539,23 @@ The empirical **median** therefore represents the **50^th^ percentile** of the d
 
 
 
+
+**Function reference:** `FancyArrowPatch` [(doc)](../appendices/doc_visualisation.qmd#plotting-fancyarrowpatch); `ax.get_xlim` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-get-xlim); `np.percentile` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-np-percentile); `ax.add_patch` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-add-patch); `ax.text` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-text); `ax.axvline` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-axvline); `array.mean` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-array-mean); `np.random.normal` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-np-random-normal); `array.min` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-array-min); `array.max` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-array-max); `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots); `sns.histplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-histplot); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.tick_params` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-tick-params); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `ax.twinx` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-twinx); `sns.ecdfplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-ecdfplot); `plotArrow` [(doc)](../appendices/doc_visualisation.qmd#plotting-plotarrow); `fig.tight_layout` [(doc)](../appendices/doc_visualisation.qmd#plotting-fig-tight-layout); `fig.savefig` [(doc)](../appendices/doc_visualisation.qmd#plotting-fig-savefig); `plt.close` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-close).
+
 ```{python}
 #| code-fold: true
 
-# Import the libraries
-import numpy as np
+import numpy as np # <1>
 import matplotlib.pyplot as plt
 import seaborn as sns
 from matplotlib.patches import FancyArrowPatch
 
-# Function to plot the arrow
-def plotArrow(ax,data,pct,c):
+def plotArrow(ax,data,pct,c): # <2>
     arrowH = FancyArrowPatch(
         (ax.get_xlim()[1], pct/100), (np.percentile(data, pct), pct/100),
-        arrowstyle='-|>',  # style: arrow with single head
+        arrowstyle='-|>', # <3>
         color=c,
-        mutation_scale=15,  # size of arrow head
+        mutation_scale=15, # <4>
         linewidth=2
     )
     ax.add_patch(arrowH)
@@ -517,39 +565,33 @@ def plotArrow(ax,data,pct,c):
 
     arrowD = FancyArrowPatch(
         (np.percentile(data, pct), pct/100), (np.percentile(data, pct), 0),
-        arrowstyle='-|>',  # style: arrow with single head
+        arrowstyle='-|>', # <5>
         color=c,
-        mutation_scale=15,  # size of arrow head
+        mutation_scale=15, # <6>
         linewidth=2
     )
     ax.add_patch(arrowD)
-    # Plot the mean as a vertical red dotted line on the histogram axis
-    ax.axvline(data.mean(), color='red', linestyle=':', linewidth=2)
+    ax.axvline(data.mean(), color='red', linestyle=':', linewidth=2) # <7>
 
 
-# Setup random data using a Normal distribution
-data = np.random.normal(size=1000)
+data = np.random.normal(size=1000) # <8>
 data = (data - data.min()) / (data.max() - data.min())*10
 datapct = np.percentile(data, [10, 25, 50, 75, 90])
 
-# Set the plots
-fig, ax = plt.subplots(figsize=(6, 4))
+fig, ax = plt.subplots(figsize=(6, 4)) # <9>
 
-# Left y axis
-sns.histplot(x=data, bins=20, color=blue, alpha=0.4, ax=ax, label='Density', element='step')
+sns.histplot(x=data, bins=20, color=blue, alpha=0.4, ax=ax, label='Density', element='step') # <10>
 ax.set_xlabel('Data value (arbitrary)')
 ax.set_ylabel('Count (= number of data points \nin each bin)', color=blue)
 ax.tick_params(axis='y', labelcolor=blue)
 ax.set_title('Percentiles of a symmetric distribution', fontweight='bold')
 
-# Add a right y axis
-ax2 = ax.twinx()
+ax2 = ax.twinx() # <11>
 sns.ecdfplot(x=data, ax=ax2, color=orange, label='Cumulative density')
 ax2.set_ylabel('CDF (= proportion of data\n points below the data value)', color=orange)
 ax2.tick_params(axis='y', labelcolor=orange)
 
-# Plot the arrows
-plotArrow(ax2, data, 75, '#1D6996')
+plotArrow(ax2, data, 75, '#1D6996') # <12>
 plotArrow(ax2, data, 50, '#0F8554')
 plotArrow(ax2, data, 25, '#994E95')
 
@@ -559,36 +601,47 @@ fig.savefig("img/fig-univ-pctS.png", dpi=150, transparent=True)
 plt.close(fig)
 ```
 
-#| label: fig-univ-pctS
+1. Import the libraries
+2. Function to plot the arrow
+3. style: arrow with single head
+4. size of arrow head
+5. style: arrow with single head
+6. size of arrow head
+7. Plot the mean as a vertical red dotted line on the histogram axis
+8. Setup random data using a Normal distribution
+9. Set the plots
+10. Left y axis
+11. Add a right y axis
+12. Plot the arrows
+
+
 ![Relationship of percentiles to a symmetric distribution. The red dotted line shows the location of the mean.](img/fig-univ-pctS.png){#fig-univ-pctS width="80%"}
 
+
+
+**Function reference:** `np.random.lognormal` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-np-random-lognormal); `array.min` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-array-min); `array.max` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-array-max); `np.percentile` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-np-percentile); `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots); `sns.histplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-histplot); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.tick_params` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-tick-params); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `ax.twinx` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-twinx); `sns.ecdfplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-ecdfplot); `plotArrow` [(doc)](../appendices/doc_visualisation.qmd#plotting-plotarrow); `fig.tight_layout` [(doc)](../appendices/doc_visualisation.qmd#plotting-fig-tight-layout); `fig.savefig` [(doc)](../appendices/doc_visualisation.qmd#plotting-fig-savefig); `plt.close` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-close).
 
 ```{python}
 #| code-fold: true
 
-# Setup random data using a log-normal distribution
-data = np.random.lognormal(size=1000, sigma=.4)
+data = np.random.lognormal(size=1000, sigma=.4) # <1>
 data = (data - data.min()) / (data.max() - data.min())*10
 datapct = np.percentile(data, [10, 25, 50, 75, 90])
 
-# Set the plots
-fig, ax = plt.subplots(ncols=1, figsize=(6, 4))
+fig, ax = plt.subplots(ncols=1, figsize=(6, 4)) # <2>
 
-# Left y axis
-sns.histplot(x=data, bins=20, color=blue, alpha=0.4, ax=ax, legend=None, element='step')
+sns.histplot(x=data, bins=20, color=blue, alpha=0.4, ax=ax, legend=None, element='step') # <3>
 ax.set_xlabel('Data value (arbitrary)')
 ax.set_ylabel('Count (= number of data points \nin each bin)', color=blue)
 ax.tick_params(axis='y', labelcolor=blue)
 ax.set_title('Percentiles of an asymmetric distribution', fontweight='bold')
 
-# Add a right y axis
-ax2 = ax.twinx()
+ax2 = ax.twinx() # <4>
 sns.ecdfplot(x=data, ax=ax2, color=orange, legend=None)
 ax2.set_ylabel('CDF (= proportion of data\n points below the data value)', color=orange)
 ax2.tick_params(axis='y', labelcolor=orange)
 
-# Plot the arrows
-plotArrow(ax2, data, 75, '#1D6996')
+plotArrow(ax2, data, 75, '#1D6996') # <5>
 plotArrow(ax2, data, 50, '#0F8554')
 plotArrow(ax2, data, 25, '#994E95')
 
@@ -596,6 +649,13 @@ fig.tight_layout()
 fig.savefig("img/fig-univ-pctA.png", dpi=150, transparent=True)
 plt.close(fig)
 ```
+
+1. Setup random data using a log-normal distribution
+2. Set the plots
+3. Left y axis
+4. Add a right y axis
+5. Plot the arrows
+
 
 ![Relationship of percentiles to a asymmetric distribution. The red dotted line shows the location of the mean.](img/fig-univ-pctA.png){#fig-univ-pctA width="80%"}
 
@@ -650,12 +710,15 @@ $$ {#eq-skew}
 
 Positive skewness indicates a distribution with a longer right tail, while negative skewness indicates a longer left tail.
 
-In *Pandas*, the skewness can be computed using `.skew()` (@lst-univ-skew). The returned value indicates:
+In *Pandas*, the skewness can be computed using `.skew()` [(doc)](../appendices/doc_pandas.qmd#pandas-skew) (@lst-univ-skew). The returned value indicates:
 
 - **0**: [Symmetric]{.mark} → e.g., normal distribution
 - **>0**: [Righ-skewed]{.mark} → a tail extends to the right
 - **<0**: [Left-skewed]{.mark} → a tail extends to the left
 
+
+
+**Function reference:** `round` [(doc)](../appendices/doc_pandas.qmd#pandas-round); `skew` [(doc)](../appendices/doc_pandas.qmd#pandas-skew).
 
 ```{python}
 #| echo: true
@@ -682,15 +745,15 @@ One way to efficiently convey the structure of a dataset is through [non-paramet
 ![Component of a box and whiskers plot. The top box plot represents an asymmetrical distribution, the bottom one a symmetrical one.](img/fig-boxplot.png){#fig-boxplot width="80%"}
 
 
-In *Seaborn*, box plots can be plotted using [`sns.boxplot()`](https://seaborn.pydata.org/generated/seaborn.boxplot.html). Two notes about box plots: 
+In *Seaborn*, box plots can be plotted using [`sns.boxplot()`](https://seaborn.pydata.org/generated/seaborn.boxplot.html) [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-boxplot). Two notes about box plots:
 
 1. They are useful to compare the **location** and **dispersion** between variables (@fig-sns-boxplot);
-2. In *Seaborn*, whiskers extend by default 1.5 times the IQR from the first and third quartiles. This behaviour can be altered with the `whis` argument of `sns.boxplot()` (see the [doc](https://seaborn.pydata.org/generated/seaborn.boxplot.html))
+2. In *Seaborn*, whiskers extend by default 1.5 times the IQR from the first and third quartiles. This behaviour can be altered with the `whis` argument of `sns.boxplot()` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-boxplot) (see the)
 
 *Seaborn* offers two alternatives to boxplots:
 
-1. **Violin plots** ([`sns.violinplot()`](https://seaborn.pydata.org/generated/seaborn.violinplot.html)) are similar to box plots, but they approximate the underlying parametric data distribution using some smoothing algorithm (i.e. *kernel density estimation*). Without going into too much detail, this provides a good first approximation of the distribution, but [it can create some unrealistic artefacts]{.mark} (e.g., see the negative Sr concentrations in @fig-sns-violinplot).
-2. **Boxen plots** ([`sns.boxenplot()`](https://seaborn.pydata.org/generated/seaborn.boxenplot.html)) are designed to better represent the non-parametric distriubtion of large dataset than box plots. They divide the datasets into **many quantiles** (not just Q1-Q3), and typically provide more resolution in the **tails** of the distribution (@fig-sns-boxenplot).
+1. **Violin plots** ([`sns.violinplot()`](https://seaborn.pydata.org/generated/seaborn.violinplot.html) [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-violinplot)) are similar to box plots, but they approximate the underlying parametric data distribution using some smoothing algorithm (i.e. *kernel density estimation*). Without going into too much detail, this provides a good first approximation of the distribution, but [it can create some unrealistic artefacts]{.mark} (e.g., see the negative Sr concentrations in @fig-sns-violinplot).
+2. **Boxen plots** ([`sns.boxenplot()`](https://seaborn.pydata.org/generated/seaborn.boxenplot.html) [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-boxenplot)) are designed to better represent the non-parametric distriubtion of large dataset than box plots. They divide the datasets into **many quantiles** (not just Q1-Q3), and typically provide more resolution in the **tails** of the distribution (@fig-sns-boxenplot).
 
 @tbl-sns provides a cheat sheet on which plot to use.
 
@@ -698,6 +761,9 @@ In *Seaborn*, box plots can be plotted using [`sns.boxplot()`](https://seaborn.p
 ::: {.panel-tabset}
 
 ## Box plot
+
+
+**Function reference:** `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots); `sns.boxplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-boxplot); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title).
 
 ```{python}
 #| label: fig-sns-boxplot
@@ -711,6 +777,9 @@ ax.set_title('Zr and Sr distribution');
 
 ## Violin plot
 
+
+**Function reference:** `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots); `sns.violinplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-violinplot); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title).
+
 ```{python}
 #| label: fig-sns-violinplot
 #| fig-cap: Visualising distributions using violin plots.
@@ -722,6 +791,9 @@ ax.set_title('Zr and Sr distribution');
 ```
 
 ## Boxen plots
+
+
+**Function reference:** `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots); `sns.boxenplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-boxenplot); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title).
 
 ```{python}
 #| label: fig-sns-boxenplot
@@ -742,7 +814,7 @@ ax.set_title('Zr and Sr distribution');
 | Shows tails well?   | No            | Yes             | Yes              |
 | Shows data density? | No            | No              | Yes              |
 | Complexity          | Simple          | Moderate          | High               |
-| Implementation      | `sns.boxplot()` | `sns.boxenplot()` | `sns.violinplot()` |
+| Implementation      | `sns.boxplot()` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-boxplot) | `sns.boxenplot()` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-boxenplot) | `sns.violinplot()` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-violinplot) |
 
 : Simple rules on which plot to choose to represent data distributions. {#tbl-sns .striped   }
 
@@ -770,8 +842,11 @@ For the sake of simplicity, let's make a subset of the trace elements dataset, f
 1. 5 [numerical]{.mark} data → *U*, *Sc*, *Hf*, *Zr*, *Sr*
 2. 1 [categorical]{.mark} data → *Epoch*
 
-*Panda* as a very handy function to [group data by categorical variables]{.mark}: `.groupby` ([doc](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.groupby.html)). Let's compute the mean value of the different trace elements for each epoch (@lst-groupby):
+*Panda* as a very handy function to [group data by categorical variables]{.mark}: `.groupby` [(doc)](../appendices/doc_pandas.qmd#pandas-groupby). Let's compute the mean value of the different trace elements for each epoch (@lst-groupby):
 
+
+
+**Function reference:** `mean` [(doc)](../appendices/doc_pandas.qmd#pandas-mean); `groupby` [(doc)](../appendices/doc_pandas.qmd#pandas-groupby).
 
 ```{python}
 #| echo: true
@@ -781,7 +856,7 @@ df_traces_sub = df_traces[['Epoch', 'U', 'Sc', 'Hf', 'Zr', 'Sr']]
 df_traces_sub.groupby(by='Epoch').mean()
 ```
 
-Pretty handy don't you think? Note that you can apply all the functions described above (e.g., `.median()` or `.percentiles()`) to a `groupby` object. 
+Pretty handy don't you think? Note that you can apply all the functions described above (e.g., `.median()` [(doc)](../appendices/doc_pandas.qmd#pandas-median) or `np.percentile()` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-np-percentile)) to a `groupby` [(doc)](../appendices/doc_pandas.qmd#pandas-groupby) object.
 
 ::: {.callout-note}
 ## Question

@@ -1,0 +1,16 @@
+/* Keep figure proportions in slides and browser PDF exports. */
+.reveal .slides section img {
+  object-fit: contain;
+  max-width: 100%;
+}
+.reveal .slides section img:not(.r-stretch) {
+  height: auto !important;
+}
+
+/* Match Outils informatique: leave room for the first-line annotation. */
+.reveal .code-copy-outer-scaffold > .code-copy-button {
+  margin-top: 0;
+  margin-right: 1.25em;
+  padding-top: 3px;
+  padding-bottom: 0;
+}

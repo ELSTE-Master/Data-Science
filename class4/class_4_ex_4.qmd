@@ -23,6 +23,9 @@ The parameters of this second model can be estimated as follows:
 
 
 
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `model.fit` [(doc)](../appendices/doc_statsmodels.qmd#models-model-fit); `smf.ols` [(doc)](../appendices/doc_statsmodels.qmd#models-smf-ols); `print` [(doc)](../appendices/doc_python.qmd#python-print); `model.summary` [(doc)](../appendices/doc_statsmodels.qmd#models-model-summary).
+
 ```{python, echo=TRUE}
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -41,6 +44,9 @@ print(mod2.summary())
 To assess its adequacy, we compare the predictions and data as follows:
 
 
+
+
+**Function reference:** `np.arange` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-np-arange); `DataFrame` [(doc)](../appendices/doc_pandas.qmd#pandas-dataframe); `model.predict` [(doc)](../appendices/doc_statsmodels.qmd#models-model-predict); `map` [(doc)](../appendices/doc_pandas.qmd#pandas-map); `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `ax.scatter` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-scatter); `ax.plot` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-plot); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.legend` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-legend); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
 
 ```{python, echo=TRUE}
 age_to_predict = np.arange(6, 13)
@@ -72,10 +78,16 @@ plt.show()
 
 Based on this graph, our second model appears to be more adequate than our first model. We can also compare the AIC of these two models as follows:
 
+
+**Function reference:** `model.fit` [(doc)](../appendices/doc_statsmodels.qmd#models-model-fit); `smf.ols` [(doc)](../appendices/doc_statsmodels.qmd#models-smf-ols).
+
 ```{python, echo=FALSE}
 mod1 = smf.ols('score ~ group + age', data=reading).fit()
 ```
 
+
+
+**Function reference:** `print` [(doc)](../appendices/doc_python.qmd#python-print); `round` [(doc)](../appendices/doc_python.qmd#python-round); `model.aic` [(doc)](../appendices/doc_statsmodels.qmd#models-model-aic).
 
 ```{python, echo=TRUE}
 #  Compare AICs of Model 1 and Model 2
@@ -86,6 +98,9 @@ print("AIC(mod2):", round(mod2.aic,2))
 
 This approach also suggests that the second model is more adequate. Similarly to what we did previously, we can construct the model diagnostic graphs as follows:
 
+
+
+**Function reference:** `map` [(doc)](../appendices/doc_pandas.qmd#pandas-map); `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `ax.scatter` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-scatter); `model.fittedvalues` [(doc)](../appendices/doc_statsmodels.qmd#models-model-fittedvalues); `model.resid` [(doc)](../appendices/doc_statsmodels.qmd#models-model-resid); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show); `stats.probplot` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-probplot); `ax.plot` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-plot).
 
 ```{python, echo=TRUE}
 import scipy.stats as stats
@@ -136,6 +151,9 @@ reading["age_minus_6"] = reading["age"] - 6
 
 Then, the parameters of this third model can be estimated as follows:
 
+
+**Function reference:** `model.fit` [(doc)](../appendices/doc_statsmodels.qmd#models-model-fit); `smf.ols` [(doc)](../appendices/doc_statsmodels.qmd#models-smf-ols); `print` [(doc)](../appendices/doc_python.qmd#python-print); `model.summary` [(doc)](../appendices/doc_statsmodels.qmd#models-model-summary).
+
 ```{python, echo=TRUE}
 # Fit the model
 mod3 = smf.ols("score ~ age_minus_6 + group:age_minus_6", data=reading).fit()
@@ -144,6 +162,9 @@ print(mod3.summary())
 
 
 To assess the model adequacy, we compare the predictions and data as follows (note that this model is based on `age_minus_6` and not `age`):
+
+
+**Function reference:** `np.arange` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-np-arange); `DataFrame` [(doc)](../appendices/doc_pandas.qmd#pandas-dataframe); `model.predict` [(doc)](../appendices/doc_statsmodels.qmd#models-model-predict); `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `ax.scatter` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-scatter); `ax.plot` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-plot); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.legend` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-legend); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
 
 ```{python, echo=TRUE}
 #  Compare predictions and data 
@@ -174,6 +195,9 @@ plt.show()
 
 Based on this graph, our third model appears to be a better fit compared to the second model. We can also compare the AIC of the models we have considered as follows:
 
+
+**Function reference:** `print` [(doc)](../appendices/doc_python.qmd#python-print); `round` [(doc)](../appendices/doc_python.qmd#python-round); `model.aic` [(doc)](../appendices/doc_statsmodels.qmd#models-model-aic).
+
 ```{python, echo=TRUE}
 # Compare AICs of the three models
 print("AIC(mod1):", round(mod1.aic,2))
@@ -183,6 +207,9 @@ print("AIC(mod3):", round(mod3.aic,2))
 
 
 This approach suggests that the third model is the most adequate among all three models we have considered. Finally, we can construct the model diagnostic graphs as follows:
+
+
+**Function reference:** `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `ax.scatter` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-scatter); `model.fittedvalues` [(doc)](../appendices/doc_statsmodels.qmd#models-model-fittedvalues); `model.resid` [(doc)](../appendices/doc_statsmodels.qmd#models-model-resid); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show); `stats.probplot` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-probplot); `ax.plot` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-plot).
 
 ```{python, echo=TRUE}
 #  Diagnostic plots for Model 3 

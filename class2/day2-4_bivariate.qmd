@@ -2,11 +2,12 @@
 title: "Bivariate analyses"
 format:
   html:
+    code-annotations: hover
     code-fold: false
     code-line-numbers: true
     css: [../assets/webex.css]
     include-after-body: [../assets/webex.js]
-    embed-resources: true 
+    embed-resources: false
 jupyter: python3
 ---
 
@@ -31,7 +32,10 @@ df_traces = pd.read_csv('https://raw.githubusercontent.com/ELSTE-Master/Data-Sci
 
 Up to now, the domain of [univariate analyses](day2-3_univariate.qmd) has allowed us to explore the properties of **one variable at the time**. Investigating the relationship between **two variables** is the topic of [bivariate analyses]{.mark}. One good visual starting point to identify these is to plot **pairwise relationships** of all the variables in our dataset.
 
-Let's go back to our `df_traces_sub` dataset. We can then plot a pairwise comparison plot using *Seaborn*'s `.pairplot()` function ([doc](https://seaborn.pydata.org/generated/seaborn.pairplot.html); @lst-sns-pairplot). We use the `hue` argument of the `.pairplot()` function to plot each epoch in a different color:
+Let's go back to our `df_traces_sub` dataset. We can then plot a pairwise comparison plot using *Seaborn*'s `.pairplot()` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-pairplot) function (; @lst-sns-pairplot). We use the `hue` argument of the `.pairplot()` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-pairplot) function to plot each epoch in a different color:
+
+
+**Function reference:** `sns.pairplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-pairplot).
 
 ```{python}
 #| echo: true
@@ -77,7 +81,7 @@ $$
 \mathrm{Cov}(X,Y)_{\text{emp}}= \frac{1}{n-1}\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y}),
 $${#eq-covar}
 
-where $\bar{x}$ and $\bar{y}$ are the [sample means]{.mark}. In *Pandas*, this can be computed using the `.cov()` function (@lst-bivar-cov).
+where $\bar{x}$ and $\bar{y}$ are the [sample means]{.mark}. In *Pandas*, this can be computed using the `.cov()` [(doc)](../appendices/doc_pandas.qmd#pandas-cov) function (@lst-bivar-cov).
 
 The covariance depends on the [magnitudes]{.mark} of the variables, so it does not directly reflect the [strength]{.mark} of the relationship. To address this, the [correlation coefficient]{.mark} provides a normalized version of the covariance, ranging from $−1$ to $1$, which indicates both the direction and the strength of the linear relationship. The correlation coefficient is given by:
 
@@ -91,7 +95,7 @@ The [sample correlation]{.mark} (@eq-corr) is defined as
 $$
 r(X,Y)_{\text{emp}} = \frac{\mathrm{Cov}(X,Y)_{\text{emp}}}{s_X s_Y} = \frac{\sum_{i=1}^n (x_i - \bar x)(y_i - \bar y)}{\sqrt{\sum_{i=1}^n (x_i - \bar x)^2}\;\sqrt{\sum_{i=1}^n (y_i - \bar y)^2}},
 $${#eq-corr}
-and can be computed in *Pandas* using the `.corr()` function (@lst-bivar-cov):
+and can be computed in *Pandas* using the `.corr()` [(doc)](../appendices/doc_pandas.qmd#pandas-corr) function (@lst-bivar-cov):
 
 
 
@@ -102,25 +106,30 @@ where $s_X$ and $s_Y$ are the [sample standard deviations]{.mark} of $X$ and $Y$
 - $r(X,Y)<0$ indicates a **negative relationship** between $X$ and $Y$ (→ $Y$ decreases when $X$ increases);
 - $r(X,Y) =0$ indicates **independence** between $X$ and $Y$.
 
+
+**Function reference:** `drop` [(doc)](../appendices/doc_pandas.qmd#pandas-drop); `cov` [(doc)](../appendices/doc_pandas.qmd#pandas-cov); `print` [(doc)](../appendices/doc_python.qmd#python-print); `min` [(doc)](../appendices/doc_pandas.qmd#pandas-min); `max` [(doc)](../appendices/doc_pandas.qmd#pandas-max); `corr` [(doc)](../appendices/doc_pandas.qmd#pandas-corr).
+
 ```{python}
 #| echo: true
 #| lst-label: lst-bivar-cov
 #| lst-cap: Computing the sample covariance and correlation coefficient in Pandas. Both the .cov() and the .corr() functions require numerical data, so we first need to remove the Epoch column. Note that the range of values returned by .corr() ranges from -1 to 1.
 
-# We remove the "Epoch" column using the function drop() as it does not contain numerical values
-df_traces_sub = df_traces_sub.drop(columns='Epoch')
+df_traces_sub = df_traces_sub.drop(columns='Epoch') # <1>
 
-# Compute the covariance
-df_traces_sub.cov()
+df_traces_sub.cov() # <2>
 print(f"The covariance for U ranges from {df_traces_sub.cov()['U'].min():.2f} to {df_traces_sub.cov()['U'].max():.2f}")
 
-# Compute the correlation coefficient
-print(f"The correlation coefficients for U ranges from {df_traces_sub.corr()['U'].min():.2f} to {df_traces_sub.corr()['U'].max():.2f}")
+print(f"The correlation coefficients for U ranges from {df_traces_sub.corr()['U'].min():.2f} to {df_traces_sub.corr()['U'].max():.2f}") # <3>
 
 print('Correlation coefficient:')
 df_traces_sub.corr()
 
 ```
+
+1. We remove the "Epoch" column using the function drop() as it does not contain numerical values
+2. Compute the covariance
+3. Compute the correlation coefficient
+
 
 
 
@@ -144,40 +153,50 @@ In practice, we rarely know the true correlations, so each entry $r(X_i, X_j)$ i
 
 *Seaborn* does not include a native function to do so, but @lst-corr-mat shows a ready-to-use function to plot one. Don't hesitate to copy it and reuse it in your codes. @fig-corr-mat shows the resulting plot applied to the concentration columns of the trace elements dataset.
 
+
+**Function reference:** `corr` [(doc)](../appendices/doc_pandas.qmd#pandas-corr); `np.triu` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-np-triu); `np.ones_like` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-np-ones-like); `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots); `sns.diverging_palette` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-diverging-palette); `sns.heatmap` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-heatmap).
+
 ```{python}
 #| echo: true
 #| lst-label: lst-corr-mat
 #| lst-cap: Function to compute produce a correlation matrix
 
-# Define a function to plot the correlation matrix. It takes one argument (i.e., a DataFrame)
-def corrMatrix(d):
+def corrMatrix(d): # <1>
         
-    # Compute the correlation matrix
-    corr = d.corr()
+    corr = d.corr() # <2>
 
-    # Generate a mask for the upper triangle
-    mask = np.triu(np.ones_like(corr, dtype=bool))
+    mask = np.triu(np.ones_like(corr, dtype=bool)) # <3>
 
-    # Set up the matplotlib figure
-    f, ax = plt.subplots(figsize=(11, 9))
+    f, ax = plt.subplots(figsize=(11, 9)) # <4>
 
-    # Generate a custom diverging colormap
-    cmap = sns.diverging_palette(230, 20, as_cmap=True)
+    cmap = sns.diverging_palette(230, 20, as_cmap=True) # <5>
 
-    # Draw the heatmap with the mask and correct aspect ratio
-    sns.heatmap(corr, mask=mask, cmap=cmap, vmax=.7, vmin=-.7, center=0,
+    sns.heatmap(corr, mask=mask, cmap=cmap, vmax=.7, vmin=-.7, center=0, # <6>
                 square=True, linewidths=.5, cbar_kws={"shrink": .5})
 ```
+
+1. Define a function to plot the correlation matrix. It takes one argument (i.e., a DataFrame)
+2. Compute the correlation matrix
+3. Generate a mask for the upper triangle
+4. Set up the matplotlib figure
+5. Generate a custom diverging colormap
+6. Draw the heatmap with the mask and correct aspect ratio
+
+
+
+**Function reference:** `iloc` [(doc)](../appendices/doc_pandas.qmd#pandas-iloc); `corrMatrix` [(doc)](../appendices/doc_visualisation.qmd#plotting-corrmatrix).
 
 ```{python}
 #| echo: true
 #| label: fig-corr-mat
 #| fig-cap: Correlation matrix for the trace elements dataset.
 
-# Keep only the numerical columns, i.e., from column index 10 to the last
-df_traces_sub = df_traces.iloc[:, 10:]
+df_traces_sub = df_traces.iloc[:, 10:] # <1>
 corrMatrix(df_traces_sub)
 ```
+
+1. Keep only the numerical columns, i.e., from column index 10 to the last
+
 
 
 ::: {.callout-note}
@@ -232,33 +251,38 @@ So, the goal of a regression for two continuous variables behaving in a linear f
 
 *Seaborn* has some high-level functions to **plot** linear regressions. These functions are designed to [provide a quick overview]{.mark} of the model fit rather than a deep statistical investigation (which is commonly achieved using another library called [statsmodels](https://www.statsmodels.org/stable/index.html)). A thorough introduction to linear regression will be the topic of class 4, so for now let's just focus on the use of the *Seaborn* functions.
 
-The first function is [`sns.regplot()`](https://seaborn.pydata.org/generated/seaborn.regplot.html#seaborn.regplot), which produces:
+The first function is [`sns.regplot()`](https://seaborn.pydata.org/generated/seaborn.regplot.html#seaborn.regplot) [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-regplot), which produces:
 
 1. A scatter plot;
 2. A linear regression model fit;
 3. A confidence interval (by default 95% in *Seaborn* obtained through *bootstrapping*. The idea behind bootstrapping is to i)  randomly removing a proportion of original observations from the dataset, ii) refit the model and compare  it to the original fit and iii) repeat this a large number of times - typically thousands of times. For a very good fit, removing observations won't affect greatly the relationship, and the fit with the subset of points will be near to equal the fit with the complete dataset.
 
-@fig-reg shows two regression plots with the 95% confidence interval. They sure do look pretty, and `sns.regplot()` is a great and efficient way to have a first impression at what a first order polynomial fit would look like, [but be careful to not over-interpret them]{.mark}. If you want to further explore and constrain linear fits, do turn to [statsmodels](https://www.statsmodels.org/stable/index.html).
+@fig-reg shows two regression plots with the 95% confidence interval. They sure do look pretty, and `sns.regplot()` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-regplot) is a great and efficient way to have a first impression at what a first order polynomial fit would look like, [but be careful to not over-interpret them]{.mark}. If you want to further explore and constrain linear fits, do turn to [statsmodels](https://www.statsmodels.org/stable/index.html).
+
+
+**Function reference:** `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots); `sns.regplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-regplot); `dict` [(doc)](../appendices/doc_python.qmd#python-dict); `fig.tight_layout` [(doc)](../appendices/doc_visualisation.qmd#plotting-fig-tight-layout); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
 
 ```{python}
 #| echo: true
 #| label: fig-reg
 #| fig-cap: Regression plots obtained using Seaborn.
 
-# Set colors for plotting
-blue = '#2F4647'
+blue = '#2F4647' # <1>
 orange = '#EB811B'
 
-# Setup the plot. Note that we require 2 axes in 1 row, which returns a list of axes (i.e., [ax1, ax2])
-fig, [ax1, ax2] = plt.subplots(1,2, figsize=(10,4.5))
+fig, [ax1, ax2] = plt.subplots(1,2, figsize=(10,4.5)) # <2>
 sns.regplot(ax=ax1, data=df_traces, x='Zr', y='Hf', color=blue, line_kws=dict(color=orange))
 sns.regplot(ax=ax2, data=df_traces, x='Zr', y='Sc', color=blue, line_kws=dict(color=orange))
 
-# These two commands mainly make the plots look good on the website
-plt.tight_layout()
+plt.tight_layout() # <3>
 plt.show()
 
 ```
+
+1. Set colors for plotting
+2. Setup the plot. Note that we require 2 axes in 1 row, which returns a list of axes (i.e., [ax1, ax2])
+3. These two commands mainly make the plots look good on the website
+
 
 ### Residual analysis
 
@@ -283,10 +307,13 @@ $$
 R^2 = 1 - \frac{\sum_{i=1}^{n} (y_i - \hat{y}_i)^2}{\sum_{i=1}^{n} (y_i - \bar{y})^2}
 $$ {#eq-r2}
 
-Any type of [structure in residuals]{.mark} might reveal a violation of linear regression assumptions. *Seaborn*'s function [`sns.residplot()`](https://seaborn.pydata.org/generated/seaborn.residplot.html) is designed to help with rapid investigation of the potential structure in residuals. @fig-resid shows the residuals for the same relationships as @fig-reg. We add the argument `lowess=True` to the function, which uses a [lowess filter](https://en.wikipedia.org/wiki/Local_regression) (i.e., think a combination of a moving average except a linear regression is performed rather than an average). This is useful to estimate the structure of the residuals.
+Any type of [structure in residuals]{.mark} might reveal a violation of linear regression assumptions. *Seaborn*'s function [`sns.residplot()`](https://seaborn.pydata.org/generated/seaborn.residplot.html) [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-residplot) is designed to help with rapid investigation of the potential structure in residuals. @fig-resid shows the residuals for the same relationships as @fig-reg. We add the argument `lowess=True` to the function, which uses a [lowess filter](https://en.wikipedia.org/wiki/Local_regression) (i.e., think a combination of a moving average except a linear regression is performed rather than an average). This is useful to estimate the structure of the residuals.
 
 <!-- fig, ax2 = plt.subplots() -->
 <!-- sns.residplot(ax=ax2, data=df_traces, x='Zr', y='Hf', color=blue, lowess=True, line_kws=dict(color=orange)) -->
+
+
+**Function reference:** `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots); `sns.residplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-residplot); `dict` [(doc)](../appendices/doc_python.qmd#python-dict); `fig.tight_layout` [(doc)](../appendices/doc_visualisation.qmd#plotting-fig-tight-layout); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
 
 ```{python}
 #| echo: true

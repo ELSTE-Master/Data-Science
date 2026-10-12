@@ -32,7 +32,7 @@ format:
     mathjax: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
     slide-number: true
 footer: "This document was prepared with the help of Lionel Voirol and Filippo Salmaso"
-css: [../assets/default.css]
+css: [../assets/default.css, ../assets/slides-images.css]
 #jupyter: python3
 ---
 
@@ -52,7 +52,14 @@ library(reticulate)
 # use_condaenv("myenv", required = TRUE)
 ```
 
-```{r, setup, include=FALSE}
+```{r, render-figures, include=FALSE}
+knitr::opts_chunk$set(
+  comment = "", fig.align = "center", fig.height = 7, fig.width = 10.5,
+  warning = FALSE, message = FALSE, dev = "svg"
+)
+```
+
+```{r, setup, include=FALSE, eval=FALSE}
 # devtools::install_github("dill/emoGG")
 library(pacman)
 p_load(
@@ -196,7 +203,7 @@ Then, <span style="color:#eb078e;">statistical inference</span> allows to infer 
 
 
 ```{r sampling, out.width="45%", echo=FALSE}
-include_graphics("../class3/img/sampling.png")
+knitr::include_graphics("../class3/img/sampling.png")
 
 ```
 <span style="font-size:0.7em;">Source: [luminousmen](luminousmen.com)</span>
@@ -229,7 +236,7 @@ $$H_0: \mu_{\text{drug}}\hspace{0.1cm} {\color{#eb078e}{=}}\hspace{0.1cm}\mu_{\t
 
 
 ```{R, out.width = "80%", echo = F}
-include_graphics("../class3/img/great_pic.png")
+knitr::include_graphics("../class3/img/great_pic.png")
 ```
 ---
 
@@ -286,7 +293,7 @@ The obtained p-value summarizes the <span style="color:#eb078e;">incompatibility
 ## How to understand p-values? {.smaller}
 
 ```{r, out.width = "30%", echo = F}
-include_graphics("../class3/img/p_value.png")
+knitr::include_graphics("../class3/img/p_value.png")
 ```
 
 <span style="font-size:0.8em;">👋 If you want to know more have a look [here](https://xkcd.com/1478/).</span>
@@ -320,7 +327,7 @@ $$Z = \frac{Y-\mu}{\sigma} \sim N(0,1), \ \ \ \ \ f_{Z}(z) = \frac{1}{\sqrt{2\pi
 
 
 ```{r, normal, out.width="60%", echo = F}
-include_graphics("../class3/img/standardnormalpdf2.png")
+knitr::include_graphics("../class3/img/standardnormalpdf2.png")
 ```
 
 
@@ -502,7 +509,7 @@ The details are beyond the scope of this class.
 
 ### Graph
 ```{r dietB, out.width="80%", echo=FALSE}
-include_graphics("../class3/img/dietAB.png")
+knitr::include_graphics("../class3/img/dietAB.png")
 ```
 ---
 
@@ -618,7 +625,7 @@ In practice, we often even encounter situations where we need to <span style="co
 <span style="color:#6A5ACD; font-weight:bold;">Are jelly beans causing acne?</span> Maybe... but why only <span style="color:green; font-weight:bold;">green</span> ones? 🤨
 
 ```{r green, out.width="45%", echo=FALSE}
-include_graphics("../class3/img/green.png")
+knitr::include_graphics("../class3/img/green.png")
 ```
 <span style="font-size:0.7em;">Source: <a href="https://xkcd.com/882/">xkcd</a></span>
 
@@ -628,7 +635,7 @@ include_graphics("../class3/img/green.png")
 ## Are jelly beans causing acne? {.smaller}
 
 ```{r green1, out.width="85%", echo=FALSE}
-include_graphics("../class3/img/green1.png")
+knitr::include_graphics("../class3/img/green1.png")
 ```
 
 <span style="font-size:0.7em;">Source: <a href="https://xkcd.com/882/">xkcd</a></span>
@@ -638,7 +645,7 @@ include_graphics("../class3/img/green1.png")
 ## Maybe a specific color? {.smaller}
 
 ```{r green2, out.width="85%", echo=FALSE}
-include_graphics("../class3/img/green2.png")
+knitr::include_graphics("../class3/img/green2.png")
 ```
 
 <span style="font-size:0.7em;">Source: <a href="https://xkcd.com/882/">xkcd</a></span>
@@ -649,7 +656,7 @@ include_graphics("../class3/img/green2.png")
 ## Maybe a specific color? {.smaller}
 
 ```{r green3, out.width="85%", echo=FALSE}
-include_graphics("../class3/img/green3.png")
+knitr::include_graphics("../class3/img/green3.png")
 ```
 
 <span style="font-size:0.7em;">Source: <a href="https://xkcd.com/882/">xkcd</a></span>
@@ -660,7 +667,7 @@ include_graphics("../class3/img/green3.png")
 
 
 ```{r green4, out.width="85%", echo=FALSE}
-include_graphics("../class3/img/green.png")
+knitr::include_graphics("../class3/img/green.png")
 ```
 
 <span style="font-size:0.7em;">Source: <a href="https://xkcd.com/882/">xkcd</a></span>
@@ -888,7 +895,7 @@ stats.kruskal(group_A, group_B, group_C)
 ### Graph {.smaller}
 
 ```{R, dietABC, out.width = "80%", echo = F}
-include_graphics("../class3/img/dietABC.png")
+knitr::include_graphics("../class3/img/dietABC.png")
 ```
 
 ---

@@ -34,6 +34,9 @@ In this exercise, we will replicate the `diet` data analysis example
 presented in the lectures slides, and we will compare diets A and B. Our first step is to load the data.
 
 
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv).
+
 ```{python, echo=TRUE}
 # Import data
 import pandas as pd
@@ -42,6 +45,9 @@ diet = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/
 
 
 We can now take a look at the data.
+
+**Function reference:** `print` [(doc)](../appendices/doc_python.qmd#python-print); `head` [(doc)](../appendices/doc_pandas.qmd#pandas-head).
+
 ```{python, echo=TRUE}
 # Import data
 n = 5
@@ -62,6 +68,9 @@ For this example, we consider diets A and B so we construct our "variables of in
 dietA = diet["weight.loss"][diet["diet.type"]=="A"]
 dietB = diet["weight.loss"][diet["diet.type"]=="B"]
 ```
+
+
+**Function reference:** `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `ax.boxplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-boxplot); `dict` [(doc)](../appendices/doc_python.qmd#python-dict); `enumerate` [(doc)](../appendices/doc_python.qmd#python-enumerate); `np.random.normal` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-np-random-normal); `len` [(doc)](../appendices/doc_python.qmd#python-len); `ax.scatter` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-scatter); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
 
 ```{python, echo=TRUE, fig.align = 'center'}
 import matplotlib.pyplot as plt
@@ -91,6 +100,9 @@ Based on the previous boxplot, Welch's t-test or Wilcoxon rank sum test are both
 $$H_{0}: \mu_A=\mu_B \quad \text{and} \quad H_{a}: \mu_A\neq\mu_B,$$
 
 where $\mu_A$ and $\mu_B$ denote the mean weight loss for diets A and B, respectively. We consider $\alpha = 0.05$ and compute the p-value as follows:
+
+
+**Function reference:** `stats.ttest_ind` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-ttest-ind); `print` [(doc)](../appendices/doc_python.qmd#python-print); `round` [(doc)](../appendices/doc_python.qmd#python-round).
 
 ```{python, echo=TRUE}
 from scipy import stats

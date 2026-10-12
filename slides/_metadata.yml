@@ -5,10 +5,19 @@ format:
     chalkboard: true
     highlight-style: atom-one
     callout-appearance: simple
-    transition: slide
+    transition: fade
     transition-speed: fast
+    code-annotations: hover
+    css: [assets/slides.css, ../assets/slides-images.css]
+    include-after-body: assets/after-body.html
+    verticator:
+      themetag: h1
+      tooltip: title
+      scale: 0.75
     fontawesome: true
     pdf: true
     mermaid:
       theme: 'default'
-      themeVariables:
+
+revealjs-plugins:
+  - verticator

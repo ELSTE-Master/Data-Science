@@ -2,11 +2,12 @@
 title: "Filtering data"
 format:
   html:
+    code-annotations: hover
     code-fold: false
     code-line-numbers: true
     css: [../assets/webex.css]
     include-after-body: [../assets/webex.js]
-    embed-resources: true 
+    embed-resources: false
 jupyter: python3
 ---
 
@@ -58,18 +59,25 @@ We can apply comparison operators to DataFrame. Let's say we want to test what r
 df['VEI'] == 4
 ```
 
-We can see that Galunggung, Taal, La Soufrière, Calbuco and Eyjafjallajökull return `True` to this condition. This is great, but what if we want to return the actual rows? We can use @lst-bool as a **mask** to then query the rows using `.loc`.
+We can see that Galunggung, Taal, La Soufrière, Calbuco and Eyjafjallajökull return `True` to this condition. This is great, but what if we want to return the actual rows? We can use @lst-bool as a **mask** to then query the rows using `.loc` [(doc)](../appendices/doc_pandas.qmd#pandas-loc).
+
+
+**Function reference:** `loc` [(doc)](../appendices/doc_pandas.qmd#pandas-loc).
 
 ```{python}
 #| lst-label: lst-bool-query
 #| lst-cap: Query data using a boolean mask
 
-mask = df['VEI'] == 4 # Create a mask
-df.loc[mask] # Query the data
+mask = df['VEI'] == 4 # <1>
+df.loc[mask] # <2>
 
-# Or, as a one line alternative:
-df.loc[df['VEI'] == 4]
+df.loc[df['VEI'] == 4] # <3>
 ```
+
+1. Create a mask
+2. Query the data
+3. Or, as a one line alternative:
+
 
 ::: {.callout-note}
 ## Question
@@ -86,7 +94,7 @@ mcq({
 })
 ```
 
-How many volcanoes are in the southern hemisphere? (hint: use the `df.shape` function to count them).
+How many volcanoes are in the southern hemisphere? (hint: use the `df.shape` [(doc)](../appendices/doc_pandas.qmd#pandas-shape) function to count them).
 
 ```{python}
 #| echo: false
@@ -106,6 +114,9 @@ mcq({
 
 We can also use comparison operators on columns containing **strings** (see @cau-dtypes for caveats). @lst-str-comp illustrates a basic string comparison using the `=` operator. @tbl-comparison-str shows additional operators for strings.
 
+
+**Function reference:** `loc` [(doc)](../appendices/doc_pandas.qmd#pandas-loc).
+
 ```{python}
 #| lst-label: lst-str-comp
 #| lst-cap: Basic comparison operation on strings
@@ -116,9 +127,9 @@ df.loc[df['Country'] == 'Indonesia']
 
 | Operation         | Example                                 | Description                                         |
 |-------------------|-----------------------------------------|-----------------------------------------------------|
-| Contains          | `df['Name'].str.contains('Soufrière')`  | Checks if each string contains a substring          |
-| Startswith        | `df['Name'].str.startswith('E')`        | Checks if each string starts with a substring       |
-| Endswith          | `df['Name'].str.endswith('o')`          | Checks if each string ends with a substring         |
+| Contains          | `df['Name'].str.contains('Soufrière')` [(doc)](../appendices/doc_pandas.qmd#pandas-str-contains)  | Checks if each string contains a substring          |
+| Startswith        | `df['Name'].str.startswith('E')` [(doc)](../appendices/doc_pandas.qmd#pandas-str-startswith)        | Checks if each string starts with a substring       |
+| Endswith          | `df['Name'].str.endswith('o')` [(doc)](../appendices/doc_pandas.qmd#pandas-str-endswith)          | Checks if each string ends with a substring         |
 
 
 : Common string comparison operations. {#tbl-comparison-str .striped   }
@@ -127,7 +138,7 @@ df.loc[df['Country'] == 'Indonesia']
 ::: {#cau-dtypes .callout-caution collapse="true"}
 ## Compare what is comparable!
 
-When using the comparison operators in @tbl-comparison-operators, we need to make sure that we are comparing data that have the **same type**. In @lst-bool, we are comparing the column `VEI` with an integer number. You can check the data type of a DataFrame using `df.dtypes`. 
+When using the comparison operators in @tbl-comparison-operators, we need to make sure that we are comparing data that have the **same type**. In @lst-bool, we are comparing the column `VEI` with an integer number. You can check the data type of a DataFrame using `df.dtypes` [(doc)](../appendices/doc_pandas.qmd#pandas-dtypes).
 
 Not all comparison operators work with all data type. For instance, you can test if a column contains a specific string using the `==` or `!=` operators, but the other won't work as they are *illogical*.
 :::
@@ -146,14 +157,21 @@ But what if we want to create more complex filters based on different rules? We 
 
 Let's gather all volcanoes that have a VEI of 3 and are in Indonesia:
 
+
+**Function reference:** `loc` [(doc)](../appendices/doc_pandas.qmd#pandas-loc).
+
 ```{python}
 #| lst-label: lst-logical-query
 #| lst-cap: Complex filtering using logical operators
 
-mask = (df['VEI'] == 3) & (df['Country'] == 'Indonesia') # Create a mask - don't forget parentheses!
-df.loc[mask] # Query the data
+mask = (df['VEI'] == 3) & (df['Country'] == 'Indonesia') # <1>
+df.loc[mask] # <2>
 
 ```
+
+1. Create a mask - don't forget parentheses!
+2. Query the data
+
 
 ::: {.callout-note}
 ## Question

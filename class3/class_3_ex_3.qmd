@@ -72,15 +72,18 @@ plt.show()
 ## Hints
 
 ::: { .hint exercise="ex_1"}
-Consider using the `boxplot()` function from `matplotlib.pyplot`.
+Consider using the `boxplot()` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-boxplot) function from `matplotlib.pyplot`.
 
 :::
 
 ## Solution
 
 ::: { .solution exercise="ex_1" }
-Use  the `boxplot()` function from `matplotlib.pyplot`:
+Use  the `boxplot()` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-boxplot) function from `matplotlib.pyplot`:
 
+
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `ax.boxplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-boxplot); `dict` [(doc)](../appendices/doc_python.qmd#python-dict); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
 
 ```python
 import pandas as pd
@@ -108,7 +111,7 @@ plt.title("Comparison of Weight Loss for Diets A and C")
 plt.show()
 
 ```
-1. Use `plt.boxplot()`
+1. Use `plt.boxplot()` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-boxplot)
 :::
 
 ::::
@@ -171,13 +174,16 @@ print("p-value:", round(p_value, 4))
 ## Hints
 
 ::: { .hint exercise="ex_2"}
-Consider using the `mannwhitneyu()` function from `scipy.stats`. Make sure to specify the correct alternative hypothesis.
+Consider using the `mannwhitneyu()` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-mannwhitneyu) function from `scipy.stats`. Make sure to specify the correct alternative hypothesis.
 
 :::
 
 ## Solution
 
 ::: { .solution exercise="ex_2" }
+
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `stats.mannwhitneyu` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-mannwhitneyu); `print` [(doc)](../appendices/doc_python.qmd#python-print); `round` [(doc)](../appendices/doc_python.qmd#python-round).
 
 ```python
 import pandas as pd
@@ -265,7 +271,7 @@ print(f"P-value: {p_value}")
 ## Hints
 
 ::: { .hint exercise="ex_3"}
-Consider using the `mannwhitneyu()` function from `scipy.stats`. In `Python`, `scipy.stats.mannwhitneyu()` does not include an argument that allows to specify the hypothesized difference between group median, but you can reproduce the same test by **shifting one sample** by that hypothesized difference.  
+Consider using the `mannwhitneyu()` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-mannwhitneyu) function from `scipy.stats`. In `Python`, `scipy.stats.mannwhitneyu()` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-mannwhitneyu) does not include an argument that allows to specify the hypothesized difference between group median, but you can reproduce the same test by **shifting one sample** by that hypothesized difference.\
 
 
 :::
@@ -273,6 +279,9 @@ Consider using the `mannwhitneyu()` function from `scipy.stats`. In `Python`, `s
 ## Solution
 
 ::: { .solution exercise="ex_3" }
+
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `stats.mannwhitneyu` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-mannwhitneyu); `print` [(doc)](../appendices/doc_python.qmd#python-print).
 
 ```python
 import pandas as pd
@@ -355,13 +364,16 @@ print(f"P-value: {p_value}")
 ## Hints
 
 ::: { .hint exercise="ex_4"}
-Consider using the `mannwhitneyu()` function from `scipy.stats`. In `Python`, `scipy.stats.mannwhitneyu()` does not include an argument that allows to specify the hypothesized difference between group median, but you can reproduce the same test by **shifting one sample** by that hypothesized difference.  
+Consider using the `mannwhitneyu()` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-mannwhitneyu) function from `scipy.stats`. In `Python`, `scipy.stats.mannwhitneyu()` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-mannwhitneyu) does not include an argument that allows to specify the hypothesized difference between group median, but you can reproduce the same test by **shifting one sample** by that hypothesized difference.\
 
 :::
 
 ## Solution
 
 ::: { .solution exercise="ex_4" }
+
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `stats.mannwhitneyu` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-mannwhitneyu); `print` [(doc)](../appendices/doc_python.qmd#python-print).
 
 ```python
 import pandas as pd

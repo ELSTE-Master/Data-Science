@@ -2,11 +2,12 @@
 title: "Overview"
 format:
   html:
+    code-annotations: hover
     code-fold: false
     code-line-numbers: true
     css: [../assets/webex.css]
     include-after-body: [../assets/webex.js]
-    embed-resources: true 
+    embed-resources: false
 jupyter: python3
 ---
 
@@ -19,7 +20,19 @@ plt.rcParams.update({
 })
 ```
 
+[{{< fa display >}} Présentation HTML](../slides/class1_intro.html){.btn .btn-download target="_blank"}
+[{{< fa file-pdf >}} Présentation PDF](class_1_slides_intro.pdf){.btn .btn-download target="_blank"}
 
+
+
+
+## Why scientific coding?
+
+A research workflow often involves collecting data, cleaning and organising them, analysing them, and presenting the results. Scientific coding lets us connect these steps in a workflow that can be repeated when new data arrive or when our methods change.
+
+For example, imagine a field study with 40 outcrops, around 10 samples per outcrop, and seven measurement methods per sample. Repeating the same processing manually quickly becomes time-consuming. With Python, we can describe the processing once and apply it consistently across the measurements.
+
+In this class, we start with tabular data and `pandas`: the tools we need to organise observations and select the data relevant to a research question.
 
 We will start our data science journey by learning a bit about the most useful Python library for this class: **Pandas**. As a reminder, a *library* is a set of tools we load on top of Python that provides new functionalities for a specific problem or type of analysis. Here, Pandas provides functions for **data manipulation and analysis**, handling structured data like tables or time series and facilitating numerous tasks you might encounter as a scientist. These include:
 
@@ -43,14 +56,53 @@ The objective of this class is by no way to make you an expert in Pandas and dat
 
 We first start by reviewing the data structure behind *Pandas*, then we will move on to a few coding exercises to make you familiar with some basic functionalities.
 
-## Slides
+## Connect this class to your research
 
-### Introduction 
+As you work through the examples, think about a dataset you already use—or might use—in your research:
 
-- {{< fa file-pdf >}} [PDF](class_1_slides_intro.pdf)
-- <i class="fa fa-window-restore"></i> <a href="../slides/class1_intro.html" target="_blank">View in browser</a>
+- What would one row represent: a sample, a measurement, a location, or an event?
+- What variables would appear in the columns?
+- What question would you like to answer?
+- Which observations would you need to select to investigate that question?
 
-### Intro to Pandas
+If you have a suitable dataset, bring a small example to class. Otherwise, identify an open dataset relevant to your interests. You do not need to know how to analyse it yet: start by describing what it contains and what you would like to learn from it.
 
-- {{< fa file-pdf >}} [PDF](class_1_slides_pandas.pdf)
-- <i class="fa fa-window-restore"></i> <a href="../slides/class1_pandas.html" target="_blank">View in browser</a>
+## Today's dataset
+
+We will use `dummy_volcanoes.csv`, the **small synthetic teaching dataset of selected volcanic eruptions** introduced in the Pandas slides. It contains **20 rows and six columns**, with dates ranging from 1980 to 2023. Its small size lets us inspect the results of our code and check whether they match what we expect.
+
+[Download the dataset](../Data/dummy_volcanoes.csv){download="dummy_volcanoes.csv"}
+
+### What does a row represent?
+
+Each row describes **one selected eruption**, rather than the complete history of a volcano. Each column records one property of that entry:
+
+| Column | Stored values | Meaning |
+|:---|:---|:---|
+| `Name` | Text | Name of the volcano associated with the eruption. |
+| `Country` | Text / category | Country in which the volcano is located. |
+| `Date` | Date written as `YYYY-MM-DD` | Date assigned to the eruption in this teaching dataset. |
+| `VEI` | Integer | Volcanic Explosivity Index: an ordered class describing eruption explosivity. |
+| `Latitude` | Decimal number | Latitude in degrees; positive values are north of the equator and negative values are south. |
+| `Longitude` | Decimal number | Longitude in degrees; positive values are east of Greenwich and negative values are west. |
+
+The first five rows, also shown in the slides, give us a preview:
+
+| Name | Country | Date | VEI | Latitude | Longitude |
+|:---|:---|:---|---:|---:|---:|
+| St. Helens | USA | 1980-05-18 | 5 | 46.1914 | -122.1956 |
+| Pinatubo | Philippines | 1991-04-02 | 6 | 15.1501 | 120.3465 |
+| El Chichón | Mexico | 1982-03-28 | 5 | 17.3559 | -93.2233 |
+| Galunggung | Indonesia | 1982-04-05 | 4 | -7.2567 | 108.0771 |
+| Nevado del Ruiz | Colombia | 1985-11-13 | 3 | 4.895 | -75.322 |
+
+### What is the VEI?
+
+The **Volcanic Explosivity Index (VEI)** classifies the size of explosive volcanic eruptions on a scale from **0 to 8**. It uses the volume of erupted **tephra**—ash and other rock fragments ejected into the air—together with eruption-column height and observations of the eruption ([USGS explanation](https://www.usgs.gov/observatories/yvo/news/volcanic-explosivity-index-a-tool-comparing-sizes-explosive-volcanic)).
+
+The scale is **logarithmic**: from VEI 2 upwards, each increase of one class corresponds to a tenfold increase in the erupted-volume thresholds. For example, VEI 4 covers approximately 0.1–1 km³ of tephra, while VEI 5 covers approximately 1–10 km³. The lowest classes do not follow exactly the same tenfold spacing.
+
+![The Volcanic Explosivity Index, showing erupted tephra volumes and example eruptions. Figure reproduced from the class slides; graphic: AFP, based on USGS/Newhall and Self (1982). The Tonga estimate shown is explicitly preliminary.](../slides/img/vei.jpeg){#fig-overview-vei width="100%"}
+
+For our dataset, remember that **VEI describes an eruption, not a permanent property of a volcano**. Mount St. Helens, for example, appears at several VEI classes in the figure because it has produced eruptions of different sizes. Since VEI is a class rather than a directly measured volume, a VEI 6 eruption is not simply “twice as large” as a VEI 3 eruption.
+

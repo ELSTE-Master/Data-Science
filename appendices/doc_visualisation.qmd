@@ -1,0 +1,709 @@
+---
+title: "Matplotlib and Seaborn"
+lang: en
+execute:
+  eval: false
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    number-sections: false
+    code-annotations: hover
+---
+
+This reference explains the Matplotlib and Seaborn tools used in classes 1–4. Each entry gives a purpose, the arguments most useful in this course, an example, and a practical note. Follow **Official documentation** for the complete API.
+
+Examples use the course datasets: `df` is the eruption table, `df_traces` the geochemical table, `reading` the reading-score table, and `df_icecover` the lake table. Samples such as `dietA` and `dietB` have already been selected. Variables such as `data`, `ax`, and `mod1` refer to the array, axes, or fitted model described in the lesson. Snippets illustrate individual operations rather than forming a script to run from top to bottom.
+
+Import `matplotlib.pyplot as plt` and `seaborn as sns`. With the axes interface, create `fig, ax = plt.subplots()`. Functions such as `plt.plot()` act on the current axes; `ax.plot()` acts on the axes you specify.
+
+## `plt.subplots()` {#plotting-plt-subplots}
+
+**Also used as:** `subplots`.
+
+**Purpose:** Create a figure and one or more plotting axes.
+
+**Main arguments:** `nrows`, `ncols`: subplot arrangement; `figsize`: width and height in inches.
+
+**Example:**
+
+```python
+fig, ax = plt.subplots(figsize=(6, 4))
+```
+
+**Remember:** Multiple subplots return a collection of axes.
+
+[Official documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html)
+
+## `plt.figure()` {#plotting-plt-figure}
+
+**Purpose:** Create or activate a figure.
+
+**Main arguments:** `figsize`: width and height in inches.
+
+**Example:**
+
+```python
+plt.figure(figsize=(6, 4))
+```
+
+**Remember:** For explicit control of axes, use `subplots()`.
+
+[Official documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.figure.html)
+
+## `ax.plot()` {#plotting-ax-plot}
+
+**Also used as:** `plt.plot`.
+
+**Purpose:** Draw connected points or lines.
+
+**Main arguments:** `x`, `y`: coordinates; `color`, `linewidth`, `label`: appearance.
+
+**Example:**
+
+```python
+ax.plot(years, prediction, label='Model')
+```
+
+**Remember:** A line implies an ordering of the points.
+
+[Official documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.plot.html)
+
+## `ax.scatter()` {#plotting-ax-scatter}
+
+**Also used as:** `plt.scatter`.
+
+**Purpose:** Draw individual observations.
+
+**Main arguments:** `x`, `y`: coordinates; `c` or `color`: colours; `s`: marker area; `alpha`: opacity.
+
+**Example:**
+
+```python
+ax.scatter(reading['age'], reading['score'], alpha=0.7)
+```
+
+[Official documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.scatter.html)
+
+## `ax.boxplot()` {#plotting-ax-boxplot}
+
+**Also used as:** `plt.boxplot`.
+
+**Purpose:** Summarise distributions using boxes, whiskers and optional outliers.
+
+**Main arguments:** `x`: one or more samples; `tick_labels`: group labels; `showfliers`: display outlier markers.
+
+**Example:**
+
+```python
+ax.boxplot([dietA, dietB], tick_labels=['A', 'B'])
+```
+
+**Remember:** Whiskers are not generally the minimum and maximum; hiding markers does not remove observations.
+
+[Official documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.boxplot.html)
+
+## `ax.legend()` {#plotting-ax-legend}
+
+**Also used as:** `plt.legend`.
+
+**Purpose:** Display labels attached to plotted objects.
+
+**Main arguments:** `loc`: placement; `frameon`: show a frame.
+
+**Example:**
+
+```python
+ax.legend(frameon=False)
+```
+
+**Remember:** Give plotted objects a `label` first.
+
+[Official documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.legend.html)
+
+## `ax.grid()` {#plotting-ax-grid}
+
+**Also used as:** `plt.grid`.
+
+**Purpose:** Show a reference grid.
+
+**Main arguments:** `visible`: show or hide; `axis`: x, y or both.
+
+**Example:**
+
+```python
+ax.grid(True)
+```
+
+**Remember:** Use a restrained grid so it supports the data.
+
+[Official documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.grid.html)
+
+## `ax.axvline()` {#plotting-ax-axvline}
+
+**Also used as:** `plt.axvline`.
+
+**Purpose:** Draw a vertical reference line.
+
+**Main arguments:** `x`: horizontal position; `color`, `linestyle`: appearance.
+
+**Example:**
+
+```python
+ax.axvline(df_traces['Zr'].mean(), color='red', linestyle=':')
+```
+
+[Official documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.axvline.html)
+
+## `ax.axhline()` {#plotting-ax-axhline}
+
+**Also used as:** `plt.axhline`.
+
+**Purpose:** Draw a horizontal reference line.
+
+**Main arguments:** `y`: vertical position; `color`, `linestyle`: appearance.
+
+**Example:**
+
+```python
+ax.axhline(0, color='grey', linestyle='--')
+```
+
+**Remember:** A zero line is helpful in a residual plot.
+
+[Official documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.axhline.html)
+
+## `ax.set_title()` {#plotting-ax-set-title}
+
+**Also used as:** `plt.title`.
+
+**Purpose:** Set an axes title.
+
+**Main arguments:** `label`: title text.
+
+**Example:**
+
+```python
+ax.set_title('Rubidium and strontium')
+```
+
+[Official documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_title.html)
+
+## `ax.set_xlabel()` {#plotting-ax-set-xlabel}
+
+**Also used as:** `plt.xlabel`.
+
+**Purpose:** Set the horizontal-axis label.
+
+**Main arguments:** `xlabel`: label text.
+
+**Example:**
+
+```python
+ax.set_xlabel('Rb concentration (ppm)')
+```
+
+**Remember:** Include units when they are known.
+
+[Official documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_xlabel.html)
+
+## `ax.set_ylabel()` {#plotting-ax-set-ylabel}
+
+**Also used as:** `plt.ylabel`.
+
+**Purpose:** Set the vertical-axis label.
+
+**Main arguments:** `ylabel`: label text.
+
+**Example:**
+
+```python
+ax.set_ylabel('Sr concentration (ppm)')
+```
+
+**Remember:** Include units when they are known.
+
+[Official documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_ylabel.html)
+
+## `ax.set_xlim()` {#plotting-ax-set-xlim}
+
+**Purpose:** Set the displayed horizontal limits.
+
+**Main arguments:** `left`, `right`: lower and upper limits.
+
+**Example:**
+
+```python
+ax.set_xlim(0, 300)
+```
+
+**Remember:** Changing display limits does not filter the underlying data.
+
+[Official documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_xlim.html)
+
+## `ax.set_ylim()` {#plotting-ax-set-ylim}
+
+**Purpose:** Set the displayed vertical limits.
+
+**Main arguments:** `bottom`, `top`: lower and upper limits.
+
+**Example:**
+
+```python
+ax.set_ylim(0, 100)
+```
+
+**Remember:** A cropped axis can hide observations.
+
+[Official documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_ylim.html)
+
+## `ax.get_xlim()` {#plotting-ax-get-xlim}
+
+**Purpose:** Read the current horizontal-axis limits.
+
+**Main arguments:** No arguments are needed.
+
+**Example:**
+
+```python
+xmin, xmax = ax.get_xlim()
+```
+
+**Remember:** Returns the limits currently displayed.
+
+[Official documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.get_xlim.html)
+
+## `ax.text()` {#plotting-ax-text}
+
+**Also used as:** `plt.text`.
+
+**Purpose:** Place text at a specified location.
+
+**Main arguments:** `x`, `y`: position; `s`: text; `transform`: coordinate system.
+
+**Example:**
+
+```python
+ax.text(0.05, 0.95, 'Sample', transform=ax.transAxes)
+```
+
+**Remember:** Axes coordinates run from 0 to 1 regardless of the plotted units.
+
+[Official documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.text.html)
+
+## `ax.tick_params()` {#plotting-ax-tick-params}
+
+**Also used as:** `plt.tick_params`.
+
+**Purpose:** Change ticks and their labels.
+
+**Main arguments:** `axis`: x, y or both; `labelcolor`: label colour; `labelsize`: size.
+
+**Example:**
+
+```python
+ax.tick_params(axis='y', labelcolor='blue')
+```
+
+[Official documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.tick_params.html)
+
+## `ax.twinx()` {#plotting-ax-twinx}
+
+**Also used as:** `plt.twinx`.
+
+**Purpose:** Create a second vertical axis sharing the horizontal axis.
+
+**Main arguments:** No arguments are needed.
+
+**Example:**
+
+```python
+ax2 = ax.twinx()
+```
+
+**Remember:** Make the two scales and their units explicit.
+
+[Official documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.twinx.html)
+
+## `ax.add_patch()` {#plotting-ax-add-patch}
+
+**Purpose:** Add a shape, such as an arrow, to the axes.
+
+**Main arguments:** `p`: a Matplotlib patch object.
+
+**Example:**
+
+```python
+ax.add_patch(arrow)
+```
+
+**Remember:** Used by the course’s percentile illustrations.
+
+[Official documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.add_patch.html)
+
+## `plt.xticks()` {#plotting-plt-xticks}
+
+**Purpose:** Set horizontal tick positions and labels.
+
+**Main arguments:** `ticks`: locations; `labels`: corresponding text.
+
+**Example:**
+
+```python
+plt.xticks([1, 2], ['A', 'B'])
+```
+
+[Official documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.xticks.html)
+
+## `fig.savefig()` {#plotting-fig-savefig}
+
+**Also used as:** `plt.savefig`.
+
+**Purpose:** Save a figure to an image file.
+
+**Main arguments:** `fname`: path; `dpi`: image resolution; `transparent`: transparent background.
+
+**Example:**
+
+```python
+fig.savefig('figure.png', dpi=150, transparent=True)
+```
+
+**Remember:** Save before closing the figure.
+
+[Official documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.savefig.html)
+
+## `fig.tight_layout()` {#plotting-fig-tight-layout}
+
+**Also used as:** `plt.tight_layout`.
+
+**Purpose:** Adjust spacing to reduce overlap of titles and labels.
+
+**Main arguments:** `pad`: surrounding padding.
+
+**Example:**
+
+```python
+fig.tight_layout()
+```
+
+**Remember:** Review the saved figure as well.
+
+[Official documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.tight_layout.html)
+
+## `plt.show()` {#plotting-plt-show}
+
+**Purpose:** Display the current figures.
+
+**Main arguments:** Usually no arguments are needed.
+
+**Example:**
+
+```python
+plt.show()
+```
+
+[Official documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.show.html)
+
+## `plt.close()` {#plotting-plt-close}
+
+**Purpose:** Close a figure to release resources.
+
+**Main arguments:** `fig`: figure object, identifier, or `"all"`.
+
+**Example:**
+
+```python
+plt.close(fig)
+```
+
+[Official documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.close.html)
+
+## `plt.rcParams.update()` {#plotting-plt-rcparams-update}
+
+**Purpose:** Change default plotting settings.
+
+**Main arguments:** Pass a dictionary of Matplotlib setting names and values.
+
+**Example:**
+
+```python
+plt.rcParams.update({'figure.facecolor': (0, 0, 0, 0)})
+```
+
+**Remember:** These settings affect subsequent plots in the current session.
+
+[Official documentation](https://matplotlib.org/stable/api/matplotlib_configuration_api.html)
+
+## `FancyArrowPatch()` {#plotting-fancyarrowpatch}
+
+**Purpose:** Construct an arrow between two positions.
+
+**Main arguments:** `posA`, `posB`: endpoints; `arrowstyle`: shape; `mutation_scale`: arrowhead size.
+
+**Example:**
+
+```python
+arrow = FancyArrowPatch((0, 0), (1, 1), arrowstyle="-|>", mutation_scale=15)
+```
+
+**Remember:** Add the resulting object with `ax.add_patch()`.
+
+[Official documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.patches.FancyArrowPatch.html)
+
+## `patch.get_height()` {#plotting-patch-get-height}
+
+**Purpose:** Read the height of a plotted bar.
+
+**Main arguments:** No arguments are needed.
+
+**Example:**
+
+```python
+value = patch.get_height()
+```
+
+**Remember:** Used when calculating the total area of a histogram.
+
+[Official documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.patches.Rectangle.html#matplotlib.patches.Rectangle.get_height)
+
+## `patch.get_width()` {#plotting-patch-get-width}
+
+**Purpose:** Read the width of a plotted bar.
+
+**Main arguments:** No arguments are needed.
+
+**Example:**
+
+```python
+value = patch.get_width()
+```
+
+**Remember:** Used when calculating the total area of a histogram.
+
+[Official documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.patches.Rectangle.html#matplotlib.patches.Rectangle.get_width)
+
+## `sns.scatterplot()` {#plotting-sns-scatterplot}
+
+**Purpose:** Plot observations and optionally encode groups or another variable.
+
+**Main arguments:** `data`: table; `x`, `y`: columns; `hue`: colours; `size`: marker sizes; `ax`: target axes.
+
+**Example:**
+
+```python
+sns.scatterplot(data=df_traces, x='Rb', y='Sr', hue='Epoch', ax=ax)
+```
+
+[Official documentation](https://seaborn.pydata.org/generated/seaborn.scatterplot.html)
+
+## `sns.histplot()` {#plotting-sns-histplot}
+
+**Also used as:** `sns.histplots`.
+
+**Purpose:** Represent a distribution using bins.
+
+**Main arguments:** `data`, `x`: values; `bins` or `binwidth`: intervals; `stat`: count, density or another scaling.
+
+**Example:**
+
+```python
+sns.histplot(data=df_traces, x='Zr', binwidth=50, ax=ax)
+```
+
+**Remember:** Bin choices affect the appearance; the function name is `histplot`, without a final s.
+
+[Official documentation](https://seaborn.pydata.org/generated/seaborn.histplot.html)
+
+## `sns.ecdfplot()` {#plotting-sns-ecdfplot}
+
+**Purpose:** Show the fraction of observations at or below each value.
+
+**Main arguments:** `data`, `x`: observations; `hue`: optional grouping.
+
+**Example:**
+
+```python
+sns.ecdfplot(data=df_traces, x='Zr', ax=ax)
+```
+
+**Remember:** Does not require choosing histogram bins.
+
+[Official documentation](https://seaborn.pydata.org/generated/seaborn.ecdfplot.html)
+
+## `sns.boxplot()` {#plotting-sns-boxplot}
+
+**Purpose:** Compare distributions with boxes and whiskers.
+
+**Main arguments:** `data`: table; `x`: grouping column; `y`: measured column; `hue`: optional grouping.
+
+**Example:**
+
+```python
+sns.boxplot(data=df_traces, x='Epoch', y='Zr', ax=ax)
+```
+
+**Remember:** Check group sizes and raw observations too.
+
+[Official documentation](https://seaborn.pydata.org/generated/seaborn.boxplot.html)
+
+## `sns.violinplot()` {#plotting-sns-violinplot}
+
+**Purpose:** Show a smoothed distribution for each group.
+
+**Main arguments:** `data`, `x`, `y`: variables; `cut`: extension beyond observed extremes.
+
+**Example:**
+
+```python
+sns.violinplot(data=df_traces, x='Epoch', y='Zr', cut=0, ax=ax)
+```
+
+**Remember:** Smoothing can suggest unsupported shapes, especially in small samples.
+
+[Official documentation](https://seaborn.pydata.org/generated/seaborn.violinplot.html)
+
+## `sns.boxenplot()` {#plotting-sns-boxenplot}
+
+**Purpose:** Display additional quantiles, especially towards the tails.
+
+**Main arguments:** `data`, `x`, `y`: variables.
+
+**Example:**
+
+```python
+sns.boxenplot(data=df_traces, x='Epoch', y='Zr', ax=ax)
+```
+
+**Remember:** Most useful for reasonably large samples.
+
+[Official documentation](https://seaborn.pydata.org/generated/seaborn.boxenplot.html)
+
+## `sns.pairplot()` {#plotting-sns-pairplot}
+
+**Purpose:** Create pairwise plots for several variables.
+
+**Main arguments:** `data`: table; `vars`: columns; `hue`: grouping variable.
+
+**Example:**
+
+```python
+sns.pairplot(df_traces, vars=['Rb', 'Sr', 'Zr'], hue='Epoch')
+```
+
+**Remember:** Creates its own figure; do not pass a single `ax`.
+
+[Official documentation](https://seaborn.pydata.org/generated/seaborn.pairplot.html)
+
+## `sns.heatmap()` {#plotting-sns-heatmap}
+
+**Purpose:** Represent a matrix using colours.
+
+**Main arguments:** `data`: matrix; `mask`: cells to hide; `cmap`: colour map; `vmin`, `vmax`: colour limits.
+
+**Example:**
+
+```python
+sns.heatmap(df_traces[['Rb', 'Sr']].corr(), vmin=-1, vmax=1, ax=ax)
+```
+
+**Remember:** Use a consistent scale when comparing correlation matrices.
+
+[Official documentation](https://seaborn.pydata.org/generated/seaborn.heatmap.html)
+
+## `sns.diverging_palette()` {#plotting-sns-diverging-palette}
+
+**Purpose:** Create a colour palette with two ends and a centre.
+
+**Main arguments:** `h_neg`, `h_pos`: end hues; `as_cmap=True`: return a colour map.
+
+**Example:**
+
+```python
+cmap = sns.diverging_palette(230, 20, as_cmap=True)
+```
+
+**Remember:** Useful for quantities with meaningful positive and negative values.
+
+[Official documentation](https://seaborn.pydata.org/generated/seaborn.diverging_palette.html)
+
+## `sns.regplot()` {#plotting-sns-regplot}
+
+**Purpose:** Show observations with a fitted regression line.
+
+**Main arguments:** `data`, `x`, `y`: variables; `ci`: confidence-interval level or None.
+
+**Example:**
+
+```python
+sns.regplot(data=df_traces, x='Rb', y='Sr', ci=95, ax=ax)
+```
+
+**Remember:** A visual regression summary does not replace checking model assumptions.
+
+[Official documentation](https://seaborn.pydata.org/generated/seaborn.regplot.html)
+
+## `sns.residplot()` {#plotting-sns-residplot}
+
+**Purpose:** Plot residuals after fitting a regression.
+
+**Main arguments:** `data`, `x`, `y`: variables; `lowess`: optional smoothed trend.
+
+**Example:**
+
+```python
+sns.residplot(data=df_traces, x='Rb', y='Sr', ax=ax)
+```
+
+**Remember:** Look for structure, changing spread and unusual observations.
+
+[Official documentation](https://seaborn.pydata.org/generated/seaborn.residplot.html)
+
+## `corrMatrix()` {#plotting-corrmatrix}
+
+**Purpose:** Draw the course’s triangular correlation heatmap.
+
+**Main arguments:** `d`: DataFrame containing numerical columns.
+
+**Example:**
+
+```python
+corrMatrix(df_traces[["Rb", "Sr", "Zr"]])
+```
+
+**Remember:** This helper is defined in the lesson, not supplied by a library. Run its definition before calling it.
+
+This is a helper written for this course. Its implementation is shown in [class 2](../class2/day2-4_bivariate.qmd).
+
+## `plotArrow()` {#plotting-plotarrow}
+
+**Purpose:** Draw a percentile marker in the course’s distribution illustration.
+
+**Main arguments:** `ax`: target axes; `data`: sample; `pct`: percentile value; `c`: colour.
+
+**Example:**
+
+```python
+plotArrow(ax, data, 25, "orange")
+```
+
+**Remember:** This course helper must be defined first. Its arguments follow the definition shown in the lesson.
+
+This is a helper written for this course. Its implementation is shown in [class 2](../class2/day2-3_univariate.qmd).
+
+## `sns.set_context()` {#plotting-sns-set-context}
+
+**Purpose:** Adjust plotting sizes for a notebook, paper, talk or poster.
+
+**Main arguments:** `context`: preset; `font_scale`: additional text scaling.
+
+**Example:**
+
+```python
+sns.set_context('talk')
+```
+
+**Remember:** Affects subsequent Seaborn/Matplotlib figures in the session.
+
+[Official documentation](https://seaborn.pydata.org/generated/seaborn.set_context.html)
+

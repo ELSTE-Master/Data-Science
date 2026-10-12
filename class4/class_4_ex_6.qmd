@@ -42,6 +42,9 @@ knitr::include_graphics("../class4/img/lakeice.jpg")
 
 
 You can load the data as follows:
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `head` [(doc)](../appendices/doc_pandas.qmd#pandas-head).
+
 ```{python, echo=TRUE}
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -98,6 +101,9 @@ Select the observations corresponding to each lake using boolean indexing and pl
 
 ::: { .solution exercise="ex_1" }
 
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `ax.plot` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-plot); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `ax.legend` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-legend); `plt.xticks` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-xticks); `ax.grid` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-grid); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
+
 ```python
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -138,6 +144,9 @@ $$
 \text{IceCover}_i = \beta_0 + \beta_1 \text{Year}_i + \epsilon_i
 $$
 He estimates the model and obtain the following results:
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `model.fit` [(doc)](../appendices/doc_statsmodels.qmd#models-model-fit); `smf.ols` [(doc)](../appendices/doc_statsmodels.qmd#models-smf-ols); `print` [(doc)](../appendices/doc_python.qmd#python-print); `model.summary` [(doc)](../appendices/doc_statsmodels.qmd#models-model-summary).
+
 ```{python, echo=TRUE}
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -212,6 +221,9 @@ $$
 More precisely, she wants to test if the ice duration is reducing over the years, while including an intercept for each lake. 
 
 She estimates the model and obtain the following results:
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `model.fit` [(doc)](../appendices/doc_statsmodels.qmd#models-model-fit); `smf.ols` [(doc)](../appendices/doc_statsmodels.qmd#models-smf-ols); `print` [(doc)](../appendices/doc_python.qmd#python-print); `model.summary` [(doc)](../appendices/doc_statsmodels.qmd#models-model-summary).
+
 ```{python, echo=TRUE}
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -278,12 +290,15 @@ plt.show()
 ## Hints
 
 ::: { .hint exercise="ex_2"}
-Use the method `predict` of the fitted model to obtain the predicted values for each lake over a range of years, and plot these predictions as lines on top of the scatter plot of the data points.
+Use the method `predict` [(doc)](../appendices/doc_statsmodels.qmd#models-model-predict) of the fitted model to obtain the predicted values for each lake over a range of years, and plot these predictions as lines on top of the scatter plot of the data points.
 :::
 
 ## Solution
 
 ::: { .solution exercise="ex_2" }
+
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `model.fit` [(doc)](../appendices/doc_statsmodels.qmd#models-model-fit); `smf.ols` [(doc)](../appendices/doc_statsmodels.qmd#models-smf-ols); `print` [(doc)](../appendices/doc_python.qmd#python-print); `model.summary` [(doc)](../appendices/doc_statsmodels.qmd#models-model-summary); `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `ax.scatter` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-scatter); `np.linspace` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-np-linspace); `min` [(doc)](../appendices/doc_pandas.qmd#pandas-min); `max` [(doc)](../appendices/doc_pandas.qmd#pandas-max); `model.predict` [(doc)](../appendices/doc_statsmodels.qmd#models-model-predict); `DataFrame` [(doc)](../appendices/doc_pandas.qmd#pandas-dataframe); `ax.plot` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-plot); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `ax.legend` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-legend); `ax.grid` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-grid); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
 
 ```python
 import pandas as pd
@@ -370,6 +385,9 @@ render_q_a_env(opts)
 
 ### Question 6
 She estimates the model and obtain the following results:
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `model.fit` [(doc)](../appendices/doc_statsmodels.qmd#models-model-fit); `smf.ols` [(doc)](../appendices/doc_statsmodels.qmd#models-smf-ols); `print` [(doc)](../appendices/doc_python.qmd#python-print); `model.summary` [(doc)](../appendices/doc_statsmodels.qmd#models-model-summary).
+
 ```{python, echo=TRUE}
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -522,12 +540,15 @@ plt.show()
 ## Hints
 
 ::: { .hint exercise="ex_3"}
-Use the method `predict` of the fitted model to obtain the predicted values for each lake over a range of years, and plot these predictions as lines on top of the scatter plot of the data points.
+Use the method `predict` [(doc)](../appendices/doc_statsmodels.qmd#models-model-predict) of the fitted model to obtain the predicted values for each lake over a range of years, and plot these predictions as lines on top of the scatter plot of the data points.
 :::
 
 ## Solution
 
 ::: { .solution exercise="ex_3" }
+
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `model.fit` [(doc)](../appendices/doc_statsmodels.qmd#models-model-fit); `smf.ols` [(doc)](../appendices/doc_statsmodels.qmd#models-smf-ols); `print` [(doc)](../appendices/doc_python.qmd#python-print); `model.summary` [(doc)](../appendices/doc_statsmodels.qmd#models-model-summary); `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `ax.scatter` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-scatter); `np.linspace` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-np-linspace); `min` [(doc)](../appendices/doc_pandas.qmd#pandas-min); `max` [(doc)](../appendices/doc_pandas.qmd#pandas-max); `model.predict` [(doc)](../appendices/doc_statsmodels.qmd#models-model-predict); `DataFrame` [(doc)](../appendices/doc_pandas.qmd#pandas-dataframe); `ax.plot` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-plot); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `ax.legend` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-legend); `ax.grid` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-grid); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
 
 ```python
 import pandas as pd
@@ -583,6 +604,9 @@ plt.show()
 ### Question 10
 
 A climatologist uses `mod3` to predict the ice duration in the year $2500$ for both lakes and obtains the following results:
+
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `model.fit` [(doc)](../appendices/doc_statsmodels.qmd#models-model-fit); `smf.ols` [(doc)](../appendices/doc_statsmodels.qmd#models-smf-ols); `astype` [(doc)](../appendices/doc_pandas.qmd#pandas-astype); `model.predict` [(doc)](../appendices/doc_statsmodels.qmd#models-model-predict); `DataFrame` [(doc)](../appendices/doc_pandas.qmd#pandas-dataframe); `Categorical` [(doc)](../appendices/doc_pandas.qmd#pandas-categorical); `print` [(doc)](../appendices/doc_python.qmd#python-print).
 
 ```{python, echo=TRUE}
 import pandas as pd
@@ -647,6 +671,9 @@ render_q_a_env(opts)
 
 ### Question 11
 Based on the AIC values, which model would you select among the three models fitted above?
+
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `model.fit` [(doc)](../appendices/doc_statsmodels.qmd#models-model-fit); `smf.ols` [(doc)](../appendices/doc_statsmodels.qmd#models-smf-ols); `DataFrame` [(doc)](../appendices/doc_pandas.qmd#pandas-dataframe); `model.aic` [(doc)](../appendices/doc_statsmodels.qmd#models-model-aic); `print` [(doc)](../appendices/doc_python.qmd#python-print).
 
 ```{python, echo=TRUE}
 import pandas as pd

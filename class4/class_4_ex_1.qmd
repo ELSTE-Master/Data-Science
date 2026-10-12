@@ -16,6 +16,9 @@ engine: knitr
 In this exercise, we will replicate the analysis of the `reading` dataset
 presented in the lectures slides. Our first step is to load the data . We can load the data as follows:
 
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv).
+
 ```{python, echo=TRUE}
 # Import data
 import pandas as pd
@@ -24,6 +27,9 @@ reading = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Scien
 
 
 We can now take a look at the data.
+
+**Function reference:** `print` [(doc)](../appendices/doc_python.qmd#python-print); `head` [(doc)](../appendices/doc_pandas.qmd#pandas-head).
+
 ```{python, echo=TRUE}
 # Import data
 n = 5
@@ -43,6 +49,9 @@ treatment = reading['score'][reading['group'] == 'Treatment']
 ## Representing the distribution of the score between groups
 
 Using these variables we can easily represent the conditional distribution of the score as follows:
+
+
+**Function reference:** `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `ax.boxplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-boxplot); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
 
 ```{python, echo=TRUE}
 import matplotlib.pyplot as plt
@@ -67,7 +76,10 @@ As suggested in slide 9, a possible model is given by:
 $$
 \text { Score }_i=\beta_0+\beta_1 \text { Group }_i+\beta_2 \text { Age }_i+\epsilon_i, \quad \epsilon_i \stackrel{i i d}{\sim} \mathcal{N}\left(0, \sigma^2\right)
 $$
-We will refer to this model as "Model 1". The parameters of this first model can be estimated using the function `smf.ols` as follows:
+We will refer to this model as "Model 1". The parameters of this first model can be estimated using the function `smf.ols` [(doc)](../appendices/doc_statsmodels.qmd#models-smf-ols) as follows:
+
+
+**Function reference:** `model.fit` [(doc)](../appendices/doc_statsmodels.qmd#models-model-fit); `smf.ols` [(doc)](../appendices/doc_statsmodels.qmd#models-smf-ols).
 
 ```{python, echo=TRUE}
 import statsmodels.formula.api as smf
@@ -78,6 +90,9 @@ mod1 = smf.ols('score ~ group + age', data=reading).fit()
 
 
 The summary of the fitted model can then be printed with:
+
+
+**Function reference:** `print` [(doc)](../appendices/doc_python.qmd#python-print); `model.summary` [(doc)](../appendices/doc_statsmodels.qmd#models-model-summary).
 
 ```{python}
 # Display the summary

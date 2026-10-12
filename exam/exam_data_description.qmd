@@ -6,7 +6,7 @@ format:
     code-line-numbers: true
     css: [../assets/webex.css]
     include-after-body: [../assets/webex.js]
-    embed-resources: true 
+    embed-resources: false
 jupyter: python3 
 ---
 
@@ -23,6 +23,9 @@ Acid rain has affected forests in northeastern North America by leaching essenti
 You are provided with a dataset containing measurements from sugar maple seedlings grown in these two watersheds: one treated with calcium-rich water (`W1`) and one left untreated (`Reference`). Your task is to analyze the data to determine whether calcium treatment has a significant effect on seedling health, focusing on leaf area as a key indicator of growth and vitality, and to identify which variables are most strongly associated with leaf growth.
 
 You can load the dataset in your `Python` environment using the following code:
+
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `head` [(doc)](../appendices/doc_pandas.qmd#pandas-head).
 
 ```{python, eval=TRUE}
 import pandas as pd

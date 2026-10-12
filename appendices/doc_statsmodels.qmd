@@ -1,0 +1,249 @@
+---
+title: "Statsmodels"
+lang: en
+execute:
+  eval: false
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    number-sections: false
+    code-annotations: hover
+---
+
+This reference explains the Statsmodels tools used in classes 1–4. Each entry gives a purpose, the arguments most useful in this course, an example, and a practical note. Follow **Official documentation** for the complete API.
+
+Examples use the course datasets: `df` is the eruption table, `df_traces` the geochemical table, `reading` the reading-score table, and `df_icecover` the lake table. Samples such as `dietA` and `dietB` have already been selected. Variables such as `data`, `ax`, and `mod1` refer to the array, axes, or fitted model described in the lesson. Snippets illustrate individual operations rather than forming a script to run from top to bottom.
+
+Import `statsmodels.formula.api as smf`. Define a model with `smf.ols(...)`, fit it, and inspect its residuals before interpreting coefficients or making predictions.
+
+## `smf.ols()` {#models-smf-ols}
+
+**Purpose:** Define an ordinary least-squares linear model using a formula.
+
+**Main arguments:** `formula`: response to the left of `~`, predictors to the right; `data`: DataFrame.
+
+**Example:**
+
+```python
+model = smf.ols('score ~ group + age', data=reading)
+```
+
+**Remember:** Use `+` for additive effects, `:` for an interaction, and `*` for main effects plus interaction.
+
+[Official documentation](https://www.statsmodels.org/stable/generated/statsmodels.formula.api.ols.html)
+
+## `model.fit()` {#models-model-fit}
+
+**Also used as:** `fit`.
+
+**Purpose:** Estimate the coefficients of a defined model.
+
+**Main arguments:** Usually no arguments are needed for the course’s OLS models.
+
+**Example:**
+
+```python
+mod1 = model.fit()
+```
+
+**Remember:** Fitting estimates parameters; it does not establish that the model is suitable.
+
+[Official documentation](https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.OLS.fit.html)
+
+## `model.summary()` {#models-model-summary}
+
+**Also used as:** `summary`.
+
+**Purpose:** Display coefficients, uncertainty and model statistics.
+
+**Main arguments:** Usually no arguments are needed.
+
+**Example:**
+
+```python
+print(mod1.summary())
+```
+
+**Remember:** Read coefficients in context and inspect residuals alongside the summary.
+
+[Official documentation](https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.RegressionResults.summary.html)
+
+## `model.predict()` {#models-model-predict}
+
+**Also used as:** `predict`.
+
+**Purpose:** Predict the fitted mean response for new predictor values.
+
+**Main arguments:** `exog`: DataFrame with the predictor names used in the formula.
+
+**Example:**
+
+```python
+predicted = mod1.predict(pd.DataFrame({'age': [8], 'group': ['Control']}))
+```
+
+**Remember:** Predictions outside the observed range are extrapolations.
+
+[Official documentation](https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.RegressionResults.predict.html)
+
+## `model.get_prediction()` {#models-model-get-prediction}
+
+**Also used as:** `get_prediction`.
+
+**Purpose:** Compute predictions together with uncertainty information.
+
+**Main arguments:** `exog`: new predictor values as a DataFrame.
+
+**Example:**
+
+```python
+prediction = mod3.get_prediction(data_control)
+```
+
+**Remember:** Use `summary_frame()` to obtain a table of means and intervals.
+
+[Official documentation](https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.RegressionResults.get_prediction.html)
+
+## `model.summary_frame()` {#models-model-summary-frame}
+
+**Also used as:** `summary_frame`.
+
+**Purpose:** Return predictions and interval bounds as a table.
+
+**Main arguments:** `alpha`: excluded probability; 0.05 produces 95% intervals.
+
+**Example:**
+
+```python
+table = prediction.summary_frame(alpha=0.05)
+```
+
+**Remember:** `mean_ci_*` describes the mean response; `obs_ci_*` describes a new observation.
+
+[Official documentation](https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.PredictionResults.summary_frame.html)
+
+## `model.params` {#models-model-params}
+
+**Also used as:** `params`.
+
+**Purpose:** Read the fitted coefficients.
+
+**Main arguments:** This is an attribute: do not add parentheses.
+
+**Example:**
+
+```python
+intercept = mod1.params['Intercept']
+```
+
+**Remember:** Names depend on the formula and the reference category.
+
+[Official documentation](https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.RegressionResults.html)
+
+## `model.fittedvalues` {#models-model-fittedvalues}
+
+**Also used as:** `fittedvalues`.
+
+**Purpose:** Read the model’s fitted mean response for each observation.
+
+**Main arguments:** This is an attribute: do not add parentheses.
+
+**Example:**
+
+```python
+predicted = mod1.fittedvalues
+```
+
+**Remember:** These predictions correspond to the observations used for fitting.
+
+[Official documentation](https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.RegressionResults.html)
+
+## `model.resid` {#models-model-resid}
+
+**Also used as:** `resid`.
+
+**Purpose:** Read observed minus fitted values.
+
+**Main arguments:** This is an attribute: do not add parentheses.
+
+**Example:**
+
+```python
+residuals = mod1.resid
+```
+
+**Remember:** Look for trends, unequal spread and unusual observations.
+
+[Official documentation](https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.RegressionResults.html)
+
+## `model.aic` {#models-model-aic}
+
+**Also used as:** `aic`.
+
+**Purpose:** Read Akaike’s information criterion.
+
+**Main arguments:** This is an attribute: do not add parentheses.
+
+**Example:**
+
+```python
+aic = mod1.aic
+```
+
+**Remember:** Compare models fitted to the same response and observations; lower values favour the trade-off between fit and complexity.
+
+[Official documentation](https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.RegressionResults.html)
+
+## `model.rsquared` {#models-model-rsquared}
+
+**Also used as:** `rsquared`.
+
+**Purpose:** Read the proportion of response variation explained by the fitted model.
+
+**Main arguments:** This is an attribute: do not add parentheses.
+
+**Example:**
+
+```python
+r_squared = mod1.rsquared
+```
+
+**Remember:** A high R-squared does not establish causation or validate assumptions.
+
+[Official documentation](https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.RegressionResults.html)
+
+## `anova_oneway()` {#models-anova-oneway}
+
+**Purpose:** Compare independent group means using a classical or Welch one-way ANOVA.
+
+**Main arguments:** `data`: groups; `use_var="unequal"`: Welch-style unequal-variance test.
+
+**Example:**
+
+```python
+from statsmodels.stats.oneway import anova_oneway
+result = anova_oneway([dietA, dietB, dietC], use_var='unequal')
+```
+
+**Remember:** Specify the variance assumption deliberately.
+
+[Official documentation](https://www.statsmodels.org/stable/generated/statsmodels.stats.oneway.anova_oneway.html)
+
+## `wls_prediction_std()` {#models-wls-prediction-std}
+
+**Purpose:** Calculate prediction uncertainty from a fitted least-squares model.
+
+**Main arguments:** `res`: fitted results; `exog`: design matrix matching the model; `alpha`: interval level.
+
+**Example:**
+
+```python
+from statsmodels.sandbox.regression.predstd import wls_prediction_std
+se, lower, upper = wls_prediction_std(mod1)
+```
+
+**Remember:** Imported in the course; `get_prediction().summary_frame()` is the clearer formula-based workflow.
+
+[Official documentation](https://github.com/statsmodels/statsmodels/blob/main/statsmodels/sandbox/regression/predstd.py)
+

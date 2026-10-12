@@ -1,0 +1,54 @@
+<script>
+(function () {
+  function boot() {
+    if (!window.Reveal) return setTimeout(boot, 50);
+
+    function update() {
+      const slides = Array.from(document.querySelectorAll(".reveal .slides section"))
+        .filter(s => !s.classList.contains("stack"))
+        // ignore hidden slides
+        .filter(s => s.getAttribute("data-visibility") !== "hidden");
+
+      const groups = new Map();
+
+      for (const slide of slides) {
+        const h = slide.querySelector("h1, h2, h3");
+        if (!h) continue;
+        const t = h.textContent.trim();
+        if (!groups.has(t)) groups.set(t, []);
+        groups.get(t).push(h);
+      }
+
+      for (const [title, hs] of groups.entries()) {
+        if (hs.length < 2) continue;
+        hs.forEach((h, i) => {
+          h.textContent = `${title} (${i + 1}/${hs.length})`;
+        });
+      }
+    }
+
+    function openLinksInNewTab() {
+      document.querySelectorAll(".reveal .slides a[href]").forEach(link => {
+        const href = link.getAttribute("href");
+
+        // Keep in-slide navigation, annotations and image lightboxes local.
+        if (!href || href.startsWith("#") || link.classList.contains("lightbox")) {
+          return;
+        }
+
+        link.setAttribute("target", "_blank");
+        link.setAttribute("rel", "noopener noreferrer");
+      });
+    }
+
+    Reveal.on("ready", () => {
+      update();
+      openLinksInNewTab();
+    });
+    update();
+    openLinksInNewTab();
+  }
+
+  boot();
+})();
+</script>

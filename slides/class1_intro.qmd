@@ -1,7 +1,7 @@
 ---
 title: "ELSTE Data science"
 subtitle: "Some concept of Python coding and statistical inference"
-date: "October 15, 2025"
+date: "October 14, 2026"
 author:
   - name: Sébastien Biass
     id: sb
@@ -21,8 +21,8 @@ author:
 ## Get ready
 
 - Go to [https://elste-master.github.io/Data-Science/](https://elste-master.github.io/Data-Science/)
-  - **Download slides:** Class 1 > [Overview]{.bg}
-  - **Setup VS Code:** Appendices > [Setup VS Code]{.bg}
+  - **Download slides:** Class 1 > [Overview]{.alert}
+  - **Setup VS Code:** Appendices > [Setup VS Code]{.alert}
 
 <span style="font-size: 0.5em;"></span>
 
@@ -38,8 +38,8 @@ author:
 
 - **Landsat:**
   - Download: 53 images/day (2001) - 220’000 images/day (2017)
-  - 5 million images of the Earth surface → [> 5 PB]{.bg}
-- **ESA Sentinel 1 & 2** → [4.6TB /daily!]{.bg}
+  - 5 million images of the Earth surface → [> 5 PB]{.alert}
+- **ESA Sentinel 1 & 2** → [4.6TB /daily!]{.alert}
 
 
 
@@ -55,8 +55,8 @@ author:
 ::: {.fragment}
 **How do we make sense of it all?**
 
-- [Scientific coding]{.bg} → gateway to scientific data analysis
-- [Data science]{.bg} → extracting meaningful infomation and insights from data
+- [Scientific coding]{.alert} → gateway to scientific data analysis
+- [Data science]{.alert} → extracting meaningful infomation and insights from data
 :::
 :::
 ::: {.column width="50%"}
@@ -64,37 +64,36 @@ author:
 :::
 ::::
 
-## What is [data science]{.bg}
+## What is [data science]{.alert}
 
 ### Wikipedia
 
-> Data science is an [interdisciplinary academic field]{.bg} that uses statistics, scientific computing, scientific methods, processing, scientific visualization, algorithms and systems to extract or extrapolate knowledge from [...] data.
+> Data science is an [interdisciplinary academic field]{.alert} that uses statistics, scientific computing, scientific methods, processing, scientific visualization, algorithms and systems to extract or extrapolate knowledge from [...] data.
 
 ::: {.fragment}
 
 ### National Institutes of Standards and Technology
 
-> The field that combines domain expertise, programming skills, and knowledge of mathematics and statistics to [extract meaningful insights from data]{.bg}.
+> The field that combines domain expertise, programming skills, and knowledge of mathematics and statistics to [extract meaningful insights from data]{.alert}.
 :::
 
 ## Class schedule
 
 - **Fall part at UNIGE**: 6 $\times$ 3-h long sessions
-- **Assistants**: Simon Thivet, Filippo Salmaso, Lionel Voirol 
+- **Assistants**: Sofia Hernandez Castro, Henry Hoult
 - **Format**: Theory, live coding and exercises
 
-### October 15 and 22
+### October 14 and 21
 
-- **Seb** → Intro to data science libraries for [Python]{.bg} → `Pandas`, `seaborn`
+- **Seb** → Exploratory data analysis
 
-### October 29 and November 5
+### October 28, November 4 and 11
 
-- **Stéphane** → Intro to statistical method for [data inference]{.bg}
+- **Stéphane** → Inference
 
-### November 12 and 19
+### November 18
 
-- Flexible as a function of how we progress
-- Exam format to be defined
+- Question session + exam
 
 ## Class objectives
 
@@ -108,21 +107,21 @@ author:
 ### Objectives
 
 - **Not** to make you and expert developer / statistician **but**
-  - To help you gain the [confidence]{.bg} that you are [totally capable of doing it]{.bg}
-  - To make you realise that [what you will get]{.bg} in terms of research capabilities is [worth the effort]{.bg}!
+  - Motivate scientific reasoning
+  - Develop statistical thinking
 
 :::
 
 ## Get involved!!!
 
-**We want this class to be useful for [your research]{.bg}**!
+**We want this class to be useful for [your research]{.alert}**!
 
 <span style="font-size: 0.5em;"></span>
 
 Try to contextualise the course material to **your research**:
 
-- Do you already have your own [datasets]{.bg} you could bring to class?
-- Can you use the course to [formulate new research questions]{.bg}?
+- Do you already have your own [datasets]{.alert} you could bring to class?
+- Can you use the course to [formulate new research questions]{.alert}?
 - Do you know any open-access datasets relevant to your fields?
   - If not, can you find some for the next weeks?
 
@@ -133,7 +132,7 @@ Try to contextualise the course material to **your research**:
 
 ## Motivations
 
-- **Example**: A common - but unnecessarily complicated - workflow of [many specialised softwares]{.bg}
+- **Example**: A common - but unnecessarily complicated - workflow of [many specialised softwares]{.alert}
 
 ```{mermaid}
 %%{init: {"theme":"dark"}}%%
@@ -146,12 +145,12 @@ flowchart LR
 
 
 ::: {.fragment}
-- **Objective**: Integrate full research workflow in an environment [supporting all tasks]{.bg}
+- **Objective**: Integrate full research workflow in an environment [supporting all tasks]{.alert}
 
 ```{mermaid}
 flowchart LR
     B[Start]
-    B --> C["<img src='https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/community/logos/python-logo-only.png' width='20'>"]
+    B --> C["<img src='img/python.png' width='20'>"]
     C --> D[End]
 ```
 :::
@@ -235,14 +234,14 @@ flowchart LR
 ## Motivations
 ### Motivation 3: Visualisation
 
-**Example 1**: In volcanically-active regions, soil burial after explosive eruptions [capture more carbon that they emit]{.bg}.
+**Example 1**: In volcanically-active regions, soil burial after explosive eruptions [capture more carbon that they emit]{.alert}.
 
 ![](img/C_v2.png)
 
 ## Motivations
 ### Motivation 3: Visualisation
 
-**Example 2**: In Small Island States, [≥90% of population and GDP]{.bg} is exposed to volcanic hazards.
+**Example 2**: In Small Island States, [≥90% of population and GDP]{.alert} is exposed to volcanic hazards.
 
 ![](img/FigS07.png){width=90% fig-align="center"}
 
@@ -276,37 +275,36 @@ flowchart LR
 **High-level computing language**
 
 - Compiled → doesn't directly speak to the computer, but is *interpreted* by another language
-  - Usually slower, but much, much [easier to use]{.bg}!
+  - Usually slower, but much, much [easier to use]{.alert}!
 
 ::: {.fragment}
 **Modular**
 
-- Python is composed of a *core* of functions complemented by wide ecosystem of specialized packages for [specific tasks]{.bg}
-  - A [function]{.bg} is a bit of code to perform a **specific task**
-  - A [module]{.bg} is a collection of **functions**
-  - A [package]{.bg} is composed by multiple **modules**
+- Python is composed of a *core* of functions complemented by wide ecosystem of specialized packages for [specific tasks]{.alert}
+  - A [function]{.alert} is a bit of code to perform a **specific task**
+  - A [module]{.alert} is a collection of **functions**
+  - A [package]{.alert} is composed by multiple **modules**
 :::
 
 ## An example of packages, modules and functions
 
 In the code below, we first load the necessary packages and libraries:
 
-- `matplotlib` is the main **visualisation** [package]{.bg} used in Python
-- `pyplot` is a [module]{.bg} of `matplotlib` that provides easy-to-use functions for **plotting** data
-- `figure` is a [function]{.bg} of `pyplot` and is the main function to prepare a plot
+- `matplotlib` is the main **visualisation** [package]{.alert} used in Python
+- `pyplot` is a [module]{.alert} of `matplotlib` that provides easy-to-use functions for **plotting** data
+- `figure` is a [function]{.alert} of `pyplot` and is the main function to prepare a plot
 
 ```{python}
-# | eval: False
-# | echo: True
-
+#| eval: false
+#| echo: true
 # Import the packages and modules
 from matplotlib import pyplot as plt 
 # Set up a figure for plotting
 plt.figure(...) 
 
 ```
-<!-- 1. Load the `pyplot` [module]{.bg} from the `matplotlib` [package]{.bg} 
-2. The `pyplot` module provides the `figure` [function]{.bg} -->
+<!-- 1. Load the `pyplot` [module]{.alert} from the `matplotlib` [package]{.alert} 
+2. The `pyplot` module provides the `figure` [function]{.alert} -->
 
 ## How to use Python 
 
@@ -322,9 +320,9 @@ plt.figure(...)
 - All data stored on your own computer
 
 ::: {.callout-important}
-## Environment manager!
 
-Make sure to install an **environment manager** → e.g. [Miniconda](https://www.anaconda.com/docs/getting-started/miniconda/main)
+Try [this tutorial](https://e5k.github.io/outils-info-2/course/semaine_01.html)
+
 :::
 
 :::
@@ -353,7 +351,7 @@ Make sure to install an **environment manager** → e.g. [Miniconda](https://www
 **3 main ways to run Python...**
 
 1. Run Python `.py` scripts from the command line → *deprecated*
-2. Run blocks of code from within a Python `.py` script using `ipykernel` → **similar behaviour to R/Matlab** = ❤️ 
+2. Run blocks of code from within a Python `.py` script using `ipykernel` → **similar behaviour to R/Matlab**
 3. Use **Jupyter Notebooks** in `.ipynb` files
 
 
@@ -365,11 +363,91 @@ Make sure to install an **environment manager** → e.g. [Miniconda](https://www
 :::
 
 
+# How to approach coding {background-color="#2F4647"}
+
+## Python as a natural language
+
+| Natural language | Python | Example |
+|---|---|---|
+| Noun | Object or variable | `df` |
+| Verb | Function or method | `mean()`, `sort_values()` |
+| Complement | Target variable | `"altitude"` |
+| Adverb | Argument specifying how | `ascending=False` |
+| Sentence | Instruction | `df.sort_values(...)` |
+
+```python
+df.sort_values("altitude", ascending=False)
+```
+
+::: {.callout-important}
+Python checks the grammar of your code. **You** must check the [scientific meaning]{.alert} of the sentence.
+:::
+
+::: {.notes}
+This is an analogy, not an exact grammatical correspondence. A variable refers to an object, and an argument can specify both what to work on and how to perform an operation.
+
+Ask students to identify the table, the action, the target column and the direction of sorting. Then change ascending=False to ascending=True and have them explain the new instruction before running it.
+
+Connect this to the teaching dataset: sorting by VEI orders the recorded eruption classes; it does not establish which volcano or country is most hazardous.
+:::
+
+## From a sentence to a sequence of tasks
+
+<span style="font-size: 0.5em;">&nbsp;</span>
+
+| Task | Questions to ask |
+|---|-------|
+| [**Load**]{.alert} | Where are the data? How do I read them? |
+| [**Inspect**]{.alert} | What do the rows, columns and values represent? |
+| [**Select / filter**]{.alert} | Which columns and observations do I need? |
+| [**Transform**]{.alert} | What should I sort, recode or calculate? |
+| [**Summarise / analyse**]{.alert} | What quantity or relationship answers my question? |
+| [**Visualise / export**]{.alert} | How should I show or save the result? |
+
+<!-- **Example:** “Show the dates and VEI of Indonesian eruptions with VEI ≥ 4, newest first.”
+
+→ **Filter rows** (`Country`, `VEI`) → **select columns** (`Date`, `VEI`) → **sort** (`Date`, descending) -->
+
+::: {.notes}
+These are practical categories, not a rigid sequence: an analysis often loops back to inspection or selection.
+
+Translate the scientific question into small tasks in plain language, then choose a function for each task. Here, the data have already been loaded. Filter with a Boolean mask, select columns with .loc, and sort with .sort_values(). Not every question requires all six categories.
+
+Ask students to identify which tasks require pandas and which will later require plotting or statistical libraries. After each step, inspect the result and check that it still represents the observations you intended to analyse.
+:::
+
+# Today's plans {background-color="#2F4647"}
+
+## Get started
+
+- Go to [https://elste-master.github.io/Data-Science/](https://elste-master.github.io/Data-Science/)
+  - **Setup VS Code:** Appendices > [Setup VS Code]{.alert}
+  - Follow [Class 1]{.alert}
+
+**How to do it**?
+
+- Create a [Jupyter Notebook]{.alert}
+- Copy & paste code fragment → make sure you **understand** what you are doing!
+  - Use the [documentation]{.alert} / [cheat sheets](https://e5k.github.io/outils-info-2/#cheat-sheets) / [companion course](https://e5k.github.io/outils-info-2/)
+- Document your code with [Markdown](../appendices/jupyter_markdown_summary.qmd)
+
+## Today's objectives
+
+4 modules:
+
+1. Data [structure]{.alert}
+2. [Querying]{.alert} data
+3. [Filtering]{.alert} data
+4. Data [operations]{.alert}
+
+→ We expect you to know how to get started with Python / Jupyter notebook, [shout if you are lost]{.alert}
+
+
 
 ## Start coding!
 
 - Go to [https://elste-master.github.io/Data-Science/](https://elste-master.github.io/Data-Science/)
-  - **Setup VS Code:** Appendices > [Setup VS Code]{.bg}
+  - **Setup VS Code:** Appendices > [Setup VS Code]{.alert}
 
 <span style="font-size: 0.5em;"></span>
 

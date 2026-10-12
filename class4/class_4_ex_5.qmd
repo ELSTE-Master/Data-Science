@@ -23,9 +23,12 @@ $$
 
 
 
-which corresponds to the expected (or average) score for a child of a certain age in a certain group. But how certain are we about this expected score? To answer this question, we can compute confidence intervals (typically at the 95% confidence level) for our predicted scores. This can be done very similarly to what we did before using the method `get_prediction().summary_frame()`. First, we recall how the third model is estimated:
+which corresponds to the expected (or average) score for a child of a certain age in a certain group. But how certain are we about this expected score? To answer this question, we can compute confidence intervals (typically at the 95% confidence level) for our predicted scores. This can be done very similarly to what we did before using the method `get_prediction().summary_frame()` [(doc)](../appendices/doc_statsmodels.qmd#models-model-get-prediction) [(doc)](../appendices/doc_statsmodels.qmd#models-model-summary-frame). First, we recall how the third model is estimated:
 
 
+
+
+**Function reference:** `wls_prediction_std` [(doc)](../appendices/doc_statsmodels.qmd#models-wls-prediction-std); `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `model.fit` [(doc)](../appendices/doc_statsmodels.qmd#models-model-fit); `smf.ols` [(doc)](../appendices/doc_statsmodels.qmd#models-smf-ols); `print` [(doc)](../appendices/doc_python.qmd#python-print); `model.summary` [(doc)](../appendices/doc_statsmodels.qmd#models-model-summary).
 
 ```{python, echo=TRUE}
 import pandas as pd
@@ -42,6 +45,9 @@ print(mod3.summary())
 
 Suppose we wish to construct the predictions for children of age 6 to 12 in the control group. In the previous slides we saw that this could be done as follows:
 
+
+**Function reference:** `np.arange` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-np-arange); `DataFrame` [(doc)](../appendices/doc_pandas.qmd#pandas-dataframe); `model.summary_frame` [(doc)](../appendices/doc_statsmodels.qmd#models-model-summary-frame); `model.get_prediction` [(doc)](../appendices/doc_statsmodels.qmd#models-model-get-prediction).
+
 ```{python}
 # --- Define ages to predict (0:6 corresponds to ages 6 to 12) ---
 age_to_predict = np.arange(0, 7)
@@ -51,13 +57,19 @@ pred_control_ci = mod3.get_prediction(data_control).summary_frame(alpha=0.05)
 
 We can inspect the content of the `pred_control_ci` DataFrame to see what it contains:
 
+
+**Function reference:** `head` [(doc)](../appendices/doc_pandas.qmd#pandas-head); `columns` [(doc)](../appendices/doc_pandas.qmd#pandas-columns).
+
 ```{python}
 pred_control_ci.head(5)
 pred_control_ci.columns
 ```
 
-The DataFrame contains the predicted mean scores (`mean`), the 95% confidence intervals for these means (`mean_ci_lower` and `mean_ci_upper`), and also the 95% intervals for individual observations (`obs_ci_lower` and `obs_ci_upper`). We can now repeat the same procedure for the treatment group.
+The DataFrame contains the predicted mean scores (`mean` [(doc)](../appendices/doc_pandas.qmd#pandas-mean)), the 95% confidence intervals for these means (`mean_ci_lower` and `mean_ci_upper`), and also the 95% intervals for individual observations (`obs_ci_lower` and `obs_ci_upper`). We can now repeat the same procedure for the treatment group.
 
+
+
+**Function reference:** `DataFrame` [(doc)](../appendices/doc_pandas.qmd#pandas-dataframe); `model.summary_frame` [(doc)](../appendices/doc_statsmodels.qmd#models-model-summary-frame); `model.get_prediction` [(doc)](../appendices/doc_statsmodels.qmd#models-model-get-prediction).
 
 ```{python}
 data_treatment = pd.DataFrame({"age_minus_6": age_to_predict, "group": "Treatment"})
@@ -65,6 +77,9 @@ pred_treatment_ci = mod3.get_prediction(data_treatment).summary_frame(alpha=0.05
 ```
 
 Next, we extract the predicted values and the lower and upper bounds of the confidence intervals, and visualize the predictions alongside the observed data:
+
+
+**Function reference:** `map` [(doc)](../appendices/doc_pandas.qmd#pandas-map); `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `ax.scatter` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-scatter); `ax.plot` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-plot); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `ax.legend` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-legend); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
 
 ```{python}
 # Extract fit, lower, upper
@@ -102,6 +117,9 @@ plt.show()
 
 In some situations, it is also of interest to compute a prediction interval, which corresponds to a confidence interval for the score of a child of a certain age and group. This is different from a confidence interval for the mean. Indeed, in the previous graph we can see that many points are outside of the confidence region (which makes sense since the intervals are confidence intervals for the means). These intervals are available directly in the `pred_control_ci` and `pred_treatment_ci` objects by using the columns `obs_ci_lower` and `obs_ci_upper.` 
 
+
+**Function reference:** `iloc` [(doc)](../appendices/doc_pandas.qmd#pandas-iloc).
+
 ```{python}
 # Extract confidence intervals for predictions
 pred_control_ci[['mean', 'mean_ci_lower', 'mean_ci_upper']].iloc[1]
@@ -112,6 +130,9 @@ In this output, we can see that our prediction intervals are much wider than the
 
 Naturally, we can produce a graph similarly to the one we considered previously as follows:
 
+
+
+**Function reference:** `map` [(doc)](../appendices/doc_pandas.qmd#pandas-map); `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `ax.scatter` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-scatter); `ax.plot` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-plot); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `ax.legend` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-legend); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
 
 ```{python}
 # Extract fit, lower, upper

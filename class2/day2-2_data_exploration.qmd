@@ -2,11 +2,12 @@
 title: "Data exploration"
 format:
   html:
+    code-annotations: hover
     code-fold: false
     code-line-numbers: true
     css: [../assets/webex.css]
     include-after-body: [../assets/webex.js]
-    embed-resources: true 
+    embed-resources: false
 jupyter: python3
 ---
 
@@ -22,28 +23,35 @@ plt.rcParams.update({
 
 ## Setting up the exercise
 
-We start by importing libraries and the dataset. As in [the previous class](../class1/day1-2_pandas.qmd), we load the dataset using **Pandas**. The dataset comes from @Smith2011 and contains the chemical concentrations in volcanic tephra belonging to the recent activity (last 15 ky) of the Campi Flergrei Caldera (Italy). The dataset is contained in an Excel file that contains two sheets named `'Supp_majors'` and `'Supp_traces'`. In @lst-load-geochem, we use the `sheet_name` argument to the `read_excel()` ([doc](https://pandas.pydata.org/docs/reference/api/pandas.read_excel.html)) function to specify that we want to load the sheet containing trace elements.
+We start by importing libraries and the dataset. As in [the previous class](../class1/day1-2_pandas.qmd), we load the dataset using **Pandas**. The dataset comes from @Smith2011 and contains the chemical concentrations in volcanic tephra belonging to the recent activity (last 15 ky) of the Campi Flergrei Caldera (Italy). The dataset is contained in an Excel file that contains two sheets named `'Supp_majors'` and `'Supp_traces'`. In @lst-load-geochem, we use the `sheet_name` argument to the `read_excel()` [(doc)](../appendices/doc_pandas.qmd#pandas-read-excel) function to specify that we want to load the sheet containing trace elements.
+
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv).
 
 ```{python}
 #| echo: true
 #| lst-label: lst-load-geochem
 #| lst-cap: caption
 
-# Load libraries
-import pandas as pd # Import pandas
-import matplotlib.pyplot as plt # Import the pyplot module from matplotlib
-import seaborn as sns # Import seaborn
+import pandas as pd # <1>
+import matplotlib.pyplot as plt # <2>
+import seaborn as sns # <3>
 
-# Import the dataset specifying which Excel sheet name to load the data from
-df_majors = pd.read_csv('https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/Smith_glass_post_NYT_data_majors.csv')
+df_majors = pd.read_csv('https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/Smith_glass_post_NYT_data_majors.csv') # <4>
 df_traces = pd.read_csv('https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/Smith_glass_post_NYT_data_traces.csv')
 ```
+
+1. Load libraries Import pandas
+2. Import the pyplot module from matplotlib
+3. Import seaborn
+4. Import the dataset specifying which Excel sheet name to load the data from
+
 
 
 Take a minute to explore both datasets using the material from [last week](../class1/day1-1_intro.qmd). Remember the [cheat sheets](../class1/day1-summary.qmd) for various Pandas functions. The typical questions you want to address are:
 
 - What **columns** are contained in the DataFrame?
-- What **types** of data are each columns? (e.g., integer → `int`, decimal values →`float`, strings → `objects` )
+- What **types** of data are each columns? (e.g., integer → `int` [(doc)](../appendices/doc_python.qmd#python-int), decimal values →`float`, strings → `objects` )
 - What columns contain:
   - **Numerical data** → contain [measurable quantities]{.mark} in numerical format and allow mathematical operations
   - **Categorical data** → represent [categories or groups]{.mark} and describe *qualities* or *characteristics*, not quantities.
@@ -54,7 +62,7 @@ Take a minute to explore both datasets using the material from [last week](../cl
 
 Based on your exploration of the trace elements dataset:
 
-- Is a [labelled]{.mark} **index** relevant? In other words, do we want to access **rows** using **[labels](../class1/day1-4_queries.qmd#label-based-indexing)** (→ `.loc`) or using **[positions](../class1/day1-4_queries.qmd#position-based-indexing)** (→ `.iloc`)?
+- Is a [labelled]{.mark} **index** relevant? In other words, do we want to access **rows** using **[labels](../class1/day1-4_queries.qmd#label-based-indexing)** (→ `.loc` [(doc)](../appendices/doc_pandas.qmd#pandas-loc)) or using **[positions](../class1/day1-4_queries.qmd#position-based-indexing)** (→ `.iloc` [(doc)](../appendices/doc_pandas.qmd#pandas-iloc))?
 - Same question for columns?
 
 ```{python}
@@ -125,7 +133,10 @@ Let's start to look at the basic components of a *Matplotlib* figure. There are 
 1. A [**Figure**]{.mark} represents the main canevas;
 2. [**Axes**]{.mark} are contained within the figure and is where most of the plotting will occur.
 
-The easiest way to define a figure is using the `subplots()` function ([doc](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html); @lst-plt-set). Note that the code returns two variables - `fig` and `ax` - which are the figure and the axes, respectively.
+The easiest way to define a figure is using the `subplots()` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots) function (; @lst-plt-set). Note that the code returns two variables - `fig` and `ax` - which are the figure and the axes, respectively.
+
+
+**Function reference:** `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots).
 
 ```{python}
 
@@ -156,7 +167,7 @@ Most additional components of a plot are controlled via the `ax` variable, which
 
 Use these functions to customise @lst-plt-ex1. Some hints:
 
-- Remember that a *function* takes some *arguments* provided between *parentheses* (e.g., `ax.title(argument)`). Each function might accept different types of arguments.
+- Remember that a *function* takes some *arguments* provided between *parentheses* (e.g., `ax.set_title(argument)` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title)). Each function might accept different types of arguments.
 - Titles and labels require a *string*, so remember to use `" "` or `' '`.
 - For now, the legend does not require any argument, so you can leave the parentheses empty.
 - Setting the grid requires one argument: do we want to show the grid (`True`) or not (`False`)
@@ -165,38 +176,40 @@ Use these functions to customise @lst-plt-ex1. Some hints:
 
 | Function        | Description                        | Argument Type         | Example Argument           |
 |-----------------|------------------------------------|-----------------------|----------------------------|
-| [`ax.set_title`](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_title.html)    | Sets the title of the axes         | str                   | "My Plot Title"            |
-| [`ax.set_xlabel`](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_xlabel.html)   | Sets the label for the x-axis      | str                   | "X Axis Label"             |
-| [`ax.set_ylabel`](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_ylabel.html)   | Sets the label for the y-axis      | str                   | "Y Axis Label"             |
-| [`ax.legend`](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.legend.html)       | Displays the legend                | None    | None (default)  |
-| [`ax.grid`](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.grid.html)         | Shows grid lines                   | bool           | True             |
+| [`ax.set_title`](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_title.html) [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title)    | Sets the title of the axes         | str                   | "My Plot Title"            |
+| [`ax.set_xlabel`](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_xlabel.html) [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel)   | Sets the label for the x-axis      | str                   | "X Axis Label"             |
+| [`ax.set_ylabel`](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_ylabel.html) [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel)   | Sets the label for the y-axis      | str                   | "Y Axis Label"             |
+| [`ax.legend`](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.legend.html) [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-legend)       | Displays the legend                | None    | None (default)  |
+| [`ax.grid`](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.grid.html) [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-grid)         | Shows grid lines                   | bool           | True             |
 
 : Some of the most frequently used plotting functions. {#tbl-mpl-basics .striped   }
+
+
+**Function reference:** `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots); `ax.plot` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-plot); `ax.scatter` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-scatter).
 
 ```{python}
 
 #| lst-label: lst-plt-ex1
 #| lst-cap: Define a figure and one axes.
 
-import matplotlib.pyplot as plt # Import matplotlib
+import matplotlib.pyplot as plt # <1>
 
-# Define some data
-data1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+data1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] # <2>
 data2 = [7, 3, 9, 1, 5, 10, 8, 2, 6, 4]
 
-# Set the figure and the axes
-fig, ax = plt.subplots()
+fig, ax = plt.subplots() # <3>
 
-# Plot the data
-ax.plot(data1, data1, color='aqua', label='Line')
-ax.scatter(data1, data2, color='purple', label='scatter')
+ax.plot(data1, data1, color='aqua', label='Line') # <4>
+ax.scatter(data1, data2, color='purple', label='scatter') # <5>
 
-# Customise the plot - up to you!
-# - Add a title
-# - Add x and y labels
-# - Add a legend
-# - Add a grid
 ```
+
+1. Import matplotlib
+2. Define some data
+3. Set the figure and the axes
+4. Plot the data
+5. Customise the plot - up to you! - Add a title - Add x and y labels - Add a legend - Add a grid
+
 
 
 ## Plotting with Seaborn {.unnumbered}
@@ -210,20 +223,24 @@ Over the next steps of the exercise we will use various types of plots offered b
 3. `x`: The name of the column containing the values used along x
 4. `y`: The name of the column containing the values used along y
 
+
+**Function reference:** `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots); `sns.scatterplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-scatterplot).
+
 ```{python}
 
 #| lst-label: lst-sns-intro
 #| lst-cap: Basic plotting using Seaborn.
 
-# Define figure + axes
-fig, ax = plt.subplots()
-# Plot with seaborn (remember, we imported it as sns)
-# df_traces is the geochemical dataset imported previously
-sns.scatterplot(ax=ax, data=df_traces, x='Rb', y='Sr')
+fig, ax = plt.subplots() # <1>
+sns.scatterplot(ax=ax, data=df_traces, x='Rb', y='Sr') # <2>
 ```
 
+1. Define figure + axes
+2. Plot with seaborn (remember, we imported it as sns) df_traces is the geochemical dataset imported previously
 
-Should you feel adventurous and check out the [documentation](https://seaborn.pydata.org/generated/seaborn.scatterplot.html) of the `scatterplot` function, you would see that it is possible to use [additional arguments]{.mark} to further customize the plot:
+
+
+Should you feel adventurous and check out the [documentation](https://seaborn.pydata.org/generated/seaborn.scatterplot.html) of the `scatterplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-scatterplot) function, you would see that it is possible to use [additional arguments]{.mark} to further customize the plot:
 
 - `hue`: Name of the variable that will produce points with [different colors]{.mark}.
 - `size`: Name of the variable that will produce points with [different sizes]{.mark}.
@@ -237,7 +254,7 @@ Complete @lst-sns-intro, but use:
 - The `"Epoch"` column to control points color.
 - The `"SiO2* (EMP)"` column to control points size.
 
-Remember, you can use `df.columns` to print a list of column names contained in the DataFrame.
+Remember, you can use `df.columns` [(doc)](../appendices/doc_pandas.qmd#pandas-columns) to print a list of column names contained in the DataFrame.
 
 - And if you are already done, take the time to explore and plot the `df_majors` dataset and plot some variables.
 

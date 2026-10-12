@@ -101,6 +101,9 @@ Select the weights corresponding to each section using boolean indexing.
 
 ::: { .solution exercise="ex_5" }
 
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `head` [(doc)](../appendices/doc_pandas.qmd#pandas-head).
+
 ```python
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -156,13 +159,16 @@ plt.show()
 ## Hints
 
 ::: { .hint exercise="ex_6"}
-Consider using the function `boxplot()` from `matplotlib.pyplot`.
+Consider using the function `boxplot()` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-boxplot) from `matplotlib.pyplot`.
 
 :::
 
 ## Solution
 
 ::: { .solution exercise="ex_6" }
+
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `head` [(doc)](../appendices/doc_pandas.qmd#pandas-head); `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `ax.boxplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-boxplot); `dict` [(doc)](../appendices/doc_python.qmd#python-dict); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
 
 ```python
 import pandas as pd
@@ -194,6 +200,9 @@ plt.show()
 
 ### Question 4
 One of your colleague run the following test to compare the two locations (OG and CC):
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `stats.ttest_ind` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-ttest-ind); `print` [(doc)](../appendices/doc_python.qmd#python-print).
+
 ```{python, echo=TRUE}
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -289,13 +298,16 @@ print(f"p-value: {p_value}")
 ## Hints
 
 ::: { .hint exercise="ex_7"}
-Consider using the function `mannwhitneyu()` from `scipy.stats`.
+Consider using the function `mannwhitneyu()` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-mannwhitneyu) from `scipy.stats`.
 
 :::
 
 ## Solution
 
 ::: { .solution exercise="ex_7" }
+
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `head` [(doc)](../appendices/doc_pandas.qmd#pandas-head); `stats.mannwhitneyu` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-mannwhitneyu); `print` [(doc)](../appendices/doc_python.qmd#python-print).
 
 ```python
 import pandas as pd

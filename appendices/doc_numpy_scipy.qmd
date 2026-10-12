@@ -1,0 +1,407 @@
+---
+title: "NumPy and SciPy"
+lang: en
+execute:
+  eval: false
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    number-sections: false
+    code-annotations: hover
+---
+
+This reference explains the NumPy and SciPy tools used in classes 1–4. Each entry gives a purpose, the arguments most useful in this course, an example, and a practical note. Follow **Official documentation** for the complete API.
+
+Examples use the course datasets: `df` is the eruption table, `df_traces` the geochemical table, `reading` the reading-score table, and `df_icecover` the lake table. Samples such as `dietA` and `dietB` have already been selected. Variables such as `data`, `ax`, and `mod1` refer to the array, axes, or fitted model described in the lesson. Snippets illustrate individual operations rather than forming a script to run from top to bottom.
+
+Import `numpy as np` and `from scipy import stats`. Numerical transformations apply element by element. Statistical tests require a defensible sampling design and appropriate assumptions.
+
+## `np.arange()` {#numerical-np-arange}
+
+**Purpose:** Create a sequence with a chosen step.
+
+**Main arguments:** `start`, `stop`, `step`: range; stop is excluded.
+
+**Example:**
+
+```python
+ages = np.arange(6, 13)
+```
+
+**Remember:** Produces ages 6 through 12.
+
+[Official documentation](https://numpy.org/doc/stable/reference/generated/numpy.arange.html)
+
+## `np.linspace()` {#numerical-np-linspace}
+
+**Purpose:** Create evenly spaced values across an interval.
+
+**Main arguments:** `start`, `stop`: endpoints; `num`: number of values.
+
+**Example:**
+
+```python
+x = np.linspace(0, 100, 200)
+```
+
+**Remember:** Includes both endpoints by default.
+
+[Official documentation](https://numpy.org/doc/stable/reference/generated/numpy.linspace.html)
+
+## `np.percentile()` {#numerical-np-percentile}
+
+**Also used as:** `.percentiles`.
+
+**Purpose:** Find thresholds below which chosen percentages of values fall.
+
+**Main arguments:** `a`: observations; `q`: percentages from 0 to 100.
+
+**Example:**
+
+```python
+quartiles = np.percentile(data, [25, 50, 75])
+```
+
+**Remember:** This is `percentile`, not `percentiles`. Missing values require separate handling.
+
+[Official documentation](https://numpy.org/doc/stable/reference/generated/numpy.percentile.html)
+
+## `np.power()` {#numerical-np-power}
+
+**Purpose:** Raise each value to a power.
+
+**Main arguments:** `x1`: values; `x2`: exponent.
+
+**Example:**
+
+```python
+squared = np.power(df_traces['Zr'], 2)
+```
+
+**Remember:** The operation applies element by element.
+
+[Official documentation](https://numpy.org/doc/stable/reference/generated/numpy.power.html)
+
+## `np.sqrt()` {#numerical-np-sqrt}
+
+**Purpose:** Take square roots element by element.
+
+**Main arguments:** `x`: values.
+
+**Example:**
+
+```python
+root = np.sqrt(df_traces['Zr'])
+```
+
+**Remember:** Real-valued square roots require nonnegative values.
+
+[Official documentation](https://numpy.org/doc/stable/reference/generated/numpy.sqrt.html)
+
+## `np.log()` {#numerical-np-log}
+
+**Purpose:** Take natural logarithms.
+
+**Main arguments:** `x`: positive values.
+
+**Example:**
+
+```python
+logged = np.log(df_traces['Zr'])
+```
+
+**Remember:** Zero and negative values are not valid for a finite real logarithm.
+
+[Official documentation](https://numpy.org/doc/stable/reference/generated/numpy.log.html)
+
+## `np.log10()` {#numerical-np-log10}
+
+**Purpose:** Take base-10 logarithms.
+
+**Main arguments:** `x`: positive values.
+
+**Example:**
+
+```python
+logged = np.log10(df_traces['Zr'])
+```
+
+**Remember:** Document the transformation and its scientific meaning.
+
+[Official documentation](https://numpy.org/doc/stable/reference/generated/numpy.log10.html)
+
+## `np.exp()` {#numerical-np-exp}
+
+**Purpose:** Calculate the exponential of each value.
+
+**Main arguments:** `x`: values.
+
+**Example:**
+
+```python
+original_scale = np.exp(logged)
+```
+
+**Remember:** Inverts a natural logarithm, not a base-10 logarithm.
+
+[Official documentation](https://numpy.org/doc/stable/reference/generated/numpy.exp.html)
+
+## `np.floor()` {#numerical-np-floor}
+
+**Purpose:** Round each value down to the next integer.
+
+**Main arguments:** `x`: values.
+
+**Example:**
+
+```python
+rounded = np.floor(df['Latitude'])
+```
+
+**Remember:** Rounding down is towards negative infinity.
+
+[Official documentation](https://numpy.org/doc/stable/reference/generated/numpy.floor.html)
+
+## `np.ceil()` {#numerical-np-ceil}
+
+**Purpose:** Round each value up to the next integer.
+
+**Main arguments:** `x`: values.
+
+**Example:**
+
+```python
+rounded = np.ceil(df['Latitude'])
+```
+
+**Remember:** Rounding up is towards positive infinity.
+
+[Official documentation](https://numpy.org/doc/stable/reference/generated/numpy.ceil.html)
+
+## `np.ones_like()` {#numerical-np-ones-like}
+
+**Purpose:** Create ones with the same shape as another array.
+
+**Main arguments:** `a`: reference array; `dtype`: optional output type.
+
+**Example:**
+
+```python
+mask = np.ones_like(correlation, dtype=bool)
+```
+
+**Remember:** The dtype controls whether the ones are numbers or Boolean values.
+
+[Official documentation](https://numpy.org/doc/stable/reference/generated/numpy.ones_like.html)
+
+## `np.triu()` {#numerical-np-triu}
+
+**Purpose:** Keep the upper triangle of a matrix and zero the remainder.
+
+**Main arguments:** `m`: matrix; `k`: diagonal offset.
+
+**Example:**
+
+```python
+mask = np.triu(np.ones_like(correlation, dtype=bool))
+```
+
+**Remember:** Used to hide duplicate correlations in a heatmap.
+
+[Official documentation](https://numpy.org/doc/stable/reference/generated/numpy.triu.html)
+
+## `np.random.normal()` {#numerical-np-random-normal}
+
+**Purpose:** Simulate observations from a normal distribution.
+
+**Main arguments:** `loc`: mean; `scale`: standard deviation; `size`: number or shape.
+
+**Example:**
+
+```python
+data = np.random.normal(loc=0, scale=1, size=1000)
+```
+
+**Remember:** Simulated values change between runs unless the generator is seeded.
+
+[Official documentation](https://numpy.org/doc/stable/reference/random/generated/numpy.random.normal.html)
+
+## `np.random.lognormal()` {#numerical-np-random-lognormal}
+
+**Purpose:** Simulate positive observations with a log-normal distribution.
+
+**Main arguments:** `mean`, `sigma`: mean and standard deviation on the log scale; `size`: sample size.
+
+**Example:**
+
+```python
+data = np.random.lognormal(mean=0, sigma=0.4, size=1000)
+```
+
+**Remember:** Parameters describe the underlying normal distribution, not the observed mean and standard deviation.
+
+[Official documentation](https://numpy.org/doc/stable/reference/random/generated/numpy.random.lognormal.html)
+
+## `array.mean()` {#numerical-array-mean}
+
+**Also used as:** `np.mean`.
+
+**Purpose:** Average array values.
+
+**Main arguments:** `axis`: direction of the summary.
+
+**Example:**
+
+```python
+average = data.mean()
+```
+
+**Remember:** Unlike pandas, ordinary NumPy means do not automatically ignore NaN.
+
+[Official documentation](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.mean.html)
+
+## `array.min()` {#numerical-array-min}
+
+**Also used as:** `np.min`.
+
+**Purpose:** Find the smallest array value.
+
+**Main arguments:** `axis`: direction of the summary.
+
+**Example:**
+
+```python
+minimum = data.min()
+```
+
+**Remember:** Returns an observed extreme.
+
+[Official documentation](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.min.html)
+
+## `array.max()` {#numerical-array-max}
+
+**Also used as:** `np.max`.
+
+**Purpose:** Find the largest array value.
+
+**Main arguments:** `axis`: direction of the summary.
+
+**Example:**
+
+```python
+maximum = data.max()
+```
+
+**Remember:** Returns an observed extreme.
+
+[Official documentation](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.max.html)
+
+## `array.std()` {#numerical-array-std}
+
+**Also used as:** `np.std`.
+
+**Purpose:** Compute the standard deviation of array values.
+
+**Main arguments:** `axis`: direction; `ddof`: denominator adjustment.
+
+**Example:**
+
+```python
+spread = data.std(ddof=1)
+```
+
+**Remember:** NumPy defaults to `ddof=0`; pandas defaults to `ddof=1`.
+
+[Official documentation](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.std.html)
+
+## `stats.ttest_ind()` {#numerical-stats-ttest-ind}
+
+**Also used as:** `ttest_ind`, `scipy.stats.ttest_ind`.
+
+**Purpose:** Compare the means of two independent samples.
+
+**Main arguments:** `a`, `b`: samples; `equal_var=False`: Welch test; `alternative`: two-sided, less or greater.
+
+**Example:**
+
+```python
+result = stats.ttest_ind(dietA, dietB, equal_var=False)
+```
+
+**Remember:** A large p-value does not establish equal means. Independence and the suitability of the mean still matter.
+
+[Official documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.html)
+
+## `stats.mannwhitneyu()` {#numerical-stats-mannwhitneyu}
+
+**Also used as:** `mannwhitneyu`, `scipy.stats.mannwhitneyu`.
+
+**Purpose:** Compare the relative ordering of two independent samples.
+
+**Main arguments:** `x`, `y`: samples; `alternative`: two-sided, less or greater.
+
+**Example:**
+
+```python
+result = stats.mannwhitneyu(dietA, dietC, alternative="less")
+```
+
+**Remember:** A median-shift interpretation needs additional distributional assumptions; the test is not universally a test of medians.
+
+[Official documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mannwhitneyu.html)
+
+## `stats.kruskal()` {#numerical-stats-kruskal}
+
+**Also used as:** `kruskal`, `scipy.stats.kruskal`.
+
+**Purpose:** Compare ranks across two or more independent groups.
+
+**Main arguments:** Pass one sample per group.
+
+**Example:**
+
+```python
+result = stats.kruskal(dietA, dietB, dietC)
+```
+
+**Remember:** A significant result does not identify the differing pairs; follow-up comparisons require multiplicity control.
+
+[Official documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kruskal.html)
+
+## `stats.probplot()` {#numerical-stats-probplot}
+
+**Also used as:** `probplot`, `scipy.stats.probplot`.
+
+**Purpose:** Compare ordered sample values with theoretical quantiles.
+
+**Main arguments:** `x`: sample; `dist`: distribution, such as `"norm"`; `plot`: optional plotting target.
+
+**Example:**
+
+```python
+stats.probplot(mod1.resid, dist="norm", plot=ax)
+```
+
+**Remember:** A Q–Q plot is a diagnostic, not proof that a distribution is normal.
+
+[Official documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.probplot.html)
+
+## `stats.f_oneway()` {#numerical-stats-f-oneway}
+
+**Also used as:** `f_oneway`, `scipy.stats.f_oneway`.
+
+**Purpose:** Perform a one-way ANOVA comparing group means.
+
+**Main arguments:** Pass the independent groups as separate samples.
+
+**Example:**
+
+```python
+result = stats.f_oneway(dietA, dietB, dietC)
+```
+
+**Remember:** Classical ANOVA assumes equal population variances; a significant result does not identify which means differ.
+
+[Official documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.f_oneway.html)
+

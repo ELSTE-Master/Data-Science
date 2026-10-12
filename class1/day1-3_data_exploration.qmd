@@ -2,11 +2,12 @@
 title: "Data structure"
 format:
   html:
+    code-annotations: hover
     code-fold: false
     code-line-numbers: true
     css: [../assets/webex.css]
     include-after-body: [../assets/webex.js]
-    embed-resources: true 
+    embed-resources: false
 jupyter: python3
 ---
 
@@ -55,6 +56,30 @@ The Volcanic Explosivity Index - or VEI - is a scale to measure the magnitude of
 
 :::
 
+::: {.callout-tip}
+## Packages, modules and functions
+
+Python’s capabilities can be extended by importing **packages**. A package groups related tools and can contain **modules**, which organise code into separate components. These tools include **functions**, which perform particular tasks.
+
+In the following example:
+
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv).
+
+```python
+import pandas as pd
+df = pd.read_csv('data.csv')
+```
+
+- `pandas` is the package we import.
+- `pd` is the short name we choose to refer to it.
+- `read_csv()` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv) is a function provided by pandas.
+- `'data.csv'` is an argument telling the function which file to read.
+- `df` is the variable in which we store the resulting DataFrame.
+
+Later, we will also call **methods**: functions associated with an object, such as `df.head()` [(doc)](../appendices/doc_pandas.qmd#pandas-head).
+:::
+
 ## Importing the library and the data {.unnumbered}
 
 As always, we start by importing the `pandas` library as `pd`.
@@ -67,26 +92,33 @@ As always, we start by importing the `pandas` library as `pd`.
 import pandas as pd
 ```
 
-We load the dataset using the `pd.read_csv` function into a variable called `df` (for DataFrame) ([doc](https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html)). Remember that *functions* can take different *arguments*, which are extra keywords you can *pass* to make the behaviour of the function more specific to your need. Here, we pass one arguments to the `read_csv()` function: `parse_dates=['Date']` Specifies that the `Date` column should be treated as a date object.
+We load the dataset using the `pd.read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv) function into a variable called `df` (for DataFrame). Remember that *functions* can take different *arguments*, which are extra keywords you can *pass* to make the behaviour of the function more specific to your need. Here, we pass one arguments to the `read_csv()` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv) function: `parse_dates=['Date']` Specifies that the `Date` column should be treated as a date object.
 
 
 <!-- ::: {.callout-tip}
 ## Function arguments
 
-Remember that *functions* can take different *arguments*, which are extra keywords you can *pass* to make the behaviour of the function more specific to your need. Here, we one arguments to the `read_csv()` function:
+Remember that *functions* can take different *arguments*, which are extra keywords you can *pass* to make the behaviour of the function more specific to your need. Here, we one arguments to the `read_csv()` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv) function:
 
 - `index_col=0`: Specify that the index of the file is the first column. More on that soon if this is unclear.
 - `parse_dates=['Date']`: Specify that the `Date` column should be treated as a date object.
 ::: -->
 
 
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `head` [(doc)](../appendices/doc_pandas.qmd#pandas-head).
+
 ```{python}
 #| lst-label: lst-load-data
 #| lst-cap: Loading data from a csv file
 
-df = pd.read_csv('https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data
-df.head() # Show the first 5 rows
+df = pd.read_csv('https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/dummy_volcanoes.csv', parse_dates=['Date']) # <1>
+df.head() # <2>
 ```
+
+1. Load data
+2. Show the first 5 rows
+
 
 
 ### Setting up the index {.unnumbered}
@@ -95,18 +127,26 @@ The output of @lst-load-data shows the first 5 rows in our DataFrame. As display
 
 @lst-set-index Illustrates the use of two useful functions:
 
-- `.set_index()`: Uses a column as the DataFrame's index
-- `.reset_index()`: Removes the column's index back to a sequential numbering as in @lst-load-data.
+- `.set_index()` [(doc)](../appendices/doc_pandas.qmd#pandas-set-index): Uses a column as the DataFrame's index
+- `.reset_index()` [(doc)](../appendices/doc_pandas.qmd#pandas-reset-index): Removes the column's index back to a sequential numbering as in @lst-load-data.
+
+
+**Function reference:** `set_index` [(doc)](../appendices/doc_pandas.qmd#pandas-set-index); `reset_index` [(doc)](../appendices/doc_pandas.qmd#pandas-reset-index); `head` [(doc)](../appendices/doc_pandas.qmd#pandas-head).
 
 ```{python}
 #| lst-label: lst-set-index
 #| lst-cap: Common functions to set the index of a DataFrame
 
-df = df.set_index('VEI') # Set the 'VEI' column as an index
-df = df.reset_index() # Shoots, I meant to set the 'Name' columns as an index
-df = df.set_index('Name') # Here we go.
+df = df.set_index('VEI') # <1>
+df = df.reset_index() # <2>
+df = df.set_index('Name') # <3>
 df.head()
 ```
+
+1. Set the 'VEI' column as an index
+2. Shoots, I meant to set the 'Name' columns as an index
+3. Here we go.
+
 
 
 ## Basic data exploration {.unnumbered}
@@ -115,14 +155,34 @@ Let's now explore the structure of the dataset with the following functions:
 
 | Function         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 |------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `df.head()`      | Prints the *first* 5 rows of the DataFrame ([doc](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.head.html))                                                                                                                                                                                                                                                                                                                          |
-| `df.tail()`      | Prints the *last* 5 rows of the DataFrame ([doc](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.tail.html))                                                                                                                                                                                                                                                                                                                           |
-| `df.info()`      | Displays some info about the DataFrame, including the number of rows (*entries*) and columns ([doc](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.info.html)). Note the `Dtype` column: this is the type variable stored in each column including *strings* (`object`), *integer* (`int64`) and *float* (`int64`) numbers. See that the `Date` column is indeed stored as a `datetime` variable as requested above. |
-| `df.shape`       | Returns a list containing the number of rows and columns of the DataFrame.                                                                                                                                                                                                                                                                                                                                                                           |
-| `df.index`       | Returns a list containing the index along the *rows* of the DataFrame.                                                                                                                                                                                                                                                                                                                                                                           |
-| `df.columns`     | Returns a list containing the index along the *columns* of the DataFrame.                                                                                                                                                                                                                                                                                                                                                                           |
+| `df.head()` [(doc)](../appendices/doc_pandas.qmd#pandas-head)      | Prints the *first* 5 rows of the DataFrame                                                                                                                                                                                                                                                                                                                          |
+| `df.tail()` [(doc)](../appendices/doc_pandas.qmd#pandas-tail)      | Prints the *last* 5 rows of the DataFrame                                                                                                                                                                                                                                                                                                                           |
+| `df.info()` [(doc)](../appendices/doc_pandas.qmd#pandas-info)      | Displays some info about the DataFrame, including the number of rows (*entries*) and columns. Note the `Dtype` column: this is the type variable stored in each column including *strings* (`object`), *integer* (`int64`) and *float* (`int64`) numbers. See that the `Date` column is indeed stored as a `datetime` variable as requested above. |
+| `df.shape` [(doc)](../appendices/doc_pandas.qmd#pandas-shape)       | Returns a list containing the number of rows and columns of the DataFrame.                                                                                                                                                                                                                                                                                                                                                                           |
+| `df.index` [(doc)](../appendices/doc_pandas.qmd#pandas-index)       | Returns a list containing the index along the *rows* of the DataFrame.                                                                                                                                                                                                                                                                                                                                                                           |
+| `df.columns` [(doc)](../appendices/doc_pandas.qmd#pandas-columns)     | Returns a list containing the index along the *columns* of the DataFrame.                                                                                                                                                                                                                                                                                                                                                                           |
 : {.striped   }
 
+
+::: {.callout-tip}
+## Why do some expressions have parentheses?
+
+Compare these two expressions:
+
+
+**Function reference:** `head` [(doc)](../appendices/doc_pandas.qmd#pandas-head); `shape` [(doc)](../appendices/doc_pandas.qmd#pandas-shape).
+
+```python
+df.head()
+df.shape
+```
+
+`head()` [(doc)](../appendices/doc_pandas.qmd#pandas-head) is a **method**: we call it with parentheses to perform an operation. We can also pass arguments, such as `df.head(3)` [(doc)](../appendices/doc_pandas.qmd#pandas-head) to display the first three rows.
+
+`shape` [(doc)](../appendices/doc_pandas.qmd#pandas-shape) is an **attribute**: we access it without parentheses to obtain information about the DataFrame. It returns a pair of numbers: the number of rows and the number of columns.
+
+The same distinction applies to `df.info()` [(doc)](../appendices/doc_pandas.qmd#pandas-info) and `df.tail()` [(doc)](../appendices/doc_pandas.qmd#pandas-tail)—methods—and to `df.index` [(doc)](../appendices/doc_pandas.qmd#pandas-index) and `df.columns` [(doc)](../appendices/doc_pandas.qmd#pandas-columns)—attributes.
+:::
 
 ::: {.callout-note}
 ## Your turn!
@@ -133,23 +193,32 @@ Try these functions on `df` and get familiar with the output.
 
 ## Sorting data {.unnumbered}
 
-The main function to sort data is `.sort_values` ([doc](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html)). It is necessary to review how *three arguments* can alter the function's behaviour:
+The main function to sort data is `.sort_values` [(doc)](../appendices/doc_pandas.qmd#pandas-sort-values). It is necessary to review how *three arguments* can alter the function's behaviour:
 
 1. `by`: First argument (required) is the label of index/row used to sort the data. It is possible to sort by multiple columns by passing a list of values.
 2. `axis`: Specifies whether sorting rows (`axis = 0` - in which case `by` is a column name) or sorting columns (`axis = 1`, in which case `by` is an index value). The documentation specifies `axis = 0`, which means that rows will be sorted if `axis` is not specified.
 3. `ascending`: Using a *bool* (remember, this is a True/False behaviour), specifies if values are sorted in *ascending* (`ascending = True`, default behaviour is not specified) or *descending* (`ascending = False`) order.
 
 
+
+**Function reference:** `sort_values` [(doc)](../appendices/doc_pandas.qmd#pandas-sort-values).
+
 ```{python}
 #| lst-label: lst-sort
 #| lst-cap: Basic sorting operations
 #| eval: false
 
-df.sort_values('VEI') # Sort volcanoes by VEI in ascending number
-df.sort_values('Date', ascending=False) # Sort volcanoes by eruption dates from recent to old
-df.sort_values('Country') # .sort_values also work on strings to sort alphabetically
-df.sort_values(['Latitude', 'Longitude']) # Sorting using multiple columns
+df.sort_values('VEI') # <1>
+df.sort_values('Date', ascending=False) # <2>
+df.sort_values('Country') # <3>
+df.sort_values(['Latitude', 'Longitude']) # <4>
 ```
+
+1. Sort volcanoes by VEI in ascending number
+2. Sort volcanoes by eruption dates from recent to old
+3. .sort_values also work on strings to sort alphabetically
+4. Sorting using multiple columns
+
 
 
 ::: {.callout-note}

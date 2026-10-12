@@ -15,6 +15,9 @@ engine: knitr
 In order to assess the adequacy of our model to the data, it is useful (when this is possible) to compare the predictions and the data. This implies that we need to do two things: (1) plot the data with different colors for the groups and (2) compute predictions.
 
 We can plot the data as follows:
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `ax.scatter` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-scatter); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
+
 ```{python}
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -36,6 +39,9 @@ plt.show()
 ```
 
 Next, we will highlight the different groups using two colors. 
+
+
+**Function reference:** `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `unique` [(doc)](../appendices/doc_pandas.qmd#pandas-unique); `ax.scatter` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-scatter); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `ax.legend` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-legend); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
 
 ```{python, echo=TRUE}
 import matplotlib.pyplot as plt
@@ -64,6 +70,9 @@ plt.show()
 ```
 
 
+
+**Function reference:** `model.fit` [(doc)](../appendices/doc_statsmodels.qmd#models-model-fit); `smf.ols` [(doc)](../appendices/doc_statsmodels.qmd#models-smf-ols); `print` [(doc)](../appendices/doc_python.qmd#python-print); `model.summary` [(doc)](../appendices/doc_statsmodels.qmd#models-model-summary).
+
 ```{python, echo=TRUE}
 # Fit the linear model: score ~ group + age
 mod1 = smf.ols('score ~ group + age', data=reading).fit()
@@ -75,6 +84,9 @@ print(mod1.summary())
 We can now compute predictions from our model. It can be observed that the age of the children ranges from 6 to 12 so our first step is to construct a sequence of numbers from 6 to 12 as follows:
 
 
+
+
+**Function reference:** `np.arange` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-np-arange); `print` [(doc)](../appendices/doc_python.qmd#python-print).
 
 ```{python, echo=TRUE}
 age_to_predict = np.arange(6, 13) 
@@ -90,6 +102,9 @@ $$
 
 This can be done as follows:
 
+
+**Function reference:** `model.params` [(doc)](../appendices/doc_statsmodels.qmd#models-model-params); `get` [(doc)](../appendices/doc_pandas.qmd#pandas-get); `print` [(doc)](../appendices/doc_python.qmd#python-print).
+
 ```{python, echo=TRUE}
 b0 = mod1.params['Intercept']
 b_age = mod1.params['age']
@@ -100,7 +115,10 @@ prediction_control = b0 + b_age * age_to_predict
 print(prediction_control)
 ```
 
-Alternatively, we can construct an `pd.DataFrame` with the data we would like to predict as follows:
+Alternatively, we can construct an `pd.DataFrame` [(doc)](../appendices/doc_pandas.qmd#pandas-dataframe) with the data we would like to predict as follows:
+
+
+**Function reference:** `DataFrame` [(doc)](../appendices/doc_pandas.qmd#pandas-dataframe); `len` [(doc)](../appendices/doc_python.qmd#python-len).
 
 ```{python, echo=TRUE}
 # Data to predict for Control group
@@ -110,7 +128,10 @@ data_to_predict_control = pd.DataFrame({
 })
 ```
 
-Then, we can use the method `predict` as follows:
+Then, we can use the method `predict` [(doc)](../appendices/doc_statsmodels.qmd#models-model-predict) as follows:
+
+
+**Function reference:** `model.predict` [(doc)](../appendices/doc_statsmodels.qmd#models-model-predict); `print` [(doc)](../appendices/doc_python.qmd#python-print).
 
 ```{python, echo=TRUE}
 prediction_control = mod1.predict(data_to_predict_control)
@@ -119,6 +140,9 @@ print(prediction_control)
 
 This approach provides the same results but is more reliable. Similarly, we can compute the predictions for the other groups as follows:
 
+
+
+**Function reference:** `DataFrame` [(doc)](../appendices/doc_pandas.qmd#pandas-dataframe); `len` [(doc)](../appendices/doc_python.qmd#python-len); `model.predict` [(doc)](../appendices/doc_statsmodels.qmd#models-model-predict); `print` [(doc)](../appendices/doc_python.qmd#python-print).
 
 ```{python, echo=TRUE}
 # Data to predict for Treatment group
@@ -134,6 +158,9 @@ print(prediction_treatment)
 
 
 Now, we can add our predictions to the graph as follows:
+
+
+**Function reference:** `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `unique` [(doc)](../appendices/doc_pandas.qmd#pandas-unique); `ax.scatter` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-scatter); `ax.plot` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-plot); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `ax.legend` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-legend); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
 
 ```{python}
 # Define colors

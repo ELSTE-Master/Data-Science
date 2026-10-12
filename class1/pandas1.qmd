@@ -2,11 +2,12 @@
 title: "Intro to Pandas"
 format:
   html:
+    code-annotations: hover
     code-fold: false
     code-line-numbers: true
     css: [../assets/webex.css]
     include-after-body: [../assets/webex.js]
-    embed-resources: true 
+    embed-resources: false
 jupyter: python3
 ---
 
@@ -140,26 +141,33 @@ As always, we start by importing the `pandas` library as `pd`.
 import pandas as pd
 ```
 
-We load the dataset using the `pd.read_csv` function into a variable called `df` (for DataFrame) ([doc](https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html)). Remember that *functions* can take different *arguments*, which are extra keywords you can *pass* to make the behaviour of the function more specific to your need. Here, we pass one arguments to the `read_csv()` function: `parse_dates=['Date']` Specifies that the `Date` column should be treated as a date object.
+We load the dataset using the `pd.read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv) function into a variable called `df` (for DataFrame). Remember that *functions* can take different *arguments*, which are extra keywords you can *pass* to make the behaviour of the function more specific to your need. Here, we pass one arguments to the `read_csv()` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv) function: `parse_dates=['Date']` Specifies that the `Date` column should be treated as a date object.
 
 
 <!-- ::: {.callout-tip}
 ## Function arguments
 
-Remember that *functions* can take different *arguments*, which are extra keywords you can *pass* to make the behaviour of the function more specific to your need. Here, we one arguments to the `read_csv()` function:
+Remember that *functions* can take different *arguments*, which are extra keywords you can *pass* to make the behaviour of the function more specific to your need. Here, we one arguments to the `read_csv()` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv) function:
 
 - `index_col=0`: Specify that the index of the file is the first column. More on that soon if this is unclear.
 - `parse_dates=['Date']`: Specify that the `Date` column should be treated as a date object.
 ::: -->
 
 
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `head` [(doc)](../appendices/doc_pandas.qmd#pandas-head).
+
 ```{python}
 #| lst-label: lst-load-data
 #| lst-cap: Loading data from a csv file
 
-df = pd.read_csv('data/dummy_volcanoes.csv', parse_dates=['Date']) # Load data
-df.head() # Show the first 5 rows
+df = pd.read_csv('data/dummy_volcanoes.csv', parse_dates=['Date']) # <1>
+df.head() # <2>
 ```
+
+1. Load data
+2. Show the first 5 rows
+
 
 
 #### Setting up the index {.unnumbered}
@@ -168,18 +176,26 @@ The output of @lst-load-data shows the first 5 rows in our DataFrame. As display
 
 @lst-set-index Illustrates the use of two useful functions:
 
-- `.set_index()`: Uses a column as the DataFrame's index
-- `.reset_index()`: Removes the column's index back to a sequential numbering as in @lst-load-data.
+- `.set_index()` [(doc)](../appendices/doc_pandas.qmd#pandas-set-index): Uses a column as the DataFrame's index
+- `.reset_index()` [(doc)](../appendices/doc_pandas.qmd#pandas-reset-index): Removes the column's index back to a sequential numbering as in @lst-load-data.
+
+
+**Function reference:** `set_index` [(doc)](../appendices/doc_pandas.qmd#pandas-set-index); `reset_index` [(doc)](../appendices/doc_pandas.qmd#pandas-reset-index); `head` [(doc)](../appendices/doc_pandas.qmd#pandas-head).
 
 ```{python}
 #| lst-label: lst-set-index
 #| lst-cap: Common functions to set the index of a DataFrame
 
-df = df.set_index('VEI') # Set the 'VEI' column as an index
-df = df.reset_index() # Shoots, I meant to set the 'Name' columns as an index
-df = df.set_index('Name') # Here we go.
+df = df.set_index('VEI') # <1>
+df = df.reset_index() # <2>
+df = df.set_index('Name') # <3>
 df.head()
 ```
+
+1. Set the 'VEI' column as an index
+2. Shoots, I meant to set the 'Name' columns as an index
+3. Here we go.
+
 
 
 #### Basic data exploration {.unnumbered}
@@ -188,12 +204,12 @@ Let's now explore the structure of the dataset with the following functions:
 
 | Function         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 |------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `df.head()`      | Prints the *first* 5 rows of the DataFrame ([doc](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.head.html))                                                                                                                                                                                                                                                                                                                          |
-| `df.tail()`      | Prints the *last* 5 rows of the DataFrame ([doc](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.tail.html))                                                                                                                                                                                                                                                                                                                           |
-| `df.info()`      | Displays some info about the DataFrame, including the number of rows (*entries*) and columns ([doc](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.info.html)). Note the `Dtype` column: this is the type variable stored in each column including *strings* (`object`), *integer* (`int64`) and *float* (`int64`) numbers. See that the `Date` column is indeed stored as a `datetime` variable as requested above. |
-| `df.shape`       | Returns a list containing the number of rows and columns of the DataFrame.                                                                                                                                                                                                                                                                                                                                                                           |
-| `df.index`       | Returns a list containing the index along the *rows* of the DataFrame.                                                                                                                                                                                                                                                                                                                                                                           |
-| `df.columns`     | Returns a list containing the index along the *columns* of the DataFrame.                                                                                                                                                                                                                                                                                                                                                                           |
+| `df.head()` [(doc)](../appendices/doc_pandas.qmd#pandas-head)      | Prints the *first* 5 rows of the DataFrame                                                                                                                                                                                                                                                                                                                          |
+| `df.tail()` [(doc)](../appendices/doc_pandas.qmd#pandas-tail)      | Prints the *last* 5 rows of the DataFrame                                                                                                                                                                                                                                                                                                                           |
+| `df.info()` [(doc)](../appendices/doc_pandas.qmd#pandas-info)      | Displays some info about the DataFrame, including the number of rows (*entries*) and columns. Note the `Dtype` column: this is the type variable stored in each column including *strings* (`object`), *integer* (`int64`) and *float* (`int64`) numbers. See that the `Date` column is indeed stored as a `datetime` variable as requested above. |
+| `df.shape` [(doc)](../appendices/doc_pandas.qmd#pandas-shape)       | Returns a list containing the number of rows and columns of the DataFrame.                                                                                                                                                                                                                                                                                                                                                                           |
+| `df.index` [(doc)](../appendices/doc_pandas.qmd#pandas-index)       | Returns a list containing the index along the *rows* of the DataFrame.                                                                                                                                                                                                                                                                                                                                                                           |
+| `df.columns` [(doc)](../appendices/doc_pandas.qmd#pandas-columns)     | Returns a list containing the index along the *columns* of the DataFrame.                                                                                                                                                                                                                                                                                                                                                                           |
 
 ::: {.callout-tip}
 
@@ -213,24 +229,36 @@ Let's now review how we can access data contained in the DataFrame. This process
 
 #### Label-based indexing {.unnumbered}
 
-![Label-based queries using `.loc`.](img/pandas_loc.png){#fig-pandas-loc}
+![Label-based queries using `.loc`. [(doc)](../appendices/doc_pandas.qmd#pandas-loc)](img/pandas_loc.png){#fig-pandas-loc}
 
 ##### Querying rows {.unnumbered}
 
-When we know the exact label of the row or the column, we can use the `.loc` function to query the DataFrame (@fig-pandas-loc). Let's start by querying specific **rows**. @lst-set-index has defined the `Name` column as the *index* (i.e., row label), which means that we can simply pass the name of the volcano.
+When we know the exact label of the row or the column, we can use the `.loc` [(doc)](../appendices/doc_pandas.qmd#pandas-loc) function to query the DataFrame (@fig-pandas-loc). Let's start by querying specific **rows**. @lst-set-index has defined the `Name` column as the *index* (i.e., row label), which means that we can simply pass the name of the volcano.
+
+
+**Function reference:** `loc` [(doc)](../appendices/doc_pandas.qmd#pandas-loc).
 
 ```{python}
-# Get the row for "Calbuco" volcano
-df.loc['Calbuco']
+df.loc['Calbuco'] # <1>
 
 ```
+
+1. Get the row for "Calbuco" volcano
+
 
 Note that the result is a *Series* (i.e., a 1-dimensional DataFrame where the columns become the index), not a DataFrame. If we want to **keep it as a DataFrame**, we can use double brackets. Double brackets can also be used to query **multiple rows**.
 
+
+**Function reference:** `loc` [(doc)](../appendices/doc_pandas.qmd#pandas-loc).
+
 ```{python}
-df.loc[['Calbuco']] # Query one row and return it as a DataFrame
-df.loc[['Calbuco', 'Taal']] # Query multiple rows
+df.loc[['Calbuco']] # <1>
+df.loc[['Calbuco', 'Taal']] # <2>
 ```
+
+1. Query one row and return it as a DataFrame
+2. Query multiple rows
+
 
 ::: {.callout-note}
 ## Question
@@ -276,12 +304,19 @@ Let's now query specific **columns**. For example, querying the `VEI` column can
 
 
 ```{python}
-df[['VEI']] # Get the VEI column
-df[['Country', 'VEI']] # Query multiple columns
+df[['VEI']] # <1>
+df[['Country', 'VEI']] # <2>
 ```
+
+1. Get the VEI column
+2. Query multiple columns
+
 
 
 Note that until now, we have only retrieved either rows or columns (@fig-pandas-loc). We can also retrieve specific values by specifying **both the row and the column**.
+
+
+**Function reference:** `loc` [(doc)](../appendices/doc_pandas.qmd#pandas-loc).
 
 ```{python}
 df.loc[['Calbuco', 'Taal']][['Country', 'VEI']]
@@ -289,12 +324,15 @@ df.loc[['Calbuco', 'Taal']][['Country', 'VEI']]
 
 #### Position-based indexing {.unnumbered}
 
-![Position-based queries using `.iloc`.](img/pandas_iloc.png){#fig-pandas-iloc}
+![Position-based queries using `.iloc`. [(doc)](../appendices/doc_pandas.qmd#pandas-iloc)](img/pandas_iloc.png){#fig-pandas-iloc}
 
 
-Some situations require querying data by *location* instead of *label* - let's say for instance we need to retrieve rows 10-20. This is done using the `.iloc` function (instead of the `.loc` function previously used; @fig-pandas-iloc). Remember that Python uses zero-based indexing (@cau-indexing), meaning that the first element is at position 0, the second at position 1, and so on.
+Some situations require querying data by *location* instead of *label* - let's say for instance we need to retrieve rows 10-20. This is done using the `.iloc` [(doc)](../appendices/doc_pandas.qmd#pandas-iloc) function (instead of the `.loc` [(doc)](../appendices/doc_pandas.qmd#pandas-loc) function previously used; @fig-pandas-iloc). Remember that Python uses zero-based indexing (@cau-indexing), meaning that the first element is at position 0, the second at position 1, and so on.
 
 The next example queries the first row - using again double brackets to return a **DataFrame**.
+
+
+**Function reference:** `iloc` [(doc)](../appendices/doc_pandas.qmd#pandas-iloc).
 
 ```{python}
 df.iloc[[0]]
@@ -304,11 +342,17 @@ df.iloc[[0]]
 
 We can get **a range of rows** using what is called *slicing*. This is done using the colon (`:`) operator. The next example queries rows 3 to 6 of the DataFrame. Note that the end index is exclusive, meaning that the element at the end index is not included in the result.
 
+
+**Function reference:** `iloc` [(doc)](../appendices/doc_pandas.qmd#pandas-iloc).
+
 ```{python}
 df.iloc[2:6]
 ```
 
 To get rows 3 to 6 and columns 2-3:
+
+
+**Function reference:** `iloc` [(doc)](../appendices/doc_pandas.qmd#pandas-iloc).
 
 ```{python}
 df.iloc[0:5, 1:3]
@@ -317,6 +361,9 @@ df.iloc[0:5, 1:3]
 ##### Count rows from the last {.unnumbered}
 
 To get the last 5 rows of the DataFrame:
+
+
+**Function reference:** `iloc` [(doc)](../appendices/doc_pandas.qmd#pandas-iloc).
 
 ```{python}
 df.iloc[-5:]
@@ -327,6 +374,9 @@ df.iloc[-5:]
 By experience, position-based queries is more used on *rows* than *columns*. For instance, we might want to access the first 10 rows because we don't know their associated labels, yet it is less likely that we ignore their *attributes*.
 It is possible mix label-based and position-based indexing. For example, to get the first 5 rows and the `Country` and `VEI` columns:
 
+
+
+**Function reference:** `iloc` [(doc)](../appendices/doc_pandas.qmd#pandas-iloc).
 
 ```{python}
 df.iloc[0:5][['Country', 'VEI']]
@@ -372,18 +422,25 @@ We can apply comparison operators to DataFrame. Let's say we want to test what r
 df['VEI'] == 4
 ```
 
-We can see that Galunggung, Taal, La Soufrière, Calbuco and Eyjafjallajökull return `True` to this condition. This is great, but what if we want to return the actual rows? We can use @lst-bool as a **mask** to then query the rows using `.loc`.
+We can see that Galunggung, Taal, La Soufrière, Calbuco and Eyjafjallajökull return `True` to this condition. This is great, but what if we want to return the actual rows? We can use @lst-bool as a **mask** to then query the rows using `.loc` [(doc)](../appendices/doc_pandas.qmd#pandas-loc).
+
+
+**Function reference:** `loc` [(doc)](../appendices/doc_pandas.qmd#pandas-loc).
 
 ```{python}
 #| lst-label: lst-bool-query
 #| lst-cap: Query data using a boolean mask
 
-mask = df['VEI'] == 4 # Create a mask
-df.loc[mask] # Query the data
+mask = df['VEI'] == 4 # <1>
+df.loc[mask] # <2>
 
-# Or, as a one line alternative:
-df.loc[df['VEI'] == 4]
+df.loc[df['VEI'] == 4] # <3>
 ```
+
+1. Create a mask
+2. Query the data
+3. Or, as a one line alternative:
+
 
 ::: {.callout-note}
 ## Question
@@ -400,7 +457,7 @@ mcq({
 })
 ```
 
-How many volcanoes are in the southern hemisphere? (hint: use the `df.shape` function to count them).
+How many volcanoes are in the southern hemisphere? (hint: use the `df.shape` [(doc)](../appendices/doc_pandas.qmd#pandas-shape) function to count them).
 
 ```{python}
 #| echo: false
@@ -420,6 +477,9 @@ mcq({
 
 We can also use comparison operators on columns containing **strings** (see @cau-dtypes for caveats). @lst-str-comp illustrates a basic string comparison using the `=` operator. @tbl-comparison-str shows additional operators for strings.
 
+
+**Function reference:** `loc` [(doc)](../appendices/doc_pandas.qmd#pandas-loc).
+
 ```{python}
 #| lst-label: lst-str-comp
 #| lst-cap: Basic comparison operation on strings
@@ -430,9 +490,9 @@ df.loc[df['Country'] == 'Indonesia']
 
 | Operation         | Example                                 | Description                                         |
 |-------------------|-----------------------------------------|-----------------------------------------------------|
-| contains          | `df['Name'].str.contains('Soufrière')`  | Checks if each string contains a substring          |
-| startswith        | `df['Name'].str.startswith('E')`        | Checks if each string starts with a substring       |
-| endswith          | `df['Name'].str.endswith('o')`          | Checks if each string ends with a substring         |
+| contains          | `df['Name'].str.contains('Soufrière')` [(doc)](../appendices/doc_pandas.qmd#pandas-str-contains)  | Checks if each string contains a substring          |
+| startswith        | `df['Name'].str.startswith('E')` [(doc)](../appendices/doc_pandas.qmd#pandas-str-startswith)        | Checks if each string starts with a substring       |
+| endswith          | `df['Name'].str.endswith('o')` [(doc)](../appendices/doc_pandas.qmd#pandas-str-endswith)          | Checks if each string ends with a substring         |
 
 
 : Common string comparison operations. {#tbl-comparison-str .striped   }
@@ -441,7 +501,7 @@ df.loc[df['Country'] == 'Indonesia']
 ::: {#cau-dtypes .callout-caution collapse="true"}
 ## Compare what is comparable!
 
-When using the comparison operators in @tbl-comparison-operators, we need to make sure that we are comparing data that have the **same type**. In @lst-bool, we are comparing the column `VEI` with an integer number. You can check the data type of a DataFrame using `df.dtypes`. 
+When using the comparison operators in @tbl-comparison-operators, we need to make sure that we are comparing data that have the **same type**. In @lst-bool, we are comparing the column `VEI` with an integer number. You can check the data type of a DataFrame using `df.dtypes` [(doc)](../appendices/doc_pandas.qmd#pandas-dtypes).
 
 Not all comparison operators work with all data type. For instance, you can test if a column contains a specific string using the `==` or `!=` operators, but the other won't work as they are *illogical*.
 :::
@@ -460,14 +520,21 @@ But what if we want to create more complex filters based on different rules? We 
 
 Let's gather all volcanoes that have a VEI of 3 and are in Indonesia:
 
+
+**Function reference:** `loc` [(doc)](../appendices/doc_pandas.qmd#pandas-loc).
+
 ```{python}
 #| lst-label: lst-logical-query
 #| lst-cap: Complex filtering using logical operators
 
-mask = (df['VEI'] == 3) & (df['Country'] == 'Indonesia') # Create a mask - don't forget parentheses!
-df.loc[mask] # Query the data
+mask = (df['VEI'] == 3) & (df['Country'] == 'Indonesia') # <1>
+df.loc[mask] # <2>
 
 ```
+
+1. Create a mask - don't forget parentheses!
+2. Query the data
+
 
 ::: {.callout-note}
 ## Question
@@ -504,23 +571,32 @@ mcq({
 
 #### Sorting data {.unnumbered}
 
-The main function to sort data is `.sort_values` ([doc](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html)). It is necessary to review how *three arguments* can alter the function's behaviour:
+The main function to sort data is `.sort_values` [(doc)](../appendices/doc_pandas.qmd#pandas-sort-values). It is necessary to review how *three arguments* can alter the function's behaviour:
 
 1. `by`: First argument (required) is the label of index/row used to sort the data. It is possible to sort by multiple columns by passing a list of values.
 2. `axis`: Specifies whether sorting rows (`axis = 0` - in which case `by` is a column name) or sorting columns (`axis = 1`, in which case `by` is an index value). The documentation specifies `axis = 0`, which means that rows will be sorted if `axis` is not specified.
 3. `ascending`: Using a *bool* (remember, this is a True/False behaviour), specifies if values are sorted in *ascending* (`ascending = True`, default behaviour is not specified) or *descending* (`ascending = False`) order.
 
 
+
+**Function reference:** `sort_values` [(doc)](../appendices/doc_pandas.qmd#pandas-sort-values).
+
 ```{python}
 #| lst-label: lst-sort
 #| lst-cap: Basic sorting operations
 #| eval: false
 
-df.sort_values('VEI') # Sort volcanoes by VEI in ascending number
-df.sort_values('Date', ascending=False) # Sort volcanoes by eruption dates from recent to old
-df.sort_values('Country') # .sort_values also work on strings to sort alphabetically
-df.sort_values(['Latitude', 'Longitude']) # Sorting using multiple columns
+df.sort_values('VEI') # <1>
+df.sort_values('Date', ascending=False) # <2>
+df.sort_values('Country') # <3>
+df.sort_values(['Latitude', 'Longitude']) # <4>
 ```
+
+1. Sort volcanoes by VEI in ascending number
+2. Sort volcanoes by eruption dates from recent to old
+3. .sort_values also work on strings to sort alphabetically
+4. Sorting using multiple columns
+
 
 
 ::: {.callout-note}
@@ -583,10 +659,13 @@ mask = df['Longitude'] <= 0
 
 ::: {.callout-tip collapse="true"}
 ## Select the values
-Select the values using `.loc` and do the maths.
+Select the values using `.loc` [(doc)](../appendices/doc_pandas.qmd#pandas-loc) and do the maths.
 
 ::: {.callout-tip collapse="true"}
 ## How?
+
+
+**Function reference:** `loc` [(doc)](../appendices/doc_pandas.qmd#pandas-loc).
 
 ```python
 360 + df.loc[mask, 'Longitude']
@@ -597,6 +676,9 @@ Select the values using `.loc` and do the maths.
 
 ::: {.callout-tip collapse="true"}
 ## Store back the values
+
+
+**Function reference:** `loc` [(doc)](../appendices/doc_pandas.qmd#pandas-loc).
 
 ```python
 df.loc[mask, 'Longitude_E'] = 360 + df.loc[mask, 'Longitude']
@@ -626,9 +708,9 @@ df.loc[mask, 'Longitude_E'] = 360 + df.loc[mask, 'Longitude']
 | Operation         | Example                                 | Description                                         |
 |-------------------|-----------------------------------------|-----------------------------------------------------|
 | Concatenation     | `df['Country'] + ' volcano'`            | Adds a string to each element                       |
-| String length     | `df['Country'].str.len()`                  | Returns the length of each string                   |
-| Uppercase         | `df['Country'].str.upper()`             | Converts each string to uppercase                   |
-| Lowercase         | `df['Country'].str.lower()`             | Converts each string to lowercase                   |
-| Replace           | `df['Country'].str.replace('USA', 'US')`| Replaces substrings in each string                  |
+| String length     | `df['Country'].str.len()` [(doc)](../appendices/doc_pandas.qmd#pandas-str-len)                  | Returns the length of each string                   |
+| Uppercase         | `df['Country'].str.upper()` [(doc)](../appendices/doc_pandas.qmd#pandas-str-upper)             | Converts each string to uppercase                   |
+| Lowercase         | `df['Country'].str.lower()` [(doc)](../appendices/doc_pandas.qmd#pandas-str-lower)             | Converts each string to lowercase                   |
+| Replace           | `df['Country'].str.replace('USA', 'US')` [(doc)](../appendices/doc_pandas.qmd#pandas-str-replace)| Replaces substrings in each string                  |
 
 : Common string operations on pandas columns. {#tbl-op-str .striped   }

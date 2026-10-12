@@ -1,0 +1,30 @@
+/* Slide-only overrides, following the Outils informatique slide setup. */
+.reveal .slides section div.callout {
+  font-size: 0.9em;
+}
+
+/* Keep emphasized text inside an alert in the alert colour. */
+.reveal .alert strong,
+.reveal .alert b {
+  color: inherit;
+}
+
+/* Figures below a listing share its vertical space. Side-by-side and
+   figure-only cells can use most of the slide height. */
+.reveal .cell-output {
+  margin-top: 0.35em;
+}
+.reveal .cell-output-display img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 340px;
+  object-fit: contain;
+}
+.reveal .column-output-location .cell-output-display img,
+.reveal .cell:not(:has(.cell-code)) .cell-output-display img {
+  max-height: 480px;
+}
+.reveal section[id^="families-of-data"] table {
+  font-size: 0.7em;
+}

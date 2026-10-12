@@ -1,0 +1,729 @@
+---
+title: "Pandas"
+lang: en
+execute:
+  eval: false
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    number-sections: false
+    code-annotations: hover
+---
+
+This reference explains the Pandas tools used in classes 1–4. Each entry gives a purpose, the arguments most useful in this course, an example, and a practical note. Follow **Official documentation** for the complete API.
+
+Examples use the course datasets: `df` is the eruption table, `df_traces` the geochemical table, `reading` the reading-score table, and `df_icecover` the lake table. Samples such as `dietA` and `dietB` have already been selected. Variables such as `data`, `ax`, and `mod1` refer to the array, axes, or fitted model described in the lesson. Snippets illustrate individual operations rather than forming a script to run from top to bottom.
+
+Import `pandas as pd`. Methods use parentheses, such as `df.head()`; attributes such as `df.shape` do not. Indexers `.loc` and `.iloc` use square brackets. Many transformations return a result: assign it if you want to keep it.
+
+## `read_csv()` {#pandas-read-csv}
+
+**Purpose:** Read a CSV file into a DataFrame.
+
+**Main arguments:** `filepath_or_buffer`: path or URL; `parse_dates`: column names to interpret as dates; `sep`: field separator.
+
+**Example:**
+
+```python
+df = pd.read_csv('data/dummy_volcanoes.csv', parse_dates=['Date'])
+```
+
+**Remember:** Check the column names and types after loading.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html)
+
+## `read_excel()` {#pandas-read-excel}
+
+**Purpose:** Read a worksheet from an Excel file.
+
+**Main arguments:** `io`: file path; `sheet_name`: worksheet name or position.
+
+**Example:**
+
+```python
+df = pd.read_excel('geochemistry.xlsx', sheet_name='Supp_traces')
+```
+
+**Remember:** Use `read_csv()` for the CSV versions supplied in the course.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.read_excel.html)
+
+## `DataFrame()` {#pandas-dataframe}
+
+**Purpose:** Create a labelled table from columns or records.
+
+**Main arguments:** `data`: dictionary, array or records; `index`: optional row labels.
+
+**Example:**
+
+```python
+new_data = pd.DataFrame({'age': [6, 8, 10], 'group': 'Control'})
+```
+
+**Remember:** Columns used for prediction must match those in the model formula.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html)
+
+## `Categorical()` {#pandas-categorical}
+
+**Purpose:** Represent a variable as categories rather than continuous numbers.
+
+**Main arguments:** `values`: observations; `categories`: optional allowed categories; `ordered`: whether their order has meaning.
+
+**Example:**
+
+```python
+df_icecover['lakeid'] = pd.Categorical(df_icecover['lakeid'])
+```
+
+**Remember:** A numeric code can still represent a category.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.Categorical.html)
+
+## `cut()` {#pandas-cut}
+
+**Purpose:** Divide numerical values into intervals.
+
+**Main arguments:** `x`: values; `bins`: interval boundaries or number of intervals; `labels`: optional interval labels.
+
+**Example:**
+
+```python
+binned = pd.cut(df_traces['Zr'], bins=[0, 100, 200, 300])
+```
+
+**Remember:** The chosen boundaries affect the resulting categories.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.cut.html)
+
+## `head()` {#pandas-head}
+
+**Purpose:** Display the first rows.
+
+**Main arguments:** `n`: number of rows; default is 5.
+
+**Example:**
+
+```python
+df.head(3)
+```
+
+**Remember:** A preview does not describe every observation.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.head.html)
+
+## `tail()` {#pandas-tail}
+
+**Purpose:** Display the last rows.
+
+**Main arguments:** `n`: number of rows; default is 5.
+
+**Example:**
+
+```python
+df.tail(5)
+```
+
+**Remember:** Useful for checking the end of a file.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.tail.html)
+
+## `info()` {#pandas-info}
+
+**Purpose:** Print column types and non-missing counts.
+
+**Main arguments:** Usually no arguments are needed.
+
+**Example:**
+
+```python
+df.info()
+```
+
+**Remember:** Prints a summary; its return value is not the summary table.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.info.html)
+
+## `set_index()` {#pandas-set-index}
+
+**Purpose:** Use one or more columns as row labels.
+
+**Main arguments:** `keys`: column name or names.
+
+**Example:**
+
+```python
+df = df.set_index('Name')
+```
+
+**Remember:** Store the returned DataFrame; labels need not be unique.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.set_index.html)
+
+## `reset_index()` {#pandas-reset-index}
+
+**Purpose:** Restore a sequential row index.
+
+**Main arguments:** `drop`: discard the old index instead of keeping it as a column.
+
+**Example:**
+
+```python
+df = df.reset_index()
+```
+
+**Remember:** By default, the former index becomes a column.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.reset_index.html)
+
+## `sort_values()` {#pandas-sort-values}
+
+**Purpose:** Sort observations by one or more columns.
+
+**Main arguments:** `by`: column names; `ascending`: increasing or decreasing order.
+
+**Example:**
+
+```python
+df = df.sort_values(['VEI', 'Date'], ascending=False)
+```
+
+**Remember:** Sorting returns a new result unless explicitly performed in place.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html)
+
+## `round()` {#pandas-round}
+
+**Purpose:** Round numbers to a chosen number of decimal places.
+
+**Main arguments:** `decimals`: number of decimal places.
+
+**Example:**
+
+```python
+df['Latitude_rounded'] = df['Latitude'].round(2)
+```
+
+**Remember:** Decimal places are different from significant figures.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.round.html)
+
+## `abs()` {#pandas-abs}
+
+**Purpose:** Take the absolute value of each number.
+
+**Main arguments:** No arguments are needed.
+
+**Example:**
+
+```python
+distance = df['Latitude'].abs()
+```
+
+**Remember:** Useful when the size of an offset matters more than its sign.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.abs.html)
+
+## `apply()` {#pandas-apply}
+
+**Purpose:** Apply a function to values or rows/columns.
+
+**Main arguments:** `func`: function to apply; DataFrame `axis=0` works by column and `axis=1` by row.
+
+**Example:**
+
+```python
+rounded_down = df['Latitude'].apply(np.floor)
+```
+
+**Remember:** Passing a function is different from calling it immediately.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.apply.html)
+
+## `clip()` {#pandas-clip}
+
+**Purpose:** Limit values to a lower and/or upper bound.
+
+**Main arguments:** `lower`, `upper`: allowed bounds.
+
+**Example:**
+
+```python
+bounded = df['Latitude'].clip(lower=-90, upper=90)
+```
+
+**Remember:** Clipping changes values; it is not a substitute for investigating errors.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.clip.html)
+
+## `fillna()` {#pandas-fillna}
+
+**Purpose:** Replace missing values.
+
+**Main arguments:** `value`: replacement value.
+
+**Example:**
+
+```python
+filled = df['VEI'].fillna(0)
+```
+
+**Remember:** Zero is an observed value, not a neutral replacement for missing data. Interpolation uses a separate method.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.fillna.html)
+
+## `mean()` {#pandas-mean}
+
+**Purpose:** Compute an arithmetic mean.
+
+**Main arguments:** `axis=0`: by column; `axis=1`: by row; `skipna`: ignore missing values.
+
+**Example:**
+
+```python
+df_traces[['Rb', 'Sr']].mean(axis=0)
+```
+
+**Remember:** Only average comparable quantities; outliers can strongly affect the mean.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mean.html)
+
+## `median()` {#pandas-median}
+
+**Purpose:** Compute the middle value of sorted observations.
+
+**Main arguments:** `axis`: direction of the summary; `skipna`: ignore missing values.
+
+**Example:**
+
+```python
+df_traces['Zr'].median()
+```
+
+**Remember:** For an even number of observations, the median averages the two middle values.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.median.html)
+
+## `mode()` {#pandas-mode}
+
+**Purpose:** Return the most frequent value or values.
+
+**Main arguments:** `dropna`: whether to exclude missing values.
+
+**Example:**
+
+```python
+df_traces['Zr'].mode()
+```
+
+**Remember:** May return several values; exact modes can be uninformative for continuous measurements.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mode.html)
+
+## `min()` {#pandas-min}
+
+**Purpose:** Find the smallest observed value.
+
+**Main arguments:** `axis`: direction of the summary; `skipna`: ignore missing values.
+
+**Example:**
+
+```python
+df_traces['Zr'].min()
+```
+
+**Remember:** The sample minimum is not necessarily the population minimum.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.min.html)
+
+## `max()` {#pandas-max}
+
+**Purpose:** Find the largest observed value.
+
+**Main arguments:** `axis`: direction of the summary; `skipna`: ignore missing values.
+
+**Example:**
+
+```python
+df_traces['Zr'].max()
+```
+
+**Remember:** The sample maximum is not necessarily the population maximum.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.max.html)
+
+## `var()` {#pandas-var}
+
+**Purpose:** Estimate variance using squared deviations from the mean.
+
+**Main arguments:** `ddof`: denominator is sample size minus `ddof`; pandas defaults to 1.
+
+**Example:**
+
+```python
+df_traces['Zr'].var()
+```
+
+**Remember:** Variance has squared units; select numerical columns.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.var.html)
+
+## `std()` {#pandas-std}
+
+**Purpose:** Estimate standard deviation.
+
+**Main arguments:** `ddof`: pandas defaults to 1; `axis`: direction of the summary.
+
+**Example:**
+
+```python
+df_traces[['Rb', 'Sr']].std()
+```
+
+**Remember:** Standard deviation has the same units as the measurements.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.std.html)
+
+## `skew()` {#pandas-skew}
+
+**Purpose:** Estimate the asymmetry of a distribution.
+
+**Main arguments:** `axis`: direction of the summary; `skipna`: ignore missing values.
+
+**Example:**
+
+```python
+df_traces['Zr'].skew()
+```
+
+**Remember:** Positive values indicate a longer right tail; inspect the distribution as well.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.skew.html)
+
+## `cov()` {#pandas-cov}
+
+**Purpose:** Compute pairwise sample covariances.
+
+**Main arguments:** `min_periods`: minimum number of paired observations; `ddof`: degrees-of-freedom adjustment.
+
+**Example:**
+
+```python
+df_traces[['Rb', 'Sr', 'Zr']].cov()
+```
+
+**Remember:** Magnitude depends on the variables’ units and scales.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.cov.html)
+
+## `corr()` {#pandas-corr}
+
+**Purpose:** Compute pairwise correlations.
+
+**Main arguments:** `method`: Pearson, Spearman or Kendall; `min_periods`: minimum paired observations.
+
+**Example:**
+
+```python
+df_traces[['Rb', 'Sr', 'Zr']].corr(method='pearson')
+```
+
+**Remember:** Correlation does not establish causation; Pearson measures linear association.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.corr.html)
+
+## `groupby()` {#pandas-groupby}
+
+**Purpose:** Split observations into groups for subsequent summaries.
+
+**Main arguments:** `by`: column name or list of names.
+
+**Example:**
+
+```python
+df_traces.groupby('Epoch')[['Rb', 'Sr']].mean()
+```
+
+**Remember:** Returns a GroupBy object; follow it with a summary such as `mean()`.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html)
+
+## `drop()` {#pandas-drop}
+
+**Purpose:** Remove selected rows or columns.
+
+**Main arguments:** `labels`: names to remove; `columns`: column names.
+
+**Example:**
+
+```python
+numerical = df_traces_sub.drop(columns=['Epoch'])
+```
+
+**Remember:** By default the returned table must be assigned if you want to retain it.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop.html)
+
+## `astype()` {#pandas-astype}
+
+**Purpose:** Convert the stored type of a column or table.
+
+**Main arguments:** `dtype`: target type.
+
+**Example:**
+
+```python
+df_icecover['year'] = df_icecover['year'].astype(int)
+```
+
+**Remember:** Conversion fails when values cannot be represented by the requested type.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.astype.html)
+
+## `unique()` {#pandas-unique}
+
+**Purpose:** Return distinct values in a Series.
+
+**Main arguments:** No arguments are needed.
+
+**Example:**
+
+```python
+reading['group'].unique()
+```
+
+**Remember:** Preserves first-appearance order; it does not sort or count the values.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.Series.unique.html)
+
+## `map()` {#pandas-map}
+
+**Purpose:** Replace or transform each value in a Series.
+
+**Main arguments:** `arg`: mapping dictionary or function.
+
+**Example:**
+
+```python
+colours = reading['group'].map({'Control': 'blue', 'Treatment': 'orange'})
+```
+
+**Remember:** Values absent from a dictionary mapping become missing.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.Series.map.html)
+
+## `get()` {#pandas-get}
+
+**Purpose:** Retrieve a labelled value with a fallback.
+
+**Main arguments:** `key`: label; `default`: value returned when the label is missing.
+
+**Example:**
+
+```python
+b_group = mod1.params.get('group[T.Treatment]', 0)
+```
+
+**Remember:** A fallback is useful only when its meaning is justified.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.Series.get.html)
+
+## `shape` {#pandas-shape}
+
+**Purpose:** Read the number of rows and columns.
+
+**Main arguments:** This is an attribute: do not add parentheses.
+
+**Example:**
+
+```python
+rows, columns = df.shape
+```
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.shape.html)
+
+## `index` {#pandas-index}
+
+**Purpose:** Read row labels.
+
+**Main arguments:** This is an attribute: do not add parentheses.
+
+**Example:**
+
+```python
+labels = df.index
+```
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.index.html)
+
+## `columns` {#pandas-columns}
+
+**Purpose:** Read column labels.
+
+**Main arguments:** This is an attribute: do not add parentheses.
+
+**Example:**
+
+```python
+names = df.columns
+```
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.columns.html)
+
+## `dtypes` {#pandas-dtypes}
+
+**Purpose:** Read the stored type of each column.
+
+**Main arguments:** This is an attribute: do not add parentheses.
+
+**Example:**
+
+```python
+types = df.dtypes
+```
+
+**Remember:** Types stored in Python and scientific variable types are different concepts.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.dtypes.html)
+
+## `loc` {#pandas-loc}
+
+**Purpose:** Select rows and columns by labels or a Boolean mask.
+
+**Main arguments:** Use square brackets: `row_selection, column_selection`.
+
+**Example:**
+
+```python
+selected = df.loc[['Calbuco', 'Taal'], ['Country', 'VEI']]
+```
+
+**Remember:** Use `:` to retain all rows or columns; label slices include their endpoint.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.loc.html)
+
+## `iloc` {#pandas-iloc}
+
+**Purpose:** Select rows and columns by integer position.
+
+**Main arguments:** Use square brackets: row positions, then column positions.
+
+**Example:**
+
+```python
+selected = df.iloc[0:5, 1:3]
+```
+
+**Remember:** Positions start at zero; the end of a slice is excluded.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.iloc.html)
+
+## `str.contains()` {#pandas-str-contains}
+
+**Purpose:** Test whether text contains a pattern.
+
+**Main arguments:** `pat`: text or regular expression; `regex=False`: literal text; `na=False`: treat missing values as non-matches.
+
+**Example:**
+
+```python
+mask = df['Country'].str.contains('I', regex=False, na=False)
+```
+
+**Remember:** The examples using a `Name` column require that it has not been moved to the index.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.Series.str.contains.html)
+
+## `str.startswith()` {#pandas-str-startswith}
+
+**Purpose:** Test whether text starts with a prefix.
+
+**Main arguments:** `pat`: prefix; `na`: result for missing values.
+
+**Example:**
+
+```python
+mask = df['Country'].str.startswith('I', na=False)
+```
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.Series.str.startswith.html)
+
+## `str.endswith()` {#pandas-str-endswith}
+
+**Purpose:** Test whether text ends with a suffix.
+
+**Main arguments:** `pat`: suffix; `na`: result for missing values.
+
+**Example:**
+
+```python
+mask = df['Country'].str.endswith('a', na=False)
+```
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.Series.str.endswith.html)
+
+## `str.len()` {#pandas-str-len}
+
+**Purpose:** Count the characters in each string.
+
+**Main arguments:** No arguments are needed.
+
+**Example:**
+
+```python
+lengths = df['Country'].str.len()
+```
+
+**Remember:** This is different from Python `len()`, which counts elements in the Series.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.Series.str.len.html)
+
+## `str.upper()` {#pandas-str-upper}
+
+**Purpose:** Convert text to uppercase.
+
+**Main arguments:** No arguments are needed.
+
+**Example:**
+
+```python
+upper = df['Country'].str.upper()
+```
+
+**Remember:** Store the result if you want to retain it.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.Series.str.upper.html)
+
+## `str.lower()` {#pandas-str-lower}
+
+**Purpose:** Convert text to lowercase.
+
+**Main arguments:** No arguments are needed.
+
+**Example:**
+
+```python
+lower = df['Country'].str.lower()
+```
+
+**Remember:** Useful when normalising text before comparisons.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.Series.str.lower.html)
+
+## `str.replace()` {#pandas-str-replace}
+
+**Purpose:** Replace part of each string.
+
+**Main arguments:** `pat`: text to find; `repl`: replacement; `regex=False`: literal replacement.
+
+**Example:**
+
+```python
+renamed = df['Country'].str.replace('USA', 'United States', regex=False)
+```
+
+**Remember:** Use ordinary Series `map()` when replacing complete category labels.
+
+[Official documentation](https://pandas.pydata.org/docs/reference/api/pandas.Series.str.replace.html)
+

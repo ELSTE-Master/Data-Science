@@ -16,6 +16,9 @@ engine: knitr
 
 In this section, we consider the construction of model diagnostic graphs discussed in the lecture slides. The first graph compares the fitted values (i.e the predictions) with the residuals of the model. The fitted values and the residuals of the model can be computed as follows:
 
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `model.fit` [(doc)](../appendices/doc_statsmodels.qmd#models-model-fit); `smf.ols` [(doc)](../appendices/doc_statsmodels.qmd#models-smf-ols); `model.fittedvalues` [(doc)](../appendices/doc_statsmodels.qmd#models-model-fittedvalues); `model.resid` [(doc)](../appendices/doc_statsmodels.qmd#models-model-resid).
+
 ```{python, echo=TRUE}
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -37,6 +40,9 @@ residuals = mod1.resid
 
 Then, we can construct the graph as follows:
 
+
+**Function reference:** `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `ax.scatter` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-scatter); `ax.axhline` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-axhline); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
+
 ```{python, echo=TRUE}
 plt.figure(figsize=(6, 5))
 plt.scatter(fitted_values, residuals, color='steelblue', alpha=0.8)
@@ -49,6 +55,9 @@ plt.show()
 ```
 
 Similarly to what we did before, we can also add different colors to compare the groups:
+
+**Function reference:** `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `unique` [(doc)](../appendices/doc_pandas.qmd#pandas-unique); `ax.scatter` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-scatter); `ax.axhline` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-axhline); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `ax.legend` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-legend); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
+
 ```{python}
 # Define colors for groups
 colors = {
@@ -75,7 +84,10 @@ plt.show()
 ```
 
 
-This graph clearly illustrates the limitation of our model. We can also construct a normal Q-Q plot to assess if the empirical distribution of the residuals is close to a normal distribution using the function `stats.probplot`:
+This graph clearly illustrates the limitation of our model. We can also construct a normal Q-Q plot to assess if the empirical distribution of the residuals is close to a normal distribution using the function `stats.probplot` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-probplot):
+
+
+**Function reference:** `stats.probplot` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-probplot); `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `ax.scatter` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-scatter); `ax.plot` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-plot); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
 
 ```{python}
 import scipy.stats as stats

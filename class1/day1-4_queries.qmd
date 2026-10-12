@@ -2,11 +2,12 @@
 title: "Querying data"
 format:
   html:
+    code-annotations: hover
     code-fold: false
     code-line-numbers: true
     css: [../assets/webex.css]
     include-after-body: [../assets/webex.js]
-    embed-resources: true 
+    embed-resources: false
 jupyter: python3
 ---
 
@@ -31,24 +32,36 @@ Let's now review how we can access data contained in the DataFrame. This process
 
 ### Label-based indexing {.unnumbered}
 
-![Label-based queries using `.loc`.](img/pandas_loc.png){#fig-pandas-loc}
+![Label-based queries using `.loc`. [(doc)](../appendices/doc_pandas.qmd#pandas-loc)](img/pandas_loc.png){#fig-pandas-loc}
 
 #### Querying rows {.unnumbered}
 
-When we know the exact label of the row or the column, we can use the `.loc` function to query the DataFrame (@fig-pandas-loc). Let's start by querying specific **rows**. We have [previously](day1-3_data_exploration.qmd#lst-set-index) defined the `Name` column as the *index* (i.e., row label), which means that we can simply pass the name of the volcano.
+When we know the exact label of the row or the column, we can use the `.loc` [(doc)](../appendices/doc_pandas.qmd#pandas-loc) function to query the DataFrame (@fig-pandas-loc). Let's start by querying specific **rows**. We have [previously](day1-3_data_exploration.qmd#lst-set-index) defined the `Name` column as the *index* (i.e., row label), which means that we can simply pass the name of the volcano.
+
+
+**Function reference:** `loc` [(doc)](../appendices/doc_pandas.qmd#pandas-loc).
 
 ```{python}
-# Get the row for "Calbuco" volcano
-df.loc['Calbuco']
+df.loc['Calbuco'] # <1>
 
 ```
+
+1. Get the row for "Calbuco" volcano
+
 
 Note that the result is a *Series* (i.e., a 1-dimensional DataFrame where the columns become the index), not a DataFrame. If we want to **keep it as a DataFrame**, we can use double brackets. Double brackets can also be used to query **multiple rows**.
 
+
+**Function reference:** `loc` [(doc)](../appendices/doc_pandas.qmd#pandas-loc).
+
 ```{python}
-df.loc[['Calbuco']] # Query one row and return it as a DataFrame
-df.loc[['Calbuco', 'Taal']] # Query multiple rows
+df.loc[['Calbuco']] # <1>
+df.loc[['Calbuco', 'Taal']] # <2>
 ```
+
+1. Query one row and return it as a DataFrame
+2. Query multiple rows
+
 
 ::: {.callout-note}
 ## Question
@@ -94,15 +107,48 @@ Let's now query specific **columns**. For example, querying the `VEI` column can
 
 
 ```{python}
-df[['VEI']] # Get the VEI column
-df[['Country', 'VEI']] # Query multiple columns
+df[['VEI']] # <1>
+df[['Country', 'VEI']] # <2>
 ```
 
+1. Get the VEI column
+2. Query multiple columns
 
-Note that until now, we have only retrieved either rows or columns (@fig-pandas-loc). We can also retrieve specific values by specifying **both the row and the column**.
+
+
+Until now, we have selected either rows or columns. With `.loc` [(doc)](../appendices/doc_pandas.qmd#pandas-loc), we can select both in one expression:
+
+
+**Function reference:** `loc` [(doc)](../appendices/doc_pandas.qmd#pandas-loc).
 
 ```{python}
-df.loc[['Calbuco', 'Taal']][['Country', 'VEI']]
+df.loc[['Calbuco', 'Taal'], ['Country', 'VEI']]
+```
+
+The general pattern is:
+
+
+**Function reference:** `loc` [(doc)](../appendices/doc_pandas.qmd#pandas-loc).
+
+```python
+df.loc[row_selection, column_selection]
+```
+
+The selection **before the comma** specifies the rows; the selection **after the comma** specifies the columns.
+
+To keep all rows and select only two columns, use `:` for the rows:
+
+
+**Function reference:** `loc` [(doc)](../appendices/doc_pandas.qmd#pandas-loc).
+
+```{python}
+df.loc[:, ['Country', 'VEI']]
+```
+
+For the selections above, this produces the same result as:
+
+```{python}
+df[['Country', 'VEI']]
 ```
 
 ### Position-based indexing {.unnumbered}
@@ -112,12 +158,15 @@ df.loc[['Calbuco', 'Taal']][['Country', 'VEI']]
 Remember that in Python, indexing starts from 0 - so the first row or column has an index of 0.
 :::
 
-![Position-based queries using `.iloc`.](img/pandas_iloc.png){#fig-pandas-iloc}
+![Position-based queries using `.iloc`. [(doc)](../appendices/doc_pandas.qmd#pandas-iloc)](img/pandas_iloc.png){#fig-pandas-iloc}
 
 
-Some situations require querying data by *location* instead of *label* - let's say for instance we need to retrieve rows 10-20. This is done using the `.iloc` function (instead of the `.loc` function previously used; @fig-pandas-iloc). Remember that Python uses zero-based indexing (@cau-indexing), meaning that the first element is at position 0, the second at position 1, and so on.
+Some situations require querying data by *location* instead of *label* - let's say for instance we need to retrieve rows 10-20. This is done using the `.iloc` [(doc)](../appendices/doc_pandas.qmd#pandas-iloc) function (instead of the `.loc` [(doc)](../appendices/doc_pandas.qmd#pandas-loc) function previously used; @fig-pandas-iloc). Remember that Python uses zero-based indexing (@cau-indexing), meaning that the first element is at position 0, the second at position 1, and so on.
 
 The next example queries the first row - using again double brackets to return a **DataFrame**.
+
+
+**Function reference:** `iloc` [(doc)](../appendices/doc_pandas.qmd#pandas-iloc).
 
 ```{python}
 df.iloc[[0]]
@@ -127,11 +176,17 @@ df.iloc[[0]]
 
 We can get **a range of rows** using what is called *slicing*. This is done using the colon (`:`) operator. The next example queries rows 3 to 6 of the DataFrame. Note that the end index is exclusive, meaning that the element at the end index is not included in the result.
 
+
+**Function reference:** `iloc` [(doc)](../appendices/doc_pandas.qmd#pandas-iloc).
+
 ```{python}
 df.iloc[2:6]
 ```
 
 To get rows 3 to 6 and columns 2-3:
+
+
+**Function reference:** `iloc` [(doc)](../appendices/doc_pandas.qmd#pandas-iloc).
 
 ```{python}
 df.iloc[0:5, 1:3]
@@ -140,6 +195,9 @@ df.iloc[0:5, 1:3]
 #### Count rows from the last {.unnumbered}
 
 To get the last 5 rows of the DataFrame:
+
+
+**Function reference:** `iloc` [(doc)](../appendices/doc_pandas.qmd#pandas-iloc).
 
 ```{python}
 df.iloc[-5:]
@@ -150,6 +208,9 @@ df.iloc[-5:]
 By experience, position-based queries is more used on *rows* than *columns*. For instance, we might want to access the first 10 rows because we don't know their associated labels, yet it is less likely that we ignore their *attributes*.
 It is possible mix label-based and position-based indexing. For example, to get the first 5 rows and the `Country` and `VEI` columns:
 
+
+
+**Function reference:** `iloc` [(doc)](../appendices/doc_pandas.qmd#pandas-iloc).
 
 ```{python}
 df.iloc[0:5][['Country', 'VEI']]
