@@ -12,7 +12,7 @@
   <meta name="author" content="Sébastien Biass">
   <meta name="author" content="Stéphane Guerrier">
   <meta name="dcterms.date" content="2026-10-21">
-  <title>ELSTE Data Science Master Course – Exploratory data analysis</title>
+  <title>ELSTE Data Science Master Course – ELSTE Data science</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -204,8 +204,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Exploratory data analysis</h1>
-  <p class="subtitle">How to start making data talk</p>
+  <h1 class="title">ELSTE Data science</h1>
+  <p class="subtitle">Class 2: Exploratory data analysis</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -323,7 +323,7 @@ Stéphane Guerrier <a href="https://orcid.org/0000-0003-0002-8794" class="quarto
 </ul></li>
 </ul>
 <p><span style="font-size: 0.5em;"></span></p>
-<div id="180a0bf9" class="cell" data-execution_count="2">
+<div id="1a0b39ef" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># Load Pandas</span></span>
 <span id="cb1-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd <span class="co"># Import pandas</span></span>
 <span id="cb1-3"><a></a></span>
@@ -336,7 +336,7 @@ Stéphane Guerrier <a href="https://orcid.org/0000-0003-0002-8794" class="quarto
 <h2>Inspecting the dataset</h2>
 <div class="columns">
 <div class="column" style="width:48%;">
-<div id="5fed18a7" class="cell" data-execution_count="3">
+<div id="329382ea" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>df_traces.head(<span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <div>
@@ -512,7 +512,7 @@ Stéphane Guerrier <a href="https://orcid.org/0000-0003-0002-8794" class="quarto
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:48%;">
-<div id="da61d717" class="cell" data-execution_count="4">
+<div id="e2cd3681" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>df_traces.info()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
@@ -705,7 +705,7 @@ memory usage: 107.1+ KB</code></pre>
 </ul></li>
 </ul>
 <p><span style="font-size: 0.5em;"></span></p>
-<div id="48bbc29b" class="cell" data-execution_count="5">
+<div id="feccb150" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt <span class="co"># Import the pyplot module from matplotlib</span></span>
 <span id="cb5-2"><a></a><span class="im">import</span> seaborn <span class="im">as</span> sns <span class="co"># Import seaborn</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -723,7 +723,7 @@ memory usage: 107.1+ KB</code></pre>
 </ul></li>
 </ul>
 <p><span style="font-size: 0.5em;"></span></p>
-<div id="bc16609d" class="cell" data-execution_count="6">
+<div id="66751431" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div><div class="column" style="width:4%;">
@@ -777,7 +777,7 @@ memory usage: 107.1+ KB</code></pre>
 <section id="plotting-example" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Plotting example</h2>
 <p><span style="font-size: 0.5em;"></span></p>
-<div id="18aef09e" class="cell columns column-output-location" data-execution_count="7">
+<div id="0b69cbf6" class="cell columns column-output-location" data-execution_count="7">
 <div class="column">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb7-1" class="hljs-ln-code"><a></a><span class="co"># Define some data</span></span>
 <span id="cb7-2" class="hljs-ln-code"><a></a>data1 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>]</span>
@@ -802,7 +802,7 @@ memory usage: 107.1+ KB</code></pre>
 <section id="plotting-example-1" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Plotting example</h2>
 <p><span style="font-size: 0.5em;"></span></p>
-<div id="d94fc53b" class="cell columns column-output-location" data-execution_count="8">
+<div id="d5f19c0a" class="cell columns column-output-location" data-execution_count="8">
 <div class="column">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb8-1" class="hljs-ln-code"><a></a><span class="co"># Define some data</span></span>
 <span id="cb8-2" class="hljs-ln-code"><a></a>data1 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>]</span>
@@ -847,7 +847,7 @@ memory usage: 107.1+ KB</code></pre>
 <section id="seaborn-example" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Seaborn example</h2>
 <p><span style="font-size: 0.5em;"></span></p>
-<div id="4edb92e6" class="cell" data-execution_count="9">
+<div id="4e329b62" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb9-1" class="hljs-ln-code"><a></a><span class="co"># Define figure + axes</span></span>
 <span id="cb9-2" class="hljs-ln-code"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb9-3" class="hljs-ln-code"><a></a><span class="co"># Plot with seaborn (remember, we imported it as sns)</span></span>
@@ -865,7 +865,7 @@ memory usage: 107.1+ KB</code></pre>
 <section id="seaborn-example-1" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Seaborn example</h2>
 <p><span style="font-size: 0.5em;"></span></p>
-<div id="eb4a9506" class="cell" data-execution_count="10">
+<div id="0a982618" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb10-1" class="hljs-ln-code"><a></a><span class="co"># Define figure + axes</span></span>
 <span id="cb10-2" class="hljs-ln-code"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb10-3" class="hljs-ln-code"><a></a><span class="co"># Plot with seaborn (remember, we imported it as sns)</span></span>
@@ -923,7 +923,7 @@ memory usage: 107.1+ KB</code></pre>
 <li>Represents the <span class="alert">distribution</span> of data</li>
 </ul></li>
 </ul>
-<div id="f6dfa7cf" class="cell" data-execution_count="11">
+<div id="25dcf9da" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -947,7 +947,7 @@ memory usage: 107.1+ KB</code></pre>
 <div class="columns">
 <div class="column" style="width:48%;">
 <p><span style="font-size: 0.5em;">&nbsp;</span> Automatic number of bins:</p>
-<div id="403cc386" class="cell" data-execution_count="12">
+<div id="d2ba2800" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb11-1" class="hljs-ln-code"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb11-2" class="hljs-ln-code"><a></a><span class="co"># Plot histogram</span></span>
 <span id="cb11-3" class="hljs-ln-code"><a></a>sns.histplot(data<span class="op">=</span>df_traces, x<span class="op">=</span><span class="st">'Zr'</span>, color<span class="op">=</span>blue, alpha<span class="op">=</span><span class="fl">.5</span>)</span>
@@ -957,7 +957,7 @@ memory usage: 107.1+ KB</code></pre>
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:48%;">
-<div id="fccc11cf" class="cell" data-execution_count="13">
+<div id="7af0c8a8" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -982,7 +982,7 @@ memory usage: 107.1+ KB</code></pre>
 <div class="columns">
 <div class="column" style="width:48%;">
 <p><span style="font-size: 0.5em;">&nbsp;</span> 10 bins:</p>
-<div id="2ee63ccd" class="cell" data-execution_count="14">
+<div id="8984a265" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb12-1" class="hljs-ln-code"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb12-2" class="hljs-ln-code"><a></a><span class="co"># Plot histogram</span></span>
 <span id="cb12-3" class="hljs-ln-code"><a></a>sns.histplot(data<span class="op">=</span>df_traces, x<span class="op">=</span><span class="st">'Zr'</span>, bins<span class="op">=</span><span class="dv">10</span>, color<span class="op">=</span>blue, alpha<span class="op">=</span><span class="fl">.5</span>)</span>
@@ -992,7 +992,7 @@ memory usage: 107.1+ KB</code></pre>
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:48%;">
-<div id="d12b3318" class="cell" data-execution_count="15">
+<div id="c421aee1" class="cell" data-execution_count="15">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1017,7 +1017,7 @@ memory usage: 107.1+ KB</code></pre>
 <div class="columns">
 <div class="column" style="width:48%;">
 <p><span style="font-size: 0.5em;">&nbsp;</span> 200 bins:</p>
-<div id="6a5fb668" class="cell" data-execution_count="16">
+<div id="04cd1e71" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb13-1" class="hljs-ln-code"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb13-2" class="hljs-ln-code"><a></a><span class="co"># Plot histogram</span></span>
 <span id="cb13-3" class="hljs-ln-code"><a></a>sns.histplot(data<span class="op">=</span>df_traces, x<span class="op">=</span><span class="st">'Zr'</span>, bins<span class="op">=</span><span class="dv">200</span>, color<span class="op">=</span>blue, alpha<span class="op">=</span><span class="fl">.5</span>)</span>
@@ -1027,7 +1027,7 @@ memory usage: 107.1+ KB</code></pre>
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:48%;">
-<div id="9b5b0d60" class="cell" data-execution_count="17">
+<div id="5c3f32d5" class="cell" data-execution_count="17">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1051,7 +1051,7 @@ memory usage: 107.1+ KB</code></pre>
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:48%;">
-<div id="25f9f144" class="cell" data-execution_count="18">
+<div id="c2dad494" class="cell" data-execution_count="18">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1075,7 +1075,7 @@ memory usage: 107.1+ KB</code></pre>
 <li><strong>estimators</strong></li>
 </ul></li>
 </ul>
-<div id="51132cb0" class="cell" data-execution_count="19">
+<div id="7dee35df" class="cell" data-execution_count="19">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1098,7 +1098,7 @@ memory usage: 107.1+ KB</code></pre>
 </ul>
 <p><span style="font-size: 0.5em;"></span></p>
 <div class="fragment">
-<div id="9821bc2c" class="cell columns column-output-location" data-execution_count="20">
+<div id="92d821d9" class="cell columns column-output-location" data-execution_count="20">
 <div class="column">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a><span class="co"># One column</span></span>
 <span id="cb14-2"><a></a>df_traces[[<span class="st">'Zr'</span>]].mean().<span class="bu">round</span>(<span class="dv">2</span>)</span>
@@ -1123,7 +1123,7 @@ dtype: float64</code></pre>
 <li>No equation, use of ECDF</li>
 <li><code>df.median()</code></li>
 </ul>
-<div id="bc010234" class="cell" data-execution_count="21">
+<div id="b3f47e09" class="cell" data-execution_count="21">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1136,7 +1136,7 @@ dtype: float64</code></pre>
 
 </div><div class="column" style="width:48%;">
 <p><span style="font-size: 0.5em;">&nbsp;</span></p>
-<div id="7b037871" class="cell" data-execution_count="22">
+<div id="f8b25856" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a><span class="co"># One column</span></span>
 <span id="cb16-2"><a></a>df_traces[[<span class="st">'Zr'</span>]].median().<span class="bu">round</span>(<span class="dv">2</span>)</span>
 <span id="cb16-3"><a></a><span class="co"># Multiple columns</span></span>
@@ -1157,7 +1157,7 @@ dtype: float64</code></pre>
 <li><strong>Categorical</strong> or <strong>discrete numerical data</strong>: value(s) that appear most often.</li>
 <li>For <strong>continuous data</strong>, exact duplicates may be rare</li>
 </ul>
-<div id="a0b4f957" class="cell columns column-output-location" data-execution_count="23">
+<div id="6fc9f644" class="cell columns column-output-location" data-execution_count="23">
 <div class="column">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a><span class="co"># Calculate the modes</span></span>
 <span id="cb18-2"><a></a>modes <span class="op">=</span> df_traces[<span class="st">'Zr'</span>].mode().<span class="bu">round</span>(<span class="dv">2</span>)</span>
@@ -1202,7 +1202,7 @@ dtype: float64</code></pre>
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:48%;">
-<div id="c703d4e0" class="cell" data-execution_count="24">
+<div id="47e325d1" class="cell" data-execution_count="24">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1230,7 +1230,7 @@ dtype: float64</code></pre>
 
 </div><div class="column" style="width:48%;">
 <p><span style="font-size: 0.5em;">&nbsp;</span></p>
-<div id="5d30b358" class="cell" data-execution_count="25">
+<div id="05b0cb5e" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a></a>df_min <span class="op">=</span> df_traces[<span class="st">'Zr'</span>].<span class="bu">min</span>()</span>
 <span id="cb19-2"><a></a>df_max <span class="op">=</span> df_traces[<span class="st">'Zr'</span>].<span class="bu">max</span>()</span>
 <span id="cb19-3"><a></a>df_range <span class="op">=</span> df_max <span class="op">-</span> df_min</span>
@@ -1275,7 +1275,7 @@ s = \sqrt{\frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1} }
 
 </div><div class="column" style="width:48%;">
 <p><span style="font-size: 0.5em;"></span></p>
-<div id="db1d759a" class="cell" data-execution_count="26">
+<div id="300007b8" class="cell" data-execution_count="26">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb21-1" class="hljs-ln-code"><a></a>df_traces[<span class="st">'Zr'</span>].std()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
 <pre><code>np.float64(118.39358315895393)</code></pre>
@@ -1296,11 +1296,11 @@ s = \sqrt{\frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1} }
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:48%;">
-<div id="0299e9da" class="cell" data-execution_count="27">
+<div id="8e484906" class="cell" data-execution_count="27">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="class2_EDA_files/figure-revealjs/cell-28-output-1.png" width="854" height="456"></p>
+<p><img data-src="class2_EDA_files/figure-revealjs/cell-28-output-1.png" width="851" height="456"></p>
 </figure>
 </div>
 </div>
@@ -1322,7 +1322,7 @@ s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}
 </ul>
 </div><div class="column" style="width:46%;">
 <p><span style="font-size: 0.5em;"></span></p>
-<div id="308f68a6" class="cell" data-execution_count="28">
+<div id="5401607f" class="cell" data-execution_count="28">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a>df_traces[<span class="st">'Zr'</span>].var()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
 <pre><code>np.float64(14017.04053321614)</code></pre>
@@ -1469,7 +1469,7 @@ Table&nbsp;1: Relationship between quartiles, deciles and percentiles.
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:48%;">
-<div id="441eeb92" class="cell" data-execution_count="29">
+<div id="eecb205c" class="cell" data-execution_count="29">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb25-2"><a></a>sns.boxplot(data<span class="op">=</span>df_traces[[<span class="st">'Zr'</span>, <span class="st">'Sr'</span>]], orient<span class="op">=</span><span class="st">"h"</span>, ax<span class="op">=</span>ax)</span>
 <span id="cb25-3"><a></a>ax.set_xlabel(<span class="st">'Concentration (ppm)'</span>)<span class="op">;</span></span>
@@ -1497,7 +1497,7 @@ Table&nbsp;1: Relationship between quartiles, deciles and percentiles.
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:48%;">
-<div id="198bb502" class="cell" data-execution_count="30">
+<div id="3e1f7165" class="cell" data-execution_count="30">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb26-2"><a></a>sns.violinplot(data<span class="op">=</span>df_traces[[<span class="st">'Zr'</span>, <span class="st">'Sr'</span>]], orient<span class="op">=</span><span class="st">"h"</span>, ax<span class="op">=</span>ax)</span>
 <span id="cb26-3"><a></a>ax.set_xlabel(<span class="st">'Concentration (ppm)'</span>)<span class="op">;</span></span>
@@ -1525,7 +1525,7 @@ Table&nbsp;1: Relationship between quartiles, deciles and percentiles.
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:48%;">
-<div id="1b2a53b9" class="cell" data-execution_count="31">
+<div id="fcbbec4d" class="cell" data-execution_count="31">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb27-2"><a></a>sns.boxenplot(data<span class="op">=</span>df_traces[[<span class="st">'Zr'</span>, <span class="st">'Sr'</span>]], orient<span class="op">=</span><span class="st">"h"</span>, ax<span class="op">=</span>ax)</span>
 <span id="cb27-3"><a></a>ax.set_xlabel(<span class="st">'Concentration (ppm)'</span>)<span class="op">;</span></span>
@@ -1584,7 +1584,7 @@ Table&nbsp;1: Relationship between quartiles, deciles and percentiles.
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:56%;">
-<div id="6474a6cf" class="cell" data-execution_count="32">
+<div id="f1abc007" class="cell" data-execution_count="32">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1660,7 +1660,7 @@ r(X_p,X_1) &amp; r(X_p,X_2) &amp; \dots &amp; 1
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:48%;">
-<div id="b6fd3a56" class="cell" data-execution_count="33">
+<div id="53930482" class="cell" data-execution_count="33">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1713,7 +1713,7 @@ y = a + bx + \varepsilon
 </div><div class="column" style="width:4%;">
 
 </div><div class="column img-up-75" style="width:38%;">
-<div id="ecf7a5e4" class="cell" data-execution_count="34">
+<div id="c6277fe9" class="cell" data-execution_count="34">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1740,7 +1740,7 @@ y = a + bx + \varepsilon
 </div><div class="column" style="width:4%;">
 
 </div><div class="column img-up-75" style="width:38%;">
-<div id="8ea86d95" class="cell" data-execution_count="35">
+<div id="0b283645" class="cell" data-execution_count="35">
 <div class="cell-output cell-output-display">
 <div>
 <figure>

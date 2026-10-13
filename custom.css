@@ -113,3 +113,17 @@ a {
   color: #d86405 !important;
 } 
 
+
+/* Presentation download buttons, matching Outils informatique. */
+.btn-download {
+  color: #d86405 !important;
+  background-color: transparent;
+  border: 1px solid #eb811b;
+  border-radius: 999px;
+}
+.btn-download:hover,
+.btn-download:focus {
+  color: #ffffff !important;
+  background-color: #eb811b;
+  border-color: #eb811b;
+}

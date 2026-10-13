@@ -206,7 +206,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">ELSTE Data science</h1>
-  <p class="subtitle">Some concept of Python coding and statistical inference</p>
+  <p class="subtitle">Class 1: Introduction to data analysis and inference using Python</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -525,7 +525,7 @@ flowchart LR
 <li><code>pyplot</code> is a <span class="alert">module</span> of <code>matplotlib</code> that provides easy-to-use functions for <strong>plotting</strong> data</li>
 <li><code>figure</code> is a <span class="alert">function</span> of <code>pyplot</code> and is the main function to prepare a plot</li>
 </ul>
-<div id="b7650194" class="cell" data-execution_count="1">
+<div id="edffe0c6" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># Import the packages and modules</span></span>
 <span id="cb1-2"><a></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt </span>
 <span id="cb1-3"><a></a><span class="co"># Set up a figure for plotting</span></span>
@@ -720,6 +720,131 @@ flowchart LR
 <h1>Today’s plans</h1>
 
 </section>
+<section id="pandas" class="slide level2">
+<h2>Pandas</h2>
+<p><span style="font-size: 0.5em;"></span></p>
+<p><code>pandas</code>: A <strong>package</strong> for <span class="alert">data manipulation and analysis</span> handling <strong>structured data</strong></p>
+<ul>
+<li><strong>Reading/writing data</strong> from common formats (CSV, Excel, JSON, etc.)</li>
+<li>Handling <strong>missing data</strong></li>
+<li><strong>Filtering</strong>, <strong>sorting</strong>, <strong>reshaping</strong> and <strong>grouping</strong> data</li>
+<li><strong>Aggregating</strong> data (sum, mean, count, etc.)</li>
+<li><strong>Time series support</strong> (date ranges, frequency conversions)</li>
+<li><strong>Statistical operations</strong></li>
+</ul>
+</section>
+<section id="anatomy-of-a-dataframe" class="slide level2">
+<h2>Anatomy of a DataFrame</h2>
+
+<img data-src="../class1/img/pandas-1.png" class="r-stretch"><ul>
+<li><p>Similar to <em>Excel</em> → contains <em>tabular data</em> composed of <span class="alert">rows</span> and <span class="alert">columns</span></p></li>
+<li><p>In <em>Excel</em>:</p>
+<ul>
+<li><strong>Rows</strong> are accessed using <em>numbers</em></li>
+<li><strong>Columns</strong> are accessed using <em>letters</em></li>
+</ul></li>
+</ul>
+</section>
+<section id="anatomy-of-a-dataframe-1" class="slide level2">
+<h2>Anatomy of a DataFrame</h2>
+
+<img data-src="../class1/img/pandas-2.png" class="r-stretch"><ul>
+<li>Unlike <em>Excel</em>, <strong>rows</strong> and <strong>columns</strong> can be <span class="alert">labelled</span>
+<ul>
+<li><span class="alert">Index</span> refers to the label of the <strong>rows</strong>. In the <em>index</em>, <strong>values are usually unique</strong> - meaning that each entry has a different label.</li>
+<li><span class="alert">Column</span> refers to the label of - logically - the <strong>columns</strong></li>
+</ul></li>
+</ul>
+</section>
+<section id="todays-dataset" class="slide level2">
+<h2>Today’s dataset</h2>
+<p>Synthetic dataset of <strong>selected volcanic eruptions</strong> → first 5 rows:</p>
+<p><span style="font-size: 0.5em;"></span></p>
+<table class="table table-striped table-hover caption-top">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 15%">
+<col style="width: 25%">
+<col style="width: 8%">
+<col style="width: 14%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Country</th>
+<th style="text-align: left;">Date</th>
+<th style="text-align: right;">VEI</th>
+<th style="text-align: right;">Latitude</th>
+<th style="text-align: right;">Longitude</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">St.&nbsp;Helens</td>
+<td style="text-align: left;">USA</td>
+<td style="text-align: left;">1980-05-18</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">46.1914</td>
+<td style="text-align: right;">-122.196</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pinatubo</td>
+<td style="text-align: left;">Philippines</td>
+<td style="text-align: left;">1991-04-02</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">15.1501</td>
+<td style="text-align: right;">120.347</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">El Chichón</td>
+<td style="text-align: left;">Mexico</td>
+<td style="text-align: left;">1982-03-28</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">17.3559</td>
+<td style="text-align: right;">-93.2233</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Galunggung</td>
+<td style="text-align: left;">Indonesia</td>
+<td style="text-align: left;">1982-04-05</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">-7.2567</td>
+<td style="text-align: right;">108.077</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Nevado del Ruiz</td>
+<td style="text-align: left;">Colombia</td>
+<td style="text-align: left;">1985-11-13</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4.895</td>
+<td style="text-align: right;">-75.322</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="volcanic-explosivity-index-vei" class="slide level2">
+<h2>Volcanic explosivity index (VEI)</h2>
+
+<img data-src="img/vei.jpeg" class="r-stretch"></section>
+<section id="todays-objectives" class="slide level2">
+<h2>Today’s objectives</h2>
+<p><strong>5 modules</strong>:</p>
+<ol type="1">
+<li>How to <span class="alert">load data</span> in a DataFrame</li>
+<li>How to <span class="alert">access</span> data → <em>query by label/position</em></li>
+<li>How to <span class="alert">filter</span> data → <em>comparison and logical operators</em></li>
+<li>How to <span class="alert">rearrange</span> data → <em>sorting values</em></li>
+<li>How to <span class="alert">operate</span> on data → <em>arithmetic and string operations</em></li>
+</ol>
+<ul>
+<li>We expect you to know how to get started with Python / Jupyter notebook</li>
+<li>Let us know if <span class="alert">you are lost</span> or if <span class="alert">you already know all of this</span>
+<ul>
+<li>Let’s make it useful for <strong>your research</strong></li>
+</ul></li>
+</ul>
+</section>
 <section id="get-started" class="slide level2">
 <h2>Get started</h2>
 <ul>
@@ -738,29 +863,6 @@ flowchart LR
 </ul></li>
 <li>Document your code with <a href="../appendices/jupyter_markdown_summary.html">Markdown</a></li>
 </ul>
-</section>
-<section id="todays-objectives" class="slide level2">
-<h2>Today’s objectives</h2>
-<p>4 modules:</p>
-<ol type="1">
-<li>Data <span class="alert">structure</span></li>
-<li><span class="alert">Querying</span> data</li>
-<li><span class="alert">Filtering</span> data</li>
-<li>Data <span class="alert">operations</span></li>
-</ol>
-<p>→ We expect you to know how to get started with Python / Jupyter notebook, <span class="alert">shout if you are lost</span></p>
-</section>
-<section id="start-coding" class="slide level2">
-<h2>Start coding!</h2>
-<ul>
-<li>Go to <a href="https://elste-master.github.io/Data-Science/">https://elste-master.github.io/Data-Science/</a>
-<ul>
-<li><strong>Setup VS Code:</strong> Appendices &gt; <span class="alert">Setup VS Code</span></li>
-</ul></li>
-</ul>
-<p><span style="font-size: 0.5em;"></span></p>
-<iframe src="../appendices/setup_vscode.html" width="100%" height="400px" style="border:none;">
-</iframe>
 
 
 </section></section>

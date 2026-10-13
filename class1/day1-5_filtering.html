@@ -358,7 +358,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="comparison-operators" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="comparison-operators">Comparison operators</h2>
 <p>Let’s assume the following variables (<a href="#lst-basic-bool" class="quarto-xref">Listing&nbsp;1</a>):</p>
-<div id="c2d8b244" class="cell" data-execution_count="2">
+<div id="f8104ee8" class="cell" data-execution_count="2">
 <div id="lst-basic-bool" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-basic-bool-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -430,7 +430,7 @@ Table&nbsp;1: Comparison operators in Python.
 </figure>
 </div>
 <p>We can apply comparison operators to DataFrame. Let’s say we want to test what rows have a VEI of 4:</p>
-<div id="97a086a6" class="cell" data-execution_count="3">
+<div id="7bdd2a2f" class="cell" data-execution_count="3">
 <div id="lst-bool" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-bool-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -468,7 +468,7 @@ Name: VEI, dtype: bool</code></pre>
 </div>
 <p>We can see that Galunggung, Taal, La Soufrière, Calbuco and Eyjafjallajökull return <code>True</code> to this condition. This is great, but what if we want to return the actual rows? We can use <a href="#lst-bool" class="quarto-xref">Listing&nbsp;2</a> as a <strong>mask</strong> to then query the rows using <code>.loc</code> <a href="../appendices/doc_pandas.html#pandas-loc">(doc)</a>.</p>
 <p><strong>Function reference:</strong> <code>loc</code> <a href="../appendices/doc_pandas.html#pandas-loc">(doc)</a>.</p>
-<div id="38b96b6b" class="cell" data-execution_count="4">
+<div id="0374cf93" class="cell" data-execution_count="4">
 <div id="lst-bool-query" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-bool-query-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -579,13 +579,13 @@ Listing&nbsp;3: Query data using a boolean mask
 </div>
 <div class="callout-body-container callout-body">
 <p>What volcanoes have a VEI of 5?</p>
-<div id="2136c667" class="cell" data-execution_count="5">
+<div id="260eb6ef" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="5">
 <select class="webex-select"><option value="blank"></option><option value="0">La Soufrière and Calbuco</option><option value="0">Merapi and Agung</option><option value="0">Nyiragongo and Taal</option><option value="answer">St. Helens and El Chichón</option></select>
 </div>
 </div>
 <p>How many volcanoes are in the southern hemisphere? (hint: use the <code>df.shape</code> <a href="../appendices/doc_pandas.html#pandas-shape">(doc)</a> function to count them).</p>
-<div id="c08ae5fc" class="cell" data-execution_count="6">
+<div id="cb8f2845" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="6">
 <select class="webex-select"><option value="blank"></option><option value="0">1</option><option value="0">2</option><option value="0">4</option><option value="answer">6</option><option value="0">12</option></select>
 </div>
@@ -596,7 +596,7 @@ Listing&nbsp;3: Query data using a boolean mask
 <h3 class="unnumbered anchored" data-anchor-id="string-comparisons">String comparisons</h3>
 <p>We can also use comparison operators on columns containing <strong>strings</strong> (see <a href="#cau-dtypes" class="quarto-xref">Caution&nbsp;1</a> for caveats). <a href="#lst-str-comp" class="quarto-xref">Listing&nbsp;4</a> illustrates a basic string comparison using the <code>=</code> operator. <a href="#tbl-comparison-str" class="quarto-xref">Table&nbsp;2</a> shows additional operators for strings.</p>
 <p><strong>Function reference:</strong> <code>loc</code> <a href="../appendices/doc_pandas.html#pandas-loc">(doc)</a>.</p>
-<div id="b7d66b6c" class="cell" data-execution_count="7">
+<div id="4f29a237" class="cell" data-execution_count="7">
 <div id="lst-str-comp" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-str-comp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -773,7 +773,7 @@ Table&nbsp;3: Logical operators in pandas for combining boolean conditions. Use 
 </div>
 <p>Let’s gather all volcanoes that have a VEI of 3 and are in Indonesia:</p>
 <p><strong>Function reference:</strong> <code>loc</code> <a href="../appendices/doc_pandas.html#pandas-loc">(doc)</a>.</p>
-<div id="aa3b435a" class="cell" data-execution_count="8">
+<div id="9558cf07" class="cell" data-execution_count="8">
 <div id="lst-logical-query" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-logical-query-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -854,13 +854,13 @@ Listing&nbsp;5: Complex filtering using logical operators
 </div>
 <div class="callout-body-container callout-body">
 <p>How many volcanoes are either in Chile <strong>or</strong> in the USA?</p>
-<div id="8cf3605c" class="cell" data-execution_count="9">
+<div id="19b7e6df" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="9">
 <select class="webex-select"><option value="blank"></option><option value="0">1</option><option value="0">3</option><option value="answer">5</option><option value="0">8</option></select>
 </div>
 </div>
 <p>How many volcanoes are in the southern hemisphere <strong>and</strong> have a VEI≥4?</p>
-<div id="aadbcbb6" class="cell" data-execution_count="10">
+<div id="d7c283b4" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="10">
 <select class="webex-select"><option value="blank"></option><option value="0">1</option><option value="answer">2</option><option value="0">8</option><option value="0">12</option></select>
 </div>
