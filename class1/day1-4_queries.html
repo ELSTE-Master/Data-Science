@@ -386,7 +386,7 @@ Figure&nbsp;1: Label-based queries using <code>.loc</code>. <a href="../appendic
 <h4 class="unnumbered anchored" data-anchor-id="querying-rows">Querying rows</h4>
 <p>When we know the exact label of the row or the column, we can use the <code>.loc</code> <a href="../appendices/doc_pandas.html#pandas-loc">(doc)</a> function to query the DataFrame (<a href="#fig-pandas-loc" class="quarto-xref">Figure&nbsp;1</a>). Let’s start by querying specific <strong>rows</strong>. We have <a href="../class1/day1-3_data_exploration.html#lst-set-index">previously</a> defined the <code>Name</code> column as the <em>index</em> (i.e., row label), which means that we can simply pass the name of the volcano.</p>
 <p><strong>Function reference:</strong> <code>loc</code> <a href="../appendices/doc_pandas.html#pandas-loc">(doc)</a>.</p>
-<div id="c0f9f25d" class="cell" data-execution_count="2">
+<div id="a0ac791a" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1"></a>df.loc[<span class="st">'Calbuco'</span>]</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
@@ -407,7 +407,7 @@ Name: Calbuco, dtype: object</code></pre>
 </div>
 <p>Note that the result is a <em>Series</em> (i.e., a 1-dimensional DataFrame where the columns become the index), not a DataFrame. If we want to <strong>keep it as a DataFrame</strong>, we can use double brackets. Double brackets can also be used to query <strong>multiple rows</strong>.</p>
 <p><strong>Function reference:</strong> <code>loc</code> <a href="../appendices/doc_pandas.html#pandas-loc">(doc)</a>.</p>
-<div id="3a0cc79d" class="cell" data-execution_count="3">
+<div id="cbeb9875" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1">1</button><span id="annotated-cell-2-1" class="code-annotation-target"><a href="#annotated-cell-2-1"></a>df.loc[[<span class="st">'Calbuco'</span>]]</span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2">2</button><span id="annotated-cell-2-2" class="code-annotation-target"><a href="#annotated-cell-2-2"></a>df.loc[[<span class="st">'Calbuco'</span>, <span class="st">'Taal'</span>]]</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-annotation">
@@ -479,13 +479,13 @@ Name: Calbuco, dtype: object</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p>What is the VEI recorded for Etna volcano?</p>
-<div id="037f7deb" class="cell" data-execution_count="4">
+<div id="9f3bf7d4" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="4">
 <select class="webex-select"><option value="blank"></option><option value="0">1</option><option value="answer">2</option><option value="0">3</option><option value="0">4</option><option value="0">5</option></select>
 </div>
 </div>
 <p>What is the eruption date for Taal volcano?</p>
-<div id="e94e2f07" class="cell" data-execution_count="5">
+<div id="77c23b86" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="5">
 <select class="webex-select"><option value="blank"></option><option value="0">1980-05-18    </option><option value="0">1991-04-02</option><option value="answer">2020-01-12</option><option value="0">1997-06-25</option><option value="0">2023-02-13</option></select>
 </div>
@@ -509,7 +509,7 @@ Name: Calbuco, dtype: object</code></pre>
 <section id="querying-columns" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="querying-columns">Querying columns</h4>
 <p>Let’s now query specific <strong>columns</strong>. For example, querying the <code>VEI</code> column can be achieved in different ways. The simplest is to use the column name directly. We can also query <strong>multiple columns</strong> using double brackets</p>
-<div id="27e2162c" class="cell" data-execution_count="6">
+<div id="780097b2" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1">1</button><span id="annotated-cell-3-1" class="code-annotation-target"><a href="#annotated-cell-3-1"></a>df[[<span class="st">'VEI'</span>]]</span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2">2</button><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2"></a>df[[<span class="st">'Country'</span>, <span class="st">'VEI'</span>]]</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-annotation">
@@ -650,7 +650,7 @@ Name: Calbuco, dtype: object</code></pre>
 </div>
 <p>Until now, we have selected either rows or columns. With <code>.loc</code> <a href="../appendices/doc_pandas.html#pandas-loc">(doc)</a>, we can select both in one expression:</p>
 <p><strong>Function reference:</strong> <code>loc</code> <a href="../appendices/doc_pandas.html#pandas-loc">(doc)</a>.</p>
-<div id="4b436fed" class="cell" data-execution_count="7">
+<div id="0942ce8c" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>df.loc[[<span class="st">'Calbuco'</span>, <span class="st">'Taal'</span>], [<span class="st">'Country'</span>, <span class="st">'VEI'</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <div>
@@ -692,7 +692,7 @@ Name: Calbuco, dtype: object</code></pre>
 <p>The selection <strong>before the comma</strong> specifies the rows; the selection <strong>after the comma</strong> specifies the columns.</p>
 <p>To keep all rows and select only two columns, use <code>:</code> for the rows:</p>
 <p><strong>Function reference:</strong> <code>loc</code> <a href="../appendices/doc_pandas.html#pandas-loc">(doc)</a>.</p>
-<div id="e571bdbf" class="cell" data-execution_count="8">
+<div id="5c4536a6" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>df.loc[:, [<span class="st">'Country'</span>, <span class="st">'VEI'</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <div>
@@ -819,7 +819,7 @@ Name: Calbuco, dtype: object</code></pre>
 </div>
 </div>
 <p>For the selections above, this produces the same result as:</p>
-<div id="9656491d" class="cell" data-execution_count="9">
+<div id="6ad2ccba" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>df[[<span class="st">'Country'</span>, <span class="st">'VEI'</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <div>
@@ -975,7 +975,7 @@ Figure&nbsp;2: Position-based queries using <code>.iloc</code>. <a href="../appe
 <p>Some situations require querying data by <em>location</em> instead of <em>label</em> - let’s say for instance we need to retrieve rows 10-20. This is done using the <code>.iloc</code> <a href="../appendices/doc_pandas.html#pandas-iloc">(doc)</a> function (instead of the <code>.loc</code> <a href="../appendices/doc_pandas.html#pandas-loc">(doc)</a> function previously used; <a href="#fig-pandas-iloc" class="quarto-xref">Figure&nbsp;2</a>). Remember that Python uses zero-based indexing (<a href="#cau-indexing" class="quarto-xref">Caution&nbsp;1</a>), meaning that the first element is at position 0, the second at position 1, and so on.</p>
 <p>The next example queries the first row - using again double brackets to return a <strong>DataFrame</strong>.</p>
 <p><strong>Function reference:</strong> <code>iloc</code> <a href="../appendices/doc_pandas.html#pandas-iloc">(doc)</a>.</p>
-<div id="cd0d368f" class="cell" data-execution_count="10">
+<div id="028b74c1" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>df.iloc[[<span class="dv">0</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <div>
@@ -1019,7 +1019,7 @@ Figure&nbsp;2: Position-based queries using <code>.iloc</code>. <a href="../appe
 <h4 class="unnumbered anchored" data-anchor-id="get-ranges-of-rows">Get ranges of rows</h4>
 <p>We can get <strong>a range of rows</strong> using what is called <em>slicing</em>. This is done using the colon (<code>:</code>) operator. The next example queries rows 3 to 6 of the DataFrame. Note that the end index is exclusive, meaning that the element at the end index is not included in the result.</p>
 <p><strong>Function reference:</strong> <code>iloc</code> <a href="../appendices/doc_pandas.html#pandas-iloc">(doc)</a>.</p>
-<div id="b4ee6216" class="cell" data-execution_count="11">
+<div id="3e0fee02" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>df.iloc[<span class="dv">2</span>:<span class="dv">6</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <div>
@@ -1085,7 +1085,7 @@ Figure&nbsp;2: Position-based queries using <code>.iloc</code>. <a href="../appe
 </div>
 <p>To get rows 3 to 6 and columns 2-3:</p>
 <p><strong>Function reference:</strong> <code>iloc</code> <a href="../appendices/doc_pandas.html#pandas-iloc">(doc)</a>.</p>
-<div id="bc198980" class="cell" data-execution_count="12">
+<div id="f055acd3" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>df.iloc[<span class="dv">0</span>:<span class="dv">5</span>, <span class="dv">1</span>:<span class="dv">3</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <div>
@@ -1141,7 +1141,7 @@ Figure&nbsp;2: Position-based queries using <code>.iloc</code>. <a href="../appe
 <h4 class="unnumbered anchored" data-anchor-id="count-rows-from-the-last">Count rows from the last</h4>
 <p>To get the last 5 rows of the DataFrame:</p>
 <p><strong>Function reference:</strong> <code>iloc</code> <a href="../appendices/doc_pandas.html#pandas-iloc">(doc)</a>.</p>
-<div id="65a3aead" class="cell" data-execution_count="13">
+<div id="873d0c6d" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>df.iloc[<span class="op">-</span><span class="dv">5</span>:]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <div>
@@ -1218,7 +1218,7 @@ Figure&nbsp;2: Position-based queries using <code>.iloc</code>. <a href="../appe
 <h4 class="unnumbered anchored" data-anchor-id="combining-position-based-and-label-based-queries">Combining position-based and label-based queries</h4>
 <p>By experience, position-based queries is more used on <em>rows</em> than <em>columns</em>. For instance, we might want to access the first 10 rows because we don’t know their associated labels, yet it is less likely that we ignore their <em>attributes</em>. It is possible mix label-based and position-based indexing. For example, to get the first 5 rows and the <code>Country</code> and <code>VEI</code> columns:</p>
 <p><strong>Function reference:</strong> <code>iloc</code> <a href="../appendices/doc_pandas.html#pandas-iloc">(doc)</a>.</p>
-<div id="5f22be9e" class="cell" data-execution_count="14">
+<div id="6609841e" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>df.iloc[<span class="dv">0</span>:<span class="dv">5</span>][[<span class="st">'Country'</span>, <span class="st">'VEI'</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
 <div>

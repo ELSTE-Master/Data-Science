@@ -521,7 +521,7 @@ Figure&nbsp;2: Histogram of the Zirconium trace element
 </ul>
 <p>The empirical mean of a dataset can easily be computed with <em>Pandas</em> using the <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mean.html"><code>.mean()</code></a> <a href="../appendices/doc_pandas.html#pandas-mean">(doc)</a> function (<a href="#lst-univ-mean" class="quarto-xref">Listing&nbsp;1</a>). Note that we round the results to two significant digits using <code>.round(2)</code> <a href="../appendices/doc_pandas.html#pandas-round">(doc)</a>.</p>
 <p><strong>Function reference:</strong> <code>round</code> <a href="../appendices/doc_pandas.html#pandas-round">(doc)</a>; <code>mean</code> <a href="../appendices/doc_pandas.html#pandas-mean">(doc)</a>.</p>
-<div id="d7483549" class="cell" data-execution_count="4">
+<div id="c4b6ba5d" class="cell" data-execution_count="4">
 <div id="lst-univ-mean" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-mean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -548,7 +548,7 @@ dtype: float64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p>What is the empirical mean value for Strontium?</p>
-<div id="6d424a38" class="cell" data-execution_count="5">
+<div id="b5067ba5" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="5">
 <select class="webex-select"><option value="blank"></option><option value="0">365.38</option><option value="answer">516.42</option><option value="0">219.38</option><option value="0">123.94</option></select>
 </div>
@@ -571,7 +571,7 @@ dtype: float64</code></pre>
 <li><code>axis = 1</code> usually makes sense when rows are labelled, and computes the mean <mark>across all columns for each row</mark>(<a href="#lst-univ-mean-multi-col" class="quarto-xref">Listing&nbsp;3</a>)</li>
 </ul>
 <p><strong>Function reference:</strong> <code>head</code> <a href="../appendices/doc_pandas.html#pandas-head">(doc)</a>; <code>round</code> <a href="../appendices/doc_pandas.html#pandas-round">(doc)</a>; <code>mean</code> <a href="../appendices/doc_pandas.html#pandas-mean">(doc)</a>.</p>
-<div id="f2d883b0" class="cell" data-execution_count="6">
+<div id="830321b2" class="cell" data-execution_count="6">
 <div id="lst-univ-mean-multi-row" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-mean-multi-row-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -605,7 +605,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>Function reference:</strong> <code>head</code> <a href="../appendices/doc_pandas.html#pandas-head">(doc)</a>; <code>round</code> <a href="../appendices/doc_pandas.html#pandas-round">(doc)</a>; <code>mean</code> <a href="../appendices/doc_pandas.html#pandas-mean">(doc)</a>.</p>
-<div id="8c4aed73" class="cell" data-execution_count="7">
+<div id="1b1403ac" class="cell" data-execution_count="7">
 <div id="lst-univ-mean-multi-col" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-mean-multi-col-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -658,7 +658,7 @@ F_X(m) = P(X \le m) = 0.5.
 <li>Read the value on the y-axis that intersects the ECDF.</li>
 </ol>
 <p><strong>Function reference:</strong> <code>plt.subplots</code> <a href="../appendices/doc_visualisation.html#plotting-plt-subplots">(doc)</a>; <code>sns.ecdfplot</code> <a href="../appendices/doc_visualisation.html#plotting-sns-ecdfplot">(doc)</a>; <code>ax.plot</code> <a href="../appendices/doc_visualisation.html#plotting-ax-plot">(doc)</a>; <code>median</code> <a href="../appendices/doc_pandas.html#pandas-median">(doc)</a>; <code>ax.set_xlim</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-xlim">(doc)</a>; <code>ax.set_ylim</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-ylim">(doc)</a>.</p>
-<div id="50277a8a" class="cell" data-execution_count="8">
+<div id="a0ddb1d2" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -669,7 +669,7 @@ F_X(m) = P(X \le m) = 0.5.
 </div>
 <p>Fortunately, we can also use the native <em>Pandas</em> <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.median.html"><code>.median</code></a> <a href="../appendices/doc_pandas.html#pandas-median">(doc)</a> function (<a href="#lst-univ-median" class="quarto-xref">Listing&nbsp;4</a>).</p>
 <p><strong>Function reference:</strong> <code>round</code> <a href="../appendices/doc_pandas.html#pandas-round">(doc)</a>; <code>median</code> <a href="../appendices/doc_pandas.html#pandas-median">(doc)</a>.</p>
-<div id="be12b4ec" class="cell" data-execution_count="9">
+<div id="5e546b6b" class="cell" data-execution_count="9">
 <div id="lst-univ-median" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-median-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -695,7 +695,7 @@ Listing&nbsp;4: Compute the median for two significant digits.
 </div>
 <div class="callout-body-container callout-body">
 <p>What is the empirical median value for Cesium?</p>
-<div id="007366f7" class="cell" data-execution_count="10">
+<div id="d115811a" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="10">
 <select class="webex-select"><option value="blank"></option><option value="0">36.38</option><option value="0">51.42</option><option value="answer">23.99</option><option value="0">13.94</option></select>
 </div>
@@ -847,7 +847,7 @@ Figure&nbsp;4: Empirical modes computed from a binned dataset.
 <li>The <mark>mean is highly sensitive to outliers</mark>, whereas the median is not.</li>
 </ul>
 <p><strong>Function reference:</strong> <code>plt.subplots</code> <a href="../appendices/doc_visualisation.html#plotting-plt-subplots">(doc)</a>; <code>sns.histplot</code> <a href="../appendices/doc_visualisation.html#plotting-sns-histplot">(doc)</a>; <code>ax.axvline</code> <a href="../appendices/doc_visualisation.html#plotting-ax-axvline">(doc)</a>; <code>mean</code> <a href="../appendices/doc_pandas.html#pandas-mean">(doc)</a>; <code>median</code> <a href="../appendices/doc_pandas.html#pandas-median">(doc)</a>; <code>ax.legend</code> <a href="../appendices/doc_visualisation.html#plotting-ax-legend">(doc)</a>.</p>
-<div id="14c7da56" class="cell" data-execution_count="13">
+<div id="03f1a705" class="cell" data-execution_count="13">
 <div id="lst-univ-mean-med" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-mean-med-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -894,7 +894,7 @@ Listing&nbsp;5: Compute the empirical median for two significant digits.
 R_\text{emp} = \max(x_1, \dots, x_n) - \min(x_1, \dots, x_n).
 \tag{2}\]</span></span></p>
 <p><strong>Function reference:</strong> <code>min</code> <a href="../appendices/doc_pandas.html#pandas-min">(doc)</a>; <code>max</code> <a href="../appendices/doc_pandas.html#pandas-max">(doc)</a>; <code>print</code> <a href="../appendices/doc_python.html#python-print">(doc)</a>.</p>
-<div id="ebe6b133" class="cell" data-execution_count="14">
+<div id="67e8fbad" class="cell" data-execution_count="14">
 <div id="lst-univ-minmax" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-minmax-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -936,7 +936,7 @@ Listing&nbsp;6: Compute the min and the max values of a column
 </div>
 <div class="callout-body-container callout-body">
 <p>What is the empirical range for Cesium?</p>
-<div id="12a7d792" class="cell" data-execution_count="15">
+<div id="acb503df" class="cell" data-execution_count="15">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="15">
 <select class="webex-select"><option value="blank"></option><option value="0">12.41</option><option value="0">414.6</option><option value="answer">41.46</option><option value="0">53.88</option></select>
 </div>
@@ -965,7 +965,7 @@ s = \sqrt{s^2}.
 For a Gaussian (normal) distribution, about 68% of the data falls within one standard deviation of the mean, about 95% within two standard deviations, and about 99.7% within three standard deviations. Thus, variance and standard deviation are fundamental for describing the spread and probability intervals of normally distributed data.</p>
 <p>You can compute these in pandas using <code>.var()</code> <a href="../appendices/doc_pandas.html#pandas-var">(doc)</a> and <code>.std()</code> <a href="../appendices/doc_pandas.html#pandas-std">(doc)</a>:</p>
 <p><strong>Function reference:</strong> <code>var</code> <a href="../appendices/doc_pandas.html#pandas-var">(doc)</a>; <code>std</code> <a href="../appendices/doc_pandas.html#pandas-std">(doc)</a>.</p>
-<div id="3ea235d3" class="cell" data-execution_count="16">
+<div id="7dbe9a07" class="cell" data-execution_count="16">
 <div id="lst-univ-std" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-std-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1020,7 +1020,7 @@ dtype: float64</code></pre>
 </ul>
 <p><a href="#fig-univ-pctS" class="quarto-xref">Figure&nbsp;5</a> shows the percentiles of a <strong>symmetric</strong> distribution, and demonstrates how i) the median value <strong>is equal</strong> to the mean and ii) the 25<sup>th</sup>and 75<sup>th</sup> percentile are <strong>equally dispersed</strong> around the median. In contrast, for <strong>asymmetric</strong> distributions, <a href="#fig-univ-pctA" class="quarto-xref">Figure&nbsp;6</a> shows that i) the median and mean values <strong>increasingly diverge</strong> and ii) the 25<sup>th</sup>and 75<sup>th</sup> percentile are <strong>asymmetrically dispersed</strong> around the median.</p>
 <p><strong>Function reference:</strong> <code>FancyArrowPatch</code> <a href="../appendices/doc_visualisation.html#plotting-fancyarrowpatch">(doc)</a>; <code>ax.get_xlim</code> <a href="../appendices/doc_visualisation.html#plotting-ax-get-xlim">(doc)</a>; <code>np.percentile</code> <a href="../appendices/doc_numpy_scipy.html#numerical-np-percentile">(doc)</a>; <code>ax.add_patch</code> <a href="../appendices/doc_visualisation.html#plotting-ax-add-patch">(doc)</a>; <code>ax.text</code> <a href="../appendices/doc_visualisation.html#plotting-ax-text">(doc)</a>; <code>ax.axvline</code> <a href="../appendices/doc_visualisation.html#plotting-ax-axvline">(doc)</a>; <code>array.mean</code> <a href="../appendices/doc_numpy_scipy.html#numerical-array-mean">(doc)</a>; <code>np.random.normal</code> <a href="../appendices/doc_numpy_scipy.html#numerical-np-random-normal">(doc)</a>; <code>array.min</code> <a href="../appendices/doc_numpy_scipy.html#numerical-array-min">(doc)</a>; <code>array.max</code> <a href="../appendices/doc_numpy_scipy.html#numerical-array-max">(doc)</a>; <code>plt.subplots</code> <a href="../appendices/doc_visualisation.html#plotting-plt-subplots">(doc)</a>; <code>sns.histplot</code> <a href="../appendices/doc_visualisation.html#plotting-sns-histplot">(doc)</a>; <code>ax.set_xlabel</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-xlabel">(doc)</a>; <code>ax.set_ylabel</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-ylabel">(doc)</a>; <code>ax.tick_params</code> <a href="../appendices/doc_visualisation.html#plotting-ax-tick-params">(doc)</a>; <code>ax.set_title</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-title">(doc)</a>; <code>ax.twinx</code> <a href="../appendices/doc_visualisation.html#plotting-ax-twinx">(doc)</a>; <code>sns.ecdfplot</code> <a href="../appendices/doc_visualisation.html#plotting-sns-ecdfplot">(doc)</a>; <code>plotArrow</code> <a href="../appendices/doc_visualisation.html#plotting-plotarrow">(doc)</a>; <code>fig.tight_layout</code> <a href="../appendices/doc_visualisation.html#plotting-fig-tight-layout">(doc)</a>; <code>fig.savefig</code> <a href="../appendices/doc_visualisation.html#plotting-fig-savefig">(doc)</a>; <code>plt.close</code> <a href="../appendices/doc_visualisation.html#plotting-plt-close">(doc)</a>.</p>
-<div id="61532f19" class="cell" data-execution_count="17">
+<div id="8b2c20a3" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-9"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="1">1</button><span id="annotated-cell-9-1" class="code-annotation-target"><a href="#annotated-cell-9-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1142,7 +1142,7 @@ Figure&nbsp;5: Relationship of percentiles to a symmetric distribution. The red 
 </figure>
 </div>
 <p><strong>Function reference:</strong> <code>np.random.lognormal</code> <a href="../appendices/doc_numpy_scipy.html#numerical-np-random-lognormal">(doc)</a>; <code>array.min</code> <a href="../appendices/doc_numpy_scipy.html#numerical-array-min">(doc)</a>; <code>array.max</code> <a href="../appendices/doc_numpy_scipy.html#numerical-array-max">(doc)</a>; <code>np.percentile</code> <a href="../appendices/doc_numpy_scipy.html#numerical-np-percentile">(doc)</a>; <code>plt.subplots</code> <a href="../appendices/doc_visualisation.html#plotting-plt-subplots">(doc)</a>; <code>sns.histplot</code> <a href="../appendices/doc_visualisation.html#plotting-sns-histplot">(doc)</a>; <code>ax.set_xlabel</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-xlabel">(doc)</a>; <code>ax.set_ylabel</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-ylabel">(doc)</a>; <code>ax.tick_params</code> <a href="../appendices/doc_visualisation.html#plotting-ax-tick-params">(doc)</a>; <code>ax.set_title</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-title">(doc)</a>; <code>ax.twinx</code> <a href="../appendices/doc_visualisation.html#plotting-ax-twinx">(doc)</a>; <code>sns.ecdfplot</code> <a href="../appendices/doc_visualisation.html#plotting-sns-ecdfplot">(doc)</a>; <code>plotArrow</code> <a href="../appendices/doc_visualisation.html#plotting-plotarrow">(doc)</a>; <code>fig.tight_layout</code> <a href="../appendices/doc_visualisation.html#plotting-fig-tight-layout">(doc)</a>; <code>fig.savefig</code> <a href="../appendices/doc_visualisation.html#plotting-fig-savefig">(doc)</a>; <code>plt.close</code> <a href="../appendices/doc_visualisation.html#plotting-plt-close">(doc)</a>.</p>
-<div id="333e9c09" class="cell" data-execution_count="18">
+<div id="3f270b20" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-10"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="1">1</button><span id="annotated-cell-10-1" class="code-annotation-target"><a href="#annotated-cell-10-1"></a>data <span class="op">=</span> np.random.lognormal(size<span class="op">=</span><span class="dv">1000</span>, sigma<span class="op">=</span><span class="fl">.4</span>)</span>
@@ -1294,7 +1294,7 @@ Table&nbsp;1: Relationship between quartiles, deciles and percentiles.
 <li><strong>&lt;0</strong>: <mark>Left-skewed</mark> → a tail extends to the left</li>
 </ul>
 <p><strong>Function reference:</strong> <code>round</code> <a href="../appendices/doc_pandas.html#pandas-round">(doc)</a>; <code>skew</code> <a href="../appendices/doc_pandas.html#pandas-skew">(doc)</a>.</p>
-<div id="f1dbbc47" class="cell" data-execution_count="19">
+<div id="66be806d" class="cell" data-execution_count="19">
 <div id="lst-univ-skew" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-skew-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1490,7 +1490,7 @@ Table&nbsp;2: Simple rules on which plot to choose to represent data distributio
 </ol>
 <p><em>Panda</em> as a very handy function to <mark>group data by categorical variables</mark>: <code>.groupby</code> <a href="../appendices/doc_pandas.html#pandas-groupby">(doc)</a>. Let’s compute the mean value of the different trace elements for each epoch (<a href="#lst-groupby" class="quarto-xref">Listing&nbsp;9</a>):</p>
 <p><strong>Function reference:</strong> <code>mean</code> <a href="../appendices/doc_pandas.html#pandas-mean">(doc)</a>; <code>groupby</code> <a href="../appendices/doc_pandas.html#pandas-groupby">(doc)</a>.</p>
-<div id="87bb3ed4" class="cell" data-execution_count="23">
+<div id="0b7ae804" class="cell" data-execution_count="23">
 <div id="lst-groupby" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-groupby-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">

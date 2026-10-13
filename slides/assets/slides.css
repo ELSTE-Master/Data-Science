@@ -28,3 +28,19 @@
 .reveal section[id^="families-of-data"] table {
   font-size: 0.7em;
 }
+
+/* Keep the two open-data tables readable within the slide. */
+.reveal section.open-data-table table {
+  width: 100%;
+  font-size: 0.62em;
+  line-height: 1.25;
+}
+.reveal section.open-data-table th,
+.reveal section.open-data-table td {
+  padding: 0.4em 0.5em;
+}
+.reveal section.open-data-table th:first-child,
+.reveal section.open-data-table td:first-child {
+  width: 28%;
+  white-space: normal;
+}
