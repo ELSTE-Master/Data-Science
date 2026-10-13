@@ -38,8 +38,7 @@ The objectives of this class are to:
 
 ## Slides
 
-- {{< fa file-pdf >}} [PDF](class_3_slides.pdf)
-
-- <i class="fa fa-window-restore"></i> <a href="../class3/class_3_slides.html" target="_blank">View in browser</a>
+[{{< fa file-pdf >}} PDF](class_3_slides.pdf){.btn .btn-download target="_blank"}
+[{{< fa display >}} View in browser](../class3/class_3_slides.html){.btn .btn-download target="_blank"}
 
 

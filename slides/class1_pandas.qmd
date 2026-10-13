@@ -1,6 +1,6 @@
 ---
-title: "Intro to Python and Pandas"
-subtitle: "DataFrames for Data Science"
+title: "ELSTE Data science"
+subtitle: "Introduction to Python and Pandas data frames"
 date: "October 14, 2026"
 author:
   - name: Sébastien Biass
@@ -19,81 +19,7 @@ author:
 
 ---
 
-## Background
-
-::: {.callout-warning}
-## 
-We assume that you all followed Guy Simpson's Python crash course
-:::
-
-
-<span style="font-size: 0.5em;"></span>
-
-`pandas`: A **package** for [data manipulation and analysis]{.alert} handling **structured data**
-
-- **Reading/writing data** from common formats (CSV, Excel, JSON, etc.)
-- Handling **missing data**
-- **Filtering**, **sorting**, **reshaping** and **grouping** data
-- **Aggregating** data (sum, mean, count, etc.)
-- **Time series support** (date ranges, frequency conversions)
-- **Statistical operations**
-
-## Today's objectives
-
-Understand what is a `pandas` [DataFrame]{.alert} and its [basic anatomy]{.alert}
-
-- How to [load data]{.alert} in a DataFrame
-- How to [access]{.alert} data → *query by label/position*
-- How to [filter]{.alert} data → *comparison and logical operators*
-- How to [rearrange]{.alert} data → *sorting values*
-- How to [operate]{.alert} on data → *arithmetic and string operations*
-
-# Introduction to pandas {background-color="#2F4647"}
-
-## Anatomy of a DataFrame
-
-![](../class1/img/pandas-1.png)
-
-::: {.fragment}
-- Similar to *Excel* → contains *tabular data* composed of [rows]{.alert} and [columns]{.alert}
-:::
-
-::: {.fragment}
-- In *Excel*:
-  - **Rows** are accessed using *numbers*
-  - **Columns** are accessed using *letters*
-:::
-
-## Anatomy of a DataFrame
-
-![](../class1/img/pandas-2.png)
-
-::: {.fragment}
-- Unlike *Excel*, **rows** and **columns** can be [labelled]{.alert}
-  - [Index]{.alert} refers to the label of the **rows**. In the *index*, **values are usually unique** - meaning that each entry has a different label.
-  - [Column]{.alert} refers to the label of - logically - the **columns**
-:::
-
-# Data structure {background-color="#2F4647"}
-
-## The dataset
-
-Synthetic dataset of **selected volcanic eruptions** → first 5 rows:
-
-<span style="font-size: 0.5em;"></span>
-
-| Name            | Country     | Date                |   VEI |   Latitude |   Longitude |
-|:----------------|:------------|:--------------------|------:|-----------:|------------:|
-| St. Helens      | USA         | 1980-05-18 |     5 |    46.1914 |   -122.196  |
-| Pinatubo        | Philippines | 1991-04-02 |     6 |    15.1501 |    120.347  |
-| El Chichón      | Mexico      | 1982-03-28 |     5 |    17.3559 |    -93.2233 |
-| Galunggung      | Indonesia   | 1982-04-05 |     4 |    -7.2567 |    108.077  |
-| Nevado del Ruiz | Colombia    | 1985-11-13 |     3 |     4.895  |    -75.322  |
-: {.table .table-striped .table-hover}
-
-## Volcanic explosivity index (VEI)
-
-![](img/vei.jpeg)
+# Loading data {background-color="#2F4647"}
 
 ## Setting up the notebook {auto-animate="true"}
 

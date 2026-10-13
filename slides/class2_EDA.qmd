@@ -1,6 +1,6 @@
 ---
-title: "Exploratory data analysis"
-subtitle: "How to start making data talk"
+title: "ELSTE Data science"
+subtitle: "Class 2: Exploratory data analysis"
 date: "October 21, 2026"
 author:
   - name: Sébastien Biass

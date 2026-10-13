@@ -1,6 +1,6 @@
 ---
 title: "ELSTE Data science"
-subtitle: "Some concept of Python coding and statistical inference"
+subtitle: "Class 1: Introduction to data analysis and inference using Python"
 date: "October 14, 2026"
 author:
   - name: Sébastien Biass
@@ -418,6 +418,77 @@ Ask students to identify which tasks require pandas and which will later require
 
 # Today's plans {background-color="#2F4647"}
 
+## Pandas
+
+<span style="font-size: 0.5em;"></span>
+
+`pandas`: A **package** for [data manipulation and analysis]{.alert} handling **structured data**
+
+- **Reading/writing data** from common formats (CSV, Excel, JSON, etc.)
+- Handling **missing data**
+- **Filtering**, **sorting**, **reshaping** and **grouping** data
+- **Aggregating** data (sum, mean, count, etc.)
+- **Time series support** (date ranges, frequency conversions)
+- **Statistical operations**
+
+
+## Anatomy of a DataFrame
+
+![](../class1/img/pandas-1.png)
+
+
+- Similar to *Excel* → contains *tabular data* composed of [rows]{.alert} and [columns]{.alert}
+
+- In *Excel*:
+  - **Rows** are accessed using *numbers*
+  - **Columns** are accessed using *letters*
+
+## Anatomy of a DataFrame
+
+![](../class1/img/pandas-2.png)
+
+
+- Unlike *Excel*, **rows** and **columns** can be [labelled]{.alert}
+  - [Index]{.alert} refers to the label of the **rows**. In the *index*, **values are usually unique** - meaning that each entry has a different label.
+  - [Column]{.alert} refers to the label of - logically - the **columns**
+
+
+## Today's dataset
+
+Synthetic dataset of **selected volcanic eruptions** → first 5 rows:
+
+<span style="font-size: 0.5em;"></span>
+
+| Name            | Country     | Date                |   VEI |   Latitude |   Longitude |
+|:----------------|:------------|:--------------------|------:|-----------:|------------:|
+| St. Helens      | USA         | 1980-05-18 |     5 |    46.1914 |   -122.196  |
+| Pinatubo        | Philippines | 1991-04-02 |     6 |    15.1501 |    120.347  |
+| El Chichón      | Mexico      | 1982-03-28 |     5 |    17.3559 |    -93.2233 |
+| Galunggung      | Indonesia   | 1982-04-05 |     4 |    -7.2567 |    108.077  |
+| Nevado del Ruiz | Colombia    | 1985-11-13 |     3 |     4.895  |    -75.322  |
+: {.table .table-striped .table-hover}
+
+## Volcanic explosivity index (VEI)
+
+![](img/vei.jpeg)
+
+
+
+## Today's objectives
+
+**5 modules**:
+
+1. How to [load data]{.alert} in a DataFrame
+1. How to [access]{.alert} data → *query by label/position*
+1. How to [filter]{.alert} data → *comparison and logical operators*
+1. How to [rearrange]{.alert} data → *sorting values*
+1. How to [operate]{.alert} on data → *arithmetic and string operations*
+
+- We expect you to know how to get started with Python / Jupyter notebook 
+- Let us know if [you are lost]{.alert} or if [you already know all of this]{.alert}
+  - Let's make it useful for **your research**
+
+
 ## Get started
 
 - Go to [https://elste-master.github.io/Data-Science/](https://elste-master.github.io/Data-Science/)
@@ -431,24 +502,4 @@ Ask students to identify which tasks require pandas and which will later require
   - Use the [documentation]{.alert} / [cheat sheets](https://e5k.github.io/outils-info-2/#cheat-sheets) / [companion course](https://e5k.github.io/outils-info-2/)
 - Document your code with [Markdown](../appendices/jupyter_markdown_summary.qmd)
 
-## Today's objectives
 
-4 modules:
-
-1. Data [structure]{.alert}
-2. [Querying]{.alert} data
-3. [Filtering]{.alert} data
-4. Data [operations]{.alert}
-
-→ We expect you to know how to get started with Python / Jupyter notebook, [shout if you are lost]{.alert}
-
-
-
-## Start coding!
-
-- Go to [https://elste-master.github.io/Data-Science/](https://elste-master.github.io/Data-Science/)
-  - **Setup VS Code:** Appendices > [Setup VS Code]{.alert}
-
-<span style="font-size: 0.5em;"></span>
-
-<iframe src="../appendices/setup_vscode.html" width="100%" height="400px" style="border:none;"></iframe>
