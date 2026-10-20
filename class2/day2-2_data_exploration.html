@@ -379,7 +379,7 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="setting-up-the-exercise">Setting up the exercise</h2>
 <p>We start by importing libraries and the dataset. As in <a href="../class1/day1-2_pandas.html">the previous class</a>, we load the dataset using <strong>Pandas</strong>. The dataset comes from <span class="citation" data-cites="Smith2011">Smith, Isaia, and Pearce (<a href="#ref-Smith2011" role="doc-biblioref">2011</a>)</span> and contains the chemical concentrations in volcanic tephra belonging to the recent activity (last 15 ky) of the Campi Flergrei Caldera (Italy). The dataset is contained in an Excel file that contains two sheets named <code>'Supp_majors'</code> and <code>'Supp_traces'</code>. In <a href="#lst-load-geochem" class="quarto-xref">Listing&nbsp;1</a>, we use the <code>sheet_name</code> argument to the <code>read_excel()</code> <a href="../appendices/doc_pandas.html#pandas-read-excel">(doc)</a> function to specify that we want to load the sheet containing trace elements.</p>
 <p><strong>Function reference:</strong> <code>read_csv</code> <a href="../appendices/doc_pandas.html#pandas-read-csv">(doc)</a>.</p>
-<div id="a8644090" class="cell" data-execution_count="2">
+<div id="ed32f73b" class="cell" data-execution_count="2">
 <div id="lst-load-geochem" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-load-geochem-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -441,7 +441,7 @@ Listing&nbsp;1: caption
 <li>Is a <mark>labelled</mark> <strong>index</strong> relevant? In other words, do we want to access <strong>rows</strong> using <strong><a href="../class1/day1-4_queries.html#label-based-indexing">labels</a></strong> (→ <code>.loc</code> <a href="../appendices/doc_pandas.html#pandas-loc">(doc)</a>) or using <strong><a href="../class1/day1-4_queries.html#position-based-indexing">positions</a></strong> (→ <code>.iloc</code> <a href="../appendices/doc_pandas.html#pandas-iloc">(doc)</a>)?</li>
 <li>Same question for columns?</li>
 </ul>
-<div id="1ff8dbe6" class="cell" data-execution_count="3">
+<div id="c6af29ed" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="3">
 <select class="webex-select"><option value="blank"></option><option value="answer">Labels for index, labels for columns</option><option value="answer">Labels for index, positions for columns</option><option value="answer">Positions for index, labels for columns</option><option value="answer">Positions for index, positions for columns</option></select>
 </div>
@@ -465,7 +465,7 @@ Listing&nbsp;1: caption
 <ul>
 <li>What column<strong>s</strong> can be used as grouping variables?</li>
 </ul>
-<div id="40ec1a4c" class="cell" data-execution_count="4">
+<div id="2eda7316" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="4">
 <select class="webex-select"><option value="blank"></option><option value="0">Analysis no.</option><option value="0">Rb</option><option value="0">Strat. Pos.</option><option value="answer">Epoch</option><option value="0">Sc</option><option value="0">La</option><option value="answer">Eruption</option><option value="0">Ce</option></select>
 </div>
@@ -516,7 +516,7 @@ Listing&nbsp;1: caption
 </ol>
 <p>The easiest way to define a figure is using the <code>subplots()</code> <a href="../appendices/doc_visualisation.html#plotting-plt-subplots">(doc)</a> function (; <a href="#lst-plt-set" class="quarto-xref">Listing&nbsp;2</a>). Note that the code returns two variables - <code>fig</code> and <code>ax</code> - which are the figure and the axes, respectively.</p>
 <p><strong>Function reference:</strong> <code>plt.subplots</code> <a href="../appendices/doc_visualisation.html#plotting-plt-subplots">(doc)</a>.</p>
-<div id="83cef836" class="cell" data-execution_count="5">
+<div id="b18191f0" class="cell" data-execution_count="5">
 <div id="lst-plt-set" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-plt-set-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -627,7 +627,7 @@ Table&nbsp;1: Some of the most frequently used plotting functions.
 </figure>
 </div>
 <p><strong>Function reference:</strong> <code>plt.subplots</code> <a href="../appendices/doc_visualisation.html#plotting-plt-subplots">(doc)</a>; <code>ax.plot</code> <a href="../appendices/doc_visualisation.html#plotting-ax-plot">(doc)</a>; <code>ax.scatter</code> <a href="../appendices/doc_visualisation.html#plotting-ax-scatter">(doc)</a>.</p>
-<div id="97374334" class="cell" data-execution_count="6">
+<div id="d4be6b6e" class="cell" data-execution_count="6">
 <div id="lst-plt-ex1" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-plt-ex1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -691,7 +691,7 @@ Listing&nbsp;3: Define a figure and one axes.
 <li><code>y</code>: The name of the column containing the values used along y</li>
 </ol>
 <p><strong>Function reference:</strong> <code>plt.subplots</code> <a href="../appendices/doc_visualisation.html#plotting-plt-subplots">(doc)</a>; <code>sns.scatterplot</code> <a href="../appendices/doc_visualisation.html#plotting-sns-scatterplot">(doc)</a>.</p>
-<div id="af9ba8c7" class="cell" data-execution_count="7">
+<div id="0e689687" class="cell" data-execution_count="7">
 <div id="lst-sns-intro" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-sns-intro-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">

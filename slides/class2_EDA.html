@@ -6,7 +6,10 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2a367172f4fe7d9182ebf8e09f85cb4e.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2a367172f4fe7d9182ebf8e09f85cb4e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.27">
 
   <meta name="author" content="Sébastien Biass">
@@ -259,6 +262,12 @@ Stéphane Guerrier <a href="https://orcid.org/0000-0003-0002-8794" class="quarto
 </ul>
 </div>
 </section>
+<section id="sample-vs-population" class="slide level2">
+<h2>Sample vs population</h2>
+<div style="width:100%; display:flex; justify-content:center; text-align: center">
+<p><a href="img/population_sample_teal.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/population_sample_teal.png" class="img-up-0" style="width:80.0%"></a></p>
+</div>
+</section>
 <section>
 <section id="the-dataset" class="title-slide slide level1 center" data-background-color="#2F4647">
 <h1>The dataset</h1>
@@ -275,27 +284,27 @@ Stéphane Guerrier <a href="https://orcid.org/0000-0003-0002-8794" class="quarto
 </ul></li>
 </ul>
 
+<!-- ## Caldera-forming eruptions cycles
+
+![Bouvet de Maisoneuve et al. (2021)](img2/caldera_cbm.png) -->
+<!-- ## Caldera cycles at Campi Flegrei
+
+
+:::: {.columns}
+::: {.column width="48%"}
+
+![Bouvet de Maisoneuve et al. (2021), Forni et al. (2018) →](img2/cf_cbm.png){width="75%"}
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+![](img2/caldera_forni.png){.img-up-50  width="75%"}
+:::
+:::: -->
 <img data-src="img2/gmap.png" class="r-stretch"></section>
-<section id="caldera-forming-eruptions-cycles" class="slide level2">
-<h2>Caldera-forming eruptions cycles</h2>
-
-<img data-src="img2/caldera_cbm.png" class="r-stretch quarto-figure-center"><p class="caption">Bouvet de Maisoneuve et al.&nbsp;(2021)</p></section>
-<section id="caldera-cycles-at-campi-flegrei" class="slide level2">
-<h2>Caldera cycles at Campi Flegrei</h2>
-<div class="columns">
-<div class="column" style="width:48%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img2/cf_cbm.png" style="width:75.0%"></p>
-<figcaption>Bouvet de Maisoneuve et al.&nbsp;(2021), Forni et al.&nbsp;(2018) →</figcaption>
-</figure>
-</div>
-</div><div class="column" style="width:4%;">
-
-</div><div class="column" style="width:48%;">
-<p><img data-src="img2/caldera_forni.png" class="img-up-50" style="width:75.0%"></p>
-</div></div>
-</section>
 <section id="dataset" class="slide level2">
 <h2>Dataset</h2>
 <div class="columns">
@@ -323,7 +332,7 @@ Stéphane Guerrier <a href="https://orcid.org/0000-0003-0002-8794" class="quarto
 </ul></li>
 </ul>
 <p><span style="font-size: 0.5em;"></span></p>
-<div id="06a77473" class="cell" data-execution_count="2">
+<div id="4387ebfd" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># Load Pandas</span></span>
 <span id="cb1-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd <span class="co"># Import pandas</span></span>
 <span id="cb1-3"><a></a></span>
@@ -336,7 +345,7 @@ Stéphane Guerrier <a href="https://orcid.org/0000-0003-0002-8794" class="quarto
 <h2>Inspecting the dataset</h2>
 <div class="columns">
 <div class="column" style="width:48%;">
-<div id="f7d414e6" class="cell" data-execution_count="3">
+<div id="7a1b1d47" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>df_traces.head(<span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <div>
@@ -512,7 +521,7 @@ Stéphane Guerrier <a href="https://orcid.org/0000-0003-0002-8794" class="quarto
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:48%;">
-<div id="19b7afbf" class="cell" data-execution_count="4">
+<div id="c05ccb4c" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>df_traces.info()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
@@ -562,10 +571,14 @@ memory usage: 107.1+ KB</code></pre>
 </div>
 </div>
 </div></div>
+</section></section>
+<section>
+<section id="types-of-data" class="title-slide slide level1 center" data-background-color="#2F4647">
+<h1>Types of data</h1>
+
 </section>
-<section id="types-of-data" class="slide level2">
-<h2>Types of data</h2>
-<p><strong>Basic types of data</strong></p>
+<section id="basic-types-of-data" class="slide level2">
+<h2>Basic types of data</h2>
 <ul>
 <li><code>int</code>: <strong>Integer</strong> numbers → 0, 1, 2, …</li>
 <li><code>float</code>: <strong>Decimal</strong> numbers → 1.1, 1.2, 1.3, …</li>
@@ -687,1081 +700,58 @@ memory usage: 107.1+ KB</code></pre>
 </table>
 </section></section>
 <section>
-<section id="plotting-data" class="title-slide slide level1 center" data-background-color="#2F4647">
-<h1>Plotting data</h1>
+<section id="today" class="title-slide slide level1 center" data-background-color="#2F4647">
+<h1>Today</h1>
 
 </section>
-<section id="plotting-libraries" class="slide level2">
-<h2>Plotting libraries</h2>
-<p>There are two main plotting libraries:</p>
-<ul>
-<li><code>matplotlib</code> (and its module <code>pyplot</code>): core of plotting in Python
-<ul>
-<li><a href="https://matplotlib.org/stable/gallery/index.html">Matplotlib gallery</a></li>
-</ul></li>
-<li><code>seaborn</code>: based on <code>matplotlib</code>, designed for statistical exploration, integration with <code>pandas</code>
-<ul>
-<li><a href="https://seaborn.pydata.org/examples/index.html">Seaborn gallery</a></li>
-</ul></li>
-</ul>
-<p><span style="font-size: 0.5em;"></span></p>
-<div id="7fc01419" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt <span class="co"># Import the pyplot module from matplotlib</span></span>
-<span id="cb5-2"><a></a><span class="im">import</span> seaborn <span class="im">as</span> sns <span class="co"># Import seaborn</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="anatomy-of-a-figure" class="slide level2">
-<h2>Anatomy of a figure</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<ul>
-<li>Setup figure: <code>plt.subplots()</code></li>
-<li>Returns:
-<ul>
-<li><code>fig</code> → figure</li>
-<li><code>ax</code> → axes</li>
-</ul></li>
-</ul>
-<p><span style="font-size: 0.5em;"></span></p>
-<div id="cca338a9" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div><div class="column" style="width:4%;">
-
-</div><div class="column" style="width:56%;">
-<p><img data-src="../class2/img/fig-anatomy-1.png"></p>
-</div></div>
-</section>
-<section id="anatomy-of-a-axes" class="slide level2">
-<h2>Anatomy of a axes</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<p><strong>Axes:</strong> Where most of the magic occurs</p>
-<p><span style="font-size: 0.5em;"></span></p>
-<table class="table-striped caption-top">
-<thead>
-<tr class="header">
-<th>Function</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_title.html"><code>ax.set_title</code></a></td>
-<td>Sets the title of the axes</td>
-</tr>
-<tr class="even">
-<td><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_xlabel.html"><code>ax.set_xlabel</code></a></td>
-<td>Sets the label for the x-axis</td>
-</tr>
-<tr class="odd">
-<td><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_ylabel.html"><code>ax.set_ylabel</code></a></td>
-<td>Sets the label for the y-axis</td>
-</tr>
-<tr class="even">
-<td><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.legend.html"><code>ax.legend</code></a></td>
-<td>Displays the legend</td>
-</tr>
-<tr class="odd">
-<td><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.grid.html"><code>ax.grid</code></a></td>
-<td>Shows grid lines</td>
-</tr>
-</tbody>
-</table>
-</div><div class="column" style="width:4%;">
-
-</div><div class="column" style="width:56%;">
-<p><img data-src="../class2/img/fig-anatomy-2.png"></p>
-</div></div>
-</section>
-<section id="plotting-example" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Plotting example</h2>
-<p><span style="font-size: 0.5em;"></span></p>
-<div id="42389ddc" class="cell columns column-output-location" data-execution_count="7">
-<div class="column">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb7-1" class="hljs-ln-code"><a></a><span class="co"># Define some data</span></span>
-<span id="cb7-2" class="hljs-ln-code"><a></a>data1 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>]</span>
-<span id="cb7-3" class="hljs-ln-code"><a></a>data2 <span class="op">=</span> [<span class="dv">7</span>, <span class="dv">3</span>, <span class="dv">9</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">4</span>]</span>
-<span id="cb7-4" class="hljs-ln-code"><a></a></span>
-<span id="cb7-5" class="hljs-ln-code"><a></a><span class="co"># Set the figure and the axes</span></span>
-<span id="cb7-6" class="hljs-ln-code"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb7-7" class="hljs-ln-code"><a></a></span>
-<span id="cb7-8" class="hljs-ln-code"><a></a><span class="co"># Plot the data</span></span>
-<span id="cb7-9" class="hljs-ln-code"><a></a>ax.plot(data1, data1, color<span class="op">=</span><span class="st">'aqua'</span>, label<span class="op">=</span><span class="st">'Line'</span>)</span>
-<span id="cb7-10" class="hljs-ln-code"><a></a>ax.scatter(data1, data2, color<span class="op">=</span><span class="st">'purple'</span>, label<span class="op">=</span><span class="st">'scatter'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div><div class="column fragment">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="class2_EDA_files/figure-revealjs/cell-8-output-1.png" width="808" height="427"></p>
-</figure>
-</div>
-</div>
-</div></div>
-</section>
-<section id="plotting-example-1" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Plotting example</h2>
-<p><span style="font-size: 0.5em;"></span></p>
-<div id="f3db17fc" class="cell columns column-output-location" data-execution_count="8">
-<div class="column">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb8-1" class="hljs-ln-code"><a></a><span class="co"># Define some data</span></span>
-<span id="cb8-2" class="hljs-ln-code"><a></a>data1 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>]</span>
-<span id="cb8-3" class="hljs-ln-code"><a></a>data2 <span class="op">=</span> [<span class="dv">7</span>, <span class="dv">3</span>, <span class="dv">9</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">4</span>]</span>
-<span id="cb8-4" class="hljs-ln-code"><a></a></span>
-<span id="cb8-5" class="hljs-ln-code"><a></a><span class="co"># Set the figure and the axes</span></span>
-<span id="cb8-6" class="hljs-ln-code"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb8-7" class="hljs-ln-code"><a></a></span>
-<span id="cb8-8" class="hljs-ln-code"><a></a><span class="co"># Plot the data</span></span>
-<span id="cb8-9" class="hljs-ln-code"><a></a>ax.plot(data1, data1, color<span class="op">=</span><span class="st">'aqua'</span>, label<span class="op">=</span><span class="st">'Line'</span>)</span>
-<span id="cb8-10" class="hljs-ln-code"><a></a>ax.scatter(data1, data2, color<span class="op">=</span><span class="st">'purple'</span>, label<span class="op">=</span><span class="st">'scatter'</span>)</span>
-<span id="cb8-11" class="hljs-ln-code"><a></a></span>
-<span id="cb8-12" class="hljs-ln-code"><a></a><span class="co"># Set labels</span></span>
-<span id="cb8-13" class="hljs-ln-code"><a></a>ax.set_xlabel(<span class="st">'x Label'</span>)</span>
-<span id="cb8-14" class="hljs-ln-code"><a></a>ax.set_ylabel(<span class="st">'y Label'</span>)</span>
-<span id="cb8-15" class="hljs-ln-code"><a></a></span>
-<span id="cb8-16" class="hljs-ln-code"><a></a><span class="co"># Only to make it look pretty on the presentation</span></span>
-<span id="cb8-17" class="hljs-ln-code"><a></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div><div class="column fragment">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="class2_EDA_files/figure-revealjs/cell-9-output-1.png" width="837" height="456"></p>
-</figure>
-</div>
-</div>
-</div></div>
-</section>
-<section id="seaborn" class="slide level2">
-<h2>Seaborn</h2>
-<p><strong>Why Seaborn?</strong></p>
+<section id="exploratory-data-analysis" class="slide level2">
+<h2>Exploratory data analysis</h2>
 <p><span style="font-size: 0.5em;"></span></p>
 <blockquote>
-<p>Seaborn provides a high-level interface for drawing attractive and informative statistical graphics.</p>
+<p>Can <span class="alert">fractional crystallisation</span> explain the chemical variability of Campi Flegrei glasses, or do we need <span class="alert">magma mixing</span>?</p>
 </blockquote>
+<p><span style="font-size: 0.5em;"></span></p>
 <ul>
-<li>Makes plotting <code>pandas</code> DataFrames <strong>easy</strong></li>
-<li>Produces <strong>clean</strong> graphics</li>
-<li>Drawback: difficult customisation</li>
+<li><strong>Univariate</strong>: Are element concentrations narrowly distributed, broadly spread or multimodal?</li>
+<li><strong>Bivariate</strong>: Are relationships such as Sr–Zr consistent with Sr removal by feldspar crystallisation while Zr becomes enriched in the residual melt?</li>
+<li><strong>Interpretation</strong>: Can one differentiation process explain the observations, or are multiple magma components needed?
+<ul>
+<li><strong><span class="alert">Correlation</span> ≠ <span class="alert">mechanistic</span> explanation</strong></li>
+</ul></li>
+<li><strong>Sample vs population</strong>: Do the analysed glasses capture the compositional variability within each eruption?</li>
 </ul>
 </section>
-<section id="seaborn-example" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Seaborn example</h2>
-<p><span style="font-size: 0.5em;"></span></p>
-<div id="50b768ac" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb9-1" class="hljs-ln-code"><a></a><span class="co"># Define figure + axes</span></span>
-<span id="cb9-2" class="hljs-ln-code"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb9-3" class="hljs-ln-code"><a></a><span class="co"># Plot with seaborn (remember, we imported it as sns)</span></span>
-<span id="cb9-4" class="hljs-ln-code"><a></a><span class="co"># df_traces is the geochemical dataset imported previously</span></span>
-<span id="cb9-5" class="hljs-ln-code"><a></a>sns.scatterplot(ax<span class="op">=</span>ax, data<span class="op">=</span>df_traces, x<span class="op">=</span><span class="st">'Rb'</span>, y<span class="op">=</span><span class="st">'Sr'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="class2_EDA_files/figure-revealjs/cell-10-output-1.png" width="865" height="456"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="seaborn-example-1" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Seaborn example</h2>
-<p><span style="font-size: 0.5em;"></span></p>
-<div id="a00ba30a" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb10-1" class="hljs-ln-code"><a></a><span class="co"># Define figure + axes</span></span>
-<span id="cb10-2" class="hljs-ln-code"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb10-3" class="hljs-ln-code"><a></a><span class="co"># Plot with seaborn (remember, we imported it as sns)</span></span>
-<span id="cb10-4" class="hljs-ln-code"><a></a><span class="co"># df_traces is the geochemical dataset imported previously</span></span>
-<span id="cb10-5" class="hljs-ln-code"><a></a>sns.scatterplot(ax<span class="op">=</span>ax, data<span class="op">=</span>df_traces, x<span class="op">=</span><span class="st">'Rb'</span>, y<span class="op">=</span><span class="st">'Sr'</span>, hue<span class="op">=</span><span class="st">'Epoch'</span>, size<span class="op">=</span><span class="st">"SiO2* (EMP)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="class2_EDA_files/figure-revealjs/cell-11-output-1.png" width="865" height="456"></p>
-</figure>
-</div>
-</div>
-</div>
+<section id="objectives" class="slide level2">
+<h2>Objectives</h2>
+<ol type="1">
+<li>Understand <strong>data structure</strong>
+<ul>
+<li>Type and completeness of dataset</li>
+</ul></li>
+<li>Basics of <strong>plotting</strong> with <code>matplotlib</code> and <code>seaborn</code></li>
+<li><strong>Univariate</strong> statistics
+<ul>
+<li>Position, spread, shape</li>
+<li>Quantification + visualisation</li>
+</ul></li>
+<li><strong>Bivariate</strong> statistics
+<ul>
+<li>Covariance &amp; Correlation</li>
+<li>Intro to regression + residual analysis</li>
+</ul></li>
+</ol>
 </section>
 <section id="your-turn" class="slide level2">
 <h2>Your turn!</h2>
 <ul>
 <li>Go to <a href="https://elste-master.github.io/Data-Science/">https://elste-master.github.io/Data-Science/</a>
 <ul>
-<li>Class 2 &gt; <span class="alert">Data exploration</span></li>
-<li>Explore the structure of the glass geochemistry or <span class="alert">your</span> dataset</li>
-<li>Get used to plotting functions</li>
-</ul></li>
-</ul>
-<iframe src="../class2/day2-2_data_exploration.html" width="100%" height="400px" style="border:none;">
-</iframe>
-</section></section>
-<section>
-<section id="descriptive-statistics" class="title-slide slide level1 center" data-background-color="#2F4647">
-<h1>Descriptive statistics</h1>
-
-</section>
-<section id="descriptive-statistics-1" class="slide level2">
-<h2>Descriptive statistics</h2>
-<p><span style="font-size: 0.5em;">&nbsp;</span></p>
-<ul>
-<li><strong>Descriptive statistics</strong> → <span class="alert">provide ways of capturing the properties of a given data set or sample</span>.</li>
-<li><code>Pandas</code> and <code>Seaborn</code> → review <span class="alert">metrics, tools, and strategies</span> to summarize a dataset</li>
-<li>Providing us with a <span class="alert">quantitative basis</span> to describe it and compare it to other datasets</li>
-</ul>
-</section></section>
-<section>
-<section id="univariate-analyses" class="title-slide slide level1 center" data-background-color="#2F4647">
-<h1>Univariate analyses</h1>
-
-</section>
-<section id="univariate-analyses-1" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Univariate analyses</h2>
-<ul>
-<li><strong>Objective</strong> <span class="alert">capturing the properties of <strong>single</strong> variables at the time</span></li>
-<li>Fist step: review the samples distribution using <strong>histograms</strong>
-<ul>
-<li>Divides dataset into <strong>equal intervals</strong> → <span class="alert">bins</span></li>
-<li><strong>Counts the value</strong> in each bin</li>
-<li>Represents the <span class="alert">distribution</span> of data</li>
-</ul></li>
-</ul>
-<div id="d50de199" class="cell" data-execution_count="11">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="class2_EDA_files/figure-revealjs/cell-12-output-1.png" width="999" height="427"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="univariate-analyses-2" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Univariate analyses</h2>
-<ul>
-<li><strong>Objective</strong> <span class="alert">capturing the properties of <strong>single</strong> variables at the time</span></li>
-<li>Fist step: review the samples distribution using <strong>histograms</strong>
-<ul>
-<li>Divides dataset into <strong>equal intervals</strong> → <span class="alert">bins</span></li>
-<li><strong>Counts the value</strong> in each bin</li>
-<li>Represents the <span class="alert">distribution</span> of data</li>
-</ul></li>
-</ul>
-<div class="columns">
-<div class="column" style="width:48%;">
-<p><span style="font-size: 0.5em;">&nbsp;</span> Automatic number of bins:</p>
-<div id="f97bc6a3" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb11-1" class="hljs-ln-code"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb11-2" class="hljs-ln-code"><a></a><span class="co"># Plot histogram</span></span>
-<span id="cb11-3" class="hljs-ln-code"><a></a>sns.histplot(data<span class="op">=</span>df_traces, x<span class="op">=</span><span class="st">'Zr'</span>, color<span class="op">=</span>blue, alpha<span class="op">=</span><span class="fl">.5</span>)</span>
-<span id="cb11-4" class="hljs-ln-code"><a></a>ax.set_xlabel(<span class="st">'Zr (ppm)'</span>)<span class="op">;</span></span>
-<span id="cb11-5" class="hljs-ln-code"><a></a>ax.set_title(<span class="st">'Zr distribution'</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div><div class="column" style="width:4%;">
-
-</div><div class="column" style="width:48%;">
-<div id="cde76956" class="cell" data-execution_count="13">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="class2_EDA_files/figure-revealjs/cell-14-output-1.png" width="837" height="482"></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="univariate-analyses-3" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Univariate analyses</h2>
-<ul>
-<li><strong>Objective</strong> <span class="alert">capturing the properties of <strong>single</strong> variables at the time</span></li>
-<li>Fist step: review the samples distribution using <strong>histograms</strong>
-<ul>
-<li>Divides dataset into <strong>equal intervals</strong> → <span class="alert">bins</span></li>
-<li><strong>Counts the value</strong> in each bin</li>
-<li>Represents the <span class="alert">distribution</span> of data</li>
-</ul></li>
-</ul>
-<div class="columns">
-<div class="column" style="width:48%;">
-<p><span style="font-size: 0.5em;">&nbsp;</span> 10 bins:</p>
-<div id="f139e36e" class="cell" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb12-1" class="hljs-ln-code"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb12-2" class="hljs-ln-code"><a></a><span class="co"># Plot histogram</span></span>
-<span id="cb12-3" class="hljs-ln-code"><a></a>sns.histplot(data<span class="op">=</span>df_traces, x<span class="op">=</span><span class="st">'Zr'</span>, bins<span class="op">=</span><span class="dv">10</span>, color<span class="op">=</span>blue, alpha<span class="op">=</span><span class="fl">.5</span>)</span>
-<span id="cb12-4" class="hljs-ln-code"><a></a>ax.set_xlabel(<span class="st">'Zr (ppm)'</span>)<span class="op">;</span></span>
-<span id="cb12-5" class="hljs-ln-code"><a></a>ax.set_title(<span class="st">'Zr distribution'</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div><div class="column" style="width:4%;">
-
-</div><div class="column" style="width:48%;">
-<div id="e9964e0a" class="cell" data-execution_count="15">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="class2_EDA_files/figure-revealjs/cell-16-output-1.png" width="851" height="482"></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="univariate-analyses-4" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Univariate analyses</h2>
-<ul>
-<li><strong>Objective</strong> <span class="alert">capturing the properties of <strong>single</strong> variables at the time</span></li>
-<li>Fist step: review the samples distribution using <strong>histograms</strong>
-<ul>
-<li>Divides dataset into <strong>equal intervals</strong> → <span class="alert">bins</span></li>
-<li><strong>Counts the value</strong> in each bin</li>
-<li>Represents the <span class="alert">distribution</span> of data</li>
-</ul></li>
-</ul>
-<div class="columns">
-<div class="column" style="width:48%;">
-<p><span style="font-size: 0.5em;">&nbsp;</span> 200 bins:</p>
-<div id="ca0ea8a0" class="cell" data-execution_count="16">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb13-1" class="hljs-ln-code"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb13-2" class="hljs-ln-code"><a></a><span class="co"># Plot histogram</span></span>
-<span id="cb13-3" class="hljs-ln-code"><a></a>sns.histplot(data<span class="op">=</span>df_traces, x<span class="op">=</span><span class="st">'Zr'</span>, bins<span class="op">=</span><span class="dv">200</span>, color<span class="op">=</span>blue, alpha<span class="op">=</span><span class="fl">.5</span>)</span>
-<span id="cb13-4" class="hljs-ln-code"><a></a>ax.set_xlabel(<span class="st">'Zr (ppm)'</span>)<span class="op">;</span></span>
-<span id="cb13-5" class="hljs-ln-code"><a></a>ax.set_title(<span class="st">'Zr distribution'</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div><div class="column" style="width:4%;">
-
-</div><div class="column" style="width:48%;">
-<div id="0f5ffece" class="cell" data-execution_count="17">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="class2_EDA_files/figure-revealjs/cell-18-output-1.png" width="837" height="482"></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="descriptive-parameters" class="slide level2">
-<h2>Descriptive parameters</h2>
-<p>Intuitive importance of describing <strong>three different characteristics</strong> of the distribution:</p>
-<div class="columns">
-<div class="column" style="width:48%;">
-<ul>
-<li>The <strong>location</strong> - or where is <span class="alert">the central value(s)</span> of the dataset;</li>
-<li>The <strong>dispersion</strong> - or how <span class="alert">spread out</span> is the distribution of data compared to the central values;</li>
-<li>The <strong>skewness</strong> - or how <span class="alert">symmetrical</span> is the distribution of data compared to the central values;</li>
-</ul>
-</div><div class="column" style="width:4%;">
-
-</div><div class="column" style="width:48%;">
-<div id="2159de9e" class="cell" data-execution_count="18">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="class2_EDA_files/figure-revealjs/cell-19-output-1.png" width="837" height="482"></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="descriptive-parameters-1" class="slide level2">
-<h2>Descriptive parameters</h2>
-<p><span style="font-size: 0.5em;"></span></p>
-<ul>
-<li><strong>Ideally</strong> → able to constrain <span class="alert">full distributions</span> of <span class="math inline">\(X\)</span>
-<ul>
-<li><strong>theoretical moments</strong></li>
-</ul></li>
-<li><strong>In practice</strong> → only observe a finite <span class="alert">sample</span> of <span class="math inline">\(X\)</span>
-<ul>
-<li><strong>estimators</strong></li>
-</ul></li>
-</ul>
-<div id="f204ae85" class="cell" data-execution_count="19">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="class2_EDA_files/figure-revealjs/cell-20-output-1.png" width="999" height="433"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="location-i-mean" class="slide level2">
-<h2>Location I: Mean</h2>
-<p>The <strong>mean</strong> is the <span class="alert">sum of the values divided by the number of values</span>:</p>
-<p><span class="math display">\[
-\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i
-\]</span></p>
-<ul>
-<li>Meaningful to describe <span class="alert">symmetrical distributions</span></li>
-<li>Very <strong>sensitive</strong> to <span class="alert">outliers</span></li>
-<li><code>df.mean()</code></li>
-</ul>
-<p><span style="font-size: 0.5em;"></span></p>
-<div class="fragment">
-<div id="c3f02afb" class="cell columns column-output-location" data-execution_count="20">
-<div class="column">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a><span class="co"># One column</span></span>
-<span id="cb14-2"><a></a>df_traces[[<span class="st">'Zr'</span>]].mean().<span class="bu">round</span>(<span class="dv">2</span>)</span>
-<span id="cb14-3"><a></a><span class="co"># Multiple columns</span></span>
-<span id="cb14-4"><a></a>df_traces[[<span class="st">'Zr'</span>,<span class="st">'Rb'</span>,<span class="st">'Sr'</span>]].mean().<span class="bu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div><div class="column">
-<div class="cell-output cell-output-display" data-execution_count="15">
-<pre><code>Zr    365.39
-Rb    343.81
-Sr    516.42
-dtype: float64</code></pre>
-</div>
-</div></div>
-</div>
-</section>
-<section id="location-ii-median" class="slide level2">
-<h2>Location II: Median</h2>
-<p>The <strong>median</strong> is the value <span class="alert">at the exact middle of the dataset</span>.</p>
-<div class="columns">
-<div class="column" style="width:48%;">
-<ul>
-<li>No equation, use of ECDF</li>
-<li><code>df.median()</code></li>
-</ul>
-<div id="9a1d9c95" class="cell" data-execution_count="21">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="class2_EDA_files/figure-revealjs/cell-22-output-1.png" width="546" height="390"></p>
-</figure>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:4%;">
-
-</div><div class="column" style="width:48%;">
-<p><span style="font-size: 0.5em;">&nbsp;</span></p>
-<div id="7def05bf" class="cell" data-execution_count="22">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a><span class="co"># One column</span></span>
-<span id="cb16-2"><a></a>df_traces[[<span class="st">'Zr'</span>]].median().<span class="bu">round</span>(<span class="dv">2</span>)</span>
-<span id="cb16-3"><a></a><span class="co"># Multiple columns</span></span>
-<span id="cb16-4"><a></a>df_traces[[<span class="st">'Zr'</span>,<span class="st">'Rb'</span>,<span class="st">'Sr'</span>]].median().<span class="bu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="17">
-<pre><code>Zr    339.0
-Rb    347.5
-Sr    490.0
-dtype: float64</code></pre>
-</div>
-</div>
-</div></div>
-</section>
-<section id="location-iii-mode" class="slide level2">
-<h2>Location III: Mode</h2>
-<p>The <strong>mode</strong> is the value <span class="alert">that occur most frequently in a dataset</span>.</p>
-<ul>
-<li><strong>Categorical</strong> or <strong>discrete numerical data</strong>: value(s) that appear most often.</li>
-<li>For <strong>continuous data</strong>, exact duplicates may be rare</li>
-</ul>
-<div id="99ae34db" class="cell columns column-output-location" data-execution_count="23">
-<div class="column">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a><span class="co"># Calculate the modes</span></span>
-<span id="cb18-2"><a></a>modes <span class="op">=</span> df_traces[<span class="st">'Zr'</span>].mode().<span class="bu">round</span>(<span class="dv">2</span>)</span>
-<span id="cb18-3"><a></a></span>
-<span id="cb18-4"><a></a><span class="co"># Plot the histogram</span></span>
-<span id="cb18-5"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb18-6"><a></a>sns.histplot(data<span class="op">=</span>df_traces, x<span class="op">=</span><span class="st">'Zr'</span>, ax<span class="op">=</span>ax, color<span class="op">=</span>blue, alpha<span class="op">=</span><span class="fl">.5</span>)</span>
-<span id="cb18-7"><a></a></span>
-<span id="cb18-8"><a></a><span class="co"># Plot the modes</span></span>
-<span id="cb18-9"><a></a>[ax.axvline(m, color<span class="op">=</span><span class="st">'darkorange'</span>, lw<span class="op">=</span><span class="dv">2</span>) <span class="cf">for</span> i, m <span class="kw">in</span> <span class="bu">enumerate</span>(modes)]</span>
-<span id="cb18-10"><a></a></span>
-<span id="cb18-11"><a></a>ax.set_xlabel(<span class="st">'Zr (ppm)'</span>)</span>
-<span id="cb18-12"><a></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div><div class="column">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="class2_EDA_files/figure-revealjs/cell-24-output-1.png" width="837" height="456"></p>
-</figure>
-</div>
-</div>
-</div></div>
-</section>
-<section id="location-summary" class="slide level2">
-<h2>Location: Summary</h2>
-<div class="columns">
-<div class="column" style="width:48%;">
-<ul>
-<li><strong>Mean</strong>: Best for symmetric distributions
-<ul>
-<li>Sensitive to outliers</li>
-</ul></li>
-<li><strong>Median</strong>: Best for skewed or outlier-prone data
-<ul>
-<li>Only based on rank, not magnitude</li>
-</ul></li>
-<li><strong>Mode</strong>: Best for describing the most frequent range in grouped or categorical-like data.
-<ul>
-<li>Otherwise requires binning</li>
-</ul></li>
-</ul>
-</div><div class="column" style="width:4%;">
-
-</div><div class="column" style="width:48%;">
-<div id="13598378" class="cell" data-execution_count="24">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="class2_EDA_files/figure-revealjs/cell-25-output-1.png" width="837" height="456"></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="dispersion-1-range" class="slide level2">
-<h2>Dispersion 1: Range</h2>
-<p>The <strong>range</strong> is the range of value covered in the dataset</p>
-<div class="columns">
-<div class="column" style="width:48%;">
-<ul>
-<li>Min → <code>df.min()</code></li>
-<li>Max → <code>df.max()</code></li>
-<li>Range:</li>
-</ul>
-<p><span class="math display">\[
-\text{Range} = \max(x) - \min(x)
-\]</span></p>
-</div><div class="column" style="width:4%;">
-
-</div><div class="column" style="width:48%;">
-<p><span style="font-size: 0.5em;">&nbsp;</span></p>
-<div id="c33d60db" class="cell" data-execution_count="25">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a></a>df_min <span class="op">=</span> df_traces[<span class="st">'Zr'</span>].<span class="bu">min</span>()</span>
-<span id="cb19-2"><a></a>df_max <span class="op">=</span> df_traces[<span class="st">'Zr'</span>].<span class="bu">max</span>()</span>
-<span id="cb19-3"><a></a>df_range <span class="op">=</span> df_max <span class="op">-</span> df_min</span>
-<span id="cb19-4"><a></a><span class="bu">print</span>(<span class="ss">f"The range of Zircon concentrations is </span><span class="sc">{</span>df_range<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>The range of Zircon concentrations is 735.00</code></pre>
-</div>
-</div>
-</div></div>
-<div class="fragment">
-<div class="callout callout-warning callout-titled callout-style-simple">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Don’t use Python reserved keywords as variable names</strong></p>
-</div>
-<div class="callout-content">
-<p>Names as <code>min</code>, <code>max</code> or <code>range</code> represent native Python variables and <strong>cannot be used as variable names!</strong></p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="dispersion-2-standard-deviation" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Dispersion 2: Standard deviation</h2>
-<p>The <strong>sample standard deviation</strong> (<span class="math inline">\(s\)</span>) is the sum of squares differences between data points <span class="math inline">\(x_i\)</span> and the mean <span class="math inline">\(\bar{x}\)</span> over <span class="math inline">\(n\)</span> observations: <span class="math display">\[
-s = \sqrt{\frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1} }
-\]</span></p>
-<p><span style="font-size: 0.5em;"></span></p>
-<div class="columns">
-<div class="column" style="width:48%;">
-<ul>
-<li><span class="math inline">\(s\)</span> is in <span class="alert">the same unit as the data</span>
-<ul>
-<li>Easy to interpret</li>
-</ul></li>
-<li><code>df.std()</code></li>
-</ul>
-</div><div class="column" style="width:4%;">
-
-</div><div class="column" style="width:48%;">
-<p><span style="font-size: 0.5em;"></span></p>
-<div id="cedd8a10" class="cell" data-execution_count="26">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb21-1" class="hljs-ln-code"><a></a>df_traces[<span class="st">'Zr'</span>].std()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
-<pre><code>np.float64(118.39358315895393)</code></pre>
-</div>
-</div>
-</div></div>
-</section>
-<section id="dispersion-2-standard-deviation-1" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Dispersion 2: Standard deviation</h2>
-<p>The <strong>theoretical standard deviation</strong> (<span class="math inline">\(\sigma\)</span>) is closely related to the <strong>normal distribution</strong> as:</p>
-<div class="columns">
-<div class="column" style="width:48%;">
-<ul>
-<li><span class="math inline">\(1\sigma\)</span> → ~68% of the data</li>
-<li><span class="math inline">\(2\sigma\)</span> → ~95% of the data</li>
-<li><span class="math inline">\(3\sigma\)</span> → ~99.7% of the data</li>
-</ul>
-</div><div class="column" style="width:4%;">
-
-</div><div class="column" style="width:48%;">
-<div id="60e5c002" class="cell" data-execution_count="27">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="class2_EDA_files/figure-revealjs/cell-28-output-1.png" width="851" height="456"></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="dispersion-2.1-variance" class="slide level2">
-<h2>Dispersion 2.1: Variance</h2>
-<p>The <strong>variance</strong> (<span class="math inline">\(s^2\)</span>) is the <span class="alert">average of squared deviations</span> from the mean (→ the square of the standard deviation): <span class="math display">\[
-s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}
-\]</span></p>
-<p><span style="font-size: 0.5em;"></span></p>
-<div class="columns">
-<div class="column" style="width:54%;">
-<ul>
-<li><span class="math inline">\(s^2\)</span> is in <strong>not</strong> the same unit as the data</li>
-<li>Used in modelling (e.g., ANOVA)</li>
-<li><code>df.var()</code></li>
-</ul>
-</div><div class="column" style="width:46%;">
-<p><span style="font-size: 0.5em;"></span></p>
-<div id="84add56b" class="cell" data-execution_count="28">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a>df_traces[<span class="st">'Zr'</span>].var()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="23">
-<pre><code>np.float64(14017.04053321614)</code></pre>
-</div>
-</div>
-</div></div>
-<div class="callout callout-tip callout-titled callout-style-simple">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Rule of thumb</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Comparing data spread → <span class="alert">standard deviation</span></li>
-<li>Statistical modelling → <span class="alert">variance</span></li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="dispersion-3-interquartile-range" class="slide level2">
-<h2>Dispersion 3: Interquartile range</h2>
-<p>The <strong>interquartile range</strong> (IQR) indicates <span class="alert">how spread out the middle 50%</span> of the data is.</p>
-<ul>
-<li>Difference between the third quartile (Q3) and the first quartile (Q1):</li>
-</ul>
-<p><span id="eq-IQR"><span class="math display">\[
-\mathrm{IQR} = Q_3 - Q_1
-\tag{1}\]</span></span></p>
-<ul>
-<li>Q1: The value below which <strong>25% of the data fall</strong></li>
-<li>Q3: The value below which <strong>75% of the data fall</strong></li>
-</ul>
-</section>
-<section id="dispersion-3-interquartile-range-1" class="slide level2">
-<h2>Dispersion 3: Interquartile range</h2>
-<p><span style="font-size: 0.5em;">&nbsp;</span></p>
-<div id="tbl-univ-pct" class="striped quarto-float quarto-figure quarto-figure-center">
-<figure class="quarto-float quarto-float-tbl">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-univ-pct-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: Relationship between quartiles, deciles and percentiles.
-</figcaption>
-<div aria-describedby="tbl-univ-pct-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table class="table-striped caption-top">
-<colgroup>
-<col style="width: 21%">
-<col style="width: 18%">
-<col style="width: 59%">
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Measure</strong></th>
-<th><strong>Number of Divisions</strong></th>
-<th><strong>Position(s) in Data / Percentile Equivalent</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Quartiles (Q1, Q2, Q3)</strong></td>
-<td>4 equal parts</td>
-<td>Q1 = 25th percentile, Q2 = 50th percentile (median), Q3 = 75th percentile</td>
-</tr>
-<tr class="even">
-<td><strong>Deciles (D1 … D9)</strong></td>
-<td>10 equal parts</td>
-<td>D1 = 10th percentile, D2 = 20th percentile, …, D9 = 90th percentile</td>
-</tr>
-<tr class="odd">
-<td><strong>Percentiles (P1 … P99)</strong></td>
-<td>100 equal parts</td>
-<td>P1 = 1st percentile, P2 = 2nd percentile, …, P99 = 99th percentile</td>
-</tr>
-</tbody>
-</table>
-</div>
-</figure>
-</div>
-<ul>
-<li><span class="alert">median</span> =
-<ul>
-<li>2nd quartile = Q2</li>
-<li>5th decile = D5</li>
-<li>50th percentile = P50</li>
-</ul></li>
-</ul>
-</section>
-<section id="dispersion-3-interquartile-range-2" class="slide level2">
-<h2>Dispersion 3: Interquartile range</h2>
-<p>The <strong>interquartile range</strong> (IQR) indicates <span class="alert">how spread out the middle 50%</span> of the data is.</p>
-<div class="columns">
-<div class="column" style="width:48%;">
-<p><span style="font-size: 0.5em;"></span></p>
-<p><span class="math inline">\(Q_1\)</span> and <span class="math inline">\(Q_3\)</span> for a <strong>symmetrical</strong> distribution:</p>
-<p><img data-src="../class2/img/fig-univ-pctS.png"></p>
-</div><div class="column" style="width:4%;">
-
-</div><div class="column" style="width:48%;">
-<p><span style="font-size: 0.5em;"></span></p>
-<p><span class="math inline">\(Q_1\)</span> and <span class="math inline">\(Q_3\)</span> for an <strong>asymmetrical</strong> distribution:</p>
-<p><img data-src="../class2/img/fig-univ-pctA.png"></p>
-</div></div>
-</section>
-<section id="shape-skewness" class="slide level2">
-<h2>Shape: Skewness</h2>
-<p>The <strong>skewness</strong> measures <span class="alert">the asymmetry of a distribution</span> and is computed as:</p>
-<p><span class="math display">\[
-\text{Skewness} = \frac{1}{n} \sum_{i=1}^{n}\left(\frac{x_i-\bar{x}}{s}\right)^{3}
-\]</span></p>
-<p>In <em>Pandas</em>, the skewness can be computed using <code>.skew()</code></p>
-<ul>
-<li><strong>0</strong>: <span class="alert">Symmetric</span> → e.g., normal distribution</li>
-<li><strong>&gt;0</strong>: <span class="alert">Righ-skewed</span> → a tail extends to the right</li>
-<li><strong>&lt;0</strong>: <span class="alert">Left-skewed</span> → a tail extends to the left</li>
-</ul>
-</section>
-<section id="distribution-visualisation" class="slide level2">
-<h2>Distribution visualisation</h2>
-<p>Beyond <strong>histograms</strong> → some plot types report <span class="alert">empirical</span> indications of <strong>location</strong>, <strong>dispersion</strong> and <strong>skewness</strong>.</p>
-<p><strong>Box and whisker plots</strong></p>
-<div class="columns">
-<div class="column" style="width:40%;">
-<ul>
-<li><strong>Box</strong> → <span class="math inline">\(IQR\)</span> + median</li>
-<li><strong>Whiskers</strong> 1.5 times the IQR from Q1/Q3</li>
-<li><strong>Outlier</strong> → differs from the majority of observations</li>
-</ul>
-</div><div class="column" style="width:60%;">
-<p><img data-src="../class2/img/fig-boxplot.png" class="img-up-50"></p>
-</div></div>
-</section>
-<section id="distribution-visualisation-box-plots" class="slide level2">
-<h2>Distribution visualisation: Box plots</h2>
-<p><span style="font-size: 0.5em;">&nbsp;</span></p>
-<div class="columns">
-<div class="column" style="width:48%;">
-<ul>
-<li><code>sns.boxplot()</code></li>
-<li>No density</li>
-<li>No tail resolution</li>
-</ul>
-</div><div class="column" style="width:4%;">
-
-</div><div class="column" style="width:48%;">
-<div id="af8282e9" class="cell" data-execution_count="29">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb25-2"><a></a>sns.boxplot(data<span class="op">=</span>df_traces[[<span class="st">'Zr'</span>, <span class="st">'Sr'</span>]], orient<span class="op">=</span><span class="st">"h"</span>, ax<span class="op">=</span>ax)</span>
-<span id="cb25-3"><a></a>ax.set_xlabel(<span class="st">'Concentration (ppm)'</span>)<span class="op">;</span></span>
-<span id="cb25-4"><a></a>ax.set_title(<span class="st">'Zr and Sr distribution'</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="class2_EDA_files/figure-revealjs/cell-30-output-1.png" width="804" height="482"></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="distribution-visualisation-violin-plots" class="slide level2">
-<h2>Distribution visualisation: Violin plots</h2>
-<p><span style="font-size: 0.5em;">&nbsp;</span></p>
-<div class="columns">
-<div class="column" style="width:48%;">
-<ul>
-<li><code>sns.violinplot()</code></li>
-<li>Density estimate through Kernel Density Estimator → <span class="alert">artefacts</span></li>
-<li>Some tail resolution, not always realistic</li>
-</ul>
-</div><div class="column" style="width:4%;">
-
-</div><div class="column" style="width:48%;">
-<div id="b0ed90e9" class="cell" data-execution_count="30">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb26-2"><a></a>sns.violinplot(data<span class="op">=</span>df_traces[[<span class="st">'Zr'</span>, <span class="st">'Sr'</span>]], orient<span class="op">=</span><span class="st">"h"</span>, ax<span class="op">=</span>ax)</span>
-<span id="cb26-3"><a></a>ax.set_xlabel(<span class="st">'Concentration (ppm)'</span>)<span class="op">;</span></span>
-<span id="cb26-4"><a></a>ax.set_title(<span class="st">'Zr and Sr distribution'</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="class2_EDA_files/figure-revealjs/cell-31-output-1.png" width="804" height="482"></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="distribution-visualisation-boxen-plots" class="slide level2">
-<h2>Distribution visualisation: Boxen plots</h2>
-<p><span style="font-size: 0.5em;">&nbsp;</span></p>
-<div class="columns">
-<div class="column" style="width:48%;">
-<ul>
-<li><code>sns.boxenplot()</code></li>
-<li>Plots deciles → some density estimate</li>
-<li>Good tail resolution</li>
-</ul>
-</div><div class="column" style="width:4%;">
-
-</div><div class="column" style="width:48%;">
-<div id="c8bd4861" class="cell" data-execution_count="31">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb27-2"><a></a>sns.boxenplot(data<span class="op">=</span>df_traces[[<span class="st">'Zr'</span>, <span class="st">'Sr'</span>]], orient<span class="op">=</span><span class="st">"h"</span>, ax<span class="op">=</span>ax)</span>
-<span id="cb27-3"><a></a>ax.set_xlabel(<span class="st">'Concentration (ppm)'</span>)<span class="op">;</span></span>
-<span id="cb27-4"><a></a>ax.set_title(<span class="st">'Zr and Sr distribution'</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="class2_EDA_files/figure-revealjs/cell-32-output-1.png" width="804" height="482"></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="your-turn-1" class="slide level2">
-<h2>Your turn!</h2>
-<ul>
-<li>Go to <a href="https://elste-master.github.io/Data-Science/">https://elste-master.github.io/Data-Science/</a>
-<ul>
-<li>Class 2 &gt; <span class="alert">Univariate analyses</span></li>
+<li>Class 2</li>
 <li>Explore the structure of the glass geochemistry or <span class="alert">your</span> dataset</li>
 <li>Get used to the various functions</li>
 </ul></li>
 </ul>
-<iframe src="../class2/day2-3_univariate.html" width="100%" height="400px" style="border:none;">
-</iframe>
-</section></section>
-<section>
-<section id="bivariate-analyses" class="title-slide slide level1 center" data-background-color="#2F4647">
-<h1>Bivariate analyses</h1>
-
-</section>
-<section id="bivariate-analyses-1" class="slide level2">
-<h2>Bivariate analyses</h2>
-<ul>
-<li><strong>Univariate analyses</strong>: properties of one variable at the time</li>
-<li><strong>Bivariate analyses</strong>: investigate the <strong>relationship</strong> between two variables</li>
-</ul>
-<div class="fragment">
-<ol type="1">
-<li><strong>Visually</strong> → pairwise comparison</li>
-<li>Using <strong>covariance/correlation</strong> → correlation matrix</li>
-<li>First look at <strong>linear regression</strong> → only visually for now</li>
-</ol>
-</div>
-</section>
-<section id="pairwise-comparison" class="slide level2">
-<h2>Pairwise comparison</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<p>A first visual inspection using <code>sns.pairplot()</code></p>
-<ul>
-<li>Numerical values</li>
-<li>One categorical value</li>
-</ul>
-</div><div class="column" style="width:4%;">
-
-</div><div class="column" style="width:56%;">
-<div id="ecef2353" class="cell" data-execution_count="32">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="class2_EDA_files/figure-revealjs/cell-33-output-1.png" width="1342" height="1172"></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="covariance" class="slide level2">
-<h2>Covariance</h2>
-<ul>
-<li>The <span class="alert">covariance</span> captures <strong>the direction and magnitude of the linear relationship between the two variables</strong></li>
-<li>The <span class="alert">sample covariance</span> is an <strong>estimator</strong> of the theoretical covariance:</li>
-</ul>
-<p><span class="math display">\[
-\mathrm{Cov}(X,Y)_{\text{emp}}= \frac{1}{n-1}\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y}),
-\]</span></p>
-<ul>
-<li><strong>Positive</strong>: Increase in <span class="math inline">\(X\)</span> → increase in <span class="math inline">\(Y\)</span></li>
-<li><strong>Negative</strong>: Increase in <span class="math inline">\(X\)</span> → decrease in <span class="math inline">\(Y\)</span></li>
-</ul>
-<p><strong>Problem</strong>: depends on the <span class="alert">magnitudes</span> of the variables, so it does not directly reflect the <span class="alert">strength</span> of the relationship</p>
-</section>
-<section id="correlation" class="slide level2">
-<h2>Correlation</h2>
-<ul>
-<li>The <span class="alert">correlation coefficient</span> provides <strong>a normalized version</strong> of the covariance
-<ul>
-<li>Ranges from <span class="math inline">\(−1\)</span> to <span class="math inline">\(1\)</span></li>
-<li>Indicates both the direction and the strength of the linear relationship</li>
-</ul></li>
-<li>The <span class="alert">sample correlation</span> is computed as:</li>
-</ul>
-<p><span class="math display">\[
-r(X,Y)_{\text{emp}} = \frac{\mathrm{Cov}(X,Y)_{\text{emp}}}{s_X s_Y} = \frac{\sum_{i=1}^n (x_i - \bar x)(y_i - \bar y)}{\sqrt{\sum_{i=1}^n (x_i - \bar x)^2}\;\sqrt{\sum_{i=1}^n (y_i - \bar y)^2}},
-\]</span></p>
-<ul>
-<li><span class="math inline">\(r(X,Y)=-1\)</span>/<span class="math inline">\(1\)</span> → “perfect” <strong>relationship</strong> between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></li>
-<li><span class="math inline">\(r(X,Y)=0\)</span> → <strong>independence</strong> between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</li>
-</ul>
-</section>
-<section id="correlation-matrix" class="slide level2">
-<h2>Correlation matrix</h2>
-<ul>
-<li><span class="alert">Correlation matrix</span> → square table showing the <span class="alert">pairwise correlations</span> between all variables in a dataset</li>
-<li>Suppose we have <span class="math inline">\(p\)</span> variables <span class="math inline">\((X_1, X_2, \dots, X_p)\)</span> → the <span class="alert">correlation matrix</span> <span class="math inline">\(\mathbf{C}\)</span> is:</li>
-</ul>
-<p><span class="math display">\[
-\mathbf{C} =
-\begin{pmatrix}
-1 &amp; r(X_1,X_2) &amp; \dots &amp; r(X_1,X_p) \\
-r(X_2,X_1) &amp; 1 &amp; \dots &amp; r(X_2,X_p) \\
-\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
-r(X_p,X_1) &amp; r(X_p,X_2) &amp; \dots &amp; 1
-\end{pmatrix}.
-\]</span></p>
-</section>
-<section id="correlation-matrix-1" class="slide level2">
-<h2>Correlation matrix</h2>
-<div class="columns">
-<div class="column" style="width:48%;">
-<p>Correlation matrix for trace elements</p>
-<ul>
-<li>Use <strong>sample</strong> correlation coefficient <span class="math inline">\(r\)</span>
-<ul>
-<li><strong>Red:</strong> positive relationship</li>
-<li><strong>Blue:</strong> negative relationship</li>
-<li><strong>White:</strong> no relationship</li>
-</ul></li>
-</ul>
-</div><div class="column" style="width:4%;">
-
-</div><div class="column" style="width:48%;">
-<div id="d377d8c7" class="cell" data-execution_count="33">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="class2_EDA_files/figure-revealjs/cell-34-output-1.png" width="854" height="726"></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="linear-regression" class="slide level2">
-<h2>Linear regression</h2>
-<ul>
-<li>Correlation coefficients → measure of coupling between two continuous variables</li>
-<li><span class="alert">linear regressions</span> attempt modelling this relationship</li>
-</ul>
-<div class="columns">
-<div class="column" style="width:30%;">
-<p><span class="math display">\[
-y = a + bx + \varepsilon
-\]</span></p>
-</div><div class="column" style="width:4%;">
-
-</div><div class="column" style="width:66%;">
-<p>where:</p>
-<ul>
-<li><span class="math inline">\(y\)</span>: dependent (response) variable</li>
-<li><span class="math inline">\(x\)</span>: independent (predictor) variable</li>
-<li><span class="math inline">\(a\)</span>: intercept → value of <span class="math inline">\(y\)</span> when <span class="math inline">\(x=0\)</span></li>
-<li><span class="math inline">\(b\)</span>: slope → how much <span class="math inline">\(y\)</span> changes by unit of <span class="math inline">\(x\)</span></li>
-<li><span class="math inline">\(\varepsilon\)</span>: error term</li>
-</ul>
-</div></div>
-<p>→ <strong>Objective:</strong> Estimate the values of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> that best fit the observed data</p>
-</section>
-<section id="linear-regression-with-seaborn" class="slide level2">
-<h2>Linear regression with Seaborn</h2>
-<p><em>Seaborn</em> has high level functions to <strong>visualise</strong> regressions → <code>sns.regplot()</code> that produce:</p>
-<div class="columns">
-<div class="column" style="width:58%;">
-<ol type="1">
-<li>A scatter plot;</li>
-<li>A linear regression model fit;</li>
-<li>A confidence interval</li>
-</ol>
-<div class="fragment">
-<p>→ <span class="alert"><strong>Be critical</strong></span></p>
-<p>→ Further investigations <span class="alert">require dedicated stats packages</span></p>
-</div>
-</div><div class="column" style="width:4%;">
-
-</div><div class="column img-up-75" style="width:38%;">
-<div id="d893dadb" class="cell" data-execution_count="34">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="class2_EDA_files/figure-revealjs/cell-35-output-1.png" width="543" height="832"></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="residual-analysis-with-seaborn" class="slide level2">
-<h2>Residual analysis with Seaborn</h2>
-<p>Linear regression → <span class="alert">do residuals show any structure</span>?? → <code>sns.residplot()</code></p>
-<div class="columns">
-<div class="column" style="width:58%;">
-<p>Residuals are necessary to:</p>
-<ol type="1">
-<li><strong>Diagnose model fit</strong> (→ how much <strong>unexplained variation</strong> remains);</li>
-<li><strong>Detect patterns</strong> that indicate problems (non-linearity, heteroscedasticity, outliers).</li>
-</ol>
-<div class="fragment">
-<p>Any type of <span class="alert">structure in residuals</span> might reveal a <strong>violation of linear regression assumptions</strong>.</p>
-</div>
-</div><div class="column" style="width:4%;">
-
-</div><div class="column img-up-75" style="width:38%;">
-<div id="1013060d" class="cell" data-execution_count="35">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="class2_EDA_files/figure-revealjs/cell-36-output-1.png" width="543" height="832"></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="your-turn-2" class="slide level2">
-<h2>Your turn!</h2>
-<ul>
-<li>Go to <a href="https://elste-master.github.io/Data-Science/">https://elste-master.github.io/Data-Science/</a>
-<ul>
-<li>Class 2 &gt; <span class="alert">Bivariate analyses</span></li>
-<li>Explore the structure of the glass geochemistry or <span class="alert">your</span> dataset</li>
-<li>Get used to the various functions</li>
-</ul></li>
-</ul>
-<iframe src="../class2/day2-4_bivariate.html" width="100%" height="400px" style="border:none;">
+<iframe src="../class2/day2-1_intro.html" width="100%" height="400px" style="border:none;">
 </iframe>
 
 
@@ -2359,6 +1349,38 @@ y = a + bx + \varepsilon
         }
       });
       </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
     
 
 </body></html>

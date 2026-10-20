@@ -419,7 +419,7 @@ window.Quarto = {
 <div id="fig-sns-hist_theoretical" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sns-hist_theoretical-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="day2-3_univariate_files/figure-html/fig-sns-hist_theoretical-output-1.png" width="593" height="414" class="figure-img">
+<img src="day2-3_univariate_files/figure-html/fig-sns-hist_theoretical-output-1.png" width="593" height="411" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sns-hist_theoretical-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: Difference between theoretical distributions and sample histogram
@@ -521,7 +521,7 @@ Figure&nbsp;2: Histogram of the Zirconium trace element
 </ul>
 <p>The empirical mean of a dataset can easily be computed with <em>Pandas</em> using the <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mean.html"><code>.mean()</code></a> <a href="../appendices/doc_pandas.html#pandas-mean">(doc)</a> function (<a href="#lst-univ-mean" class="quarto-xref">Listing&nbsp;1</a>). Note that we round the results to two significant digits using <code>.round(2)</code> <a href="../appendices/doc_pandas.html#pandas-round">(doc)</a>.</p>
 <p><strong>Function reference:</strong> <code>round</code> <a href="../appendices/doc_pandas.html#pandas-round">(doc)</a>; <code>mean</code> <a href="../appendices/doc_pandas.html#pandas-mean">(doc)</a>.</p>
-<div id="c4b6ba5d" class="cell" data-execution_count="4">
+<div id="f5b3a6fe" class="cell" data-execution_count="4">
 <div id="lst-univ-mean" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-mean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -548,7 +548,7 @@ dtype: float64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p>What is the empirical mean value for Strontium?</p>
-<div id="b5067ba5" class="cell" data-execution_count="5">
+<div id="4c2e9156" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="5">
 <select class="webex-select"><option value="blank"></option><option value="0">365.38</option><option value="answer">516.42</option><option value="0">219.38</option><option value="0">123.94</option></select>
 </div>
@@ -571,27 +571,27 @@ dtype: float64</code></pre>
 <li><code>axis = 1</code> usually makes sense when rows are labelled, and computes the mean <mark>across all columns for each row</mark>(<a href="#lst-univ-mean-multi-col" class="quarto-xref">Listing&nbsp;3</a>)</li>
 </ul>
 <p><strong>Function reference:</strong> <code>head</code> <a href="../appendices/doc_pandas.html#pandas-head">(doc)</a>; <code>round</code> <a href="../appendices/doc_pandas.html#pandas-round">(doc)</a>; <code>mean</code> <a href="../appendices/doc_pandas.html#pandas-mean">(doc)</a>.</p>
-<div id="830321b2" class="cell" data-execution_count="6">
+<div id="fa370c2b" class="cell" data-execution_count="6">
 <div id="lst-univ-mean-multi-row" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-mean-multi-row-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Listing&nbsp;2: Compute the empirical mean across rows.
 </figcaption>
 <div aria-describedby="lst-univ-mean-multi-row-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-14"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="1">1</button><span id="annotated-cell-14-1" class="code-annotation-target"><a href="#annotated-cell-14-1"></a>df_traces_sub <span class="op">=</span> df_traces[[<span class="st">'Sc'</span>,<span class="st">'Rb'</span>,<span class="st">'Sr'</span>,<span class="st">'Y'</span>,<span class="st">'Zr'</span>,<span class="st">'Nb'</span>,<span class="st">'Cs'</span>]]</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="2">2</button><span id="annotated-cell-14-2" class="code-annotation-target"><a href="#annotated-cell-14-2"></a>df_traces_sub.mean(axis<span class="op">=</span><span class="dv">0</span>).<span class="bu">round</span>(<span class="dv">2</span>).head()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-12"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="1">1</button><span id="annotated-cell-12-1" class="code-annotation-target"><a href="#annotated-cell-12-1"></a>df_traces_sub <span class="op">=</span> df_traces[[<span class="st">'Sc'</span>,<span class="st">'Rb'</span>,<span class="st">'Sr'</span>,<span class="st">'Y'</span>,<span class="st">'Zr'</span>,<span class="st">'Nb'</span>,<span class="st">'Cs'</span>]]</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="2">2</button><span id="annotated-cell-12-2" class="code-annotation-target"><a href="#annotated-cell-12-2"></a>df_traces_sub.mean(axis<span class="op">=</span><span class="dv">0</span>).<span class="bu">round</span>(<span class="dv">2</span>).head()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-14" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-12" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-14" data-code-lines="1" data-code-annotation="1">Create a subset of the df_traces containing numerical data</span>
+<span data-code-cell="annotated-cell-12" data-code-lines="1" data-code-annotation="1">Create a subset of the df_traces containing numerical data</span>
 </dd>
-<dt data-target-cell="annotated-cell-14" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-12" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-14" data-code-lines="2" data-code-annotation="2">Compute the mean across all rows</span>
+<span data-code-cell="annotated-cell-12" data-code-lines="2" data-code-annotation="2">Compute the mean across all rows</span>
 </dd>
 </dl>
 </div>
@@ -605,27 +605,27 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>Function reference:</strong> <code>head</code> <a href="../appendices/doc_pandas.html#pandas-head">(doc)</a>; <code>round</code> <a href="../appendices/doc_pandas.html#pandas-round">(doc)</a>; <code>mean</code> <a href="../appendices/doc_pandas.html#pandas-mean">(doc)</a>.</p>
-<div id="1b1403ac" class="cell" data-execution_count="7">
+<div id="4f7a0434" class="cell" data-execution_count="7">
 <div id="lst-univ-mean-multi-col" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-mean-multi-col-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Listing&nbsp;3: Compute the empirical mean across columns.
 </figcaption>
 <div aria-describedby="lst-univ-mean-multi-col-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-15"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-15" data-target-annotation="1">1</button><span id="annotated-cell-15-1" class="code-annotation-target"><a href="#annotated-cell-15-1"></a>df_traces_sub <span class="op">=</span> df_traces[[<span class="st">'Sc'</span>,<span class="st">'Rb'</span>,<span class="st">'Sr'</span>,<span class="st">'Y'</span>,<span class="st">'Zr'</span>,<span class="st">'Nb'</span>,<span class="st">'Cs'</span>]]</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-15" data-target-annotation="2">2</button><span id="annotated-cell-15-2" class="code-annotation-target"><a href="#annotated-cell-15-2"></a>df_traces_sub.mean(axis<span class="op">=</span><span class="dv">1</span>).<span class="bu">round</span>(<span class="dv">2</span>).head()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-13"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="1">1</button><span id="annotated-cell-13-1" class="code-annotation-target"><a href="#annotated-cell-13-1"></a>df_traces_sub <span class="op">=</span> df_traces[[<span class="st">'Sc'</span>,<span class="st">'Rb'</span>,<span class="st">'Sr'</span>,<span class="st">'Y'</span>,<span class="st">'Zr'</span>,<span class="st">'Nb'</span>,<span class="st">'Cs'</span>]]</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="2">2</button><span id="annotated-cell-13-2" class="code-annotation-target"><a href="#annotated-cell-13-2"></a>df_traces_sub.mean(axis<span class="op">=</span><span class="dv">1</span>).<span class="bu">round</span>(<span class="dv">2</span>).head()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-15" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-15" data-code-lines="1" data-code-annotation="1">Create a subset of the df_traces containing numerical data</span>
+<span data-code-cell="annotated-cell-13" data-code-lines="1" data-code-annotation="1">Create a subset of the df_traces containing numerical data</span>
 </dd>
-<dt data-target-cell="annotated-cell-15" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-15" data-code-lines="2" data-code-annotation="2">Compute the mean across all columns</span>
+<span data-code-cell="annotated-cell-13" data-code-lines="2" data-code-annotation="2">Compute the mean across all columns</span>
 </dd>
 </dl>
 </div>
@@ -651,25 +651,30 @@ P(X \le m) \ge 0.5 \quad \text{and} \quad P(X \ge m) \ge 0.5,
 <p><span class="math display">\[
 F_X(m) = P(X \le m) = 0.5.
 \]</span></p>
-<p>In practice, we usually only observe a finite <mark>sample</mark> of <span class="math inline">\(X\)</span>. The <mark>empirical median</mark> is an <mark>estimator</mark> of the theoretical median, defined as the middle value of the sorted sample. There is no easy formula to compute the empirical median, instead we need to conceptually (<strong>?@lst-univ-median-ex</strong>):</p>
+<p>In practice, we usually only observe a finite <mark>sample</mark> of <span class="math inline">\(X\)</span>. The <mark>empirical median</mark> is an <mark>estimator</mark> of the theoretical median, defined as the middle value of the sorted sample. There is no easy formula to compute the empirical median, instead we need to conceptually (<a href="#fig-univ-median-ex" class="quarto-xref">Figure&nbsp;3</a>):</p>
 <ol type="1">
 <li>Order all values in ascending order and plot them against a normalised number of observations (this is called an empirical cumulative density function - or ECDF);</li>
 <li>On the x-axis, find the point dividing the dataset into two equal numbers of observations;</li>
 <li>Read the value on the y-axis that intersects the ECDF.</li>
 </ol>
-<p><strong>Function reference:</strong> <code>plt.subplots</code> <a href="../appendices/doc_visualisation.html#plotting-plt-subplots">(doc)</a>; <code>sns.ecdfplot</code> <a href="../appendices/doc_visualisation.html#plotting-sns-ecdfplot">(doc)</a>; <code>ax.plot</code> <a href="../appendices/doc_visualisation.html#plotting-ax-plot">(doc)</a>; <code>median</code> <a href="../appendices/doc_pandas.html#pandas-median">(doc)</a>; <code>ax.set_xlim</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-xlim">(doc)</a>; <code>ax.set_ylim</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-ylim">(doc)</a>.</p>
-<div id="a0ddb1d2" class="cell" data-execution_count="8">
+<!-- **Function reference:** `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots); `sns.ecdfplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-ecdfplot); `ax.plot` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-plot); `median` [(doc)](../appendices/doc_pandas.qmd#pandas-median); `ax.set_xlim` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlim); `ax.set_ylim` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylim). -->
+<div id="cell-fig-univ-median-ex" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="day2-3_univariate_files/figure-html/cell-9-output-1.png" width="527" height="361" class="figure-img"></p>
+<div id="fig-univ-median-ex" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-univ-median-ex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="day2-3_univariate_files/figure-html/fig-univ-median-ex-output-1.png" width="527" height="361" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-univ-median-ex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Graphical representation of the empirical median.
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>Fortunately, we can also use the native <em>Pandas</em> <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.median.html"><code>.median</code></a> <a href="../appendices/doc_pandas.html#pandas-median">(doc)</a> function (<a href="#lst-univ-median" class="quarto-xref">Listing&nbsp;4</a>).</p>
 <p><strong>Function reference:</strong> <code>round</code> <a href="../appendices/doc_pandas.html#pandas-round">(doc)</a>; <code>median</code> <a href="../appendices/doc_pandas.html#pandas-median">(doc)</a>.</p>
-<div id="5e546b6b" class="cell" data-execution_count="9">
+<div id="c3ffa6f6" class="cell" data-execution_count="9">
 <div id="lst-univ-median" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-median-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -695,7 +700,7 @@ Listing&nbsp;4: Compute the median for two significant digits.
 </div>
 <div class="callout-body-container callout-body">
 <p>What is the empirical median value for Cesium?</p>
-<div id="d115811a" class="cell" data-execution_count="10">
+<div id="8dce625b" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="10">
 <select class="webex-select"><option value="blank"></option><option value="0">36.38</option><option value="0">51.42</option><option value="answer">23.99</option><option value="0">13.94</option></select>
 </div>
@@ -713,8 +718,8 @@ Listing&nbsp;4: Compute the median for two significant digits.
 </ul>
 <p>The <mark>empirical mode</mark> is an <mark>estimator</mark> of the theoretical mode, defined as the most frequent value in a sample (discrete) or the peak of a density estimate (continuous). A distribution can have one mode (unimodal), two modes (bimodal), or multiple modes (multimodal). In <em>Pandas</em>, the empirical mode is computed using <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mode.html"><code>.mode()</code></a> <a href="../appendices/doc_pandas.html#pandas-mode">(doc)</a>.</p>
 <p>For <strong>categorical</strong> or <strong>discrete numerical data</strong>, the empirical mode simply the value(s) that appear most often.</p>
-<p>For <strong>continuous data</strong>, <mark>exact duplicates may be rare</mark>, and resulting empirical modes might not be that meaningful (<a href="#fig-mode" class="quarto-xref">Figure&nbsp;3</a>). As a result, we often bin the data into intervals first and find the most populated bin (<a href="#fig-mode-bin" class="quarto-xref">Figure&nbsp;4</a>).</p>
-<p><strong>Function reference:</strong> <code>round</code> <a href="../appendices/doc_pandas.html#pandas-round">(doc)</a>; <code>mode</code> <a href="../appendices/doc_pandas.html#pandas-mode">(doc)</a>; <code>plt.subplots</code> <a href="../appendices/doc_visualisation.html#plotting-plt-subplots">(doc)</a>; <code>sns.histplot</code> <a href="../appendices/doc_visualisation.html#plotting-sns-histplot">(doc)</a>; <code>enumerate</code> <a href="../appendices/doc_python.html#python-enumerate">(doc)</a>; <code>ax.axvline</code> <a href="../appendices/doc_visualisation.html#plotting-ax-axvline">(doc)</a>; <code>ax.set_xlabel</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-xlabel">(doc)</a>; <code>plt.show</code> <a href="../appendices/doc_visualisation.html#plotting-plt-show">(doc)</a>.</p>
+<p>For <strong>continuous data</strong>, <mark>exact duplicates may be rare</mark>, and resulting empirical modes might not be that meaningful (<a href="#fig-mode" class="quarto-xref">Figure&nbsp;4</a>). As a result, we often bin the data into intervals first and find the most populated bin (<a href="#fig-mode-bin" class="quarto-xref">Figure&nbsp;5</a>).</p>
+<!-- **Function reference:** `round` [(doc)](../appendices/doc_pandas.qmd#pandas-round); `mode` [(doc)](../appendices/doc_pandas.qmd#pandas-mode); `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots); `sns.histplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-histplot); `enumerate` [(doc)](../appendices/doc_python.qmd#python-enumerate); `ax.axvline` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-axvline); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show). -->
 <div id="cell-fig-mode" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
@@ -759,13 +764,13 @@ Listing&nbsp;4: Compute the median for two significant digits.
 <img src="day2-3_univariate_files/figure-html/fig-mode-output-1.png" width="585" height="429" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: Modes computed from a continuous dataset.
+Figure&nbsp;4: Modes computed from a continuous dataset.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p><strong>Function reference:</strong> <code>int</code> <a href="../appendices/doc_python.html#python-int">(doc)</a>; <code>min</code> <a href="../appendices/doc_pandas.html#pandas-min">(doc)</a>; <code>max</code> <a href="../appendices/doc_pandas.html#pandas-max">(doc)</a>; <code>range</code> <a href="../appendices/doc_python.html#python-range">(doc)</a>; <code>cut</code> <a href="../appendices/doc_pandas.html#pandas-cut">(doc)</a>; <code>mode</code> <a href="../appendices/doc_pandas.html#pandas-mode">(doc)</a>; <code>list.append</code> <a href="../appendices/doc_python.html#python-list-append">(doc)</a>; <code>plt.subplots</code> <a href="../appendices/doc_visualisation.html#plotting-plt-subplots">(doc)</a>; <code>sns.histplot</code> <a href="../appendices/doc_visualisation.html#plotting-sns-histplot">(doc)</a>; <code>enumerate</code> <a href="../appendices/doc_python.html#python-enumerate">(doc)</a>; <code>ax.axvline</code> <a href="../appendices/doc_visualisation.html#plotting-ax-axvline">(doc)</a>; <code>ax.set_xlabel</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-xlabel">(doc)</a>; <code>plt.show</code> <a href="../appendices/doc_visualisation.html#plotting-plt-show">(doc)</a>.</p>
+<!-- **Function reference:** `int` [(doc)](../appendices/doc_python.qmd#python-int); `min` [(doc)](../appendices/doc_pandas.qmd#pandas-min); `max` [(doc)](../appendices/doc_pandas.qmd#pandas-max); `range` [(doc)](../appendices/doc_python.qmd#python-range); `cut` [(doc)](../appendices/doc_pandas.qmd#pandas-cut); `mode` [(doc)](../appendices/doc_pandas.qmd#pandas-mode); `list.append` [(doc)](../appendices/doc_python.qmd#python-list-append); `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots); `sns.histplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-histplot); `enumerate` [(doc)](../appendices/doc_python.qmd#python-enumerate); `ax.axvline` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-axvline); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show). -->
 <div id="cell-fig-mode-bin" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
@@ -831,7 +836,7 @@ Figure&nbsp;3: Modes computed from a continuous dataset.
 <img src="day2-3_univariate_files/figure-html/fig-mode-bin-output-1.png" width="585" height="429" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mode-bin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4: Empirical modes computed from a binned dataset.
+Figure&nbsp;5: Empirical modes computed from a binned dataset.
 </figcaption>
 </figure>
 </div>
@@ -847,7 +852,7 @@ Figure&nbsp;4: Empirical modes computed from a binned dataset.
 <li>The <mark>mean is highly sensitive to outliers</mark>, whereas the median is not.</li>
 </ul>
 <p><strong>Function reference:</strong> <code>plt.subplots</code> <a href="../appendices/doc_visualisation.html#plotting-plt-subplots">(doc)</a>; <code>sns.histplot</code> <a href="../appendices/doc_visualisation.html#plotting-sns-histplot">(doc)</a>; <code>ax.axvline</code> <a href="../appendices/doc_visualisation.html#plotting-ax-axvline">(doc)</a>; <code>mean</code> <a href="../appendices/doc_pandas.html#pandas-mean">(doc)</a>; <code>median</code> <a href="../appendices/doc_pandas.html#pandas-median">(doc)</a>; <code>ax.legend</code> <a href="../appendices/doc_visualisation.html#plotting-ax-legend">(doc)</a>.</p>
-<div id="03f1a705" class="cell" data-execution_count="13">
+<div id="77589cab" class="cell" data-execution_count="13">
 <div id="lst-univ-mean-med" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-mean-med-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -894,7 +899,7 @@ Listing&nbsp;5: Compute the empirical median for two significant digits.
 R_\text{emp} = \max(x_1, \dots, x_n) - \min(x_1, \dots, x_n).
 \tag{2}\]</span></span></p>
 <p><strong>Function reference:</strong> <code>min</code> <a href="../appendices/doc_pandas.html#pandas-min">(doc)</a>; <code>max</code> <a href="../appendices/doc_pandas.html#pandas-max">(doc)</a>; <code>print</code> <a href="../appendices/doc_python.html#python-print">(doc)</a>.</p>
-<div id="67e8fbad" class="cell" data-execution_count="14">
+<div id="36643c9d" class="cell" data-execution_count="14">
 <div id="lst-univ-minmax" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-minmax-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -936,7 +941,7 @@ Listing&nbsp;6: Compute the min and the max values of a column
 </div>
 <div class="callout-body-container callout-body">
 <p>What is the empirical range for Cesium?</p>
-<div id="acb503df" class="cell" data-execution_count="15">
+<div id="0bd280f9" class="cell" data-execution_count="15">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="15">
 <select class="webex-select"><option value="blank"></option><option value="0">12.41</option><option value="0">414.6</option><option value="answer">41.46</option><option value="0">53.88</option></select>
 </div>
@@ -965,7 +970,7 @@ s = \sqrt{s^2}.
 For a Gaussian (normal) distribution, about 68% of the data falls within one standard deviation of the mean, about 95% within two standard deviations, and about 99.7% within three standard deviations. Thus, variance and standard deviation are fundamental for describing the spread and probability intervals of normally distributed data.</p>
 <p>You can compute these in pandas using <code>.var()</code> <a href="../appendices/doc_pandas.html#pandas-var">(doc)</a> and <code>.std()</code> <a href="../appendices/doc_pandas.html#pandas-std">(doc)</a>:</p>
 <p><strong>Function reference:</strong> <code>var</code> <a href="../appendices/doc_pandas.html#pandas-var">(doc)</a>; <code>std</code> <a href="../appendices/doc_pandas.html#pandas-std">(doc)</a>.</p>
-<div id="7dbe9a07" class="cell" data-execution_count="16">
+<div id="cdc50568" class="cell" data-execution_count="16">
 <div id="lst-univ-std" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-std-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1013,195 +1018,48 @@ dtype: float64</code></pre>
 <li><em>What is the value below which lie <mark>25%</mark> of the data?</em> → <strong>25<sup>th</sup> percentile</strong>;</li>
 <li><em>What is the value below which lie <mark>75%</mark> of the data?</em> → <strong>75<sup>th</sup> percentile</strong>.</li>
 </ul>
-<p><a href="#fig-univ-pctS" class="quarto-xref">Figure&nbsp;5</a> and <a href="#fig-univ-pctA" class="quarto-xref">Figure&nbsp;6</a> show the relationship between the percentiles and the underlying distribution of data, where:</p>
+<p><a href="#fig-univ-pctS" class="quarto-xref">Figure&nbsp;6</a> and <a href="#fig-univ-pctA" class="quarto-xref">Figure&nbsp;7</a> show the relationship between the percentiles and the underlying distribution of data, where:</p>
 <ul>
 <li>The blue area shows the <mark>histogram</mark> (→ <strong>how many</strong> data points fall into a specific bin = discrete range of values?)</li>
 <li>The orange curve shows the <mark>cumulative</mark> function (→ <strong>what proportion</strong> of data falls below a specific value?)</li>
 </ul>
-<p><a href="#fig-univ-pctS" class="quarto-xref">Figure&nbsp;5</a> shows the percentiles of a <strong>symmetric</strong> distribution, and demonstrates how i) the median value <strong>is equal</strong> to the mean and ii) the 25<sup>th</sup>and 75<sup>th</sup> percentile are <strong>equally dispersed</strong> around the median. In contrast, for <strong>asymmetric</strong> distributions, <a href="#fig-univ-pctA" class="quarto-xref">Figure&nbsp;6</a> shows that i) the median and mean values <strong>increasingly diverge</strong> and ii) the 25<sup>th</sup>and 75<sup>th</sup> percentile are <strong>asymmetrically dispersed</strong> around the median.</p>
-<p><strong>Function reference:</strong> <code>FancyArrowPatch</code> <a href="../appendices/doc_visualisation.html#plotting-fancyarrowpatch">(doc)</a>; <code>ax.get_xlim</code> <a href="../appendices/doc_visualisation.html#plotting-ax-get-xlim">(doc)</a>; <code>np.percentile</code> <a href="../appendices/doc_numpy_scipy.html#numerical-np-percentile">(doc)</a>; <code>ax.add_patch</code> <a href="../appendices/doc_visualisation.html#plotting-ax-add-patch">(doc)</a>; <code>ax.text</code> <a href="../appendices/doc_visualisation.html#plotting-ax-text">(doc)</a>; <code>ax.axvline</code> <a href="../appendices/doc_visualisation.html#plotting-ax-axvline">(doc)</a>; <code>array.mean</code> <a href="../appendices/doc_numpy_scipy.html#numerical-array-mean">(doc)</a>; <code>np.random.normal</code> <a href="../appendices/doc_numpy_scipy.html#numerical-np-random-normal">(doc)</a>; <code>array.min</code> <a href="../appendices/doc_numpy_scipy.html#numerical-array-min">(doc)</a>; <code>array.max</code> <a href="../appendices/doc_numpy_scipy.html#numerical-array-max">(doc)</a>; <code>plt.subplots</code> <a href="../appendices/doc_visualisation.html#plotting-plt-subplots">(doc)</a>; <code>sns.histplot</code> <a href="../appendices/doc_visualisation.html#plotting-sns-histplot">(doc)</a>; <code>ax.set_xlabel</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-xlabel">(doc)</a>; <code>ax.set_ylabel</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-ylabel">(doc)</a>; <code>ax.tick_params</code> <a href="../appendices/doc_visualisation.html#plotting-ax-tick-params">(doc)</a>; <code>ax.set_title</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-title">(doc)</a>; <code>ax.twinx</code> <a href="../appendices/doc_visualisation.html#plotting-ax-twinx">(doc)</a>; <code>sns.ecdfplot</code> <a href="../appendices/doc_visualisation.html#plotting-sns-ecdfplot">(doc)</a>; <code>plotArrow</code> <a href="../appendices/doc_visualisation.html#plotting-plotarrow">(doc)</a>; <code>fig.tight_layout</code> <a href="../appendices/doc_visualisation.html#plotting-fig-tight-layout">(doc)</a>; <code>fig.savefig</code> <a href="../appendices/doc_visualisation.html#plotting-fig-savefig">(doc)</a>; <code>plt.close</code> <a href="../appendices/doc_visualisation.html#plotting-plt-close">(doc)</a>.</p>
-<div id="8b2c20a3" class="cell" data-execution_count="17">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-9"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="1">1</button><span id="annotated-cell-9-1" class="code-annotation-target"><a href="#annotated-cell-9-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="annotated-cell-9-2"><a href="#annotated-cell-9-2"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="annotated-cell-9-3"><a href="#annotated-cell-9-3"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="annotated-cell-9-4"><a href="#annotated-cell-9-4"></a><span class="im">from</span> matplotlib.patches <span class="im">import</span> FancyArrowPatch</span>
-<span id="annotated-cell-9-5"><a href="#annotated-cell-9-5"></a></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="2">2</button><span id="annotated-cell-9-6" class="code-annotation-target"><a href="#annotated-cell-9-6"></a><span class="kw">def</span> plotArrow(ax,data,pct,c):</span>
-<span id="annotated-cell-9-7"><a href="#annotated-cell-9-7"></a>    arrowH <span class="op">=</span> FancyArrowPatch(</span>
-<span id="annotated-cell-9-8"><a href="#annotated-cell-9-8"></a>        (ax.get_xlim()[<span class="dv">1</span>], pct<span class="op">/</span><span class="dv">100</span>), (np.percentile(data, pct), pct<span class="op">/</span><span class="dv">100</span>),</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="3">3</button><span id="annotated-cell-9-9" class="code-annotation-target"><a href="#annotated-cell-9-9"></a>        arrowstyle<span class="op">=</span><span class="st">'-|&gt;'</span>,</span>
-<span id="annotated-cell-9-10"><a href="#annotated-cell-9-10"></a>        color<span class="op">=</span>c,</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="4">4</button><span id="annotated-cell-9-11" class="code-annotation-target"><a href="#annotated-cell-9-11"></a>        mutation_scale<span class="op">=</span><span class="dv">15</span>,</span>
-<span id="annotated-cell-9-12"><a href="#annotated-cell-9-12"></a>        linewidth<span class="op">=</span><span class="dv">2</span></span>
-<span id="annotated-cell-9-13"><a href="#annotated-cell-9-13"></a>    )</span>
-<span id="annotated-cell-9-14"><a href="#annotated-cell-9-14"></a>    ax.add_patch(arrowH)</span>
-<span id="annotated-cell-9-15"><a href="#annotated-cell-9-15"></a></span>
-<span id="annotated-cell-9-16"><a href="#annotated-cell-9-16"></a>    value <span class="op">=</span> np.percentile(data, pct)</span>
-<span id="annotated-cell-9-17"><a href="#annotated-cell-9-17"></a>    ax.text(<span class="dv">8</span>, pct<span class="op">/</span><span class="dv">100</span> <span class="op">+</span> <span class="fl">0.03</span>, <span class="ss">f"</span><span class="sc">{</span>pct<span class="sc">}</span><span class="ss">th: </span><span class="sc">{</span>value<span class="sc">:.2f}</span><span class="ss">"</span>, color<span class="op">=</span>c, ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'bottom'</span>, fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
-<span id="annotated-cell-9-18"><a href="#annotated-cell-9-18"></a></span>
-<span id="annotated-cell-9-19"><a href="#annotated-cell-9-19"></a>    arrowD <span class="op">=</span> FancyArrowPatch(</span>
-<span id="annotated-cell-9-20"><a href="#annotated-cell-9-20"></a>        (np.percentile(data, pct), pct<span class="op">/</span><span class="dv">100</span>), (np.percentile(data, pct), <span class="dv">0</span>),</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="5">5</button><span id="annotated-cell-9-21" class="code-annotation-target"><a href="#annotated-cell-9-21"></a>        arrowstyle<span class="op">=</span><span class="st">'-|&gt;'</span>,</span>
-<span id="annotated-cell-9-22"><a href="#annotated-cell-9-22"></a>        color<span class="op">=</span>c,</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="6">6</button><span id="annotated-cell-9-23" class="code-annotation-target"><a href="#annotated-cell-9-23"></a>        mutation_scale<span class="op">=</span><span class="dv">15</span>,</span>
-<span id="annotated-cell-9-24"><a href="#annotated-cell-9-24"></a>        linewidth<span class="op">=</span><span class="dv">2</span></span>
-<span id="annotated-cell-9-25"><a href="#annotated-cell-9-25"></a>    )</span>
-<span id="annotated-cell-9-26"><a href="#annotated-cell-9-26"></a>    ax.add_patch(arrowD)</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="7">7</button><span id="annotated-cell-9-27" class="code-annotation-target"><a href="#annotated-cell-9-27"></a>    ax.axvline(data.mean(), color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">':'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="annotated-cell-9-28"><a href="#annotated-cell-9-28"></a></span>
-<span id="annotated-cell-9-29"><a href="#annotated-cell-9-29"></a></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="8">8</button><span id="annotated-cell-9-30" class="code-annotation-target"><a href="#annotated-cell-9-30"></a>data <span class="op">=</span> np.random.normal(size<span class="op">=</span><span class="dv">1000</span>)</span>
-<span id="annotated-cell-9-31"><a href="#annotated-cell-9-31"></a>data <span class="op">=</span> (data <span class="op">-</span> data.<span class="bu">min</span>()) <span class="op">/</span> (data.<span class="bu">max</span>() <span class="op">-</span> data.<span class="bu">min</span>())<span class="op">*</span><span class="dv">10</span></span>
-<span id="annotated-cell-9-32"><a href="#annotated-cell-9-32"></a>datapct <span class="op">=</span> np.percentile(data, [<span class="dv">10</span>, <span class="dv">25</span>, <span class="dv">50</span>, <span class="dv">75</span>, <span class="dv">90</span>])</span>
-<span id="annotated-cell-9-33"><a href="#annotated-cell-9-33"></a></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="9">9</button><span id="annotated-cell-9-34" class="code-annotation-target"><a href="#annotated-cell-9-34"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">4</span>))</span>
-<span id="annotated-cell-9-35"><a href="#annotated-cell-9-35"></a></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="10">10</button><span id="annotated-cell-9-36" class="code-annotation-target"><a href="#annotated-cell-9-36"></a>sns.histplot(x<span class="op">=</span>data, bins<span class="op">=</span><span class="dv">20</span>, color<span class="op">=</span>blue, alpha<span class="op">=</span><span class="fl">0.4</span>, ax<span class="op">=</span>ax, label<span class="op">=</span><span class="st">'Density'</span>, element<span class="op">=</span><span class="st">'step'</span>)</span>
-<span id="annotated-cell-9-37"><a href="#annotated-cell-9-37"></a>ax.set_xlabel(<span class="st">'Data value (arbitrary)'</span>)</span>
-<span id="annotated-cell-9-38"><a href="#annotated-cell-9-38"></a>ax.set_ylabel(<span class="st">'Count (= number of data points </span><span class="ch">\n</span><span class="st">in each bin)'</span>, color<span class="op">=</span>blue)</span>
-<span id="annotated-cell-9-39"><a href="#annotated-cell-9-39"></a>ax.tick_params(axis<span class="op">=</span><span class="st">'y'</span>, labelcolor<span class="op">=</span>blue)</span>
-<span id="annotated-cell-9-40"><a href="#annotated-cell-9-40"></a>ax.set_title(<span class="st">'Percentiles of a symmetric distribution'</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
-<span id="annotated-cell-9-41"><a href="#annotated-cell-9-41"></a></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="11">11</button><span id="annotated-cell-9-42" class="code-annotation-target"><a href="#annotated-cell-9-42"></a>ax2 <span class="op">=</span> ax.twinx()</span>
-<span id="annotated-cell-9-43"><a href="#annotated-cell-9-43"></a>sns.ecdfplot(x<span class="op">=</span>data, ax<span class="op">=</span>ax2, color<span class="op">=</span>orange, label<span class="op">=</span><span class="st">'Cumulative density'</span>)</span>
-<span id="annotated-cell-9-44"><a href="#annotated-cell-9-44"></a>ax2.set_ylabel(<span class="st">'CDF (= proportion of data</span><span class="ch">\n</span><span class="st"> points below the data value)'</span>, color<span class="op">=</span>orange)</span>
-<span id="annotated-cell-9-45"><a href="#annotated-cell-9-45"></a>ax2.tick_params(axis<span class="op">=</span><span class="st">'y'</span>, labelcolor<span class="op">=</span>orange)</span>
-<span id="annotated-cell-9-46"><a href="#annotated-cell-9-46"></a></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="12">12</button><span id="annotated-cell-9-47" class="code-annotation-target"><a href="#annotated-cell-9-47"></a>plotArrow(ax2, data, <span class="dv">75</span>, <span class="st">'#1D6996'</span>)</span>
-<span id="annotated-cell-9-48"><a href="#annotated-cell-9-48"></a>plotArrow(ax2, data, <span class="dv">50</span>, <span class="st">'#0F8554'</span>)</span>
-<span id="annotated-cell-9-49"><a href="#annotated-cell-9-49"></a>plotArrow(ax2, data, <span class="dv">25</span>, <span class="st">'#994E95'</span>)</span>
-<span id="annotated-cell-9-50"><a href="#annotated-cell-9-50"></a></span>
-<span id="annotated-cell-9-51"><a href="#annotated-cell-9-51"></a>fig.tight_layout()</span>
-<span id="annotated-cell-9-52"><a href="#annotated-cell-9-52"></a></span>
-<span id="annotated-cell-9-53"><a href="#annotated-cell-9-53"></a>fig.savefig(<span class="st">"img/fig-univ-pctS.png"</span>, dpi<span class="op">=</span><span class="dv">150</span>, transparent<span class="op">=</span><span class="va">True</span>)</span>
-<span id="annotated-cell-9-54"><a href="#annotated-cell-9-54"></a>plt.close(fig)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-annotation">
-<dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-9" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="1" data-code-annotation="1">Import the libraries</span>
-</dd>
-<dt data-target-cell="annotated-cell-9" data-target-annotation="2">2</dt>
-<dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="6" data-code-annotation="2">Function to plot the arrow</span>
-</dd>
-<dt data-target-cell="annotated-cell-9" data-target-annotation="3">3</dt>
-<dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="9" data-code-annotation="3">style: arrow with single head</span>
-</dd>
-<dt data-target-cell="annotated-cell-9" data-target-annotation="4">4</dt>
-<dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="11" data-code-annotation="4">size of arrow head</span>
-</dd>
-<dt data-target-cell="annotated-cell-9" data-target-annotation="5">5</dt>
-<dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="21" data-code-annotation="5">style: arrow with single head</span>
-</dd>
-<dt data-target-cell="annotated-cell-9" data-target-annotation="6">6</dt>
-<dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="23" data-code-annotation="6">size of arrow head</span>
-</dd>
-<dt data-target-cell="annotated-cell-9" data-target-annotation="7">7</dt>
-<dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="27" data-code-annotation="7">Plot the mean as a vertical red dotted line on the histogram axis</span>
-</dd>
-<dt data-target-cell="annotated-cell-9" data-target-annotation="8">8</dt>
-<dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="30" data-code-annotation="8">Setup random data using a Normal distribution</span>
-</dd>
-<dt data-target-cell="annotated-cell-9" data-target-annotation="9">9</dt>
-<dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="34" data-code-annotation="9">Set the plots</span>
-</dd>
-<dt data-target-cell="annotated-cell-9" data-target-annotation="10">10</dt>
-<dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="36" data-code-annotation="10">Left y axis</span>
-</dd>
-<dt data-target-cell="annotated-cell-9" data-target-annotation="11">11</dt>
-<dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="42" data-code-annotation="11">Add a right y axis</span>
-</dd>
-<dt data-target-cell="annotated-cell-9" data-target-annotation="12">12</dt>
-<dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="47" data-code-annotation="12">Plot the arrows</span>
-</dd>
-</dl>
-</div>
-</div>
+<p><a href="#fig-univ-pctS" class="quarto-xref">Figure&nbsp;6</a> shows the percentiles of a <strong>symmetric</strong> distribution, and demonstrates how i) the median value <strong>is equal</strong> to the mean and ii) the 25<sup>th</sup>and 75<sup>th</sup> percentile are <strong>equally dispersed</strong> around the median. In contrast, for <strong>asymmetric</strong> distributions, <a href="#fig-univ-pctA" class="quarto-xref">Figure&nbsp;7</a> shows that i) the median and mean values <strong>increasingly diverge</strong> and ii) the 25<sup>th</sup>and 75<sup>th</sup> percentile are <strong>asymmetrically dispersed</strong> around the median.</p>
+<!-- **Function reference:** `FancyArrowPatch` [(doc)](../appendices/doc_visualisation.qmd#plotting-fancyarrowpatch); `ax.get_xlim` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-get-xlim); `np.percentile` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-np-percentile); `ax.add_patch` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-add-patch); `ax.text` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-text); `ax.axvline` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-axvline); `array.mean` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-array-mean); `np.random.normal` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-np-random-normal); `array.min` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-array-min); `array.max` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-array-max); `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots); `sns.histplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-histplot); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.tick_params` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-tick-params); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `ax.twinx` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-twinx); `sns.ecdfplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-ecdfplot); `plotArrow` [(doc)](../appendices/doc_visualisation.qmd#plotting-plotarrow); `fig.tight_layout` [(doc)](../appendices/doc_visualisation.qmd#plotting-fig-tight-layout); `fig.savefig` [(doc)](../appendices/doc_visualisation.qmd#plotting-fig-savefig); `plt.close` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-close). -->
+<!-- 1. Import the libraries
+2. Function to plot the arrow
+3. style: arrow with single head
+4. size of arrow head
+5. style: arrow with single head
+6. size of arrow head
+7. Plot the mean as a vertical red dotted line on the histogram axis
+8. Setup random data using a Normal distribution
+9. Set the plots
+10. Left y axis
+11. Add a right y axis
+12. Plot the arrows -->
 <div id="fig-univ-pctS" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-univ-pctS-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="img/fig-univ-pctS.png" class="img-fluid figure-img" style="width:80.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-univ-pctS-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5: Relationship of percentiles to a symmetric distribution. The red dotted line shows the location of the mean.
+Figure&nbsp;6: Relationship of percentiles to a symmetric distribution. The red dotted line shows the location of the mean.
 </figcaption>
 </figure>
 </div>
-<p><strong>Function reference:</strong> <code>np.random.lognormal</code> <a href="../appendices/doc_numpy_scipy.html#numerical-np-random-lognormal">(doc)</a>; <code>array.min</code> <a href="../appendices/doc_numpy_scipy.html#numerical-array-min">(doc)</a>; <code>array.max</code> <a href="../appendices/doc_numpy_scipy.html#numerical-array-max">(doc)</a>; <code>np.percentile</code> <a href="../appendices/doc_numpy_scipy.html#numerical-np-percentile">(doc)</a>; <code>plt.subplots</code> <a href="../appendices/doc_visualisation.html#plotting-plt-subplots">(doc)</a>; <code>sns.histplot</code> <a href="../appendices/doc_visualisation.html#plotting-sns-histplot">(doc)</a>; <code>ax.set_xlabel</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-xlabel">(doc)</a>; <code>ax.set_ylabel</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-ylabel">(doc)</a>; <code>ax.tick_params</code> <a href="../appendices/doc_visualisation.html#plotting-ax-tick-params">(doc)</a>; <code>ax.set_title</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-title">(doc)</a>; <code>ax.twinx</code> <a href="../appendices/doc_visualisation.html#plotting-ax-twinx">(doc)</a>; <code>sns.ecdfplot</code> <a href="../appendices/doc_visualisation.html#plotting-sns-ecdfplot">(doc)</a>; <code>plotArrow</code> <a href="../appendices/doc_visualisation.html#plotting-plotarrow">(doc)</a>; <code>fig.tight_layout</code> <a href="../appendices/doc_visualisation.html#plotting-fig-tight-layout">(doc)</a>; <code>fig.savefig</code> <a href="../appendices/doc_visualisation.html#plotting-fig-savefig">(doc)</a>; <code>plt.close</code> <a href="../appendices/doc_visualisation.html#plotting-plt-close">(doc)</a>.</p>
-<div id="3f270b20" class="cell" data-execution_count="18">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-10"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="1">1</button><span id="annotated-cell-10-1" class="code-annotation-target"><a href="#annotated-cell-10-1"></a>data <span class="op">=</span> np.random.lognormal(size<span class="op">=</span><span class="dv">1000</span>, sigma<span class="op">=</span><span class="fl">.4</span>)</span>
-<span id="annotated-cell-10-2"><a href="#annotated-cell-10-2"></a>data <span class="op">=</span> (data <span class="op">-</span> data.<span class="bu">min</span>()) <span class="op">/</span> (data.<span class="bu">max</span>() <span class="op">-</span> data.<span class="bu">min</span>())<span class="op">*</span><span class="dv">10</span></span>
-<span id="annotated-cell-10-3"><a href="#annotated-cell-10-3"></a>datapct <span class="op">=</span> np.percentile(data, [<span class="dv">10</span>, <span class="dv">25</span>, <span class="dv">50</span>, <span class="dv">75</span>, <span class="dv">90</span>])</span>
-<span id="annotated-cell-10-4"><a href="#annotated-cell-10-4"></a></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="2">2</button><span id="annotated-cell-10-5" class="code-annotation-target"><a href="#annotated-cell-10-5"></a>fig, ax <span class="op">=</span> plt.subplots(ncols<span class="op">=</span><span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">4</span>))</span>
-<span id="annotated-cell-10-6"><a href="#annotated-cell-10-6"></a></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="3">3</button><span id="annotated-cell-10-7" class="code-annotation-target"><a href="#annotated-cell-10-7"></a>sns.histplot(x<span class="op">=</span>data, bins<span class="op">=</span><span class="dv">20</span>, color<span class="op">=</span>blue, alpha<span class="op">=</span><span class="fl">0.4</span>, ax<span class="op">=</span>ax, legend<span class="op">=</span><span class="va">None</span>, element<span class="op">=</span><span class="st">'step'</span>)</span>
-<span id="annotated-cell-10-8"><a href="#annotated-cell-10-8"></a>ax.set_xlabel(<span class="st">'Data value (arbitrary)'</span>)</span>
-<span id="annotated-cell-10-9"><a href="#annotated-cell-10-9"></a>ax.set_ylabel(<span class="st">'Count (= number of data points </span><span class="ch">\n</span><span class="st">in each bin)'</span>, color<span class="op">=</span>blue)</span>
-<span id="annotated-cell-10-10"><a href="#annotated-cell-10-10"></a>ax.tick_params(axis<span class="op">=</span><span class="st">'y'</span>, labelcolor<span class="op">=</span>blue)</span>
-<span id="annotated-cell-10-11"><a href="#annotated-cell-10-11"></a>ax.set_title(<span class="st">'Percentiles of an asymmetric distribution'</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
-<span id="annotated-cell-10-12"><a href="#annotated-cell-10-12"></a></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="4">4</button><span id="annotated-cell-10-13" class="code-annotation-target"><a href="#annotated-cell-10-13"></a>ax2 <span class="op">=</span> ax.twinx()</span>
-<span id="annotated-cell-10-14"><a href="#annotated-cell-10-14"></a>sns.ecdfplot(x<span class="op">=</span>data, ax<span class="op">=</span>ax2, color<span class="op">=</span>orange, legend<span class="op">=</span><span class="va">None</span>)</span>
-<span id="annotated-cell-10-15"><a href="#annotated-cell-10-15"></a>ax2.set_ylabel(<span class="st">'CDF (= proportion of data</span><span class="ch">\n</span><span class="st"> points below the data value)'</span>, color<span class="op">=</span>orange)</span>
-<span id="annotated-cell-10-16"><a href="#annotated-cell-10-16"></a>ax2.tick_params(axis<span class="op">=</span><span class="st">'y'</span>, labelcolor<span class="op">=</span>orange)</span>
-<span id="annotated-cell-10-17"><a href="#annotated-cell-10-17"></a></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="5">5</button><span id="annotated-cell-10-18" class="code-annotation-target"><a href="#annotated-cell-10-18"></a>plotArrow(ax2, data, <span class="dv">75</span>, <span class="st">'#1D6996'</span>)</span>
-<span id="annotated-cell-10-19"><a href="#annotated-cell-10-19"></a>plotArrow(ax2, data, <span class="dv">50</span>, <span class="st">'#0F8554'</span>)</span>
-<span id="annotated-cell-10-20"><a href="#annotated-cell-10-20"></a>plotArrow(ax2, data, <span class="dv">25</span>, <span class="st">'#994E95'</span>)</span>
-<span id="annotated-cell-10-21"><a href="#annotated-cell-10-21"></a></span>
-<span id="annotated-cell-10-22"><a href="#annotated-cell-10-22"></a>fig.tight_layout()</span>
-<span id="annotated-cell-10-23"><a href="#annotated-cell-10-23"></a>fig.savefig(<span class="st">"img/fig-univ-pctA.png"</span>, dpi<span class="op">=</span><span class="dv">150</span>, transparent<span class="op">=</span><span class="va">True</span>)</span>
-<span id="annotated-cell-10-24"><a href="#annotated-cell-10-24"></a>plt.close(fig)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-annotation">
-<dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-10" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-10" data-code-lines="1" data-code-annotation="1">Setup random data using a log-normal distribution</span>
-</dd>
-<dt data-target-cell="annotated-cell-10" data-target-annotation="2">2</dt>
-<dd>
-<span data-code-cell="annotated-cell-10" data-code-lines="5" data-code-annotation="2">Set the plots</span>
-</dd>
-<dt data-target-cell="annotated-cell-10" data-target-annotation="3">3</dt>
-<dd>
-<span data-code-cell="annotated-cell-10" data-code-lines="7" data-code-annotation="3">Left y axis</span>
-</dd>
-<dt data-target-cell="annotated-cell-10" data-target-annotation="4">4</dt>
-<dd>
-<span data-code-cell="annotated-cell-10" data-code-lines="13" data-code-annotation="4">Add a right y axis</span>
-</dd>
-<dt data-target-cell="annotated-cell-10" data-target-annotation="5">5</dt>
-<dd>
-<span data-code-cell="annotated-cell-10" data-code-lines="18" data-code-annotation="5">Plot the arrows</span>
-</dd>
-</dl>
-</div>
-</div>
+<!-- **Function reference:** `np.random.lognormal` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-np-random-lognormal); `array.min` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-array-min); `array.max` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-array-max); `np.percentile` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-np-percentile); `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots); `sns.histplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-histplot); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.tick_params` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-tick-params); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `ax.twinx` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-twinx); `sns.ecdfplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-ecdfplot); `plotArrow` [(doc)](../appendices/doc_visualisation.qmd#plotting-plotarrow); `fig.tight_layout` [(doc)](../appendices/doc_visualisation.qmd#plotting-fig-tight-layout); `fig.savefig` [(doc)](../appendices/doc_visualisation.qmd#plotting-fig-savefig); `plt.close` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-close). -->
+<!-- 1. Setup random data using a log-normal distribution
+2. Set the plots
+3. Left y axis
+4. Add a right y axis
+5. Plot the arrows -->
 <div id="fig-univ-pctA" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-univ-pctA-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="img/fig-univ-pctA.png" class="img-fluid figure-img" style="width:80.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-univ-pctA-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6: Relationship of percentiles to a asymmetric distribution. The red dotted line shows the location of the mean.
+Figure&nbsp;7: Relationship of percentiles to a asymmetric distribution. The red dotted line shows the location of the mean.
 </figcaption>
 </figure>
 </div>
@@ -1294,7 +1152,7 @@ Table&nbsp;1: Relationship between quartiles, deciles and percentiles.
 <li><strong>&lt;0</strong>: <mark>Left-skewed</mark> → a tail extends to the left</li>
 </ul>
 <p><strong>Function reference:</strong> <code>round</code> <a href="../appendices/doc_pandas.html#pandas-round">(doc)</a>; <code>skew</code> <a href="../appendices/doc_pandas.html#pandas-skew">(doc)</a>.</p>
-<div id="66be806d" class="cell" data-execution_count="19">
+<div id="84059588" class="cell" data-execution_count="19">
 <div id="lst-univ-skew" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-skew-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1314,7 +1172,7 @@ Listing&nbsp;8: Skewness of the <code>Zr</code> dataset.
 <section id="non-parametric-distribution-visualisation" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="non-parametric-distribution-visualisation">Non-parametric distribution visualisation</h2>
 <p>We have reviewed several measures that describe the central tendency and spread of a dataset. Depending on the characteristics of the data, some measures are more informative than others. For instance, the <mark>mean</mark> and <mark>standard deviation</mark> provide a concise summary of the center and spread, but they can be heavily influenced by extreme values or skewed distributions. In contrast, measures based on <mark>percentiles</mark>, such as the <mark>interquartile range (IQR)</mark>, describe the spread of the data without being overly sensitive to outliers. The <mark>IQR</mark> captures the range of the central <span class="math inline">\(50\%\)</span> of the data, giving a robust sense of variability even in asymmetrical distributions. Reporting additional percentiles, such as the <span class="math inline">\(10^\text{th}\)</span> and <span class="math inline">\(90^\text{th}\)</span>, can further help to convey the shape and spread of the dataset, providing a more complete picture than a single range or standard deviation alone.</p>
-<p>One way to efficiently convey the structure of a dataset is through <mark>non-parametric representations of distributions</mark>, which do not rely on assumptions about the underlying distribution. <mark>Boxplots</mark> (or box-and-whiskers plots; <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;7</a>) are a classic example: they summarize the data using a few key <mark>quantiles</mark>, such as the <mark>median</mark> and <mark>interquartile range (IQR)</mark>. Because boxplots rely on these <mark>order-based statistics</mark> rather than moments like the mean or variance, they are considered <mark>non-parametric</mark>, making them especially useful for datasets that are skewed, contain outliers, or deviate from symmetry. By focusing on the spread and central tendency through quantiles, boxplots provide a robust visual summary of the data’s <mark>location</mark>, <mark>dispersion</mark>, and potential asymmetry.</p>
+<p>One way to efficiently convey the structure of a dataset is through <mark>non-parametric representations of distributions</mark>, which do not rely on assumptions about the underlying distribution. <mark>Boxplots</mark> (or box-and-whiskers plots; <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;8</a>) are a classic example: they summarize the data using a few key <mark>quantiles</mark>, such as the <mark>median</mark> and <mark>interquartile range (IQR)</mark>. Because boxplots rely on these <mark>order-based statistics</mark> rather than moments like the mean or variance, they are considered <mark>non-parametric</mark>, making them especially useful for datasets that are skewed, contain outliers, or deviate from symmetry. By focusing on the spread and central tendency through quantiles, boxplots provide a robust visual summary of the data’s <mark>location</mark>, <mark>dispersion</mark>, and potential asymmetry.</p>
 <ul>
 <li>The <strong>box</strong> represents the <span class="math inline">\(25^\text{th}\)</span> and <span class="math inline">\(75^\text{th}\)</span> percentiles → <span class="math inline">\(IQR\)</span>;</li>
 <li>The <strong>horizontal line</strong> within the <strong>box</strong> represents the <strong>median</strong>;</li>
@@ -1327,19 +1185,19 @@ Listing&nbsp;8: Skewness of the <code>Zr</code> dataset.
 <img src="img/fig-boxplot.png" class="img-fluid figure-img" style="width:80.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7: Component of a box and whiskers plot. The top box plot represents an asymmetrical distribution, the bottom one a symmetrical one.
+Figure&nbsp;8: Component of a box and whiskers plot. The top box plot represents an asymmetrical distribution, the bottom one a symmetrical one.
 </figcaption>
 </figure>
 </div>
 <p>In <em>Seaborn</em>, box plots can be plotted using <a href="https://seaborn.pydata.org/generated/seaborn.boxplot.html"><code>sns.boxplot()</code></a> <a href="../appendices/doc_visualisation.html#plotting-sns-boxplot">(doc)</a>. Two notes about box plots:</p>
 <ol type="1">
-<li>They are useful to compare the <strong>location</strong> and <strong>dispersion</strong> between variables (<a href="#fig-sns-boxplot" class="quarto-xref">Figure&nbsp;8</a>);</li>
+<li>They are useful to compare the <strong>location</strong> and <strong>dispersion</strong> between variables (<a href="#fig-sns-boxplot" class="quarto-xref">Figure&nbsp;9</a>);</li>
 <li>In <em>Seaborn</em>, whiskers extend by default 1.5 times the IQR from the first and third quartiles. This behaviour can be altered with the <code>whis</code> argument of <code>sns.boxplot()</code> <a href="../appendices/doc_visualisation.html#plotting-sns-boxplot">(doc)</a> (see the)</li>
 </ol>
 <p><em>Seaborn</em> offers two alternatives to boxplots:</p>
 <ol type="1">
-<li><strong>Violin plots</strong> (<a href="https://seaborn.pydata.org/generated/seaborn.violinplot.html"><code>sns.violinplot()</code></a> <a href="../appendices/doc_visualisation.html#plotting-sns-violinplot">(doc)</a>) are similar to box plots, but they approximate the underlying parametric data distribution using some smoothing algorithm (i.e.&nbsp;<em>kernel density estimation</em>). Without going into too much detail, this provides a good first approximation of the distribution, but <mark>it can create some unrealistic artefacts</mark> (e.g., see the negative Sr concentrations in <a href="#fig-sns-violinplot" class="quarto-xref">Figure&nbsp;9</a>).</li>
-<li><strong>Boxen plots</strong> (<a href="https://seaborn.pydata.org/generated/seaborn.boxenplot.html"><code>sns.boxenplot()</code></a> <a href="../appendices/doc_visualisation.html#plotting-sns-boxenplot">(doc)</a>) are designed to better represent the non-parametric distriubtion of large dataset than box plots. They divide the datasets into <strong>many quantiles</strong> (not just Q1-Q3), and typically provide more resolution in the <strong>tails</strong> of the distribution (<a href="#fig-sns-boxenplot" class="quarto-xref">Figure&nbsp;10</a>).</li>
+<li><strong>Violin plots</strong> (<a href="https://seaborn.pydata.org/generated/seaborn.violinplot.html"><code>sns.violinplot()</code></a> <a href="../appendices/doc_visualisation.html#plotting-sns-violinplot">(doc)</a>) are similar to box plots, but they approximate the underlying parametric data distribution using some smoothing algorithm (i.e.&nbsp;<em>kernel density estimation</em>). Without going into too much detail, this provides a good first approximation of the distribution, but <mark>it can create some unrealistic artefacts</mark> (e.g., see the negative Sr concentrations in <a href="#fig-sns-violinplot" class="quarto-xref">Figure&nbsp;10</a>).</li>
+<li><strong>Boxen plots</strong> (<a href="https://seaborn.pydata.org/generated/seaborn.boxenplot.html"><code>sns.boxenplot()</code></a> <a href="../appendices/doc_visualisation.html#plotting-sns-boxenplot">(doc)</a>) are designed to better represent the non-parametric distriubtion of large dataset than box plots. They divide the datasets into <strong>many quantiles</strong> (not just Q1-Q3), and typically provide more resolution in the <strong>tails</strong> of the distribution (<a href="#fig-sns-boxenplot" class="quarto-xref">Figure&nbsp;11</a>).</li>
 </ol>
 <p><a href="#tbl-sns" class="quarto-xref">Table&nbsp;2</a> provides a cheat sheet on which plot to use.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
@@ -1359,7 +1217,7 @@ Figure&nbsp;7: Component of a box and whiskers plot. The top box plot represents
 <img src="day2-3_univariate_files/figure-html/fig-sns-boxplot-output-1.png" width="564" height="449" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sns-boxplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8: Visualising distributions using box-and-whisker plots.
+Figure&nbsp;9: Visualising distributions using box-and-whisker plots.
 </figcaption>
 </figure>
 </div>
@@ -1380,7 +1238,7 @@ Figure&nbsp;8: Visualising distributions using box-and-whisker plots.
 <img src="day2-3_univariate_files/figure-html/fig-sns-violinplot-output-1.png" width="564" height="449" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sns-violinplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9: Visualising distributions using violin plots.
+Figure&nbsp;10: Visualising distributions using violin plots.
 </figcaption>
 </figure>
 </div>
@@ -1401,7 +1259,7 @@ Figure&nbsp;9: Visualising distributions using violin plots.
 <img src="day2-3_univariate_files/figure-html/fig-sns-boxenplot-output-1.png" width="564" height="449" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sns-boxenplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;10: Visualising distributions using boxen plots.
+Figure&nbsp;11: Visualising distributions using boxen plots.
 </figcaption>
 </figure>
 </div>
@@ -1490,7 +1348,7 @@ Table&nbsp;2: Simple rules on which plot to choose to represent data distributio
 </ol>
 <p><em>Panda</em> as a very handy function to <mark>group data by categorical variables</mark>: <code>.groupby</code> <a href="../appendices/doc_pandas.html#pandas-groupby">(doc)</a>. Let’s compute the mean value of the different trace elements for each epoch (<a href="#lst-groupby" class="quarto-xref">Listing&nbsp;9</a>):</p>
 <p><strong>Function reference:</strong> <code>mean</code> <a href="../appendices/doc_pandas.html#pandas-mean">(doc)</a>; <code>groupby</code> <a href="../appendices/doc_pandas.html#pandas-groupby">(doc)</a>.</p>
-<div id="0b7ae804" class="cell" data-execution_count="23">
+<div id="1f58fc85" class="cell" data-execution_count="23">
 <div id="lst-groupby" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-groupby-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">

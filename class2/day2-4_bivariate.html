@@ -389,7 +389,7 @@ window.Quarto = {
 <p>Up to now, the domain of <a href="../class2/day2-3_univariate.html">univariate analyses</a> has allowed us to explore the properties of <strong>one variable at the time</strong>. Investigating the relationship between <strong>two variables</strong> is the topic of <mark>bivariate analyses</mark>. One good visual starting point to identify these is to plot <strong>pairwise relationships</strong> of all the variables in our dataset.</p>
 <p>Let’s go back to our <code>df_traces_sub</code> dataset. We can then plot a pairwise comparison plot using <em>Seaborn</em>’s <code>.pairplot()</code> <a href="../appendices/doc_visualisation.html#plotting-sns-pairplot">(doc)</a> function (; <a href="#lst-sns-pairplot" class="quarto-xref">Listing&nbsp;1</a>). We use the <code>hue</code> argument of the <code>.pairplot()</code> <a href="../appendices/doc_visualisation.html#plotting-sns-pairplot">(doc)</a> function to plot each epoch in a different color:</p>
 <p><strong>Function reference:</strong> <code>sns.pairplot</code> <a href="../appendices/doc_visualisation.html#plotting-sns-pairplot">(doc)</a>.</p>
-<div id="500a8e15" class="cell" data-execution_count="2">
+<div id="71acf1d5" class="cell" data-execution_count="2">
 <div id="lst-sns-pairplot" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-sns-pairplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -459,7 +459,7 @@ r(X,Y)_{\text{emp}} = \frac{\mathrm{Cov}(X,Y)_{\text{emp}}}{s_X s_Y} = \frac{\su
 <li><span class="math inline">\(r(X,Y) =0\)</span> indicates <strong>independence</strong> between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</li>
 </ul>
 <p><strong>Function reference:</strong> <code>drop</code> <a href="../appendices/doc_pandas.html#pandas-drop">(doc)</a>; <code>cov</code> <a href="../appendices/doc_pandas.html#pandas-cov">(doc)</a>; <code>print</code> <a href="../appendices/doc_python.html#python-print">(doc)</a>; <code>min</code> <a href="../appendices/doc_pandas.html#pandas-min">(doc)</a>; <code>max</code> <a href="../appendices/doc_pandas.html#pandas-max">(doc)</a>; <code>corr</code> <a href="../appendices/doc_pandas.html#pandas-corr">(doc)</a>.</p>
-<div id="3ef68cc2" class="cell" data-execution_count="3">
+<div id="ccdb38ca" class="cell" data-execution_count="3">
 <div id="lst-bivar-cov" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-bivar-cov-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -576,7 +576,7 @@ r(X_p,X_1) &amp; r(X_p,X_2) &amp; \dots &amp; 1
 <p>In practice, we rarely know the true correlations, so each entry <span class="math inline">\(r(X_i, X_j)\)</span> is typically estimated from a <mark>sample</mark>, giving the <mark>sample correlation</mark> between variables <span class="math inline">\(X_i\)</span> and <span class="math inline">\(X_j\)</span>.</p>
 <p><em>Seaborn</em> does not include a native function to do so, but <a href="#lst-corr-mat" class="quarto-xref">Listing&nbsp;3</a> shows a ready-to-use function to plot one. Don’t hesitate to copy it and reuse it in your codes. <a href="#fig-corr-mat" class="quarto-xref">Figure&nbsp;1</a> shows the resulting plot applied to the concentration columns of the trace elements dataset.</p>
 <p><strong>Function reference:</strong> <code>corr</code> <a href="../appendices/doc_pandas.html#pandas-corr">(doc)</a>; <code>np.triu</code> <a href="../appendices/doc_numpy_scipy.html#numerical-np-triu">(doc)</a>; <code>np.ones_like</code> <a href="../appendices/doc_numpy_scipy.html#numerical-np-ones-like">(doc)</a>; <code>plt.subplots</code> <a href="../appendices/doc_visualisation.html#plotting-plt-subplots">(doc)</a>; <code>sns.diverging_palette</code> <a href="../appendices/doc_visualisation.html#plotting-sns-diverging-palette">(doc)</a>; <code>sns.heatmap</code> <a href="../appendices/doc_visualisation.html#plotting-sns-heatmap">(doc)</a>.</p>
-<div id="eeda33b1" class="cell" data-execution_count="4">
+<div id="905027f1" class="cell" data-execution_count="4">
 <div id="lst-corr-mat" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-corr-mat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -584,17 +584,12 @@ Listing&nbsp;3: Function to compute produce a correlation matrix
 </figcaption>
 <div aria-describedby="lst-corr-mat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1">1</button><span id="annotated-cell-3-1" class="code-annotation-target"><a href="#annotated-cell-3-1"></a><span class="kw">def</span> corrMatrix(d):</span>
-<span id="annotated-cell-3-2"><a href="#annotated-cell-3-2"></a>        </span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2">2</button><span id="annotated-cell-3-3" class="code-annotation-target"><a href="#annotated-cell-3-3"></a>    corr <span class="op">=</span> d.corr()</span>
-<span id="annotated-cell-3-4"><a href="#annotated-cell-3-4"></a></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3">3</button><span id="annotated-cell-3-5" class="code-annotation-target"><a href="#annotated-cell-3-5"></a>    mask <span class="op">=</span> np.triu(np.ones_like(corr, dtype<span class="op">=</span><span class="bu">bool</span>))</span>
-<span id="annotated-cell-3-6"><a href="#annotated-cell-3-6"></a></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="4">4</button><span id="annotated-cell-3-7" class="code-annotation-target"><a href="#annotated-cell-3-7"></a>    f, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">9</span>))</span>
-<span id="annotated-cell-3-8"><a href="#annotated-cell-3-8"></a></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="5">5</button><span id="annotated-cell-3-9" class="code-annotation-target"><a href="#annotated-cell-3-9"></a>    cmap <span class="op">=</span> sns.diverging_palette(<span class="dv">230</span>, <span class="dv">20</span>, as_cmap<span class="op">=</span><span class="va">True</span>)</span>
-<span id="annotated-cell-3-10"><a href="#annotated-cell-3-10"></a></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="6">6</button><span id="annotated-cell-3-11" class="code-annotation-target"><a href="#annotated-cell-3-11"></a>    sns.heatmap(corr, mask<span class="op">=</span>mask, cmap<span class="op">=</span>cmap, vmax<span class="op">=</span><span class="fl">.7</span>, vmin<span class="op">=-</span><span class="fl">.7</span>, center<span class="op">=</span><span class="dv">0</span>,</span>
-<span id="annotated-cell-3-12"><a href="#annotated-cell-3-12"></a>                square<span class="op">=</span><span class="va">True</span>, linewidths<span class="op">=</span><span class="fl">.5</span>, cbar_kws<span class="op">=</span>{<span class="st">"shrink"</span>: <span class="fl">.5</span>})</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2">2</button><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2"></a>    corr <span class="op">=</span> d.corr()</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3">3</button><span id="annotated-cell-3-3" class="code-annotation-target"><a href="#annotated-cell-3-3"></a>    mask <span class="op">=</span> np.triu(np.ones_like(corr, dtype<span class="op">=</span><span class="bu">bool</span>))</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="4">4</button><span id="annotated-cell-3-4" class="code-annotation-target"><a href="#annotated-cell-3-4"></a>    f, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">9</span>))</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="5">5</button><span id="annotated-cell-3-5" class="code-annotation-target"><a href="#annotated-cell-3-5"></a>    cmap <span class="op">=</span> sns.diverging_palette(<span class="dv">230</span>, <span class="dv">20</span>, as_cmap<span class="op">=</span><span class="va">True</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="6">6</button><span id="annotated-cell-3-6" class="code-annotation-target"><a href="#annotated-cell-3-6"></a>    sns.heatmap(corr, mask<span class="op">=</span>mask, cmap<span class="op">=</span>cmap, vmax<span class="op">=</span><span class="fl">.7</span>, vmin<span class="op">=-</span><span class="fl">.7</span>, center<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="annotated-cell-3-7"><a href="#annotated-cell-3-7"></a>                square<span class="op">=</span><span class="va">True</span>, linewidths<span class="op">=</span><span class="fl">.5</span>, cbar_kws<span class="op">=</span>{<span class="st">"shrink"</span>: <span class="fl">.5</span>})</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
@@ -606,23 +601,23 @@ Listing&nbsp;3: Function to compute produce a correlation matrix
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="3" data-code-annotation="2">Compute the correlation matrix</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="2" data-code-annotation="2">Compute the correlation matrix</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="5" data-code-annotation="3">Generate a mask for the upper triangle</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="3" data-code-annotation="3">Generate a mask for the upper triangle</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="7" data-code-annotation="4">Set up the matplotlib figure</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="4" data-code-annotation="4">Set up the matplotlib figure</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="5">5</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="9" data-code-annotation="5">Generate a custom diverging colormap</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="5" data-code-annotation="5">Generate a custom diverging colormap</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="6">6</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="11" data-code-annotation="6">Draw the heatmap with the mask and correct aspect ratio</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="6" data-code-annotation="6">Draw the heatmap with the mask and correct aspect ratio</span>
 </dd>
 </dl>
 </div>
@@ -663,13 +658,13 @@ Figure&nbsp;1: Correlation matrix for the trace elements dataset.
 </div>
 <div class="callout-body-container callout-body">
 <p>Two variables show relatively strong <strong>negative correlations</strong>. These are:</p>
-<div id="d24724d3" class="cell" data-execution_count="6">
+<div id="14e1b2d0" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="6">
 <select class="webex-select"><option value="blank"></option><option value="0">Sc and Pb</option><option value="0">Ba and Nd</option><option value="answer">Sr and Ba</option><option value="0">Tb and Er</option><option value="0">Pb and Ce</option></select>
 </div>
 </div>
 <p>Three variables show relatively <strong>weak correlations</strong>:</p>
-<div id="805a6f72" class="cell" data-execution_count="7">
+<div id="b7f6c74f" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="7">
 <select class="webex-select"><option value="blank"></option><option value="0">U, Yb and Hf</option><option value="0">Y, Ze and Nd</option><option value="0">Sr, Pr and Ba</option><option value="answer">Sc, Eu and Pb</option><option value="0">Ce, Tb and Nd</option></select>
 </div>
