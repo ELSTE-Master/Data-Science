@@ -126,6 +126,26 @@ Try to contextualise the course material to **your research**:
   - If not, can you find some for the next weeks?
 
 
+## Open data in geosciences {.open-data-table}
+
+| Database | What can you find? |
+|:---------------------|:----------------------------------------------------------|
+| [**PANGAEA**](https://www.pangaea.de/) | About **447,000 datasets**: marine geology, geochemistry, palaeoclimate and ecology. Documented datasets with citable DOIs. |
+| [**EarthScope**](https://www.earthscope.org/) | Continuous seismic records from thousands of stations. **590 TB** archived by 2019; over **215 TB** of new geophysical data in 2024. |
+| [**NOAA Paleoclimatology**](https://www.ncei.noaa.gov/access/paleo-search/) | Over **10,000 datasets** from ice cores, tree rings, corals and sediments, extending climate records over thousands to millions of years. |
+| [**EarthChem**](https://earthchem.org) | Geochemical databases searchable by location, age, tectonic setting, sample and composition. |
+| [**IODP³**](https://iodp3.org/resources/data-samples) | Ocean-drilling measurements, images and metadata, normally open after a **one-year embargo**; physical cores available from repositories. |
+
+## Open Earth-observation data {.open-data-table}
+
+| Database | What can you find? |
+|:---------------------|:----------------------------------------------------------|
+| [**Landsat**](https://www.usgs.gov/landsat-missions/landsat-project-statistics) | Over **13.8 PB** of imagery since 1972. About **1 TB/day** of new observations and **3 TB/day** of derived scientific products. |
+| [**Copernicus Sentinel**](https://sentinels.copernicus.eu) | Radar, optical and atmospheric observations. Sentinel 1 & 2 acquire **4.6 TB/day**; the former portal distributed about **590 PB** to **750,000 users** before closing in 2023. |
+| [**NASA EOSDIS**](https://www.earthdata.nasa.gov/about/esdis/eosdis) | Observations of the atmosphere, oceans, ice, biosphere and land. Higher-resolution missions drive archive growth and analysis in the cloud. |
+| [**ERA5**](https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels?tab=overview) | Hourly global climate reanalysis: **200+ variables** on an approximately **31 km** grid. About **5 PB** of native data and **1 PB** prepared for distribution. |
+| [**NOAA NCEI**](https://www.ncei.noaa.gov/access/search/index) | Open weather, ocean, coastal and geophysical archives from historical records, stations, buoys, ships and other observing systems. |
+
 # Why coding? {background-color="#2F4647"}
 
 

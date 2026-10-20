@@ -247,18 +247,18 @@ $$
 F_X(m) = P(X \le m) = 0.5.
 $$
 
-In practice, we usually only observe a finite [sample]{.mark} of $X$. The [empirical median]{.mark} is an [estimator]{.mark} of the theoretical median, defined as the middle value of the sorted sample. There is no easy formula to compute the empirical median, instead we need to conceptually (@lst-univ-median-ex):
+In practice, we usually only observe a finite [sample]{.mark} of $X$. The [empirical median]{.mark} is an [estimator]{.mark} of the theoretical median, defined as the middle value of the sorted sample. There is no easy formula to compute the empirical median, instead we need to conceptually (@fig-univ-median-ex):
 
 1. Order all values in ascending order and plot them against a normalised number of observations (this is called an empirical cumulative density function - or ECDF);
 2. On the x-axis, find the point dividing the dataset into two equal numbers of observations;
 3. Read the value on the y-axis that intersects the ECDF.
 
 
-**Function reference:** `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots); `sns.ecdfplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-ecdfplot); `ax.plot` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-plot); `median` [(doc)](../appendices/doc_pandas.qmd#pandas-median); `ax.set_xlim` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlim); `ax.set_ylim` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylim).
+<!-- **Function reference:** `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots); `sns.ecdfplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-ecdfplot); `ax.plot` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-plot); `median` [(doc)](../appendices/doc_pandas.qmd#pandas-median); `ax.set_xlim` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlim); `ax.set_ylim` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylim). -->
 
 ```{python}
-#| lst-label: lst-univ-median-ex
-#| lst-cap: Graphical representation of the empirical median.
+#| label: fig-univ-median-ex
+#| fig-cap: Graphical representation of the empirical median.
 #| echo: false
 
 fig, ax = plt.subplots(figsize=(6,4))
@@ -313,7 +313,7 @@ For **categorical** or **discrete numerical data**, the empirical mode simply th
 For **continuous data**, [exact duplicates may be rare]{.mark}, and resulting empirical modes might not be that meaningful (@fig-mode). As a result, we often bin the data into intervals first and find the most populated bin (@fig-mode-bin).
 
 
-**Function reference:** `round` [(doc)](../appendices/doc_pandas.qmd#pandas-round); `mode` [(doc)](../appendices/doc_pandas.qmd#pandas-mode); `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots); `sns.histplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-histplot); `enumerate` [(doc)](../appendices/doc_python.qmd#python-enumerate); `ax.axvline` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-axvline); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
+<!-- **Function reference:** `round` [(doc)](../appendices/doc_pandas.qmd#pandas-round); `mode` [(doc)](../appendices/doc_pandas.qmd#pandas-mode); `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots); `sns.histplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-histplot); `enumerate` [(doc)](../appendices/doc_python.qmd#python-enumerate); `ax.axvline` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-axvline); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show). -->
 
 ```{python}
 #| code-fold: true
@@ -344,7 +344,7 @@ plt.show()
 
 
 
-**Function reference:** `int` [(doc)](../appendices/doc_python.qmd#python-int); `min` [(doc)](../appendices/doc_pandas.qmd#pandas-min); `max` [(doc)](../appendices/doc_pandas.qmd#pandas-max); `range` [(doc)](../appendices/doc_python.qmd#python-range); `cut` [(doc)](../appendices/doc_pandas.qmd#pandas-cut); `mode` [(doc)](../appendices/doc_pandas.qmd#pandas-mode); `list.append` [(doc)](../appendices/doc_python.qmd#python-list-append); `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots); `sns.histplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-histplot); `enumerate` [(doc)](../appendices/doc_python.qmd#python-enumerate); `ax.axvline` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-axvline); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
+<!-- **Function reference:** `int` [(doc)](../appendices/doc_python.qmd#python-int); `min` [(doc)](../appendices/doc_pandas.qmd#pandas-min); `max` [(doc)](../appendices/doc_pandas.qmd#pandas-max); `range` [(doc)](../appendices/doc_python.qmd#python-range); `cut` [(doc)](../appendices/doc_pandas.qmd#pandas-cut); `mode` [(doc)](../appendices/doc_pandas.qmd#pandas-mode); `list.append` [(doc)](../appendices/doc_python.qmd#python-list-append); `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots); `sns.histplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-histplot); `enumerate` [(doc)](../appendices/doc_python.qmd#python-enumerate); `ax.axvline` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-axvline); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show). -->
 
 ```{python}
 #| code-fold: true
@@ -540,10 +540,10 @@ The empirical **median** therefore represents the **50^th^ percentile** of the d
 
 
 
-**Function reference:** `FancyArrowPatch` [(doc)](../appendices/doc_visualisation.qmd#plotting-fancyarrowpatch); `ax.get_xlim` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-get-xlim); `np.percentile` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-np-percentile); `ax.add_patch` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-add-patch); `ax.text` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-text); `ax.axvline` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-axvline); `array.mean` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-array-mean); `np.random.normal` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-np-random-normal); `array.min` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-array-min); `array.max` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-array-max); `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots); `sns.histplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-histplot); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.tick_params` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-tick-params); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `ax.twinx` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-twinx); `sns.ecdfplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-ecdfplot); `plotArrow` [(doc)](../appendices/doc_visualisation.qmd#plotting-plotarrow); `fig.tight_layout` [(doc)](../appendices/doc_visualisation.qmd#plotting-fig-tight-layout); `fig.savefig` [(doc)](../appendices/doc_visualisation.qmd#plotting-fig-savefig); `plt.close` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-close).
+<!-- **Function reference:** `FancyArrowPatch` [(doc)](../appendices/doc_visualisation.qmd#plotting-fancyarrowpatch); `ax.get_xlim` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-get-xlim); `np.percentile` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-np-percentile); `ax.add_patch` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-add-patch); `ax.text` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-text); `ax.axvline` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-axvline); `array.mean` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-array-mean); `np.random.normal` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-np-random-normal); `array.min` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-array-min); `array.max` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-array-max); `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots); `sns.histplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-histplot); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.tick_params` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-tick-params); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `ax.twinx` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-twinx); `sns.ecdfplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-ecdfplot); `plotArrow` [(doc)](../appendices/doc_visualisation.qmd#plotting-plotarrow); `fig.tight_layout` [(doc)](../appendices/doc_visualisation.qmd#plotting-fig-tight-layout); `fig.savefig` [(doc)](../appendices/doc_visualisation.qmd#plotting-fig-savefig); `plt.close` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-close). -->
 
 ```{python}
-#| code-fold: true
+#| echo: false
 
 import numpy as np # <1>
 import matplotlib.pyplot as plt
@@ -601,7 +601,7 @@ fig.savefig("img/fig-univ-pctS.png", dpi=150, transparent=True)
 plt.close(fig)
 ```
 
-1. Import the libraries
+<!-- 1. Import the libraries
 2. Function to plot the arrow
 3. style: arrow with single head
 4. size of arrow head
@@ -612,17 +612,17 @@ plt.close(fig)
 9. Set the plots
 10. Left y axis
 11. Add a right y axis
-12. Plot the arrows
+12. Plot the arrows -->
 
 
 ![Relationship of percentiles to a symmetric distribution. The red dotted line shows the location of the mean.](img/fig-univ-pctS.png){#fig-univ-pctS width="80%"}
 
 
 
-**Function reference:** `np.random.lognormal` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-np-random-lognormal); `array.min` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-array-min); `array.max` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-array-max); `np.percentile` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-np-percentile); `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots); `sns.histplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-histplot); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.tick_params` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-tick-params); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `ax.twinx` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-twinx); `sns.ecdfplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-ecdfplot); `plotArrow` [(doc)](../appendices/doc_visualisation.qmd#plotting-plotarrow); `fig.tight_layout` [(doc)](../appendices/doc_visualisation.qmd#plotting-fig-tight-layout); `fig.savefig` [(doc)](../appendices/doc_visualisation.qmd#plotting-fig-savefig); `plt.close` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-close).
+<!-- **Function reference:** `np.random.lognormal` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-np-random-lognormal); `array.min` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-array-min); `array.max` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-array-max); `np.percentile` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-np-percentile); `plt.subplots` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-subplots); `sns.histplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-histplot); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.tick_params` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-tick-params); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `ax.twinx` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-twinx); `sns.ecdfplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-ecdfplot); `plotArrow` [(doc)](../appendices/doc_visualisation.qmd#plotting-plotarrow); `fig.tight_layout` [(doc)](../appendices/doc_visualisation.qmd#plotting-fig-tight-layout); `fig.savefig` [(doc)](../appendices/doc_visualisation.qmd#plotting-fig-savefig); `plt.close` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-close). -->
 
 ```{python}
-#| code-fold: true
+#| echo: false
 
 data = np.random.lognormal(size=1000, sigma=.4) # <1>
 data = (data - data.min()) / (data.max() - data.min())*10
@@ -650,11 +650,11 @@ fig.savefig("img/fig-univ-pctA.png", dpi=150, transparent=True)
 plt.close(fig)
 ```
 
-1. Setup random data using a log-normal distribution
+<!-- 1. Setup random data using a log-normal distribution
 2. Set the plots
 3. Left y axis
 4. Add a right y axis
-5. Plot the arrows
+5. Plot the arrows -->
 
 
 ![Relationship of percentiles to a asymmetric distribution. The red dotted line shows the location of the mean.](img/fig-univ-pctA.png){#fig-univ-pctA width="80%"}

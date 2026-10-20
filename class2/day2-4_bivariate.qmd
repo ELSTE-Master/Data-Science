@@ -161,16 +161,11 @@ In practice, we rarely know the true correlations, so each entry $r(X_i, X_j)$ i
 #| lst-label: lst-corr-mat
 #| lst-cap: Function to compute produce a correlation matrix
 
-def corrMatrix(d): # <1>
-        
+def corrMatrix(d): # <1>        
     corr = d.corr() # <2>
-
     mask = np.triu(np.ones_like(corr, dtype=bool)) # <3>
-
     f, ax = plt.subplots(figsize=(11, 9)) # <4>
-
     cmap = sns.diverging_palette(230, 20, as_cmap=True) # <5>
-
     sns.heatmap(corr, mask=mask, cmap=cmap, vmax=.7, vmin=-.7, center=0, # <6>
                 square=True, linewidths=.5, cbar_kws={"shrink": .5})
 ```
