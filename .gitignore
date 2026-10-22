@@ -2,6 +2,7 @@
 .quarto/
 /_site/
 /_past-years/
+/Test_codes/
 /scripts/
 .Rproj.user
 .Rhistory
