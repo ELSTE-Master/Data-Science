@@ -1,0 +1,181 @@
+arc,latitude,longitude,crust_km,crust_class,sio2
+Aegean,36.37,25.46,27.99,thin,59.63
+Aleutian,52.0,178.13,27.78,thin,51.2
+Aleutian,52.85,173.31,27.99,thin,58.2
+Aleutian,55.3409,-162.1291,33.09,medium,56.22
+Aleutian,55.3929,-161.9471,34.07,medium,56.33
+Aleutian,55.3969,-162.0267,34.07,medium,60.54
+Andes,-52.1095,-69.6705,29.23,thin,46.62
+Andes,-52.0753,-69.5842,29.19,thin,45.83
+Andes,-48.5067,-70.3517,33.57,medium,50.78
+Andes,-47.1578,-71.5571,34.47,medium,55.0
+Andes,-46.1472,-72.6242,32.52,medium,48.8
+Andes,-45.8511,-73.0967,35.08,medium,57.5
+Andes,-45.0506,-72.9947,38.23,medium,51.63
+Andes,-42.72,-72.6,28.8,thin,49.81
+Andes,-41.95,-67.57,35.98,medium,48.44
+Andes,-41.1823,-71.7924,34.79,medium,49.89
+Andes,-40.5417,-72.1931,40.09,medium,53.76
+Andes,-39.27,-71.81,31.71,medium,50.82
+Andes,-37.0993,-69.0113,36.51,medium,49.68
+Andes,-36.9889,-69.9988,43.99,thick,51.52
+Andes,-36.4409,-69.3826,43.98,thick,68.25
+Andes,-36.3886,-69.2972,44.84,thick,67.83
+Andes,-36.3739,-69.2012,45.4,thick,57.82
+Andes,-36.2,-70.67,45.36,thick,55.04
+Andes,-35.9971,-70.5613,44.93,thick,51.22
+Andes,-35.6636,-69.524,38.7,medium,45.96
+Andes,-34.203,-69.9265,49.2,thick,67.06
+Andes,-34.2,-72.0,27.71,thin,54.05
+Andes,-33.6518,-70.1202,45.74,thick,67.85
+Andes,-32.6588,-70.4899,45.39,thick,50.76
+Andes,-29.84,-69.95,56.9,thick,72.02
+Andes,-29.8242,-69.8358,57.2,thick,48.69
+Andes,-29.36,-70.05,61.39,thick,62.18
+Andes,-25.8342,-68.5792,57.08,thick,62.3
+Andes,-25.5641,-67.9522,65.0,thick,63.61
+Andes,-25.4985,-68.1182,59.55,thick,60.66
+Andes,-25.4352,-67.9893,65.06,thick,67.37
+Andes,-25.42,-69.21,52.78,thick,69.18
+Andes,-24.921,-69.77,44.97,thick,60.08
+Andes,-24.801,-69.627,42.63,medium,62.77
+Andes,-24.7348,-66.1663,56.75,thick,51.92
+Andes,-24.65,-67.92,52.93,thick,55.1
+Andes,-24.3808,-65.8589,54.38,thick,61.84
+Andes,-24.2298,-67.0175,56.9,thick,65.3
+Andes,-23.7047,-67.2911,60.01,thick,67.94
+Andes,-23.321,-67.7771,55.23,thick,58.02
+Andes,-22.7953,-66.6822,61.25,thick,57.8
+Andes,-22.25,-67.23,61.6,thick,65.21
+Andes,-22.074,-68.95,51.25,thick,58.87
+Andes,-21.2,-68.33,60.12,thick,65.4
+Andes,-20.9167,-68.4833,58.48,thick,61.14
+Andes,-18.1917,-69.5903,54.14,thick,65.3
+Andes,-18.1746,-69.1859,61.46,thick,57.72
+Andes,-18.15,-68.87,64.14,thick,52.83
+Andes,-18.1466,-69.1301,67.9,thick,60.61
+Andes,-18.0625,-69.2181,59.36,thick,61.0
+Andes,-16.4217,-69.16,55.7,thick,54.94
+Andes,-16.2981,-71.6465,54.51,thick,59.6
+Andes,-16.29,-71.6433,54.51,thick,57.64
+Andes,-16.2817,-71.655,54.51,thick,54.07
+Andes,-16.2336,-71.7067,46.0,thick,76.1
+Andes,-15.895,-69.89,55.7,thick,61.01
+Andes,-15.7036,-72.6322,57.07,thick,56.5
+Andes,-15.4314,-72.3453,56.51,thick,59.3
+Andes,-0.95,-78.9,57.1,thick,65.98
+Banda,-8.83,125.6,38.83,medium,47.59
+Bismarck,-4.63,149.38,25.43,thin,50.84
+Bismarck,-4.0483,137.1028,55.93,thick,54.7
+Cascades,39.188,-120.1615,45.74,thick,58.98
+Cascades,40.492,-121.508,46.15,thick,74.99
+Cascades,41.4892,-122.3085,37.71,medium,52.78
+Cascades,41.5048,-121.6367,41.56,medium,49.5
+Cascades,41.9083,-121.643,37.53,medium,48.0
+Cascades,42.972,-122.1033,41.15,medium,58.81
+Cascades,45.4,-122.49,29.59,thin,51.3
+Cascades,45.63,-122.14,28.69,thin,54.13
+Cascades,46.8079,-121.8948,38.87,medium,60.63
+Cascades,50.79,-123.387,41.99,medium,48.27
+Central America,7.2318,-80.6035,29.4,thin,48.12
+Central America,8.58,-80.17,31.55,medium,65.9
+Central America,10.43,-85.21,28.22,thin,69.68
+Central America,10.64,-85.6,28.29,thin,70.49
+Central America,12.1305,-86.329,28.46,thin,48.12
+Central America,12.3297,-85.5167,31.47,medium,71.74
+Central America,12.9765,-87.5791,28.87,thin,57.64
+Central America,13.4608,-86.672,33.83,medium,76.01
+Central America,13.7089,-89.0681,33.04,medium,70.83
+Central America,14.4531,-89.1703,34.12,medium,77.14
+Greater Antilles,18.5,-67.0,29.01,thin,55.96
+Greater Antilles,19.1603,-70.5678,32.13,medium,52.2
+Greater Antilles,19.2758,-70.7654,31.62,medium,49.87
+Honshu,32.7442,129.9897,27.99,thin,53.96
+Honshu,33.1,129.9,28.53,thin,55.66
+Honshu,33.22,134.18,25.86,thin,48.8
+Honshu,33.43,129.58,27.99,thin,50.61
+Honshu,33.5,129.5,27.75,thin,48.33
+Honshu,34.3158,133.9392,29.37,thin,61.86
+Honshu,35.0,136.0,28.68,thin,59.04
+Honshu,35.4,135.9,30.25,medium,52.63
+Honshu,35.49,133.18,28.01,thin,52.39
+Honshu,35.5,133.15,28.23,thin,51.97
+Honshu,35.58,137.83,35.28,medium,69.91
+Honshu,35.6903,135.016,27.68,thin,70.16
+Honshu,36.8158,138.5817,36.53,medium,61.96
+Honshu,37.83,139.25,28.08,thin,52.77
+Honshu,38.0,141.0,27.7,thin,52.32
+Honshu,39.0414,140.3872,30.9,medium,54.3
+Honshu,39.1206,140.8478,33.15,medium,57.8
+Honshu,39.145,140.6797,30.7,medium,61.1
+Honshu,39.1658,140.8314,33.97,medium,60.2
+Honshu,40.4367,140.9661,32.52,medium,59.41
+Honshu,40.6514,140.9075,32.91,medium,53.6
+Honshu,41.3,141.05,29.95,thin,54.29
+Honshu,41.73,141.0,28.52,thin,76.12
+Honshu,41.923,140.777,32.43,medium,61.31
+Izu-Bonin,26.554,142.2028,26.53,thin,52.08
+Izu-Bonin,26.566,142.2129,26.53,thin,50.22
+Izu-Bonin,26.5663,142.2273,26.53,thin,50.96
+Izu-Bonin,33.115,139.792,27.52,thin,49.95
+Izu-Bonin,34.5737,139.257,24.97,thin,57.34
+Izu-Bonin,34.68,138.97,28.41,thin,60.0
+Kamchatka,52.5831,158.0881,35.05,medium,61.2
+Kamchatka,56.0,162.0,28.45,thin,63.03
+Kamchatka,56.0899,160.4771,47.46,thick,52.67
+Kamchatka,56.5703,161.4656,30.64,medium,60.49
+Kamchatka,57.3563,159.9633,36.51,medium,50.4
+Kamchatka,57.8167,160.25,34.41,medium,51.12
+Kamchatka,57.982,161.129,31.66,medium,53.69
+Kurile,43.5151,142.0104,29.1,thin,48.72
+Kurile,43.5745,141.6228,29.47,thin,48.79
+Kurile,43.9426,141.6329,27.93,thin,51.13
+Kurile,44.0767,144.244,27.92,thin,51.92
+Kurile,44.8,143.5,26.96,thin,53.72
+Kurile,46.5,151.0,27.17,thin,59.01
+Lesser Antilles,12.132,-61.727,22.77,thin,47.46
+Lesser Antilles,12.175,-61.618,28.66,thin,46.32
+Lesser Antilles,16.691,-62.149,27.99,thin,53.27
+Lesser Antilles,16.6933,-62.1484,27.99,thin,51.71
+Lesser Antilles,16.8,-62.21,27.99,thin,55.54
+Lesser Antilles,17.3658,-62.8313,27.24,thin,51.69
+Lesser Antilles,17.4778,-62.9597,23.79,thin,56.78
+Luzon,13.5,123.7,28.1,thin,60.23
+Luzon,15.13,120.35,34.46,medium,68.84
+Mexican Volcanic Belt,18.88,-99.11,38.44,medium,53.0
+Mexican Volcanic Belt,18.975,-98.87,40.57,medium,52.7
+Mexican Volcanic Belt,18.9833,-97.2394,58.4,thick,64.14
+Mexican Volcanic Belt,19.0,-98.6,48.52,thick,63.15
+Mexican Volcanic Belt,19.016,-99.4532,45.38,thick,56.7
+Mexican Volcanic Belt,19.0621,-98.6756,58.46,thick,59.9
+Mexican Volcanic Belt,19.0917,-98.9624,47.5,thick,52.51
+Mexican Volcanic Belt,19.1195,-99.7558,58.39,thick,66.48
+Mexican Volcanic Belt,19.203,-101.728,41.65,medium,54.17
+Mexican Volcanic Belt,19.22,-99.04,45.76,thick,60.9
+Mexican Volcanic Belt,19.3297,-98.7519,48.68,thick,56.1
+Mexican Volcanic Belt,19.4933,-97.7333,46.0,thick,70.0
+Mexican Volcanic Belt,19.795,-96.519,30.9,medium,51.94
+Mexican Volcanic Belt,19.8508,-100.495,44.71,thick,57.1
+Mexican Volcanic Belt,19.8911,-100.6953,47.06,thick,75.8
+Mexican Volcanic Belt,19.99,-101.84,43.4,thick,59.89
+Mexican Volcanic Belt,20.63,-99.72,42.48,medium,54.4
+Mexican Volcanic Belt,20.6887,-103.6972,38.42,medium,60.6
+Mexican Volcanic Belt,20.782,-103.343,38.94,medium,76.0
+Mexican Volcanic Belt,20.8092,-100.1742,43.09,thick,62.02
+Mexican Volcanic Belt,20.8718,-103.2485,38.32,medium,57.7
+Mexican Volcanic Belt,21.0398,-104.7563,33.39,medium,70.18
+Mexican Volcanic Belt,21.0688,-104.4445,35.2,medium,55.8
+Mexican Volcanic Belt,21.1675,-104.6508,35.62,medium,64.6
+Mexican Volcanic Belt,21.25,-105.0,29.32,thin,58.49
+New Hebrides,-14.45,168.0,24.84,thin,51.51
+Ryukyu,32.6867,130.1975,27.97,thin,50.87
+Scotia,-62.83,-60.5,25.57,thin,56.48
+Scotia,-62.5667,-59.625,28.14,thin,58.12
+Sunda,-9.62,119.3,31.61,medium,62.18
+Sunda,-7.4869,110.5683,33.55,medium,51.41
+Sunda,-7.233,109.166,39.55,medium,50.36
+Sunda,-6.7424,107.0654,33.06,medium,58.81
+Tonga,-22.2208,-175.7486,21.34,thin,56.38
+Tonga,-19.7123,-175.0597,22.1,thin,54.55
+Tonga,-17.451,-179.158,27.99,thin,48.65
+Tonga,-17.371,-178.883,27.92,thin,60.49
