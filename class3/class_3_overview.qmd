@@ -1,0 +1,12 @@
+---
+title: "Class 3"
+format:
+  live-html:
+    theme: cosmo
+    css: ../assets/webex_2.css
+    include-after-body: ../assets/webex_2.js
+jupyter: python3
+---
+
+[{{< fa display >}} Présentation HTML](../slides/class1_intro.html){.btn .btn-download target="_blank"}
+[{{< fa file-pdf >}} Présentation PDF](class_1_slides_intro.pdf){.btn .btn-download target="_blank"}

@@ -40,3 +40,8 @@ PDF compression uses Ghostscript by default. To keep the original PDF quality,
 run `python render_all.py --no-compress` or
 `python slides2pdf.py --from-rendered --no-compress`. Both keep the usual PDF
 filenames, replacing the previous downloads.
+
+Class 3: edit `slides/class_3_slides.qmd` (the live deck), then run
+`python slides/make_static_slides.py` before building to refresh
+`slides/class_3_slides_static.qmd` (the PDF source). Shared Class 3 images
+are copied into `slides/img/class3`; the originals remain in `class3/img`.

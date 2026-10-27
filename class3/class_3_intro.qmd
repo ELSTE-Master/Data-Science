@@ -39,7 +39,7 @@ The objectives of this class are to:
 ## Slides
 
 [{{< fa file-pdf >}} PDF](class_3_slides.pdf){.btn .btn-download target="_blank"}
-[{{< fa display >}} View in browser](../class3/class_3_slides.html){.btn .btn-download target="_blank"}
+[{{< fa display >}} View in browser](../slides/class_3_slides.html){.btn .btn-download target="_blank"}
 [{{< fa download >}} Offline HTML](class_3_slides_static.html){.btn .btn-download target="_blank"}
 
 

@@ -6,7 +6,7 @@ class_3_slides_static.qmd, the same deck rendered with clean-revealjs and
 embed-resources, where the cells are executed at render time instead. The
 static HTML is the downloadable/offline version and the source of the PDF.
 
-Run after editing the live deck:  python class3/make_static_slides.py
+Run after editing the live deck:  python slides/make_static_slides.py
 """
 import re
 from pathlib import Path
@@ -24,6 +24,7 @@ a = s.index("format:\n  live-revealjs:")
 b = s.index("css: [", a)
 s = s[:a] + '''format:
   clean-revealjs:
+    chalkboard: false
     embed-resources: true
     self-contained: true
     self-contained-math: true

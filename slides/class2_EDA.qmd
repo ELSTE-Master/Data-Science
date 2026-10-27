@@ -1,4 +1,7 @@
 ---
+metadata-files: [assets/clean-format.yml]
+format:
+  clean-revealjs: default
 title: "ELSTE Data science"
 subtitle: "Class 2: Exploratory data analysis"
 date: "October 21, 2026"
