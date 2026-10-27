@@ -88,7 +88,7 @@ def panel(shift, kind):
         o.append(r"\draw[cmagma, line width=1.8pt] (%.2f,%.2f) -- (%.2f,%.2f);" % (VX, moho + 0.7, VX, surf - 0.55))
         o.append(r"\fill[cmagma!80!white] (%.2f,%.2f) ellipse (0.42 and 0.17);" % (VX, surf - 0.5))
         o.append(r"\draw[cmagma, line width=1.8pt] (%.2f,%.2f) -- (%.2f,%.2f);" % (VX, surf - 0.35, VX, surf + 0.7))
-        o.append(r"\node[txt, font=\scriptsize, anchor=east, align=right] at (4.9,%.2f) {long storage near the Moho:\\cooling, crystallization,\\assimilation of crust};" % (moho + 1.25))
+        o.append(r"\node[txt, font=\scriptsize, anchor=east, align=right] at (5.05,%.2f) {long storage\\near the Moho:\\cooling, crystallization,\\assimilation of crust};" % (moho + 1.3))
         o.append(r"\node[txt, font=\scriptsize, anchor=west] at (5.95,%.2f) {shallow chamber};" % (surf - 0.5))
     else:
         o.append(r"\draw[cmagma, line width=1.8pt] (%.2f,%.2f) -- (%.2f,%.2f);" % (VX, moho, VX, surf - 0.5))
@@ -108,7 +108,7 @@ def panel(shift, kind):
     # thickness bar and labels
     o.append(r"\draw[txt, {Bar[width=5pt]}-{Bar[width=5pt]}, line width=0.8pt] (8.55,%.2f) -- (8.55,%.2f);" % (moho, surf))
     o.append(r"\node[txt, font=\small, anchor=east] at (8.4,%.2f) {$\approx$ %d km};" % ((moho + surf) / 2, 50 if thick else 25))
-    o.append(r"\node[txt, font=\scriptsize, anchor=west] at (2.3,%.2f) {crust};" % (surf - 0.2))
+    o.append(r"\node[txt, font=\scriptsize, anchor=west] at (%.2f,%.2f) {crust};" % ((7.9, surf - 0.22) if thick else (6.0, surf - 0.25)))
     o.append(r"\node[txt, font=\small] at (1.3,0.6) {mantle};")
     o.append(r"\node[txt, font=\scriptsize, anchor=west] at (%.2f,%.2f) {ocean};" % (XL + 0.1, sea - 0.17 if thick else sea + 0.14))
     o.append(r"\node[%s, font=\large\bfseries] at (4.5,6.55) {%s};" % (col, "Thick crust (continental arc)" if thick else "Thin crust (island arc)"))

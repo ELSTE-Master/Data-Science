@@ -98,6 +98,144 @@ document.addEventListener("DOMContentLoaded", function () {
 
 ------------------------------------------------------------------------
 
+## The big picture: p-hacking {.smaller}
+
+[P-hacking]{style="color:#eb078e; font-weight:bold;"} is the misuse of
+data analysis to find patterns that can be presented as statistically
+significant: [run many tests on the data and report only those that
+come back significant]{style="color:#6A5ACD;"}.
+[Example:]{style="font-weight:bold;"} the number of letters in the
+[Scripps National Spelling Bee](https://en.wikipedia.org/wiki/Scripps_National_Spelling_Bee)
+winning word correlates with the number of people killed by venomous
+spiders in the US.
+
+![](img/phacking.png){fig-align="center" width="74%" .nostretch}
+
+[Source: [Wikipedia on data dredging](https://en.wikipedia.org/wiki/Data_dredging). 👋 If you want to know more, take a look [here](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1124898/).]{style="font-size:0.7em;"}
+
+------------------------------------------------------------------------
+
+## How to p-hack? 🤔 {.smaller}
+
+Are Republicans good or bad for the US economy?
+[Both!!]{style="color:#6A5ACD; font-weight:bold;"} Choose the terms,
+the measure of the economy and the years, and you can "prove" either.
+Try it [here](https://stats.andrewheiss.com/hack-your-way/) (a rebuild
+of the original FiveThirtyEight tool, archived
+[here](https://web.archive.org/web/20241222202340/https://projects.fivethirtyeight.com/p-hacking/)).
+
+![](img/republican.png){fig-align="center" width="46%" .nostretch}
+
+## The garden of forking paths {.smaller}
+
+::: {.columns}
+::: {.column .v-center width="60%"}
+![](img/forking_paths.png){width="100%" .nostretch}
+:::
+
+::: {.column .v-center width="40%"}
+::: {style="margin-left:0.6em; font-size:0.88em;"}
+- No fishing needed: every analysis involves [choices made after seeing
+  the data]{style="color:#eb078e;"} (which groups, which test, one- or
+  two-sided, what to do with outliers, ...). Each path looks reasonable,
+  and only one is reported.
+- The data of this class, [16 defensible
+  analyses]{style="color:#6A5ACD; font-weight:bold;"}: p-values from
+  $1.8\%$ to $86\%$, six of them below $5\%$. The reported p-value
+  [ignores the paths not taken]{style="color:#eb078e;"}.
+- Remedies: [pre-register]{style="color:#eb078e;"} the path before
+  looking at the data, or report the whole garden (multiverse analysis).
+:::
+:::
+:::
+
+[Gelman, A. & Loken, E. (2014), "The statistical crisis in science", *American Scientist* 102, 460. In finance: Coqueret, G. (2023), "Forking paths in financial economics", arXiv:2401.08606.]{style="font-size:0.7em;"}
+
+------------------------------------------------------------------------
+
+## This brings us to "HARKing" {.smaller}
+
+::: {.columns}
+::: {.column width="52%"}
+[HARKing]{style="color:#eb078e; font-weight:bold;"} is an acronym
+coined by Norbert Kerr for the questionable research practice of
+["Hypothesizing After the Results are Known"]{style="color:#6A5ACD;"}:
+presenting [a post hoc]{style="color:#06bcf1; font-weight:bold;"}
+hypothesis in the introduction of a research report as if it were an
+[a priori]{style="color:#06bcf1; font-weight:bold;"} hypothesis.
+
+[How to do it?]{style="color:#eb078e; font-weight:bold;"} 🤔
+
+- Test 20 jelly bean colours: one of them comes out linked to acne
+  (more on this later).
+- Pretend this was our original hypothesis.
+- Et voilà!
+
+[👋 If you want to know more, have a look [here](https://en.wikipedia.org/wiki/HARKing) and the references therein.]{style="font-size:0.85em;"}
+:::
+
+::: {.column width="48%"}
+![](img/green.png){fig-align="center" width="62%" .nostretch}
+
+[Source: [xkcd](https://xkcd.com/882/)]{style="font-size:0.7em;"}
+:::
+:::
+
+------------------------------------------------------------------------
+
+## The costs of HARKing (and p-hacking) {.smaller}
+
+HARKing and p-hacking are (arguably) playing an important role in the
+[replication crisis in science]{style="color:#6A5ACD; font-weight:bold;"}:
+when 100 published psychology studies were repeated, most p-values and
+effect sizes did not hold up.
+
+![](img/replic.png){fig-align="center" width="80%" .nostretch}
+
+[Source: [Open Science Collaboration, "Estimating the reproducibility of psychological science", *Science* 349 (2015)](https://doi.org/10.1126/science.aac4716). 👋 If you want to know more, take a look [here](https://en.wikipedia.org/wiki/Replication_crisis).]{style="font-size:0.7em;"}
+
+------------------------------------------------------------------------
+
+## The cost for society {.smaller}
+
+Contradictory studies (coffee, wine, milk, ...) make the public
+[cynical about science]{style="color:#eb078e; font-weight:bold;"}: "find
+the study that sounds best to you and go with that". Once evidence can
+be picked like that, it has [lost its power]{style="color:#6A5ACD;"}.
+
+![](img/milk_debate.jpg){fig-align="center" width="60%" .nostretch style="border-radius:14px;"}
+
+[👋 If you want to know more, take a look [here](https://www.youtube.com/watch?v=0Rnq1NpHdmw).]{style="font-size:0.8em;"}
+
+------------------------------------------------------------------------
+
+## The four horsemen of irreproducibility {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+![](img/bishop_2019_page.png){width="100%" .nostretch}
+:::
+
+::: {.column .v-center width="50%"}
+::: {style="margin-left:0.8em;"}
+Dorothy Bishop's four horsemen of the reproducibility apocalypse:
+
+- [publication bias]{style="color:#6A5ACD; font-weight:bold;"}
+- [low statistical power]{style="color:#06bcf1; font-weight:bold;"}
+- [p-hacking]{style="color:#eb078e; font-weight:bold; white-space:nowrap;"}
+- [HARKing]{style="color:#8bb174; font-weight:bold;"}
+
+We will meet the last three today. The remedies she lists are now
+standard: [pre-registration]{style="color:#eb078e;"}, registered
+reports, open data and code.
+
+[Source: [D. V. M. Bishop, *Nature* 568, 435 (2019)](https://www.nature.com/articles/d41586-019-01307-2).]{style="font-size:0.7em;"}
+:::
+:::
+:::
+
+------------------------------------------------------------------------
+
 ## Case study {.smaller}
 
 ![](img/henry_paper.png){fig-align="center" width="88%"}
@@ -150,7 +288,7 @@ Letters*, 470, 96–107.
 
 ::: {.columns}
 ::: {.column width="46%"}
-::: {style="font-size:0.95em; margin-top:1em;"}
+::: {style="font-size:0.95em; margin-top:4.2em;"}
 - Sample [elevation]{style="color:#eb078e;"} used as a proxy for crustal
   thickness.
 - Continuous variable (elevation, m a.s.l.) [broken into discrete
@@ -361,7 +499,7 @@ locations) of two independent samples. For example:
 3.  A limnologist: duration of lake ice cover before vs after 1950.
 4.  Does coffee raise blood pressure? ☕
 5.  [Does the US economy grow faster under Democratic or Republican
-    presidents?]{style="color:#eb078e;"} 🇺🇸 [(data at the end)]{style="color:grey;"}
+    presidents?]{style="color:#eb078e;"} 🇺🇸 [(see the beginning of the class)]{style="color:grey;"}
 6.  Is a glass of red wine as good as an hour at the gym? 🍷
 
 We will see three tests:
@@ -446,6 +584,17 @@ mean SiO$_2$ content?
 ------------------------------------------------------------------------
 
 ## Thin vs medium crust — Import the data {.smaller}
+
+```{python}
+#| include: false
+# Hidden setup: the variables used by the cells of this deck are defined once here,
+# so that any cell can be run in class, even out of order.
+import pandas as pd
+crust = pd.read_csv("../Data/arc_magmas_crust_sample.csv")
+sio2_thin   = crust["sio2"][crust["crust_class"] == "thin"]
+sio2_medium = crust["sio2"][crust["crust_class"] == "medium"]
+sio2_thick  = crust["sio2"][crust["crust_class"] == "thick"]
+```
 
 ```{python}
 #| echo: true
@@ -1058,116 +1207,4 @@ for name, p in [("Test 1 (thin < medium) ", p_1), ("Test 2 (medium < thick)", p_
   p-values $< 10^{-88}$ for Tests 2 and 3 but $88\%$ for Test 1: the
   thin-to-medium step is [not supported]{style="color:#eb078e;"}.
   Differentiation seems only strongly enhanced once the crust is thick.
-:::
-
-------------------------------------------------------------------------
-
-## The big picture: p-hacking {.smaller}
-
-[P-hacking]{style="color:#eb078e; font-weight:bold;"} is the misuse of
-data analysis to find patterns that can be presented as statistically
-significant: [run many tests on the data and report only those that
-come back significant]{style="color:#6A5ACD;"}.
-[Example:]{style="font-weight:bold;"} the number of letters in the
-[Scripps National Spelling Bee](https://en.wikipedia.org/wiki/Scripps_National_Spelling_Bee)
-winning word correlates with the number of people killed by venomous
-spiders in the US.
-
-![](img/phacking.png){fig-align="center" width="74%" .nostretch}
-
-[Source: [Wikipedia on data dredging](https://en.wikipedia.org/wiki/Data_dredging). 👋 If you want to know more, take a look [here](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1124898/).]{style="font-size:0.7em;"}
-
-------------------------------------------------------------------------
-
-## How to p-hack? 🤔 {.smaller}
-
-Back to our question: are Republicans good or bad for the US economy?
-[Both!!]{style="color:#6A5ACD; font-weight:bold;"} Choose the terms,
-the measure of the economy and the years, and you can "prove" either.
-Try it [here](https://stats.andrewheiss.com/hack-your-way/) (a rebuild
-of the original FiveThirtyEight tool, archived
-[here](https://web.archive.org/web/20241222202340/https://projects.fivethirtyeight.com/p-hacking/)).
-
-![](img/republican.png){fig-align="center" width="46%" .nostretch}
-
-------------------------------------------------------------------------
-
-## This brings us to "HARKing" {.smaller}
-
-::: {.columns}
-::: {.column width="52%"}
-[HARKing]{style="color:#eb078e; font-weight:bold;"} is an acronym
-coined by Norbert Kerr for the questionable research practice of
-["Hypothesizing After the Results are Known"]{style="color:#6A5ACD;"}:
-presenting [a post hoc]{style="color:#06bcf1; font-weight:bold;"}
-hypothesis in the introduction of a research report as if it were an
-[a priori]{style="color:#06bcf1; font-weight:bold;"} hypothesis.
-
-[How to do it?]{style="color:#eb078e; font-weight:bold;"} 🤔
-
-- Test if one jelly bean colour is linked to acne.
-- Pretend this was our original hypothesis.
-- Et voilà!
-
-[👋 If you want to know more, have a look [here](https://en.wikipedia.org/wiki/HARKing) and the references therein.]{style="font-size:0.85em;"}
-:::
-
-::: {.column width="48%"}
-![](img/green.png){fig-align="center" width="62%" .nostretch}
-
-[Source: [xkcd](https://xkcd.com/882/)]{style="font-size:0.7em;"}
-:::
-:::
-
-------------------------------------------------------------------------
-
-## The costs of HARKing (and p-hacking) {.smaller}
-
-HARKing and p-hacking are (arguably) playing an important role in the
-[replication crisis in science]{style="color:#6A5ACD; font-weight:bold;"}:
-when 100 published psychology studies were repeated, most p-values and
-effect sizes did not hold up.
-
-![](img/replic.png){fig-align="center" width="80%" .nostretch}
-
-[Source: [Open Science Collaboration, "Estimating the reproducibility of psychological science", *Science* 349 (2015)](https://doi.org/10.1126/science.aac4716). 👋 If you want to know more, take a look [here](https://en.wikipedia.org/wiki/Replication_crisis).]{style="font-size:0.7em;"}
-
-------------------------------------------------------------------------
-
-## The cost for society {.smaller}
-
-Contradictory studies (coffee, wine, milk, ...) make the public
-[cynical about science]{style="color:#eb078e; font-weight:bold;"}: "find
-the study that sounds best to you and go with that". Once evidence can
-be picked like that, it has [lost its power]{style="color:#6A5ACD;"}.
-
-![](img/milk_debate.jpg){fig-align="center" width="60%" .nostretch style="border-radius:14px;"}
-
-[👋 If you want to know more, take a look [here](https://www.youtube.com/watch?v=0Rnq1NpHdmw).]{style="font-size:0.8em;"}
-
-------------------------------------------------------------------------
-
-## The four horsemen of irreproducibility {.smaller}
-
-::: {.columns}
-::: {.column width="50%"}
-![](img/bishop_2019_page.png){width="100%" .nostretch}
-:::
-
-::: {.column width="50%"}
-::: {style="margin-left:0.8em; margin-top:0;"}
-Dorothy Bishop's four horsemen of the reproducibility apocalypse:
-
-- [publication bias]{style="color:#6A5ACD; font-weight:bold;"}
-- [low statistical power]{style="color:#06bcf1; font-weight:bold;"}
-- [p-hacking]{style="color:#eb078e; font-weight:bold; white-space:nowrap;"}
-- [HARKing]{style="color:#8bb174; font-weight:bold;"}
-
-We met the last three today. The remedies she lists are now
-standard: [pre-registration]{style="color:#eb078e;"}, registered
-reports, open data and code.
-
-[Source: [D. V. M. Bishop, *Nature* 568, 435 (2019)](https://www.nature.com/articles/d41586-019-01307-2).]{style="font-size:0.7em;"}
-:::
-:::
 :::

@@ -16,3 +16,8 @@
 .reveal .slides section.present:not(#title-slide):not(.stack) > h2 {
   margin-bottom: 0.2em;
 }
+
+/* A column tagged .v-center is centred vertically against its taller neighbour
+   (Quarto rewrites the column's style attribute, so this cannot be done inline). */
+.reveal .columns:has(> .column.v-center) { display: flex; align-items: center; }
+.reveal .columns > .column.v-center { align-self: center; }

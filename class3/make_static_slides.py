@@ -33,20 +33,26 @@ s = s[:a] + '''format:
 
 # ---- cells ----
 def convert(match):
-    body = match.group(2)
-    lines = body.rstrip("\n").split("\n")
+    raw = match.group(1)
+    lines = raw.rstrip("\n").split("\n")
+    opts = {}
+    while lines and lines[0].startswith("#|"):
+        k, _, v = lines.pop(0)[2:].partition(":")
+        opts[k.strip()] = v.strip()
+    body = "\n".join(lines).strip("\n")
     if all(l.strip() in ("", "# Your code here") for l in lines):
         return ""                                   # students' empty cell: nothing to show statically
+    if opts.get("include") == "false":              # hidden setup cell of the live deck
+        return "```{python}\n#| include: false\n" + body.replace(URL, LOCAL) + "\n```\n"
     if URL in body:
         # Show the cell as the students see it (GitHub URL, not executed), then run the
         # same code on the local copy without echo so its output appears right below.
-        code = body.rstrip("\n")
-        out = "```{python}\n#| echo: true\n#| eval: false\n" + code + "\n```\n\n"
-        out += "```{python}\n#| echo: false\n" + code.replace(URL, LOCAL) + "\n```\n"
+        out = "```{python}\n#| echo: true\n#| eval: false\n" + body + "\n```\n\n"
+        out += "```{python}\n#| echo: false\n" + body.replace(URL, LOCAL) + "\n```\n"
         return out
-    return "```{python}\n#| echo: true\n" + body.rstrip("\n") + "\n```\n"
+    return "```{python}\n#| echo: true\n" + body + "\n```\n"
 
-s = re.sub(r"```\{pyodide\}\n(#\| autorun: true\n)?(.*?)```\n", convert, s, flags=re.S)
+s = re.sub(r"```\{pyodide\}\n(.*?)```\n", convert, s, flags=re.S)
 assert "{pyodide}" not in s
 
 # ---- banner inside the front matter (a YAML comment adds no slide) ----
