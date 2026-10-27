@@ -46,3 +46,6 @@ _site/
 
 
 
+
+# generated TikZ sources/PDFs of the class 3 figures (made by class3/make_*.py)
+class3/tex/

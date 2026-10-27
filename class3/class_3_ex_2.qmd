@@ -1,118 +1,342 @@
 ---
-title: "Examples diet data part I"
-format: 
+title: "Exercises magma data"
+format:
   live-html:
     theme: cosmo
     css: ../assets/webex_2.css
-    include-after-body: ../assets/webex_2.js
-engine: knitr
+    include-after-body: [../assets/webex_2.js, ../assets/exercise-solution.js]
+jupyter: python3
 ---
 
-{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+```{python}
+#| include: false
+import sys
+sys.path.insert(0, "../assets")
+from q_a_env import render_q_a_env
 
-
-
-
-
-
-
-
-```{r, echo = FALSE, results='asis'}
-knitr::opts_chunk$set(echo = FALSE)
-source("../assets/q_a_env.R")
+# Values quoted in the text below (computed on the course dataset)
+import pandas as pd
+from scipy import stats
+crust = pd.read_csv("../Data/arc_magmas_crust_sample.csv")
+sio2_thin  = crust["sio2"][crust["crust_class"] == "thin"]
+sio2_thick = crust["sio2"][crust["crust_class"] == "thick"]
+p_46 = stats.ttest_ind(sio2_thin + 4.6, sio2_thick, alternative="less", equal_var=False).pvalue
+p_45 = stats.ttest_ind(sio2_thin + 4.5, sio2_thick, alternative="less", equal_var=False).pvalue
 ```
 
 <!-- MathJax for Rendering Math -->
 <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
 </script>
-## Comparing Diets A and B
-
-## Getting the data
-
-In this exercise, we will replicate the `diet` data analysis example
-presented in the lectures slides, and we will compare diets A and B. Our first step is to load the data.
 
 
+In the lecture, we compared magmas erupting through thin and medium crust. In this section, we will consider the difference of the average SiO$_2$ content between magmas erupting through **thin** ($< 30$ km) and **thick** ($\geq 43$ km) crust. As in the lecture, we use the random subsample of $60$ cells per crustal-thickness class. In particular, we are interested in testing whether magmas erupting through thick crust have a larger average SiO$_2$ content than magmas erupting through thin crust.
 
-**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv).
+### Question 1
+How to plot the data?
 
-```{python, echo=TRUE}
-# Import data
+Complete the code below to obtain the boxplot to compare the empirical distributions of the SiO$_2$ content for the two groups:
+
+
+:::: {.panel-tabset}
+
+## Exercise
+
+```{pyodide}
+#| exercise: ex_1
 import pandas as pd
-diet = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/diet.csv")
-```
-
-
-We can now take a look at the data.
-
-**Function reference:** `print` [(doc)](../appendices/doc_python.qmd#python-print); `head` [(doc)](../appendices/doc_pandas.qmd#pandas-head).
-
-```{python, echo=TRUE}
-# Import data
-n = 5
-print(diet.head(n)) #print the first n rows of the dataset
-```
-
-To compare the effectiveness of the diets, we first compute the weight loss of the participants (i.e. initial weight - final weight), which can be done in `Python` as follows:
-
-```{python, echo=TRUE}
-# Compute weight loss
-diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
-```
-
-For this example, we consider diets A and B so we construct our "variables of interest", say `dietA` and `dietB`, by only selecting these diets. This can be done in `Python` as follows:
-
-```{python, echo=TRUE}
-# Variable of interest
-dietA = diet["weight.loss"][diet["diet.type"]=="A"]
-dietB = diet["weight.loss"][diet["diet.type"]=="B"]
-```
-
-
-**Function reference:** `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `ax.boxplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-boxplot); `dict` [(doc)](../appendices/doc_python.qmd#python-dict); `enumerate` [(doc)](../appendices/doc_python.qmd#python-enumerate); `np.random.normal` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-np-random-normal); `len` [(doc)](../appendices/doc_python.qmd#python-len); `ax.scatter` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-scatter); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
-
-```{python, echo=TRUE, fig.align = 'center'}
 import matplotlib.pyplot as plt
-import numpy as np
 
+crust = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/arc_magmas_crust_sample.csv")
+
+# Variables of interest
+sio2_thin  = crust["sio2"][crust["crust_class"] == "thin"]
+sio2_thick = crust["sio2"][crust["crust_class"] == "thick"]
+
+# Side-by-side boxplot
 plt.figure(figsize=(6,4))
-
-# Boxplot without outliers
-plt.boxplot([dietA, dietB],
-            tick_labels=["Diet A", "Diet B"],
-            patch_artist=True,
+plt.______([sio2_thin, sio2_thick],
+            labels=["Thin crust", "Thick crust"],
+            patch_artist=True,  # color the boxes
             boxprops=dict(facecolor="lightblue", color="blue"),
-            medianprops=dict(color="red"),
-            showfliers=False) # don't show outliers in boxplot
+            medianprops=dict(color="red"))
 
-# Overlay all points with horizontal jitter
-for i, data in enumerate([dietA, dietB], start=1):
-    x = np.random.normal(i, 0.09, size=len(data))  # jitter for visibility
-    plt.scatter(x, data, alpha=0.7, color='orange', edgecolor='k', zorder=10)
-
-plt.ylabel("Weight loss (kg)")
-plt.title("Comparison of Weight Loss for Diets A and B")
+plt.ylabel("SiO$_2$ (wt.%)")
+plt.title("SiO$_2$ content: thin vs thick crust")
 plt.show()
 ```
-Based on the previous boxplot, Welch's t-test or Wilcoxon rank sum test are both reasonable choices. For this example we will use the Welch's t-test. To compare the effectiveness of diets A and B we start by defining the hypotheses:
 
-$$H_{0}: \mu_A=\mu_B \quad \text{and} \quad H_{a}: \mu_A\neq\mu_B,$$
+## Hints
 
-where $\mu_A$ and $\mu_B$ denote the mean weight loss for diets A and B, respectively. We consider $\alpha = 0.05$ and compute the p-value as follows:
+Consider using the `boxplot()` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-boxplot) function from `matplotlib.pyplot`.
 
 
-**Function reference:** `stats.ttest_ind` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-ttest-ind); `print` [(doc)](../appendices/doc_python.qmd#python-print); `round` [(doc)](../appendices/doc_python.qmd#python-round).
+## Solution
 
-```{python, echo=TRUE}
-from scipy import stats
+Use the `boxplot()` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-boxplot) function from `matplotlib.pyplot`:
 
-# Welch's t-test (equal_var=False makes it Welch)
-t_stat, p_value = stats.ttest_ind(dietA, dietB, equal_var=False)
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `ax.boxplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-boxplot); `dict` [(doc)](../appendices/doc_python.qmd#python-dict); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
 
-print("t-statistic:", round(t_stat, 4))
-print("p-value:", round(p_value, 4))
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+crust = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/arc_magmas_crust_sample.csv")
+
+# Variables of interest
+sio2_thin  = crust["sio2"][crust["crust_class"] == "thin"]
+sio2_thick = crust["sio2"][crust["crust_class"] == "thick"]
+
+# Side-by-side boxplot
+plt.figure(figsize=(6,4))
+plt.boxplot([sio2_thin, sio2_thick],
+            labels=["Thin crust", "Thick crust"],
+            patch_artist=True,  # color the boxes
+            boxprops=dict(facecolor="lightblue", color="blue"),
+            medianprops=dict(color="red"))
+
+plt.ylabel("SiO$_2$ (wt.%)")
+plt.title("SiO$_2$ content: thin vs thick crust")
+plt.show()
 ```
 
-Since the p-value is equal to $96.22\%$ which is larger than $5\%$, we fail to reject the null hypothesis at the $95\%$ confidence level.
+::::
 
+### Question 2
+Which test should we use?
+
+Based on the graph you produce, which test appears to be the most appropriate to test if magmas erupting through thick crust have a larger average SiO$_2$ content than magmas erupting through thin crust? Remember that each group contains $60$ cells.
+
+```{python}
+#| echo: false
+#| output: asis
+render_q_a_env([
+    {"value": "Student's t-test.",
+     "feedback": "Student's t-test assumes that the variances of the two groups are the same. This is very hard to verify in practice, so it is preferable to avoid using this test."},
+    {"value": "Welch's t-test.",
+     "feedback": "Yes! The question is about the mean SiO\\(_2\\) content, the two groups have different spreads and, with \\(60\\) cells per group and no extreme value, the t-test is reliable. Welch's version does not require equal variances.",
+     "answer": True},
+    {"value": "Mann–Whitney–Wilcoxon test.",
+     "feedback": "A reasonable robust alternative, but it compares the locations (medians) of the two distributions rather than their means, which is what the question is about. With no extreme value in the data, Welch's t-test is the natural choice."},
+])
+```
+
+### Question 3
+How to perform the test you selected?
+
+Complete the code below to test if magmas erupting through thick crust have a larger average SiO$_2$ content than magmas erupting through thin crust. Pay attention to the order of the two samples when choosing the alternative hypothesis.
+
+
+:::: {.panel-tabset}
+
+## Exercise
+
+```{pyodide}
+#| exercise: ex_2
+import pandas as pd
+from scipy import stats
+
+crust = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/arc_magmas_crust_sample.csv")
+
+# Variables of interest
+sio2_thin  = crust["sio2"][crust["crust_class"] == "thin"]
+sio2_thick = crust["sio2"][crust["crust_class"] == "thick"]
+
+# Welch's t-test
+t_stat, p_value = ______(sio2_thin, sio2_thick, alternative=______, equal_var=______)
+
+print("t-statistic:", round(t_stat, 4))
+print("p-value:", p_value)
+```
+
+## Hints
+
+Consider using the `ttest_ind()` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-ttest-ind) function from `scipy.stats`. Since `sio2_thin` is given first, the alternative hypothesis $\mu_{\text{thin}} < \mu_{\text{thick}}$ corresponds to `alternative="less"`. Which value of `equal_var` gives Welch's t-test?
+
+
+## Solution
+
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `stats.ttest_ind` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-ttest-ind); `print` [(doc)](../appendices/doc_python.qmd#python-print); `round` [(doc)](../appendices/doc_python.qmd#python-round).
+
+```python
+import pandas as pd
+from scipy import stats
+
+crust = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/arc_magmas_crust_sample.csv")
+
+# Variables of interest
+sio2_thin  = crust["sio2"][crust["crust_class"] == "thin"]
+sio2_thick = crust["sio2"][crust["crust_class"] == "thick"]
+
+# Welch's t-test
+t_stat, p_value = stats.ttest_ind(sio2_thin, sio2_thick, alternative="less", equal_var=False)
+
+print("t-statistic:", round(t_stat, 4))
+print("p-value:", p_value)
+```
+
+
+::::
+
+
+### Question 4
+What can we conclude?
+Based on the test you performed and considering a significance level of $5\%$, we can conclude that:
+
+```{python}
+#| echo: false
+#| output: asis
+render_q_a_env([
+    {"value": "We can reject the null hypothesis at the significance level of \\(5\\%\\) and conclude that magmas erupting through thin crust have a larger average SiO\\(_2\\) content than magmas erupting through thick crust.",
+     "feedback": "Be careful with the order of the groups used in the statement."},
+    {"value": "We can be sure that magmas erupting through thick crust have a larger average SiO\\(_2\\) content than magmas erupting through thin crust.",
+     "feedback": "Sadly, we can never be sure with statistical methods."},
+    {"value": "We can reject the null hypothesis at the significance level of \\(5\\%\\) and conclude that magmas erupting through thick crust have a larger average SiO\\(_2\\) content than magmas erupting through thin crust.",
+     "feedback": "Yay! 👍", "answer": True},
+    {"value": "We cannot reject the null hypothesis at the significance level of \\(5\\%\\).",
+     "feedback": "In this case the p-value is (much) smaller than \\(5\\%\\) so we can reject the null hypothesis."},
+])
+```
+
+### Question 5
+Does crustal thickness really matter?
+
+A colleague who believes that crustal thickness plays only a minor role in magmatic differentiation is unhappy about your analysis. The colleague constructs the following argument: to claim that magmas erupting through thick crust are more differentiated, the average difference in SiO$_2$ content should be larger than $4.6$ wt.%, otherwise the statistical difference is geologically meaningless. Below we perform the test that the colleague is interested in, i.e.
+
+$$H_{0}: \mu_{\text{thick}} - \mu_{\text{thin}} = 4.6 \quad \text{and} \quad H_{a}: \mu_{\text{thick}} - \mu_{\text{thin}} > 4.6.$$
+
+:::: {.panel-tabset}
+
+## Exercise
+
+```{pyodide}
+#| exercise: ex_3
+import pandas as pd
+from scipy import stats
+
+crust = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/arc_magmas_crust_sample.csv")
+
+# Variables of interest
+sio2_thin  = crust["sio2"][crust["crust_class"] == "thin"]
+sio2_thick = crust["sio2"][crust["crust_class"] == "thick"]
+
+t_stat, p_value = ______(______, ______, ______, equal_var=False)
+print(f"t-statistic: {t_stat:.4f}")
+print(f"p-value: {p_value:.4f}")
+```
+
+## Hints
+
+Consider using the `ttest_ind()` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-ttest-ind) function from `scipy.stats`. `scipy.stats.ttest_ind()` does not include an argument that allows to specify the hypothesized difference between the two means, but you can reproduce the same test by **shifting one sample** by that hypothesized difference: $\mu_{\text{thick}} - \mu_{\text{thin}} > 4.6$ is the same as $\mu_{\text{thin}} + 4.6 < \mu_{\text{thick}}$.
+
+
+## Solution
+
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `stats.ttest_ind` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-ttest-ind); `print` [(doc)](../appendices/doc_python.qmd#python-print).
+
+```python
+import pandas as pd
+from scipy import stats
+
+crust = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/arc_magmas_crust_sample.csv")
+
+# Variables of interest
+sio2_thin  = crust["sio2"][crust["crust_class"] == "thin"]
+sio2_thick = crust["sio2"][crust["crust_class"] == "thick"]
+
+t_stat, p_value = stats.ttest_ind(sio2_thin + 4.6, sio2_thick, alternative="less", equal_var=False)
+print(f"t-statistic: {t_stat:.4f}")
+print(f"p-value: {p_value:.4f}")
+```
+
+
+::::
+
+### Question 6
+Based on this test, we obtain a p-value of `{python} f"{p_46:.2%}"` (which could make you think that the colleague picked $4.6$ wt.% for a good reason...🤔). Therefore, the colleague claims that it is statistically proven that crustal thickness has no geologically meaningful effect on the SiO$_2$ content of arc magmas. What do you think of this argument?
+
+```{python}
+#| echo: false
+#| output: asis
+render_q_a_env([
+    {"value": "The colleague showed that the average difference in SiO\\(_2\\) content is equal to \\(4.6\\) wt.%, so the claim is incorrect.",
+     "feedback": "Nope, we can never 'accept' the null."},
+    {"value": "The colleague is correct, crustal thickness does not really matter.",
+     "feedback": "Nope!"},
+    {"value": "The claim of the colleague is incorrect for the following reasons. First, there is no good reason to use a difference of \\(4.6\\) wt.% and second, we can never accept the null hypothesis!",
+     "feedback": "Yay! 👍", "answer": True},
+    {"value": "The colleague showed that the average difference in SiO\\(_2\\) content is equal to \\(4.6\\) wt.%, so the claim is correct.",
+     "feedback": "Nope, we can never 'accept' the null."},
+])
+```
+
+### Question 7
+Another colleague, convinced that crustal thickness is the main control on magmatic differentiation, is unhappy about this claim and selects instead a difference of $4.5$ wt.%. Please complete the following test this second colleague wants to perform:
+
+:::: {.panel-tabset}
+
+## Exercise
+
+```{pyodide}
+#| exercise: ex_4
+import pandas as pd
+from scipy import stats
+
+crust = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/arc_magmas_crust_sample.csv")
+
+# Variables of interest
+sio2_thin  = crust["sio2"][crust["crust_class"] == "thin"]
+sio2_thick = crust["sio2"][crust["crust_class"] == "thick"]
+
+t_stat, p_value = ______(______, ______, ______, equal_var=False)
+print(f"t-statistic: {t_stat:.4f}")
+print(f"p-value: {p_value:.4f}")
+```
+
+## Hints
+
+Consider using the `ttest_ind()` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-ttest-ind) function from `scipy.stats`. As in Question 5, you can reproduce the test of a hypothesized difference by **shifting one sample** by that difference.
+
+
+## Solution
+
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `stats.ttest_ind` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-ttest-ind); `print` [(doc)](../appendices/doc_python.qmd#python-print).
+
+```python
+import pandas as pd
+from scipy import stats
+
+crust = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/arc_magmas_crust_sample.csv")
+
+# Variables of interest
+sio2_thin  = crust["sio2"][crust["crust_class"] == "thin"]
+sio2_thick = crust["sio2"][crust["crust_class"] == "thick"]
+
+t_stat, p_value = stats.ttest_ind(sio2_thin + 4.5, sio2_thick, alternative="less", equal_var=False)
+print(f"t-statistic: {t_stat:.4f}")
+print(f"p-value: {p_value:.4f}")
+```
+
+
+::::
+
+
+### Question 8
+This test gives a p-value of `{python} f"{p_45:.2%}"`. The second colleague then claims that magmas erupting through thick crust have an average SiO$_2$ content that is significantly larger by more than $4.5$ wt.% than magmas erupting through thin crust. What do you think of this argument?
+
+```{python}
+#| echo: false
+#| output: asis
+render_q_a_env([
+    {"value": "The claim is correct because the p-value is smaller than \\(5\\%\\).",
+     "feedback": "In some sense, this answer is correct... but why did the colleague pick \\(4.5\\) wt.%?"},
+    {"value": "The claim is incorrect because we can't accept the null hypothesis.",
+     "feedback": "In this case, we can reject the null."},
+    {"value": "The claim is incorrect because the hypothesis was constructed after looking at the known results.",
+     "feedback": "Yes, this is an example of HARKing, an acronym coined by Norbert Kerr that refers to the questionable practice of hypothesizing after the results are known. Nevertheless, this is a very common practice...😅",
+     "answer": True},
+])
+```

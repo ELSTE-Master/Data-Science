@@ -21,7 +21,8 @@ DECKS = {
     'class1_intro': ('slides/class1_intro.html', 'class1/class_1_slides_intro.pdf'),
     'class1_pandas': ('slides/class1_pandas.html', 'class1/class_1_slides_pandas.pdf'),
     'class2_EDA': ('slides/class2_EDA.html', 'class2/class_2_slides_EDA.pdf'),
-    'class_3_slides': ('class3/class_3_slides.html', 'class3/class_3_slides.pdf'),
+    # Class 3: the PDF comes from the static deck (the live one has no outputs before the cells run)
+    'class_3_slides': ('class3/class_3_slides_static.html', 'class3/class_3_slides.pdf'),
     'class_4_slides': ('class4/class_4_slides.html', 'class4/class_4_slides.pdf'),
 }
 

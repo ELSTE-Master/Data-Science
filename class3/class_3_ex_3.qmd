@@ -1,25 +1,37 @@
 ---
-title: "Exercises diet data"
-format: 
+title: "Exercises magma data: ANOVA"
+format:
   live-html:
     theme: cosmo
     css: ../assets/webex_2.css
-    include-after-body: ../assets/webex_2.js
-engine: knitr
+    include-after-body: [../assets/webex_2.js, ../assets/exercise-solution.js]
+pyodide:
+  packages:
+    - pandas
+    - scipy
+    - statsmodels
+jupyter: python3
 ---
 
-{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+```{python}
+#| include: false
+import sys
+sys.path.insert(0, "../assets")
+from q_a_env import render_q_a_env
 
-
-
-
-
-
-
-
-```{r, echo = FALSE, results='asis'}
-knitr::opts_chunk$set(echo = FALSE)
-source("../assets/q_a_env.R")
+# Values quoted in the text below (computed on the course dataset)
+import pandas as pd
+from scipy import stats
+from statsmodels.stats.oneway import anova_oneway
+crust = pd.read_csv("../Data/arc_magmas_crust_sample.csv")
+sio2_thin   = crust["sio2"][crust["crust_class"] == "thin"]
+sio2_medium = crust["sio2"][crust["crust_class"] == "medium"]
+sio2_thick  = crust["sio2"][crust["crust_class"] == "thick"]
+p_anova = anova_oneway(crust["sio2"], groups=crust["crust_class"], use_var="unequal", welch_correction=True).pvalue
+p_1 = stats.ttest_ind(sio2_thin, sio2_medium, alternative="less", equal_var=False).pvalue
+p_2 = stats.ttest_ind(sio2_medium, sio2_thick, alternative="less", equal_var=False).pvalue
+p_3 = stats.ttest_ind(sio2_thin, sio2_thick, alternative="less", equal_var=False).pvalue
+alpha_c = 0.05 / 3
 ```
 
 <!-- MathJax for Rendering Math -->
@@ -28,394 +40,210 @@ source("../assets/q_a_env.R")
 </script>
 
 
+In the lecture and in the previous exercises, we compared two crustal-thickness classes at a time. We now consider the three classes together, as in the last slides of the lecture. Following Farner & Lee (2017), our theory is that magmatic differentiation increases with crustal thickness, i.e.
 
-In the previous section, we compared diets A and B. In this section, we will consider the difference of the average weight loss between diets A and C. In particular, we are interested in testing whether diet C leads to a larger average weight loss than diet A.
+$$\mu_{\text{thin}} < \mu_{\text{medium}} < \mu_{\text{thick}},$$
+
+where $\mu_{\text{thin}}$, $\mu_{\text{medium}}$ and $\mu_{\text{thick}}$ denote the mean SiO$_2$ content (wt.%) of magmas erupting through thin ($< 30$ km), medium ($30$–$43$ km) and thick ($\geq 43$ km) crust. We use the same random subsample of $60$ cells per class as in the lecture and follow the standard procedure in two steps:
+
+1. **Step 1:** a multiple-sample location test of $H_0$: "the three means are equal". If $H_0$ is not rejected, we stop here.
+
+2. **Step 2:** otherwise, three one-sided Welch's t-tests (thin vs medium, medium vs thick and thin vs thick) at a corrected significance level $\alpha_c$, hoping to reject $H_0$ each time.
+
+As always, we start by looking at the data. The code below (the same as in the lecture) loads the data and draws the boxplots of the three groups.
+
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `ax.boxplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-boxplot); `dict` [(doc)](../appendices/doc_python.qmd#python-dict); `enumerate` [(doc)](../appendices/doc_python.qmd#python-enumerate); `np.random.normal` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-np-random-normal); `ax.scatter` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-scatter); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
+
+```{python}
+#| echo: true
+#| eval: false
+# Import data
+import pandas as pd
+crust = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/arc_magmas_crust_sample.csv")
+
+# Variables of interest
+sio2_thin   = crust["sio2"][crust["crust_class"] == "thin"]
+sio2_medium = crust["sio2"][crust["crust_class"] == "medium"]
+sio2_thick  = crust["sio2"][crust["crust_class"] == "thick"]
+```
+
+```{python}
+#| echo: true
+#| fig-align: center
+import matplotlib.pyplot as plt
+import numpy as np
+
+plt.figure(figsize=(6, 4))
+plt.boxplot([sio2_thin, sio2_medium, sio2_thick],
+            tick_labels=["Thin crust", "Medium crust", "Thick crust"],
+            patch_artist=True,
+            boxprops=dict(facecolor="lightblue", color="blue"),
+            medianprops=dict(color="red"),
+            showfliers=False)  # the points are drawn individually below
+for i, data in enumerate([sio2_thin, sio2_medium, sio2_thick], start=1):
+    x = np.random.normal(i, 0.05, size=len(data))  # jitter for visibility
+    plt.scatter(x, data, s=12, alpha=0.5, color="orange", zorder=10)
+plt.ylabel("SiO$_2$ (wt.%)")
+plt.show()
+```
+
+The three groups have different spreads, the thin and medium groups are somewhat skewed with a few high values, but there is no extreme value and each group contains $60$ cells. Since our theory concerns the **mean** SiO$_2$ content, we use Welch's one-way ANOVA for Step 1 and Welch's t-tests for Step 2.
 
 ### Question 1
-How to plot the data?
+Step 1: do the three means differ?
 
-Complete the code below to obtain the boxplot to compare the empirical distributions of the weight loss of the two diets:
+The hypotheses of Step 1 are
 
+$$H_{0}: \mu_{\text{thin}}=\mu_{\text{medium}}=\mu_{\text{thick}} \quad \text{and} \quad H_{a}: H_0 \ \text{is false}.$$
+
+Complete the code below to perform Welch's one-way ANOVA (we consider $\alpha = 0.05$):
 
 :::: {.panel-tabset}
 
 ## Exercise
-
-
 
 ```{pyodide}
 #| exercise: ex_1
 import pandas as pd
-import matplotlib.pyplot as plt
+from statsmodels.stats.oneway import anova_oneway
 
-diet = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/diet.csv")
-# compute weight loss
-diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
+crust = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/arc_magmas_crust_sample.csv")
 
-# Variable of interest
-dietA = diet["weight.loss"][diet["diet.type"]=="A"]
-dietC = diet["weight.loss"][diet["diet.type"]=="C"]
+# Welch's one-way ANOVA: SiO2 content by crustal-thickness class
+res = anova_oneway(crust[______], groups=crust[______], use_var=______, welch_correction=True)
 
-# Side-by-side boxplot
-plt.figure(figsize=(6,4))
-plt.______([dietA, dietC],
-            labels=["Diet A", "Diet C"],
-            patch_artist=True,  # color the boxes
-            boxprops=dict(facecolor="lightblue", color="blue"),
-            medianprops=dict(color="red"))
-
-plt.ylabel("Weight loss (kg)")
-plt.title("Comparison of Weight Loss for Diets A and C")
-plt.show()
+print(f"F statistic = {res.statistic:.3f}")
+print(f"p-value = {res.pvalue:.3g}")
 ```
 
 ## Hints
 
-::: { .hint exercise="ex_1"}
-Consider using the `boxplot()` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-boxplot) function from `matplotlib.pyplot`.
-
-:::
+The `anova_oneway()` [(doc)](../appendices/doc_statsmodels.qmd#models-anova-oneway) function from `statsmodels` takes the variable to compare (`sio2`) and the variable defining the groups (`crust_class`). Which value of `use_var` allows the groups to have different variances?
 
 ## Solution
 
-::: { .solution exercise="ex_1" }
-Use  the `boxplot()` [(doc)](../appendices/doc_visualisation.qmd#plotting-sns-boxplot) function from `matplotlib.pyplot`:
 
-
-
-**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `ax.boxplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-boxplot); `dict` [(doc)](../appendices/doc_python.qmd#python-dict); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `anova_oneway` [(doc)](../appendices/doc_statsmodels.qmd#models-anova-oneway); `print` [(doc)](../appendices/doc_python.qmd#python-print).
 
 ```python
 import pandas as pd
-import matplotlib.pyplot as plt
+from statsmodels.stats.oneway import anova_oneway
 
-diet = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/diet.csv")
+crust = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/arc_magmas_crust_sample.csv")
 
-# compute weight loss
-diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
+# Welch's one-way ANOVA: SiO2 content by crustal-thickness class
+res = anova_oneway(crust["sio2"], groups=crust["crust_class"], use_var="unequal", welch_correction=True)
 
-# Variable of interest
-dietA = diet["weight.loss"][diet["diet.type"]=="A"]
-dietC = diet["weight.loss"][diet["diet.type"]=="C"]
-
-# Side-by-side boxplot
-plt.figure(figsize=(6,4))
-plt.boxplot([dietA, dietC],    #<1>
-            labels=["Diet A", "Diet C"],
-            patch_artist=True,  # color the boxes
-            boxprops=dict(facecolor="lightblue", color="blue"),
-            medianprops=dict(color="red"))
-
-plt.ylabel("Weight loss (kg)")
-plt.title("Comparison of Weight Loss for Diets A and C")
-plt.show()
-
+print(f"F statistic = {res.statistic:.3f}")
+print(f"p-value = {res.pvalue:.3g}")
 ```
-1. Use `plt.boxplot()` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-boxplot)
-:::
+
 
 ::::
 
+You should obtain a p-value of about `{python} f"{p_anova:.1e}"`, far below $5\%$: we reject $H_0$, the mean SiO$_2$ content is not the same in the three classes, and we move on to Step 2.
+
 ### Question 2
-Which test should we use?
+Step 2: which means differ?
 
-Based on the graph you produce, which test appears to be the most appropriate to test if diet C leads to a larger average weight loss than diet A?
+We now consider the three one-sided tests that correspond to our theory:
 
+**Test 1:** $H_{0}: \mu_{\text{thin}}=\mu_{\text{medium}}$ and $H_{a}: \mu_{\text{thin}} < \mu_{\text{medium}}$.
 
-```{r, results='asis'}
-# Define questions choice and individual feedback for each question
-opts <- list(
-  list(value = "Student's t-test.",
-       feedback = "The student t-test assumes that the variances of the two groups are the same. This is very hard to verify in practice and thus, it is preferable to avoid using this test."),
-  list(value = "Welch's t-test.",
-       feedback = "This is probably a suitable choice but one can argue that outliers are present in diet A so this may not be the optimal choice."),
-  answer = list(
-    value = "Wilcoxon test.",
-    feedback = "This is arguably the best choice for this problem."
-  )
-)
-# render QA environment
-render_q_a_env(opts)
-```
+**Test 2:** $H_{0}: \mu_{\text{medium}}=\mu_{\text{thick}}$ and $H_{a}: \mu_{\text{medium}} < \mu_{\text{thick}}$.
 
-### Question 3
-How to perform the test you selected?
+**Test 3:** $H_{0}: \mu_{\text{thin}}=\mu_{\text{thick}}$ and $H_{a}: \mu_{\text{thin}} < \mu_{\text{thick}}$.
 
-Complete the code below to test if diet C leads to a larger average weight loss than diet A. Remember that we are interested in testing if diet C leads to a larger weight loss than diet A.
-
+Complete the code below to perform the three tests at the Bonferroni-corrected level $\alpha_c$. Pay attention to the order of the two samples in each call: with `alternative="less"`, the alternative is that the mean of the *first* sample is smaller.
 
 :::: {.panel-tabset}
 
 ## Exercise
-
-
 
 ```{pyodide}
 #| exercise: ex_2
 import pandas as pd
-import matplotlib.pyplot as plt
 from scipy import stats
 
-diet = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/diet.csv")
-# compute weight loss
-diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
+crust = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/arc_magmas_crust_sample.csv")
 
-# Variable of interest
-dietA = diet["weight.loss"][diet["diet.type"]=="A"]
-dietC = diet["weight.loss"][diet["diet.type"]=="C"]
+# Variables of interest
+sio2_thin   = crust["sio2"][crust["crust_class"] == "thin"]
+sio2_medium = crust["sio2"][crust["crust_class"] == "medium"]
+sio2_thick  = crust["sio2"][crust["crust_class"] == "thick"]
 
-# Wilcoxon rank-sum test (Mann–Whitney U)
-stat, p_value = ______(dietA, dietC, alternative =______)
+alpha_c = ______ / ______                                    # Bonferroni correction
 
-print("Wilcoxon statistic:", round(stat, 4))
-print("p-value:", round(p_value, 4))
+# Test 1:  H0: mu_thin = mu_medium    vs  Ha: mu_thin < mu_medium
+p_1 = stats.ttest_ind(sio2_thin, sio2_medium, alternative=______, equal_var=False).pvalue
+# Test 2:  H0: mu_medium = mu_thick   vs  Ha: mu_medium < mu_thick
+p_2 = stats.ttest_ind(sio2_medium, sio2_thick, alternative=______, equal_var=False).pvalue
+# Test 3:  H0: mu_thin = mu_thick     vs  Ha: mu_thin < mu_thick
+p_3 = stats.ttest_ind(______, ______, alternative=______, equal_var=False).pvalue
+
+for name, p in [("Test 1 (thin < medium) ", p_1), ("Test 2 (medium < thick)", p_2), ("Test 3 (thin < thick)  ", p_3)]:
+    print(name, " p-value =", f"{p:.2e}", " -> reject H0" if p < alpha_c else " -> do not reject H0")
 ```
 
 ## Hints
 
-::: { .hint exercise="ex_2"}
-Consider using the `mannwhitneyu()` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-mannwhitneyu) function from `scipy.stats`. Make sure to specify the correct alternative hypothesis.
-
-:::
+With the Bonferroni correction, $\alpha_c = \alpha / k$ where $k$ is the number of tests. For the `ttest_ind()` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-ttest-ind) function, `alternative="less"` tests whether the mean of the first sample is smaller than the mean of the second one. Test 3 compares the thin and thick classes.
 
 ## Solution
 
-::: { .solution exercise="ex_2" }
 
-
-**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `stats.mannwhitneyu` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-mannwhitneyu); `print` [(doc)](../appendices/doc_python.qmd#python-print); `round` [(doc)](../appendices/doc_python.qmd#python-round).
+**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `stats.ttest_ind` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-ttest-ind); `print` [(doc)](../appendices/doc_python.qmd#python-print).
 
 ```python
 import pandas as pd
-import matplotlib.pyplot as plt
 from scipy import stats
 
-diet = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/diet.csv")
-# compute weight loss
-diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
+crust = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/arc_magmas_crust_sample.csv")
 
-# Variable of interest
-dietA = diet["weight.loss"][diet["diet.type"]=="A"]
-dietC = diet["weight.loss"][diet["diet.type"]=="C"]
+# Variables of interest
+sio2_thin   = crust["sio2"][crust["crust_class"] == "thin"]
+sio2_medium = crust["sio2"][crust["crust_class"] == "medium"]
+sio2_thick  = crust["sio2"][crust["crust_class"] == "thick"]
 
-# Wilcoxon rank-sum test (Mann–Whitney U)
-stat, p_value = stats.mannwhitneyu(dietA, dietC, alternative ="less")
+alpha_c = 0.05 / 3                                           # Bonferroni correction
 
-print("Wilcoxon statistic:", round(stat, 4))
-print("p-value:", round(p_value, 4))
+# Test 1:  H0: mu_thin = mu_medium    vs  Ha: mu_thin < mu_medium
+p_1 = stats.ttest_ind(sio2_thin, sio2_medium, alternative="less", equal_var=False).pvalue
+# Test 2:  H0: mu_medium = mu_thick   vs  Ha: mu_medium < mu_thick
+p_2 = stats.ttest_ind(sio2_medium, sio2_thick, alternative="less", equal_var=False).pvalue
+# Test 3:  H0: mu_thin = mu_thick     vs  Ha: mu_thin < mu_thick
+p_3 = stats.ttest_ind(sio2_thin, sio2_thick, alternative="less", equal_var=False).pvalue
 
+for name, p in [("Test 1 (thin < medium) ", p_1), ("Test 2 (medium < thick)", p_2), ("Test 3 (thin < thick)  ", p_3)]:
+    print(name, " p-value =", f"{p:.2e}", " -> reject H0" if p < alpha_c else " -> do not reject H0")
 ```
 
-:::
 
 ::::
 
-
-### Question 4
+### Question 3
 What can we conclude?
-Based on the test you performed and considering a significance level of $5\%$, we can conclude that:
 
+You should obtain p-values of `{python} f"{p_1:.2%}"`, `{python} f"{p_2:.2%}"` and `{python} f"{p_3:.1e}"` for Tests 1, 2 and 3, to be compared with $\alpha_c = 0.05/3 \approx 1.67\%$ (the Dunn–Šidák correction would give $1.70\%$ and the same decisions). At the significance level of $5\%$ for the whole family of tests, we can conclude that:
 
-```{r, results='asis'}
-# Define questions choice and individual feedback for each question
-opts <- list(
-  list(value = "We can reject the null hypothesis at the significance level of \\(5\\%\\) and conclude that diet A leads to a larger average weight loss than diet C.",
-       feedback = "Be careful with the order of the diets used in the statement."),
-  list(value = "We can be sure that diet C leads to a larger average weight loss than diet A.",
-       feedback = "Sadly, we can never be sure with statistical methods."),
-  answer = list(
-    value = "We can reject the null hypothesis at the significance level of \\(5\\%\\) and conclude that diet C leads to a larger average weight loss than diet A.",
-    feedback = "Yay! 👍"
-  ),
-  list(
-    value = "We cannot reject the null hypothesis at the significance level of \\(5\\%\\).",
-    feedback = "In this case the p-value is smaller than \\(5\\%\\) so we can reject the null hypothesis."
-  )
-)
-# render QA environment
-render_q_a_env(opts)
+```{python}
+#| echo: false
+#| output: asis
+render_q_a_env([
+    {"value": "The three steps of our theory are supported by the data: the three null hypotheses are rejected.",
+     "feedback": "Look again at Test 1: its p-value (" + f"{p_1:.2%}" + ") is above \\(\\alpha_c\\)."},
+    {"value": "Magmas erupting through thick crust have a higher mean SiO\\(_2\\) content than magmas erupting through medium or thin crust (Tests 2 and 3). The thin-to-medium step of our theory is not supported (yet): Test 1 is not rejected at \\(\\alpha_c\\).",
+     "feedback": "Yes! 👍 Note that, taken alone at \\(\\alpha = 5\\%\\), Test 1 would have rejected \\(H_0\\) (p-value " + f"{p_1:.2%}" + "): the correction for multiple testing changes the conclusion.",
+     "answer": True},
+    {"value": "Test 1 is not rejected, so the mean SiO\\(_2\\) content is the same for thin and medium crust: differentiation only starts once the crust is thick.",
+     "feedback": "Not rejecting \\(H_0\\) does not prove that it is true (absence of evidence is not evidence of absence)."},
+    {"value": "Since the p-value of Test 1 is below \\(5\\%\\), the whole theory is confirmed.",
+     "feedback": "With three tests on the same data, each p-value must be compared with \\(\\alpha_c \\approx 1.67\\%\\), not with \\(5\\%\\)."},
+])
 ```
 
-### Question 5
-Is diet A really so bad?
+::: {.callout-note}
+## With all 8498 cells
 
-A consultant who is hired by the company and promotes diet A is unhappy about your analysis as it indicates that diet C (promoted by a competing firm) is better in terms of weight loss. Thus the consultant constructs the following argument: to claim that a diet is more effective in terms of weight loss, we should have at least an average difference larger than one kg, otherwise the statistical difference is meaningless. Below we perform the test that the consultant is interested in:
-
-
-:::: {.panel-tabset}
-
-## Exercise
-
-
-
-```{pyodide}
-#| exercise: ex_3
-import pandas as pd
-import matplotlib.pyplot as plt
-from scipy import stats
-
-diet = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/diet.csv")
-# compute weight loss
-diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
-
-# Variable of interest
-dietA = diet["weight.loss"][diet["diet.type"]=="A"]
-dietC = diet["weight.loss"][diet["diet.type"]=="C"]
-
-
-stat, p_value = ______(______, ______, ______)
-print(f"Mann-Whitney U test statistic: {stat}")
-print(f"P-value: {p_value}")
-```
-
-## Hints
-
-::: { .hint exercise="ex_3"}
-Consider using the `mannwhitneyu()` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-mannwhitneyu) function from `scipy.stats`. In `Python`, `scipy.stats.mannwhitneyu()` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-mannwhitneyu) does not include an argument that allows to specify the hypothesized difference between group median, but you can reproduce the same test by **shifting one sample** by that hypothesized difference.\
-
-
+Our subsample has the size of a typical field study. If you redo the analysis with the full compilation of Farner & Lee (2017) (replace `arc_magmas_crust_sample.csv` by `arc_magmas_crust.csv` in the import), the mean SiO$_2$ contents are $57.1$, $56.9$ and $61.2$ wt.% for thin, medium and thick crust: the p-values of Tests 2 and 3 are below $10^{-88}$, but the p-value of Test 1 is $88\%$. The thin-to-medium step is not supported by the data; magmatic differentiation seems to be strongly enhanced only once the crust is thick.
 :::
-
-## Solution
-
-::: { .solution exercise="ex_3" }
-
-
-**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `stats.mannwhitneyu` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-mannwhitneyu); `print` [(doc)](../appendices/doc_python.qmd#python-print).
-
-```python
-import pandas as pd
-import matplotlib.pyplot as plt
-from scipy import stats
-
-diet = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/diet.csv")
-# compute weight loss
-diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
-
-# Variable of interest
-dietA = diet["weight.loss"][diet["diet.type"]=="A"]
-dietC = diet["weight.loss"][diet["diet.type"]=="C"]
-
-
-stat, p_value = stats.mannwhitneyu(dietA+1, dietC, alternative="less")
-print(f"Mann-Whitney U test statistic: {stat}")
-print(f"P-value: {p_value}")
-```
-
-:::
-
-::::
-
-### Question 6
-Based on this test, we obtain a p-value of $5.747\%$ (which could make you think that the consultant picked one kg for a good reason...🤔). Therefore, the consultant claims that it is statistically proven that the two diets are equally effective in terms of weights loss. What do you think of this argument?
-
-
-
-```{r, results='asis'}
-# Define questions choice and individual feedback for each question
-opts <- list(
-  list(value = "The consultant showed that the average difference in terms of weight loss is equal to one kg, so his claim is incorrect.",
-       feedback = "Nope, we can never 'accept' the null."),
-  list(value = "The consultant is correct, there is indeed not much difference between the two diets.",
-       feedback = "Nope!"),
-  answer = list(
-    value = "The claim of the consultant is incorrect for the following reasons. First, there is no good reason to compare a difference of one kg and second, we can never accept the null hypothesis!",
-    feedback = "Yay! 👍"
-  ),
-  list(
-    value = "The consultant showed that the average difference in terms of weight loss is equal to one kg, so his claim is correct.",
-    feedback = "Nope, we can never 'accept' the null."
-  )
-)
-# render QA environment
-render_q_a_env(opts)
-```
-
-### Question 7
-The competing company that promotes diet C is unhappy about the claims made by the consultant. So they hire their own consultant, who selects a difference of $950$ grams. Please complete the following test this second consultant wants to perform:
-
-:::: {.panel-tabset}
-
-## Exercise
-
-
-
-```{pyodide}
-#| exercise: ex_4
-import pandas as pd
-import matplotlib.pyplot as plt
-from scipy import stats
-
-diet = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/diet.csv")
-# compute weight loss
-diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
-
-# Variable of interest
-dietA = diet["weight.loss"][diet["diet.type"]=="A"]
-dietC = diet["weight.loss"][diet["diet.type"]=="C"]
-
-
-stat, p_value = ______(______, ______, ______)
-print(f"Mann-Whitney U test statistic: {stat}")
-print(f"P-value: {p_value}")
-
-```
-
-## Hints
-
-::: { .hint exercise="ex_4"}
-Consider using the `mannwhitneyu()` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-mannwhitneyu) function from `scipy.stats`. In `Python`, `scipy.stats.mannwhitneyu()` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-mannwhitneyu) does not include an argument that allows to specify the hypothesized difference between group median, but you can reproduce the same test by **shifting one sample** by that hypothesized difference.\
-
-:::
-
-## Solution
-
-::: { .solution exercise="ex_4" }
-
-
-**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `stats.mannwhitneyu` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-mannwhitneyu); `print` [(doc)](../appendices/doc_python.qmd#python-print).
-
-```python
-import pandas as pd
-import matplotlib.pyplot as plt
-from scipy import stats
-
-diet = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/diet.csv")
-# compute weight loss
-diet["weight.loss"] = diet["initial.weight"] - diet["final.weight"]
-
-# Variable of interest
-dietA = diet["weight.loss"][diet["diet.type"]=="A"]
-dietC = diet["weight.loss"][diet["diet.type"]=="C"]
-
-
-stat, p_value = stats.mannwhitneyu(dietA+0.95, dietC, alternative="less")
-print(f"Mann-Whitney U test statistic: {stat}")
-print(f"P-value: {p_value}")
-```
-
-:::
-
-::::
-
-
-### Question 8
-Then, the (second) consultant claims that diet C leads to an average weight loss that is significantly larger by $950$ grams than diet A. What do you think of this argument:
-
-
-
-```{r, results='asis'}
-# Define questions choice and individual feedback for each question
-opts <- list(
-  list(value = "The claim is correct because the p-value is smaller than 5%.",
-       feedback = "In some sense, this answer is correct... but why did the consultant pick 950 grams?"),
-  list(value = "The claim is incorrect because we can't accept the null hypothesis.",
-       feedback = "In this case, we can reject the null."),
-  answer = list(
-    value = "The claim is incorrect because the hypothesis was constructed after looking at the known results.",
-    feedback = "Yes, this is an example of HARKing, an acronym coined by Norbert Kerr that refers to the questionable practice of hypothesizing after the results are known. Nevertheless, this is a very common practice...😅"
-  )
-)
-# render QA environment
-render_q_a_env(opts)
-```

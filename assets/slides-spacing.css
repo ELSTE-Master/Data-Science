@@ -1,0 +1,18 @@
+/* Vertical rhythm for Reveal.js slides: keep the title at the top and
+   distribute the remaining blocks evenly over the free height, so sparse
+   slides do not bunch up under the title. Full slides are unaffected
+   (no free space to distribute). Applied to the visible slide only, so
+   Reveal's own show/hide logic is untouched. */
+.reveal .slides section.present:not(#title-slide):not(.stack) {
+  display: flex !important;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+}
+.reveal .slides section.present:not(#title-slide):not(.stack) > :not(h2) {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.reveal .slides section.present:not(#title-slide):not(.stack) > h2 {
+  margin-bottom: 0.2em;
+}
