@@ -275,13 +275,13 @@ Yuming Zhang <a href="https://orcid.org/0000-0003-2293-9601" class="quarto-title
 #title-slide .quarto-title-author-name img { width:0.7em; vertical-align:baseline; }
 #title-slide .quarto-title-affiliation { font-size:0.48em; margin:0; color:#666; }
 /* Title slide: acknowledgement pinned at the bottom */
-/* the note lives in the slide container and is shown only while the title slide is current */
-.reveal .slides > .title-thanks { display:none; position:absolute; left:0; right:0; bottom:0.6em; margin:0; font-size:0.42em; color:#999; text-align:center; }
-.reveal .slides:has(> #title-slide.present) > .title-thanks { display:block; }
+/* Keep the note outside .slides: Reveal uses sibling elements to detect the final slide. */
+.reveal > .title-thanks { display:none; position:absolute; left:0; right:0; bottom:0.6em; margin:0; font-size:0.42em; color:#999; text-align:center; }
+.reveal:has(.slides > #title-slide.present) > .title-thanks { display:block; }
 </style>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  var box = document.querySelector(".reveal .slides");
+  var box = document.querySelector(".reveal");
   if (box && !box.querySelector(":scope > .title-thanks")) {
     var p = document.createElement("p");
     p.className = "title-thanks";
@@ -642,7 +642,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <p>Hypotheses (usually <span class="math inline">\(\mu_0 = 0\)</span>) and test statistic under <span class="math inline">\(H_0\)</span> (<span class="math inline">\(s_p\)</span> = pooled standard deviation):</p>
 <p><span class="math display">\[H_0: {\color{#6A5ACD}{\mu_A}} - {\color{#06bcf1}{\mu_B}} {\color{#eb078e}{=}} \mu_0 \quad \text{vs} \quad H_a: {\color{#6A5ACD}{\mu_A}} - {\color{#06bcf1}{\mu_B}} \ \big[ {\color{#eb078e}{&gt;}} \text{ or } {\color{#eb078e}{&lt;}} \text{ or } {\color{#eb078e}{\neq}} \big]\ \mu_0, \qquad T = \frac{(\overline{X}_{A}-\overline{X}_{B})-\mu_0}{s_{p}\sqrt{n_{A}^{-1}+n_{B}^{-1}}} \ {\overset{H_0}{\sim}} \ \text{Student}(n_{A}+n_{B}-2).\]</span></p>
 <div style="font-size:1.2em;">
-<div id="93813cd0" class="cell" data-execution_count="1">
+<div id="959ee6b1" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
 <span id="cb1-2"><a></a>stats.ttest_ind(a <span class="op">=</span> ..., b <span class="op">=</span> ..., alternative <span class="op">=</span> ..., equal_var <span class="op">=</span> <span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -658,7 +658,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <p>Test statistic under <span class="math inline">\(H_0\)</span> (<span class="math inline">\(df\)</span> is computed from the data; the details are beyond the scope of this class):</p>
 <p><span class="math display">\[T = \frac{(\overline{X}_{A}-\overline{X}_{B})-\mu_0}{\sqrt{s^2_A/n_{A} + s^2_B/n_{B}}} \ {\overset{H_0}{\sim}} \ \text{Student}(df).\]</span></p>
 <div style="font-size:1.2em;">
-<div id="0f432b61" class="cell" data-execution_count="2">
+<div id="65c74667" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
 <span id="cb2-2"><a></a>stats.ttest_ind(a <span class="op">=</span> ..., b <span class="op">=</span> ..., alternative <span class="op">=</span> ..., equal_var <span class="op">=</span> <span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -742,7 +742,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZnJvbSBzY2lweSBpbXBvcnQg
 <p>The test statistic uses the <span style="color:#eb078e;">ranks</span> of the observations in the pooled sample, not their values (<span class="math inline">\(R_{i(g)}\)</span> = global rank of the <span class="math inline">\(i\)</span>-th observation of group <span class="math inline">\(g\)</span>):</p>
 <p><span class="math display">\[Z = \frac{\sum_{i=1}^{n_{B}}R_{i(B)}-n_{B}(n_{A}+n_{B}+1)/2}{\sqrt{n_{A}n_{B}(n_{A}+n_{B}+1)/12}}.\]</span></p>
 <div style="font-size:1.2em;">
-<div id="6a298818" class="cell" data-execution_count="3">
+<div id="0cc52c41" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
 <span id="cb3-2"><a></a>stats.mannwhitneyu(x <span class="op">=</span> ..., y <span class="op">=</span> ..., alternative <span class="op">=</span> ...)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -944,7 +944,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZnJvbSBzY2lweSBpbXBvcnQg
 <p>Test statistic under <span class="math inline">\(H_0\)</span>: the variability <span style="color:#eb078e;">between</span> the group means divided by the variability <span style="color:#eb078e;">within</span> the groups, where <span class="math inline">\(N = \sum_g n_g\)</span> and <span class="math inline">\(\overline{X}\)</span> is the mean of all <span class="math inline">\(N\)</span> observations. Means far apart compared to the noise give a large <span class="math inline">\(F\)</span>, i.e.&nbsp;a small p-value:</p>
 <p><span class="math display">\[F = \frac{\frac{1}{G-1}\sum_{g=1}^G n_g \left(\overline{X}_g - \overline{X}\right)^2}{\frac{1}{N-G}\sum_{g=1}^G (n_g - 1)\, s_g^2} \ {\overset{H_0}{\sim}} \ \text{Fisher}(G-1,\, N-G).\]</span></p>
 <div style="font-size:1.2em;">
-<div id="2631662e" class="cell" data-execution_count="4">
+<div id="0f5080f0" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
 <span id="cb4-2"><a></a>stats.f_oneway(group_1, group_2, group_3)   <span class="co"># no "alternative": Ha is always "at least one pair differs"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -961,7 +961,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZnJvbSBzY2lweSBpbXBvcnQg
 <p><span class="math display">\[F^* = \frac{\frac{1}{G-1}\sum_{g=1}^G w_g \left(\overline{X}_g - \overline{X}^*\right)^2}{1 + \frac{2(G-2)}{3\Delta}} \ {\overset{H_0}{\sim}} \ \text{Fisher}(G-1,\, \Delta), \qquad \overline{X}^* = \frac{\sum_{g=1}^G w_g \overline{X}_g}{\sum_{g=1}^G w_g}.\]</span></p>
 <p><span style="font-size:0.7em; color:grey;">For the curious: <span class="math inline">\(\Delta = \Big[\frac{3}{G^2-1} \sum_{g=1}^G \frac{1}{n_g-1} \big(1-\frac{w_g}{\sum_{h=1}^G w_h}\big)^2\Big]^{-1}\)</span>. For <span class="math inline">\(G = 2\)</span> it is Welch’s <span class="math inline">\(t\)</span>-test (<span class="math inline">\(F^* = T^2\)</span> and <span class="math inline">\(\Delta = df\)</span>).</span></p>
 <div style="font-size:1.2em;">
-<div id="8416d391" class="cell" data-execution_count="5">
+<div id="3a14ac77" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="im">from</span> statsmodels.stats.oneway <span class="im">import</span> anova_oneway</span>
 <span id="cb5-2"><a></a>anova_oneway(data <span class="op">=</span> ..., groups <span class="op">=</span> ..., use_var <span class="op">=</span> <span class="st">"unequal"</span>, welch_correction <span class="op">=</span> <span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -979,7 +979,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZnJvbSBzY2lweSBpbXBvcnQg
 <p><span class="math display">\[H = \frac{12}{N(N+1)} \sum_{g=1}^G n_g \left(\overline{R}_g - \frac{N+1}{2}\right)^2 \ {\overset{H_0}{\sim}} \ \chi^2(G-1).\]</span></p>
 <p><span style="font-size:0.7em; color:grey;">With ties, <span class="math inline">\(H\)</span> is divided by <span class="math inline">\(1 - \sum_{v=1}^V (t_v^3 - t_v)/(N^3 - N)\)</span>, where <span class="math inline">\(t_v\)</span> is the number of observations sharing the <span class="math inline">\(v\)</span>-th distinct value.</span></p>
 <div style="font-size:1.2em;">
-<div id="0988636e" class="cell" data-execution_count="6">
+<div id="125dbd01" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
 <span id="cb6-2"><a></a>stats.kruskal(group_1, group_2, group_3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>

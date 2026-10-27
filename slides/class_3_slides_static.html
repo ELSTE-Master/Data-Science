@@ -1629,7 +1629,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <p>Hypotheses (usually <span class="math inline">\(\mu_0 = 0\)</span>) and test statistic under <span class="math inline">\(H_0\)</span> (<span class="math inline">\(s_p\)</span> = pooled standard deviation):</p>
 <p><span class="math display">\[H_0: {\color{#6A5ACD}{\mu_A}} - {\color{#06bcf1}{\mu_B}} {\color{#eb078e}{=}} \mu_0 \quad \text{vs} \quad H_a: {\color{#6A5ACD}{\mu_A}} - {\color{#06bcf1}{\mu_B}} \ \big[ {\color{#eb078e}{&gt;}} \text{ or } {\color{#eb078e}{&lt;}} \text{ or } {\color{#eb078e}{\neq}} \big]\ \mu_0, \qquad T = \frac{(\overline{X}_{A}-\overline{X}_{B})-\mu_0}{s_{p}\sqrt{n_{A}^{-1}+n_{B}^{-1}}} \ {\overset{H_0}{\sim}} \ \text{Student}(n_{A}+n_{B}-2).\]</span></p>
 <div style="font-size:1.2em;">
-<div id="df043424" class="cell" data-execution_count="1">
+<div id="570ac30a" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
 <span id="cb1-2"><a></a>stats.ttest_ind(a <span class="op">=</span> ..., b <span class="op">=</span> ..., alternative <span class="op">=</span> ..., equal_var <span class="op">=</span> <span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -1645,7 +1645,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <p>Test statistic under <span class="math inline">\(H_0\)</span> (<span class="math inline">\(df\)</span> is computed from the data; the details are beyond the scope of this class):</p>
 <p><span class="math display">\[T = \frac{(\overline{X}_{A}-\overline{X}_{B})-\mu_0}{\sqrt{s^2_A/n_{A} + s^2_B/n_{B}}} \ {\overset{H_0}{\sim}} \ \text{Student}(df).\]</span></p>
 <div style="font-size:1.2em;">
-<div id="017ad954" class="cell" data-execution_count="2">
+<div id="173bdc53" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
 <span id="cb2-2"><a></a>stats.ttest_ind(a <span class="op">=</span> ..., b <span class="op">=</span> ..., alternative <span class="op">=</span> ..., equal_var <span class="op">=</span> <span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -1667,7 +1667,7 @@ document.addEventListener("DOMContentLoaded", function () {
 </section>
 <section id="thin-vs-medium-crust-import-the-data" class="slide level2 smaller">
 <h2>Thin vs medium crust — Import the data</h2>
-<div id="6c6621c1" class="cell" data-execution_count="4">
+<div id="126db3a3" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="co"># Import data</span></span>
 <span id="cb3-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb3-3"><a></a>crust <span class="op">=</span> pd.read_csv(<span class="st">&quot;https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/arc_magmas_crust_sample.csv&quot;</span>)</span>
@@ -1679,7 +1679,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb3-9"><a></a>sio2_thin   <span class="op">=</span> crust[<span class="st">&quot;sio2&quot;</span>][crust[<span class="st">&quot;crust_class&quot;</span>] <span class="op">==</span> <span class="st">&quot;thin&quot;</span>]</span>
 <span id="cb3-10"><a></a>sio2_medium <span class="op">=</span> crust[<span class="st">&quot;sio2&quot;</span>][crust[<span class="st">&quot;crust_class&quot;</span>] <span class="op">==</span> <span class="st">&quot;medium&quot;</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="2c2f36d3" class="cell" data-execution_count="5">
+<div id="7f068f22" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-stdout">
 <pre><code>        arc  latitude  longitude  crust_km crust_class   sio2
 0    Aegean   36.3700    25.4600     27.99        thin  59.63
@@ -1693,7 +1693,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <section id="thin-vs-medium-crust-students-t-test" class="slide level2 smaller">
 <h2>Thin vs medium crust — Student’s t-test</h2>
 <div style="font-size: 1.3em;">
-<div id="114a4f03" class="cell" data-execution_count="6">
+<div id="1f9172e9" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
 <span id="cb5-2"><a></a></span>
 <span id="cb5-3"><a></a><span class="co"># Student&#39;s t-test (equal_var=True assumes equal variances)</span></span>
@@ -1711,7 +1711,7 @@ p-value: 0.0349</code></pre>
 <section id="thin-vs-medium-crust-welchs-t-test" class="slide level2 smaller">
 <h2>Thin vs medium crust — Welch’s t-test</h2>
 <div style="font-size: 1.3em;">
-<div id="9967d5b1" class="cell" data-execution_count="7">
+<div id="dd79ba99" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
 <span id="cb7-2"><a></a></span>
 <span id="cb7-3"><a></a><span class="co"># Welch&#39;s t-test (equal_var=False makes it Welch)</span></span>
@@ -1745,7 +1745,7 @@ p-value: 0.035</code></pre>
 <p>The test statistic uses the <span style="color:#eb078e;">ranks</span> of the observations in the pooled sample, not their values (<span class="math inline">\(R_{i(g)}\)</span> = global rank of the <span class="math inline">\(i\)</span>-th observation of group <span class="math inline">\(g\)</span>):</p>
 <p><span class="math display">\[Z = \frac{\sum_{i=1}^{n_{B}}R_{i(B)}-n_{B}(n_{A}+n_{B}+1)/2}{\sqrt{n_{A}n_{B}(n_{A}+n_{B}+1)/12}}.\]</span></p>
 <div style="font-size:1.2em;">
-<div id="0ccf550c" class="cell" data-execution_count="8">
+<div id="e3c8f057" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
 <span id="cb9-2"><a></a>stats.mannwhitneyu(x <span class="op">=</span> ..., y <span class="op">=</span> ..., alternative <span class="op">=</span> ...)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -1758,7 +1758,7 @@ p-value: 0.035</code></pre>
 <section id="thin-vs-medium-crust-wilcoxon" class="slide level2 smaller">
 <h2>Thin vs medium crust — Wilcoxon</h2>
 <div style="font-size: 1.3em;">
-<div id="5fe05cc7" class="cell" data-execution_count="9">
+<div id="b8cb4a1e" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
 <span id="cb10-2"><a></a></span>
 <span id="cb10-3"><a></a><span class="co"># Wilcoxon rank-sum test (Mann–Whitney U)</span></span>
@@ -1952,7 +1952,7 @@ p-value: 0.0475</code></pre>
 <p>Test statistic under <span class="math inline">\(H_0\)</span>: the variability <span style="color:#eb078e;">between</span> the group means divided by the variability <span style="color:#eb078e;">within</span> the groups, where <span class="math inline">\(N = \sum_g n_g\)</span> and <span class="math inline">\(\overline{X}\)</span> is the mean of all <span class="math inline">\(N\)</span> observations. Means far apart compared to the noise give a large <span class="math inline">\(F\)</span>, i.e. a small p-value:</p>
 <p><span class="math display">\[F = \frac{\frac{1}{G-1}\sum_{g=1}^G n_g \left(\overline{X}_g - \overline{X}\right)^2}{\frac{1}{N-G}\sum_{g=1}^G (n_g - 1)\, s_g^2} \ {\overset{H_0}{\sim}} \ \text{Fisher}(G-1,\, N-G).\]</span></p>
 <div style="font-size:1.2em;">
-<div id="136a9a8a" class="cell" data-execution_count="10">
+<div id="c0b40347" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
 <span id="cb12-2"><a></a>stats.f_oneway(group_1, group_2, group_3)   <span class="co"># no &quot;alternative&quot;: Ha is always &quot;at least one pair differs&quot;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -1969,7 +1969,7 @@ p-value: 0.0475</code></pre>
 <p><span class="math display">\[F^* = \frac{\frac{1}{G-1}\sum_{g=1}^G w_g \left(\overline{X}_g - \overline{X}^*\right)^2}{1 + \frac{2(G-2)}{3\Delta}} \ {\overset{H_0}{\sim}} \ \text{Fisher}(G-1,\, \Delta), \qquad \overline{X}^* = \frac{\sum_{g=1}^G w_g \overline{X}_g}{\sum_{g=1}^G w_g}.\]</span></p>
 <p><span style="font-size:0.7em; color:grey;">For the curious: <span class="math inline">\(\Delta = \Big[\frac{3}{G^2-1} \sum_{g=1}^G \frac{1}{n_g-1} \big(1-\frac{w_g}{\sum_{h=1}^G w_h}\big)^2\Big]^{-1}\)</span>. For <span class="math inline">\(G = 2\)</span> it is Welch’s <span class="math inline">\(t\)</span>-test (<span class="math inline">\(F^* = T^2\)</span> and <span class="math inline">\(\Delta = df\)</span>).</span></p>
 <div style="font-size:1.2em;">
-<div id="456b7602" class="cell" data-execution_count="11">
+<div id="b635c693" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a><span class="im">from</span> statsmodels.stats.oneway <span class="im">import</span> anova_oneway</span>
 <span id="cb13-2"><a></a>anova_oneway(data <span class="op">=</span> ..., groups <span class="op">=</span> ..., use_var <span class="op">=</span> <span class="st">&quot;unequal&quot;</span>, welch_correction <span class="op">=</span> <span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -1987,7 +1987,7 @@ p-value: 0.0475</code></pre>
 <p><span class="math display">\[H = \frac{12}{N(N+1)} \sum_{g=1}^G n_g \left(\overline{R}_g - \frac{N+1}{2}\right)^2 \ {\overset{H_0}{\sim}} \ \chi^2(G-1).\]</span></p>
 <p><span style="font-size:0.7em; color:grey;">With ties, <span class="math inline">\(H\)</span> is divided by <span class="math inline">\(1 - \sum_{v=1}^V (t_v^3 - t_v)/(N^3 - N)\)</span>, where <span class="math inline">\(t_v\)</span> is the number of observations sharing the <span class="math inline">\(v\)</span>-th distinct value.</span></p>
 <div style="font-size:1.2em;">
-<div id="456c9eb0" class="cell" data-execution_count="12">
+<div id="56a4660d" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
 <span id="cb14-2"><a></a>stats.kruskal(group_1, group_2, group_3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -2009,7 +2009,7 @@ p-value: 0.0475</code></pre>
 </section>
 <section id="thin-medium-thick-crust-import" class="slide level2 smaller">
 <h2>Thin, medium, thick crust — Import</h2>
-<div id="c2bda94c" class="cell" data-execution_count="13">
+<div id="6745525d" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a><span class="co"># Import data</span></span>
 <span id="cb15-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb15-3"><a></a>crust <span class="op">=</span> pd.read_csv(<span class="st">&quot;https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/arc_magmas_crust_sample.csv&quot;</span>)</span>
@@ -2023,7 +2023,7 @@ p-value: 0.0475</code></pre>
 <span id="cb15-11"><a></a>summary <span class="op">=</span> crust.groupby(<span class="st">&quot;crust_class&quot;</span>)[<span class="st">&quot;sio2&quot;</span>].agg([<span class="st">&quot;count&quot;</span>, <span class="st">&quot;mean&quot;</span>, <span class="st">&quot;std&quot;</span>, <span class="st">&quot;median&quot;</span>])</span>
 <span id="cb15-12"><a></a><span class="bu">print</span>(summary.loc[[<span class="st">&quot;thin&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;thick&quot;</span>]].<span class="bu">round</span>(<span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="012b18ff" class="cell" data-execution_count="14">
+<div id="6c86bf9a" class="cell" data-execution_count="14">
 <div class="cell-output cell-output-stdout">
 <pre><code>             count   mean   std  median
 crust_class                            
@@ -2036,7 +2036,7 @@ thick           60  61.01  6.39   60.64</code></pre>
 <section id="thin-medium-thick-crust-step-1" class="slide level2 smaller">
 <h2>Thin, medium, thick crust — Step 1</h2>
 <div style="font-size:1.0em;">
-<div id="3ca5c308" class="cell" data-execution_count="15">
+<div id="e72ab749" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
 <span id="cb17-2"><a></a><span class="im">from</span> statsmodels.stats.oneway <span class="im">import</span> anova_oneway</span>
 <span id="cb17-3"><a></a></span>
@@ -2064,7 +2064,7 @@ Kruskal-Wallis:  H = 29.124  p-value = 4.7e-07</code></pre>
 <h2>Thin, medium, thick crust — Step 2</h2>
 <p>Three one-sided Welch <span class="math inline">\(t\)</span>-tests (Tests 1 to 3), each at the Bonferroni level <span class="math inline">\(\alpha_c = 0.05/3 \approx 1.67\%\)</span> (Dunn–Šidák would give <span class="math inline">\(1.70\%\)</span>).</p>
 <div style="font-size:0.9em;">
-<div id="6b7388f9" class="cell" data-execution_count="16">
+<div id="51f26c1a" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
 <span id="cb19-2"><a></a></span>
 <span id="cb19-3"><a></a>alpha_c <span class="op">=</span> <span class="fl">0.05</span> <span class="op">/</span> <span class="dv">3</span>                                      <span class="co"># Bonferroni correction, 3 tests</span></span>

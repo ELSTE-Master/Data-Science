@@ -151,7 +151,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../class3/class_3_ex_1.html">Class 3: Analysis of variance</a></li><li class="breadcrumb-item"><a href="../class3/class_3_ex_3.html">Exercises magma data: ANOVA</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../class3/class_3_intro.html">Class 3: Analysis of variance</a></li><li class="breadcrumb-item"><a href="../class3/class_3_ex_3.html">Exercises magma data: ANOVA</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -284,6 +284,12 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../class3/class_3_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../class3/class_3_ex_1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Review exercises</span></a>
   </div>
@@ -387,7 +393,7 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../class3/class_3_ex_1.html">Class 3: Analysis of variance</a></li><li class="breadcrumb-item"><a href="../class3/class_3_ex_3.html">Exercises magma data: ANOVA</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../class3/class_3_intro.html">Class 3: Analysis of variance</a></li><li class="breadcrumb-item"><a href="../class3/class_3_ex_3.html">Exercises magma data: ANOVA</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Exercises magma data: ANOVA</h1>
 </div>
@@ -418,7 +424,7 @@ window.Quarto = {
 </ol>
 <p>As always, we start by looking at the data. The code below (the same as in the lecture) loads the data and draws the boxplots of the three groups.</p>
 <p><strong>Function reference:</strong> <code>read_csv</code> <a href="../appendices/doc_pandas.html#pandas-read-csv">(doc)</a>; <code>plt.figure</code> <a href="../appendices/doc_visualisation.html#plotting-plt-figure">(doc)</a>; <code>ax.boxplot</code> <a href="../appendices/doc_visualisation.html#plotting-ax-boxplot">(doc)</a>; <code>dict</code> <a href="../appendices/doc_python.html#python-dict">(doc)</a>; <code>enumerate</code> <a href="../appendices/doc_python.html#python-enumerate">(doc)</a>; <code>np.random.normal</code> <a href="../appendices/doc_numpy_scipy.html#numerical-np-random-normal">(doc)</a>; <code>ax.scatter</code> <a href="../appendices/doc_visualisation.html#plotting-ax-scatter">(doc)</a>; <code>ax.set_ylabel</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-ylabel">(doc)</a>; <code>plt.show</code> <a href="../appendices/doc_visualisation.html#plotting-plt-show">(doc)</a>.</p>
-<div id="f90bf77f" class="cell" data-execution_count="2">
+<div id="477c30bf" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import data</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>crust <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/arc_magmas_crust_sample.csv"</span>)</span>
@@ -428,7 +434,7 @@ window.Quarto = {
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>sio2_medium <span class="op">=</span> crust[<span class="st">"sio2"</span>][crust[<span class="st">"crust_class"</span>] <span class="op">==</span> <span class="st">"medium"</span>]</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>sio2_thick  <span class="op">=</span> crust[<span class="st">"sio2"</span>][crust[<span class="st">"crust_class"</span>] <span class="op">==</span> <span class="st">"thick"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="f5a6073b" class="cell" data-execution_count="3">
+<div id="81c9109e" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
