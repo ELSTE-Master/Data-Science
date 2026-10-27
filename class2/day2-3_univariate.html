@@ -276,12 +276,47 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
- <span class="menu-text">Appendices</span></a>
+ <span class="menu-text">Class 3: Analysis of variance</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class3/class_3_ex_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Review exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class3/class_3_ex_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises magma data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class3/class_3_ex_3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises magma data: ANOVA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class3/class_3_ex_4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises salamander data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../appendices/setup_vscode.html" class="sidebar-item-text sidebar-link">
@@ -296,13 +331,13 @@ window.Quarto = {
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
  <span class="menu-text">Function reference</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../appendices/function_reference.html" class="sidebar-item-text sidebar-link">
@@ -521,7 +556,7 @@ Figure&nbsp;2: Histogram of the Zirconium trace element
 </ul>
 <p>The empirical mean of a dataset can easily be computed with <em>Pandas</em> using the <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mean.html"><code>.mean()</code></a> <a href="../appendices/doc_pandas.html#pandas-mean">(doc)</a> function (<a href="#lst-univ-mean" class="quarto-xref">Listing&nbsp;1</a>). Note that we round the results to two significant digits using <code>.round(2)</code> <a href="../appendices/doc_pandas.html#pandas-round">(doc)</a>.</p>
 <p><strong>Function reference:</strong> <code>round</code> <a href="../appendices/doc_pandas.html#pandas-round">(doc)</a>; <code>mean</code> <a href="../appendices/doc_pandas.html#pandas-mean">(doc)</a>.</p>
-<div id="f5b3a6fe" class="cell" data-execution_count="4">
+<div id="f3c2766c" class="cell" data-execution_count="4">
 <div id="lst-univ-mean" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-mean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -548,7 +583,7 @@ dtype: float64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p>What is the empirical mean value for Strontium?</p>
-<div id="4c2e9156" class="cell" data-execution_count="5">
+<div id="e0d00b51" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="5">
 <select class="webex-select"><option value="blank"></option><option value="0">365.38</option><option value="answer">516.42</option><option value="0">219.38</option><option value="0">123.94</option></select>
 </div>
@@ -571,7 +606,7 @@ dtype: float64</code></pre>
 <li><code>axis = 1</code> usually makes sense when rows are labelled, and computes the mean <mark>across all columns for each row</mark>(<a href="#lst-univ-mean-multi-col" class="quarto-xref">Listing&nbsp;3</a>)</li>
 </ul>
 <p><strong>Function reference:</strong> <code>head</code> <a href="../appendices/doc_pandas.html#pandas-head">(doc)</a>; <code>round</code> <a href="../appendices/doc_pandas.html#pandas-round">(doc)</a>; <code>mean</code> <a href="../appendices/doc_pandas.html#pandas-mean">(doc)</a>.</p>
-<div id="fa370c2b" class="cell" data-execution_count="6">
+<div id="97a1e158" class="cell" data-execution_count="6">
 <div id="lst-univ-mean-multi-row" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-mean-multi-row-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -605,7 +640,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p><strong>Function reference:</strong> <code>head</code> <a href="../appendices/doc_pandas.html#pandas-head">(doc)</a>; <code>round</code> <a href="../appendices/doc_pandas.html#pandas-round">(doc)</a>; <code>mean</code> <a href="../appendices/doc_pandas.html#pandas-mean">(doc)</a>.</p>
-<div id="4f7a0434" class="cell" data-execution_count="7">
+<div id="c036b2c4" class="cell" data-execution_count="7">
 <div id="lst-univ-mean-multi-col" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-mean-multi-col-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -674,7 +709,7 @@ Figure&nbsp;3: Graphical representation of the empirical median.
 </div>
 <p>Fortunately, we can also use the native <em>Pandas</em> <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.median.html"><code>.median</code></a> <a href="../appendices/doc_pandas.html#pandas-median">(doc)</a> function (<a href="#lst-univ-median" class="quarto-xref">Listing&nbsp;4</a>).</p>
 <p><strong>Function reference:</strong> <code>round</code> <a href="../appendices/doc_pandas.html#pandas-round">(doc)</a>; <code>median</code> <a href="../appendices/doc_pandas.html#pandas-median">(doc)</a>.</p>
-<div id="c3ffa6f6" class="cell" data-execution_count="9">
+<div id="cc16ab3a" class="cell" data-execution_count="9">
 <div id="lst-univ-median" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-median-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -700,7 +735,7 @@ Listing&nbsp;4: Compute the median for two significant digits.
 </div>
 <div class="callout-body-container callout-body">
 <p>What is the empirical median value for Cesium?</p>
-<div id="8dce625b" class="cell" data-execution_count="10">
+<div id="3e235d86" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="10">
 <select class="webex-select"><option value="blank"></option><option value="0">36.38</option><option value="0">51.42</option><option value="answer">23.99</option><option value="0">13.94</option></select>
 </div>
@@ -852,7 +887,7 @@ Figure&nbsp;5: Empirical modes computed from a binned dataset.
 <li>The <mark>mean is highly sensitive to outliers</mark>, whereas the median is not.</li>
 </ul>
 <p><strong>Function reference:</strong> <code>plt.subplots</code> <a href="../appendices/doc_visualisation.html#plotting-plt-subplots">(doc)</a>; <code>sns.histplot</code> <a href="../appendices/doc_visualisation.html#plotting-sns-histplot">(doc)</a>; <code>ax.axvline</code> <a href="../appendices/doc_visualisation.html#plotting-ax-axvline">(doc)</a>; <code>mean</code> <a href="../appendices/doc_pandas.html#pandas-mean">(doc)</a>; <code>median</code> <a href="../appendices/doc_pandas.html#pandas-median">(doc)</a>; <code>ax.legend</code> <a href="../appendices/doc_visualisation.html#plotting-ax-legend">(doc)</a>.</p>
-<div id="77589cab" class="cell" data-execution_count="13">
+<div id="92583cea" class="cell" data-execution_count="13">
 <div id="lst-univ-mean-med" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-mean-med-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -899,7 +934,7 @@ Listing&nbsp;5: Compute the empirical median for two significant digits.
 R_\text{emp} = \max(x_1, \dots, x_n) - \min(x_1, \dots, x_n).
 \tag{2}\]</span></span></p>
 <p><strong>Function reference:</strong> <code>min</code> <a href="../appendices/doc_pandas.html#pandas-min">(doc)</a>; <code>max</code> <a href="../appendices/doc_pandas.html#pandas-max">(doc)</a>; <code>print</code> <a href="../appendices/doc_python.html#python-print">(doc)</a>.</p>
-<div id="36643c9d" class="cell" data-execution_count="14">
+<div id="42518398" class="cell" data-execution_count="14">
 <div id="lst-univ-minmax" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-minmax-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -941,7 +976,7 @@ Listing&nbsp;6: Compute the min and the max values of a column
 </div>
 <div class="callout-body-container callout-body">
 <p>What is the empirical range for Cesium?</p>
-<div id="0bd280f9" class="cell" data-execution_count="15">
+<div id="1bd176f1" class="cell" data-execution_count="15">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="15">
 <select class="webex-select"><option value="blank"></option><option value="0">12.41</option><option value="0">414.6</option><option value="answer">41.46</option><option value="0">53.88</option></select>
 </div>
@@ -970,7 +1005,7 @@ s = \sqrt{s^2}.
 For a Gaussian (normal) distribution, about 68% of the data falls within one standard deviation of the mean, about 95% within two standard deviations, and about 99.7% within three standard deviations. Thus, variance and standard deviation are fundamental for describing the spread and probability intervals of normally distributed data.</p>
 <p>You can compute these in pandas using <code>.var()</code> <a href="../appendices/doc_pandas.html#pandas-var">(doc)</a> and <code>.std()</code> <a href="../appendices/doc_pandas.html#pandas-std">(doc)</a>:</p>
 <p><strong>Function reference:</strong> <code>var</code> <a href="../appendices/doc_pandas.html#pandas-var">(doc)</a>; <code>std</code> <a href="../appendices/doc_pandas.html#pandas-std">(doc)</a>.</p>
-<div id="cdc50568" class="cell" data-execution_count="16">
+<div id="6ab6665c" class="cell" data-execution_count="16">
 <div id="lst-univ-std" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-std-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1152,7 +1187,7 @@ Table&nbsp;1: Relationship between quartiles, deciles and percentiles.
 <li><strong>&lt;0</strong>: <mark>Left-skewed</mark> → a tail extends to the left</li>
 </ul>
 <p><strong>Function reference:</strong> <code>round</code> <a href="../appendices/doc_pandas.html#pandas-round">(doc)</a>; <code>skew</code> <a href="../appendices/doc_pandas.html#pandas-skew">(doc)</a>.</p>
-<div id="84059588" class="cell" data-execution_count="19">
+<div id="5be4e1e7" class="cell" data-execution_count="19">
 <div id="lst-univ-skew" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-univ-skew-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1348,7 +1383,7 @@ Table&nbsp;2: Simple rules on which plot to choose to represent data distributio
 </ol>
 <p><em>Panda</em> as a very handy function to <mark>group data by categorical variables</mark>: <code>.groupby</code> <a href="../appendices/doc_pandas.html#pandas-groupby">(doc)</a>. Let’s compute the mean value of the different trace elements for each epoch (<a href="#lst-groupby" class="quarto-xref">Listing&nbsp;9</a>):</p>
 <p><strong>Function reference:</strong> <code>mean</code> <a href="../appendices/doc_pandas.html#pandas-mean">(doc)</a>; <code>groupby</code> <a href="../appendices/doc_pandas.html#pandas-groupby">(doc)</a>.</p>
-<div id="1f58fc85" class="cell" data-execution_count="23">
+<div id="766b30e4" class="cell" data-execution_count="23">
 <div id="lst-groupby" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-groupby-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">

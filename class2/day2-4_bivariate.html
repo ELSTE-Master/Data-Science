@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../appendices/setup_vscode.html" rel="next">
+<link href="../class3/class_3_ex_1.html" rel="next">
 <link href="../class2/day2-3_univariate.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -276,12 +276,47 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
- <span class="menu-text">Appendices</span></a>
+ <span class="menu-text">Class 3: Analysis of variance</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class3/class_3_ex_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Review exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class3/class_3_ex_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises magma data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class3/class_3_ex_3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises magma data: ANOVA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class3/class_3_ex_4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises salamander data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../appendices/setup_vscode.html" class="sidebar-item-text sidebar-link">
@@ -296,13 +331,13 @@ window.Quarto = {
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
  <span class="menu-text">Function reference</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../appendices/function_reference.html" class="sidebar-item-text sidebar-link">
@@ -389,7 +424,7 @@ window.Quarto = {
 <p>Up to now, the domain of <a href="../class2/day2-3_univariate.html">univariate analyses</a> has allowed us to explore the properties of <strong>one variable at the time</strong>. Investigating the relationship between <strong>two variables</strong> is the topic of <mark>bivariate analyses</mark>. One good visual starting point to identify these is to plot <strong>pairwise relationships</strong> of all the variables in our dataset.</p>
 <p>Let’s go back to our <code>df_traces_sub</code> dataset. We can then plot a pairwise comparison plot using <em>Seaborn</em>’s <code>.pairplot()</code> <a href="../appendices/doc_visualisation.html#plotting-sns-pairplot">(doc)</a> function (; <a href="#lst-sns-pairplot" class="quarto-xref">Listing&nbsp;1</a>). We use the <code>hue</code> argument of the <code>.pairplot()</code> <a href="../appendices/doc_visualisation.html#plotting-sns-pairplot">(doc)</a> function to plot each epoch in a different color:</p>
 <p><strong>Function reference:</strong> <code>sns.pairplot</code> <a href="../appendices/doc_visualisation.html#plotting-sns-pairplot">(doc)</a>.</p>
-<div id="71acf1d5" class="cell" data-execution_count="2">
+<div id="aeeb9db4" class="cell" data-execution_count="2">
 <div id="lst-sns-pairplot" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-sns-pairplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -459,7 +494,7 @@ r(X,Y)_{\text{emp}} = \frac{\mathrm{Cov}(X,Y)_{\text{emp}}}{s_X s_Y} = \frac{\su
 <li><span class="math inline">\(r(X,Y) =0\)</span> indicates <strong>independence</strong> between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</li>
 </ul>
 <p><strong>Function reference:</strong> <code>drop</code> <a href="../appendices/doc_pandas.html#pandas-drop">(doc)</a>; <code>cov</code> <a href="../appendices/doc_pandas.html#pandas-cov">(doc)</a>; <code>print</code> <a href="../appendices/doc_python.html#python-print">(doc)</a>; <code>min</code> <a href="../appendices/doc_pandas.html#pandas-min">(doc)</a>; <code>max</code> <a href="../appendices/doc_pandas.html#pandas-max">(doc)</a>; <code>corr</code> <a href="../appendices/doc_pandas.html#pandas-corr">(doc)</a>.</p>
-<div id="ccdb38ca" class="cell" data-execution_count="3">
+<div id="64ab95ac" class="cell" data-execution_count="3">
 <div id="lst-bivar-cov" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-bivar-cov-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -576,7 +611,7 @@ r(X_p,X_1) &amp; r(X_p,X_2) &amp; \dots &amp; 1
 <p>In practice, we rarely know the true correlations, so each entry <span class="math inline">\(r(X_i, X_j)\)</span> is typically estimated from a <mark>sample</mark>, giving the <mark>sample correlation</mark> between variables <span class="math inline">\(X_i\)</span> and <span class="math inline">\(X_j\)</span>.</p>
 <p><em>Seaborn</em> does not include a native function to do so, but <a href="#lst-corr-mat" class="quarto-xref">Listing&nbsp;3</a> shows a ready-to-use function to plot one. Don’t hesitate to copy it and reuse it in your codes. <a href="#fig-corr-mat" class="quarto-xref">Figure&nbsp;1</a> shows the resulting plot applied to the concentration columns of the trace elements dataset.</p>
 <p><strong>Function reference:</strong> <code>corr</code> <a href="../appendices/doc_pandas.html#pandas-corr">(doc)</a>; <code>np.triu</code> <a href="../appendices/doc_numpy_scipy.html#numerical-np-triu">(doc)</a>; <code>np.ones_like</code> <a href="../appendices/doc_numpy_scipy.html#numerical-np-ones-like">(doc)</a>; <code>plt.subplots</code> <a href="../appendices/doc_visualisation.html#plotting-plt-subplots">(doc)</a>; <code>sns.diverging_palette</code> <a href="../appendices/doc_visualisation.html#plotting-sns-diverging-palette">(doc)</a>; <code>sns.heatmap</code> <a href="../appendices/doc_visualisation.html#plotting-sns-heatmap">(doc)</a>.</p>
-<div id="905027f1" class="cell" data-execution_count="4">
+<div id="3240d66c" class="cell" data-execution_count="4">
 <div id="lst-corr-mat" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-corr-mat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -658,13 +693,13 @@ Figure&nbsp;1: Correlation matrix for the trace elements dataset.
 </div>
 <div class="callout-body-container callout-body">
 <p>Two variables show relatively strong <strong>negative correlations</strong>. These are:</p>
-<div id="14e1b2d0" class="cell" data-execution_count="6">
+<div id="a7d6a164" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="6">
 <select class="webex-select"><option value="blank"></option><option value="0">Sc and Pb</option><option value="0">Ba and Nd</option><option value="answer">Sr and Ba</option><option value="0">Tb and Er</option><option value="0">Pb and Ce</option></select>
 </div>
 </div>
 <p>Three variables show relatively <strong>weak correlations</strong>:</p>
-<div id="b7f6c74f" class="cell" data-execution_count="7">
+<div id="7f4c7350" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="7">
 <select class="webex-select"><option value="blank"></option><option value="0">U, Yb and Hf</option><option value="0">Y, Ze and Nd</option><option value="0">Sr, Pr and Ba</option><option value="answer">Sc, Eu and Pb</option><option value="0">Ce, Tb and Nd</option></select>
 </div>
@@ -1457,8 +1492,8 @@ window.onload = function() {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../appendices/setup_vscode.html" class="pagination-link" aria-label="Setup VS Code">
-        <span class="nav-page-text">Setup VS Code</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../class3/class_3_ex_1.html" class="pagination-link" aria-label="Review exercises">
+        <span class="nav-page-text">Review exercises</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
