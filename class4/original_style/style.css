@@ -1,0 +1,211 @@
+/* Use the course clean theme and shared slide CSS, as in class_4_slides.pdf.
+   Only prototype figure layouts and the original statistical palette live here. */
+.reveal .slides { text-align:left; }
+.reveal .columns { gap:28px; }
+.reveal .column > :first-child { margin-top:0; }
+.reveal .slide figure { margin:0; }
+.reveal .pink { color:#eb078e; }
+.reveal .purple { color:#6A5ACD; }
+.reveal .turquoise { color:#167c77; }
+.reveal .orange { color:#EB811B; }
+.reveal .blue { color:#2b59c3; }
+.reveal .small { font-size:.75em; }
+.reveal .caption { color:#555; font-size:.68em; }
+.reveal .takeaway { border-left:4px solid #EB811B; padding-left:18px; }
+.reveal .column p { margin-top:.65em; }
+.reveal .column .math.display { font-size:.9em; }
+/* Contributors across the title, following the supplied PDF. */
+#title-slide .quarto-title-authors { display:flex; gap:1em; }
+#title-slide .quarto-title-author { flex:1; min-width:0; }
+#title-slide .quarto-title-author-name { font-size:.7em; }
+#title-slide .quarto-title-affiliation { font-size:.55em; }
+
+/* Slide 2 only: a geological illustration followed by the physical idea and question. */
+.reveal .slides section.cpx-story.present > :not(h2) { margin-top:0; margin-bottom:0; }
+.reveal .cpx-story .story-figure { height:385px; flex-shrink:0; }
+.reveal .cpx-story .story-figure p { margin:0; }
+.reveal .cpx-story .story-figure img { height:385px !important; width:100%; margin:0; }
+.reveal .cpx-story .story-statements { font-size:26px; line-height:1.3; }
+.reveal .cpx-story .story-statements p { margin:.4em 0; }
+.reveal .cpx-story .story-statements .purple,
+.reveal .cpx-story .story-statements .turquoise,
+.reveal .cpx-story .story-statements .pink { font-weight:600; }
+
+/* Prediction slide: keep equations and the three-model score table together. */
+.reveal .prediction-math .column .math.display { font-size:.75em; }
+.reveal .prediction-math .column mjx-container[display="true"] { margin:.45em 0; }
+.reveal .prediction-math .column p { margin-top:.3em; }
+.reveal .prediction-math table { font-size:20px; }
+
+/* Box quotation: same palette and type system as the statistical illustrations. */
+.reveal .box-quote { color:#6A5ACD; font-size:1.35em; line-height:1.25; }
+
+/* Bound the new polynomial illustration in browser and PDF layouts. */
+.reveal .polynomial-lesson > p { margin:.3em 0 !important; }
+.reveal .polynomial-lesson > p mjx-container[display="true"] { margin:.3em 0; }
+.reveal .polynomial-lesson .columns { margin-top:.3em !important; margin-bottom:0 !important; }
+.reveal .polynomial-lesson .column img { max-height:400px; }
+
+/* Box slide: the quotation replaces a heading; the portrait stays a small vignette. */
+.reveal .box-slide > h2 { display:none; }
+
+/* Python demonstration: visible editable code in HTML, plain selectable code in PDF. */
+.reveal .regression-code .exercise-cell .exercise-editor-body:not([hidden]) {
+  position:static; max-height:none; overflow:visible; border:0; box-shadow:none;
+}
+.reveal .regression-code .exercise-cell .cm-editor { font-size:22px; line-height:1.35; }
+.reveal .regression-code .exercise-cell .exercise-editor-header { font-size:20px; }
+.reveal .regression-code .exercise-cell .cell-output-stdout pre code { font-size:22px !important; }
+.reveal .regression-code.scrollable { overflow:visible !important; }
+.reveal .regression-code pre.sourceCode { padding:18px; border:1px solid #d6d6df; border-radius:6px; background:#f6f6f8; }
+.reveal .regression-code pre.sourceCode code { font-size:23px !important; line-height:1.4; white-space:pre; }
+
+/* Summary demonstration: the native Run Code editor and its real output sit side by side. */
+.reveal .regression-summary .exercise-cell,
+.reveal .regression-summary .summary-panels {
+  display:grid; grid-template-columns:minmax(0,42fr) minmax(0,58fr); gap:24px; align-items:start;
+}
+.reveal .regression-summary .exercise-cell > .observablehq:has(.exercise-editor) { grid-column:1; grid-row:1; min-width:0; }
+.reveal .regression-summary .exercise-cell > .observablehq:has(.cell-output-container) { grid-column:2; grid-row:1; min-width:0; }
+.reveal .regression-summary .exercise-cell > .quarto-ojs-hide { display:none !important; }
+.reveal .regression-summary .exercise-cell .cm-editor { font-size:20px; line-height:1.3; }
+.reveal .regression-summary .exercise-cell .exercise-editor-header { font-size:18px; }
+.reveal .regression-summary .summary-panels > div { min-width:0; }
+.reveal .regression-summary pre.sourceCode code { font-size:20px !important; line-height:1.3; }
+.reveal .regression-summary .summary-output,
+.reveal .regression-summary .cell-output-container { font-size:20px; line-height:1.25; }
+.reveal .regression-summary table { width:100%; font-size:20px; margin:0 0 16px; }
+.reveal .regression-summary table td,
+.reveal .regression-summary table th { padding:4px; line-height:1.2; }
+.reveal .regression-summary table caption { font-size:23px; font-weight:600; margin-bottom:8px; }
+.reveal .regression-summary .cell-output-container .cell-output { margin-top:0; }
+
+/* Ten coefficients: preserve the summary layout while fitting every row. */
+.reveal .quadratic-summary .exercise-cell .cm-editor { font-size:18px; line-height:1.2; }
+.reveal .quadratic-summary pre.sourceCode code { font-size:18px !important; line-height:1.2; }
+.reveal .quadratic-summary .summary-output,
+.reveal .quadratic-summary .cell-output-container { font-size:17px; line-height:1.15; }
+.reveal .quadratic-summary table { font-size:17px; margin-bottom:10px; }
+.reveal .quadratic-summary table td,
+.reveal .quadratic-summary table th { padding:2px; line-height:1.15; }
+.reveal .quadratic-summary table caption { font-size:20px; margin-bottom:6px; }
+.reveal .quadratic-summary table + br { display:none; }
+
+/* Coefficient inference: hypotheses, fitted values and interpretation. */
+.reveal .pvalue-lesson table { width:100%; font-size:24px; }
+.reveal .pvalue-lesson .column p { margin-top:.4em; }
+.reveal .pvalue-lesson .column mjx-container[display="true"] { margin:.4em 0; }
+
+/* R-squared definition: keep the formula, example and interpretation on one page. */
+.reveal .r2-lesson > p { margin:.3em 0 !important; }
+.reveal .r2-lesson > p mjx-container[display="true"] { margin:.35em 0; }
+.reveal .r2-lesson .column p { margin-top:.4em; }
+
+/* Three-oxide polynomial: equation above paired training-fit plots, like slide 11. */
+.reveal .three-oxide-lesson > p { margin:.25em 0 !important; }
+.reveal .three-oxide-lesson > p .math.display { font-size:.82em; }
+.reveal .three-oxide-lesson > p mjx-container[display="true"] { margin:.25em 0; }
+.reveal .three-oxide-lesson .column p { margin-top:.4em; }
+
+.reveal .three-oxide-lesson .columns { margin-top:.3em !important; margin-bottom:0 !important; }
+.reveal .three-oxide-lesson .column img { max-height:290px; }
+/* Fix this dense mathematical slide's block positions across Reveal and PDF pagination. */
+.reveal .three-oxide-lesson > p {
+  position:absolute; top:70px; left:0; right:0; margin:0 !important;
+}
+.reveal .three-oxide-lesson > .caption {
+  position:absolute; top:210px; left:0; right:0; margin:0 !important;
+}
+.reveal .three-oxide-lesson > .caption p { margin:0; }
+.reveal .three-oxide-lesson > .columns {
+  position:absolute; top:260px; left:0; right:0; margin:0 !important;
+}
+
+/* Selection demonstrations: readable code beside reproducible R figures. */
+.reveal .selection-code .exercise-cell .cm-editor { font-size:17px; line-height:1.15; }
+.reveal .selection-code .exercise-cell .exercise-editor-header { font-size:17px; }
+.reveal .selection-code pre.sourceCode { padding:12px; }
+.reveal .selection-code pre.sourceCode code { font-size:17px !important; line-height:1.2; }
+.reveal .selection-code .exercise-cell .cell-output-stdout pre code { font-size:17px !important; line-height:1.2; }
+.reveal .selection-code .column p { margin:.35em 0; }
+.reveal .selection-code .column img { max-height:370px; }
+/* Keep both columns on the same PDF page, independent of print fragmentation. */
+.reveal .selection-code > .small {
+  position:absolute; top:85px; left:0; right:0; margin:0 !important;
+}
+.reveal .selection-code > .columns {
+  position:absolute; top:140px; left:0; right:0; margin:0 !important;
+}
+.reveal .selection-code .exercise-cell .cell-output-stdout pre { margin:.35em 0; }
+
+/* Common-cause story: original scientific illustrations, with brief statements. */
+.reveal .slides section.confounding-story > :not(h2) { margin-top:0 !important; margin-bottom:0 !important; }
+.reveal .confounding-story .cause-figure { height:350px; flex-shrink:0; }
+.reveal .confounding-story .cause-figure p { margin:0; }
+.reveal .slides section.confounding-story .cause-figure img { width:100%; height:350px !important; object-fit:contain; margin:0; }
+.reveal .confounding-story .cause-statements { font-size:25px; line-height:1.3; }
+.reveal .confounding-story .cause-statements p { margin:.4em 0; }
+
+/* Keep the residual review visible even when reached before its SVG has loaded. */
+.reveal .quadratic-residual-lesson .residual-figure { height:450px; flex-shrink:0; }
+.reveal .quadratic-residual-lesson .residual-figure p { margin:0; line-height:0; }
+.reveal .slides section.quadratic-residual-lesson .residual-figure img {
+  width:100%; height:450px !important; max-height:none; margin:0; object-fit:contain;
+}
+
+/* Pointwise uncertainty bands: one large plot, short definitions and assumptions. */
+.reveal .uncertainty-lesson > .interval-question {
+  position:absolute; top:80px; left:0; right:0; margin:0 !important; font-size:28px;
+}
+.reveal .uncertainty-lesson .interval-question p { margin:0; }
+.reveal .uncertainty-lesson > .columns {
+  position:absolute; top:130px; left:0; right:0; margin:0 !important;
+}
+.reveal .uncertainty-lesson .column p { margin:.4em 0; }
+.reveal .uncertainty-lesson .column:first-child p { margin:0; line-height:0; }
+.reveal .slides section.uncertainty-lesson .column img {
+  width:100%; height:410px !important; max-height:none; margin:0; object-fit:contain;
+}
+.reveal .uncertainty-lesson .interval-explanation { font-size:24px; line-height:1.2; }
+.reveal .uncertainty-lesson .interval-explanation p { margin:.25em 0; }
+.reveal .uncertainty-lesson > .interval-assumptions {
+  position:absolute; top:565px; left:0; right:0; margin:0 !important;
+  font-size:20px; line-height:1.3;
+}
+.reveal .uncertainty-lesson > .interval-reflection {
+  position:absolute; top:650px; left:0; right:0; margin:0 !important;
+  font-size:25px; line-height:1.3;
+}
+
+/* Search-space illustration and a concise, conceptual forward-AIC recipe. */
+.reveal .model-search-lesson .column > p { margin:.3em 0; }
+.reveal .model-search-lesson .column:first-child { font-size:26px; }
+.reveal .model-search-lesson .column mjx-container[display="true"] { margin:.35em 0; }
+.reveal .model-search-lesson .column img { max-height:335px; }
+.reveal .model-search-lesson .column ol { font-size:27px; line-height:1.3; }
+.reveal .model-search-lesson .column li { margin-bottom:.45em; }
+.reveal .model-search-lesson .column .small { font-size:22px; line-height:1.3; }
+
+/* Classical interval formulas beside the editable statsmodels example. */
+.reveal .interval-code > .columns {
+  position:absolute; top:95px; left:0; right:0; margin:0 !important;
+}
+.reveal .interval-code .column > p { margin:.3em 0; font-size:25px; }
+.reveal .interval-code .column .math.display { font-size:.82em; }
+.reveal .interval-code mjx-container[display="true"] { margin:.4em 0; }
+.reveal .interval-code .interval-definitions { font-size:21px; line-height:1.25; }
+.reveal .interval-code .interval-definitions p { margin:.5em 0; }
+.reveal .interval-code .interval-definitions .math.display { font-size:1em; }
+.reveal .interval-code .exercise-cell .cm-editor { font-size:17px; line-height:1.15; }
+.reveal .interval-code .exercise-cell .exercise-editor-header { font-size:17px; }
+.reveal .interval-code pre.sourceCode { padding:12px; }
+.reveal .interval-code pre.sourceCode code { font-size:17px !important; line-height:1.2; }
+.reveal .interval-code .exercise-cell .cell-output-stdout pre code { font-size:17px !important; line-height:1.15; }
+.reveal .interval-code .exercise-cell .cell-output-stdout pre { margin:.35em 0; }
+.reveal .interval-code .interval-output-key { font-size:20px; line-height:1.25; }
+.reveal .interval-code .interval-output-key p { margin:.4em 0; }
+.reveal .interval-code > .interval-code-assumptions {
+  position:absolute; top:650px; left:0; right:0; margin:0 !important;
+  font-size:20px; line-height:1.25;
+}
+.reveal .interval-code .interval-code-assumptions p { margin:0; }

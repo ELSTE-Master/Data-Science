@@ -23,7 +23,7 @@ DECKS = {
     'class2_EDA': ('slides/class2_EDA.html', 'class2/class_2_slides_EDA.pdf'),
     # Class 3: the PDF comes from the static deck (the live one has no outputs before the cells run)
     'class_3_slides': ('slides/class_3_slides_static.html', 'class3/class_3_slides.pdf'),
-    'class_4_slides': ('class4/class_4_slides.html', 'class4/class_4_slides.pdf'),
+    'class_4_slides': ('class4/class_4_slides_static.html', 'class4/class_4_slides.pdf'),
 }
 
 class LocalResources(HTMLParser):

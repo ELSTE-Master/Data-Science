@@ -10,28 +10,15 @@ format:
 jupyter: python3
 ---
 
-```{python}
-#| echo: false
-from pywebexercises.exercises import mcq, longmcq, torf
-import matplotlib.pyplot as plt
-plt.rcParams.update({
-    "figure.facecolor":  (0.0, 0.0, 0.0, 0.0),  # red   with alpha = 30%
-})
-```
-
-
-This session introduces **linear regression** as a framework for quantifying relationships between a numeric outcome and one or more predictors. We discuss how to incorporate categorical variables and interaction terms, and how to interpret coefficients along with their associated uncertainty (standard errors, confidence intervals, and p-values). We emphasize key assumptions (e.g., linearity, additivity, homoscedasticity, normal errors, independence), model diagnostics (e.g., residual plots, QQ plots), effect sizes, and prediction. We also highlight the connection between regression and two-sample tests by showing how the t-test can be viewed as a special case of the linear model framework.
+This lecture uses experimental clinopyroxene (CPX) chemistry to study **linear regression** and temperature prediction. The existing exercises retain their original case studies and will be updated separately.
 
 ## Today’s objectives {.unnumbered}
 
-The objectives of this class are to:
-
-- [x] Review core concepts: hypotheses, p-values, confidence intervals, and how they arise in regression  
-- [x] Fit and interpret linear regression models
-- [x] Encode categorical variables and add interaction terms; interpret conditional effects  
-- [x] Check assumptions and run diagnostics: residual patterns, QQ plots, heteroscedasticity, independence, ...
-- [x] Compare and select models: adjusted $R^2$, AIC; consider transformations when appropriate  
-- [x] Communicate effect sizes and predictions (point & interval) and implement analyses in Python (`pandas` + `statsmodels`)
+- Fit and interpret simple and multiple linear regression, least squares, coefficients, p-values and $R^2$.
+- Examine residual diagnostics, polynomial terms and interactions.
+- Understand overfitting, training/test separation, model-search complexity, AIC and grouped cross-validation.
+- Interpret prediction errors, confidence intervals for a conditional mean and prediction intervals for an individual observation.
+- Distinguish association from causation and discuss scientific limitations.
 
 ## Slides
 
@@ -39,3 +26,4 @@ The objectives of this class are to:
 [{{< fa file-pdf >}} PDF](class_4_slides.pdf){.btn .btn-download target="_blank"}
 [{{< fa display >}} View in browser](../class4/class_4_slides.html){.btn .btn-download target="_blank"}
 
+[Static/offline HTML](class_4_slides_static.html){.btn .btn-download target="_blank"}

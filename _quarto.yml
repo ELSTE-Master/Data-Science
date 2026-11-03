@@ -13,9 +13,13 @@ project:
     - appendices/*.qmd
     - slides/class*.qmd
     - class4/class_4_slides.qmd
+    - class4/class_4_slides_static.qmd
   resources:
     - slides/img/**
     - slides/img2/**
+    - Data/cpx_teaching.csv
+    - Data/cpx_teaching_split.csv
+    - class4/cpx_lesson.py
   # PDFs are made from the finished HTML; partial previews skip this step.
   post-render:
     - python3 slides2pdf.py --post-render
@@ -61,15 +65,15 @@ website:
           - class3/class_3_ex_3.qmd
           - class3/class_3_ex_4.qmd
       #     - class3/class_3_ex_5.qmd
-      # - section: "Class 4: Linear regression"
-      #   contents:
-      #     - class4/class_4_intro.qmd
-      #     - class4/class_4_ex_1.qmd
-      #     - class4/class_4_ex_2.qmd
-      #     - class4/class_4_ex_3.qmd
-      #     - class4/class_4_ex_4.qmd
-      #     - class4/class_4_ex_5.qmd
-      #     - class4/class_4_ex_6.qmd
+      - section: "Class 4: Linear regression"
+        contents:
+          - class4/class_4_intro.qmd
+          - class4/class_4_ex_1.qmd
+          - class4/class_4_ex_2.qmd
+          - class4/class_4_ex_3.qmd
+          - class4/class_4_ex_4.qmd
+          - class4/class_4_ex_5.qmd
+          - class4/class_4_ex_6.qmd
       # - section: "Exam"
       #   contents:
       #     - exam/exam_intro.qmd

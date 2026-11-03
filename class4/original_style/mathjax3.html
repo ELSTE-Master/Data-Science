@@ -1,0 +1,21 @@
+<script>
+// Some Quarto Reveal templates select the MathJax 2 adapter even with a
+// MathJax 3 URL. Keep this correction local to Class 4 and preserve the
+// renderer's URL, including an embedded data URL in the offline deck.
+Object.defineProperty(window, 'RevealMath', {
+  configurable: true,
+  get() { return this.__class4RevealMath; },
+  set(plugin) {
+    if (plugin.id === 'mathjax2' && plugin.MathJax3) {
+      const adapter = plugin.MathJax3();
+      plugin.init = function(deck) {
+        const config = deck.getConfig();
+        deck.configure({mathjax3: {mathjax: config.math.mathjax}});
+        return adapter.init(deck);
+      };
+    }
+    this.__class4RevealMath = plugin;
+  }
+});
+</script>
+<link rel="icon" href="data:,">
