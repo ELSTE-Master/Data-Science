@@ -1,0 +1,6 @@
+checks/
+*.csv
+*_ols_summary.html
+R-session.txt
+figures/*.png
+!figures/george_box_stylized.png
