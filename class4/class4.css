@@ -1,0 +1,30 @@
+/* Match Class 3's title cards and keep numerical output readable. */
+#title-slide .quarto-title-authors { display:grid; grid-template-columns:1fr 1fr; gap:.6em 1.5em; }
+#title-slide .quarto-title-author { width:auto; }
+#title-slide .quarto-title-author-name { font-size:.65em; }
+#title-slide .quarto-title-affiliation { font-size:.5em; }
+.reveal .slide table { font-size:.75em; }
+.reveal .slide .cell-output-stdout { font-size:.75em; }
+
+.reveal .slide .cell-output-stdout pre code { font-size:16px !important; line-height:1.2; }
+
+/* Live editors are opt-in overlays: Run Code closes them before results arrive. */
+.reveal .exercise-cell .exercise-editor { position:relative; margin:.25em 0 !important; }
+.reveal .exercise-cell .exercise-editor-header { padding:.25em .4em; font-size:18px; }
+.reveal .exercise-cell .exercise-editor-body[hidden] { display:none !important; }
+.reveal .exercise-cell .exercise-editor-body:not([hidden]) {
+  position:absolute; top:100%; left:0; right:0; z-index:20;
+  background:white; border:1px solid #bbb; box-shadow:0 4px 10px #0003;
+  max-height:190px; overflow:auto;
+}
+.reveal .exercise-cell .cm-editor { font-size:18px; line-height:1.25; }
+.reveal .slide .exercise-cell .cell-output-display img { max-height:230px; width:auto; }
+.reveal .slide .cell-output-display img { max-height:250px; width:auto; }
+.reveal .slide pre.sourceCode code { font-size:19px !important; line-height:1.25; }
+.reveal .slide .cell-output-stdout pre { margin:.25em 0; }
+.reveal .footer { font-size:13px; }
+/* Pyodide displays Matplotlib as canvas; static rendering uses images. */
+.reveal .slide .exercise-cell canvas {
+  max-height:210px !important; max-width:100%;
+  width:auto !important; height:auto !important; object-fit:contain;
+}
