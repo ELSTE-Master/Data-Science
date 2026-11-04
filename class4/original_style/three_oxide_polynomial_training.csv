@@ -1,0 +1,3 @@
+"Model","Coefficients","Training_R2","Training_RMSE"
+"Additive",4,0.671954190730916,88.3960098608661
+"Full quadratic",10,0.698337889615662,84.7668016691435

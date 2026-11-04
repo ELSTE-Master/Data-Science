@@ -1,0 +1,5 @@
+"Model","Coefficients","R2"
+"Baseline",1,0
+"Simple",2,0.4472911551494
+"Multiple",4,0.671954190730916
+"Quadratic",10,0.698337889615662

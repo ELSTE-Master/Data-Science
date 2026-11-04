@@ -1,0 +1,3 @@
+"Model","Coefficients","Training_R2","Training_RMSE"
+"Degree 2",3,0.449202787098122,114.541082086826
+"Degree 10",11,0.504772179003723,108.609529399996

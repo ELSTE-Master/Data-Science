@@ -13,9 +13,14 @@ project:
     - appendices/*.qmd
     - slides/class*.qmd
     - class4/class_4_slides.qmd
+    - class4/class_4_slides_static.qmd
   resources:
     - slides/img/**
     - slides/img2/**
+    # read at run time by the live Class 4 deck (pyodide resources)
+    - Data/cpx_teaching.csv
+    - Data/cpx_teaching_split.csv
+    - class4/cpx_lesson.py
   # PDFs are made from the finished HTML; partial previews skip this step.
   post-render:
     - python3 slides2pdf.py --post-render

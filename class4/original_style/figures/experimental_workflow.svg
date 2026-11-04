@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="385" viewBox="0 0 1280 385" role="img" aria-labelledby="title desc">
+<title id="title">An experimental rock becomes a source of chemical information</title>
+<desc id="desc">Illustrative piston-cylinder cutaway. A piston compresses a solid pressure assembly; a furnace heats a capsule containing starting material. Clinopyroxene-bearing products form or equilibrate at controlled temperature and pressure. After recovery, a polyphase product is examined and a clinopyroxene grain is enlarged to illustrate chemical analysis. This is one example of experimental petrology; methods differ among studies.</desc>
+<!-- Original schematic, not to scale. Scientific context: ETH Zurich, Piston
+     Cylinders (https://highpressure.ethz.ch/facilities/experimental/piston-cylinders.html),
+     GFZ, Piston Cylinder Press (https://www.gfz.de/en/section/chemistry-and-physics-of-earth-materials/infrastructure/piston-cylinder-press/).
+     Neither source is claimed as attribution of the pinned teaching dataset. -->
+<defs>
+ <marker id="p" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#6A5ACD"/></marker>
+ <marker id="t" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="none" stroke="#6A5ACD" stroke-width="1.5"/></marker>
+ <pattern id="steel" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#e0e2e6"/><path d="M0 10 L10 0" stroke="#c9cbd1" stroke-width="1"/></pattern>
+ <clipPath id="charge"><ellipse cx="773" cy="204" rx="80" ry="61"/></clipPath>
+</defs>
+<rect width="1280" height="385" fill="white"/>
+<g font-family="Liberation Serif, Georgia, serif" font-size="25" fill="#41434a">
+ <text x="305" y="30" text-anchor="middle" fill="#6A5ACD" font-size="30" font-weight="bold">Experimental petrology</text>
+ <text x="972" y="30" text-anchor="middle" fill="#167c77" font-size="30" font-weight="bold">Mineral chemistry</text>
+ <!-- Cutaway pressure vessel: outer steel, solid pressure medium, furnace, capsule. -->
+ <path d="M186 83 H285 V69 H377 V83 H472 V296 H377 V313 H285 V296 H186 Z" fill="url(#steel)" stroke="#636674" stroke-width="2.5"/>
+ <rect x="245" y="98" width="171" height="181" fill="#f0e6df" stroke="#8c817b" stroke-width="2"/>
+ <rect x="277" y="111" width="108" height="157" fill="#595862" stroke="#41404c" stroke-width="2"/>
+ <rect x="288" y="121" width="86" height="136" fill="#fce6db"/>
+ <rect x="304" y="138" width="54" height="102" rx="11" fill="#fff7ee" stroke="#b98168" stroke-width="2.5"/>
+ <!-- A polyphase experimental charge; turquoise grains denote CPX. -->
+ <path d="M313 162 L328 155 L335 166 L325 188 L313 182 Z M330 203 L341 192 L350 202 L343 222 L331 223 Z" fill="#84ccc4" stroke="#367f7b" stroke-width="1.4"/>
+ <path d="M339 149 L350 154 L349 176 L339 180 Z M313 209 L324 206 L325 225 L315 229 Z" fill="#d4c4b6" stroke="#a3968d"/>
+ <path d="M308 195 L320 190 L327 199 L315 204 Z M335 181 L347 180 L351 189 L341 195 Z" fill="#e2d7cd" stroke="#a3968d"/>
+ <!-- Piston and fixed upper plug. -->
+ <rect x="286" y="72" width="90" height="26" fill="#afb4c0" stroke="#636674" stroke-width="2"/>
+ <rect x="286" y="279" width="90" height="49" fill="#afb4c0" stroke="#636674" stroke-width="2"/>
+ <path d="M331 358 V317" stroke="#6A5ACD" stroke-width="4" marker-end="url(#p)"/>
+ <text x="350" y="350" fill="#6A5ACD" font-style="italic">P</text>
+ <path d="M256 191 H277 M385 191 H405" stroke="#eb078e" stroke-width="4"/>
+ <text x="498" y="91" fill="#eb078e" font-style="italic">high T</text>
+ <path d="M499 99 L389 154" stroke="#eb078e" stroke-width="1.5" fill="none"/>
+ <text x="10" y="143">Starting</text><text x="10" y="171">material</text>
+ <path d="M109 163 L154 163 L304 184" fill="none" stroke="#747782" stroke-width="1.5"/>
+ <text x="10" y="252">Heated capsule</text>
+ <path d="M160 246 L214 246 L305 230" fill="none" stroke="#747782" stroke-width="1.5"/>
+ <text x="496" y="263">CPX-bearing</text><text x="496" y="291">products</text>
+ <path d="M492 246 L358 212" fill="none" stroke="#367f7b" stroke-width="1.5"/>
+ <!-- Recovery leads to a polished charge, with magnification of one CPX grain. -->
+ <path d="M492 188 C547 143 593 133 656 164" fill="none" stroke="#6A5ACD" stroke-width="2.5" marker-end="url(#t)"/>
+ <text x="562" y="121" text-anchor="middle" font-size="21">Recover</text>
+ <ellipse cx="773" cy="204" rx="89" ry="70" fill="#e9e9ec" stroke="#8d929f" stroke-width="2"/>
+ <g clip-path="url(#charge)" stroke="#a69d94" stroke-width="1.3" fill="#e9dfd4">
+  <ellipse cx="773" cy="204" rx="80" ry="61" fill="#f7f3ed"/>
+  <path d="M689 157 L725 155 L740 185 L715 205 L685 193 Z M737 141 L771 145 L789 173 L766 187 L740 181 Z M798 141 L840 159 L836 192 L805 188 L788 170 Z M706 216 L733 207 L750 229 L736 263 L702 252 Z M771 228 L798 217 L821 246 L797 272 L766 265 Z M828 196 L859 198 L863 226 L830 241 L813 219 Z"/>
+  <path d="M747 180 L773 166 L799 186 L790 219 L762 231 L743 211 Z" fill="#8bcfc6" stroke="#367f7b" stroke-width="2"/>
+  <path d="M712 180 L724 170 L734 178 L730 198 L715 203 Z M809 224 L823 217 L833 230 L827 246 L814 245 Z" fill="#8bcfc6" stroke="#367f7b"/>
+ </g>
+ <text x="773" y="313" text-anchor="middle" font-size="23">Recovered products</text>
+ <!-- Magnification leaders locate the enlarged grain; no spot/row equivalence is implied. -->
+ <path d="M792 180 L972 106 M789 219 L973 286" stroke="#b0b4bd" stroke-width="1.5" stroke-dasharray="5 5" fill="none"/>
+ <circle cx="1084" cy="195" r="116" fill="#f7fcfb" stroke="#20B2AA" stroke-width="2.5"/>
+ <!-- Angular prismatic section with compositional texture, not a decorative gem. -->
+ <path d="M1028 110 L1115 122 L1146 172 L1127 272 L1051 279 L1006 225 Z" fill="#a6d9cf" stroke="#367f7b" stroke-width="2.5"/>
+ <path d="M1036 129 L1105 140 L1125 176 L1109 254 L1059 261 L1025 222 Z" fill="#c0e5dc" stroke="#70b6a8" stroke-width="1.5"/>
+ <path d="M1046 152 L1093 161 L1107 183 L1094 233 L1066 241 L1042 218 Z" fill="#d2ede5" stroke="#8ac6b6" stroke-width="1.2"/>
+ <circle cx="1081" cy="202" r="8" fill="none" stroke="#eb078e" stroke-width="2"/>
+ <path d="M1066 202 H1074 M1088 202 H1096 M1081 187 V195 M1081 209 V217" stroke="#eb078e" stroke-width="1.5"/>
+ <text x="1219" y="124" font-size="23" fill="#167c77" text-anchor="middle">CPX</text>
+ <path d="M1202 134 L1143 155" stroke="#367f7b" stroke-width="1.5"/>
+ <text x="1084" y="339" font-size="26" text-anchor="middle" fill="#167c77">MgO · Al₂O₃ · TiO₂ · …</text>
+ <text x="640" y="380" font-family="Roboto, Arial, sans-serif" font-size="17" fill="#777" text-anchor="middle">Illustrative piston-cylinder setup; experimental methods vary among studies.</text>
+</g>
+</svg>

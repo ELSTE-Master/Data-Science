@@ -1,0 +1,7 @@
+"Model","Term","Estimate"
+"Simple","(Intercept)",707.801899293883
+"Simple","MgO_Cpx",27.6595736654097
+"Multiple","(Intercept)",576.31765441931
+"Multiple","MgO_Cpx",28.3746747605371
+"Multiple","Al2O3_Cpx",25.1036060071224
+"Multiple","TiO2_Cpx",-18.617661014536
