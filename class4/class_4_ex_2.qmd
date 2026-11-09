@@ -1,192 +1,174 @@
 ---
-title: "Example reading data: prediction"
-format: 
+title: "Exercise 2: Multiple regression with three oxides"
+format:
   live-html:
     theme: cosmo
     css: ../assets/webex_2.css
-    include-after-body: ../assets/webex_2.js
-engine: knitr
+    include-after-body: [../assets/webex_2.js, ../assets/exercise-solution.js]
+pyodide:
+  packages: [pandas, numpy, scipy, statsmodels, matplotlib]
+  resources: [../Data/cpx_teaching.csv, ../Data/cpx_teaching_split.csv, cpx_lesson.py]
+jupyter: python3
 ---
 
+```{python}
+#| include: false
+import sys
+sys.path.insert(0, "../assets")
+from q_a_env import render_q_a_env
+```
 
-{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+The lecture considered a simple MgO regression and a multiple regression with **MgO, Al₂O₃ and TiO₂**. Use the same 1,402 training observations for both.
 
+### Question 1 — Write the model
 
-In order to assess the adequacy of our model to the data, it is useful (when this is possible) to compare the predictions and the data. This implies that we need to do two things: (1) plot the data with different colors for the groups and (2) compute predictions.
-
-We can plot the data as follows:
-
-**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `ax.scatter` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-scatter); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
+Which `statsmodels` formula fits temperature using all three oxide measurements as separate linear predictors?
 
 ```{python}
-import pandas as pd
-import matplotlib.pyplot as plt
+#| echo: false
+#| output: asis
+render_q_a_env([
+    {"value": "MgO_Cpx + Al2O3_Cpx + TiO2_Cpx ~ T_C",
+     "feedback": "This reverses the response and predictors."},
+    {"value": "T_C ~ Ref + Run",
+     "feedback": "Those are identifiers rather than the requested chemical predictors."},
+    {"value": "T_C ~ MgO_Cpx * Al2O3_Cpx * TiO2_Cpx",
+     "feedback": "The * operator also introduces interaction terms."},
+    {"value": "T_C ~ MgO_Cpx + Al2O3_Cpx + TiO2_Cpx",
+     "feedback": "Correct: each predictor appears as an additive term.", "answer": True},
+])
+```
+
+### Question 2 — Fit and compare training fit
+
+Complete the code to fit both models and compare their training $R^2$.
+
+:::: {.panel-tabset}
+
+## Exercise
+
+```{pyodide}
+#| exercise: ex_1
+from cpx_lesson import load_data
 import statsmodels.formula.api as smf
-import numpy as np
 
-reading = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/reading.csv")
-
-plt.figure(figsize=(6, 5))
-# Scatter plot (no color coding by group)
-plt.scatter(reading['age'], reading['score'], color='steelblue')
-
-# Labels and title
-plt.xlabel('Age')
-plt.ylabel('Score')
-plt.title('Age vs. Score')
-
-plt.show()
+train, _ = load_data()
+simple = smf.ols("T_C ~ MgO_Cpx", data=train).fit()
+multiple = smf.ols(
+    "T_C ~ MgO_Cpx + ______ + ______",
+    data=train
+).fit()
+print(f"Simple training R²: {simple.______:0.3f}")
+print(f"Multiple training R²: {multiple.rsquared:0.3f}")
+print(multiple.params.round(2))
 ```
 
-Next, we will highlight the different groups using two colors. 
+## Hints
 
+The remaining predictors are `Al2O3_Cpx` and `TiO2_Cpx`. The fitted model's training coefficient of determination is stored in `.rsquared`.
 
-**Function reference:** `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `unique` [(doc)](../appendices/doc_pandas.qmd#pandas-unique); `ax.scatter` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-scatter); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `ax.legend` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-legend); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
+## Solution
 
-```{python, echo=TRUE}
-import matplotlib.pyplot as plt
+**Function reference:** `smf.ols` and `model.fit` [(doc)](../appendices/doc_statsmodels.qmd).
 
+```python
+from cpx_lesson import load_data
+import statsmodels.formula.api as smf
 
-
-# Define custom colors for each group
-colors = {
-    'Control': '#c4bedf',
-    'Treatment': '#f6aed5'
-}
-
-plt.figure(figsize=(6, 5))
-
-# Scatter plot by group with specific colors
-for g in reading['group'].unique():
-    subset = reading[reading['group'] == g]
-    plt.scatter(subset['age'], subset['score'], label=g, color=colors[g], alpha=0.8)
-
-# Labels and legend
-plt.xlabel('Age')
-plt.ylabel('Score')
-plt.title('Age vs. Score by Group')
-plt.legend()
-plt.show()
+train, _ = load_data()
+simple = smf.ols("T_C ~ MgO_Cpx", data=train).fit()
+multiple = smf.ols(
+    "T_C ~ MgO_Cpx + Al2O3_Cpx + TiO2_Cpx",
+    data=train
+).fit()
+print(f"Simple training R²: {simple.rsquared:0.3f}")
+print(f"Multiple training R²: {multiple.rsquared:0.3f}")
+print(multiple.params.round(2))
 ```
 
+::::
 
+### Question 3 — A conditional coefficient
 
-**Function reference:** `model.fit` [(doc)](../appendices/doc_statsmodels.qmd#models-model-fit); `smf.ols` [(doc)](../appendices/doc_statsmodels.qmd#models-smf-ols); `print` [(doc)](../appendices/doc_python.qmd#python-print); `model.summary` [(doc)](../appendices/doc_statsmodels.qmd#models-model-summary).
-
-```{python, echo=TRUE}
-# Fit the linear model: score ~ group + age
-mod1 = smf.ols('score ~ group + age', data=reading).fit()
-print(mod1.summary())
-
-
-```
-
-We can now compute predictions from our model. It can be observed that the age of the children ranges from 6 to 12 so our first step is to construct a sequence of numbers from 6 to 12 as follows:
-
-
-
-
-**Function reference:** `np.arange` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-np-arange); `print` [(doc)](../appendices/doc_python.qmd#python-print).
-
-```{python, echo=TRUE}
-age_to_predict = np.arange(6, 13) 
-print(age_to_predict)
-
-```
-
-Then, using the output of the model we have that the predictions for the group "Control" are given by:
-
-$$
-\text { Predicted Score }_i=-7.8639+6.6457 \mathrm{Age}_i
-$$
-
-This can be done as follows:
-
-
-**Function reference:** `model.params` [(doc)](../appendices/doc_statsmodels.qmd#models-model-params); `get` [(doc)](../appendices/doc_pandas.qmd#pandas-get); `print` [(doc)](../appendices/doc_python.qmd#python-print).
-
-```{python, echo=TRUE}
-b0 = mod1.params['Intercept']
-b_age = mod1.params['age']
-b_group = mod1.params.get('group[T.Treatment]', 0)  # Treatment effect
-
-# Predictions for Control group (no group effect)
-prediction_control = b0 + b_age * age_to_predict
-print(prediction_control)
-```
-
-Alternatively, we can construct an `pd.DataFrame` [(doc)](../appendices/doc_pandas.qmd#pandas-dataframe) with the data we would like to predict as follows:
-
-
-**Function reference:** `DataFrame` [(doc)](../appendices/doc_pandas.qmd#pandas-dataframe); `len` [(doc)](../appendices/doc_python.qmd#python-len).
-
-```{python, echo=TRUE}
-# Data to predict for Control group
-data_to_predict_control = pd.DataFrame({
-    'age': age_to_predict,
-    'group': ['Control'] * len(age_to_predict)
-})
-```
-
-Then, we can use the method `predict` [(doc)](../appendices/doc_statsmodels.qmd#models-model-predict) as follows:
-
-
-**Function reference:** `model.predict` [(doc)](../appendices/doc_statsmodels.qmd#models-model-predict); `print` [(doc)](../appendices/doc_python.qmd#python-print).
-
-```{python, echo=TRUE}
-prediction_control = mod1.predict(data_to_predict_control)
-print(prediction_control)
-```
-
-This approach provides the same results but is more reliable. Similarly, we can compute the predictions for the other groups as follows:
-
-
-
-**Function reference:** `DataFrame` [(doc)](../appendices/doc_pandas.qmd#pandas-dataframe); `len` [(doc)](../appendices/doc_python.qmd#python-len); `model.predict` [(doc)](../appendices/doc_statsmodels.qmd#models-model-predict); `print` [(doc)](../appendices/doc_python.qmd#python-print).
-
-```{python, echo=TRUE}
-# Data to predict for Treatment group
-data_to_predict_treatment = pd.DataFrame({
-    'age': age_to_predict,
-    'group': ['Treatment'] * len(age_to_predict)
-})
-
-prediction_treatment = mod1.predict(data_to_predict_treatment)
-print(prediction_treatment)
-
-```
-
-
-Now, we can add our predictions to the graph as follows:
-
-
-**Function reference:** `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `unique` [(doc)](../appendices/doc_pandas.qmd#pandas-unique); `ax.scatter` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-scatter); `ax.plot` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-plot); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `ax.legend` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-legend); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
+The TiO₂ coefficient in the multiple model is about **−18.6 °C per reported unit**. Which interpretation is appropriate?
 
 ```{python}
-# Define colors
-
-colors = {
-    'Control': '#c4bedf',
-    'Treatment': '#f6aed5'
-}
-# Plot observed data
-plt.figure(figsize=(7, 5))
-for g in reading['group'].unique():
-    subset = reading[reading['group'] == g]
-    plt.scatter(subset['age'], subset['score'], color=colors[g], label=g, alpha=0.7)
-
-# Add prediction lines
-plt.plot(age_to_predict, prediction_control, color=colors['Control'], linewidth=2)
-plt.plot(age_to_predict, prediction_treatment, color=colors['Treatment'], linewidth=2)
-
-# Labels and legend
-plt.xlabel("Age")
-plt.ylabel("Score")
-plt.title("Predicted Reading Scores by Age and Group (Model 1)")
-plt.legend()
-plt.show()
-
+#| echo: false
+#| output: asis
+render_q_a_env([
+    {"value": "A temperature 18.6 °C lower proves that TiO₂ was measured incorrectly.",
+     "feedback": "The coefficient does not diagnose individual measurement errors."},
+    {"value": "At a fixed MgO and Al₂O₃, a one-unit higher TiO₂ is associated with a fitted mean temperature 18.6 °C lower.",
+     "feedback": "Correct: 'holding the other included predictors fixed' is essential.", "answer": True},
+    {"value": "A one-unit higher TiO₂ always lowers the true experimental temperature by 18.6 °C.",
+     "feedback": "Regression coefficients are associations, not guaranteed physical interventions."},
+    {"value": "TiO₂ must have a negative correlation with temperature when considered alone.",
+     "feedback": "A partial regression coefficient need not have the same sign as a marginal association."},
+])
 ```
 
+### Question 4 — Predict a training composition
 
-As discussed in the lecture slides, the adequacy between our predictions and the data is not ideal. To highlight the limitations of this model we will consider model diagnostic graphs in the next section.
+Use the chemistry of the **first training observation** as an example input. Compute the fitted temperature with each model. This demonstrates prediction syntax, but these values are **in-sample fits**, not test errors.
+
+:::: {.panel-tabset}
+
+## Exercise
+
+```{pyodide}
+#| exercise: ex_2
+from cpx_lesson import load_data
+import statsmodels.formula.api as smf
+
+train, _ = load_data()
+simple = smf.ols("T_C ~ MgO_Cpx", data=train).fit()
+multiple = smf.ols(
+    "T_C ~ MgO_Cpx + Al2O3_Cpx + TiO2_Cpx", data=train
+).fit()
+
+new = train.iloc[[0]][["MgO_Cpx", "Al2O3_Cpx", "TiO2_Cpx"]]
+print("Simple fitted temperature:", round(simple.______(new).iloc[0], 1))
+print("Multiple fitted temperature:", round(multiple.______(new).iloc[0], 1))
+```
+
+## Hints
+
+The method is called `.predict()`. For a formula model, pass a data frame with the predictor columns. Using `[[0]]` retains the first row as a data frame.
+
+## Solution
+
+**Function reference:** `model.predict` [(doc)](../appendices/doc_statsmodels.qmd); `iloc` [(doc)](../appendices/doc_pandas.qmd).
+
+```python
+from cpx_lesson import load_data
+import statsmodels.formula.api as smf
+
+train, _ = load_data()
+simple = smf.ols("T_C ~ MgO_Cpx", data=train).fit()
+multiple = smf.ols(
+    "T_C ~ MgO_Cpx + Al2O3_Cpx + TiO2_Cpx", data=train
+).fit()
+
+new = train.iloc[[0]][["MgO_Cpx", "Al2O3_Cpx", "TiO2_Cpx"]]
+print("Simple fitted temperature:", round(simple.predict(new).iloc[0], 1))
+print("Multiple fitted temperature:", round(multiple.predict(new).iloc[0], 1))
+```
+
+::::
+
+### Question 5 — Does higher training $R^2$ settle the choice?
+
+```{python}
+#| echo: false
+#| output: asis
+render_q_a_env([
+    {"value": "No. Multiple regression cannot be used for mineral compositions.",
+     "feedback": "It can; the issue is what the coefficients and errors mean."},
+    {"value": "Yes. A model with more predictors is always scientifically preferable.",
+     "feedback": "Model complexity should be justified by scientific relevance and predictive performance."},
+    {"value": "No. Adding predictors cannot lower ordinary training R² on the same rows, but may fail to improve test error.",
+     "feedback": "Correct. We will evaluate models on observations not used for fitting.", "answer": True},
+    {"value": "Yes. Higher training R² proves better performance on future publications.",
+     "feedback": "Training fit alone does not measure generalization."},
+])
+```

@@ -1,108 +1,186 @@
 ---
-title: "Example reading data: model diagnostic"
-format: 
+title: "Exercise 3: Residuals and curved relationships"
+format:
   live-html:
     theme: cosmo
     css: ../assets/webex_2.css
-    include-after-body: ../assets/webex_2.js
-engine: knitr
+    include-after-body: [../assets/webex_2.js, ../assets/exercise-solution.js]
+pyodide:
+  packages: [pandas, numpy, scipy, statsmodels, matplotlib]
+  resources: [../Data/cpx_teaching.csv, ../Data/cpx_teaching_split.csv, cpx_lesson.py]
+jupyter: python3
 ---
 
+```{python}
+#| include: false
+import sys
+sys.path.insert(0, "../assets")
+from q_a_env import render_q_a_env
+```
 
-{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+The multiple regression has a higher training $R^2$ than the MgO-only model. But even a good fit can miss an important pattern. We will inspect **residuals** and then allow the fitted mean to curve.
 
+### Question 1 — Plot the residuals
 
+For observation $i$, the residual is $e_i=T_i-\hat T_i$. Complete the plot for the multiple model using **training observations only**.
 
+:::: {.panel-tabset}
 
-In this section, we consider the construction of model diagnostic graphs discussed in the lecture slides. The first graph compares the fitted values (i.e the predictions) with the residuals of the model. The fitted values and the residuals of the model can be computed as follows:
+## Exercise
 
-
-**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `model.fit` [(doc)](../appendices/doc_statsmodels.qmd#models-model-fit); `smf.ols` [(doc)](../appendices/doc_statsmodels.qmd#models-smf-ols); `model.fittedvalues` [(doc)](../appendices/doc_statsmodels.qmd#models-model-fittedvalues); `model.resid` [(doc)](../appendices/doc_statsmodels.qmd#models-model-resid).
-
-```{python, echo=TRUE}
-import pandas as pd
-import matplotlib.pyplot as plt
+```{pyodide}
+#| exercise: ex_1
+from cpx_lesson import load_data
 import statsmodels.formula.api as smf
-import numpy as np
+import matplotlib.pyplot as plt
 
-reading = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/reading.csv")
+train, _ = load_data()
+multiple = smf.ols(
+    "T_C ~ MgO_Cpx + Al2O3_Cpx + TiO2_Cpx", data=train
+).fit()
 
-# Fit the linear model: score ~ group + age
-mod1 = smf.ols('score ~ group + age', data=reading).fit()
-
-# Fitted values
-fitted_values = mod1.fittedvalues
-
-# Residuals
-residuals = mod1.resid
-```
-
-
-Then, we can construct the graph as follows:
-
-
-**Function reference:** `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `ax.scatter` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-scatter); `ax.axhline` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-axhline); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
-
-```{python, echo=TRUE}
-plt.figure(figsize=(6, 5))
-plt.scatter(fitted_values, residuals, color='steelblue', alpha=0.8)
-plt.axhline(0, color='gray', linestyle='--', linewidth=1)
-plt.xlabel("Fitted values")
-plt.ylabel("Residuals")
-plt.title("Residuals vs Fitted Values")
+plt.figure(figsize=(6, 4))
+plt.scatter(multiple.______, multiple.______, alpha=0.4, s=14)
+plt.axhline(0, color="crimson", linestyle="--")
+plt.xlabel("Fitted temperature (°C)")
+plt.ylabel("Residual (°C)")
+plt.title("Residuals: three-oxide linear model")
 plt.show()
-
 ```
 
-Similarly to what we did before, we can also add different colors to compare the groups:
+## Hints
 
-**Function reference:** `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `unique` [(doc)](../appendices/doc_pandas.qmd#pandas-unique); `ax.scatter` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-scatter); `ax.axhline` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-axhline); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `ax.legend` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-legend); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
+Use `.fittedvalues` for fitted temperatures and `.resid` for residuals. A horizontal line at zero helps reveal patterns.
+
+## Solution
+
+**Function reference:** `model.fittedvalues`, `model.resid` [(doc)](../appendices/doc_statsmodels.qmd); `plt.scatter` and `plt.axhline` [(doc)](../appendices/doc_visualisation.qmd).
+
+```python
+from cpx_lesson import load_data
+import statsmodels.formula.api as smf
+import matplotlib.pyplot as plt
+
+train, _ = load_data()
+multiple = smf.ols(
+    "T_C ~ MgO_Cpx + Al2O3_Cpx + TiO2_Cpx", data=train
+).fit()
+
+plt.figure(figsize=(6, 4))
+plt.scatter(multiple.fittedvalues, multiple.resid, alpha=0.4, s=14)
+plt.axhline(0, color="crimson", linestyle="--")
+plt.xlabel("Fitted temperature (°C)")
+plt.ylabel("Residual (°C)")
+plt.title("Residuals: three-oxide linear model")
+plt.show()
+```
+
+::::
+
+### Question 2 — What would curvature suggest?
+
+Imagine the residual plot shows a systematic curved pattern rather than random scatter around zero.
 
 ```{python}
-# Define colors for groups
-colors = {
-    'Control': '#c4bedf',
-    'Treatment': '#f6aed5'
-}
-
-plt.figure(figsize=(6, 5))
-for g in reading['group'].unique():
-    subset = reading[reading['group'] == g]
-    plt.scatter(
-        fitted_values[reading['group'] == g],
-        residuals[reading['group'] == g],
-        color=colors[g], label=g, alpha=0.8
-    )
-
-plt.axhline(0, color='gray', linestyle='--', linewidth=1)
-plt.xlabel("Fitted values")
-plt.ylabel("Residuals")
-plt.title("Residuals vs Fitted Values by Group")
-plt.legend()
-plt.show()
-
+#| echo: false
+#| output: asis
+render_q_a_env([
+    {"value": "The residuals should all be exactly zero for ordinary least squares.",
+     "feedback": "OLS minimizes the sum of squared residuals; it does not generally make every residual zero."},
+    {"value": "A straight-line conditional mean may be inadequate; a curved term is worth investigating.",
+     "feedback": "Correct. The graph is a diagnostic, not proof of a particular alternative model.", "answer": True},
+    {"value": "The curved pattern proves that MgO causes temperature changes.",
+     "feedback": "Residual patterns do not establish causality."},
+    {"value": "The model must have zero predictive error outside the training data.",
+     "feedback": "A pattern in residuals suggests the opposite."},
+])
 ```
 
+### Question 3 — Fit the full quadratic model
 
-This graph clearly illustrates the limitation of our model. We can also construct a normal Q-Q plot to assess if the empirical distribution of the residuals is close to a normal distribution using the function `stats.probplot` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-probplot):
+The lecture's quadratic model has three linear terms, three squared terms and three pairwise interactions. The `(a + b + c)**2` formula shorthand adds the main effects and pairwise interactions; `I(x**2)` adds an actual squared numeric predictor.
 
+Complete the formula and fit the model.
 
-**Function reference:** `stats.probplot` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-stats-probplot); `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `ax.scatter` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-scatter); `ax.plot` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-plot); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
+:::: {.panel-tabset}
+
+## Exercise
+
+```{pyodide}
+#| exercise: ex_2
+from cpx_lesson import load_data
+import statsmodels.formula.api as smf
+
+train, _ = load_data()
+multiple = smf.ols(
+    "T_C ~ MgO_Cpx + Al2O3_Cpx + TiO2_Cpx", data=train
+).fit()
+formula = (
+    "T_C ~ (MgO_Cpx + Al2O3_Cpx + TiO2_Cpx)**______"
+    " + I(MgO_Cpx**2) + I(Al2O3_Cpx**2) + I(TiO2_Cpx**2)"
+)
+quadratic = smf.ols(formula, data=train).______()
+print(f"Multiple training R²: {multiple.rsquared:.3f}")
+print(f"Quadratic training R²: {quadratic.rsquared:.3f}")
+print("Number of coefficients (including intercept):", len(quadratic.params))
+```
+
+## Hints
+
+Use formula degree `2` to obtain pairwise interactions and call `.fit()`. The squared predictor terms are already written.
+
+## Solution
+
+```python
+from cpx_lesson import load_data
+import statsmodels.formula.api as smf
+
+train, _ = load_data()
+multiple = smf.ols(
+    "T_C ~ MgO_Cpx + Al2O3_Cpx + TiO2_Cpx", data=train
+).fit()
+formula = (
+    "T_C ~ (MgO_Cpx + Al2O3_Cpx + TiO2_Cpx)**2"
+    " + I(MgO_Cpx**2) + I(Al2O3_Cpx**2) + I(TiO2_Cpx**2)"
+)
+quadratic = smf.ols(formula, data=train).fit()
+print(f"Multiple training R²: {multiple.rsquared:.3f}")
+print(f"Quadratic training R²: {quadratic.rsquared:.3f}")
+print("Number of coefficients (including intercept):", len(quadratic.params))
+```
+
+::::
+
+### Question 4 — Is this still linear regression?
 
 ```{python}
-import scipy.stats as stats
-(osm, osr), (slope, intercept, r) = stats.probplot(residuals, dist="norm")
-plt.figure(figsize=(6, 5))
-
-# Black dots
-plt.scatter(osm, osr, color='black', s=20)
-
-# Black reference line
-plt.plot(osm, slope * osm + intercept, color='black', linewidth=1.5)
-plt.title("Normal Q–Q Plot of Residuals")
-plt.xlabel("Theoretical Quantiles")
-plt.ylabel("Sample Quantiles")
-plt.show()
-
+#| echo: false
+#| output: asis
+render_q_a_env([
+    {"value": "Only if the data come from one publication.",
+     "feedback": "Publication structure matters for inference and validation, not for the algebraic definition."},
+    {"value": "Only if every interaction coefficient is exactly zero.",
+     "feedback": "Nonzero interaction coefficients are perfectly compatible with a linear model in the coefficients."},
+    {"value": "No. Any squared predictor makes least squares impossible.",
+     "feedback": "Ordinary least squares also fits models with known transformations of predictors."},
+    {"value": "Yes. It is linear in its unknown coefficients, even though it contains squared predictors and products.",
+     "feedback": "Exactly. Linear refers to the coefficients, not necessarily to a straight line in predictor space.", "answer": True},
+])
 ```
 
+### Question 5 — More flexibility
+
+```{python}
+#| echo: false
+#| output: asis
+render_q_a_env([
+    {"value": "The quadratic model has 10 coefficients including the intercept; its training R² cannot be lower than that of the nested linear model on the same observations.",
+     "feedback": "Correct. Extra flexibility may improve training fit, but test performance must be checked separately.", "answer": True},
+    {"value": "The quadratic model always predicts better on unseen experiments.",
+     "feedback": "Increasing complexity can increase out-of-sample error."},
+    {"value": "The quadratic model contains only three estimated coefficients.",
+     "feedback": "Count the intercept, three main terms, three squares and three pairwise interactions."},
+    {"value": "Training R² decreases whenever a predictor is added.",
+     "feedback": "In nested ordinary least squares models on the same rows, training R² cannot decrease."},
+])
+```

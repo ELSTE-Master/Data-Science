@@ -10,33 +10,38 @@ format:
 jupyter: python3
 ---
 
-```{python}
-#| echo: false
-from pywebexercises.exercises import mcq, longmcq, torf
-import matplotlib.pyplot as plt
-plt.rcParams.update({
-    "figure.facecolor":  (0.0, 0.0, 0.0, 0.0),  # red   with alpha = 30%
-})
-```
-
-
-This session introduces **linear regression** as a framework for quantifying relationships between a numeric outcome and one or more predictors. We discuss how to incorporate categorical variables and interaction terms, and how to interpret coefficients along with their associated uncertainty (standard errors, confidence intervals, and p-values). We emphasize key assumptions (e.g., linearity, additivity, homoscedasticity, normal errors, independence), model diagnostics (e.g., residual plots, QQ plots), effect sizes, and prediction. We also highlight the connection between regression and two-sample tests by showing how the t-test can be viewed as a special case of the linear model framework.
+This lecture uses experimental clinopyroxene (CPX) chemistry to study **linear regression** and temperature prediction. The exercises below use the same experimental dataset, frozen train/evaluation allocation and Python models as the slides.
 
 ## Today’s objectives {.unnumbered}
 
-The objectives of this class are to:
-
-- [x] Review core concepts: hypotheses, p-values, confidence intervals, and how they arise in regression  
-- [x] Fit and interpret linear regression models
-- [x] Encode categorical variables and add interaction terms; interpret conditional effects  
-- [x] Check assumptions and run diagnostics: residual patterns, QQ plots, heteroscedasticity, independence, ...
-- [x] Compare and select models: adjusted $R^2$, AIC; consider transformations when appropriate  
-- [x] Communicate effect sizes and predictions (point & interval) and implement analyses in Python (`pandas` + `statsmodels`)
+- Fit and interpret simple and multiple linear regression, least squares, coefficients, p-values and $R^2$.
+- Examine residual diagnostics, polynomial terms and interactions.
+- Understand overfitting, training/test separation, model-search complexity, AIC and grouped cross-validation.
+- Interpret prediction errors, confidence intervals for a conditional mean and prediction intervals for an individual observation.
+- Distinguish association from causation and discuss scientific limitations.
 
 ## Slides
 
 
 [{{< fa file-pdf >}} PDF](class_4_slides.pdf){.btn .btn-download target="_blank"}
 [{{< fa display >}} View in browser](../class4/class_4_slides.html){.btn .btn-download target="_blank"}
-[{{< fa download >}} Offline HTML](class_4_slides_static.html){.btn .btn-download target="_blank"}
 
+[Static/offline HTML](class_4_slides_static.html){.btn .btn-download target="_blank"}
+
+## Exercises
+
+Each exercise mixes short multiple-choice questions (with feedback) and editable Python cells. Select the **Hints** or **Solution** tab when you need help. The Python cells run in the browser, with an internet connection required to load the runtime and its packages.
+
+**Core practice (start here; about 55–70 minutes):**
+
+1. [Fit and understand a regression line](class_4_ex_1.qmd) — plot experimental CPX and interpret the MgO slope and $R^2$.
+2. [Multiple regression with three oxides](class_4_ex_2.qmd) — fit models with MgO, Al₂O₃ and TiO₂; distinguish conditional coefficients.
+3. [Residuals and curved relationships](class_4_ex_3.qmd) — inspect a diagnostic plot and fit the full quadratic.
+4. [Test-set prediction error](class_4_ex_4.qmd) — respect publication groups and calculate RMSE and MAE.
+
+**Extensions (if time permits; about 25–35 minutes):**
+
+5. [AIC and grouped cross-validation](class_4_ex_5.qmd) — compare fixed candidates without using the evaluation partition for selection.
+6. [Prediction intervals and scientific use](class_4_ex_6.qmd) — compare uncertainty for a mean and an individual experimental temperature.
+
+The results describe **experimental** CPX in this teaching dataset. They do not, by themselves, validate temperature prediction for natural crystals. The evaluation results shown in the lecture have already been inspected; they should not be presented as a fresh blind test.

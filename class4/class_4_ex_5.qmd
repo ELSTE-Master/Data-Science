@@ -1,175 +1,221 @@
 ---
-title: "Example reading data: confidence intervals for predictions"
-format: 
+title: "Exercise 5: AIC and five-fold cross-validation"
+format:
   live-html:
     theme: cosmo
     css: ../assets/webex_2.css
-    include-after-body: ../assets/webex_2.js
-engine: knitr
+    include-after-body: [../assets/webex_2.js, ../assets/exercise-solution.js]
+pyodide:
+  packages: [pandas, numpy, scipy, statsmodels, matplotlib]
+  resources: [../Data/cpx_teaching.csv, ../Data/cpx_teaching_split.csv, cpx_lesson.py]
+jupyter: python3
 ---
 
+```{python}
+#| include: false
+import sys
+sys.path.insert(0, "../assets")
+from q_a_env import render_q_a_env
+```
 
-{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+**Extension activity:** complete this page if you have time after the first four exercises. We will compare the **three models** from the lecture, using only training observations:
 
+1. MgO-only linear regression;
+2. a linear model with three oxides;
+3. a full three-oxide quadratic with squared terms and pairwise interactions.
 
+Model selection uses the training data (`train`). The separate test dataset (`evaluation`) is **not** used to fit or choose models here.
 
+AIC rewards better fit while penalizing model complexity. Smaller AIC is preferred among these candidate models. AIC is **not** a prediction error in degrees Celsius.
 
+### Question 1 — What does AIC measure?
 
-In the previous section, we saw that the third model appears to be the most adequate among all three models we have considered. The prediction for this model can be expressed as follows:
+```{python}
+#| echo: false
+#| output: asis
+render_q_a_env([
+    {"value": "AIC is always higher for the model with more coefficients.",
+     "feedback": "A model with more coefficients can have smaller AIC if its fit improves enough."},
+    {"value": "AIC guarantees that the selected model is physically causal.",
+     "feedback": "AIC compares models; it does not show that one variable causes another."},
+    {"value": "AIC is the average absolute error measured in degrees Celsius.",
+     "feedback": "That describes MAE, not AIC."},
+    {"value": "AIC balances how well a model fits the data against its complexity; smaller AIC is preferred among the candidate models.",
+     "feedback": "Correct. AIC rewards better fit and penalizes extra complexity. It is not an error measured in °C.", "answer": True},
+])
+```
 
-$$
-\text { Prediction Score }_i=33.3504+6.1522\left(\text { Age }_i-6\right)+5.8103 \text { Group }_i\left(\text { Age }_i-6\right)
-$$
+### Question 2 — Calculate AIC on training data
 
+`selection_formulas()` supplies the three model formulas from the lecture. Complete the code to fit each model on the training data, calculate AIC and subtract the smallest AIC. The model with the smallest AIC will have a difference of zero.
 
+:::: {.panel-tabset}
 
-which corresponds to the expected (or average) score for a child of a certain age in a certain group. But how certain are we about this expected score? To answer this question, we can compute confidence intervals (typically at the 95% confidence level) for our predicted scores. This can be done very similarly to what we did before using the method `get_prediction().summary_frame()` [(doc)](../appendices/doc_statsmodels.qmd#models-model-get-prediction) [(doc)](../appendices/doc_statsmodels.qmd#models-model-summary-frame). First, we recall how the third model is estimated:
+## Exercise
 
-
-
-
-**Function reference:** `wls_prediction_std` [(doc)](../appendices/doc_statsmodels.qmd#models-wls-prediction-std); `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv); `model.fit` [(doc)](../appendices/doc_statsmodels.qmd#models-model-fit); `smf.ols` [(doc)](../appendices/doc_statsmodels.qmd#models-smf-ols); `print` [(doc)](../appendices/doc_python.qmd#python-print); `model.summary` [(doc)](../appendices/doc_statsmodels.qmd#models-model-summary).
-
-```{python, echo=TRUE}
+```{pyodide}
+#| exercise: ex_1
+from cpx_lesson import load_data, selection_formulas
+import statsmodels.formula.api as smf
 import pandas as pd
-import matplotlib.pyplot as plt
+
+train, _ = load_data()
+aic = {}
+for name, formula in selection_formulas().items():
+    fit = smf.ols(formula, data=______).fit()
+    aic[name] = fit.______
+
+scores = pd.Series(aic)
+delta_aic = scores - scores.______()
+print(delta_aic.round(1).to_string())
+```
+
+## Hints
+
+The model uses `train`. The fitted result's `.aic` property contains AIC, and `.min()` obtains the smallest value in the Series.
+
+## Solution
+
+```python
+from cpx_lesson import load_data, selection_formulas
+import statsmodels.formula.api as smf
+import pandas as pd
+
+train, _ = load_data()
+aic = {}
+for name, formula in selection_formulas().items():
+    fit = smf.ols(formula, data=train).fit()
+    aic[name] = fit.aic
+
+scores = pd.Series(aic)
+delta_aic = scores - scores.min()
+print(delta_aic.round(1).to_string())
+```
+
+::::
+
+### Question 3 — Why cross-validation too?
+
+Five-fold cross-validation checks predictions using the training data:
+
+1. Divide the training observations into five parts, called **folds**.
+2. Fit the model using four folds.
+3. Predict the observations in the remaining fold, which was not used for that fit.
+4. Repeat until each fold has been used to evaluate predictions once.
+5. Combine all these prediction errors to calculate a cross-validation RMSE.
+
+The original test dataset stays outside this procedure. Why is cross-validation useful alongside AIC?
+
+```{python}
+#| echo: false
+#| output: asis
+render_q_a_env([
+    {"value": "Cross-validation estimates training R² without splitting the data.",
+     "feedback": "Cross-validation fits the model several times, each time excluding one fold from fitting."},
+    {"value": "Cross-validation measures prediction errors on folds excluded from fitting, while AIC balances fit and complexity.",
+     "feedback": "Correct. They answer related but different questions, so they need not favor the same model.", "answer": True},
+    {"value": "Cross-validation converts correlation into causation.",
+     "feedback": "Checking prediction errors does not show that one variable causes another."},
+    {"value": "Cross-validation uses the test dataset to estimate the regression coefficients.",
+     "feedback": "Each fit uses four folds of training observations. The separate test dataset is not used."},
+])
+```
+
+### Question 4 — Calculate five-fold cross-validation RMSE
+
+`cv_folds(train)` provides the five predefined folds, labelled `0` to `4`. You do not need to create or change them. In the loop, `fitting` contains four folds and `validation` contains the remaining fold.
+
+Complete the code for the three-oxide model. Collect the **squared prediction errors** from all five validation folds, then take their mean and its square root to obtain the cross-validation RMSE.
+
+:::: {.panel-tabset}
+
+## Exercise
+
+```{pyodide}
+#| exercise: ex_2
+from cpx_lesson import load_data, cv_folds
 import statsmodels.formula.api as smf
 import numpy as np
-from statsmodels.sandbox.regression.predstd import wls_prediction_std
 
-reading = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/reading.csv")
-reading["age_minus_6"] = reading["age"] - 6
-mod3 = smf.ols("score ~ age_minus_6 + group:age_minus_6", data=reading).fit()
-print(mod3.summary())
+train, _ = load_data()
+fold = cv_folds(train)
+formula = "T_C ~ MgO_Cpx + Al2O3_Cpx + TiO2_Cpx"
+squared_errors = []
+
+for v in range(5):
+    fitting = train.loc[fold != v]
+    validation = train.loc[fold == v]
+    model = smf.ols(formula, data=______).fit()
+    error = validation["T_C"] - model.______(validation)
+    squared_errors.extend((error ** 2).to_numpy())
+
+cv_rmse = np.sqrt(np.______(squared_errors))
+print(f"5-fold CV RMSE: {cv_rmse:.1f} °C")
 ```
 
-Suppose we wish to construct the predictions for children of age 6 to 12 in the control group. In the previous slides we saw that this could be done as follows:
+## Hints
 
+Fit on `fitting` and predict `validation`. Use `np.mean()` to pool the squared errors. The result should be close to the lecture's three-oxide CV RMSE of **90.1 °C**.
 
-**Function reference:** `np.arange` [(doc)](../appendices/doc_numpy_scipy.qmd#numerical-np-arange); `DataFrame` [(doc)](../appendices/doc_pandas.qmd#pandas-dataframe); `model.summary_frame` [(doc)](../appendices/doc_statsmodels.qmd#models-model-summary-frame); `model.get_prediction` [(doc)](../appendices/doc_statsmodels.qmd#models-model-get-prediction).
+## Solution
+
+```python
+from cpx_lesson import load_data, cv_folds
+import statsmodels.formula.api as smf
+import numpy as np
+
+train, _ = load_data()
+fold = cv_folds(train)
+formula = "T_C ~ MgO_Cpx + Al2O3_Cpx + TiO2_Cpx"
+squared_errors = []
+
+for v in range(5):
+    fitting = train.loc[fold != v]
+    validation = train.loc[fold == v]
+    model = smf.ols(formula, data=fitting).fit()
+    error = validation["T_C"] - model.predict(validation)
+    squared_errors.extend((error ** 2).to_numpy())
+
+cv_rmse = np.sqrt(np.mean(squared_errors))
+print(f"5-fold CV RMSE: {cv_rmse:.1f} °C")
+```
+
+::::
+
+### Question 5 — Compare the results
+
+The lecture reported approximately **90.1 °C** CV RMSE for the three-oxide linear model and **90.0 °C** for the full quadratic. AIC favors the quadratic more clearly. What can we conclude?
 
 ```{python}
-# --- Define ages to predict (0:6 corresponds to ages 6 to 12) ---
-age_to_predict = np.arange(0, 7)
-data_control = pd.DataFrame({"age_minus_6": age_to_predict, "group": "Control"})
-pred_control_ci = mod3.get_prediction(data_control).summary_frame(alpha=0.05)
+#| echo: false
+#| output: asis
+render_q_a_env([
+    {"value": "The CV errors are almost equal; the AIC preference does not demonstrate a meaningful improvement in predictive accuracy.",
+     "feedback": "Correct. AIC balances fit and complexity, while CV checks predictions on excluded folds. This very small CV difference does not establish a useful improvement.", "answer": True},
+    {"value": "Both models have zero uncertainty because their CV errors are close.",
+     "feedback": "Similar point estimates do not imply zero uncertainty."},
+    {"value": "The two numbers represent confidence intervals for regression coefficients.",
+     "feedback": "They summarize cross-validation prediction errors in °C."},
+    {"value": "The 0.1 °C difference proves a universal advantage of the quadratic model.",
+     "feedback": "Such a small difference on these folds does not prove that the quadratic will predict better on other data."},
+])
 ```
 
-We can inspect the content of the `pred_control_ci` DataFrame to see what it contains:
+### Question 6 — Which observations evaluate each fit?
 
-
-**Function reference:** `head` [(doc)](../appendices/doc_pandas.qmd#pandas-head); `columns` [(doc)](../appendices/doc_pandas.qmd#pandas-columns).
+During five-fold cross-validation, which observations are used to evaluate the fitted model at each iteration?
 
 ```{python}
-pred_control_ci.head(5)
-pred_control_ci.columns
+#| echo: false
+#| output: asis
+render_q_a_env([
+    {"value": "The observations in the original test dataset (`evaluation`).",
+     "feedback": "The separate test dataset stays outside cross-validation; all five folds come from the training data."},
+    {"value": "The observations in the four folds used to fit that model.",
+     "feedback": "Those observations estimate the coefficients. Evaluate predictions on the fold excluded from that fit."},
+    {"value": "The observations in the fold that was excluded when fitting the model for that iteration.",
+     "feedback": "Correct. Each training observation is used to evaluate a model fitted without its fold, and the original test dataset remains outside the procedure.", "answer": True},
+    {"value": "All training observations, after fitting the model on all five folds.",
+     "feedback": "That would measure training fit. Cross-validation excludes one fold from each fit and evaluates predictions on that fold."},
+])
 ```
-
-The DataFrame contains the predicted mean scores (`mean` [(doc)](../appendices/doc_pandas.qmd#pandas-mean)), the 95% confidence intervals for these means (`mean_ci_lower` and `mean_ci_upper`), and also the 95% intervals for individual observations (`obs_ci_lower` and `obs_ci_upper`). We can now repeat the same procedure for the treatment group.
-
-
-
-**Function reference:** `DataFrame` [(doc)](../appendices/doc_pandas.qmd#pandas-dataframe); `model.summary_frame` [(doc)](../appendices/doc_statsmodels.qmd#models-model-summary-frame); `model.get_prediction` [(doc)](../appendices/doc_statsmodels.qmd#models-model-get-prediction).
-
-```{python}
-data_treatment = pd.DataFrame({"age_minus_6": age_to_predict, "group": "Treatment"})
-pred_treatment_ci = mod3.get_prediction(data_treatment).summary_frame(alpha=0.05)
-```
-
-Next, we extract the predicted values and the lower and upper bounds of the confidence intervals, and visualize the predictions alongside the observed data:
-
-
-**Function reference:** `map` [(doc)](../appendices/doc_pandas.qmd#pandas-map); `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `ax.scatter` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-scatter); `ax.plot` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-plot); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `ax.legend` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-legend); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
-
-```{python}
-# Extract fit, lower, upper
-fit_control = pred_control_ci['mean']
-lwr_control = pred_control_ci['mean_ci_lower']
-upr_control = pred_control_ci['mean_ci_upper']
-
-fit_treatment = pred_treatment_ci['mean']
-lwr_treatment = pred_treatment_ci['mean_ci_lower']
-upr_treatment = pred_treatment_ci['mean_ci_upper']
-
-# --- Plot predictions with confidence intervals ---
-colors = {'Control': '#c4bedf', 'Treatment': '#f6aed5'}
-group_col = reading['group'].map(colors)
-plt.figure(figsize=(7, 5))
-plt.scatter(reading['age'], reading['score'], c=group_col, label=None)
-
-# Control
-plt.plot(age_to_predict + 6, fit_control, color=colors['Control'], label="Control")
-plt.plot(age_to_predict + 6, lwr_control, color=colors['Control'], linestyle='--', label="Control CI")
-plt.plot(age_to_predict + 6, upr_control, color=colors['Control'], linestyle='--')
-
-# Treatment
-plt.plot(age_to_predict + 6, fit_treatment, color=colors['Treatment'], label="Treatment")
-plt.plot(age_to_predict + 6, lwr_treatment, color=colors['Treatment'], linestyle='--', label="Treatment CI")
-plt.plot(age_to_predict + 6, upr_treatment, color=colors['Treatment'], linestyle='--')
-
-plt.xlabel("Age")
-plt.ylabel("Score")
-plt.title("Predictions with 95% Confidence Intervals (Model 3)")
-plt.legend()
-plt.show()
-
-```
-
-In some situations, it is also of interest to compute a prediction interval, which corresponds to a confidence interval for the score of a child of a certain age and group. This is different from a confidence interval for the mean. Indeed, in the previous graph we can see that many points are outside of the confidence region (which makes sense since the intervals are confidence intervals for the means). These intervals are available directly in the `pred_control_ci` and `pred_treatment_ci` objects by using the columns `obs_ci_lower` and `obs_ci_upper.` 
-
-
-**Function reference:** `iloc` [(doc)](../appendices/doc_pandas.qmd#pandas-iloc).
-
-```{python}
-# Extract confidence intervals for predictions
-pred_control_ci[['mean', 'mean_ci_lower', 'mean_ci_upper']].iloc[1]
-# Extract prediction intervals from control group age 7
-pred_control_ci[['mean', 'obs_ci_lower', 'obs_ci_upper']].iloc[1]
-```
-In this output, we can see that our prediction intervals are much wider than the previous confidence intervals. For example, for a child of age 7 our predicted score is 39.50267 but the corresponding 95% prediction interval is (32.30440 46.70093). This means that with a probability of 95%, we expect the score of a child of age 7 in the control group to be somewhere between 32.30440 and 46.70093.
-
-Naturally, we can produce a graph similarly to the one we considered previously as follows:
-
-
-
-**Function reference:** `map` [(doc)](../appendices/doc_pandas.qmd#pandas-map); `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `ax.scatter` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-scatter); `ax.plot` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-plot); `ax.set_xlabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-xlabel); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `ax.legend` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-legend); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
-
-```{python}
-# Extract fit, lower, upper
-fit_control = pred_control_ci['mean']
-lwr_control = pred_control_ci['obs_ci_lower']
-upr_control = pred_control_ci['obs_ci_upper']
-
-fit_treatment = pred_treatment_ci['mean']
-lwr_treatment = pred_treatment_ci['obs_ci_lower']
-upr_treatment = pred_treatment_ci['obs_ci_upper']
-
-# --- Plot predictions with confidence intervals ---
-colors = {'Control': '#c4bedf', 'Treatment': '#f6aed5'}
-group_col = reading['group'].map(colors)
-plt.figure(figsize=(7, 5))
-plt.scatter(reading['age'], reading['score'], c=group_col, label=None)
-
-# Control
-plt.plot(age_to_predict + 6, fit_control, color=colors['Control'], label="Control")
-plt.plot(age_to_predict + 6, lwr_control, color=colors['Control'], linestyle='--', label="Control PI")
-plt.plot(age_to_predict + 6, upr_control, color=colors['Control'], linestyle='--')
-
-# Treatment
-plt.plot(age_to_predict + 6, fit_treatment, color=colors['Treatment'], label="Treatment")
-plt.plot(age_to_predict + 6, lwr_treatment, color=colors['Treatment'], linestyle='--', label="Treatment PI")
-plt.plot(age_to_predict + 6, upr_treatment, color=colors['Treatment'], linestyle='--')
-
-plt.xlabel("Age")
-plt.ylabel("Score")
-plt.title("Predictions with 95% Prediction Intervals (Model 3)")
-plt.legend()
-plt.show()
-```
-
-
-
- 
-
-
-
