@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Example reading data: prediction – ELSTE Data Science Master Course</title>
+<title>Exercise 2: Multiple regression with three oxides – ELSTE Data Science Master Course</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -151,7 +151,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../class4/class_4_intro.html">Class 4: Linear regression</a></li><li class="breadcrumb-item"><a href="../class4/class_4_ex_2.html">Example reading data: prediction</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../class4/class_4_intro.html">Class 4: Linear regression</a></li><li class="breadcrumb-item"><a href="../class4/class_4_ex_2.html">Exercise 2: Multiple regression with three oxides</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -332,37 +332,37 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../class4/class_4_ex_1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Example reading data: estimation</span></a>
+ <span class="menu-text">Exercise 1: Fit and understand a regression line</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../class4/class_4_ex_2.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Example reading data: prediction</span></a>
+ <span class="menu-text">Exercise 2: Multiple regression with three oxides</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../class4/class_4_ex_3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Example reading data: model diagnostic</span></a>
+ <span class="menu-text">Exercise 3: Residuals and curved relationships</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../class4/class_4_ex_4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Example reading data: improving our model</span></a>
+ <span class="menu-text">Exercise 4: Predictive accuracy</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../class4/class_4_ex_5.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Example reading data: confidence intervals for predictions</span></a>
+ <span class="menu-text">Exercise 5: AIC and five-fold cross-validation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../class4/class_4_ex_6.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exercises ice duration data</span></a>
+ <span class="menu-text">Exercise 6: Prediction intervals and scientific use</span></a>
   </div>
 </li>
       </ul>
@@ -370,12 +370,35 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
- <span class="menu-text">Appendices</span></a>
+ <span class="menu-text">Exam</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exam/exam_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Instructions and documents</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exam/exam_data_description.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data description</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../appendices/setup_vscode.html" class="sidebar-item-text sidebar-link">
@@ -390,13 +413,13 @@ window.Quarto = {
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
  <span class="menu-text">Function reference</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../appendices/function_reference.html" class="sidebar-item-text sidebar-link">
@@ -446,9 +469,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../class4/class_4_intro.html">Class 4: Linear regression</a></li><li class="breadcrumb-item"><a href="../class4/class_4_ex_2.html">Example reading data: prediction</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../class4/class_4_intro.html">Class 4: Linear regression</a></li><li class="breadcrumb-item"><a href="../class4/class_4_ex_2.html">Exercise 2: Multiple regression with three oxides</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Example reading data: prediction</h1>
+<h1 class="title">Exercise 2: Multiple regression with three oxides</h1>
 </div>
 
 
@@ -465,216 +488,116 @@ window.Quarto = {
 </header>
 
 
-<p>In order to assess the adequacy of our model to the data, it is useful (when this is possible) to compare the predictions and the data. This implies that we need to do two things: (1) plot the data with different colors for the groups and (2) compute predictions.</p>
-<p>We can plot the data as follows:</p>
-<p><strong>Function reference:</strong> <code>read_csv</code> <a href="../appendices/doc_pandas.html#pandas-read-csv">(doc)</a>; <code>plt.figure</code> <a href="../appendices/doc_visualisation.html#plotting-plt-figure">(doc)</a>; <code>ax.scatter</code> <a href="../appendices/doc_visualisation.html#plotting-ax-scatter">(doc)</a>; <code>ax.set_xlabel</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-xlabel">(doc)</a>; <code>ax.set_ylabel</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-ylabel">(doc)</a>; <code>ax.set_title</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-title">(doc)</a>; <code>plt.show</code> <a href="../appendices/doc_visualisation.html#plotting-plt-show">(doc)</a>.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>reading <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/reading.csv"</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot (no color coding by group)</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>plt.scatter(reading[<span class="st">'age'</span>], reading[<span class="st">'score'</span>], color<span class="op">=</span><span class="st">'steelblue'</span>)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Labels and title</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Age'</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Score'</span>)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Age vs. Score'</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
+<p>The lecture considered a simple MgO regression and a multiple regression with <strong>MgO, Al₂O₃ and TiO₂</strong>. Use the same 1,402 training observations for both.</p>
+<section id="question-1-write-the-model" class="level3">
+<h3 class="anchored" data-anchor-id="question-1-write-the-model">Question 1 — Write the model</h3>
+<p>Which <code>statsmodels</code> formula fits temperature using all three oxide measurements as separate linear predictors?</p>
+<div id="radio_q1" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_q1" value="" data-feedback="This reverses the response and predictors."> <span>MgO_Cpx + Al2O3_Cpx + TiO2_Cpx ~ T_C</span></label><label><input type="radio" autocomplete="off" name="radio_q1" value="" data-feedback="Those are identifiers rather than the requested chemical predictors."> <span>T_C ~ Ref + Run</span></label><label><input type="radio" autocomplete="off" name="radio_q1" value="" data-feedback="The * operator also introduces interaction terms."> <span>T_C ~ MgO_Cpx * Al2O3_Cpx * TiO2_Cpx</span></label><label><input type="radio" autocomplete="off" name="radio_q1" value="answer" data-feedback="Correct: each predictor appears as an additive term."> <span>T_C ~ MgO_Cpx + Al2O3_Cpx + TiO2_Cpx</span></label>
+<div class="webex-feedback-box">
+
+</div>
+</div>
+</section>
+<section id="question-2-fit-and-compare-training-fit" class="level3">
+<h3 class="anchored" data-anchor-id="question-2-fit-and-compare-training-fit">Question 2 — Fit and compare training fit</h3>
+<p>Complete the code to fit both models and compare their training <span class="math inline">\(R^2\)</span>.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Exercise</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Hints</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Solution</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div>
-<figure class="figure">
-<p><img src="class_4_ex_2_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="576"></p>
-</figure>
+<div id="pyodide-1" class="exercise-cell">
+
+</div>
+<script type="pyodide-1-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfMSJ9LCJjb2RlIjoiZnJvbSBjcHhfbGVzc29uIGltcG9ydCBsb2FkX2RhdGFcbmltcG9ydCBzdGF0c21vZGVscy5mb3JtdWxhLmFwaSBhcyBzbWZcblxudHJhaW4sIF8gPSBsb2FkX2RhdGEoKVxuc2ltcGxlID0gc21mLm9scyhcIlRfQyB+IE1nT19DcHhcIiwgZGF0YT10cmFpbikuZml0KClcbm11bHRpcGxlID0gc21mLm9scyhcbiAgICBcIlRfQyB+IE1nT19DcHggKyBfX19fX18gKyBfX19fX19cIixcbiAgICBkYXRhPXRyYWluXG4pLmZpdCgpXG5wcmludChmXCJTaW1wbGUgdHJhaW5pbmcgUsKyOiB7c2ltcGxlLl9fX19fXzowLjNmfVwiKVxucHJpbnQoZlwiTXVsdGlwbGUgdHJhaW5pbmcgUsKyOiB7bXVsdGlwbGUucnNxdWFyZWQ6MC4zZn1cIilcbnByaW50KG11bHRpcGxlLnBhcmFtcy5yb3VuZCgyKSkifQ==
+</script>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>The remaining predictors are <code>Al2O3_Cpx</code> and <code>TiO2_Cpx</code>. The fitted model’s training coefficient of determination is stored in <code>.rsquared</code>.</p>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<p><strong>Function reference:</strong> <code>smf.ols</code> and <code>model.fit</code> <a href="../appendices/doc_statsmodels.html">(doc)</a>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cpx_lesson <span class="im">import</span> load_data</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>train, _ <span class="op">=</span> load_data()</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>simple <span class="op">=</span> smf.ols(<span class="st">"T_C ~ MgO_Cpx"</span>, data<span class="op">=</span>train).fit()</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>multiple <span class="op">=</span> smf.ols(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"T_C ~ MgO_Cpx + Al2O3_Cpx + TiO2_Cpx"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>train</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>).fit()</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Simple training R²: </span><span class="sc">{</span>simple<span class="sc">.</span>rsquared<span class="sc">:0.3f}</span><span class="ss">"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Multiple training R²: </span><span class="sc">{</span>multiple<span class="sc">.</span>rsquared<span class="sc">:0.3f}</span><span class="ss">"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(multiple.params.<span class="bu">round</span>(<span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
-<p>Next, we will highlight the different groups using two colors.</p>
-<p><strong>Function reference:</strong> <code>plt.figure</code> <a href="../appendices/doc_visualisation.html#plotting-plt-figure">(doc)</a>; <code>unique</code> <a href="../appendices/doc_pandas.html#pandas-unique">(doc)</a>; <code>ax.scatter</code> <a href="../appendices/doc_visualisation.html#plotting-ax-scatter">(doc)</a>; <code>ax.set_xlabel</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-xlabel">(doc)</a>; <code>ax.set_ylabel</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-ylabel">(doc)</a>; <code>ax.set_title</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-title">(doc)</a>; <code>ax.legend</code> <a href="../appendices/doc_visualisation.html#plotting-ax-legend">(doc)</a>; <code>plt.show</code> <a href="../appendices/doc_visualisation.html#plotting-plt-show">(doc)</a>.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+</section>
+<section id="question-3-a-conditional-coefficient" class="level3">
+<h3 class="anchored" data-anchor-id="question-3-a-conditional-coefficient">Question 3 — A conditional coefficient</h3>
+<p>The TiO₂ coefficient in the multiple model is about <strong>−18.6 °C per reported unit</strong>. Which interpretation is appropriate?</p>
+<div id="radio_q2" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_q2" value="" data-feedback="The coefficient does not diagnose individual measurement errors."> <span>A temperature 18.6 °C lower proves that TiO₂ was measured incorrectly.</span></label><label><input type="radio" autocomplete="off" name="radio_q2" value="answer" data-feedback="Correct: 'holding the other included predictors fixed' is essential."> <span>At a fixed MgO and Al₂O₃, a one-unit higher TiO₂ is associated with a fitted mean temperature 18.6 °C lower.</span></label><label><input type="radio" autocomplete="off" name="radio_q2" value="" data-feedback="Regression coefficients are associations, not guaranteed physical interventions."> <span>A one-unit higher TiO₂ always lowers the true experimental temperature by 18.6 °C.</span></label><label><input type="radio" autocomplete="off" name="radio_q2" value="" data-feedback="A partial regression coefficient need not have the same sign as a marginal association."> <span>TiO₂ must have a negative correlation with temperature when considered alone.</span></label>
+<div class="webex-feedback-box">
+
+</div>
+</div>
+</section>
+<section id="question-4-predict-a-training-composition" class="level3">
+<h3 class="anchored" data-anchor-id="question-4-predict-a-training-composition">Question 4 — Predict a training composition</h3>
+<p>Use the chemistry of the <strong>first training observation</strong> as an example input. Compute the fitted temperature with each model. This demonstrates prediction syntax, but these values are <strong>in-sample fits</strong>, not test errors.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Exercise</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Hints</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false" href="">Solution</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div>
+<div id="pyodide-2" class="exercise-cell">
+
+</div>
+<script type="pyodide-2-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfMiJ9LCJjb2RlIjoiZnJvbSBjcHhfbGVzc29uIGltcG9ydCBsb2FkX2RhdGFcbmltcG9ydCBzdGF0c21vZGVscy5mb3JtdWxhLmFwaSBhcyBzbWZcblxudHJhaW4sIF8gPSBsb2FkX2RhdGEoKVxuc2ltcGxlID0gc21mLm9scyhcIlRfQyB+IE1nT19DcHhcIiwgZGF0YT10cmFpbikuZml0KClcbm11bHRpcGxlID0gc21mLm9scyhcbiAgICBcIlRfQyB+IE1nT19DcHggKyBBbDJPM19DcHggKyBUaU8yX0NweFwiLCBkYXRhPXRyYWluXG4pLmZpdCgpXG5cbm5ldyA9IHRyYWluLmlsb2NbWzBdXVtbXCJNZ09fQ3B4XCIsIFwiQWwyTzNfQ3B4XCIsIFwiVGlPMl9DcHhcIl1dXG5wcmludChcIlNpbXBsZSBmaXR0ZWQgdGVtcGVyYXR1cmU6XCIsIHJvdW5kKHNpbXBsZS5fX19fX18obmV3KS5pbG9jWzBdLCAxKSlcbnByaW50KFwiTXVsdGlwbGUgZml0dGVkIHRlbXBlcmF0dXJlOlwiLCByb3VuZChtdWx0aXBsZS5fX19fX18obmV3KS5pbG9jWzBdLCAxKSkifQ==
+</script>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p>The method is called <code>.predict()</code>. For a formula model, pass a data frame with the predictor columns. Using <code>[[0]]</code> retains the first row as a data frame.</p>
+</div>
+<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
+<p><strong>Function reference:</strong> <code>model.predict</code> <a href="../appendices/doc_statsmodels.html">(doc)</a>; <code>iloc</code> <a href="../appendices/doc_pandas.html">(doc)</a>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cpx_lesson <span class="im">import</span> load_data</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Define custom colors for each group</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> {</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Control'</span>: <span class="st">'#c4bedf'</span>,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Treatment'</span>: <span class="st">'#f6aed5'</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot by group with specific colors</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> g <span class="kw">in</span> reading[<span class="st">'group'</span>].unique():</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    subset <span class="op">=</span> reading[reading[<span class="st">'group'</span>] <span class="op">==</span> g]</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    plt.scatter(subset[<span class="st">'age'</span>], subset[<span class="st">'score'</span>], label<span class="op">=</span>g, color<span class="op">=</span>colors[g], alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Labels and legend</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Age'</span>)</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Score'</span>)</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Age vs. Score by Group'</span>)</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="class_4_ex_2_files/figure-html/unnamed-chunk-3-3.png" class="img-fluid figure-img" width="576"></p>
-</figure>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>train, _ <span class="op">=</span> load_data()</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>simple <span class="op">=</span> smf.ols(<span class="st">"T_C ~ MgO_Cpx"</span>, data<span class="op">=</span>train).fit()</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>multiple <span class="op">=</span> smf.ols(</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"T_C ~ MgO_Cpx + Al2O3_Cpx + TiO2_Cpx"</span>, data<span class="op">=</span>train</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>).fit()</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>new <span class="op">=</span> train.iloc[[<span class="dv">0</span>]][[<span class="st">"MgO_Cpx"</span>, <span class="st">"Al2O3_Cpx"</span>, <span class="st">"TiO2_Cpx"</span>]]</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Simple fitted temperature:"</span>, <span class="bu">round</span>(simple.predict(new).iloc[<span class="dv">0</span>], <span class="dv">1</span>))</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Multiple fitted temperature:"</span>, <span class="bu">round</span>(multiple.predict(new).iloc[<span class="dv">0</span>], <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
-<p><strong>Function reference:</strong> <code>model.fit</code> <a href="../appendices/doc_statsmodels.html#models-model-fit">(doc)</a>; <code>smf.ols</code> <a href="../appendices/doc_statsmodels.html#models-smf-ols">(doc)</a>; <code>print</code> <a href="../appendices/doc_python.html#python-print">(doc)</a>; <code>model.summary</code> <a href="../appendices/doc_statsmodels.html#models-model-summary">(doc)</a>.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the linear model: score ~ group + age</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>mod1 <span class="op">=</span> smf.ols(<span class="st">'score ~ group + age'</span>, data<span class="op">=</span>reading).fit()</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mod1.summary())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                            OLS Regression Results                            
-==============================================================================
-Dep. Variable:                  score   R-squared:                       0.859
-Model:                            OLS   Adj. R-squared:                  0.854
-Method:                 Least Squares   F-statistic:                     173.0
-Date:                Wed, 04 Nov 2026   Prob (F-statistic):           6.16e-25
-Time:                        09:24:00   Log-Likelihood:                -173.13
-No. Observations:                  60   AIC:                             352.3
-Df Residuals:                      57   BIC:                             358.6
-Df Model:                           2                                         
-Covariance Type:            nonrobust                                         
-======================================================================================
-                         coef    std err          t      P&gt;|t|      [0.025      0.975]
---------------------------------------------------------------------------------------
-Intercept             -7.8639      3.324     -2.366      0.021     -14.520      -1.208
-group[T.Treatment]     6.3771      1.393      4.578      0.000       3.587       9.167
-age                    6.6457      0.370     17.985      0.000       5.906       7.386
-==============================================================================
-Omnibus:                        0.633   Durbin-Watson:                   2.068
-Prob(Omnibus):                  0.729   Jarque-Bera (JB):                0.386
-Skew:                           0.196   Prob(JB):                        0.824
-Kurtosis:                       3.013   Cond. No.                         50.7
-==============================================================================
+</section>
+<section id="question-5-does-higher-training-r2-settle-the-choice" class="level3">
+<h3 class="anchored" data-anchor-id="question-5-does-higher-training-r2-settle-the-choice">Question 5 — Does higher training <span class="math inline">\(R^2\)</span> settle the choice?</h3>
+<div id="radio_q3" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_q3" value="" data-feedback="It can; the issue is what the coefficients and errors mean."> <span>No.&nbsp;Multiple regression cannot be used for mineral compositions.</span></label><label><input type="radio" autocomplete="off" name="radio_q3" value="" data-feedback="Model complexity should be justified by scientific relevance and predictive performance."> <span>Yes. A model with more predictors is always scientifically preferable.</span></label><label><input type="radio" autocomplete="off" name="radio_q3" value="answer" data-feedback="Correct. We will evaluate models on observations not used for fitting."> <span>No.&nbsp;Adding predictors cannot lower ordinary training R² on the same rows, but may fail to improve test error.</span></label><label><input type="radio" autocomplete="off" name="radio_q3" value="" data-feedback="Training fit alone does not measure generalization."> <span>Yes. Higher training R² proves better performance on future publications.</span></label>
+<div class="webex-feedback-box">
 
-Notes:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</code></pre>
 </div>
 </div>
-<p>We can now compute predictions from our model. It can be observed that the age of the children ranges from 6 to 12 so our first step is to construct a sequence of numbers from 6 to 12 as follows:</p>
-<p><strong>Function reference:</strong> <code>np.arange</code> <a href="../appendices/doc_numpy_scipy.html#numerical-np-arange">(doc)</a>; <code>print</code> <a href="../appendices/doc_python.html#python-print">(doc)</a>.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>age_to_predict <span class="op">=</span> np.arange(<span class="dv">6</span>, <span class="dv">13</span>) </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(age_to_predict)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[ 6  7  8  9 10 11 12]</code></pre>
-</div>
-</div>
-<p>Then, using the output of the model we have that the predictions for the group “Control” are given by:</p>
-<p><span class="math display">\[
-\text { Predicted Score }_i=-7.8639+6.6457 \mathrm{Age}_i
-\]</span></p>
-<p>This can be done as follows:</p>
-<p><strong>Function reference:</strong> <code>model.params</code> <a href="../appendices/doc_statsmodels.html#models-model-params">(doc)</a>; <code>get</code> <a href="../appendices/doc_pandas.html#pandas-get">(doc)</a>; <code>print</code> <a href="../appendices/doc_python.html#python-print">(doc)</a>.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>b0 <span class="op">=</span> mod1.params[<span class="st">'Intercept'</span>]</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>b_age <span class="op">=</span> mod1.params[<span class="st">'age'</span>]</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>b_group <span class="op">=</span> mod1.params.get(<span class="st">'group[T.Treatment]'</span>, <span class="dv">0</span>)  <span class="co"># Treatment effect</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Predictions for Control group (no group effect)</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>prediction_control <span class="op">=</span> b0 <span class="op">+</span> b_age <span class="op">*</span> age_to_predict</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(prediction_control)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[32.0101229  38.65578822 45.30145355 51.94711887 58.59278419 65.23844951
- 71.88411484]</code></pre>
-</div>
-</div>
-<p>Alternatively, we can construct an <code>pd.DataFrame</code> <a href="../appendices/doc_pandas.html#pandas-dataframe">(doc)</a> with the data we would like to predict as follows:</p>
-<p><strong>Function reference:</strong> <code>DataFrame</code> <a href="../appendices/doc_pandas.html#pandas-dataframe">(doc)</a>; <code>len</code> <a href="../appendices/doc_python.html#python-len">(doc)</a>.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data to predict for Control group</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>data_to_predict_control <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'age'</span>: age_to_predict,</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'group'</span>: [<span class="st">'Control'</span>] <span class="op">*</span> <span class="bu">len</span>(age_to_predict)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Then, we can use the method <code>predict</code> <a href="../appendices/doc_statsmodels.html#models-model-predict">(doc)</a> as follows:</p>
-<p><strong>Function reference:</strong> <code>model.predict</code> <a href="../appendices/doc_statsmodels.html#models-model-predict">(doc)</a>; <code>print</code> <a href="../appendices/doc_python.html#python-print">(doc)</a>.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>prediction_control <span class="op">=</span> mod1.predict(data_to_predict_control)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(prediction_control)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>0    32.010123
-1    38.655788
-2    45.301454
-3    51.947119
-4    58.592784
-5    65.238450
-6    71.884115
-dtype: float64</code></pre>
-</div>
-</div>
-<p>This approach provides the same results but is more reliable. Similarly, we can compute the predictions for the other groups as follows:</p>
-<p><strong>Function reference:</strong> <code>DataFrame</code> <a href="../appendices/doc_pandas.html#pandas-dataframe">(doc)</a>; <code>len</code> <a href="../appendices/doc_python.html#python-len">(doc)</a>; <code>model.predict</code> <a href="../appendices/doc_statsmodels.html#models-model-predict">(doc)</a>; <code>print</code> <a href="../appendices/doc_python.html#python-print">(doc)</a>.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data to predict for Treatment group</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>data_to_predict_treatment <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'age'</span>: age_to_predict,</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'group'</span>: [<span class="st">'Treatment'</span>] <span class="op">*</span> <span class="bu">len</span>(age_to_predict)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>prediction_treatment <span class="op">=</span> mod1.predict(data_to_predict_treatment)</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(prediction_treatment)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>0    38.387192
-1    45.032858
-2    51.678523
-3    58.324188
-4    64.969854
-5    71.615519
-6    78.261184
-dtype: float64</code></pre>
-</div>
-</div>
-<p>Now, we can add our predictions to the graph as follows:</p>
-<p><strong>Function reference:</strong> <code>plt.figure</code> <a href="../appendices/doc_visualisation.html#plotting-plt-figure">(doc)</a>; <code>unique</code> <a href="../appendices/doc_pandas.html#pandas-unique">(doc)</a>; <code>ax.scatter</code> <a href="../appendices/doc_visualisation.html#plotting-ax-scatter">(doc)</a>; <code>ax.plot</code> <a href="../appendices/doc_visualisation.html#plotting-ax-plot">(doc)</a>; <code>ax.set_xlabel</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-xlabel">(doc)</a>; <code>ax.set_ylabel</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-ylabel">(doc)</a>; <code>ax.set_title</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-title">(doc)</a>; <code>ax.legend</code> <a href="../appendices/doc_visualisation.html#plotting-ax-legend">(doc)</a>; <code>plt.show</code> <a href="../appendices/doc_visualisation.html#plotting-plt-show">(doc)</a>.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define colors</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> {</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Control'</span>: <span class="st">'#c4bedf'</span>,</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Treatment'</span>: <span class="st">'#f6aed5'</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot observed data</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> g <span class="kw">in</span> reading[<span class="st">'group'</span>].unique():</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    subset <span class="op">=</span> reading[reading[<span class="st">'group'</span>] <span class="op">==</span> g]</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    plt.scatter(subset[<span class="st">'age'</span>], subset[<span class="st">'score'</span>], color<span class="op">=</span>colors[g], label<span class="op">=</span>g, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Add prediction lines</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>plt.plot(age_to_predict, prediction_control, color<span class="op">=</span>colors[<span class="st">'Control'</span>], linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>plt.plot(age_to_predict, prediction_treatment, color<span class="op">=</span>colors[<span class="st">'Treatment'</span>], linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Labels and legend</span></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Age"</span>)</span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Score"</span>)</span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Predicted Reading Scores by Age and Group (Model 1)"</span>)</span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="class_4_ex_2_files/figure-html/unnamed-chunk-10-5.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>As discussed in the lecture slides, the adequacy between our predictions and the data is not ideal. To highlight the limitations of this model we will consider model diagnostic graphs in the next section.</p>
 
 
+<script type="pyodide-data">
+eyJvcHRpb25zIjp7ImVudiI6eyJQTE9UTFlfUkVOREVSRVIiOiJwbG90bHlfbWltZXR5cGUifSwiaW5kZXhVUkwiOiJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvcHlvZGlkZS92MC4yOC4xL2Z1bGwvIn0sInBhY2thZ2VzIjp7InBrZ3MiOlsicHlvZGlkZV9odHRwIiwibWljcm9waXAiLCJpcHl0aG9uIiwicGFuZGFzIiwibnVtcHkiLCJzY2lweSIsInN0YXRzbW9kZWxzIiwibWF0cGxvdGxpYiJdfX0=
+</script>
 <script type="ojs-module-contents">
-eyJjb250ZW50cyI6W119
+eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJweW9kaWRlLTIiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8yID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0yLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBleGVyY2lzZSBjb25maWd1cmF0aW9uXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKFxuICAgIHtcbiAgICAgIGlkOiBcInB5b2RpZGUtMi1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IocHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF9weW9kaWRlX3ZhbHVlXzIgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzIsIHt9KTtcbl9weW9kaWRlX2ZlZWRiYWNrXzIgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBQeW9kaWRlR3JhZGVyKF9weW9kaWRlX3ZhbHVlXzIuZXZhbHVhdG9yKTtcbiAgY29uc3QgZmVlZGJhY2sgPSBhd2FpdCBncmFkZXIuZ3JhZGVFeGVyY2lzZSgpO1xuICBpZiAoIWZlZWRiYWNrKSByZXR1cm4gZW1wdHlGZWVkYmFjaztcbiAgcmV0dXJuIGZlZWRiYWNrO1xufVxuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzEgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTEtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwicHlvZGlkZS0xLWNvbnRlbnRzXCIsXG4gICAgICBlbnZpcjogYGV4ZXJjaXNlLWVudi0ke2Jsb2NrLmF0dHIuZXhlcmNpc2V9YCxcbiAgICAgIGVycm9yOiBmYWxzZSxcbiAgICAgIGNhcHRpb246ICdFeGVyY2lzZScsXG4gICAgfSxcbiAgICBibG9jay5hdHRyXG4gICk7XG5cbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG52aWV3b2YgX3B5b2RpZGVfdmFsdWVfMSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMSwge30pO1xuX3B5b2RpZGVfZmVlZGJhY2tfMSA9IHtcbiAgY29uc3QgeyBQeW9kaWRlR3JhZGVyIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBlbXB0eUZlZWRiYWNrID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7XG5cbiAgY29uc3QgZ3JhZGVyID0gbmV3IFB5b2RpZGVHcmFkZXIoX3B5b2RpZGVfdmFsdWVfMS5ldmFsdWF0b3IpO1xuICBjb25zdCBmZWVkYmFjayA9IGF3YWl0IGdyYWRlci5ncmFkZUV4ZXJjaXNlKCk7XG4gIGlmICghZmVlZGJhY2spIHJldHVybiBlbXB0eUZlZWRiYWNrO1xuICByZXR1cm4gZmVlZGJhY2s7XG59XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS1wcmVsdWRlIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoicHlvZGlkZU9qcyA9IHtcbiAgY29uc3Qge1xuICAgIFB5b2RpZGVFdmFsdWF0b3IsXG4gICAgUHlvZGlkZUVudmlyb25tZW50TWFuYWdlcixcbiAgICBzZXR1cFB5dGhvbixcbiAgICBzdGFydFB5b2RpZGVXb3JrZXIsXG4gICAgYjY0RGVjb2RlLFxuICAgIGNvbGxhcHNlUGF0aCxcbiAgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc3RhdHVzQ29udGFpbmVyID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJleGVyY2lzZS1sb2FkaW5nLXN0YXR1c1wiKTtcbiAgY29uc3QgaW5kaWNhdG9yQ29udGFpbmVyID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJleGVyY2lzZS1sb2FkaW5nLWluZGljYXRvclwiKTtcbiAgaW5kaWNhdG9yQ29udGFpbmVyLmNsYXNzTGlzdC5yZW1vdmUoXCJkLW5vbmVcIik7XG5cbiAgbGV0IHN0YXR1c1RleHQgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwiZGl2XCIpXG4gIHN0YXR1c1RleHQuY2xhc3NMaXN0ID0gXCJleGVyY2lzZS1sb2FkaW5nLWRldGFpbHNcIjtcbiAgc3RhdHVzVGV4dCA9IHN0YXR1c0NvbnRhaW5lci5hcHBlbmRDaGlsZChzdGF0dXNUZXh0KTtcbiAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBJbml0aWFsaXNlYDtcblxuICAvLyBIb2lzdCBpbmRpY2F0b3Igb3V0IGZyb20gZmluYWwgc2xpZGUgd2hlbiBydW5uaW5nIHVuZGVyIHJldmVhbFxuICBjb25zdCByZXZlYWxTdGF0dXMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLnJldmVhbCAuZXhlcmNpc2UtbG9hZGluZy1pbmRpY2F0b3JcIik7XG4gIGlmIChyZXZlYWxTdGF0dXMpIHtcbiAgICByZXZlYWxTdGF0dXMucmVtb3ZlKCk7XG4gICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5yZXZlYWwgPiAuc2xpZGVzXCIpLmFwcGVuZENoaWxkKHJldmVhbFN0YXR1cyk7XG4gIH1cblxuICAvLyBNYWtlIGFueSByZXZlYWwgc2xpZGVzIHdpdGggbGl2ZSBjZWxscyBzY3JvbGxhYmxlXG4gIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoXCIucmV2ZWFsIC5leGVyY2lzZS1jZWxsXCIpLmZvckVhY2goKGVsKSA9PiB7XG4gICAgZWwuY2xvc2VzdCgnc2VjdGlvbi5zbGlkZScpLmNsYXNzTGlzdC5hZGQoXCJzY3JvbGxhYmxlXCIpO1xuICB9KVxuXG4gIC8vIFB5b2RpZGUgc3VwcGxlbWVudGFsIGRhdGEgYW5kIG9wdGlvbnNcbiAgY29uc3QgZGF0YUNvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS1kYXRhXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgZGF0YSA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKGRhdGFDb250ZW50KSk7XG5cbiAgLy8gR3JhYiBsaXN0IG9mIHJlc291cmNlcyB0byBiZSBkb3dubG9hZGVkXG4gIGNvbnN0IGZpbGVzQ29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ2ZnMtZmlsZVxcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGZpbGVzID0gSlNPTi5wYXJzZShiNjREZWNvZGUoZmlsZXNDb250ZW50KSk7XG5cbiAgbGV0IHB5b2RpZGVQcm9taXNlID0gKGFzeW5jICgpID0+IHtcbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIFB5b2RpZGVgO1xuICAgIGNvbnN0IHB5b2RpZGUgPSBhd2FpdCBzdGFydFB5b2RpZGVXb3JrZXIoZGF0YS5vcHRpb25zKTtcblxuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcGFja2FnZTogbWljcm9waXBgO1xuICAgIGF3YWl0IHB5b2RpZGUubG9hZFBhY2thZ2UoXCJtaWNyb3BpcFwiKTtcbiAgICBjb25zdCBtaWNyb3BpcCA9IGF3YWl0IHB5b2RpZGUucHlpbXBvcnQoXCJtaWNyb3BpcFwiKTtcbiAgICBhd2FpdCBkYXRhLnBhY2thZ2VzLnBrZ3MubWFwKChwa2cpID0+ICgpID0+IHtcbiAgICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcGFja2FnZTogJHtwa2d9YDtcbiAgICAgIHJldHVybiBtaWNyb3BpcC5pbnN0YWxsKHBrZyk7XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG4gICAgYXdhaXQgbWljcm9waXAuZGVzdHJveSgpO1xuXG4gICAgLy8gRG93bmxvYWQgYW5kIGluc3RhbGwgcmVzb3VyY2VzXG4gICAgYXdhaXQgZmlsZXMubWFwKChmaWxlKSA9PiBhc3luYyAoKSA9PiB7XG4gICAgICBjb25zdCBuYW1lID0gZmlsZS5zdWJzdHJpbmcoZmlsZS5sYXN0SW5kZXhPZignLycpICsgMSk7XG4gICAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIHJlc291cmNlOiAke25hbWV9YDtcbiAgICAgIGNvbnN0IHJlc3BvbnNlID0gYXdhaXQgZmV0Y2goZmlsZSk7XG4gICAgICBpZiAoIXJlc3BvbnNlLm9rKSB7XG4gICAgICAgIHRocm93IG5ldyBFcnJvcihgQ2FuJ3QgZG93bmxvYWQgXFxgJHtmaWxlfVxcYC4gRXJyb3IgJHtyZXNwb25zZS5zdGF0dXN9OiBcIiR7cmVzcG9uc2Uuc3RhdHVzVGV4dH1cIi5gKTtcbiAgICAgIH1cbiAgICAgIGNvbnN0IGRhdGEgPSBhd2FpdCByZXNwb25zZS5hcnJheUJ1ZmZlcigpO1xuXG4gICAgICAvLyBTdG9yZSBVUkxzIGluIHRoZSBjd2Qgd2l0aG91dCBhbnkgc3ViZGlyZWN0b3J5IHN0cnVjdHVyZVxuICAgICAgaWYgKGZpbGUuaW5jbHVkZXMoXCI6Ly9cIikpIHtcbiAgICAgICAgZmlsZSA9IG5hbWU7XG4gICAgICB9XG5cbiAgICAgIC8vIENvbGxhcHNlIGhpZ2hlciBkaXJlY3Rvcnkgc3RydWN0dXJlXG4gICAgICBmaWxlID0gY29sbGFwc2VQYXRoKGZpbGUpO1xuXG4gICAgICAvLyBDcmVhdGUgZGlyZWN0b3J5IHRyZWUsIGlnbm9yaW5nIFwiZGlyZWN0b3J5IGV4aXN0c1wiIFZGUyBlcnJvcnNcbiAgICAgIGNvbnN0IHBhcnRzID0gZmlsZS5zcGxpdCgnLycpLnNsaWNlKDAsIC0xKTtcbiAgICAgIGxldCBwYXRoID0gJyc7XG4gICAgICB3aGlsZSAocGFydHMubGVuZ3RoID4gMCkge1xuICAgICAgICBwYXRoICs9IHBhcnRzLnNoaWZ0KCkgKyAnLyc7XG4gICAgICAgIHRyeSB7XG4gICAgICAgICAgYXdhaXQgcHlvZGlkZS5GUy5ta2RpcihwYXRoKTtcbiAgICAgICAgfSBjYXRjaCAoZSkge1xuICAgICAgICAgIGlmIChlLm5hbWUgIT09IFwiRXJybm9FcnJvclwiKSB0aHJvdyBlO1xuICAgICAgICAgIGlmIChlLmVycm5vICE9PSAyMCkge1xuICAgICAgICAgICAgY29uc3QgZXJyb3JUZXh0UHRyID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLl9zdHJlcnJvcihlLmVycm5vKTtcbiAgICAgICAgICAgIGNvbnN0IGVycm9yVGV4dCA9IGF3YWl0IHB5b2RpZGUuX21vZHVsZS5VVEY4VG9TdHJpbmcoZXJyb3JUZXh0UHRyKTtcbiAgICAgICAgICAgIHRocm93IG5ldyBFcnJvcihgRmlsZXN5c3RlbSBFcnJvciAke2UuZXJybm99IFwiJHtlcnJvclRleHR9XCIuYCk7XG4gICAgICAgICAgfVxuICAgICAgICB9XG4gICAgICB9XG5cbiAgICAgIC8vIFdyaXRlIHRoaXMgZmlsZSB0byB0aGUgVkZTXG4gICAgICB0cnkge1xuICAgICAgICByZXR1cm4gYXdhaXQgcHlvZGlkZS5GUy53cml0ZUZpbGUoZmlsZSwgbmV3IFVpbnQ4QXJyYXkoZGF0YSkpO1xuICAgICAgfSBjYXRjaCAoZSkge1xuICAgICAgICBpZiAoZS5uYW1lICE9PSBcIkVycm5vRXJyb3JcIikgdGhyb3cgZTtcbiAgICAgICAgY29uc3QgZXJyb3JUZXh0UHRyID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLl9zdHJlcnJvcihlLmVycm5vKTtcbiAgICAgICAgY29uc3QgZXJyb3JUZXh0ID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLlVURjhUb1N0cmluZyhlcnJvclRleHRQdHIpO1xuICAgICAgICB0aHJvdyBuZXcgRXJyb3IoYEZpbGVzeXN0ZW0gRXJyb3IgJHtlLmVycm5vfSBcIiR7ZXJyb3JUZXh0fVwiLmApO1xuICAgICAgfVxuICAgIH0pLnJlZHVjZSgoY3VyLCBuZXh0KSA9PiBjdXIudGhlbihuZXh0KSwgUHJvbWlzZS5yZXNvbHZlKCkpO1xuXG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBQeW9kaWRlIGVudmlyb25tZW50IHNldHVwYDtcbiAgICBhd2FpdCBzZXR1cFB5dGhvbihweW9kaWRlKTtcblxuICAgIHN0YXR1c1RleHQucmVtb3ZlKCk7XG4gICAgaWYgKHN0YXR1c0NvbnRhaW5lci5jaGlsZHJlbi5sZW5ndGggPT0gMCkge1xuICAgICAgc3RhdHVzQ29udGFpbmVyLnBhcmVudE5vZGUucmVtb3ZlKCk7XG4gICAgfVxuICAgIHJldHVybiBweW9kaWRlO1xuICB9KSgpLmNhdGNoKChlcnIpID0+IHtcbiAgICBzdGF0dXNUZXh0LnN0eWxlLmNvbG9yID0gXCJ2YXIoLS1leGVyY2lzZS1lZGl0b3ItaGwtZXIsICNBRDAwMDApXCI7XG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGVyci5tZXNzYWdlO1xuICAgIC8vaW5kaWNhdG9yQ29udGFpbmVyLnF1ZXJ5U2VsZWN0b3IoXCIuc3Bpbm5lci1ncm93XCIpLmNsYXNzTGlzdC5hZGQoXCJkLW5vbmVcIik7XG4gICAgdGhyb3cgZXJyO1xuICB9KTtcblxuICAvLyBLZWVwIHRyYWNrIG9mIGluaXRpYWwgT0pTIGJsb2NrIHJlbmRlclxuICBjb25zdCByZW5kZXJlZE9qcyA9IHt9O1xuXG4gIGNvbnN0IHByb2Nlc3MgPSBhc3luYyAoY29udGV4dCwgaW5wdXRzKSA9PiB7XG4gICAgY29uc3QgcHlvZGlkZSA9IGF3YWl0IHB5b2RpZGVQcm9taXNlO1xuICAgIGNvbnN0IGV2YWx1YXRvciA9IG5ldyBQeW9kaWRlRXZhbHVhdG9yKHB5b2RpZGUsIGNvbnRleHQpO1xuICAgIGF3YWl0IGV2YWx1YXRvci5wcm9jZXNzKGlucHV0cyk7XG4gICAgcmV0dXJuIGV2YWx1YXRvci5jb250YWluZXI7XG4gIH1cblxuICByZXR1cm4ge1xuICAgIHB5b2RpZGVQcm9taXNlLFxuICAgIHJlbmRlcmVkT2pzLFxuICAgIHByb2Nlc3MsXG4gIH07XG59XG4ifV19
 </script>
 <div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
 <div id="exercise-loading-status" class="d-flex gap-2">
@@ -685,8 +608,9 @@ eyJjb250ZW50cyI6W119
 </div>
 </div>
 <script type="vfs-file">
-W10=
+WyIuLi9EYXRhL2NweF90ZWFjaGluZy5jc3YiLCIuLi9EYXRhL2NweF90ZWFjaGluZ19zcGxpdC5jc3YiLCJjcHhfbGVzc29uLnB5Il0=
 </script>
+</section>
 
 </main> <!-- /main -->
 <script>
@@ -766,6 +690,68 @@ function toggleAlert(event, message, type) {
     MathJax.typesetPromise([alertMessage]);  // Re-render math with MathJax v3
   }
 }
+</script>
+<script>
+// Exercise tabsets (Exercise / Hints / Solution): a click on the "Solution" tab
+// loads the solution code into the exercise editor itself, so that it can be run
+// with "Run Code" (and "Start Over" brings the exercise back). The page stays on
+// the Exercise tab; the text of the Solution tab (function reference, remarks)
+// is shown below the editor. If the editor is not ready yet, the tab behaves
+// normally. Bootstrap handles tab clicks in the capture phase on `document`, so
+// the interception is done one level up, on `window`.
+(function () {
+  function editorView(pane) {
+    var content = pane.querySelector(".cm-content");
+    return content && content.cmView ? content.cmView.view : null;
+  }
+  function solutionCode(pane) {
+    var pre = pane.querySelector("pre code") || pane.querySelector("pre");
+    if (!pre) return null;
+    var clone = pre.cloneNode(true);
+    clone.querySelectorAll(".code-annotation-anchor, .code-copy-button").forEach(function (e) { e.remove(); });
+    return clone.textContent.replace(/[ \t]+\n/g, "\n").replace(/\s+$/, "") + "\n";
+  }
+  function setup(tabset) {
+    var exLink = null, solLink = null;
+    tabset.querySelectorAll(":scope > ul.nav-tabs a.nav-link").forEach(function (a) {
+      var t = a.textContent.trim().toLowerCase();
+      if (t === "exercise") exLink = a;
+      if (t === "solution") solLink = a;
+    });
+    if (!exLink || !solLink) return;
+    var exPane = tabset.querySelector(exLink.getAttribute("data-bs-target"));
+    var solPane = tabset.querySelector(solLink.getAttribute("data-bs-target"));
+    if (!exPane || !solPane || !exPane.querySelector(".exercise-cell")) return;
+    solLink.title = "Load the solution into the exercise editor";
+    solLink.__exsol = { exPane: exPane, solPane: solPane };
+  }
+  function loadSolution(info) {
+    var view = editorView(info.exPane), code = solutionCode(info.solPane);
+    if (!view || !code) return false;                   // editor not ready: normal tab switch
+    view.dispatch({ changes: { from: 0, to: view.state.doc.length, insert: code } });
+    var note = info.exPane.querySelector(".solution-note");
+    if (!note) { note = document.createElement("div"); note.className = "solution-note"; info.exPane.appendChild(note); }
+    note.innerHTML = "";
+    info.solPane.querySelectorAll(":scope > *").forEach(function (el) {
+      if (el.matches("pre") || el.querySelector("pre")) return;   // the code itself is in the editor
+      note.appendChild(el.cloneNode(true));
+    });
+    if (!note.hasChildNodes()) note.remove();           // nothing to show besides the code
+    view.focus();
+    return true;
+  }
+  window.addEventListener("click", function (e) {
+    var a = e.target && e.target.closest ? e.target.closest("a.nav-link") : null;
+    if (!a || !a.__exsol) return;
+    if (loadSolution(a.__exsol)) { e.preventDefault(); e.stopPropagation(); }
+  }, true);
+  var style = document.createElement("style");
+  style.textContent = ".solution-note{margin-top:.6em;padding:.5em .8em;border-left:3px solid #6A5ACD;background:#f4f2fb;font-size:.92em;}.solution-note p:last-child{margin-bottom:0;}";
+  document.head.appendChild(style);
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".panel-tabset").forEach(setup);
+  });
+})();
 </script>
 <script type="ojs-module-contents">
 eyJjb250ZW50cyI6W119
@@ -1180,13 +1166,13 @@ window._ojs.runtime.interpretFromScriptTags();
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../class4/class_4_ex_1.html" class="pagination-link" aria-label="Example reading data: estimation">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Example reading data: estimation</span>
+      <a href="../class4/class_4_ex_1.html" class="pagination-link" aria-label="Exercise 1: Fit and understand a regression line">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Exercise 1: Fit and understand a regression line</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../class4/class_4_ex_3.html" class="pagination-link" aria-label="Example reading data: model diagnostic">
-        <span class="nav-page-text">Example reading data: model diagnostic</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../class4/class_4_ex_3.html" class="pagination-link" aria-label="Exercise 3: Residuals and curved relationships">
+        <span class="nav-page-text">Exercise 3: Residuals and curved relationships</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

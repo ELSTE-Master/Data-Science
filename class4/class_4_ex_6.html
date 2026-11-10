@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Exercises ice duration data – ELSTE Data Science Master Course</title>
+<title>Exercise 6: Prediction intervals and scientific use – ELSTE Data Science Master Course</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../appendices/setup_vscode.html" rel="next">
+<link href="../exam/exam_intro.html" rel="next">
 <link href="../class4/class_4_ex_5.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -109,35 +109,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
 <link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../assets/webex_2.css">
 </head>
@@ -151,7 +122,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../class4/class_4_intro.html">Class 4: Linear regression</a></li><li class="breadcrumb-item"><a href="../class4/class_4_ex_6.html">Exercises ice duration data</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../class4/class_4_intro.html">Class 4: Linear regression</a></li><li class="breadcrumb-item"><a href="../class4/class_4_ex_6.html">Exercise 6: Prediction intervals and scientific use</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -332,37 +303,37 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../class4/class_4_ex_1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Example reading data: estimation</span></a>
+ <span class="menu-text">Exercise 1: Fit and understand a regression line</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../class4/class_4_ex_2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Example reading data: prediction</span></a>
+ <span class="menu-text">Exercise 2: Multiple regression with three oxides</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../class4/class_4_ex_3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Example reading data: model diagnostic</span></a>
+ <span class="menu-text">Exercise 3: Residuals and curved relationships</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../class4/class_4_ex_4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Example reading data: improving our model</span></a>
+ <span class="menu-text">Exercise 4: Predictive accuracy</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../class4/class_4_ex_5.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Example reading data: confidence intervals for predictions</span></a>
+ <span class="menu-text">Exercise 5: AIC and five-fold cross-validation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../class4/class_4_ex_6.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Exercises ice duration data</span></a>
+ <span class="menu-text">Exercise 6: Prediction intervals and scientific use</span></a>
   </div>
 </li>
       </ul>
@@ -370,12 +341,35 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
- <span class="menu-text">Appendices</span></a>
+ <span class="menu-text">Exam</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exam/exam_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Instructions and documents</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exam/exam_data_description.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data description</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../appendices/setup_vscode.html" class="sidebar-item-text sidebar-link">
@@ -390,13 +384,13 @@ window.Quarto = {
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
  <span class="menu-text">Function reference</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../appendices/function_reference.html" class="sidebar-item-text sidebar-link">
@@ -446,9 +440,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../class4/class_4_intro.html">Class 4: Linear regression</a></li><li class="breadcrumb-item"><a href="../class4/class_4_ex_6.html">Exercises ice duration data</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../class4/class_4_intro.html">Class 4: Linear regression</a></li><li class="breadcrumb-item"><a href="../class4/class_4_ex_6.html">Exercise 6: Prediction intervals and scientific use</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Exercises ice duration data</h1>
+<h1 class="title">Exercise 6: Prediction intervals and scientific use</h1>
 </div>
 
 
@@ -465,507 +459,110 @@ window.Quarto = {
 </header>
 
 
-<!-- MathJax for Rendering Math -->
-<script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
-</script>
-<p>In this exercise we will model lake ice duration data using linear regression models. According to the United States Environmental Protection Agency, lake ice duration can be an indicator of climate change. This is because lake ice is dependent on several environmental factors, so changes in these factors will influence the formation of ice on top of lakes. As a result, the study and analysis of lake ice formation can inform scientists about how quickly the climate is changing, and are critical to minimizing disruptions to lake ecosystems. We can examine the ice duration of Lake Mendota and Lake Monona in the are of Madison, WI. The dataset is extracted from the <code>ntl_icecover</code> dataset of the <code>R</code> package <code>lterdatasampler</code>.</p>
-<div style="text-align:center;">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="../class4/img/lakeice.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
-</figure>
+<p><strong>Extension activity:</strong> finish by distinguishing a fitted temperature, a confidence interval for the <strong>mean response</strong>, and a prediction interval for <strong>one new experimental observation</strong>.</p>
+<section id="question-1-which-interval-answers-which-question" class="level3">
+<h3 class="anchored" data-anchor-id="question-1-which-interval-answers-which-question">Question 1 — Which interval answers which question?</h3>
+<div id="radio_q1" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_q1" value="" data-feedback="These are intervals for response quantities at a chosen predictor value."> <span>Both intervals describe only uncertainty in the MgO coefficient.</span></label><label><input type="radio" autocomplete="off" name="radio_q1" value="" data-feedback="Under the classical model, the prediction interval is wider."> <span>A prediction interval is always narrower than a confidence interval.</span></label><label><input type="radio" autocomplete="off" name="radio_q1" value="answer" data-feedback="Correct. An individual outcome has additional residual variability."> <span>The confidence interval targets the mean temperature at a given composition; the prediction interval targets an individual new observation.</span></label><label><input type="radio" autocomplete="off" name="radio_q1" value="" data-feedback="A mean confidence interval omits the additional variation of a new individual outcome."> <span>The confidence interval predicts every individual observation.</span></label>
+<div class="webex-feedback-box">
+
 </div>
 </div>
-</div>
-</div>
-<p>You can load the data as follows:</p>
-<p><strong>Function reference:</strong> <code>read_csv</code> <a href="../appendices/doc_pandas.html#pandas-read-csv">(doc)</a>; <code>head</code> <a href="../appendices/doc_pandas.html#pandas-head">(doc)</a>.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df_icecover <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/df_icecover.csv"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>df_icecover.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>         lakeid      ice_on     ice_off  ice_duration  year
-0  Lake Mendota  1855-12-18  1856-04-14           118  1855
-1  Lake Mendota  1856-12-06  1857-05-06           151  1856
-2  Lake Mendota  1857-11-25  1858-03-26           121  1857
-3  Lake Mendota  1858-12-08  1859-03-14            96  1858
-4  Lake Mendota  1859-12-07  1860-03-26           110  1859</code></pre>
-</div>
-</div>
-<section id="question-1" class="level2">
-<h2 class="anchored" data-anchor-id="question-1">Question 1</h2>
-<p>Complete the code below to visualize the ice duration over the years for both lakes.</p>
+</section>
+<section id="question-2-compute-classical-intervals-in-python" class="level3">
+<h3 class="anchored" data-anchor-id="question-2-compute-classical-intervals-in-python">Question 2 — Compute classical intervals in Python</h3>
+<p>As in the slides, choose the MgO value at which the fitted <strong>simple model</strong> predicts 1,200 °C. Complete the call to <code>statsmodels</code>, then compare the interval widths.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Exercise</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Hints</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Solution</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<div class="cell" data-exercise="ex_1">
 <div>
 <div id="pyodide-1" class="exercise-cell">
 
 </div>
 <script type="pyodide-1-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfMSJ9LCJjb2RlIjoiaW1wb3J0IHBhbmRhcyBhcyBwZFxuaW1wb3J0IG1hdHBsb3RsaWIucHlwbG90IGFzIHBsdFxuXG5kZl9pY2Vjb3ZlciA9IHBkLnJlYWRfY3N2KFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0VMU1RFLU1hc3Rlci9EYXRhLVNjaWVuY2UvbWFpbi9EYXRhL2RmX2ljZWNvdmVyLmNzdlwiKVxuXG4jIEZpbHRlciBsYWtlc1xuZGZfbGFrZV9tZW5kb3RhID0gZGZfaWNlY292ZXJbZGZfaWNlY292ZXJbJ2xha2VpZCddID09IF9fX19fX11cbmRmX2xha2VfbW9ub25hICA9IF9fX19fX1tkZl9pY2Vjb3ZlclsnbGFrZWlkJ10gPT0gX19fX19fXVxuXG4jIENvbG9yc1xubXljb2wgPSBbXCIjNmE1YWNkXCIsIFwiI2U2NDE3M1wiXVxuXG4jIFBsb3RcbnBsdC5maWd1cmUoZmlnc2l6ZT0oOCw1KSlcbl9fX19fXyhkZl9sYWtlX21lbmRvdGFbJ3llYXInXSwgZGZfbGFrZV9tZW5kb3RhWydpY2VfZHVyYXRpb24nXSwgJ28nLCBjb2xvcj1teWNvbFswXSwgbGFiZWw9J01lbmRvdGEnKVxuX19fX19fKGRmX2xha2VfbW9ub25hWyd5ZWFyJ10sIGRmX2xha2VfbW9ub25hWydpY2VfZHVyYXRpb24nXSwgJ28nLCBjb2xvcj1teWNvbFsxXSwgbGFiZWw9J01vbm9uYScpXG5cbnBsdC54bGFiZWwoXCJZZWFyXCIpXG5wbHQueWxhYmVsKFwiSWNlIGR1cmF0aW9uIChkYXlzKVwiKVxucGx0LnRpdGxlKFwiSWNlIGR1cmF0aW9uIG92ZXIgeWVhcnNcIilcbnBsdC5sZWdlbmQobG9jPVwidXBwZXIgcmlnaHRcIilcbnBsdC54dGlja3Mocm90YXRpb249NDUpXG5wbHQuZ3JpZChUcnVlKVxucGx0LnNob3coKSJ9
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfMSJ9LCJjb2RlIjoiZnJvbSBjcHhfbGVzc29uIGltcG9ydCBsb2FkX2RhdGFcbmltcG9ydCBzdGF0c21vZGVscy5mb3JtdWxhLmFwaSBhcyBzbWZcbmltcG9ydCBwYW5kYXMgYXMgcGRcblxudHJhaW4sIF8gPSBsb2FkX2RhdGEoKVxuc2ltcGxlID0gc21mLm9scyhcIlRfQyB+IE1nT19DcHhcIiwgZGF0YT10cmFpbikuZml0KClcbmIwLCBiMSA9IHNpbXBsZS5wYXJhbXNcbngwID0gKDEyMDAgLSBiMCkgLyBiMVxubmV3ID0gcGQuRGF0YUZyYW1lKHtcIk1nT19DcHhcIjogW3gwXX0pXG5cbmludGVydmFscyA9IHNpbXBsZS5fX19fX18obmV3KS5fX19fX18oYWxwaGE9MC4wNSlcbnJvdyA9IGludGVydmFscy5pbG9jWzBdXG5tZWFuX3dpZHRoID0gcm93W1wibWVhbl9jaV91cHBlclwiXSAtIHJvd1tcIm1lYW5fY2lfbG93ZXJcIl1cbmluZGl2aWR1YWxfd2lkdGggPSByb3dbXCJvYnNfY2lfdXBwZXJcIl0gLSByb3dbXCJvYnNfY2lfbG93ZXJcIl1cbnByaW50KHJvd1tbXCJtZWFuXCIsIFwibWVhbl9jaV9sb3dlclwiLCBcIm1lYW5fY2lfdXBwZXJcIixcbiAgICAgICAgICAgXCJvYnNfY2lfbG93ZXJcIiwgXCJvYnNfY2lfdXBwZXJcIl1dLnJvdW5kKDEpLnRvX3N0cmluZygpKVxucHJpbnQoZlwiTWVhbiBDSSB3aWR0aDoge21lYW5fd2lkdGg6LjFmfSDCsENcIilcbnByaW50KGZcIkluZGl2aWR1YWwgUEkgd2lkdGg6IHtpbmRpdmlkdWFsX3dpZHRoOi4xZn0gwrBDXCIpIn0=
 </script>
 </div>
 </div>
-</div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_1">
-<p>Select the observations corresponding to each lake using boolean indexing and plot the data using <code>matplotlib</code>.</p>
-</div>
+<p>Call <code>.get_prediction(new)</code> followed by <code>.summary_frame(alpha=0.05)</code>. <code>mean_ci_*</code> refers to the mean response, while <code>obs_ci_*</code> refers to an individual outcome.</p>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex_1">
-<p><strong>Function reference:</strong> <code>read_csv</code> <a href="../appendices/doc_pandas.html#pandas-read-csv">(doc)</a>; <code>plt.figure</code> <a href="../appendices/doc_visualisation.html#plotting-plt-figure">(doc)</a>; <code>ax.plot</code> <a href="../appendices/doc_visualisation.html#plotting-ax-plot">(doc)</a>; <code>ax.set_xlabel</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-xlabel">(doc)</a>; <code>ax.set_ylabel</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-ylabel">(doc)</a>; <code>ax.set_title</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-title">(doc)</a>; <code>ax.legend</code> <a href="../appendices/doc_visualisation.html#plotting-ax-legend">(doc)</a>; <code>plt.xticks</code> <a href="../appendices/doc_visualisation.html#plotting-plt-xticks">(doc)</a>; <code>ax.grid</code> <a href="../appendices/doc_visualisation.html#plotting-ax-grid">(doc)</a>; <code>plt.show</code> <a href="../appendices/doc_visualisation.html#plotting-plt-show">(doc)</a>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df_icecover <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/df_icecover.csv"</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter lakes</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>df_lake_mendota <span class="op">=</span> df_icecover[df_icecover[<span class="st">'lakeid'</span>] <span class="op">==</span> <span class="st">"Lake Mendota"</span>]</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>df_lake_monona  <span class="op">=</span> df_icecover[df_icecover[<span class="st">'lakeid'</span>] <span class="op">==</span> <span class="st">"Lake Monona"</span>]</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Colors</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>mycol <span class="op">=</span> [<span class="st">"#6a5acd"</span>, <span class="st">"#e64173"</span>]</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>))</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>plt.plot(df_lake_mendota[<span class="st">'year'</span>], df_lake_mendota[<span class="st">'ice_duration'</span>], <span class="st">'o'</span>, color<span class="op">=</span>mycol[<span class="dv">0</span>], label<span class="op">=</span><span class="st">'Mendota'</span>)</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>plt.plot(df_lake_monona[<span class="st">'year'</span>], df_lake_monona[<span class="st">'ice_duration'</span>], <span class="st">'o'</span>, color<span class="op">=</span>mycol[<span class="dv">1</span>], label<span class="op">=</span><span class="st">'Monona'</span>)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Year"</span>)</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Ice duration (days)"</span>)</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Ice duration over years"</span>)</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">"upper right"</span>)</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cpx_lesson <span class="im">import</span> load_data</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>train, _ <span class="op">=</span> load_data()</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>simple <span class="op">=</span> smf.ols(<span class="st">"T_C ~ MgO_Cpx"</span>, data<span class="op">=</span>train).fit()</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>b0, b1 <span class="op">=</span> simple.params</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>x0 <span class="op">=</span> (<span class="dv">1200</span> <span class="op">-</span> b0) <span class="op">/</span> b1</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>new <span class="op">=</span> pd.DataFrame({<span class="st">"MgO_Cpx"</span>: [x0]})</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>intervals <span class="op">=</span> simple.get_prediction(new).summary_frame(alpha<span class="op">=</span><span class="fl">0.05</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>row <span class="op">=</span> intervals.iloc[<span class="dv">0</span>]</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>mean_width <span class="op">=</span> row[<span class="st">"mean_ci_upper"</span>] <span class="op">-</span> row[<span class="st">"mean_ci_lower"</span>]</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>individual_width <span class="op">=</span> row[<span class="st">"obs_ci_upper"</span>] <span class="op">-</span> row[<span class="st">"obs_ci_lower"</span>]</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(row[[<span class="st">"mean"</span>, <span class="st">"mean_ci_lower"</span>, <span class="st">"mean_ci_upper"</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>           <span class="st">"obs_ci_lower"</span>, <span class="st">"obs_ci_upper"</span>]].<span class="bu">round</span>(<span class="dv">1</span>).to_string())</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Mean CI width: </span><span class="sc">{</span>mean_width<span class="sc">:.1f}</span><span class="ss"> °C"</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Individual PI width: </span><span class="sc">{</span>individual_width<span class="sc">:.1f}</span><span class="ss"> °C"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
-</div>
-<section id="question-2" class="level3">
-<h3 class="anchored" data-anchor-id="question-2">Question 2</h3>
-<p>One of your colleague proposes to consider the following models to analyze the ice duration data: <span class="math display">\[
-\text{IceCover}_i = \beta_0 + \beta_1 \text{Year}_i + \epsilon_i
-\]</span> He estimates the model and obtain the following results:</p>
-<p><strong>Function reference:</strong> <code>read_csv</code> <a href="../appendices/doc_pandas.html#pandas-read-csv">(doc)</a>; <code>model.fit</code> <a href="../appendices/doc_statsmodels.html#models-model-fit">(doc)</a>; <code>smf.ols</code> <a href="../appendices/doc_statsmodels.html#models-smf-ols">(doc)</a>; <code>print</code> <a href="../appendices/doc_python.html#python-print">(doc)</a>; <code>model.summary</code> <a href="../appendices/doc_statsmodels.html#models-model-summary">(doc)</a>.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>df_icecover <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/df_icecover.csv"</span>)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>mod1 <span class="op">=</span> smf.ols(<span class="st">"ice_duration ~ year"</span>, data<span class="op">=</span>df_icecover).fit()</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mod1.summary())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                            OLS Regression Results                            
-==============================================================================
-Dep. Variable:           ice_duration   R-squared:                       0.246
-Model:                            OLS   Adj. R-squared:                  0.244
-Method:                 Least Squares   F-statistic:                     107.2
-Date:                Wed, 04 Nov 2026   Prob (F-statistic):           6.14e-22
-Time:                        09:24:24   Log-Likelihood:                -1406.9
-No. Observations:                 331   AIC:                             2818.
-Df Residuals:                     329   BIC:                             2825.
-Df Model:                           1                                         
-Covariance Type:            nonrobust                                         
-==============================================================================
-                 coef    std err          t      P&gt;|t|      [0.025      0.975]
-------------------------------------------------------------------------------
-Intercept    495.4410     37.926     13.063      0.000     420.834     570.048
-year          -0.2027      0.020    -10.356      0.000      -0.241      -0.164
-==============================================================================
-Omnibus:                       25.409   Durbin-Watson:                   2.150
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):               32.243
-Skew:                          -0.597   Prob(JB):                     9.97e-08
-Kurtosis:                       3.955   Cond. No.                     7.85e+04
-==============================================================================
-
-Notes:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-[2] The condition number is large, 7.85e+04. This might indicate that there are
-strong multicollinearity or other numerical problems.</code></pre>
-</div>
-</div>
-<p>He wants to test if the ice duration is reducing over the years, regardless of the lake. What are the correct hyptheses to test this claim?</p>
-<div id="radio_NEYNBCCIJJ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NEYNBCCIJJ" value="answer" data-feedback="Yes! The alternative hypothesis tests if ice duration decreases over the years."> <span>\( H_0: \beta_1 = 0 \), \( H_a: \beta_1 &lt; 0 \)</span></label><label><input type="radio" autocomplete="off" name="radio_NEYNBCCIJJ" value="" data-feedback="No, this would test if ice duration is increasing over the years."> <span>\( H_0: \beta_1 = 0 \), \( H_a: \beta_1 &gt; 0 \)</span></label><label><input type="radio" autocomplete="off" name="radio_NEYNBCCIJJ" value="" data-feedback="This tests for any change (increase or decrease), not specifically a reduction."> <span>\( H_0: \beta_1 = 0 \), \( H_a: \beta_1 \neq 0 \)</span></label><label><input type="radio" autocomplete="off" name="radio_NEYNBCCIJJ" value="" data-feedback="No, the null hypothesis should always contain equality."> <span>\( H_0: \beta_1 \neq 0 \), \( H_a: \beta_1 = 0 \)</span></label>
+</section>
+<section id="question-3-why-is-the-individual-interval-wider" class="level3">
+<h3 class="anchored" data-anchor-id="question-3-why-is-the-individual-interval-wider">Question 3 — Why is the individual interval wider?</h3>
+<div id="radio_q2" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_q2" value="answer" data-feedback="Correct. The classical prediction variance has an extra residual-variance term."> <span>Because it includes uncertainty in the fitted mean and residual variation of a new experimental temperature.</span></label><label><input type="radio" autocomplete="off" name="radio_q2" value="" data-feedback="Both intervals above use alpha = 0.05."> <span>Because it uses a significance level of 50% rather than 5%.</span></label><label><input type="radio" autocomplete="off" name="radio_q2" value="" data-feedback="The estimated conditional mean also has uncertainty."> <span>Because a fitted model has no uncertainty about the mean.</span></label><label><input type="radio" autocomplete="off" name="radio_q2" value="" data-feedback="These intervals use the fitted model and chosen predictor value, not the observed test response."> <span>Because prediction intervals are calculated from the test responses.</span></label>
 <div class="webex-feedback-box">
 
 </div>
 </div>
 </section>
-<section id="question-3" class="level3">
-<h3 class="anchored" data-anchor-id="question-3">Question 3</h3>
-<p>How do you interpret the coefficent associated with <span class="math inline">\(\beta_0\)</span> in <code>mod1</code>?</p>
-<div id="radio_IXJNRJFQPB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_IXJNRJFQPB" value="answer" data-feedback="Correct! \( \beta_0 \) represents the estimated ice duration when year is \(0\)."> <span>The estimated ice duration when year is \(0\).</span></label><label><input type="radio" autocomplete="off" name="radio_IXJNRJFQPB" value="" data-feedback="No, \( \beta_0 \) corresponds to year \(0\), not the first year of observation."> <span>The estimated ice duration in the first year of observation.</span></label><label><input type="radio" autocomplete="off" name="radio_IXJNRJFQPB" value="" data-feedback="No, \( \beta_0 \) is not an average, it is the intercept of the regression line."> <span>The average ice duration across all years.</span></label><label><input type="radio" autocomplete="off" name="radio_IXJNRJFQPB" value="" data-feedback="No, this describes \( \beta_1 \), not \( \beta_0 \)."> <span>The change in ice duration for a one-year increase.</span></label>
-<div class="webex-feedback-box">
-
-</div>
-</div>
-</section>
-<section id="question-4" class="level3">
-<h3 class="anchored" data-anchor-id="question-4">Question 4</h3>
-<p>A second colleague of yours proposes to consider the following model to analyze the ice duration data: <span class="math display">\[
-\text{IceCover}_i = \beta_0 + \beta_1 \text{Year}_i + \beta_2 \text{LakeID}_i + \epsilon_i
-\]</span> More precisely, she wants to test if the ice duration is reducing over the years, while including an intercept for each lake.</p>
-<p>She estimates the model and obtain the following results:</p>
-<p><strong>Function reference:</strong> <code>read_csv</code> <a href="../appendices/doc_pandas.html#pandas-read-csv">(doc)</a>; <code>model.fit</code> <a href="../appendices/doc_statsmodels.html#models-model-fit">(doc)</a>; <code>smf.ols</code> <a href="../appendices/doc_statsmodels.html#models-smf-ols">(doc)</a>; <code>print</code> <a href="../appendices/doc_python.html#python-print">(doc)</a>; <code>model.summary</code> <a href="../appendices/doc_statsmodels.html#models-model-summary">(doc)</a>.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>df_icecover <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/df_icecover.csv"</span>)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>mod2 <span class="op">=</span> smf.ols(<span class="st">"ice_duration ~ year + lakeid"</span>, data<span class="op">=</span>df_icecover).fit()</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mod2.summary())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                            OLS Regression Results                            
-==============================================================================
-Dep. Variable:           ice_duration   R-squared:                       0.247
-Model:                            OLS   Adj. R-squared:                  0.242
-Method:                 Least Squares   F-statistic:                     53.69
-Date:                Wed, 04 Nov 2026   Prob (F-statistic):           6.74e-21
-Time:                        09:24:25   Log-Likelihood:                -1406.7
-No. Observations:                 331   AIC:                             2819.
-Df Residuals:                     328   BIC:                             2831.
-Df Model:                           2                                         
-Covariance Type:            nonrobust                                         
-=========================================================================================
-                            coef    std err          t      P&gt;|t|      [0.025      0.975]
------------------------------------------------------------------------------------------
-Intercept               494.7583     37.980     13.027      0.000     420.043     569.474
-lakeid[T.Lake Monona]     1.1167      1.873      0.596      0.551      -2.568       4.801
-year                     -0.2027      0.020    -10.342      0.000      -0.241      -0.164
-==============================================================================
-Omnibus:                       25.159   Durbin-Watson:                   2.152
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):               31.751
-Skew:                          -0.595   Prob(JB):                     1.27e-07
-Kurtosis:                       3.941   Cond. No.                     7.86e+04
-==============================================================================
-
-Notes:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-[2] The condition number is large, 7.86e+04. This might indicate that there are
-strong multicollinearity or other numerical problems.</code></pre>
-</div>
-</div>
-<p>Complete the following code to plot the data points and the regression lines for both lakes.</p>
+<section id="question-4-optional-inspect-empirical-interval-coverage" class="level3">
+<h3 class="anchored" data-anchor-id="question-4-optional-inspect-empirical-interval-coverage">Question 4 — Optional: inspect empirical interval coverage</h3>
+<p>The classical intervals rely on a correctly specified conditional mean and independent, normal, constant-variance errors. These assumptions may be questionable for observations clustered by publication.</p>
+<p>As a <strong>descriptive exercise only</strong>, estimate how often the simple model’s nominal 95% <em>individual</em> prediction intervals contain the measured temperatures in the frozen evaluation partition. This does <strong>not</strong> validate coverage for natural crystals or for all future publications.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Exercise</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Hints</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false" href="">Solution</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
-<div class="cell" data-exercise="ex_2">
 <div>
 <div id="pyodide-2" class="exercise-cell">
 
 </div>
 <script type="pyodide-2-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfMiJ9LCJjb2RlIjoiaW1wb3J0IHBhbmRhcyBhcyBwZFxuaW1wb3J0IG1hdHBsb3RsaWIucHlwbG90IGFzIHBsdFxuaW1wb3J0IHN0YXRzbW9kZWxzLmZvcm11bGEuYXBpIGFzIHNtZlxuaW1wb3J0IG51bXB5IGFzIG5wXG5cbiMgTG9hZCBkYXRhXG5kZl9pY2Vjb3ZlciA9IHBkLnJlYWRfY3N2KFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0VMU1RFLU1hc3Rlci9EYXRhLVNjaWVuY2UvbWFpbi9EYXRhL2RmX2ljZWNvdmVyLmNzdlwiKVxuXG4jIEZpdCBsaW5lYXIgbW9kZWwgd2l0aCBsYWtlLXNwZWNpZmljIGludGVyY2VwdHNcbm1vZDIgPSBzbWYub2xzKFwiaWNlX2R1cmF0aW9uIH4geWVhciArIGxha2VpZFwiLCBkYXRhPWRmX2ljZWNvdmVyKS5maXQoKVxucHJpbnQobW9kMi5zdW1tYXJ5KCkpXG5cbiMgU2VwYXJhdGUgbGFrZXNcbmRmX21lbmRvdGEgPSBkZl9pY2Vjb3ZlcltkZl9pY2Vjb3ZlclsnbGFrZWlkJ10gPT0gXCJMYWtlIE1lbmRvdGFcIl1cbmRmX21vbm9uYSAgPSBkZl9pY2Vjb3ZlcltkZl9pY2Vjb3ZlclsnbGFrZWlkJ10gPT0gXCJMYWtlIE1vbm9uYVwiXVxuXG4jIENvbG9yc1xuY29sb3JzID0gW1wiIzZhNWFjZFwiLCBcIiNlNjQxNzNcIl1cblxuIyBQbG90IGRhdGEgcG9pbnRzXG5wbHQuZmlndXJlKGZpZ3NpemU9KDgsNSkpXG5wbHQuc2NhdHRlcihkZl9tZW5kb3RhWyd5ZWFyJ10sIGRmX21lbmRvdGFbJ2ljZV9kdXJhdGlvbiddLCBjb2xvcj1jb2xvcnNbMF0sIGxhYmVsPVwiTWVuZG90YVwiKVxucGx0LnNjYXR0ZXIoZGZfbW9ub25hWyd5ZWFyJ10sIGRmX21vbm9uYVsnaWNlX2R1cmF0aW9uJ10sIGNvbG9yPWNvbG9yc1sxXSwgbGFiZWw9XCJNb25vbmFcIilcblxuIyBQcmVwYXJlIHllYXJzIGZvciBwcmVkaWN0aW9uc1xueWVhcnMgPSBucC5saW5zcGFjZShkZl9pY2Vjb3ZlclsneWVhciddLm1pbigpLCBkZl9pY2Vjb3ZlclsneWVhciddLm1heCgpLCAyMDApXG5cbiMgUHJlZGljdCBmb3IgTWVuZG90YVxucHJlZF9tZW5kb3RhID0gbW9kMi5fX19fX18ocGQuRGF0YUZyYW1lKHsneWVhcic6IHllYXJzLCAnbGFrZWlkJzogJ0xha2UgTWVuZG90YSd9KSlcbnBsdC5wbG90KHllYXJzLCBwcmVkX21lbmRvdGEsIGNvbG9yPWNvbG9yc1swXSwgbGluZXN0eWxlPSctJywgbGluZXdpZHRoPTIpXG5cbiMgUHJlZGljdCBmb3IgTW9ub25hXG5wcmVkX21vbm9uYSA9IG1vZDIuX19fX19fKHBkLkRhdGFGcmFtZSh7J3llYXInOiB5ZWFycywgJ2xha2VpZCc6ICdMYWtlIE1vbm9uYSd9KSlcbnBsdC5wbG90KHllYXJzLCBwcmVkX21vbm9uYSwgY29sb3I9Y29sb3JzWzFdLCBsaW5lc3R5bGU9Jy0nLCBsaW5ld2lkdGg9MilcblxuIyBMYWJlbHMsIGxlZ2VuZCwgdGl0bGVcbnBsdC54bGFiZWwoXCJZZWFyXCIpXG5wbHQueWxhYmVsKFwiSWNlIGR1cmF0aW9uIChkYXlzKVwiKVxucGx0LnRpdGxlKFwiSWNlIGR1cmF0aW9uIG92ZXIgeWVhcnMgd2l0aCByZWdyZXNzaW9uIGxpbmVzXCIpXG5wbHQubGVnZW5kKClcbnBsdC5ncmlkKFRydWUpXG5wbHQuc2hvdygpIn0=
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfMiJ9LCJjb2RlIjoiZnJvbSBjcHhfbGVzc29uIGltcG9ydCBsb2FkX2RhdGFcbmltcG9ydCBzdGF0c21vZGVscy5mb3JtdWxhLmFwaSBhcyBzbWZcbmltcG9ydCBudW1weSBhcyBucFxuXG50cmFpbiwgZXZhbHVhdGlvbiA9IGxvYWRfZGF0YSgpXG5zaW1wbGUgPSBzbWYub2xzKFwiVF9DIH4gTWdPX0NweFwiLCBkYXRhPXRyYWluKS5maXQoKVxuZnJhbWUgPSBzaW1wbGUuZ2V0X3ByZWRpY3Rpb24oZXZhbHVhdGlvbikuc3VtbWFyeV9mcmFtZShhbHBoYT0wLjA1KVxubG93ID0gZnJhbWVbXCJvYnNfY2lfbG93ZXJcIl0udG9fbnVtcHkoKVxuaGlnaCA9IGZyYW1lW1wib2JzX2NpX3VwcGVyXCJdLnRvX251bXB5KClcbm9ic2VydmVkID0gZXZhbHVhdGlvbltcIlRfQ1wiXS50b19udW1weSgpXG5cbmNvdmVyZWQgPSAob2JzZXJ2ZWQgPj0gbG93KSAmIChvYnNlcnZlZCA8PSBoaWdoKVxuZnJhY3Rpb24gPSBucC5fX19fX18oY292ZXJlZClcbnByaW50KGZcIkV2YWx1YXRpb24gZnJhY3Rpb24gaW5zaWRlIG5vbWluYWwgOTUlIFBJczoge2ZyYWN0aW9uOi4zZn1cIikifQ==
 </script>
-</div>
 </div>
 </div>
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
-<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_2">
-<p>Use the method <code>predict</code> <a href="../appendices/doc_statsmodels.html#models-model-predict">(doc)</a> of the fitted model to obtain the predicted values for each lake over a range of years, and plot these predictions as lines on top of the scatter plot of the data points.</p>
-</div>
+<p>A Boolean array contains <code>True</code> for covered observations. Its <code>.mean()</code> or <code>np.mean()</code> gives the fraction covered. The arrays, rather than pandas indexes, are compared to preserve their observation order.</p>
 </div>
 <div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
-<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex_2">
-<p><strong>Function reference:</strong> <code>read_csv</code> <a href="../appendices/doc_pandas.html#pandas-read-csv">(doc)</a>; <code>model.fit</code> <a href="../appendices/doc_statsmodels.html#models-model-fit">(doc)</a>; <code>smf.ols</code> <a href="../appendices/doc_statsmodels.html#models-smf-ols">(doc)</a>; <code>print</code> <a href="../appendices/doc_python.html#python-print">(doc)</a>; <code>model.summary</code> <a href="../appendices/doc_statsmodels.html#models-model-summary">(doc)</a>; <code>plt.figure</code> <a href="../appendices/doc_visualisation.html#plotting-plt-figure">(doc)</a>; <code>ax.scatter</code> <a href="../appendices/doc_visualisation.html#plotting-ax-scatter">(doc)</a>; <code>np.linspace</code> <a href="../appendices/doc_numpy_scipy.html#numerical-np-linspace">(doc)</a>; <code>min</code> <a href="../appendices/doc_pandas.html#pandas-min">(doc)</a>; <code>max</code> <a href="../appendices/doc_pandas.html#pandas-max">(doc)</a>; <code>model.predict</code> <a href="../appendices/doc_statsmodels.html#models-model-predict">(doc)</a>; <code>DataFrame</code> <a href="../appendices/doc_pandas.html#pandas-dataframe">(doc)</a>; <code>ax.plot</code> <a href="../appendices/doc_visualisation.html#plotting-ax-plot">(doc)</a>; <code>ax.set_xlabel</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-xlabel">(doc)</a>; <code>ax.set_ylabel</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-ylabel">(doc)</a>; <code>ax.set_title</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-title">(doc)</a>; <code>ax.legend</code> <a href="../appendices/doc_visualisation.html#plotting-ax-legend">(doc)</a>; <code>ax.grid</code> <a href="../appendices/doc_visualisation.html#plotting-ax-grid">(doc)</a>; <code>plt.show</code> <a href="../appendices/doc_visualisation.html#plotting-plt-show">(doc)</a>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>df_icecover <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/df_icecover.csv"</span>)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit linear model with lake-specific intercepts</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>mod2 <span class="op">=</span> smf.ols(<span class="st">"ice_duration ~ year + lakeid"</span>, data<span class="op">=</span>df_icecover).fit()</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mod2.summary())</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Separate lakes</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>df_mendota <span class="op">=</span> df_icecover[df_icecover[<span class="st">'lakeid'</span>] <span class="op">==</span> <span class="st">"Lake Mendota"</span>]</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>df_monona  <span class="op">=</span> df_icecover[df_icecover[<span class="st">'lakeid'</span>] <span class="op">==</span> <span class="st">"Lake Monona"</span>]</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Colors</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [<span class="st">"#6a5acd"</span>, <span class="st">"#e64173"</span>]</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot data points</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>))</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>plt.scatter(df_mendota[<span class="st">'year'</span>], df_mendota[<span class="st">'ice_duration'</span>], color<span class="op">=</span>colors[<span class="dv">0</span>], label<span class="op">=</span><span class="st">"Mendota"</span>)</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>plt.scatter(df_monona[<span class="st">'year'</span>], df_monona[<span class="st">'ice_duration'</span>], color<span class="op">=</span>colors[<span class="dv">1</span>], label<span class="op">=</span><span class="st">"Monona"</span>)</span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare years for predictions</span></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>years <span class="op">=</span> np.linspace(df_icecover[<span class="st">'year'</span>].<span class="bu">min</span>(), df_icecover[<span class="st">'year'</span>].<span class="bu">max</span>(), <span class="dv">200</span>)</span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict for Mendota</span></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>pred_mendota <span class="op">=</span> mod2.predict(pd.DataFrame({<span class="st">'year'</span>: years, <span class="st">'lakeid'</span>: <span class="st">'Lake Mendota'</span>}))</span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>plt.plot(years, pred_mendota, color<span class="op">=</span>colors[<span class="dv">0</span>], linestyle<span class="op">=</span><span class="st">'-'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict for Monona</span></span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>pred_monona <span class="op">=</span> mod2.predict(pd.DataFrame({<span class="st">'year'</span>: years, <span class="st">'lakeid'</span>: <span class="st">'Lake Monona'</span>}))</span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>plt.plot(years, pred_monona, color<span class="op">=</span>colors[<span class="dv">1</span>], linestyle<span class="op">=</span><span class="st">'-'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Labels, legend, title</span></span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Year"</span>)</span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Ice duration (days)"</span>)</span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Ice duration over years with regression lines"</span>)</span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cpx_lesson <span class="im">import</span> load_data</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>train, evaluation <span class="op">=</span> load_data()</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>simple <span class="op">=</span> smf.ols(<span class="st">"T_C ~ MgO_Cpx"</span>, data<span class="op">=</span>train).fit()</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>frame <span class="op">=</span> simple.get_prediction(evaluation).summary_frame(alpha<span class="op">=</span><span class="fl">0.05</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>low <span class="op">=</span> frame[<span class="st">"obs_ci_lower"</span>].to_numpy()</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>high <span class="op">=</span> frame[<span class="st">"obs_ci_upper"</span>].to_numpy()</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>observed <span class="op">=</span> evaluation[<span class="st">"T_C"</span>].to_numpy()</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>covered <span class="op">=</span> (observed <span class="op">&gt;=</span> low) <span class="op">&amp;</span> (observed <span class="op">&lt;=</span> high)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>fraction <span class="op">=</span> np.mean(covered)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Evaluation fraction inside nominal 95% PIs: </span><span class="sc">{</span>fraction<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 </section>
-<section id="question-5" class="level3">
-<h3 class="anchored" data-anchor-id="question-5">Question 5</h3>
-<p>A third colleague of yours proposes to consider the following model to analyze the ice duration data: <span class="math display">\[
-\text{IceCover}_i = \beta_0 + \beta_1 \text{Year}_i + \beta_2 \text{LakeID}_i + \beta_3 \text{Year}_i \times \text{LakeID}_i + \epsilon_i
-\]</span> What is the correct formula to specify this model in <code>statsmodels</code>?</p>
-<div id="radio_OYSLMAERDU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OYSLMAERDU" value="" data-feedback="No, this formula does not include the interaction term."> <span><code>ice_duration ~ year + lakeid</code></span></label><label><input type="radio" autocomplete="off" name="radio_OYSLMAERDU" value="" data-feedback="No, this formula does not include lakeid or the interaction term."> <span><code>ice_duration ~ year</code></span></label><label><input type="radio" autocomplete="off" name="radio_OYSLMAERDU" value="answer" data-feedback="Correct! The <code>*</code> operator includes both main effects and the interaction term."> <span><code>ice_duration ~ year * lakeid</code></span></label><label><input type="radio" autocomplete="off" name="radio_OYSLMAERDU" value="" data-feedback="No, the <code>/</code> operator is not used for interactions in `statsmodels`."> <span><code>ice_duration ~ year / lakeid</code></span></label>
-<div class="webex-feedback-box">
-
-</div>
-</div>
-</section>
-<section id="question-6" class="level3">
-<h3 class="anchored" data-anchor-id="question-6">Question 6</h3>
-<p>She estimates the model and obtain the following results:</p>
-<p><strong>Function reference:</strong> <code>read_csv</code> <a href="../appendices/doc_pandas.html#pandas-read-csv">(doc)</a>; <code>model.fit</code> <a href="../appendices/doc_statsmodels.html#models-model-fit">(doc)</a>; <code>smf.ols</code> <a href="../appendices/doc_statsmodels.html#models-smf-ols">(doc)</a>; <code>print</code> <a href="../appendices/doc_python.html#python-print">(doc)</a>; <code>model.summary</code> <a href="../appendices/doc_statsmodels.html#models-model-summary">(doc)</a>.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>df_icecover <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/df_icecover.csv"</span>)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>mod3 <span class="op">=</span> smf.ols(<span class="st">"ice_duration ~ year + lakeid + year:lakeid"</span>, data<span class="op">=</span>df_icecover).fit()</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mod3.summary())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                            OLS Regression Results                            
-==============================================================================
-Dep. Variable:           ice_duration   R-squared:                       0.247
-Model:                            OLS   Adj. R-squared:                  0.240
-Method:                 Least Squares   F-statistic:                     35.76
-Date:                Wed, 04 Nov 2026   Prob (F-statistic):           5.18e-20
-Time:                        09:24:25   Log-Likelihood:                -1406.6
-No. Observations:                 331   AIC:                             2821.
-Df Residuals:                     327   BIC:                             2836.
-Df Model:                           3                                         
-Covariance Type:            nonrobust                                         
-==============================================================================================
-                                 coef    std err          t      P&gt;|t|      [0.025      0.975]
-----------------------------------------------------------------------------------------------
-Intercept                    479.2000     54.027      8.870      0.000     372.915     585.485
-lakeid[T.Lake Monona]         31.9296     76.027      0.420      0.675    -117.635     181.494
-year                          -0.1946      0.028     -6.980      0.000      -0.249      -0.140
-year:lakeid[T.Lake Monona]    -0.0159      0.039     -0.405      0.685      -0.093       0.061
-==============================================================================
-Omnibus:                       25.821   Durbin-Watson:                   2.154
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):               32.984
-Skew:                          -0.601   Prob(JB):                     6.88e-08
-Kurtosis:                       3.972   Cond. No.                     2.06e+05
-==============================================================================
-
-Notes:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-[2] The condition number is large, 2.06e+05. This might indicate that there are
-strong multicollinearity or other numerical problems.</code></pre>
-</div>
-</div>
-<p>This colleague wants to test whether the ice duration is evolving at different rates for the two lakes. What would be the appropriate hypotheses for this test?</p>
-<div id="radio_BJUCJKVAQC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BJUCJKVAQC" value="answer" data-feedback="Correct! Testing if the interaction term is significantly different from zero checks if the rates of change differ between lakes."> <span>\( H_0: \beta_3 = 0 \), \( H_a: \beta_3 \neq 0 \)</span></label><label><input type="radio" autocomplete="off" name="radio_BJUCJKVAQC" value="" data-feedback="No, this tests if ice duration decreases over years in general, not if the rates differ between lakes."> <span>\( H_0: \beta_1 = 0 \), \( H_a: \beta_1 &lt; 0 \)</span></label><label><input type="radio" autocomplete="off" name="radio_BJUCJKVAQC" value="" data-feedback="No, this tests if there is a difference in intercepts between lakes, not the rates of change."> <span>\( H_0: \beta_2 = 0 \), \( H_a: \beta_2 \neq 0 \)</span></label><label><input type="radio" autocomplete="off" name="radio_BJUCJKVAQC" value="" data-feedback="No, the alternative hypothesis should test for any difference, not just a decrease."> <span>\( H_0: \beta_3 = 0 \), \( H_a: \beta_3 &lt; 0 \)</span></label>
-<div class="webex-feedback-box">
-
-</div>
-</div>
-</section>
-<section id="question-7" class="level3">
-<h3 class="anchored" data-anchor-id="question-7">Question 7</h3>
-<p>What is the p-value associated with this test according to the model summary above?</p>
-<div id="radio_YMPPNHIKKW" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YMPPNHIKKW" value="answer" data-feedback="Correct!"> <span>\(0.685\)</span></label><label><input type="radio" autocomplete="off" name="radio_YMPPNHIKKW" value="" data-feedback="No, this is the p-value for the coefficient associated with the intercept of Lake Monona."> <span>\(0.675\)</span></label><label><input type="radio" autocomplete="off" name="radio_YMPPNHIKKW" value="" data-feedback="No, this is the estimated coefficient for the interaction term."> <span>\(-0.0159\)</span></label><label><input type="radio" autocomplete="off" name="radio_YMPPNHIKKW" value="" data-feedback="No, this is the estimated standard deviation of the estimated coefficient for the interaction term."> <span>\(0.039\)</span></label>
-<div class="webex-feedback-box">
-
-</div>
-</div>
-</section>
-<section id="question-8" class="level3">
-<h3 class="anchored" data-anchor-id="question-8">Question 8</h3>
-<p>What can you conclude regarding the difference in ice duration between the two lakes (considering <span class="math inline">\(\alpha=0.05\)</span>)?</p>
-<div id="radio_VSWLEIZYJQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VSWLEIZYJQ" value="" data-feedback="No, the p-value is greater than 0.05, so we fail to reject the null hypothesis."> <span>We reject \(H_0\), there is evidence from the data that the slope for ice duration differs between the two lakes</span></label><label><input type="radio" autocomplete="off" name="radio_VSWLEIZYJQ" value="answer" data-feedback="Correct! The p-value is greater than 0.05, so we fail to reject the null hypothesis."> <span>We cannot reject \(H_0\), there is no evidence from the data that the slope for ice duration differs between the two lakes</span></label><label><input type="radio" autocomplete="off" name="radio_VSWLEIZYJQ" value="" data-feedback="No, failing to reject the null hypothesis does not imply that the slopes are exactly equal."> <span>We cannot reject \(H_0\). Therefore the slopes are exactly equal and there is absolutely no difference between the lakes' trends</span></label><label><input type="radio" autocomplete="off" name="radio_VSWLEIZYJQ" value="" data-feedback="No. A significant main effect for year indicates a common downward trend overall, but it does not test whether the slopes differ between lakes"> <span>We reject \(H_0\) because the coefficient for year (\(\beta_1\)) is significantly negative, so the trends must differ between lakes</span></label>
-<div class="webex-feedback-box">
-
-</div>
-</div>
-</section>
-<section id="question-9" class="level3">
-<h3 class="anchored" data-anchor-id="question-9">Question 9</h3>
-<p>Complete the following code to plot the data points and the regression lines for both lakes according to the third model.</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">Exercise</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">Hints</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-3" role="tab" aria-controls="tabset-3-3" aria-selected="false" href="">Solution</a></li></ul>
-<div class="tab-content">
-<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
-<div class="cell" data-exercise="ex_3">
-<div>
-<div id="pyodide-3" class="exercise-cell">
-
-</div>
-<script type="pyodide-3-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfMyJ9LCJjb2RlIjoiaW1wb3J0IHBhbmRhcyBhcyBwZFxuaW1wb3J0IG1hdHBsb3RsaWIucHlwbG90IGFzIHBsdFxuaW1wb3J0IHN0YXRzbW9kZWxzLmZvcm11bGEuYXBpIGFzIHNtZlxuaW1wb3J0IG51bXB5IGFzIG5wXG5cbiMgTG9hZCBkYXRhXG5kZl9pY2Vjb3ZlciA9IHBkLnJlYWRfY3N2KFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0VMU1RFLU1hc3Rlci9EYXRhLVNjaWVuY2UvbWFpbi9EYXRhL2RmX2ljZWNvdmVyLmNzdlwiKVxuXG4jIEZpdCBsaW5lYXIgbW9kZWwgd2l0aCBsYWtlLXNwZWNpZmljIGludGVyY2VwdHNcbm1vZDMgPSBzbWYub2xzKF9fX19fXywgZGF0YT1kZl9pY2Vjb3ZlcikuZml0KClcbnByaW50KG1vZDMuc3VtbWFyeSgpKVxuXG4jIFNlcGFyYXRlIGxha2VzXG5kZl9tZW5kb3RhID0gZGZfaWNlY292ZXJbZGZfaWNlY292ZXJbJ2xha2VpZCddID09IFwiTGFrZSBNZW5kb3RhXCJdXG5kZl9tb25vbmEgID0gZGZfaWNlY292ZXJbZGZfaWNlY292ZXJbJ2xha2VpZCddID09IFwiTGFrZSBNb25vbmFcIl1cblxuIyBDb2xvcnNcbmNvbG9ycyA9IFtcIiM2YTVhY2RcIiwgXCIjZTY0MTczXCJdXG5cbiMgUGxvdCBkYXRhIHBvaW50c1xucGx0LmZpZ3VyZShmaWdzaXplPSg4LDUpKVxucGx0LnNjYXR0ZXIoZGZfbWVuZG90YVsneWVhciddLCBkZl9tZW5kb3RhWydpY2VfZHVyYXRpb24nXSwgY29sb3I9Y29sb3JzWzBdLCBsYWJlbD1cIk1lbmRvdGFcIilcbnBsdC5zY2F0dGVyKGRmX21vbm9uYVsneWVhciddLCBkZl9tb25vbmFbJ2ljZV9kdXJhdGlvbiddLCBjb2xvcj1jb2xvcnNbMV0sIGxhYmVsPVwiTW9ub25hXCIpXG5cbiMgUHJlcGFyZSB5ZWFycyBmb3IgcHJlZGljdGlvbnNcbnllYXJzID0gbnAubGluc3BhY2UoZGZfaWNlY292ZXJbJ3llYXInXS5taW4oKSwgZGZfaWNlY292ZXJbJ3llYXInXS5tYXgoKSwgMjAwKVxuXG4jIFByZWRpY3QgZm9yIE1lbmRvdGFcbnByZWRfbWVuZG90YSA9IF9fX19fXyhwZC5EYXRhRnJhbWUoeyd5ZWFyJzogeWVhcnMsICdsYWtlaWQnOiAnTGFrZSBNZW5kb3RhJ30pKVxucGx0LnBsb3QoeWVhcnMsIHByZWRfbWVuZG90YSwgY29sb3I9Y29sb3JzWzBdLCBsaW5lc3R5bGU9Jy0nLCBsaW5ld2lkdGg9MilcblxuIyBQcmVkaWN0IGZvciBNb25vbmFcbnByZWRfbW9ub25hID0gX19fX19fKHBkLkRhdGFGcmFtZSh7J3llYXInOiB5ZWFycywgJ2xha2VpZCc6ICdMYWtlIE1vbm9uYSd9KSlcbnBsdC5wbG90KHllYXJzLCBwcmVkX21vbm9uYSwgY29sb3I9Y29sb3JzWzFdLCBsaW5lc3R5bGU9Jy0nLCBsaW5ld2lkdGg9MilcblxuIyBMYWJlbHMsIGxlZ2VuZCwgdGl0bGVcbnBsdC54bGFiZWwoXCJZZWFyXCIpXG5wbHQueWxhYmVsKFwiSWNlIGR1cmF0aW9uIChkYXlzKVwiKVxucGx0LnRpdGxlKFwiSWNlIGR1cmF0aW9uIG92ZXIgeWVhcnMgd2l0aCByZWdyZXNzaW9uIGxpbmVzXCIpXG5wbHQubGVnZW5kKClcbnBsdC5ncmlkKFRydWUpXG5wbHQuc2hvdygpIn0=
-</script>
-</div>
-</div>
-</div>
-<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
-<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_3">
-<p>Use the method <code>predict</code> <a href="../appendices/doc_statsmodels.html#models-model-predict">(doc)</a> of the fitted model to obtain the predicted values for each lake over a range of years, and plot these predictions as lines on top of the scatter plot of the data points.</p>
-</div>
-</div>
-<div id="tabset-3-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-3-tab">
-<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex_3">
-<p><strong>Function reference:</strong> <code>read_csv</code> <a href="../appendices/doc_pandas.html#pandas-read-csv">(doc)</a>; <code>model.fit</code> <a href="../appendices/doc_statsmodels.html#models-model-fit">(doc)</a>; <code>smf.ols</code> <a href="../appendices/doc_statsmodels.html#models-smf-ols">(doc)</a>; <code>print</code> <a href="../appendices/doc_python.html#python-print">(doc)</a>; <code>model.summary</code> <a href="../appendices/doc_statsmodels.html#models-model-summary">(doc)</a>; <code>plt.figure</code> <a href="../appendices/doc_visualisation.html#plotting-plt-figure">(doc)</a>; <code>ax.scatter</code> <a href="../appendices/doc_visualisation.html#plotting-ax-scatter">(doc)</a>; <code>np.linspace</code> <a href="../appendices/doc_numpy_scipy.html#numerical-np-linspace">(doc)</a>; <code>min</code> <a href="../appendices/doc_pandas.html#pandas-min">(doc)</a>; <code>max</code> <a href="../appendices/doc_pandas.html#pandas-max">(doc)</a>; <code>model.predict</code> <a href="../appendices/doc_statsmodels.html#models-model-predict">(doc)</a>; <code>DataFrame</code> <a href="../appendices/doc_pandas.html#pandas-dataframe">(doc)</a>; <code>ax.plot</code> <a href="../appendices/doc_visualisation.html#plotting-ax-plot">(doc)</a>; <code>ax.set_xlabel</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-xlabel">(doc)</a>; <code>ax.set_ylabel</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-ylabel">(doc)</a>; <code>ax.set_title</code> <a href="../appendices/doc_visualisation.html#plotting-ax-set-title">(doc)</a>; <code>ax.legend</code> <a href="../appendices/doc_visualisation.html#plotting-ax-legend">(doc)</a>; <code>ax.grid</code> <a href="../appendices/doc_visualisation.html#plotting-ax-grid">(doc)</a>; <code>plt.show</code> <a href="../appendices/doc_visualisation.html#plotting-plt-show">(doc)</a>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>df_icecover <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/df_icecover.csv"</span>)</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit linear model with lake-specific intercepts</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>mod3 <span class="op">=</span> smf.ols(<span class="st">"ice_duration ~ year + lakeid + year:lakeid"</span>, data<span class="op">=</span>df_icecover).fit()</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mod3.summary())</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Separate lakes</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>df_mendota <span class="op">=</span> df_icecover[df_icecover[<span class="st">'lakeid'</span>] <span class="op">==</span> <span class="st">"Lake Mendota"</span>]</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>df_monona  <span class="op">=</span> df_icecover[df_icecover[<span class="st">'lakeid'</span>] <span class="op">==</span> <span class="st">"Lake Monona"</span>]</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Colors</span></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [<span class="st">"#6a5acd"</span>, <span class="st">"#e64173"</span>]</span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot data points</span></span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>))</span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>plt.scatter(df_mendota[<span class="st">'year'</span>], df_mendota[<span class="st">'ice_duration'</span>], color<span class="op">=</span>colors[<span class="dv">0</span>], label<span class="op">=</span><span class="st">"Mendota"</span>)</span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>plt.scatter(df_monona[<span class="st">'year'</span>], df_monona[<span class="st">'ice_duration'</span>], color<span class="op">=</span>colors[<span class="dv">1</span>], label<span class="op">=</span><span class="st">"Monona"</span>)</span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare years for predictions</span></span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>years <span class="op">=</span> np.linspace(df_icecover[<span class="st">'year'</span>].<span class="bu">min</span>(), df_icecover[<span class="st">'year'</span>].<span class="bu">max</span>(), <span class="dv">200</span>)</span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict for Mendota</span></span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>pred_mendota <span class="op">=</span> mod3.predict(pd.DataFrame({<span class="st">'year'</span>: years, <span class="st">'lakeid'</span>: <span class="st">'Lake Mendota'</span>}))</span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>plt.plot(years, pred_mendota, color<span class="op">=</span>colors[<span class="dv">0</span>], linestyle<span class="op">=</span><span class="st">'-'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict for Monona</span></span>
-<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>pred_monona <span class="op">=</span> mod3.predict(pd.DataFrame({<span class="st">'year'</span>: years, <span class="st">'lakeid'</span>: <span class="st">'Lake Monona'</span>}))</span>
-<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>plt.plot(years, pred_monona, color<span class="op">=</span>colors[<span class="dv">1</span>], linestyle<span class="op">=</span><span class="st">'-'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Labels, legend, title</span></span>
-<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Year"</span>)</span>
-<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Ice duration (days)"</span>)</span>
-<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Ice duration over years with regression lines"</span>)</span>
-<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="question-10" class="level3">
-<h3 class="anchored" data-anchor-id="question-10">Question 10</h3>
-<p>A climatologist uses <code>mod3</code> to predict the ice duration in the year <span class="math inline">\(2500\)</span> for both lakes and obtains the following results:</p>
-<p><strong>Function reference:</strong> <code>read_csv</code> <a href="../appendices/doc_pandas.html#pandas-read-csv">(doc)</a>; <code>model.fit</code> <a href="../appendices/doc_statsmodels.html#models-model-fit">(doc)</a>; <code>smf.ols</code> <a href="../appendices/doc_statsmodels.html#models-smf-ols">(doc)</a>; <code>astype</code> <a href="../appendices/doc_pandas.html#pandas-astype">(doc)</a>; <code>model.predict</code> <a href="../appendices/doc_statsmodels.html#models-model-predict">(doc)</a>; <code>DataFrame</code> <a href="../appendices/doc_pandas.html#pandas-dataframe">(doc)</a>; <code>Categorical</code> <a href="../appendices/doc_pandas.html#pandas-categorical">(doc)</a>; <code>print</code> <a href="../appendices/doc_python.html#python-print">(doc)</a>.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>df_icecover <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/df_icecover.csv"</span>)</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit linear model with lake-specific intercepts and trend</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>mod3 <span class="op">=</span> smf.ols(<span class="st">"ice_duration ~ year + lakeid + year:lakeid"</span>, data<span class="op">=</span>df_icecover).fit()</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Define levels for the categorical variable</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>lake_levels <span class="op">=</span> df_icecover[<span class="st">'lakeid'</span>].astype(<span class="st">'category'</span>).cat.categories</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict for Mendota</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>pred_mendota <span class="op">=</span> mod3.predict(pd.DataFrame({</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">'year'</span>: [<span class="dv">2500</span>], </span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">'lakeid'</span>: pd.Categorical([<span class="st">'Lake Mendota'</span>], categories<span class="op">=</span>lake_levels)</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>}))</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict for Monona</span></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>pred_monona <span class="op">=</span> mod3.predict(pd.DataFrame({</span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">'year'</span>: [<span class="dv">2500</span>], </span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">'lakeid'</span>: pd.Categorical([<span class="st">'Lake Monona'</span>], categories<span class="op">=</span>lake_levels)</span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>}))</span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Predicted ice duration in 2500 for Lake Mendota: </span><span class="sc">{</span>pred_mendota<span class="sc">.</span>values[<span class="dv">0</span>]<span class="sc">:.2f}</span><span class="ss"> days"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Predicted ice duration in 2500 for Lake Mendota: -7.37 days</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Predicted ice duration in 2500 for Lake Monona: </span><span class="sc">{</span>pred_monona<span class="sc">.</span>values[<span class="dv">0</span>]<span class="sc">:.2f}</span><span class="ss"> days"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Predicted ice duration in 2500 for Lake Monona: -15.21 days</code></pre>
-</div>
-</div>
-<p>Is this prediction reliable? Justify your answer.</p>
-<div id="radio_TSEDHDZNOO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TSEDHDZNOO" value="" data-feedback="No. A numeric prediction does not guarantee reliability. The model was fitted on historical data and may not be valid far outside the observed range."> <span>Yes. The model gives a numeric prediction, so it is reliable even far into the future.</span></label><label><input type="radio" autocomplete="off" name="radio_TSEDHDZNOO" value="answer" data-feedback="Correct! Predicting for year \(2500\) is extreme extrapolation. Linear model behavior outside the observed years is uncertain."> <span>No.&nbsp;The prediction is not reliable. It is a large extrapolation beyond the data range and even yields an impossible/negative ice duration.</span></label><label><input type="radio" autocomplete="off" name="radio_TSEDHDZNOO" value="" data-feedback="No. Non-significant interaction only means there is little evidence of different slopes between lakes in the sample. The main issue here is extrapolation and unrealistic predicted values."> <span>No.&nbsp;Because the interaction term is not statistically significant, the model cannot be used for prediction at all.</span></label><label><input type="radio" autocomplete="off" name="radio_TSEDHDZNOO" value="" data-feedback="No."> <span>Yes, predictions at any year are valid.</span></label>
-<div class="webex-feedback-box">
-
-</div>
-</div>
-</section>
-<section id="question-11" class="level3">
-<h3 class="anchored" data-anchor-id="question-11">Question 11</h3>
-<p>Based on the AIC values, which model would you select among the three models fitted above?</p>
-<p><strong>Function reference:</strong> <code>read_csv</code> <a href="../appendices/doc_pandas.html#pandas-read-csv">(doc)</a>; <code>model.fit</code> <a href="../appendices/doc_statsmodels.html#models-model-fit">(doc)</a>; <code>smf.ols</code> <a href="../appendices/doc_statsmodels.html#models-smf-ols">(doc)</a>; <code>DataFrame</code> <a href="../appendices/doc_pandas.html#pandas-dataframe">(doc)</a>; <code>model.aic</code> <a href="../appendices/doc_statsmodels.html#models-model-aic">(doc)</a>; <code>print</code> <a href="../appendices/doc_python.html#python-print">(doc)</a>.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>df_icecover <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/df_icecover.csv"</span>)</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>mod1 <span class="op">=</span> smf.ols(<span class="st">"ice_duration ~ year"</span>, data<span class="op">=</span>df_icecover).fit()</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>mod2 <span class="op">=</span> smf.ols(<span class="st">"ice_duration ~ year + lakeid"</span>, data<span class="op">=</span>df_icecover).fit()</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>mod3 <span class="op">=</span> smf.ols(<span class="st">"ice_duration ~ year + lakeid + year:lakeid"</span>, data<span class="op">=</span>df_icecover).fit()</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>aic_values <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Model'</span>: [<span class="st">'mod1'</span>, <span class="st">'mod2'</span>, <span class="st">'mod3'</span>],</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'AIC'</span>: [mod1.aic, mod2.aic, mod3.aic]</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(aic_values)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  Model          AIC
-0  mod1  2817.758574
-1  mod2  2819.400099
-2  mod3  2821.233773</code></pre>
-</div>
-</div>
-<div id="radio_NVVDNYJIRY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NVVDNYJIRY" value="" data-feedback="No. Although more complex models can fit data better, AIC penalizes complexity. Model 3 has the highest AIC, so it is not preferred."> <span>Model 3, because it is the most complex and therefore should always fit the data best.</span></label><label><input type="radio" autocomplete="off" name="radio_NVVDNYJIRY" value="" data-feedback="No. Model 2’s AIC (2819.40) is higher than Model 1’s (2817.76), so Model 1 is preferred."> <span>Model 2 (with lake-specific intercepts), because it has the lowest AIC among the three models.</span></label><label><input type="radio" autocomplete="off" name="radio_NVVDNYJIRY" value="answer" data-feedback="Correct! Model 1 has the smallest AIC value (2817.76), indicating it provides the best balance between model fit and simplicity."> <span>Model 1, because it has the lowest AIC among the three models.</span></label><label><input type="radio" autocomplete="off" name="radio_NVVDNYJIRY" value="" data-feedback="Not quite. Model 1 is preferred because it actually has the lowest AIC, not just because it’s simpler."> <span>Model 1, because simpler models are always better regardless of AIC.</span></label>
-<div class="webex-feedback-box">
-
-</div>
-</div>
-</section>
-<section id="question-12" class="level3">
-<h3 class="anchored" data-anchor-id="question-12">Question 12</h3>
-<p>An expert says that the data are actually not independent because the ice duration in a given year might be correlated with the ice duration in the previous year. Is this a problem to perform inference with the models fitted above?</p>
-<div id="radio_PXWPUFKTPQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PXWPUFKTPQ" value="" data-feedback="No. Autocorrelation violates the independence assumption of the residuals, which can make standard errors and hypothesis tests unreliable."> <span>No, correlation between observations across years does not matter for linear regression.</span></label><label><input type="radio" autocomplete="off" name="radio_PXWPUFKTPQ" value="answer" data-feedback="Correct! When residuals are autocorrelated, standard errors may be underestimated, leading to incorrect p-values and confidence intervals."> <span>Yes, it can be a problem because correlated observations violate the independence assumption required for linear regression.</span></label><label><input type="radio" autocomplete="off" name="radio_PXWPUFKTPQ" value="" data-feedback="No. Including 'year' as a covariate does not guarantee that residuals are independent across time."> <span>No, as long as the model includes <code>year</code> as a covariate, independence is automatically ensured.</span></label><label><input type="radio" autocomplete="off" name="radio_PXWPUFKTPQ" value="" data-feedback="Autocorrelation affects inference regardless of sample size."> <span>Yes, but only if the sample size is very small.</span></label>
+<section id="question-5-what-may-we-conclude" class="level3">
+<h3 class="anchored" data-anchor-id="question-5-what-may-we-conclude">Question 5 — What may we conclude?</h3>
+<div id="radio_q3" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_q3" value="" data-feedback="Slope significance does not guarantee model validity or domain transfer."> <span>A low p-value for the MgO slope is sufficient to justify a 95% prediction region for any geological setting.</span></label><label><input type="radio" autocomplete="off" name="radio_q3" value="" data-feedback="Mean confidence intervals do not include individual residual variation."> <span>A fitted mean confidence interval covers 95% of all future individual temperatures.</span></label><label><input type="radio" autocomplete="off" name="radio_q3" value="" data-feedback="The model was fitted to experimental data and has not been validated for natural-crystal thermometry."> <span>A nominal 95% interval guarantees at least 95% coverage for natural crystals.</span></label><label><input type="radio" autocomplete="off" name="radio_q3" value="answer" data-feedback="Correct. Nominal model-based coverage and observed out-of-sample coverage are different quantities."> <span>A nominal 95% interval may be miscalibrated for new publications if model or dependence assumptions fail; empirical evaluation should be interpreted cautiously.</span></label>
 <div class="webex-feedback-box">
 
 </div>
@@ -973,10 +570,10 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfMyJ9LCJjb2RlIjoi
 
 
 <script type="pyodide-data">
-eyJvcHRpb25zIjp7ImVudiI6eyJQTE9UTFlfUkVOREVSRVIiOiJwbG90bHlfbWltZXR5cGUifSwiaW5kZXhVUkwiOiJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvcHlvZGlkZS92MC4yOC4xL2Z1bGwvIn0sInBhY2thZ2VzIjp7InBrZ3MiOlsicHlvZGlkZV9odHRwIiwibWljcm9waXAiLCJpcHl0aG9uIl19fQ==
+eyJvcHRpb25zIjp7ImVudiI6eyJQTE9UTFlfUkVOREVSRVIiOiJwbG90bHlfbWltZXR5cGUifSwiaW5kZXhVUkwiOiJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvcHlvZGlkZS92MC4yOC4xL2Z1bGwvIn0sInBhY2thZ2VzIjp7InBrZ3MiOlsicHlvZGlkZV9odHRwIiwibWljcm9waXAiLCJpcHl0aG9uIiwicGFuZGFzIiwibnVtcHkiLCJzY2lweSIsInN0YXRzbW9kZWxzIiwibWF0cGxvdGxpYiJdfX0=
 </script>
 <script type="ojs-module-contents">
-eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJweW9kaWRlLTMiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8zID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0zLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBleGVyY2lzZSBjb25maWd1cmF0aW9uXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKFxuICAgIHtcbiAgICAgIGlkOiBcInB5b2RpZGUtMy1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IocHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF9weW9kaWRlX3ZhbHVlXzMgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzMsIHt9KTtcbl9weW9kaWRlX2ZlZWRiYWNrXzMgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBQeW9kaWRlR3JhZGVyKF9weW9kaWRlX3ZhbHVlXzMuZXZhbHVhdG9yKTtcbiAgY29uc3QgZmVlZGJhY2sgPSBhd2FpdCBncmFkZXIuZ3JhZGVFeGVyY2lzZSgpO1xuICBpZiAoIWZlZWRiYWNrKSByZXR1cm4gZW1wdHlGZWVkYmFjaztcbiAgcmV0dXJuIGZlZWRiYWNrO1xufVxuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMiIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzIgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTItY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwicHlvZGlkZS0yLWNvbnRlbnRzXCIsXG4gICAgICBlbnZpcjogYGV4ZXJjaXNlLWVudi0ke2Jsb2NrLmF0dHIuZXhlcmNpc2V9YCxcbiAgICAgIGVycm9yOiBmYWxzZSxcbiAgICAgIGNhcHRpb246ICdFeGVyY2lzZScsXG4gICAgfSxcbiAgICBibG9jay5hdHRyXG4gICk7XG5cbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG52aWV3b2YgX3B5b2RpZGVfdmFsdWVfMiA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMiwge30pO1xuX3B5b2RpZGVfZmVlZGJhY2tfMiA9IHtcbiAgY29uc3QgeyBQeW9kaWRlR3JhZGVyIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBlbXB0eUZlZWRiYWNrID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7XG5cbiAgY29uc3QgZ3JhZGVyID0gbmV3IFB5b2RpZGVHcmFkZXIoX3B5b2RpZGVfdmFsdWVfMi5ldmFsdWF0b3IpO1xuICBjb25zdCBmZWVkYmFjayA9IGF3YWl0IGdyYWRlci5ncmFkZUV4ZXJjaXNlKCk7XG4gIGlmICghZmVlZGJhY2spIHJldHVybiBlbXB0eUZlZWRiYWNrO1xuICByZXR1cm4gZmVlZGJhY2s7XG59XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0xIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMSA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtMS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIC8vIERlZmF1bHQgZXhlcmNpc2UgY29uZmlndXJhdGlvblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbihcbiAgICB7XG4gICAgICBpZDogXCJweW9kaWRlLTEtY29udGVudHNcIixcbiAgICAgIGVudmlyOiBgZXhlcmNpc2UtZW52LSR7YmxvY2suYXR0ci5leGVyY2lzZX1gLFxuICAgICAgZXJyb3I6IGZhbHNlLFxuICAgICAgY2FwdGlvbjogJ0V4ZXJjaXNlJyxcbiAgICB9LFxuICAgIGJsb2NrLmF0dHJcbiAgKTtcblxuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbnZpZXdvZiBfcHlvZGlkZV92YWx1ZV8xID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl8xLCB7fSk7XG5fcHlvZGlkZV9mZWVkYmFja18xID0ge1xuICBjb25zdCB7IFB5b2RpZGVHcmFkZXIgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IGVtcHR5RmVlZGJhY2sgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTtcblxuICBjb25zdCBncmFkZXIgPSBuZXcgUHlvZGlkZUdyYWRlcihfcHlvZGlkZV92YWx1ZV8xLmV2YWx1YXRvcik7XG4gIGNvbnN0IGZlZWRiYWNrID0gYXdhaXQgZ3JhZGVyLmdyYWRlRXhlcmNpc2UoKTtcbiAgaWYgKCFmZWVkYmFjaykgcmV0dXJuIGVtcHR5RmVlZGJhY2s7XG4gIHJldHVybiBmZWVkYmFjaztcbn1cbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLXByZWx1ZGUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJweW9kaWRlT2pzID0ge1xuICBjb25zdCB7XG4gICAgUHlvZGlkZUV2YWx1YXRvcixcbiAgICBQeW9kaWRlRW52aXJvbm1lbnRNYW5hZ2VyLFxuICAgIHNldHVwUHl0aG9uLFxuICAgIHN0YXJ0UHlvZGlkZVdvcmtlcixcbiAgICBiNjREZWNvZGUsXG4gICAgY29sbGFwc2VQYXRoLFxuICB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzdGF0dXNDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImV4ZXJjaXNlLWxvYWRpbmctc3RhdHVzXCIpO1xuICBjb25zdCBpbmRpY2F0b3JDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImV4ZXJjaXNlLWxvYWRpbmctaW5kaWNhdG9yXCIpO1xuICBpbmRpY2F0b3JDb250YWluZXIuY2xhc3NMaXN0LnJlbW92ZShcImQtbm9uZVwiKTtcblxuICBsZXQgc3RhdHVzVGV4dCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIilcbiAgc3RhdHVzVGV4dC5jbGFzc0xpc3QgPSBcImV4ZXJjaXNlLWxvYWRpbmctZGV0YWlsc1wiO1xuICBzdGF0dXNUZXh0ID0gc3RhdHVzQ29udGFpbmVyLmFwcGVuZENoaWxkKHN0YXR1c1RleHQpO1xuICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYEluaXRpYWxpc2VgO1xuXG4gIC8vIEhvaXN0IGluZGljYXRvciBvdXQgZnJvbSBmaW5hbCBzbGlkZSB3aGVuIHJ1bm5pbmcgdW5kZXIgcmV2ZWFsXG4gIGNvbnN0IHJldmVhbFN0YXR1cyA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIucmV2ZWFsIC5leGVyY2lzZS1sb2FkaW5nLWluZGljYXRvclwiKTtcbiAgaWYgKHJldmVhbFN0YXR1cykge1xuICAgIHJldmVhbFN0YXR1cy5yZW1vdmUoKTtcbiAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLnJldmVhbCA+IC5zbGlkZXNcIikuYXBwZW5kQ2hpbGQocmV2ZWFsU3RhdHVzKTtcbiAgfVxuXG4gIC8vIE1ha2UgYW55IHJldmVhbCBzbGlkZXMgd2l0aCBsaXZlIGNlbGxzIHNjcm9sbGFibGVcbiAgZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbChcIi5yZXZlYWwgLmV4ZXJjaXNlLWNlbGxcIikuZm9yRWFjaCgoZWwpID0+IHtcbiAgICBlbC5jbG9zZXN0KCdzZWN0aW9uLnNsaWRlJykuY2xhc3NMaXN0LmFkZChcInNjcm9sbGFibGVcIik7XG4gIH0pXG5cbiAgLy8gUHlvZGlkZSBzdXBwbGVtZW50YWwgZGF0YSBhbmQgb3B0aW9uc1xuICBjb25zdCBkYXRhQ29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLWRhdGFcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBkYXRhID0gSlNPTi5wYXJzZShiNjREZWNvZGUoZGF0YUNvbnRlbnQpKTtcblxuICAvLyBHcmFiIGxpc3Qgb2YgcmVzb3VyY2VzIHRvIGJlIGRvd25sb2FkZWRcbiAgY29uc3QgZmlsZXNDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInZmcy1maWxlXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgZmlsZXMgPSBKU09OLnBhcnNlKGI2NERlY29kZShmaWxlc0NvbnRlbnQpKTtcblxuICBsZXQgcHlvZGlkZVByb21pc2UgPSAoYXN5bmMgKCkgPT4ge1xuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgUHlvZGlkZWA7XG4gICAgY29uc3QgcHlvZGlkZSA9IGF3YWl0IHN0YXJ0UHlvZGlkZVdvcmtlcihkYXRhLm9wdGlvbnMpO1xuXG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiBtaWNyb3BpcGA7XG4gICAgYXdhaXQgcHlvZGlkZS5sb2FkUGFja2FnZShcIm1pY3JvcGlwXCIpO1xuICAgIGNvbnN0IG1pY3JvcGlwID0gYXdhaXQgcHlvZGlkZS5weWltcG9ydChcIm1pY3JvcGlwXCIpO1xuICAgIGF3YWl0IGRhdGEucGFja2FnZXMucGtncy5tYXAoKHBrZykgPT4gKCkgPT4ge1xuICAgICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiAke3BrZ31gO1xuICAgICAgcmV0dXJuIG1pY3JvcGlwLmluc3RhbGwocGtnKTtcbiAgICB9KS5yZWR1Y2UoKGN1ciwgbmV4dCkgPT4gY3VyLnRoZW4obmV4dCksIFByb21pc2UucmVzb2x2ZSgpKTtcbiAgICBhd2FpdCBtaWNyb3BpcC5kZXN0cm95KCk7XG5cbiAgICAvLyBEb3dubG9hZCBhbmQgaW5zdGFsbCByZXNvdXJjZXNcbiAgICBhd2FpdCBmaWxlcy5tYXAoKGZpbGUpID0+IGFzeW5jICgpID0+IHtcbiAgICAgIGNvbnN0IG5hbWUgPSBmaWxlLnN1YnN0cmluZyhmaWxlLmxhc3RJbmRleE9mKCcvJykgKyAxKTtcbiAgICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcmVzb3VyY2U6ICR7bmFtZX1gO1xuICAgICAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBmZXRjaChmaWxlKTtcbiAgICAgIGlmICghcmVzcG9uc2Uub2spIHtcbiAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBDYW4ndCBkb3dubG9hZCBcXGAke2ZpbGV9XFxgLiBFcnJvciAke3Jlc3BvbnNlLnN0YXR1c306IFwiJHtyZXNwb25zZS5zdGF0dXNUZXh0fVwiLmApO1xuICAgICAgfVxuICAgICAgY29uc3QgZGF0YSA9IGF3YWl0IHJlc3BvbnNlLmFycmF5QnVmZmVyKCk7XG5cbiAgICAgIC8vIFN0b3JlIFVSTHMgaW4gdGhlIGN3ZCB3aXRob3V0IGFueSBzdWJkaXJlY3Rvcnkgc3RydWN0dXJlXG4gICAgICBpZiAoZmlsZS5pbmNsdWRlcyhcIjovL1wiKSkge1xuICAgICAgICBmaWxlID0gbmFtZTtcbiAgICAgIH1cblxuICAgICAgLy8gQ29sbGFwc2UgaGlnaGVyIGRpcmVjdG9yeSBzdHJ1Y3R1cmVcbiAgICAgIGZpbGUgPSBjb2xsYXBzZVBhdGgoZmlsZSk7XG5cbiAgICAgIC8vIENyZWF0ZSBkaXJlY3RvcnkgdHJlZSwgaWdub3JpbmcgXCJkaXJlY3RvcnkgZXhpc3RzXCIgVkZTIGVycm9yc1xuICAgICAgY29uc3QgcGFydHMgPSBmaWxlLnNwbGl0KCcvJykuc2xpY2UoMCwgLTEpO1xuICAgICAgbGV0IHBhdGggPSAnJztcbiAgICAgIHdoaWxlIChwYXJ0cy5sZW5ndGggPiAwKSB7XG4gICAgICAgIHBhdGggKz0gcGFydHMuc2hpZnQoKSArICcvJztcbiAgICAgICAgdHJ5IHtcbiAgICAgICAgICBhd2FpdCBweW9kaWRlLkZTLm1rZGlyKHBhdGgpO1xuICAgICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgICAgaWYgKGUubmFtZSAhPT0gXCJFcnJub0Vycm9yXCIpIHRocm93IGU7XG4gICAgICAgICAgaWYgKGUuZXJybm8gIT09IDIwKSB7XG4gICAgICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICAgICAgY29uc3QgZXJyb3JUZXh0ID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLlVURjhUb1N0cmluZyhlcnJvclRleHRQdHIpO1xuICAgICAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBGaWxlc3lzdGVtIEVycm9yICR7ZS5lcnJub30gXCIke2Vycm9yVGV4dH1cIi5gKTtcbiAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgIH1cblxuICAgICAgLy8gV3JpdGUgdGhpcyBmaWxlIHRvIHRoZSBWRlNcbiAgICAgIHRyeSB7XG4gICAgICAgIHJldHVybiBhd2FpdCBweW9kaWRlLkZTLndyaXRlRmlsZShmaWxlLCBuZXcgVWludDhBcnJheShkYXRhKSk7XG4gICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgIGlmIChlLm5hbWUgIT09IFwiRXJybm9FcnJvclwiKSB0aHJvdyBlO1xuICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICBjb25zdCBlcnJvclRleHQgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuVVRGOFRvU3RyaW5nKGVycm9yVGV4dFB0cik7XG4gICAgICAgIHRocm93IG5ldyBFcnJvcihgRmlsZXN5c3RlbSBFcnJvciAke2UuZXJybm99IFwiJHtlcnJvclRleHR9XCIuYCk7XG4gICAgICB9XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG5cbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYFB5b2RpZGUgZW52aXJvbm1lbnQgc2V0dXBgO1xuICAgIGF3YWl0IHNldHVwUHl0aG9uKHB5b2RpZGUpO1xuXG4gICAgc3RhdHVzVGV4dC5yZW1vdmUoKTtcbiAgICBpZiAoc3RhdHVzQ29udGFpbmVyLmNoaWxkcmVuLmxlbmd0aCA9PSAwKSB7XG4gICAgICBzdGF0dXNDb250YWluZXIucGFyZW50Tm9kZS5yZW1vdmUoKTtcbiAgICB9XG4gICAgcmV0dXJuIHB5b2RpZGU7XG4gIH0pKCkuY2F0Y2goKGVycikgPT4ge1xuICAgIHN0YXR1c1RleHQuc3R5bGUuY29sb3IgPSBcInZhcigtLWV4ZXJjaXNlLWVkaXRvci1obC1lciwgI0FEMDAwMClcIjtcbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gZXJyLm1lc3NhZ2U7XG4gICAgLy9pbmRpY2F0b3JDb250YWluZXIucXVlcnlTZWxlY3RvcihcIi5zcGlubmVyLWdyb3dcIikuY2xhc3NMaXN0LmFkZChcImQtbm9uZVwiKTtcbiAgICB0aHJvdyBlcnI7XG4gIH0pO1xuXG4gIC8vIEtlZXAgdHJhY2sgb2YgaW5pdGlhbCBPSlMgYmxvY2sgcmVuZGVyXG4gIGNvbnN0IHJlbmRlcmVkT2pzID0ge307XG5cbiAgY29uc3QgcHJvY2VzcyA9IGFzeW5jIChjb250ZXh0LCBpbnB1dHMpID0+IHtcbiAgICBjb25zdCBweW9kaWRlID0gYXdhaXQgcHlvZGlkZVByb21pc2U7XG4gICAgY29uc3QgZXZhbHVhdG9yID0gbmV3IFB5b2RpZGVFdmFsdWF0b3IocHlvZGlkZSwgY29udGV4dCk7XG4gICAgYXdhaXQgZXZhbHVhdG9yLnByb2Nlc3MoaW5wdXRzKTtcbiAgICByZXR1cm4gZXZhbHVhdG9yLmNvbnRhaW5lcjtcbiAgfVxuXG4gIHJldHVybiB7XG4gICAgcHlvZGlkZVByb21pc2UsXG4gICAgcmVuZGVyZWRPanMsXG4gICAgcHJvY2VzcyxcbiAgfTtcbn1cbiJ9XX0=
+eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJweW9kaWRlLTIiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8yID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0yLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBleGVyY2lzZSBjb25maWd1cmF0aW9uXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKFxuICAgIHtcbiAgICAgIGlkOiBcInB5b2RpZGUtMi1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IocHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF9weW9kaWRlX3ZhbHVlXzIgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzIsIHt9KTtcbl9weW9kaWRlX2ZlZWRiYWNrXzIgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBQeW9kaWRlR3JhZGVyKF9weW9kaWRlX3ZhbHVlXzIuZXZhbHVhdG9yKTtcbiAgY29uc3QgZmVlZGJhY2sgPSBhd2FpdCBncmFkZXIuZ3JhZGVFeGVyY2lzZSgpO1xuICBpZiAoIWZlZWRiYWNrKSByZXR1cm4gZW1wdHlGZWVkYmFjaztcbiAgcmV0dXJuIGZlZWRiYWNrO1xufVxuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzEgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTEtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwicHlvZGlkZS0xLWNvbnRlbnRzXCIsXG4gICAgICBlbnZpcjogYGV4ZXJjaXNlLWVudi0ke2Jsb2NrLmF0dHIuZXhlcmNpc2V9YCxcbiAgICAgIGVycm9yOiBmYWxzZSxcbiAgICAgIGNhcHRpb246ICdFeGVyY2lzZScsXG4gICAgfSxcbiAgICBibG9jay5hdHRyXG4gICk7XG5cbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG52aWV3b2YgX3B5b2RpZGVfdmFsdWVfMSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMSwge30pO1xuX3B5b2RpZGVfZmVlZGJhY2tfMSA9IHtcbiAgY29uc3QgeyBQeW9kaWRlR3JhZGVyIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBlbXB0eUZlZWRiYWNrID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7XG5cbiAgY29uc3QgZ3JhZGVyID0gbmV3IFB5b2RpZGVHcmFkZXIoX3B5b2RpZGVfdmFsdWVfMS5ldmFsdWF0b3IpO1xuICBjb25zdCBmZWVkYmFjayA9IGF3YWl0IGdyYWRlci5ncmFkZUV4ZXJjaXNlKCk7XG4gIGlmICghZmVlZGJhY2spIHJldHVybiBlbXB0eUZlZWRiYWNrO1xuICByZXR1cm4gZmVlZGJhY2s7XG59XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS1wcmVsdWRlIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoicHlvZGlkZU9qcyA9IHtcbiAgY29uc3Qge1xuICAgIFB5b2RpZGVFdmFsdWF0b3IsXG4gICAgUHlvZGlkZUVudmlyb25tZW50TWFuYWdlcixcbiAgICBzZXR1cFB5dGhvbixcbiAgICBzdGFydFB5b2RpZGVXb3JrZXIsXG4gICAgYjY0RGVjb2RlLFxuICAgIGNvbGxhcHNlUGF0aCxcbiAgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc3RhdHVzQ29udGFpbmVyID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJleGVyY2lzZS1sb2FkaW5nLXN0YXR1c1wiKTtcbiAgY29uc3QgaW5kaWNhdG9yQ29udGFpbmVyID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJleGVyY2lzZS1sb2FkaW5nLWluZGljYXRvclwiKTtcbiAgaW5kaWNhdG9yQ29udGFpbmVyLmNsYXNzTGlzdC5yZW1vdmUoXCJkLW5vbmVcIik7XG5cbiAgbGV0IHN0YXR1c1RleHQgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwiZGl2XCIpXG4gIHN0YXR1c1RleHQuY2xhc3NMaXN0ID0gXCJleGVyY2lzZS1sb2FkaW5nLWRldGFpbHNcIjtcbiAgc3RhdHVzVGV4dCA9IHN0YXR1c0NvbnRhaW5lci5hcHBlbmRDaGlsZChzdGF0dXNUZXh0KTtcbiAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBJbml0aWFsaXNlYDtcblxuICAvLyBIb2lzdCBpbmRpY2F0b3Igb3V0IGZyb20gZmluYWwgc2xpZGUgd2hlbiBydW5uaW5nIHVuZGVyIHJldmVhbFxuICBjb25zdCByZXZlYWxTdGF0dXMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLnJldmVhbCAuZXhlcmNpc2UtbG9hZGluZy1pbmRpY2F0b3JcIik7XG4gIGlmIChyZXZlYWxTdGF0dXMpIHtcbiAgICByZXZlYWxTdGF0dXMucmVtb3ZlKCk7XG4gICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5yZXZlYWwgPiAuc2xpZGVzXCIpLmFwcGVuZENoaWxkKHJldmVhbFN0YXR1cyk7XG4gIH1cblxuICAvLyBNYWtlIGFueSByZXZlYWwgc2xpZGVzIHdpdGggbGl2ZSBjZWxscyBzY3JvbGxhYmxlXG4gIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoXCIucmV2ZWFsIC5leGVyY2lzZS1jZWxsXCIpLmZvckVhY2goKGVsKSA9PiB7XG4gICAgZWwuY2xvc2VzdCgnc2VjdGlvbi5zbGlkZScpLmNsYXNzTGlzdC5hZGQoXCJzY3JvbGxhYmxlXCIpO1xuICB9KVxuXG4gIC8vIFB5b2RpZGUgc3VwcGxlbWVudGFsIGRhdGEgYW5kIG9wdGlvbnNcbiAgY29uc3QgZGF0YUNvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS1kYXRhXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgZGF0YSA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKGRhdGFDb250ZW50KSk7XG5cbiAgLy8gR3JhYiBsaXN0IG9mIHJlc291cmNlcyB0byBiZSBkb3dubG9hZGVkXG4gIGNvbnN0IGZpbGVzQ29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ2ZnMtZmlsZVxcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGZpbGVzID0gSlNPTi5wYXJzZShiNjREZWNvZGUoZmlsZXNDb250ZW50KSk7XG5cbiAgbGV0IHB5b2RpZGVQcm9taXNlID0gKGFzeW5jICgpID0+IHtcbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIFB5b2RpZGVgO1xuICAgIGNvbnN0IHB5b2RpZGUgPSBhd2FpdCBzdGFydFB5b2RpZGVXb3JrZXIoZGF0YS5vcHRpb25zKTtcblxuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcGFja2FnZTogbWljcm9waXBgO1xuICAgIGF3YWl0IHB5b2RpZGUubG9hZFBhY2thZ2UoXCJtaWNyb3BpcFwiKTtcbiAgICBjb25zdCBtaWNyb3BpcCA9IGF3YWl0IHB5b2RpZGUucHlpbXBvcnQoXCJtaWNyb3BpcFwiKTtcbiAgICBhd2FpdCBkYXRhLnBhY2thZ2VzLnBrZ3MubWFwKChwa2cpID0+ICgpID0+IHtcbiAgICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcGFja2FnZTogJHtwa2d9YDtcbiAgICAgIHJldHVybiBtaWNyb3BpcC5pbnN0YWxsKHBrZyk7XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG4gICAgYXdhaXQgbWljcm9waXAuZGVzdHJveSgpO1xuXG4gICAgLy8gRG93bmxvYWQgYW5kIGluc3RhbGwgcmVzb3VyY2VzXG4gICAgYXdhaXQgZmlsZXMubWFwKChmaWxlKSA9PiBhc3luYyAoKSA9PiB7XG4gICAgICBjb25zdCBuYW1lID0gZmlsZS5zdWJzdHJpbmcoZmlsZS5sYXN0SW5kZXhPZignLycpICsgMSk7XG4gICAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIHJlc291cmNlOiAke25hbWV9YDtcbiAgICAgIGNvbnN0IHJlc3BvbnNlID0gYXdhaXQgZmV0Y2goZmlsZSk7XG4gICAgICBpZiAoIXJlc3BvbnNlLm9rKSB7XG4gICAgICAgIHRocm93IG5ldyBFcnJvcihgQ2FuJ3QgZG93bmxvYWQgXFxgJHtmaWxlfVxcYC4gRXJyb3IgJHtyZXNwb25zZS5zdGF0dXN9OiBcIiR7cmVzcG9uc2Uuc3RhdHVzVGV4dH1cIi5gKTtcbiAgICAgIH1cbiAgICAgIGNvbnN0IGRhdGEgPSBhd2FpdCByZXNwb25zZS5hcnJheUJ1ZmZlcigpO1xuXG4gICAgICAvLyBTdG9yZSBVUkxzIGluIHRoZSBjd2Qgd2l0aG91dCBhbnkgc3ViZGlyZWN0b3J5IHN0cnVjdHVyZVxuICAgICAgaWYgKGZpbGUuaW5jbHVkZXMoXCI6Ly9cIikpIHtcbiAgICAgICAgZmlsZSA9IG5hbWU7XG4gICAgICB9XG5cbiAgICAgIC8vIENvbGxhcHNlIGhpZ2hlciBkaXJlY3Rvcnkgc3RydWN0dXJlXG4gICAgICBmaWxlID0gY29sbGFwc2VQYXRoKGZpbGUpO1xuXG4gICAgICAvLyBDcmVhdGUgZGlyZWN0b3J5IHRyZWUsIGlnbm9yaW5nIFwiZGlyZWN0b3J5IGV4aXN0c1wiIFZGUyBlcnJvcnNcbiAgICAgIGNvbnN0IHBhcnRzID0gZmlsZS5zcGxpdCgnLycpLnNsaWNlKDAsIC0xKTtcbiAgICAgIGxldCBwYXRoID0gJyc7XG4gICAgICB3aGlsZSAocGFydHMubGVuZ3RoID4gMCkge1xuICAgICAgICBwYXRoICs9IHBhcnRzLnNoaWZ0KCkgKyAnLyc7XG4gICAgICAgIHRyeSB7XG4gICAgICAgICAgYXdhaXQgcHlvZGlkZS5GUy5ta2RpcihwYXRoKTtcbiAgICAgICAgfSBjYXRjaCAoZSkge1xuICAgICAgICAgIGlmIChlLm5hbWUgIT09IFwiRXJybm9FcnJvclwiKSB0aHJvdyBlO1xuICAgICAgICAgIGlmIChlLmVycm5vICE9PSAyMCkge1xuICAgICAgICAgICAgY29uc3QgZXJyb3JUZXh0UHRyID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLl9zdHJlcnJvcihlLmVycm5vKTtcbiAgICAgICAgICAgIGNvbnN0IGVycm9yVGV4dCA9IGF3YWl0IHB5b2RpZGUuX21vZHVsZS5VVEY4VG9TdHJpbmcoZXJyb3JUZXh0UHRyKTtcbiAgICAgICAgICAgIHRocm93IG5ldyBFcnJvcihgRmlsZXN5c3RlbSBFcnJvciAke2UuZXJybm99IFwiJHtlcnJvclRleHR9XCIuYCk7XG4gICAgICAgICAgfVxuICAgICAgICB9XG4gICAgICB9XG5cbiAgICAgIC8vIFdyaXRlIHRoaXMgZmlsZSB0byB0aGUgVkZTXG4gICAgICB0cnkge1xuICAgICAgICByZXR1cm4gYXdhaXQgcHlvZGlkZS5GUy53cml0ZUZpbGUoZmlsZSwgbmV3IFVpbnQ4QXJyYXkoZGF0YSkpO1xuICAgICAgfSBjYXRjaCAoZSkge1xuICAgICAgICBpZiAoZS5uYW1lICE9PSBcIkVycm5vRXJyb3JcIikgdGhyb3cgZTtcbiAgICAgICAgY29uc3QgZXJyb3JUZXh0UHRyID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLl9zdHJlcnJvcihlLmVycm5vKTtcbiAgICAgICAgY29uc3QgZXJyb3JUZXh0ID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLlVURjhUb1N0cmluZyhlcnJvclRleHRQdHIpO1xuICAgICAgICB0aHJvdyBuZXcgRXJyb3IoYEZpbGVzeXN0ZW0gRXJyb3IgJHtlLmVycm5vfSBcIiR7ZXJyb3JUZXh0fVwiLmApO1xuICAgICAgfVxuICAgIH0pLnJlZHVjZSgoY3VyLCBuZXh0KSA9PiBjdXIudGhlbihuZXh0KSwgUHJvbWlzZS5yZXNvbHZlKCkpO1xuXG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBQeW9kaWRlIGVudmlyb25tZW50IHNldHVwYDtcbiAgICBhd2FpdCBzZXR1cFB5dGhvbihweW9kaWRlKTtcblxuICAgIHN0YXR1c1RleHQucmVtb3ZlKCk7XG4gICAgaWYgKHN0YXR1c0NvbnRhaW5lci5jaGlsZHJlbi5sZW5ndGggPT0gMCkge1xuICAgICAgc3RhdHVzQ29udGFpbmVyLnBhcmVudE5vZGUucmVtb3ZlKCk7XG4gICAgfVxuICAgIHJldHVybiBweW9kaWRlO1xuICB9KSgpLmNhdGNoKChlcnIpID0+IHtcbiAgICBzdGF0dXNUZXh0LnN0eWxlLmNvbG9yID0gXCJ2YXIoLS1leGVyY2lzZS1lZGl0b3ItaGwtZXIsICNBRDAwMDApXCI7XG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGVyci5tZXNzYWdlO1xuICAgIC8vaW5kaWNhdG9yQ29udGFpbmVyLnF1ZXJ5U2VsZWN0b3IoXCIuc3Bpbm5lci1ncm93XCIpLmNsYXNzTGlzdC5hZGQoXCJkLW5vbmVcIik7XG4gICAgdGhyb3cgZXJyO1xuICB9KTtcblxuICAvLyBLZWVwIHRyYWNrIG9mIGluaXRpYWwgT0pTIGJsb2NrIHJlbmRlclxuICBjb25zdCByZW5kZXJlZE9qcyA9IHt9O1xuXG4gIGNvbnN0IHByb2Nlc3MgPSBhc3luYyAoY29udGV4dCwgaW5wdXRzKSA9PiB7XG4gICAgY29uc3QgcHlvZGlkZSA9IGF3YWl0IHB5b2RpZGVQcm9taXNlO1xuICAgIGNvbnN0IGV2YWx1YXRvciA9IG5ldyBQeW9kaWRlRXZhbHVhdG9yKHB5b2RpZGUsIGNvbnRleHQpO1xuICAgIGF3YWl0IGV2YWx1YXRvci5wcm9jZXNzKGlucHV0cyk7XG4gICAgcmV0dXJuIGV2YWx1YXRvci5jb250YWluZXI7XG4gIH1cblxuICByZXR1cm4ge1xuICAgIHB5b2RpZGVQcm9taXNlLFxuICAgIHJlbmRlcmVkT2pzLFxuICAgIHByb2Nlc3MsXG4gIH07XG59XG4ifV19
 </script>
 <div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
 <div id="exercise-loading-status" class="d-flex gap-2">
@@ -987,9 +584,8 @@ eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJweW9kaWRlLTMiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2RO
 </div>
 </div>
 <script type="vfs-file">
-W10=
+WyIuLi9EYXRhL2NweF90ZWFjaGluZy5jc3YiLCIuLi9EYXRhL2NweF90ZWFjaGluZ19zcGxpdC5jc3YiLCJjcHhfbGVzc29uLnB5Il0=
 </script>
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -1070,6 +666,68 @@ function toggleAlert(event, message, type) {
     MathJax.typesetPromise([alertMessage]);  // Re-render math with MathJax v3
   }
 }
+</script>
+<script>
+// Exercise tabsets (Exercise / Hints / Solution): a click on the "Solution" tab
+// loads the solution code into the exercise editor itself, so that it can be run
+// with "Run Code" (and "Start Over" brings the exercise back). The page stays on
+// the Exercise tab; the text of the Solution tab (function reference, remarks)
+// is shown below the editor. If the editor is not ready yet, the tab behaves
+// normally. Bootstrap handles tab clicks in the capture phase on `document`, so
+// the interception is done one level up, on `window`.
+(function () {
+  function editorView(pane) {
+    var content = pane.querySelector(".cm-content");
+    return content && content.cmView ? content.cmView.view : null;
+  }
+  function solutionCode(pane) {
+    var pre = pane.querySelector("pre code") || pane.querySelector("pre");
+    if (!pre) return null;
+    var clone = pre.cloneNode(true);
+    clone.querySelectorAll(".code-annotation-anchor, .code-copy-button").forEach(function (e) { e.remove(); });
+    return clone.textContent.replace(/[ \t]+\n/g, "\n").replace(/\s+$/, "") + "\n";
+  }
+  function setup(tabset) {
+    var exLink = null, solLink = null;
+    tabset.querySelectorAll(":scope > ul.nav-tabs a.nav-link").forEach(function (a) {
+      var t = a.textContent.trim().toLowerCase();
+      if (t === "exercise") exLink = a;
+      if (t === "solution") solLink = a;
+    });
+    if (!exLink || !solLink) return;
+    var exPane = tabset.querySelector(exLink.getAttribute("data-bs-target"));
+    var solPane = tabset.querySelector(solLink.getAttribute("data-bs-target"));
+    if (!exPane || !solPane || !exPane.querySelector(".exercise-cell")) return;
+    solLink.title = "Load the solution into the exercise editor";
+    solLink.__exsol = { exPane: exPane, solPane: solPane };
+  }
+  function loadSolution(info) {
+    var view = editorView(info.exPane), code = solutionCode(info.solPane);
+    if (!view || !code) return false;                   // editor not ready: normal tab switch
+    view.dispatch({ changes: { from: 0, to: view.state.doc.length, insert: code } });
+    var note = info.exPane.querySelector(".solution-note");
+    if (!note) { note = document.createElement("div"); note.className = "solution-note"; info.exPane.appendChild(note); }
+    note.innerHTML = "";
+    info.solPane.querySelectorAll(":scope > *").forEach(function (el) {
+      if (el.matches("pre") || el.querySelector("pre")) return;   // the code itself is in the editor
+      note.appendChild(el.cloneNode(true));
+    });
+    if (!note.hasChildNodes()) note.remove();           // nothing to show besides the code
+    view.focus();
+    return true;
+  }
+  window.addEventListener("click", function (e) {
+    var a = e.target && e.target.closest ? e.target.closest("a.nav-link") : null;
+    if (!a || !a.__exsol) return;
+    if (loadSolution(a.__exsol)) { e.preventDefault(); e.stopPropagation(); }
+  }, true);
+  var style = document.createElement("style");
+  style.textContent = ".solution-note{margin-top:.6em;padding:.5em .8em;border-left:3px solid #6A5ACD;background:#f4f2fb;font-size:.92em;}.solution-note p:last-child{margin-bottom:0;}";
+  document.head.appendChild(style);
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".panel-tabset").forEach(setup);
+  });
+})();
 </script>
 <script type="ojs-module-contents">
 eyJjb250ZW50cyI6W119
@@ -1484,13 +1142,13 @@ window._ojs.runtime.interpretFromScriptTags();
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../class4/class_4_ex_5.html" class="pagination-link" aria-label="Example reading data: confidence intervals for predictions">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Example reading data: confidence intervals for predictions</span>
+      <a href="../class4/class_4_ex_5.html" class="pagination-link" aria-label="Exercise 5: AIC and five-fold cross-validation">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Exercise 5: AIC and five-fold cross-validation</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../appendices/setup_vscode.html" class="pagination-link" aria-label="Setup VS Code">
-        <span class="nav-page-text">Setup VS Code</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../exam/exam_intro.html" class="pagination-link" aria-label="Instructions and documents">
+        <span class="nav-page-text">Instructions and documents</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
