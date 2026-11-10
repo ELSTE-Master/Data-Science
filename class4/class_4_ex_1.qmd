@@ -1,100 +1,191 @@
 ---
-title: "Example reading data: estimation"
-format: 
+title: "Exercise 1: Fit and understand a regression line"
+format:
   live-html:
     theme: cosmo
     css: ../assets/webex_2.css
-    include-after-body: ../assets/webex_2.js
-engine: knitr
+    include-after-body: [../assets/webex_2.js, ../assets/exercise-solution.js]
+pyodide:
+  packages: [pandas, numpy, scipy, statsmodels, matplotlib]
+  resources: [../Data/cpx_teaching.csv, ../Data/cpx_teaching_split.csv, cpx_lesson.py]
+jupyter: python3
 ---
 
-
-{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
-
-
-
-In this exercise, we will replicate the analysis of the `reading` dataset
-presented in the lectures slides. Our first step is to load the data . We can load the data as follows:
-
-
-**Function reference:** `read_csv` [(doc)](../appendices/doc_pandas.qmd#pandas-read-csv).
-
-```{python, echo=TRUE}
-# Import data
-import pandas as pd
-reading = pd.read_csv("https://raw.githubusercontent.com/ELSTE-Master/Data-Science/main/Data/reading.csv")
+```{python}
+#| include: false
+import sys
+sys.path.insert(0, "../assets")
+from q_a_env import render_q_a_env
 ```
 
+We will predict **experimental temperature** ($T_C$, in °C) from the measured chemistry of clinopyroxene (CPX). The original data contain 1,696 observations from several publications. The supplied, frozen allocation has **1,402 training** and **294 evaluation** observations.
 
-We can now take a look at the data.
+The code below uses the same data loader as the slides. It checks the original files and keeps observations linked to the same publications in the same partition. For now, work **only with `train`**. The evaluation data will be used in Exercise 4.
 
-**Function reference:** `print` [(doc)](../appendices/doc_python.qmd#python-print); `head` [(doc)](../appendices/doc_pandas.qmd#pandas-head).
+### Question 1 — Which direction?
 
-```{python, echo=TRUE}
-# Import data
-n = 5
-print(reading.head(n)) #print the first n rows of the dataset
+We want to predict experimental temperature from MgO. Which description is correct?
+
+```{python}
+#| echo: false
+#| output: asis
+render_q_a_env([
+    {"value": "Both are responses, so a regression model is not possible.",
+     "feedback": "A response and a predictor have different roles in a regression."},
+    {"value": "A study identifier is required as the response.",
+     "feedback": "Publication identifiers help with validation, not with defining the response."},
+    {"value": "Temperature is the response and MgO is the predictor.",
+     "feedback": "Correct: T_C is on the left of the regression formula.", "answer": True},
+    {"value": "MgO is the response and temperature is the predictor.",
+     "feedback": "That would answer the reverse prediction question."},
+])
 ```
 
-## Comparing groups
+### Question 2 — Visualize the relationship
 
-To compare the two groups (i.e. `Control` and `Treatment`), we can start by comparing the empirical distributions using boxplots similarly to the graph presented in slide 2. For this purpose, we will construct two new variables, called `control` and `treatment`, which correspond to the scores in these groups. This can be done as follows:
+Complete the Python code to make a scatter plot using the training data.
 
+:::: {.panel-tabset}
 
-```{python, echo=TRUE}
-control = reading['score'][reading['group'] == 'Control']
-treatment = reading['score'][reading['group'] == 'Treatment']
-```
+## Exercise
 
-## Representing the distribution of the score between groups
-
-Using these variables we can easily represent the conditional distribution of the score as follows:
-
-
-**Function reference:** `plt.figure` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-figure); `ax.boxplot` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-boxplot); `ax.set_ylabel` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-ylabel); `ax.set_title` [(doc)](../appendices/doc_visualisation.qmd#plotting-ax-set-title); `plt.show` [(doc)](../appendices/doc_visualisation.qmd#plotting-plt-show).
-
-```{python, echo=TRUE}
+```{pyodide}
+#| exercise: ex_1
+from cpx_lesson import load_data
 import matplotlib.pyplot as plt
 
-# Create the boxplot
-plt.figure(figsize=(6, 5))
-plt.boxplot([control, treatment], tick_labels=['Control', 'Treatment']);
+train, evaluation = load_data()
+print(f"Training observations: {len(train)}")
 
-# Add labels and title
-plt.ylabel('Score')
-plt.title('Comparison of Reading Scores by Group')
-
-# Show the plot
+plt.figure(figsize=(6, 4))
+plt.______(train["______"], train["______"], alpha=0.4, s=14)
+plt.xlabel("MgO (reported concentration units)")
+plt.ylabel("Experimental temperature (°C)")
+plt.title("Experimental CPX: training data")
 plt.show()
 ```
 
+## Hints
 
+Use `plt.scatter()` to plot points. MgO belongs on the horizontal axis and temperature on the vertical axis. Column names are case-sensitive: `MgO_Cpx` and `T_C`.
 
-## Modelling 
+## Solution
 
-As suggested in slide 9, a possible model is given by:
-$$
-\text { Score }_i=\beta_0+\beta_1 \text { Group }_i+\beta_2 \text { Age }_i+\epsilon_i, \quad \epsilon_i \stackrel{i i d}{\sim} \mathcal{N}\left(0, \sigma^2\right)
-$$
-We will refer to this model as "Model 1". The parameters of this first model can be estimated using the function `smf.ols` [(doc)](../appendices/doc_statsmodels.qmd#models-smf-ols) as follows:
+**Function reference:** `plt.scatter` [(doc)](../appendices/doc_visualisation.qmd); `plt.xlabel` and `plt.ylabel` [(doc)](../appendices/doc_visualisation.qmd).
 
+```python
+from cpx_lesson import load_data
+import matplotlib.pyplot as plt
 
-**Function reference:** `model.fit` [(doc)](../appendices/doc_statsmodels.qmd#models-model-fit); `smf.ols` [(doc)](../appendices/doc_statsmodels.qmd#models-smf-ols).
+train, evaluation = load_data()
+print(f"Training observations: {len(train)}")
 
-```{python, echo=TRUE}
-import statsmodels.formula.api as smf
-
-# Fit the linear model
-mod1 = smf.ols('score ~ group + age', data=reading).fit()
+plt.figure(figsize=(6, 4))
+plt.scatter(train["MgO_Cpx"], train["T_C"], alpha=0.4, s=14)
+plt.xlabel("MgO (reported concentration units)")
+plt.ylabel("Experimental temperature (°C)")
+plt.title("Experimental CPX: training data")
+plt.show()
 ```
 
+::::
 
-The summary of the fitted model can then be printed with:
+### Question 3 — Fit the line
 
+The simple regression is
 
-**Function reference:** `print` [(doc)](../appendices/doc_python.qmd#python-print); `model.summary` [(doc)](../appendices/doc_statsmodels.qmd#models-model-summary).
+$$T_i = \beta_0 + \beta_1 \mathrm{MgO}_i + \varepsilon_i.$$
+
+Complete the code and inspect the intercept, slope and training $R^2$.
+
+:::: {.panel-tabset}
+
+## Exercise
+
+```{pyodide}
+#| exercise: ex_2
+from cpx_lesson import load_data
+import statsmodels.formula.api as smf
+
+train, _ = load_data()
+simple = smf.ols("T_C ~ ______", data=train).______()
+print(simple.params.round(2))
+print(f"Training R²: {simple.rsquared:.3f}")
+```
+
+## Hints
+
+Write the predictor after `~` in the formula. The `.fit()` method estimates the least-squares coefficients.
+
+## Solution
+
+**Function reference:** `smf.ols` [(doc)](../appendices/doc_statsmodels.qmd#models-smf-ols); `model.fit` [(doc)](../appendices/doc_statsmodels.qmd#models-model-fit); `model.params` [(doc)](../appendices/doc_statsmodels.qmd).
+
+```python
+from cpx_lesson import load_data
+import statsmodels.formula.api as smf
+
+train, _ = load_data()
+simple = smf.ols("T_C ~ MgO_Cpx", data=train).fit()
+print(simple.params.round(2))
+print(f"Training R²: {simple.rsquared:.3f}")
+```
+
+::::
+
+### Question 4 — Interpret the slope
+
+You should find a slope of about **27.7 °C per reported MgO unit**. What does it mean?
 
 ```{python}
-# Display the summary
-print(mod1.summary())
+#| echo: false
+#| output: asis
+render_q_a_env([
+    {"value": "A one-unit higher MgO measurement is associated with a 27.7 °C higher fitted mean temperature in this simple model.",
+     "feedback": "Yes. This is the change in fitted conditional mean, not a guarantee for each observation.", "answer": True},
+    {"value": "Adding one unit of MgO would cause an experiment's temperature to rise by 27.7 °C.",
+     "feedback": "Regression here describes an association; it does not establish a causal intervention."},
+    {"value": "The mean MgO measurement equals 27.7.",
+     "feedback": "The slope has units of temperature per MgO unit."},
+    {"value": "Every individual experiment is predicted without error.",
+     "feedback": "The points still deviate from the fitted line."},
+])
+```
+
+### Question 5 — Interpret $R^2$
+
+The simple model has a training $R^2$ of approximately **0.447**. Which conclusion is warranted?
+
+```{python}
+#| echo: false
+#| output: asis
+render_q_a_env([
+    {"value": "44.7% of experiments were performed with no measurement error.",
+     "feedback": "R² does not quantify measurement-error prevalence."},
+    {"value": "The model predicts new temperatures with 44.7% accuracy.",
+     "feedback": "R² is not the percentage of correct future predictions."},
+    {"value": "The fitted line is necessarily valid for natural CPX crystals.",
+     "feedback": "The data here come from controlled experiments; transfer to natural crystals has not been established."},
+    {"value": "About 44.7% of training temperature variation relative to the training mean is accounted for by this fitted model.",
+     "feedback": "Correct. R² is based on training squared errors; it is not a test-set accuracy guarantee.", "answer": True},
+])
+```
+
+### Question 6 — Statistical versus practical evidence
+
+Suppose the test of $H_0:\beta_1=0$ gives a very small p-value. What would it establish?
+
+```{python}
+#| echo: false
+#| output: asis
+render_q_a_env([
+    {"value": "The MgO slope is a proven causal effect.",
+     "feedback": "Statistical significance does not establish causality."},
+    {"value": "The slope differs from zero under the model's inferential assumptions; usefulness for temperature prediction still needs separate assessment.",
+     "feedback": "Exactly. Statistical evidence, predictive accuracy and geological usefulness are distinct questions.", "answer": True},
+    {"value": "The linear mean function and independent errors have been verified.",
+     "feedback": "A small p-value does not validate the model assumptions."},
+    {"value": "Every future prediction will be within 5 °C.",
+     "feedback": "A p-value does not bound future prediction errors."},
+])
 ```
